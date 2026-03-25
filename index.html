@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VUB Financial Readiness Course</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body class="light-mode">
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h2>VUB Readiness</h2>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#home" class="active" data-section="home"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#module1" data-section="module1"><i class="fa-regular fa-calendar-check"></i> Module 1: Timelines</a></li>
+            <li><a href="#module2" data-section="module2"><i class="fa-solid fa-hand-holding-dollar"></i> Module 2: Compensation</a></li>
+            <li><a href="#module3" data-section="module3"><i class="fa-solid fa-staff-snake"></i> Module 3: Healthcare</a></li>
+            <li><a href="#module4" data-section="module4"><i class="fa-solid fa-arrow-trend-up"></i> Module 4: Investments</a></li>
+            <li><a href="#module5" data-section="module5"><i class="fa-solid fa-file-contract"></i> Module 5: Legacy</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                <i class="fa-solid fa-moon"></i> <span>Dark Mode</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+        <div class="scroll-container">
+            
+            <!-- Home Section -->
+            <section id="home" class="section-pane active">
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <span class="badge">Veterans Upward Bound</span>
+                        <h1 class="hero-title">Financial Readiness Course</h1>
+                        <p class="hero-subtitle">Master your transition: strategies for military and federal retirement planning, benefit maximization, and post-service financial security.</p>
+                        <a href="#module1" class="btn-primary">Start Course <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="course-overview">
+                    <h2 class="section-heading">Course Modules overview</h2>
+                    <div class="card-grid">
+                        <div class="course-card" onclick="window.location.hash='module1'">
+                            <div class="card-icon"><i class="fa-regular fa-calendar"></i></div>
+                            <h3>Retirement Timelines & Preparation</h3>
+                            <p>Step-by-step administrative and lifestyle preparations required as military and federal employees approach their retirement dates.</p>
+                        </div>
+                        <div class="course-card" onclick="window.location.hash='module2'">
+                            <div class="card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                            <h3>Navigating Disability Pay</h3>
+                            <p>Understanding the complex rules of CRSC vs. CRDP, the VA Waiver, and how these specialized payments interact with Social Security.</p>
+                        </div>
+                        <div class="course-card" onclick="window.location.hash='module3'">
+                            <div class="card-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                            <h3>Healthcare & Long-Term Care</h3>
+                            <p>Integrating Medicare, TRICARE, FEHB, and understanding the VA Aid & Attendance pension for long-term care needs.</p>
+                        </div>
+                        <div class="course-card" onclick="window.location.hash='module4'">
+                            <div class="card-icon"><i class="fa-solid fa-building-columns"></i></div>
+                            <h3>Investment Risks & Taxes</h3>
+                            <p>Wealth preservation strategies, sequence of returns risk, state taxation of military retirement, and buying power considerations.</p>
+                        </div>
+                        <div class="course-card" onclick="window.location.hash='module5'">
+                            <div class="card-icon"><i class="fa-solid fa-seedling"></i></div>
+                            <h3>Legacy Planning</h3>
+                            <p>End-of-life financial planning utilizing the Survivor Benefit Plan (SBP) and ensuring spouses are financially secure.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module 1 -->
+            <section id="module1" class="section-pane">
+                <div class="content-wrapper">
+                    <div class="module-header">
+                        <span class="module-eyebrow">Module 1</span>
+                        <h1 class="module-title">Retirement Transition Timelines & Preparation</h1>
+                    </div>
+                    
+                    <div class="glass-panel">
+                        <h2>Marine Corps Transition (6 to 1 Months Out)</h2>
+                        <p>Key concepts include scheduling your final retirement physicals, executing a thorough job search strategy, and submitting Benefits Delivery at Discharge (BDD) claims within the critical 90-180 day window before separation.</p>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-check text-gold"></i> Submit Benefits Delivery at Discharge (BDD) claims</li>
+                            <li><i class="fa-solid fa-check text-gold"></i> Address Blended Retirement System (BRS) lump-sum options</li>
+                            <li><i class="fa-solid fa-check text-gold"></i> Complete final outprocessing and relocation planning</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-panel mt-6">
+                        <h2>Federal Employee Retirement (5 Years to 0 Months Out)</h2>
+                        <p>Tailored for both CSRS and FERS employees, this timeline emphasizes early preparation starting up to 5 years from your planned separation date.</p>
+                        <div class="info-callout">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <div>
+                                <strong>Pro Tip:</strong> Calculate your expected annuity and TSP income early. Verify civilian/military service records and ensure all financial indebtedness is cleared well in advance of your final day.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module 2 -->
+            <section id="module2" class="section-pane">
+                <div class="content-wrapper">
+                    <div class="module-header">
+                        <span class="module-eyebrow">Module 2</span>
+                        <h1 class="module-title">Navigating Disability Pay and Compensation</h1>
+                    </div>
+                    
+                    <div class="glass-panel">
+                        <h2>CRSC vs. CRDP</h2>
+                        <p>It is vital to understand the differences between Concurrent Retirement and Disability Pay (CRDP), which restores retired pay withheld due to VA offsets for service-connected disabilities, and Combat-Related Special Compensation (CRSC), a non-taxable compensation for combat-related disabilities. <strong>Retirees cannot receive both and must elect one annually.</strong></p>
+                    </div>
+
+                    <div class="grid-2-col mt-6">
+                        <div class="glass-panel">
+                            <h3>The VA Waiver</h3>
+                            <p>By law, military retirees must waive a portion of their DoD retired pay dollar-for-dollar for their VA disability compensation. Changes in your VA disability ratings can trigger complicated retroactive debits and credits, which sometimes result in an unexpected debt owed to DFAS.</p>
+                        </div>
+                        <div class="glass-panel">
+                            <h3>Interaction with Social Security</h3>
+                            <p>Your VA disability compensation is tax-free and <em>does not</em> count as "earned income" by the Social Security Administration, meaning it will not reduce or offset your Social Security retirement checks. The only exception lies in the needs-based VA Pension, which can be affected by other income.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module 3 -->
+            <section id="module3" class="section-pane">
+                <div class="content-wrapper">
+                    <div class="module-header">
+                        <span class="module-eyebrow">Module 3</span>
+                        <h1 class="module-title">Healthcare & Long-Term Care Integration</h1>
+                    </div>
+                    
+                    <div class="glass-panel">
+                        <h2>Medicare, VA Benefits, and TRICARE</h2>
+                        <p>Veterans are strongly encouraged to enroll in Medicare Parts A and B at age 65, as VA benefits typically only cover care at VA facilities. For military retirees, enrolling in Medicare Parts A and B is <em>mandatory</em> to keep TRICARE for Life, which works as a powerful "wraparound" secondary payer program to Medicare.</p>
+                    </div>
+
+                    <div class="glass-panel mt-6">
+                        <h2>The FEHB 5-Year Rule</h2>
+                        <p>Federal retirees can carry their Federal Employees Health Benefits (FEHB) and Federal Employees' Group Life Insurance (FEGLI) into retirement, but they must have been continuously enrolled in the program for the <strong>five years of service immediately preceding retirement</strong>.</p>
+                    </div>
+
+                    <div class="glass-panel mt-6 feature-box">
+                        <div class="box-icon"><i class="fa-solid fa-user-nurse"></i></div>
+                        <div>
+                            <h2>VA Aid & Attendance Benefit</h2>
+                            <p>A crucial, tax-free monthly enhanced pension for war-era veterans and surviving spouses who need assistance with Activities of Daily Living (ADLs) or require custodial care.</p>
+                            <ul class="feature-list mt-3">
+                                <li><strong>Eligibility:</strong> 90 days active duty with at least one day during wartime</li>
+                                <li><strong>Asset Limits:</strong> Strict net worth limits and a 3-year look-back period on asset transfers</li>
+                                <li><strong>Coverage:</strong> Home care, assisted living, and skilled nursing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module 4 -->
+            <section id="module4" class="section-pane">
+                <div class="content-wrapper">
+                    <div class="module-header">
+                        <span class="module-eyebrow">Module 4</span>
+                        <h1 class="module-title">Investment Risks, State Taxes & Buying Power</h1>
+                    </div>
+                    
+                    <div class="grid-2-col">
+                        <div class="glass-panel">
+                            <h3>Sequence of Returns Risk</h3>
+                            <p>This is the risk of experiencing negative market returns late in your working years or early in retirement. Because you are withdrawing funds in a down market, it can permanently deplete a portfolio much faster than anticipated.</p>
+                        </div>
+                        <div class="glass-panel">
+                            <h3>The "Bucket" Strategy</h3>
+                            <p>A mitigation strategy that divides assets into three buckets:</p>
+                            <ul class="feature-list text-sm">
+                                <li><i class="fa-solid fa-droplet text-blue"></i> <strong>Liquidity:</strong> Cash for immediate 3-5 year needs.</li>
+                                <li><i class="fa-solid fa-basket-shopping text-blue"></i> <strong>Lifestyle:</strong> Diversified investments for years 3-10.</li>
+                                <li><i class="fa-solid fa-tree text-blue"></i> <strong>Legacy:</strong> Long-term assets for future growth.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel mt-6">
+                        <h2>State Taxation of Military Retirement</h2>
+                        <p>State tax policies vary dramatically. As of 2026, some states have no income tax (e.g., Florida, Texas), while others fully exempt military retirement (e.g., Arizona, South Carolina), and some fully tax it (e.g., California). Relocating to a tax-friendly state can boost your Debt-to-Income (DTI) ratio, significantly increasing your VA home loan purchasing power.</p>
+                        
+                        <div class="info-callout mt-4 alert-warning">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <div>
+                                <strong>Hidden Costs Warning:</strong> Retirees must be wary of offsetting costs. High property taxes or massive home insurance rates can completely wipe out any state income tax savings you gained by relocating.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module 5 -->
+            <section id="module5" class="section-pane">
+                <div class="content-wrapper">
+                    <div class="module-header">
+                        <span class="module-eyebrow">Module 5</span>
+                        <h1 class="module-title">Legacy Planning and Survivor Benefits</h1>
+                    </div>
+                    
+                    <div class="glass-panel">
+                        <h2>The Survivor Benefit Plan (SBP)</h2>
+                        <p>The SBP provides a guaranteed, inflation-indexed lifetime monthly payout to your surviving beneficiary. It is crucial to understand that declining SBP requires the spouse's notarized signature, and that the election is a <strong>one-time, irrevocable decision</strong> made at the time of retirement.</p>
+                    </div>
+
+                    <div class="grid-2-col mt-6">
+                        <div class="glass-panel border-green">
+                            <h3 class="text-green"><i class="fa-solid fa-thumbs-up"></i> Pros of SBP</h3>
+                            <ul class="feature-list mt-3">
+                                <li>Protection against outliving your money (longevity insurance).</li>
+                                <li>Automatic qualification without restrictive medical exams.</li>
+                                <li>The costs are subsidized by the government.</li>
+                            </ul>
+                        </div>
+                        <div class="glass-panel border-red">
+                            <h3 class="text-red"><i class="fa-solid fa-thumbs-down"></i> Cons of SBP</h3>
+                            <ul class="feature-list mt-3">
+                                <li>No access to the underlying principal value.</li>
+                                <li>Benefits abruptly end if the spouse predeceases the retiree (or sometimes upon remarriage before age 55).</li>
+                                <li>Lack of flexibility compared to standard term or whole life insurance.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-panel mt-6">
+                        <p><strong>Recommendation:</strong> Conduct thorough financial modeling of insurable needs, income replacement strategies, and longevity risk to make the right choice for your family's unique situation before your retirement date.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>
