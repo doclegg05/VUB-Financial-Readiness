@@ -108,7 +108,7 @@ def build_pdf():
     # ── Course Description ──
     story.append(Paragraph("Course Description", styles["section"]))
     story.append(Paragraph(
-        "This 5-week course equips military veterans with the financial knowledge needed to "
+        "This 6-week course equips military veterans with the financial knowledge needed to "
         "maximize retirement benefits, avoid costly mistakes, and protect what they've built. "
         "Topics include retirement pay, VA disability, healthcare coordination, tax-efficient "
         "withdrawals, and estate planning &mdash; all tailored to the unique financial landscape "
@@ -159,19 +159,19 @@ def build_pdf():
         ],
         [
             Paragraph("5", styles["body"]),
-            Paragraph("Jun 1", styles["body"]),
-            Paragraph("<b>Module 5 + Post-Test</b><br/>Legacy &amp; Estate Planning", styles["body"]),
+            Paragraph("May 25", styles["body"]),
+            Paragraph("<b>Module 5</b><br/>Legacy &amp; Estate Planning", styles["body"]),
             Paragraph("Survivor Benefit Plan, DIC, SBP-DIC offset elimination (2023), "
                       "estate documents, beneficiary designations, cognitive decline planning", styles["small"]),
         ],
+        [
+            Paragraph("6", styles["body"]),
+            Paragraph("Jun 1", styles["body"]),
+            Paragraph("<b>Review + Post-Test</b>", styles["body"]),
+            Paragraph("Course review, Q&amp;A, post-test assessment (20 questions), "
+                      "score comparison with pre-test, certificates of completion", styles["small"]),
+        ],
     ]
-
-    # Note about Memorial Day
-    schedule_rows.append([
-        "", "",
-        Paragraph("<i>No class May 25 (Memorial Day)</i>", styles["small"]),
-        "",
-    ])
 
     col_widths = [0.5 * inch, 0.6 * inch, 1.9 * inch, 4.0 * inch]
     schedule_table = Table(schedule_rows, colWidths=col_widths)
@@ -182,8 +182,9 @@ def build_pdf():
         # Alternating rows
         ("BACKGROUND", (0, 2), (-1, 2), ROW_ALT),
         ("BACKGROUND", (0, 4), (-1, 4), ROW_ALT),
+        ("BACKGROUND", (0, 6), (-1, 6), ROW_ALT),
         # Grid
-        ("GRID", (0, 0), (-1, 5), 0.5, BORDER),
+        ("GRID", (0, 0), (-1, 6), 0.5, BORDER),
         ("LINEBELOW", (0, 0), (-1, 0), 1, BRASS),
         # Padding
         ("TOPPADDING", (0, 0), (-1, -1), 5),
@@ -191,10 +192,6 @@ def build_pdf():
         ("LEFTPADDING", (0, 0), (-1, -1), 6),
         ("RIGHTPADDING", (0, 0), (-1, -1), 6),
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
-        # Memorial Day row - no borders
-        ("GRID", (0, 6), (-1, 6), 0, white),
-        ("BACKGROUND", (0, 6), (-1, 6), white),
-        ("SPAN", (2, 6), (3, 6)),
     ]))
     story.append(schedule_table)
     story.append(Spacer(1, 8))
