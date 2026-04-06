@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Schedule — VUB Financial Readiness Course</title>
+    <style>
+        /* ===== Reset & Page Setup ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.4in 0.5in 0.4in 0.5in;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: #1a1a1a;
+            background: #fff;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.4in 0.5in;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            background: linear-gradient(135deg, #1b2e4a 0%, #0d1b2a 60%, #1b2e4a 100%);
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            margin-bottom: 2px;
+        }
+
+        .header-left .subtitle {
+            font-size: 0.78rem;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        .badge {
+            background: #c8a84e;
+            color: #1b2e4a;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        /* ===== Info Box ===== */
+        .info-box {
+            border: 1.5px solid #cbd5e1;
+            border-radius: 5px;
+            padding: 10px 14px;
+            margin-bottom: 10px;
+            background: #f8fafc;
+        }
+
+        .info-box h2 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #1b2e4a;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px 24px;
+            font-size: 0.84rem;
+        }
+
+        .info-grid .info-item {
+            padding: 2px 0;
+        }
+
+        .info-grid .info-item strong {
+            color: #1b2e4a;
+        }
+
+        /* ===== Schedule Table ===== */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 6px;
+            font-size: 0.82rem;
+        }
+
+        .schedule-table thead th {
+            padding: 8px 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-align: left;
+            color: #fff;
+            background: #1b2e4a;
+        }
+
+        .schedule-table thead th:first-child {
+            border-radius: 5px 0 0 0;
+            width: 6%;
+            text-align: center;
+        }
+
+        .schedule-table thead th:nth-child(2) {
+            width: 12%;
+        }
+
+        .schedule-table thead th:nth-child(3) {
+            width: 22%;
+        }
+
+        .schedule-table thead th:nth-child(4) {
+            width: 22%;
+        }
+
+        .schedule-table thead th:last-child {
+            border-radius: 0 5px 0 0;
+            width: 38%;
+        }
+
+        .schedule-table tbody td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        .schedule-table tbody td:first-child {
+            text-align: center;
+            font-weight: 700;
+            color: #1b2e4a;
+            background: #f0f4f8;
+        }
+
+        .schedule-table tbody td:nth-child(2) {
+            font-weight: 600;
+            color: #334155;
+            white-space: nowrap;
+        }
+
+        .schedule-table tbody td:nth-child(3) {
+            color: #1b2e4a;
+            font-weight: 600;
+        }
+
+        .schedule-table tbody td:nth-child(4) {
+            font-style: italic;
+            color: #475569;
+        }
+
+        .schedule-table tbody td:last-child {
+            font-size: 0.8rem;
+            color: #334155;
+        }
+
+        .schedule-table tbody tr:nth-child(even) td {
+            background: #fafbfc;
+        }
+
+        .schedule-table tbody tr:nth-child(even) td:first-child {
+            background: #e8edf3;
+        }
+
+        .schedule-table tbody tr:last-child td {
+            border-bottom: 2px solid #94a3b8;
+        }
+
+        /* ===== Holiday Note ===== */
+        .holiday-note {
+            text-align: center;
+            font-size: 0.78rem;
+            color: #92400e;
+            background: #fffbeb;
+            border: 1px solid #c8a84e;
+            border-radius: 4px;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* ===== What to Bring ===== */
+        .bring-box {
+            border: 1.5px solid #c8a84e;
+            border-left: 4px solid #c8a84e;
+            border-radius: 5px;
+            padding: 10px 14px;
+            margin-bottom: 10px;
+            background: #fffdf5;
+        }
+
+        .bring-box h2 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #7c6a2a;
+        }
+
+        .bring-box ul {
+            list-style: none;
+            padding: 0;
+            font-size: 0.82rem;
+            columns: 2;
+            column-gap: 20px;
+        }
+
+        .bring-box li {
+            padding: 2px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .bring-box li::before {
+            content: "\25A0";
+            position: absolute;
+            left: 0;
+            color: #c8a84e;
+            font-size: 0.6rem;
+            top: 4px;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            text-align: center;
+            font-size: 0.72rem;
+            color: #64748b;
+            padding-top: 8px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .footer p {
+            margin: 1px 0;
+        }
+
+        /* ===== Print Styles ===== */
+        @media print {
+            body {
+                padding: 0;
+                font-size: 0.86rem;
+            }
+
+            .header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .schedule-table thead th,
+            .schedule-table tbody td:first-child,
+            .schedule-table tbody tr:nth-child(even) td,
+            .schedule-table tbody tr:nth-child(even) td:first-child,
+            .info-box,
+            .bring-box,
+            .holiday-note {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .info-box, .schedule-table, .bring-box {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <h1>Course Schedule</h1>
+            <div class="subtitle">VUB Financial Readiness Course</div>
+        </div>
+        <div class="badge">Spring 2026</div>
+    </div>
+
+    <!-- Course Info -->
+    <div class="info-box">
+        <h2>Course Information</h2>
+        <div class="info-grid">
+            <div class="info-item"><strong>When:</strong> Mondays, 4:30 &ndash; 6:30 PM</div>
+            <div class="info-item"><strong>Where:</strong> VUB Computer Lab</div>
+            <div class="info-item"><strong>Instructor:</strong> Britt Legg</div>
+            <div class="info-item"><strong>Duration:</strong> 5 weeks (April 27 &ndash; June 1, 2026)</div>
+        </div>
+    </div>
+
+    <!-- Schedule Table -->
+    <table class="schedule-table">
+        <thead>
+            <tr>
+                <th>Wk</th>
+                <th>Date</th>
+                <th>Module</th>
+                <th>Topic</th>
+                <th>Key Takeaways</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>April 27</td>
+                <td>Pre-Test + Module 1</td>
+                <td>Know What You Have</td>
+                <td>Military retirement pay, TSP options, Social Security claiming strategy</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>May 4</td>
+                <td>Module 2</td>
+                <td>Disability Benefits</td>
+                <td>VA claims, CRDP vs CRSC, VA Pension, scam prevention</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>May 11</td>
+                <td>Module 3</td>
+                <td>Healthcare &amp; Long-Term Care</td>
+                <td>Medicare/TRICARE coordination, Aid &amp; Attendance</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>May 18</td>
+                <td>Module 4</td>
+                <td>Managing Your Retirement Income</td>
+                <td>Tax-efficient withdrawals, RMDs, state tax impact, debt</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>June 1</td>
+                <td>Module 5 + Post-Test</td>
+                <td>Legacy &amp; Estate Planning</td>
+                <td>SBP, estate documents, cognitive decline planning</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Holiday Note -->
+    <div class="holiday-note">
+        No class May 25 &mdash; Memorial Day
+    </div>
+
+    <!-- What to Bring -->
+    <div class="bring-box">
+        <h2>What to Bring</h2>
+        <ul>
+            <li>Pen and notepad</li>
+            <li>Your myPay login (mypay.dfas.mil)</li>
+            <li>Your Social Security statement (ssa.gov/myaccount)</li>
+            <li>Any VA correspondence or rating letters</li>
+            <li>Questions about your specific situation</li>
+        </ul>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Veterans Upward Bound &mdash; West Virginia | Financial Readiness Course</p>
+        <p>All class materials will be provided. No textbook required.</p>
+    </div>
+
+</body>
+</html>
