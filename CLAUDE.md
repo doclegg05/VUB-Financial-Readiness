@@ -4,7 +4,7 @@
 
 **Project Name:** Veterans Upward Bound (VUB) Financial Readiness Course
 **Deliverable:** Single-page web application with modular financial education content
-**Purpose:** Financial literacy and retirement planning course for military veterans and federal employees
+**Purpose:** Financial literacy and retirement planning course for military veterans
 **Audience:** Male veterans (mostly retired), older generation, learning in computer lab setting
 
 ---
@@ -34,10 +34,10 @@ Single-page application with sidebar navigation, 5 content modules, dark/light t
 
 | Module | Topic | Focus |
 |:-------|:------|:------|
-| 1 | Retirement Timelines & Preparation | BDD claims, BRS options, CSRS/FERS timelines |
+| 1 | Retirement Timelines & Preparation | Social Security claiming strategy, TSP withdrawals |
 | 2 | Disability Pay & Compensation | CRSC vs CRDP, VA Waiver, Social Security interaction |
-| 3 | Healthcare & Long-Term Care | Medicare/TRICARE/FEHB integration, Aid & Attendance |
-| 4 | Investment Risks & Taxes | Sequence of returns, bucket strategy, state tax impact |
+| 3 | Healthcare & Long-Term Care | Medicare/TRICARE integration, Aid & Attendance |
+| 4 | Managing Your Retirement Income | Tax-efficient withdrawals, RMDs, state tax impact, debt management |
 | 5 | Legacy Planning | Survivor Benefit Plan (SBP), pros/cons analysis |
 
 ---
@@ -103,7 +103,7 @@ Surface:         #ffffff (light) / #1e293b (dark)
 
 ## Modular Instructions
 
-Additional rules are split into `.claude/rules/`:
+Additional rules are split into `.claude/`:
 - `code-style.md` — HTML/CSS/JS formatting and naming conventions
 - `accessibility.md` — WCAG compliance, keyboard nav, contrast ratios
 - `content-guidelines.md` — Veteran content accuracy and tone standards

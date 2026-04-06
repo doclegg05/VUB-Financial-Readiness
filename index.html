@@ -8,24 +8,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body class="light-mode">
 
+    <!-- Mobile Menu Toggle -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
     <!-- Sidebar Navigation -->
-    <nav class="sidebar">
+    <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
             <h2>VUB Readiness</h2>
         </div>
-        
+
         <ul class="nav-links">
             <li><a href="#home" class="active" data-section="home"><i class="fa-solid fa-house"></i> Home</a></li>
-            <li><a href="#module1" data-section="module1"><i class="fa-regular fa-calendar-check"></i> Module 1: Timelines</a></li>
-            <li><a href="#module2" data-section="module2"><i class="fa-solid fa-hand-holding-dollar"></i> Module 2: Compensation</a></li>
+            <li><a href="#module1" data-section="module1"><i class="fa-solid fa-calculator"></i> Module 1: Know What You Have</a></li>
+            <li><a href="#module2" data-section="module2"><i class="fa-solid fa-scale-balanced"></i> Module 2: Disability Benefits</a></li>
             <li><a href="#module3" data-section="module3"><i class="fa-solid fa-staff-snake"></i> Module 3: Healthcare</a></li>
-            <li><a href="#module4" data-section="module4"><i class="fa-solid fa-arrow-trend-up"></i> Module 4: Investments</a></li>
-            <li><a href="#module5" data-section="module5"><i class="fa-solid fa-file-contract"></i> Module 5: Legacy</a></li>
+            <li><a href="#module4" data-section="module4"><i class="fa-solid fa-coins"></i> Module 4: Managing Income</a></li>
+            <li><a href="#module5" data-section="module5"><i class="fa-solid fa-seedling"></i> Module 5: Legacy</a></li>
+            <li><a href="#resources" data-section="resources"><i class="fa-solid fa-graduation-cap"></i> Study Resources</a></li>
         </ul>
 
         <div class="sidebar-footer">
@@ -38,212 +44,1322 @@
     <!-- Main Content Area -->
     <main class="content-area">
         <div class="scroll-container">
-            
+
             <!-- Home Section -->
             <section id="home" class="section-pane active">
                 <div class="hero-container">
                     <div class="hero-content">
                         <span class="badge">Veterans Upward Bound</span>
                         <h1 class="hero-title">Financial Readiness Course</h1>
-                        <p class="hero-subtitle">Master your transition: strategies for military and federal retirement planning, benefit maximization, and post-service financial security.</p>
+                        <p class="hero-subtitle">Understand your benefits, maximize your compensation, and protect what you've built.</p>
                         <a href="#module1" class="btn-primary">Start Course <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="course-overview">
                     <h2 class="section-heading">Course Modules overview</h2>
                     <div class="card-grid">
-                        <div class="course-card" onclick="window.location.hash='module1'">
-                            <div class="card-icon"><i class="fa-regular fa-calendar"></i></div>
-                            <h3>Retirement Timelines & Preparation</h3>
-                            <p>Step-by-step administrative and lifestyle preparations required as military and federal employees approach their retirement dates.</p>
-                        </div>
-                        <div class="course-card" onclick="window.location.hash='module2'">
+                        <a href="#module1" class="course-card resource-card">
+                            <div class="card-icon"><i class="fa-solid fa-calculator"></i></div>
+                            <h3>Know What You Have</h3>
+                            <p>Understand your military retirement pay, TSP options, and Social Security — and how they work together.</p>
+                        </a>
+                        <a href="#module2" class="course-card resource-card">
                             <div class="card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-                            <h3>Navigating Disability Pay</h3>
-                            <p>Understanding the complex rules of CRSC vs. CRDP, the VA Waiver, and how these specialized payments interact with Social Security.</p>
-                        </div>
-                        <div class="course-card" onclick="window.location.hash='module3'">
+                            <h3>Maximizing Disability Benefits</h3>
+                            <p>Are you getting everything you've earned? Filing claims, understanding CRSC vs CRDP, and avoiding scams.</p>
+                        </a>
+                        <a href="#module3" class="course-card resource-card">
                             <div class="card-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-                            <h3>Healthcare & Long-Term Care</h3>
-                            <p>Integrating Medicare, TRICARE, FEHB, and understanding the VA Aid & Attendance pension for long-term care needs.</p>
-                        </div>
-                        <div class="course-card" onclick="window.location.hash='module4'">
-                            <div class="card-icon"><i class="fa-solid fa-building-columns"></i></div>
-                            <h3>Investment Risks & Taxes</h3>
-                            <p>Wealth preservation strategies, sequence of returns risk, state taxation of military retirement, and buying power considerations.</p>
-                        </div>
-                        <div class="course-card" onclick="window.location.hash='module5'">
+                            <h3>Healthcare &amp; Long-Term Care</h3>
+                            <p>Managing VA healthcare, Medicare, TRICARE for Life, and planning for Aid &amp; Attendance.</p>
+                        </a>
+                        <a href="#module4" class="course-card resource-card">
+                            <div class="card-icon"><i class="fa-solid fa-coins"></i></div>
+                            <h3>Managing Your Retirement Income</h3>
+                            <p>Tax-efficient withdrawal order, RMD management, state tax impact, and managing debt on fixed income.</p>
+                        </a>
+                        <a href="#module5" class="course-card resource-card">
                             <div class="card-icon"><i class="fa-solid fa-seedling"></i></div>
-                            <h3>Legacy Planning</h3>
-                            <p>End-of-life financial planning utilizing the Survivor Benefit Plan (SBP) and ensuring spouses are financially secure.</p>
+                            <h3>Legacy &amp; Estate Planning</h3>
+                            <p>SBP, estate documents, beneficiary designations, burial benefits, and protecting against exploitation.</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================
+                 MODULE 1: KNOW WHAT YOU HAVE
+                 ============================================ -->
+            <section id="module1" class="section-pane">
+                <div class="presentation-container">
+                    <nav class="pres-sidebar">
+                        <div class="pres-sidebar-header">
+                            <div class="pres-module-badge">Module 1</div>
+                            <h3>Know What You Have</h3>
+                            <button class="pres-back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Course</button>
+                        </div>
+                        <ul class="pres-chapter-list">
+                            <li class="pres-chapter expanded" data-chapter="intro"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Intro</div><ul class="pres-slide-list"><li class="pres-slide-item active" tabindex="0" data-slide="0">Title &amp; Objectives</li></ul></li>
+                            <li class="pres-chapter" data-chapter="retpay"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Retirement Pay</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="1">How Your Pay Works</li><li class="pres-slide-item" tabindex="0" data-slide="2">Reading Your RAS</li><li class="pres-slide-item" tabindex="0" data-slide="3">VA Disability Pay</li></ul></li>
+                            <li class="pres-chapter" data-chapter="tsp"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> TSP</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="4">Your TSP Today</li><li class="pres-slide-item" tabindex="0" data-slide="5">Withdrawals &amp; RMD</li><li class="pres-slide-item discussion-item" tabindex="0" data-slide="6">&#128172; Your TSP</li></ul></li>
+                            <li class="pres-chapter" data-chapter="ss"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Social Security</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="7">SS Basics</li><li class="pres-slide-item" tabindex="0" data-slide="8">Spousal &amp; Survivor</li><li class="pres-slide-item" tabindex="0" data-slide="9">The Dollar Math</li><li class="pres-slide-item discussion-item" tabindex="0" data-slide="10">&#128172; Your SS Plan</li></ul></li>
+                            <li class="pres-chapter" data-chapter="wrapup"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Wrapup</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="11">Key Takeaways</li></ul></li>
+                        </ul>
+                        <div class="pres-sidebar-footer">
+                            <div class="pres-slide-counter">Slide <span class="pres-current">1</span> of <span class="pres-total">12</span></div>
+                            <button class="pres-theme-toggle"><i class="fa-solid fa-moon"></i> <span>Dark Mode</span></button>
+                        </div>
+                    </nav>
+                    <div class="pres-main" role="region" aria-label="Slide Content">
+                        <div class="pres-progress-bar"><div class="pres-progress-fill"></div></div>
+                        <div class="pres-slide-area" tabindex="-1">
+
+                            <div class="pres-slide pres-slide-title active" data-chapter="intro">
+                                <span class="pres-slide-eyebrow">Module 1 of 5</span>
+                                <h2>Know What You Have</h2>
+                                <p class="pres-subtitle">Understanding your military retirement pay, TSP, Social Security, and how they work together</p>
+                                <div class="pres-objectives">
+                                    <h3><i class="fa-solid fa-bullseye"></i> Learning Objectives</h3>
+                                    <ul>
+                                        <li>Understand how your military retirement pay is calculated</li>
+                                        <li>Know where your TSP is invested and your withdrawal options</li>
+                                        <li>Learn when and how to optimize Social Security benefits</li>
+                                        <li>Identify key resources for pay and benefits questions</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="retpay">
+                                <h2><i class="fa-solid fa-calculator text-blue"></i> How Your Retirement Pay Works</h2>
+                                <p>If you served 20+ years, you receive monthly retired pay for life. Most veterans in this room are on the High-3 system &mdash; your pay is based on the average of your highest 36 months of basic pay.</p>
+                                <div class="grid-2-col mt-4">
+                                    <div class="glass-panel">
+                                        <h3>High-3 System</h3>
+                                        <p>Average of highest 36 months &times; 2.5% &times; years of service</p>
+                                        <p class="mt-3"><strong>Example:</strong> 20 years at $7,000 High-3 = <strong>$3,500/month</strong></p>
+                                    </div>
+                                    <div class="glass-panel">
+                                        <h3>COLA Protection</h3>
+                                        <p>Your retired pay is adjusted every January for inflation, matching the Consumer Price Index. This keeps your purchasing power steady over decades of retirement.</p>
+                                    </div>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>Check your pay:</strong> Log into myPay (mypay.dfas.mil) to see your current gross pay, deductions, and net deposit. Your annual 1099-R tax statement is also available there.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="retpay">
+                                <h2><i class="fa-solid fa-file-lines text-gold"></i> Reading Your Retiree Account Statement</h2>
+                                <p>DFAS sends a Retiree Account Statement (RAS) whenever your pay changes. Most veterans glance at the bottom line and file it away. Here's what to actually look for:</p>
+                                <div class="glass-panel mt-4">
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Gross Pay</strong> &mdash; Your base retired pay before any deductions</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>VA Waiver</strong> &mdash; Amount waived if you receive VA disability compensation (dollar-for-dollar reduction)</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>SBP Premium</strong> &mdash; Survivor Benefit Plan deduction (if enrolled)</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Federal Tax Withholding</strong> &mdash; Verify this matches your W-4 elections</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>CRDP/CRSC</strong> &mdash; Restored pay if you qualify (covered in Module 2)</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Net Pay</strong> &mdash; What actually hits your bank account</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4 alert-warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div><strong>Common surprise:</strong> Many veterans don't realize their gross pay is reduced by the VA Waiver. If your VA disability rating has changed, your RAS should reflect the adjustment &mdash; but DFAS processing can lag by several months.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="retpay">
+                                <h2><i class="fa-solid fa-shield-heart text-blue"></i> VA Disability Compensation</h2>
+                                <p>VA disability compensation is a separate, tax-free monthly payment based on your service-connected disability rating. It's not the same as retired pay &mdash; and understanding how they interact is critical.</p>
+                                <div class="pres-stat-grid">
+                                    <div class="pres-stat-card"><span class="pres-stat-number">Tax-Free</span><span class="pres-stat-label">VA disability pay is not taxable income</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">0-100%</span><span class="pres-stat-label">Rating determines monthly amount</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">COLA</span><span class="pres-stat-label">Adjusted annually for inflation</span></div>
+                                </div>
+                                <div class="glass-panel mt-4">
+                                    <p>If you receive both military retired pay AND VA disability compensation, your retired pay is reduced dollar-for-dollar by your VA amount (the "VA Waiver"). Programs like CRDP and CRSC can restore some or all of that reduction &mdash; we'll cover those in Module 2.</p>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>Haven't filed a VA claim?</strong> It's never too late. Many veterans develop new conditions or see existing ones worsen years after service. Module 2 covers how to file or increase your rating.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="tsp">
+                                <h2><i class="fa-solid fa-piggy-bank text-gold"></i> Your TSP Today</h2>
+                                <p>Whether you're still growing your TSP or already drawing from it, understanding your fund allocation matters. Here are the five individual funds and what they invest in:</p>
+                                <div class="pres-stat-grid">
+                                    <div class="pres-stat-card"><span class="pres-stat-number">G</span><span class="pres-stat-label">Government Securities<br>Lowest risk</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">F</span><span class="pres-stat-label">Fixed Income (Bonds)<br>Low-moderate risk</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">C</span><span class="pres-stat-label">Common Stock (S&amp;P 500)<br>Moderate risk</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">S</span><span class="pres-stat-label">Small Cap Stock<br>Higher risk</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">I</span><span class="pres-stat-label">International Stock<br>Higher risk</span></div>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>L Funds (Lifecycle):</strong> Target-date funds that automatically adjust your mix of G/F/C/S/I based on your target retirement year. If you haven't changed your allocation since you separated, it may be worth reviewing whether your current mix still matches your risk tolerance.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="tsp">
+                                <h2><i class="fa-solid fa-money-bill-transfer text-blue"></i> TSP Withdrawals &amp; Required Minimum Distributions</h2>
+                                <p>If you still have money in your TSP, here are your options &mdash; and the rules you need to know:</p>
+                                <div class="glass-panel mt-4">
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>TSP Monthly Payments:</strong> Set a fixed dollar amount or life-expectancy-based payments</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Single Withdrawal:</strong> Take a one-time partial withdrawal (minimum $1,000)</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Full Withdrawal:</strong> Lump sum, annuity purchase, or transfer to an IRA</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Leave It:</strong> Your TSP continues to grow tax-deferred until RMD age</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4 alert-warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div><strong>Required Minimum Distributions (RMDs):</strong> You must begin withdrawals at age 73 (or 75 if born after 1959, per the SECURE 2.0 Act). The penalty for missing an RMD is 25% of the amount you should have withdrawn. If you're approaching RMD age, plan ahead.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-discussion" data-chapter="tsp">
+                                <span class="pres-discussion-badge"><i class="fa-solid fa-comments"></i> Discussion</span>
+                                <h2>Your TSP</h2>
+                                <div class="pres-discussion-prompt">
+                                    <p>Think about your own TSP. Are you currently drawing from it, letting it grow, or have you rolled it into an IRA? Looking back, would you have done anything differently?</p>
+                                </div>
+                                <ul class="pres-discussion-followups">
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Do you know which funds your TSP is currently invested in?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Have you considered how your TSP withdrawal strategy affects your taxes?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> If you could advise a younger veteran about their TSP, what would you say?</li>
+                                </ul>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="ss">
+                                <h2><i class="fa-solid fa-id-card text-blue"></i> Social Security for Veterans</h2>
+                                <p>Your military service counts toward Social Security. If you served after 1956, you paid into Social Security through payroll taxes &mdash; and you may have received special wage credits that boost your benefit.</p>
+                                <div class="grid-2-col mt-4">
+                                    <div class="glass-panel">
+                                        <h3>When to Claim</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-gold"></i> <strong>62:</strong> Earliest age &mdash; permanently reduced benefit (~30% less)</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> <strong>67:</strong> Full retirement age (FRA) for most in this room &mdash; full benefit</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> <strong>70:</strong> Maximum benefit &mdash; 24% more than FRA amount</li>
+                                        </ul>
+                                    </div>
+                                    <div class="glass-panel">
+                                        <h3>Key Facts for Veterans</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-gold"></i> Military service counts toward your 35-year earnings record</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> VA disability pay does NOT reduce your Social Security</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Military retirement pay and SS are both taxable (but at different rates)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>Check your estimate:</strong> Create an account at ssa.gov/myaccount to see your projected benefit at ages 62, 67, and 70. This is the single most important step you can take before deciding when to claim.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="ss">
+                                <h2><i class="fa-solid fa-people-roof text-gold"></i> Spousal &amp; Survivor Benefits</h2>
+                                <p>Social Security isn't just about you &mdash; your claiming decision directly affects your spouse, both now and after you're gone.</p>
+                                <div class="glass-panel mt-4">
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Spousal Benefit:</strong> Your spouse can receive up to 50% of your FRA benefit amount, even if they never worked</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Survivor Benefit:</strong> When you pass away, your surviving spouse can receive up to 100% of your benefit</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Timing Matters:</strong> If you claim early at 62, you permanently reduce both YOUR benefit and your spouse's future survivor benefit</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Divorced Spouse:</strong> An ex-spouse may qualify for benefits on your record if the marriage lasted 10+ years</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4 alert-warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div><strong>The decision of WHEN to claim is one of the biggest financial decisions in retirement.</strong> Delaying from 62 to 70 can mean hundreds of thousands of dollars more over a lifetime &mdash; especially for the surviving spouse. Consider this carefully.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="ss">
+                                <h2><i class="fa-solid fa-dollar-sign text-blue"></i> Social Security: The Dollar Math</h2>
+                                <p>The decision of when to claim is worth <strong>$200,000&ndash;$500,000</strong> over a couple's lifetime. Here's why delaying matters:</p>
+                                <div class="pres-stat-grid">
+                                    <div class="pres-stat-card"><span class="pres-stat-number">62</span><span class="pres-stat-label">~$2,100/mo<br>Permanently reduced ~30%</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">67</span><span class="pres-stat-label">~$3,000/mo<br>Full Retirement Age</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">70</span><span class="pres-stat-label">~$3,720/mo<br>Maximum &mdash; 24% above FRA</span></div>
+                                </div>
+                                <div class="glass-panel mt-4">
+                                    <h3>Why This Matters for Veterans</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>You have a pension floor:</strong> Military retired pay + VA disability means you may not NEED Social Security at 62 &mdash; letting it grow is free money</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Survivor protection:</strong> Your surviving spouse inherits your benefit amount. Claiming at 70 protects them for decades</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Break-even age ~82:</strong> If you live past 82, you come out ahead by waiting. Average 65-year-old male lives to 84</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>VA disability doesn't count:</strong> Your VA pay is not counted as income for Social Security taxation thresholds</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-discussion" data-chapter="ss">
+                                <span class="pres-discussion-badge"><i class="fa-solid fa-comments"></i> Discussion</span>
+                                <h2>Your Social Security Plan</h2>
+                                <div class="pres-discussion-prompt">
+                                    <p>Have you already started receiving Social Security, or are you still deciding when to claim? What factors are influencing your decision?</p>
+                                </div>
+                                <ul class="pres-discussion-followups">
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Have you created an account at ssa.gov to see your projected benefit?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> How does your spouse's work history and age factor into your timing?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Did you know that delaying past your full retirement age increases your benefit by 8% per year?</li>
+                                </ul>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="wrapup">
+                                <h2><i class="fa-solid fa-clipboard-list text-gold"></i> Key Takeaways</h2>
+                                <div class="glass-panel">
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-star text-gold"></i> Log into myPay to review your current retired pay and deductions</li>
+                                        <li><i class="fa-solid fa-star text-gold"></i> Check your TSP allocation &mdash; does it still match your risk tolerance?</li>
+                                        <li><i class="fa-solid fa-star text-gold"></i> RMDs start at 73 (or 75) &mdash; missing one costs you 25%</li>
+                                        <li><i class="fa-solid fa-star text-gold"></i> Create an account at ssa.gov to see your projected Social Security benefit</li>
+                                        <li><i class="fa-solid fa-star text-gold"></i> Delaying Social Security can significantly increase your spouse's survivor benefit</li>
+                                        <li><i class="fa-solid fa-star text-gold"></i> VA disability pay is tax-free and doesn't reduce your Social Security</li>
+                                        <li><i class="fa-solid fa-star text-gold"></i> Delaying Social Security from 62 to 70 can mean $200K-$500K more over a couple's lifetime</li>
+                                        <li><i class="fa-solid fa-star text-gold"></i> Your military pension floor means you may not need SS early &mdash; let it grow</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-completion" data-chapter="wrapup">
+                                <div class="pres-completion-icon"><i class="fa-solid fa-trophy"></i></div>
+                                <h2>Module 1 Complete!</h2>
+                                <p class="pres-completion-text">You now have a clearer picture of your retirement income sources and how they work together.</p>
+                                <div class="pres-completion-stats">
+                                    <div class="pres-completion-stat"><span class="stat-number">12</span><span class="stat-label">Slides Completed</span></div>
+                                    <div class="pres-completion-stat"><span class="stat-number">3</span><span class="stat-label">Income Sources Covered</span></div>
+                                    <div class="pres-completion-stat"><span class="stat-number">5</span><span class="stat-label">TSP Funds Reviewed</span></div>
+                                </div>
+                                <div class="glass-panel mt-4">
+                                    <h3><i class="fa-solid fa-file-lines text-blue"></i> Module Handouts</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-download text-gold"></i> <a href="handouts/retirement-transition-checklist.html" target="_blank"><strong>Retirement Transition Checklist</strong></a></li>
+                                        <li><i class="fa-solid fa-download text-gold"></i> <a href="handouts/tsp-retirement-income.html" target="_blank"><strong>TSP Retirement Income Guide</strong></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="pres-nav-controls">
+                            <button class="pres-nav-btn pres-prev" disabled><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                            <button class="pres-nav-btn pres-next">Next <i class="fa-solid fa-arrow-right"></i></button>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Module 1 -->
-            <section id="module1" class="section-pane">
+            <!-- ============================================
+                 MODULE 2: MAXIMIZING YOUR DISABILITY BENEFITS
+                 ============================================ -->
+            <section id="module2" class="section-pane">
+                <div class="presentation-container">
+                    <nav class="pres-sidebar">
+                        <div class="pres-sidebar-header">
+                            <div class="pres-module-badge">Module 2</div>
+                            <h3>Disability Benefits</h3>
+                            <button class="pres-back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Course</button>
+                        </div>
+                        <ul class="pres-chapter-list">
+                            <li class="pres-chapter expanded" data-chapter="intro"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Intro</div><ul class="pres-slide-list"><li class="pres-slide-item active" tabindex="0" data-slide="0">Title &amp; Objectives</li></ul></li>
+                            <li class="pres-chapter" data-chapter="claims"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> VA Claims</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="1">Filing &amp; Increases</li><li class="pres-slide-item" tabindex="0" data-slide="2">Secondary Conditions</li><li class="pres-slide-item discussion-item" tabindex="0" data-slide="3">&#128172; Your VA Rating</li></ul></li>
+                            <li class="pres-chapter" data-chapter="compensation"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Compensation</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="4">VA Waiver</li><li class="pres-slide-item" tabindex="0" data-slide="5">CRDP vs CRSC</li><li class="pres-slide-item" tabindex="0" data-slide="6">Annual Election &amp; DFAS</li><li class="pres-slide-item discussion-item" tabindex="0" data-slide="7">&#128172; Which Path?</li></ul></li>
+                            <li class="pres-chapter" data-chapter="awareness"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Awareness</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="8">VA Pension &amp; Lookback</li><li class="pres-slide-item" tabindex="0" data-slide="9">Scams: $584M Crisis</li></ul></li>
+                            <li class="pres-chapter" data-chapter="wrapup"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Wrapup</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="10">Key Takeaways</li><li class="pres-slide-item" tabindex="0" data-slide="11">Module Complete</li></ul></li>
+                        </ul>
+                        <div class="pres-sidebar-footer">
+                            <div class="pres-slide-counter">Slide <span class="pres-current">1</span> of <span class="pres-total">12</span></div>
+                            <button class="pres-theme-toggle"><i class="fa-solid fa-moon"></i> <span>Dark Mode</span></button>
+                        </div>
+                    </nav>
+                    <div class="pres-main" role="region" aria-label="Slide Content">
+                        <div class="pres-progress-bar"><div class="pres-progress-fill"></div></div>
+                        <div class="pres-slide-area" tabindex="-1">
+
+                            <div class="pres-slide pres-slide-title active" data-chapter="intro">
+                                <span class="pres-slide-eyebrow">Module 2 of 5</span>
+                                <h2>Maximizing Your Disability Benefits</h2>
+                                <p class="pres-subtitle">Are you getting everything you've earned? Many veterans are underrated or missing benefits.</p>
+                                <div class="pres-objectives">
+                                    <h3><i class="fa-solid fa-bullseye"></i> Learning Objectives</h3>
+                                    <ul>
+                                        <li>Know how to file a new VA claim or request a rating increase</li>
+                                        <li>Understand secondary service-connected conditions</li>
+                                        <li>Compare CRDP and CRSC to maximize your compensation</li>
+                                        <li>Recognize common scams that target veteran benefits</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="claims">
+                                <h2><i class="fa-solid fa-file-medical text-blue"></i> Filing New Claims &amp; Rating Increases</h2>
+                                <p>It's never too late to file a VA disability claim. If you have a condition that started during service &mdash; or got worse because of service &mdash; you may be entitled to compensation. And if your existing conditions have worsened, you can request an increase.</p>
+                                <div class="grid-2-col mt-4">
+                                    <div class="glass-panel">
+                                        <h3>New Claims</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-gold"></i> File at va.gov or through your local VSO (free help)</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> You need: medical evidence + a nexus to military service</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> No time limit &mdash; you can file decades after separation</li>
+                                        </ul>
+                                    </div>
+                                    <div class="glass-panel">
+                                        <h3>Rating Increases</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-gold"></i> Conditions worsen with age &mdash; your rating should reflect that</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> File a "Claim for Increase" with current medical evidence</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Common increases: hearing loss, joint conditions, PTSD</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>A VSO (Veterans Service Organization)</strong> can file claims on your behalf at no cost. Organizations like the DAV, VFW, and American Legion have trained claims representatives.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="claims">
+                                <h2><i class="fa-solid fa-link text-gold"></i> Secondary Service-Connected Conditions</h2>
+                                <p>A secondary condition is a new health problem caused or aggravated by a condition you're already service-connected for. These are commonly missed &mdash; and can significantly increase your overall rating.</p>
+                                <div class="glass-panel mt-4">
+                                    <h3>Common Secondary Connections</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> Back injury &rarr; knee or hip problems (compensating gait)</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> PTSD &rarr; sleep apnea, hypertension, or depression</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> Diabetes (Agent Orange) &rarr; peripheral neuropathy, kidney disease</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> Tinnitus &rarr; migraines, anxiety, or sleep disturbance</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4 alert-warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div><strong>Many veterans don't realize their newer health problems may be connected to their service.</strong> If a doctor can write a nexus letter linking the new condition to your existing service-connected disability, you can file a secondary claim.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-discussion" data-chapter="claims">
+                                <span class="pres-discussion-badge"><i class="fa-solid fa-comments"></i> Discussion</span>
+                                <h2>Your VA Rating</h2>
+                                <div class="pres-discussion-prompt">
+                                    <p>Do you currently have a VA disability rating? Do you think it still accurately reflects your current health? Have any of your conditions gotten worse since your last evaluation?</p>
+                                </div>
+                                <ul class="pres-discussion-followups">
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Have you ever considered filing for a rating increase?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Are there health conditions you have now that might be connected to your service?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Has anyone here worked with a VSO to file a claim?</li>
+                                </ul>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="compensation">
+                                <h2><i class="fa-solid fa-scale-balanced text-blue"></i> The VA Waiver (Offset)</h2>
+                                <p>If you receive both military retired pay and VA disability compensation, your retired pay is reduced by your VA amount. This is the VA Waiver &mdash; and it affects most disabled military retirees.</p>
+                                <div class="glass-panel mt-4">
+                                    <p>Two federal programs exist to restore some or all of this waived pay:</p>
+                                    <ul class="feature-list mt-3">
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>CRDP</strong> &mdash; Concurrent Retirement and Disability Pay</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>CRSC</strong> &mdash; Combat-Related Special Compensation</li>
+                                    </ul>
+                                    <p class="mt-3"><strong>You cannot receive both. You must elect one annually.</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="compensation">
+                                <h2><i class="fa-solid fa-arrows-left-right text-blue"></i> CRDP vs. CRSC: Side by Side</h2>
+                                <div class="grid-2-col">
+                                    <div class="glass-panel border-green">
+                                        <h3>CRDP</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-gold"></i> <strong>50%</strong> minimum VA rating</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Automatic enrollment (no form required)</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Taxable as retired pay</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Any service-connected disability</li>
+                                        </ul>
+                                    </div>
+                                    <div class="glass-panel border-green">
+                                        <h3>CRSC</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-gold"></i> <strong>10%</strong> minimum VA rating</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Requires <strong>DD Form 2860</strong> application to your branch of service</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Non-taxable &mdash; can mean thousands more per year</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Combat-related only (armed conflict, hazardous duty, instrumentalities of war)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="compensation">
+                                <h2><i class="fa-solid fa-rotate text-blue"></i> Annual Election &amp; DFAS Lags</h2>
+                                <div class="glass-panel">
+                                    <h3>Annual Election</h3>
+                                    <p>Retirees who qualify for both can switch once per year. Run the numbers both ways since rating changes may shift which program pays more.</p>
+                                </div>
+                                <div class="glass-panel mt-4">
+                                    <h3>DFAS Reporting Lags</h3>
+                                    <p>When the VA changes your disability rating retroactively, there is often a significant time lag before DFAS adjusts your retired pay. This can trigger unexpected debts or back payments.</p>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>Monitor myPay</strong> closely after any rating change and contact DFAS promptly if discrepancies appear.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-discussion" data-chapter="compensation">
+                                <span class="pres-discussion-badge"><i class="fa-solid fa-comments"></i> Discussion</span>
+                                <h2>Which Path Applies to You?</h2>
+                                <div class="pres-discussion-prompt">
+                                    <p>Based on what we've covered, do you think you're currently receiving the right compensation &mdash; CRDP or CRSC? Has anyone here had to deal with the annual DFAS election process?</p>
+                                </div>
+                                <ul class="pres-discussion-followups">
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Do you know your current VA disability rating percentage?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Have you checked whether your conditions qualify as combat-related for CRSC?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Has anyone experienced the DFAS processing delays we discussed?</li>
+                                </ul>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="awareness">
+                                <h2><i class="fa-solid fa-hand-holding-dollar text-blue"></i> VA Pension &amp; the 36-Month Lookback</h2>
+                                <p>The VA pension is a needs-based benefit for wartime veterans with limited income and assets. It's separate from disability compensation &mdash; and one of the most underutilized benefits in the VA system.</p>
+                                <div class="glass-panel mt-4">
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Wartime service required:</strong> 90+ days active duty, at least 1 day during a wartime period</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Age 65+ or permanently disabled</strong></li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>2026 net worth limit:</strong> $163,699 (includes most assets except home and vehicle)</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Enhanced by Aid &amp; Attendance</strong> (covered in Module 3)</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4 alert-warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div><strong>The 36-month lookback:</strong> The VA reviews asset transfers made in the 36 months before your application. If you moved money to appear eligible, your claim can be denied or you may be required to repay benefits. This is exactly what pension poaching scams exploit &mdash; "advisors" who restructure your assets to qualify, leaving you exposed.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="awareness">
+                                <h2><i class="fa-solid fa-skull-crossbones text-red"></i> Veteran Benefit Scams: A $584 Million Crisis</h2>
+                                <p>Veterans lost <strong>$584 million to fraud in 2024</strong>. Twenty-seven percent of all veterans have lost money to a scam at some point. You are specifically targeted because of your guaranteed income.</p>
+                                <div class="glass-panel mt-4 border-red">
+                                    <h3>Top Threats for This Room</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-xmark text-red"></i> <strong>Claim Sharks:</strong> Charge $3,000-$10,000+ to file VA claims. This is illegal &mdash; VSOs do it free</li>
+                                        <li><i class="fa-solid fa-xmark text-red"></i> <strong>Pension Poaching:</strong> "Advisors" restructure your assets into annuities to qualify you for VA pension, then pocket fees while you risk repayment</li>
+                                        <li><i class="fa-solid fa-xmark text-red"></i> <strong>VA Impersonation:</strong> Phone/email scams claiming you owe money or must "verify" your account. The VA will never call demanding payment</li>
+                                        <li><i class="fa-solid fa-xmark text-red"></i> <strong>Predatory Financial Products:</strong> High-fee annuities, whole life insurance, and crypto sold to veterans receiving lump-sum back-pay</li>
+                                    </ul>
+                                </div>
+                                <div class="glass-panel mt-4 border-green">
+                                    <h3>Protect Yourself</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-green"></i> <strong>Never pay</strong> for VA claims assistance &mdash; use accredited VSOs (DAV, VFW, American Legion)</li>
+                                        <li><i class="fa-solid fa-check text-green"></i> Verify anyone offering benefit help at <strong>va.gov/vso</strong></li>
+                                        <li><i class="fa-solid fa-check text-green"></i> Report scams to the <strong>VA OIG: 1-800-488-8244</strong> or <strong>FTC: reportfraud.ftc.gov</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="wrapup">
+                                <h2><i class="fa-solid fa-clipboard-list text-gold"></i> Key Takeaways</h2>
+                                <div class="glass-panel">
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-star text-gold"></i> It's never too late to file a VA disability claim or request an increase</li>
+                                        <li><i class="fa-solid fa-star text-gold"></i> Secondary conditions are commonly missed &mdash; they could raise your rating</li>
+                                        <li><i class="fa-solid fa-star text-gold"></i> Check if CRDP or CRSC applies to restore your waived retired pay</li>
+                                        <li><i class="fa-solid fa-star text-gold"></i> VA pension is needs-based with a 36-month asset lookback &mdash; don't fall for restructuring scams</li>
+                                        <li><i class="fa-solid fa-star text-gold"></i> Veterans lost $584M to fraud in 2024 &mdash; never pay for claims assistance</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-completion" data-chapter="wrapup">
+                                <div class="pres-completion-icon"><i class="fa-solid fa-medal"></i></div>
+                                <h2>Module 2 Complete!</h2>
+                                <p class="pres-completion-text">You now know how to check if you're maximizing your disability benefits and how to protect yourself from scams.</p>
+                                <div class="pres-completion-stats">
+                                    <div class="pres-completion-stat"><span class="stat-number">12</span><span class="stat-label">Slides Completed</span></div>
+                                    <div class="pres-completion-stat"><span class="stat-number">2</span><span class="stat-label">Compensation Paths Compared</span></div>
+                                    <div class="pres-completion-stat"><span class="stat-number">4</span><span class="stat-label">Scam Types Identified</span></div>
+                                </div>
+                                <div class="glass-panel mt-4">
+                                    <h3><i class="fa-solid fa-file-lines text-blue"></i> Module Handout</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-download text-gold"></i> <a href="handouts/crdp-crsc-comparison.html" target="_blank"><strong>CRDP vs. CRSC Comparison Sheet</strong></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="pres-nav-controls">
+                            <button class="pres-nav-btn pres-prev" disabled><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                            <button class="pres-nav-btn pres-next">Next <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================
+                 MODULE 3: HEALTHCARE & LONG-TERM CARE
+                 ============================================ -->
+            <section id="module3" class="section-pane">
+                <div class="presentation-container">
+                    <nav class="pres-sidebar">
+                        <div class="pres-sidebar-header">
+                            <div class="pres-module-badge">Module 3</div>
+                            <h3>Healthcare &amp; Care</h3>
+                            <button class="pres-back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Course</button>
+                        </div>
+                        <ul class="pres-chapter-list">
+                            <li class="pres-chapter expanded" data-chapter="intro"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Introduction</div><ul class="pres-slide-list"><li class="pres-slide-item active" tabindex="0" data-slide="0">Title &amp; Objectives</li></ul></li>
+                            <li class="pres-chapter" data-chapter="vahealth"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> VA Healthcare</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="1">CHAMPVA</li></ul></li>
+                            <li class="pres-chapter" data-chapter="medicare"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Medicare &amp; TRICARE</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="2">Medicare at 65</li><li class="pres-slide-item" tabindex="0" data-slide="3">TRICARE for Life</li><li class="pres-slide-item" tabindex="0" data-slide="4">Part B &amp; Part D Pitfalls</li><li class="pres-slide-item" tabindex="0" data-slide="5">Coverage Comparison</li><li class="pres-slide-item discussion-item" tabindex="0" data-slide="6">&#128172; Your Healthcare After 65</li></ul></li>
+                            <li class="pres-chapter" data-chapter="aid"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Aid &amp; Attendance</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="7">A&amp;A Overview</li><li class="pres-slide-item" tabindex="0" data-slide="8">2026 Rates</li><li class="pres-slide-item" tabindex="0" data-slide="9">Eligibility &amp; ADLs</li><li class="pres-slide-item discussion-item" tabindex="0" data-slide="10">&#128172; Planning for Long-Term Care</li></ul></li>
+                            <li class="pres-chapter" data-chapter="wrapup"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Summary</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="11">Key Takeaways</li><li class="pres-slide-item" tabindex="0" data-slide="12">Module Complete</li></ul></li>
+                        </ul>
+                        <div class="pres-sidebar-footer">
+                            <div class="pres-slide-counter">Slide <span class="pres-current">1</span> of <span class="pres-total">13</span></div>
+                            <button class="pres-theme-toggle"><i class="fa-solid fa-moon"></i> <span>Dark Mode</span></button>
+                        </div>
+                    </nav>
+                    <div class="pres-main" role="region" aria-label="Slide Content">
+                        <div class="pres-progress-bar"><div class="pres-progress-fill"></div></div>
+                        <div class="pres-slide-area" tabindex="-1">
+
+                            <div class="pres-slide pres-slide-title active" data-chapter="intro">
+                                <span class="pres-slide-eyebrow">Module 3 of 5</span>
+                                <h2>Healthcare &amp; Long-Term Care</h2>
+                                <p class="pres-subtitle">Managing VA healthcare, Medicare, TRICARE, and planning for long-term care needs</p>
+                                <div class="pres-objectives"><h3><i class="fa-solid fa-bullseye"></i> Learning Objectives</h3><ul><li>Know VA healthcare priority groups and enrollment</li><li>Understand CHAMPVA coverage for dependents</li><li>Know how TRICARE for Life coordinates with Medicare</li><li>Identify Aid &amp; Attendance eligibility and 2026 benefit rates</li></ul></div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="vahealth">
+                                <h2><i class="fa-solid fa-people-roof text-gold"></i> CHAMPVA: Coverage for Dependents</h2>
+                                <p>The Civilian Health and Medical Program of the Department of Veterans Affairs covers dependents of veterans who are:</p>
+                                <div class="grid-2-col mt-4">
+                                    <div class="glass-panel">
+                                        <h3>Who Qualifies</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-gold"></i> Spouse or child of a permanently and totally disabled veteran</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Surviving spouse/child of a veteran who died from service-connected disability</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Surviving spouse/child of a veteran who was permanently disabled at death</li>
+                                        </ul>
+                                    </div>
+                                    <div class="glass-panel">
+                                        <h3>Key Details</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-gold"></i> CHAMPVA covers 75% of allowable charges</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Annual deductible: $50/person, $100/family</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Annual cap: $3,000 out-of-pocket</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="medicare">
+                                <h2><i class="fa-solid fa-hospital text-blue"></i> Medicare at Age 65</h2>
+                                <p>Veterans are strongly encouraged to enroll in Medicare Parts A and B at age 65, as VA benefits typically only cover care at VA facilities.</p>
+                                <div class="glass-panel mt-4">
+                                    <p>For military retirees, enrolling in Medicare Parts A and B is <strong>mandatory</strong> to keep TRICARE for Life.</p>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>VA Healthcare:</strong> Your VA priority group (1-8) determines copays and access. Even if you have Medicare, enroll in VA healthcare to keep your options open. See the Healthcare Benefits Reference handout for the full priority group breakdown.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="medicare">
+                                <h2><i class="fa-solid fa-shield-heart text-gold"></i> TRICARE for Life</h2>
+                                <p>TRICARE for Life is a powerful wraparound secondary payer to Medicare:</p>
+                                <div class="glass-panel mt-4">
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> Medicare pays first as the primary insurer</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> TRICARE covers remaining costs as secondary</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> Result: little to no out-of-pocket cost for most covered services</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="medicare">
+                                <h2><i class="fa-solid fa-triangle-exclamation text-red"></i> Medicare Part B &amp; Part D: Costly Pitfalls</h2>
+                                <p>Medicare enrollment has strict deadlines. Missing them can cost you permanently &mdash; and the penalties never go away.</p>
+                                <div class="grid-2-col mt-4">
+                                    <div class="glass-panel border-red">
+                                        <h3>Late Enrollment Penalties</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-xmark text-red"></i> <strong>Part B:</strong> 10% surcharge for every 12 months you delay past your initial enrollment window &mdash; for life</li>
+                                            <li><i class="fa-solid fa-xmark text-red"></i> <strong>Part D:</strong> 1% of the national base premium per month of delay &mdash; for life</li>
+                                            <li><i class="fa-solid fa-xmark text-red"></i> These penalties compound &mdash; someone 3 years late on Part B pays 30% more forever</li>
+                                        </ul>
+                                    </div>
+                                    <div class="glass-panel">
+                                        <h3>IRMAA Surcharges</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-blue"></i> Income-Related Monthly Adjustment: Higher earners pay more for Parts B and D</li>
+                                            <li><i class="fa-solid fa-check text-blue"></i> Based on tax return from 2 years ago (2024 income affects 2026 premiums)</li>
+                                            <li><i class="fa-solid fa-check text-blue"></i> Thresholds start at $106,000 (single) / $212,000 (married filing jointly)</li>
+                                            <li><i class="fa-solid fa-check text-blue"></i> Pension + TSP withdrawals + SS can push you over &mdash; plan your withdrawals</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="glass-panel mt-4">
+                                    <h3>Missed the Window?</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-blue"></i> <strong>General Enrollment Period (GEP):</strong> January 1 &ndash; March 31 each year for those who missed their initial window</li>
+                                        <li><i class="fa-solid fa-check text-blue"></i> Coverage doesn't start until July 1 of that year &mdash; and late penalties still apply</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>TRICARE for Life requires Medicare Part B enrollment.</strong> If you skip Part B, you lose TRICARE for Life coverage. This is the most common and costly mistake military retirees make at 65.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="medicare">
+                                <h2><i class="fa-solid fa-arrows-left-right text-gold"></i> Coverage Comparison: VA vs. Medicare vs. TRICARE</h2>
+                                <div class="glass-panel">
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-hospital text-blue"></i> <strong>VA Healthcare:</strong> Covers care at VA facilities only. No premiums for most enrolled veterans. Copays vary by priority group.</li>
+                                        <li><i class="fa-solid fa-id-card text-blue"></i> <strong>Medicare:</strong> Covers any Medicare-accepting provider nationwide. Part B premium ~$185/month (2026 estimate, subject to annual adjustment). No VA facility requirement.</li>
+                                        <li><i class="fa-solid fa-shield-heart text-blue"></i> <strong>TRICARE for Life:</strong> Wraps around Medicare after age 65. Medicare pays first, TRICARE covers the rest. Requires Medicare enrollment.</li>
+                                    </ul>
+                                </div>
+                                <div class="glass-panel mt-4">
+                                    <h3><i class="fa-solid fa-pills"></i> Prescription Drug Coverage Note</h3>
+                                    <p>VA drug coverage is comprehensive but requires authorization by a VA provider and must be filled through a <strong>VA pharmacy or their mail-order system</strong>. Medicare Part D offers more flexibility for those who prefer local pharmacies or live far from VA facilities.</p>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>Best strategy:</strong> Enroll in VA healthcare, Medicare Parts A &amp; B, and maintain TRICARE for Life. This gives you the broadest access to care with minimal out-of-pocket costs.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-discussion" data-chapter="medicare">
+                                <span class="pres-discussion-badge"><i class="fa-solid fa-comments"></i> Discussion</span>
+                                <h2>Your Healthcare After 65</h2>
+                                <div class="pres-discussion-prompt">
+                                    <p>What's your current plan for healthcare coverage when you turn 65? Are you counting on VA healthcare alone, or have you thought about how Medicare and TRICARE for Life fit together?</p>
+                                </div>
+                                <ul class="pres-discussion-followups">
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Do you know if you're automatically enrolled in Medicare Part A?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> What would happen if you missed the Part B enrollment window?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> How does your VA priority group affect this decision?</li>
+                                </ul>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="aid">
+                                <h2><i class="fa-solid fa-user-nurse text-blue"></i> VA Aid &amp; Attendance Overview</h2>
+                                <p>A tax-free monthly enhanced pension for wartime veterans and surviving spouses who need assistance with Activities of Daily Living (ADLs) or require custodial care.</p>
+                                <div class="glass-panel mt-4">
+                                    <p>Custodial care = help with 2+ ADLs or 24/7 supervision due to cognitive impairment.</p>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="aid">
+                                <h2><i class="fa-solid fa-dollar-sign text-gold"></i> 2026 Aid &amp; Attendance Rates</h2>
+                                <div class="pres-stat-grid">
+                                    <div class="pres-stat-card"><span class="pres-stat-number">$3,845</span><span class="pres-stat-label">Two Veterans Married</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">$2,874</span><span class="pres-stat-label">Married Veteran</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">$2,424</span><span class="pres-stat-label">Single Veteran</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">$1,558</span><span class="pres-stat-label">Surviving Spouse</span></div>
+                                </div>
+                                <p class="mt-4">Net worth limit: <strong>$163,699</strong> (2026) with a 3-year look-back period on asset transfers.</p>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="aid">
+                                <h2><i class="fa-solid fa-hand-holding-medical text-blue"></i> Eligibility &amp; the 5 ADLs</h2>
+                                <div class="grid-2-col">
+                                    <div class="glass-panel">
+                                        <h3>Eligibility</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-gold"></i> 90 days active duty, 1+ day wartime</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Non-dishonorable discharge</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Age 65+ or permanently disabled</li>
+                                        </ul>
+                                    </div>
+                                    <div class="glass-panel">
+                                        <h3>The 5 ADLs</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-hand-holding-medical text-blue"></i> Bathing</li>
+                                            <li><i class="fa-solid fa-hand-holding-medical text-blue"></i> Mobility / Transferring</li>
+                                            <li><i class="fa-solid fa-hand-holding-medical text-blue"></i> Dressing</li>
+                                            <li><i class="fa-solid fa-hand-holding-medical text-blue"></i> Toileting</li>
+                                            <li><i class="fa-solid fa-hand-holding-medical text-blue"></i> Eating</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="info-callout mt-4 alert-warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div><strong>Medicaid interaction:</strong> If you enter a Medicaid-funded facility, VA pension is reduced to approximately $90/month. Medicaid eligibility has its own asset limits and a look-back period. Consult an elder law attorney before transferring assets.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-discussion" data-chapter="aid">
+                                <span class="pres-discussion-badge"><i class="fa-solid fa-comments"></i> Discussion</span>
+                                <h2>Planning for Long-Term Care</h2>
+                                <div class="pres-discussion-prompt">
+                                    <p>Think about someone you know &mdash; maybe a parent or spouse &mdash; who needed help with daily activities like bathing, dressing, or meals. How was that care paid for? What would you do differently knowing what you know now about Aid &amp; Attendance?</p>
+                                </div>
+                                <ul class="pres-discussion-followups">
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Do you know the current net worth limit for eligibility?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Have you considered how the 3-year look-back period affects planning?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> What's the difference between Aid &amp; Attendance and Medicaid?</li>
+                                </ul>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="wrapup">
+                                <h2><i class="fa-solid fa-clipboard-list text-gold"></i> Key Takeaways</h2>
+                                <div class="glass-panel"><ul class="feature-list">
+                                    <li><i class="fa-solid fa-star text-gold"></i> Enroll in Medicare A &amp; B at 65 to keep TRICARE for Life</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> TRICARE for Life covers what Medicare doesn't &mdash; minimal out-of-pocket</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> Aid &amp; Attendance provides up to $3,845/month (2026)</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> The VA recognizes 5 specific ADLs for eligibility</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> Medicaid approval reduces A&amp;A to ~$90/month</li>
+                                </ul></div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-completion" data-chapter="wrapup">
+                                <div class="pres-completion-icon"><i class="fa-solid fa-trophy"></i></div>
+                                <h2>Module 3 Complete!</h2>
+                                <p class="pres-completion-text">You now understand how VA healthcare, Medicare, TRICARE, and Aid &amp; Attendance work together in retirement.</p>
+                                <div class="pres-completion-stats">
+                                    <div class="pres-completion-stat"><span class="stat-number">13</span><span class="stat-label">Slides Completed</span></div>
+                                    <div class="pres-completion-stat"><span class="stat-number">4</span><span class="stat-label">Programs Covered</span></div>
+                                </div>
+                                <div class="glass-panel mt-4">
+                                    <h3><i class="fa-solid fa-file-lines text-blue"></i> Module Handout</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-download text-gold"></i> <a href="handouts/healthcare-benefits-reference.html" target="_blank"><strong>Healthcare Benefits Quick Reference</strong></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="pres-nav-controls">
+                            <button class="pres-nav-btn pres-prev" disabled><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                            <button class="pres-nav-btn pres-next">Next <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================
+                 MODULE 4: PROTECTING YOUR MONEY
+                 ============================================ -->
+            <section id="module4" class="section-pane">
+                <div class="presentation-container">
+                    <nav class="pres-sidebar">
+                        <div class="pres-sidebar-header">
+                            <div class="pres-module-badge">Module 4</div>
+                            <h3>Managing Your Income</h3>
+                            <button class="pres-back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Course</button>
+                        </div>
+                        <ul class="pres-chapter-list">
+                            <li class="pres-chapter expanded" data-chapter="intro"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Introduction</div><ul class="pres-slide-list"><li class="pres-slide-item active" tabindex="0" data-slide="0">Title &amp; Objectives</li></ul></li>
+                            <li class="pres-chapter" data-chapter="income"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Income</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="1">Income Stacking</li><li class="pres-slide-item discussion-item" tabindex="0" data-slide="2">&#128172; Map Your Income</li></ul></li>
+                            <li class="pres-chapter" data-chapter="taxes"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Taxes</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="3">Federal Taxation</li><li class="pres-slide-item" tabindex="0" data-slide="4">State Tax 2026</li><li class="pres-slide-item discussion-item" tabindex="0" data-slide="5">&#128172; State Tax Impact</li></ul></li>
+                            <li class="pres-chapter" data-chapter="debt"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Debt</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="6">Debt in Retirement</li></ul></li>
+                            <li class="pres-chapter" data-chapter="protect"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Protection</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="7">Managing RMDs</li><li class="pres-slide-item" tabindex="0" data-slide="8">Inflation &amp; Buying Power</li></ul></li>
+                            <li class="pres-chapter" data-chapter="wrapup"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Wrapup</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="9">Key Takeaways</li><li class="pres-slide-item" tabindex="0" data-slide="10">Module Complete</li></ul></li>
+                        </ul>
+                        <div class="pres-sidebar-footer">
+                            <div class="pres-slide-counter">Slide <span class="pres-current">1</span> of <span class="pres-total">11</span></div>
+                            <button class="pres-theme-toggle"><i class="fa-solid fa-moon"></i> <span>Dark Mode</span></button>
+                        </div>
+                    </nav>
+                    <div class="pres-main" role="region" aria-label="Slide Content">
+                        <div class="pres-progress-bar"><div class="pres-progress-fill"></div></div>
+                        <div class="pres-slide-area" tabindex="-1">
+
+                            <div class="pres-slide pres-slide-title active" data-chapter="intro">
+                                <span class="pres-slide-eyebrow">Module 4 of 5</span>
+                                <h2>Managing Your Retirement Income</h2>
+                                <p class="pres-subtitle">Tax-efficient withdrawal order, RMD management, state tax impact, and managing debt on fixed income</p>
+                                <div class="pres-objectives"><h3><i class="fa-solid fa-bullseye"></i> Learning Objectives</h3><ul><li>Understand how to stack income sources for tax efficiency</li><li>Know federal and state tax treatment of your retirement income</li><li>Manage RMDs to avoid penalties and control your tax bracket</li><li>Recognize the impact of debt on fixed-income retirement</li></ul></div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="income">
+                                <h2><i class="fa-solid fa-layer-group text-gold"></i> Income Stacking: Your Retirement Paycheck</h2>
+                                <p>Most military retirees have multiple income streams. Stack them to understand your total monthly picture:</p>
+                                <div class="glass-panel mt-4">
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-1 text-blue"></i> <strong>Military Retired Pay</strong> &mdash; Taxable, COLA-adjusted</li>
+                                        <li><i class="fa-solid fa-2 text-blue"></i> <strong>VA Disability Compensation</strong> &mdash; Tax-free (may offset retired pay)</li>
+                                        <li><i class="fa-solid fa-3 text-blue"></i> <strong>Social Security</strong> &mdash; Partially taxable, begins at 62-70</li>
+                                        <li><i class="fa-solid fa-4 text-blue"></i> <strong>TSP / IRA Withdrawals</strong> &mdash; Taxable (traditional) or tax-free (Roth)</li>
+                                        <li><i class="fa-solid fa-5 text-blue"></i> <strong>Employment Income</strong> &mdash; Second career, part-time, consulting</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>Key insight:</strong> Understanding which income streams are taxable vs. tax-free helps you optimize withdrawal order and minimize your total tax burden.</div>
+                                </div>
+                                <div class="info-callout mt-4 alert-warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div><strong>The 4% guideline:</strong> If you're drawing from savings (TSP/IRA), a common rule of thumb is withdrawing no more than 4% of your balance per year. But with military pension + VA disability + Social Security, most veterans in this room have a guaranteed income floor that reduces reliance on portfolio withdrawals.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-discussion" data-chapter="income">
+                                <span class="pres-discussion-badge"><i class="fa-solid fa-comments"></i> Discussion</span>
+                                <h2>Map Your Retirement Income</h2>
+                                <div class="pres-discussion-prompt">
+                                    <p>Let's get personal. On a piece of paper, list every source of income you expect in retirement &mdash; military pension, VA disability, TSP, Social Security, part-time work. Now stack them up. Does the total cover your monthly expenses?</p>
+                                </div>
+                                <ul class="pres-discussion-followups">
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Which of your income sources are taxable vs. tax-free?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> What's your biggest expense that might not be covered?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> How would your income picture change if you moved to a different state?</li>
+                                </ul>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="taxes">
+                                <h2><i class="fa-solid fa-landmark text-blue"></i> Federal Taxation</h2>
+                                <div class="grid-2-col">
+                                    <div class="glass-panel border-red">
+                                        <h3>Taxable</h3>
+                                        <p>Military retirement pensions are taxed as <strong>ordinary income</strong> at the federal level.</p>
+                                    </div>
+                                    <div class="glass-panel border-green">
+                                        <h3>Tax-Free</h3>
+                                        <p>VA disability compensation is <strong>completely tax-free</strong> at both federal and state levels.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="taxes">
+                                <h2><i class="fa-solid fa-map-location-dot text-blue"></i> State Tax Landscape (2026)</h2>
+                                <div class="grid-2-col">
+                                    <div class="glass-panel border-green">
+                                        <h3 class="text-green"><i class="fa-solid fa-circle-check"></i> No State Income Tax</h3>
+                                        <p>Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, Wyoming</p>
+                                    </div>
+                                    <div class="glass-panel border-red">
+                                        <h3 class="text-red"><i class="fa-solid fa-circle-xmark"></i> Fully Tax Military Retirement</h3>
+                                        <p>California and a small number of other states tax military pensions with no special exemptions.</p>
+                                    </div>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>VA Loan &amp; Home-Buying Power:</strong> Living in a state that exempts military retirement pay lowers your <strong>debt-to-income (DTI) ratio</strong> by increasing your net usable income. This directly increases how much home you can afford with a VA loan. But watch out &mdash; states like Florida and Texas with no income tax often have <strong>high property taxes and insurance premiums</strong> that offset the savings.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-discussion" data-chapter="taxes">
+                                <span class="pres-discussion-badge"><i class="fa-solid fa-comments"></i> Discussion</span>
+                                <h2>State Tax Impact</h2>
+                                <div class="pres-discussion-prompt">
+                                    <p>Does your state tax your military retirement pay? Have you considered how moving to a different state could affect your bottom line &mdash; and what other costs (property tax, insurance, cost of living) might offset any savings?</p>
+                                </div>
+                                <ul class="pres-discussion-followups">
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Is the state tax savings worth the cost of relocating?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> What other financial factors change with a move &mdash; property tax, cost of living, VA facility access?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> How does your spouse's employment or family situation affect this?</li>
+                                </ul>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="debt">
+                                <h2><i class="fa-solid fa-credit-card text-red"></i> Debt in Retirement: The Reality</h2>
+                                <p>Most people assume they'll be debt-free by retirement. The data says otherwise:</p>
+                                <div class="pres-stat-grid">
+                                    <div class="pres-stat-card"><span class="pres-stat-number">97%</span><span class="pres-stat-label">of retirement-age Americans carry non-mortgage debt</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">68%</span><span class="pres-stat-label">of retirees carry credit card balances</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">$7,484</span><span class="pres-stat-label">average credit card balance for adults 65+</span></div>
+                                </div>
+                                <div class="glass-panel mt-4">
+                                    <h3>Action Steps</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Pay off high-interest debt before retirement</strong> &mdash; even if it means delaying retirement 6-12 months</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Don't tap TSP/IRA to service credit card debt</strong> &mdash; the tax hit plus lost growth makes it worse</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Consider mortgage payoff math:</strong> if your rate is under 4%, investing may beat early payoff. If over 6%, paying it off gives guaranteed return</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Avoid new debt in retirement</strong> &mdash; on fixed income, there's no earning power to dig out</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="protect">
+                                <h2><i class="fa-solid fa-calendar-check text-blue"></i> Managing Required Minimum Distributions</h2>
+                                <p>Once you reach RMD age, the IRS requires you to withdraw a minimum amount from tax-deferred accounts each year &mdash; TSP, traditional IRAs, and 401(k)s. Missing an RMD triggers a steep penalty.</p>
+                                <div class="pres-stat-grid">
+                                    <div class="pres-stat-card"><span class="pres-stat-number">73</span><span class="pres-stat-label">RMD start age (born 1951-1959)</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">75</span><span class="pres-stat-label">RMD start age (born 1960+)</span></div>
+                                    <div class="pres-stat-card"><span class="pres-stat-number">25%</span><span class="pres-stat-label">Penalty for missing an RMD</span></div>
+                                </div>
+                                <div class="glass-panel mt-4">
+                                    <h3>RMD Strategies</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Calculate your RMD:</strong> Divide your account balance (Dec 31 of prior year) by the IRS life expectancy factor</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Consolidate accounts:</strong> Fewer accounts means fewer RMD calculations to track</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Take it early in the year:</strong> Don't wait until December and risk missing the deadline</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Consider Roth conversions:</strong> Roth IRAs have no RMDs &mdash; converting some funds before RMD age can reduce future obligations</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4 alert-warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div><strong>If you have multiple IRAs,</strong> you can take your total RMD from any one of them. But TSP RMDs must come from the TSP itself &mdash; you can't satisfy a TSP RMD from an IRA.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="protect">
+                                <h2><i class="fa-solid fa-chart-line text-gold"></i> Inflation &amp; Your Buying Power</h2>
+                                <p>A 20-30 year retirement means inflation will significantly erode your purchasing power &mdash; even at modest rates. Understanding which of your income sources keep up with inflation is critical.</p>
+                                <div class="glass-panel mt-4">
+                                    <h3>What Has COLA</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-green"></i> <strong>Military retired pay</strong> &mdash; annual COLA (matches CPI)</li>
+                                        <li><i class="fa-solid fa-check text-green"></i> <strong>VA disability compensation</strong> &mdash; annual COLA</li>
+                                        <li><i class="fa-solid fa-check text-green"></i> <strong>Social Security</strong> &mdash; annual COLA</li>
+                                        <li><i class="fa-solid fa-xmark text-red"></i> <strong>Private pensions</strong> &mdash; most have NO inflation adjustment</li>
+                                        <li><i class="fa-solid fa-xmark text-red"></i> <strong>Fixed annuities</strong> &mdash; purchasing power declines every year</li>
+                                        <li><i class="fa-solid fa-xmark text-red"></i> <strong>Savings accounts</strong> &mdash; interest rarely keeps pace with inflation</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>At 3% inflation,</strong> $1,000 today is worth only $744 in 10 years and $554 in 20 years. The military benefits with COLA are more valuable than they appear &mdash; they're inflation-protected income for life.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="wrapup">
+                                <h2><i class="fa-solid fa-clipboard-list text-gold"></i> Key Takeaways</h2>
+                                <div class="glass-panel"><ul class="feature-list">
+                                    <li><i class="fa-solid fa-star text-gold"></i> Stack your income sources &mdash; know which are taxable vs. tax-free</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> Your state's tax treatment of military pensions can save (or cost) thousands</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> Never miss an RMD &mdash; the 25% penalty is unforgiving</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> Consider Roth conversions before RMD age to reduce future obligations</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> Pay off high-interest debt before or early in retirement</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> Military pay, VA pay, and Social Security all have COLA &mdash; private income doesn't</li>
+                                </ul></div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-completion" data-chapter="wrapup">
+                                <div class="pres-completion-icon"><i class="fa-solid fa-trophy"></i></div>
+                                <h2>Module 4 Complete!</h2>
+                                <p class="pres-completion-text">You now understand how to manage your retirement income: tax-efficient stacking, RMDs, state tax impact, and keeping debt under control.</p>
+                                <div class="pres-completion-stats">
+                                    <div class="pres-completion-stat"><span class="stat-number">11</span><span class="stat-label">Slides Completed</span></div>
+                                    <div class="pres-completion-stat"><span class="stat-number">5</span><span class="stat-label">Income Streams Mapped</span></div>
+                                    <div class="pres-completion-stat"><span class="stat-number">9</span><span class="stat-label">No-Tax States Listed</span></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="pres-nav-controls">
+                            <button class="pres-nav-btn pres-prev" disabled><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                            <button class="pres-nav-btn pres-next">Next <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================
+                 MODULE 5: LEGACY & ESTATE PLANNING
+                 ============================================ -->
+            <section id="module5" class="section-pane">
+                <div class="presentation-container">
+                    <nav class="pres-sidebar">
+                        <div class="pres-sidebar-header">
+                            <div class="pres-module-badge">Module 5</div>
+                            <h3>Legacy Planning</h3>
+                            <button class="pres-back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Course</button>
+                        </div>
+                        <ul class="pres-chapter-list">
+                            <li class="pres-chapter expanded" data-chapter="intro"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Introduction</div><ul class="pres-slide-list"><li class="pres-slide-item active" tabindex="0" data-slide="0">Title &amp; Objectives</li></ul></li>
+                            <li class="pres-chapter" data-chapter="sbp"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Survivor Benefit Plan</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="1">Understanding Your SBP</li><li class="pres-slide-item" tabindex="0" data-slide="2">Premiums &amp; Paid-Up</li><li class="pres-slide-item" tabindex="0" data-slide="3">What If You Declined?</li><li class="pres-slide-item discussion-item" tabindex="0" data-slide="4">&#128172; Your SBP</li></ul></li>
+                            <li class="pres-chapter" data-chapter="dic"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> DIC</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="5">DIC Overview</li></ul></li>
+                            <li class="pres-chapter" data-chapter="estate"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Estate &amp; Burial</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="6">Estate Essentials &amp; VA Burial</li><li class="pres-slide-item" tabindex="0" data-slide="7">Beneficiary Checklist</li><li class="pres-slide-item discussion-item" tabindex="0" data-slide="8">&#128172; When Did You Last Check?</li></ul></li>
+                            <li class="pres-chapter" data-chapter="protect"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Protection</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="9">Protecting Your Estate</li><li class="pres-slide-item" tabindex="0" data-slide="10">Cognitive Decline Planning</li></ul></li>
+                            <li class="pres-chapter" data-chapter="wrapup"><div class="pres-chapter-header" tabindex="0" role="button"><span class="pres-chapter-arrow">&#9654;</span> Course Complete</div><ul class="pres-slide-list"><li class="pres-slide-item" tabindex="0" data-slide="11">Key Takeaways</li><li class="pres-slide-item" tabindex="0" data-slide="12">Course Complete</li></ul></li>
+                        </ul>
+                        <div class="pres-sidebar-footer">
+                            <div class="pres-slide-counter">Slide <span class="pres-current">1</span> of <span class="pres-total">13</span></div>
+                            <button class="pres-theme-toggle"><i class="fa-solid fa-moon"></i> <span>Dark Mode</span></button>
+                        </div>
+                    </nav>
+                    <div class="pres-main" role="region" aria-label="Slide Content">
+                        <div class="pres-progress-bar"><div class="pres-progress-fill"></div></div>
+                        <div class="pres-slide-area" tabindex="-1">
+
+                            <div class="pres-slide pres-slide-title active" data-chapter="intro">
+                                <span class="pres-slide-eyebrow">Module 5 of 5</span>
+                                <h2>Legacy &amp; Estate Planning</h2>
+                                <p class="pres-subtitle">Make sure your family is taken care of and your wishes are clear</p>
+                                <div class="pres-objectives"><h3><i class="fa-solid fa-bullseye"></i> Learning Objectives</h3><ul><li>Understand your SBP coverage (or options if you declined)</li><li>Know how DIC interacts with SBP after the 2023 offset elimination</li><li>Ensure your estate documents and beneficiary designations are current</li><li>Protect your estate from fraud and exploitation</li></ul></div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="sbp">
+                                <h2><i class="fa-solid fa-shield-heart text-gold"></i> Understanding Your Survivor Benefit Plan</h2>
+                                <p>If you elected SBP at retirement, your surviving spouse receives 55% of your selected base amount as a guaranteed, inflation-indexed monthly payment for life. If you declined, there may still be options.</p>
+                                <div class="grid-2-col mt-4">
+                                    <div class="glass-panel border-green">
+                                        <h3 class="text-green"><i class="fa-solid fa-circle-check"></i> SBP Pros</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-green"></i> <strong>Lifetime guarantee</strong> &mdash; beneficiary cannot outlive the benefit</li>
+                                            <li><i class="fa-solid fa-check text-green"></i> <strong>Inflation-indexed</strong> via annual COLA</li>
+                                            <li><i class="fa-solid fa-check text-green"></i> <strong>DoD-subsidized</strong> &mdash; often cheaper than equivalent commercial annuities</li>
+                                            <li><i class="fa-solid fa-check text-green"></i> <strong>No medical exam</strong> required</li>
+                                            <li><i class="fa-solid fa-check text-green"></i> Premiums deducted <strong>pre-tax</strong>, lowering current income tax</li>
+                                        </ul>
+                                    </div>
+                                    <div class="glass-panel border-red">
+                                        <h3 class="text-red"><i class="fa-solid fa-circle-xmark"></i> SBP Cons</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-xmark text-red"></i> <strong>Irrevocable</strong> &mdash; one-time decision via DD Form 2656</li>
+                                            <li><i class="fa-solid fa-xmark text-red"></i> <strong>No access to principal</strong> &mdash; it's insurance, not an investment</li>
+                                            <li><i class="fa-solid fa-xmark text-red"></i> If beneficiary dies first, <strong>no refund</strong> of premiums paid</li>
+                                            <li><i class="fa-solid fa-xmark text-red"></i> Benefits are <strong>taxable</strong> to the surviving spouse</li>
+                                            <li><i class="fa-solid fa-xmark text-red"></i> Coverage may end if beneficiary <strong>remarries</strong> (before age 55)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="sbp">
+                                <h2><i class="fa-solid fa-coins text-blue"></i> Premiums &amp; Paid-Up Status</h2>
+                                <div class="glass-panel">
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Premium:</strong> 6.5% of selected base amount, deducted from pre-tax retired pay</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Paid-Up:</strong> Premiums stop after <strong>360 months (30 years)</strong> of payments <em>and</em> reaching <strong>age 70</strong> &mdash; both conditions required</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>COLA:</strong> Payout increases annually with Cost of Living Adjustment</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>No medical exam</strong> required for enrollment</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="sbp">
+                                <h2><i class="fa-solid fa-question-circle text-blue"></i> What If You Declined SBP?</h2>
+                                <p>If you didn't elect SBP at retirement, you're not automatically out of luck. Congress has periodically opened enrollment windows, and there are alternative strategies to consider.</p>
+                                <div class="glass-panel mt-4">
+                                    <h3>Options to Explore</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Congressional Open Seasons:</strong> Congress has authorized SBP enrollment windows (most recently 2023-2024 via the NDAA). Watch for future opportunities.</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Term Life Insurance:</strong> May be more affordable than SBP if you're healthy. But it expires or gets very expensive with age.</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Permanent Life Insurance:</strong> Provides a death benefit regardless of age, but premiums are significantly higher.</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Investment Strategy:</strong> Some veterans self-insure by building a dedicated investment portfolio for their spouse. This carries market risk.</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4 alert-warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div><strong>No alternative perfectly replaces SBP.</strong> SBP is guaranteed, inflation-protected, and lasts for your spouse's lifetime. Private insurance costs increase with age and health conditions. If an Open Season is announced, seriously consider enrolling.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-discussion" data-chapter="sbp">
+                                <span class="pres-discussion-badge"><i class="fa-solid fa-comments"></i> Discussion</span>
+                                <h2>Your SBP</h2>
+                                <div class="pres-discussion-prompt">
+                                    <p>Do you currently have SBP? If so, do you understand what your spouse would receive? If you declined, what's your plan to ensure your spouse is financially secure?</p>
+                                </div>
+                                <ul class="pres-discussion-followups">
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> If you have SBP, do you know when your premiums will stop (paid-up status)?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> For those without SBP &mdash; do you have alternative coverage in place?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Has anyone calculated what their spouse's income would look like without their military pension?</li>
+                                </ul>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="dic">
+                                <h2><i class="fa-solid fa-heart text-blue"></i> Dependency &amp; Indemnity Compensation (DIC)</h2>
+                                <p>DIC is a separate, <strong>tax-free</strong> VA benefit paid to surviving spouses of veterans whose death was service-connected. The base 2026 DIC rate is approximately <strong>$1,612/month</strong> (subject to annual COLA adjustments), with additional amounts for dependent children.</p>
+                                <div class="info-callout mt-4 alert-warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div><strong>DIC + SBP Interaction:</strong> As of January 1, 2023, the SBP-DIC offset has been fully eliminated. Surviving spouses now receive <strong>both</strong> their full SBP payment and full DIC with no reduction. This makes SBP significantly more valuable for families where the veteran has a service-connected condition.</div>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>Social Security Fairness Act:</strong> Veterans should monitor ongoing legislative changes that may affect how benefits like DIC and Social Security interact. Recent provisions have expanded concurrent receipt &mdash; check with your VSO or financial advisor for the latest updates.</div>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>Consult a financial advisor</strong> to model your family's specific SBP + DIC + Social Security survivor income. The interaction between these benefits is complex and worth professional analysis.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="estate">
+                                <h2><i class="fa-solid fa-gavel text-blue"></i> Estate Essentials &amp; VA Burial</h2>
+                                <div class="grid-2-col">
+                                    <div class="glass-panel">
+                                        <h3>Four Documents Every Veteran Needs</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-gold"></i> <strong>Will</strong> &mdash; directs asset distribution</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> <strong>Durable Power of Attorney</strong> &mdash; financial decisions if incapacitated</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> <strong>Healthcare Power of Attorney</strong> &mdash; medical decisions</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> <strong>Advance Directive</strong> &mdash; end-of-life care wishes</li>
+                                        </ul>
+                                        <p class="mt-3"><strong>Free help:</strong> Military legal offices and VSOs offer free estate planning.</p>
+                                    </div>
+                                    <div class="glass-panel">
+                                        <h3>VA Burial Benefits (Free)</h3>
+                                        <ul class="feature-list">
+                                            <li><i class="fa-solid fa-check text-gold"></i> National cemetery gravesite at no cost</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Government headstone/marker</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Burial flag &amp; Presidential Memorial Certificate</li>
+                                            <li><i class="fa-solid fa-check text-gold"></i> Burial allowance: up to $2,000+ (service-connected)</li>
+                                        </ul>
+                                        <p class="mt-3"><strong>Pre-plan:</strong> File VA Form 40-10007 now.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="estate">
+                                <h2><i class="fa-solid fa-list-check text-blue"></i> Beneficiary Designation Checklist</h2>
+                                <p>Beneficiary designations <strong>override your will</strong>. Review these annually and after any major life event:</p>
+                                <div class="glass-panel mt-4">
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>SBP (DD Form 2656):</strong> Spouse, former spouse, or child</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>SGLI / VGLI:</strong> Life insurance beneficiary (can be anyone)</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>TSP (Form TSP-3):</strong> Thrift Savings Plan beneficiary</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>VA Life Insurance:</strong> Beneficiary for any VA-sponsored policy</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Bank / Investment Accounts:</strong> Transfer-on-death or payable-on-death designations</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Retirement Accounts (IRAs):</strong> Primary and contingent beneficiaries</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4 alert-warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div><strong>Common mistake:</strong> Outdated beneficiaries after divorce or remarriage. An ex-spouse listed on SGLI or TSP <em>will</em> receive the benefit regardless of your will.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-discussion" data-chapter="estate">
+                                <span class="pres-discussion-badge"><i class="fa-solid fa-comments"></i> Discussion</span>
+                                <h2>When Did You Last Check?</h2>
+                                <div class="pres-discussion-prompt">
+                                    <p>Here's a tough but important question: when was the last time you reviewed who's listed as your beneficiary on SGLI, TSP, and your bank accounts? Has anything changed &mdash; divorce, remarriage, new children &mdash; since you last updated them?</p>
+                                </div>
+                                <ul class="pres-discussion-followups">
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Do you have a current will, or are you relying on state law?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Have you set up a power of attorney and advance medical directive?</li>
+                                    <li><i class="fa-solid fa-arrow-right text-gold"></i> Who in your family knows where your important documents are stored?</li>
+                                </ul>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="protect">
+                                <h2><i class="fa-solid fa-user-shield text-blue"></i> Protecting Your Estate</h2>
+                                <p>Elder financial exploitation is one of the fastest-growing crimes in America. Veterans are especially targeted because of their guaranteed income streams.</p>
+                                <div class="glass-panel mt-4 border-red">
+                                    <h3>Warning Signs</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-xmark text-red"></i> Someone pressures you to change your power of attorney or will</li>
+                                        <li><i class="fa-solid fa-xmark text-red"></i> A caregiver or family member controls access to your finances</li>
+                                        <li><i class="fa-solid fa-xmark text-red"></i> Unexpected changes to bank accounts or beneficiary designations</li>
+                                        <li><i class="fa-solid fa-xmark text-red"></i> Being asked to sign documents you don't fully understand</li>
+                                    </ul>
+                                </div>
+                                <div class="glass-panel mt-4 border-green">
+                                    <h3>Protective Steps</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-green"></i> Set up a "trusted contact" at your financial institutions &mdash; someone they can call if they suspect exploitation</li>
+                                        <li><i class="fa-solid fa-check text-green"></i> Use a durable power of attorney with specific limitations, not blanket authority</li>
+                                        <li><i class="fa-solid fa-check text-green"></i> Review bank statements monthly for unauthorized transactions</li>
+                                        <li><i class="fa-solid fa-check text-green"></i> Consider a revocable living trust to avoid probate and add a layer of protection</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>If you suspect financial exploitation,</strong> call the VA OIG at 1-800-488-8244 or Adult Protective Services in your state.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="protect">
+                                <h2><i class="fa-solid fa-brain text-blue"></i> Planning for Cognitive Decline</h2>
+                                <p>Nobody wants to think about this, but it's one of the most important financial decisions you can make <strong>while you're still sharp enough to make it.</strong></p>
+                                <div class="glass-panel mt-4">
+                                    <h3>Act Now, While You Can</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Durable Power of Attorney:</strong> "Durable" means it stays in effect if you become incapacitated. A regular POA does not. Make sure yours says "durable"</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Trusted Contact Person:</strong> Authorize your bank and brokerage to contact someone if they notice unusual activity. This is free and takes 5 minutes</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>Successor Trustee:</strong> If you have a trust, name a backup trustee who can step in</li>
+                                        <li><i class="fa-solid fa-check text-gold"></i> <strong>VA Representative Payee:</strong> If you can no longer manage VA benefits, the VA can appoint a fiduciary. Nominate someone you trust before it's needed</li>
+                                    </ul>
+                                </div>
+                                <div class="info-callout mt-4">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>The conversation:</strong> Tell your spouse or adult children where your documents are, who your financial contacts are, and what accounts you have. Write it down. This single act prevents more financial chaos than any legal document.</div>
+                                </div>
+                            </div>
+
+                            <div class="pres-slide" data-chapter="wrapup">
+                                <h2><i class="fa-solid fa-clipboard-list text-gold"></i> Key Takeaways</h2>
+                                <div class="glass-panel"><ul class="feature-list">
+                                    <li><i class="fa-solid fa-star text-gold"></i> Know your SBP status &mdash; and explore options if you declined</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> SBP-DIC offset was eliminated in 2023 &mdash; survivors receive both in full</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> Every veteran needs a will, POA, and advance directive</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> Review beneficiary designations annually &mdash; they override your will</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> Set up trusted contacts at financial institutions</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> VA burial benefits are free for honorably discharged veterans</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> Set up a trusted contact at your bank &mdash; it takes 5 minutes and can prevent exploitation</li>
+                                    <li><i class="fa-solid fa-star text-gold"></i> Tell your family where your documents are and what accounts you have</li>
+                                </ul></div>
+                            </div>
+
+                            <div class="pres-slide pres-slide-completion" data-chapter="wrapup">
+                                <div class="pres-completion-icon"><i class="fa-solid fa-medal"></i></div>
+                                <h2>Course Complete!</h2>
+                                <p class="pres-completion-text">Congratulations! You've completed all five modules of the VUB Financial Readiness Course.</p>
+                                <div class="pres-completion-stats">
+                                    <div class="pres-completion-stat"><span class="stat-number">5</span><span class="stat-label">Modules Completed</span></div>
+                                    <div class="pres-completion-stat"><span class="stat-number">61</span><span class="stat-label">Slides Reviewed</span></div>
+                                </div>
+                                <div class="glass-panel mt-4">
+                                    <h3><i class="fa-solid fa-file-lines text-blue"></i> Module Handout</h3>
+                                    <ul class="feature-list">
+                                        <li><i class="fa-solid fa-download text-gold"></i> <a href="handouts/sbp-decision-worksheet.html" target="_blank"><strong>SBP Decision Worksheet</strong></a></li>
+                                    </ul>
+                                </div>
+                                <p class="mt-4"><a href="#resources" class="btn-primary">Study Resources <i class="fa-solid fa-arrow-right"></i></a></p>
+                            </div>
+
+                        </div>
+                        <div class="pres-nav-controls">
+                            <button class="pres-nav-btn pres-prev" disabled><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                            <button class="pres-nav-btn pres-next">Next <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Study Resources -->
+            <section id="resources" class="section-pane">
                 <div class="content-wrapper">
                     <div class="module-header">
-                        <span class="module-eyebrow">Module 1</span>
-                        <h1 class="module-title">Retirement Transition Timelines & Preparation</h1>
+                        <span class="module-eyebrow">Study Resources</span>
+                        <h1 class="module-title">Review & Practice</h1>
                     </div>
-                    
-                    <div class="glass-panel">
-                        <h2>Marine Corps Transition (6 to 1 Months Out)</h2>
-                        <p>Key concepts include scheduling your final retirement physicals, executing a thorough job search strategy, and submitting Benefits Delivery at Discharge (BDD) claims within the critical 90-180 day window before separation.</p>
+
+                    <div class="card-grid">
+                        <a href="assets/notebooklm/quiz.html" target="_blank" class="course-card resource-card">
+                            <div class="card-icon"><i class="fa-solid fa-clipboard-question"></i></div>
+                            <h3>Knowledge Quiz</h3>
+                            <p>10 multiple-choice questions covering all five modules. Test your understanding of retirement benefits, disability compensation, healthcare, investments, and legacy planning.</p>
+                        </a>
+                        <a href="assets/notebooklm/flashcards.html" target="_blank" class="course-card resource-card">
+                            <div class="card-icon"><i class="fa-solid fa-layer-group"></i></div>
+                            <h3>Flashcards</h3>
+                            <p>60 interactive flashcards for self-study. Covers key terms, eligibility rules, benefit amounts, forms, and financial strategies from the course material.</p>
+                        </a>
+                    </div>
+
+                    <div class="glass-panel mt-6">
+                        <h2>Additional Materials</h2>
                         <ul class="feature-list">
-                            <li><i class="fa-solid fa-check text-gold"></i> Submit Benefits Delivery at Discharge (BDD) claims</li>
-                            <li><i class="fa-solid fa-check text-gold"></i> Address Blended Retirement System (BRS) lump-sum options</li>
-                            <li><i class="fa-solid fa-check text-gold"></i> Complete final outprocessing and relocation planning</li>
+                            <li><i class="fa-solid fa-book text-blue"></i> <a href="assets/notebooklm/study-guide.md" target="_blank"><strong>Study Guide</strong></a> &mdash; Comprehensive written review with practice questions and glossary</li>
+                            <li><i class="fa-solid fa-headphones text-blue"></i> <a href="assets/notebooklm/financial-readiness-podcast.mp3" target="_blank"><strong>Audio Overview</strong></a> &mdash; Podcast-style discussion of course topics</li>
+                            <li><i class="fa-solid fa-image text-blue"></i> <a href="assets/notebooklm/infographic.png" target="_blank"><strong>Infographic</strong></a> &mdash; Visual summary of the full retirement benefits landscape</li>
+                            <li><i class="fa-solid fa-file-pdf text-blue"></i> <a href="assets/notebooklm/slide-deck.pdf" target="_blank"><strong>Slide Deck</strong></a> &mdash; Presentation slides for reference</li>
                         </ul>
                     </div>
 
                     <div class="glass-panel mt-6">
-                        <h2>Federal Employee Retirement (5 Years to 0 Months Out)</h2>
-                        <p>Tailored for both CSRS and FERS employees, this timeline emphasizes early preparation starting up to 5 years from your planned separation date.</p>
-                        <div class="info-callout">
-                            <i class="fa-solid fa-lightbulb"></i>
-                            <div>
-                                <strong>Pro Tip:</strong> Calculate your expected annuity and TSP income early. Verify civilian/military service records and ensure all financial indebtedness is cleared well in advance of your final day.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Module 2 -->
-            <section id="module2" class="section-pane">
-                <div class="content-wrapper">
-                    <div class="module-header">
-                        <span class="module-eyebrow">Module 2</span>
-                        <h1 class="module-title">Navigating Disability Pay and Compensation</h1>
-                    </div>
-                    
-                    <div class="glass-panel">
-                        <h2>CRSC vs. CRDP</h2>
-                        <p>It is vital to understand the differences between Concurrent Retirement and Disability Pay (CRDP), which restores retired pay withheld due to VA offsets for service-connected disabilities, and Combat-Related Special Compensation (CRSC), a non-taxable compensation for combat-related disabilities. <strong>Retirees cannot receive both and must elect one annually.</strong></p>
+                        <h2>Printable Handouts</h2>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-file-lines text-blue"></i> <a href="handouts/retirement-transition-checklist.html" target="_blank"><strong>Retirement Transition Checklist</strong></a> &mdash; Timeline and action items for separation planning</li>
+                            <li><i class="fa-solid fa-file-lines text-blue"></i> <a href="handouts/tsp-retirement-income.html" target="_blank"><strong>TSP Retirement Income Guide</strong></a> &mdash; Withdrawal options, RMD rules, and fund comparison</li>
+                            <li><i class="fa-solid fa-file-lines text-blue"></i> <a href="handouts/crdp-crsc-comparison.html" target="_blank"><strong>CRDP vs. CRSC Comparison</strong></a> &mdash; Side-by-side eligibility, taxation, and application details</li>
+                            <li><i class="fa-solid fa-file-lines text-blue"></i> <a href="handouts/healthcare-benefits-reference.html" target="_blank"><strong>Healthcare Benefits Reference</strong></a> &mdash; VA, Medicare, TRICARE, and CHAMPVA quick reference</li>
+                            <li><i class="fa-solid fa-file-lines text-blue"></i> <a href="handouts/sbp-decision-worksheet.html" target="_blank"><strong>SBP Decision Worksheet</strong></a> &mdash; Pros/cons analysis and financial modeling guide</li>
+                        </ul>
                     </div>
 
-                    <div class="grid-2-col mt-6">
-                        <div class="glass-panel">
-                            <h3>The VA Waiver</h3>
-                            <p>By law, military retirees must waive a portion of their DoD retired pay dollar-for-dollar for their VA disability compensation. Changes in your VA disability ratings can trigger complicated retroactive debits and credits, which sometimes result in an unexpected debt owed to DFAS.</p>
-                        </div>
-                        <div class="glass-panel">
-                            <h3>Interaction with Social Security</h3>
-                            <p>Your VA disability compensation is tax-free and <em>does not</em> count as "earned income" by the Social Security Administration, meaning it will not reduce or offset your Social Security retirement checks. The only exception lies in the needs-based VA Pension, which can be affected by other income.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Module 3 -->
-            <section id="module3" class="section-pane">
-                <div class="content-wrapper">
-                    <div class="module-header">
-                        <span class="module-eyebrow">Module 3</span>
-                        <h1 class="module-title">Healthcare & Long-Term Care Integration</h1>
-                    </div>
-                    
-                    <div class="glass-panel">
-                        <h2>Medicare, VA Benefits, and TRICARE</h2>
-                        <p>Veterans are strongly encouraged to enroll in Medicare Parts A and B at age 65, as VA benefits typically only cover care at VA facilities. For military retirees, enrolling in Medicare Parts A and B is <em>mandatory</em> to keep TRICARE for Life, which works as a powerful "wraparound" secondary payer program to Medicare.</p>
-                    </div>
-
-                    <div class="glass-panel mt-6">
-                        <h2>The FEHB 5-Year Rule</h2>
-                        <p>Federal retirees can carry their Federal Employees Health Benefits (FEHB) and Federal Employees' Group Life Insurance (FEGLI) into retirement, but they must have been continuously enrolled in the program for the <strong>five years of service immediately preceding retirement</strong>.</p>
-                    </div>
-
-                    <div class="glass-panel mt-6 feature-box">
-                        <div class="box-icon"><i class="fa-solid fa-user-nurse"></i></div>
+                    <div class="info-callout mt-6">
+                        <i class="fa-solid fa-lightbulb"></i>
                         <div>
-                            <h2>VA Aid & Attendance Benefit</h2>
-                            <p>A crucial, tax-free monthly enhanced pension for war-era veterans and surviving spouses who need assistance with Activities of Daily Living (ADLs) or require custodial care.</p>
-                            <ul class="feature-list mt-3">
-                                <li><strong>Eligibility:</strong> 90 days active duty with at least one day during wartime</li>
-                                <li><strong>Asset Limits:</strong> Strict net worth limits and a 3-year look-back period on asset transfers</li>
-                                <li><strong>Coverage:</strong> Home care, assisted living, and skilled nursing</li>
-                            </ul>
+                            <strong>Disclaimer:</strong> This course provides general financial education. Consult a qualified financial advisor, tax professional, or attorney for decisions specific to your personal situation. Benefit amounts and rules are subject to annual changes.
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Module 4 -->
-            <section id="module4" class="section-pane">
-                <div class="content-wrapper">
-                    <div class="module-header">
-                        <span class="module-eyebrow">Module 4</span>
-                        <h1 class="module-title">Investment Risks, State Taxes & Buying Power</h1>
-                    </div>
-                    
-                    <div class="grid-2-col">
-                        <div class="glass-panel">
-                            <h3>Sequence of Returns Risk</h3>
-                            <p>This is the risk of experiencing negative market returns late in your working years or early in retirement. Because you are withdrawing funds in a down market, it can permanently deplete a portfolio much faster than anticipated.</p>
-                        </div>
-                        <div class="glass-panel">
-                            <h3>The "Bucket" Strategy</h3>
-                            <p>A mitigation strategy that divides assets into three buckets:</p>
-                            <ul class="feature-list text-sm">
-                                <li><i class="fa-solid fa-droplet text-blue"></i> <strong>Liquidity:</strong> Cash for immediate 3-5 year needs.</li>
-                                <li><i class="fa-solid fa-basket-shopping text-blue"></i> <strong>Lifestyle:</strong> Diversified investments for years 3-10.</li>
-                                <li><i class="fa-solid fa-tree text-blue"></i> <strong>Legacy:</strong> Long-term assets for future growth.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel mt-6">
-                        <h2>State Taxation of Military Retirement</h2>
-                        <p>State tax policies vary dramatically. As of 2026, some states have no income tax (e.g., Florida, Texas), while others fully exempt military retirement (e.g., Arizona, South Carolina), and some fully tax it (e.g., California). Relocating to a tax-friendly state can boost your Debt-to-Income (DTI) ratio, significantly increasing your VA home loan purchasing power.</p>
-                        
-                        <div class="info-callout mt-4 alert-warning">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                            <div>
-                                <strong>Hidden Costs Warning:</strong> Retirees must be wary of offsetting costs. High property taxes or massive home insurance rates can completely wipe out any state income tax savings you gained by relocating.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Module 5 -->
-            <section id="module5" class="section-pane">
-                <div class="content-wrapper">
-                    <div class="module-header">
-                        <span class="module-eyebrow">Module 5</span>
-                        <h1 class="module-title">Legacy Planning and Survivor Benefits</h1>
-                    </div>
-                    
-                    <div class="glass-panel">
-                        <h2>The Survivor Benefit Plan (SBP)</h2>
-                        <p>The SBP provides a guaranteed, inflation-indexed lifetime monthly payout to your surviving beneficiary. It is crucial to understand that declining SBP requires the spouse's notarized signature, and that the election is a <strong>one-time, irrevocable decision</strong> made at the time of retirement.</p>
-                    </div>
-
-                    <div class="grid-2-col mt-6">
-                        <div class="glass-panel border-green">
-                            <h3 class="text-green"><i class="fa-solid fa-thumbs-up"></i> Pros of SBP</h3>
-                            <ul class="feature-list mt-3">
-                                <li>Protection against outliving your money (longevity insurance).</li>
-                                <li>Automatic qualification without restrictive medical exams.</li>
-                                <li>The costs are subsidized by the government.</li>
-                            </ul>
-                        </div>
-                        <div class="glass-panel border-red">
-                            <h3 class="text-red"><i class="fa-solid fa-thumbs-down"></i> Cons of SBP</h3>
-                            <ul class="feature-list mt-3">
-                                <li>No access to the underlying principal value.</li>
-                                <li>Benefits abruptly end if the spouse predeceases the retiree (or sometimes upon remarriage before age 55).</li>
-                                <li>Lack of flexibility compared to standard term or whole life insurance.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="glass-panel mt-6">
-                        <p><strong>Recommendation:</strong> Conduct thorough financial modeling of insurable needs, income replacement strategies, and longevity risk to make the right choice for your family's unique situation before your retirement date.</p>
                     </div>
                 </div>
             </section>
@@ -251,6 +1367,6 @@
         </div>
     </main>
 
-    <script src="script.js?v=2"></script>
+    <script src="script.js?v=4"></script>
 </body>
 </html>

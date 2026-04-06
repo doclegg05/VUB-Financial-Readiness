@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSP &amp; Retirement Income Worksheet — VUB Financial Readiness Course</title>
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy: #1e3a8a;
+            --navy-dark: #0f2460;
+            --gold: #fbbf24;
+            --gold-dark: #d4a017;
+            --va-blue: #003F72;
+            --text: #1e293b;
+            --text-light: #475569;
+            --border: #cbd5e1;
+            --bg-light: #f8fafc;
+            --bg-gold-tint: #fffbeb;
+            --white: #ffffff;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.45in 0.5in 0.4in 0.5in;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--text);
+            max-width: 7.5in;
+            margin: 0 auto;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ── Header ── */
+        .header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--va-blue) 100%);
+            color: var(--white);
+            padding: 14px 20px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-text h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .header-text .subtitle {
+            font-size: 0.78rem;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+
+        .badge {
+            background: var(--gold);
+            color: var(--navy-dark);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 3px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* ── Sections ── */
+        .section {
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--navy);
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 3px;
+            margin-bottom: 8px;
+        }
+
+        .section-title .num {
+            display: inline-block;
+            background: var(--navy);
+            color: var(--white);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 0.72rem;
+            line-height: 20px;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+
+        /* ── Tables ── */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+
+        thead th {
+            background: var(--navy);
+            color: var(--white);
+            font-weight: 600;
+            text-align: left;
+            padding: 5px 8px;
+            font-size: 0.78rem;
+        }
+
+        thead th:first-child { border-radius: 4px 0 0 0; }
+        thead th:last-child { border-radius: 0 4px 0 0; }
+
+        tbody td {
+            padding: 4px 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody tr:nth-child(even) { background: var(--bg-light); }
+
+        tbody td:first-child { font-weight: 600; color: var(--navy); }
+
+        /* ── Bucket Strategy ── */
+        .buckets {
+            display: flex;
+            gap: 8px;
+        }
+
+        .bucket {
+            flex: 1;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        .bucket-liquidity {
+            border-color: #16a34a;
+            background: #f0fdf4;
+        }
+
+        .bucket-lifestyle {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .bucket-legacy {
+            border-color: var(--gold-dark);
+            background: var(--bg-gold-tint);
+        }
+
+        .bucket-label {
+            font-weight: 700;
+            font-size: 0.82rem;
+            margin-bottom: 2px;
+        }
+
+        .bucket-liquidity .bucket-label { color: #16a34a; }
+        .bucket-lifestyle .bucket-label { color: #2563eb; }
+        .bucket-legacy .bucket-label { color: var(--gold-dark); }
+
+        .bucket-years {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 3px;
+        }
+
+        .bucket-items {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .bucket-rule {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 5px 10px;
+            margin-top: 8px;
+            font-size: 0.78rem;
+            text-align: center;
+        }
+
+        .bucket-rule strong {
+            color: var(--navy);
+        }
+
+        /* ── 4% Rule Grid ── */
+        .four-pct-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .four-pct-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .four-pct-card .portfolio {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .four-pct-card .annual {
+            font-size: 0.78rem;
+            color: #16a34a;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .four-pct-card .monthly {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        /* ── Worksheet ── */
+        .worksheet {
+            border: 2px solid var(--navy);
+            border-radius: 6px;
+            padding: 10px 14px;
+            background: var(--white);
+        }
+
+        .worksheet-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 5px 0;
+            border-bottom: 1px dashed var(--border);
+            font-size: 0.85rem;
+        }
+
+        .worksheet-row:last-child {
+            border-bottom: none;
+            border-top: 2px solid var(--navy);
+            margin-top: 2px;
+            padding-top: 7px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .worksheet-row .label {
+            flex: 1;
+        }
+
+        .worksheet-row .tax-note {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .worksheet-row .blank {
+            width: 140px;
+            border-bottom: 1.5px solid var(--text);
+            text-align: right;
+            font-size: 0.85rem;
+            margin-left: 10px;
+        }
+
+        .worksheet-row .per-mo {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            margin-left: 4px;
+            white-space: nowrap;
+        }
+
+        /* ── State Tax Tip ── */
+        .tip-box {
+            background: var(--bg-gold-tint);
+            border: 1px solid var(--gold);
+            border-left: 4px solid var(--gold);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+        }
+
+        .tip-box .tip-title {
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 3px;
+            font-size: 0.82rem;
+        }
+
+        .tip-box .state-list {
+            font-weight: 600;
+            color: var(--va-blue);
+        }
+
+        .tip-box .warning {
+            color: #b91c1c;
+            font-weight: 600;
+            font-size: 0.75rem;
+            margin-top: 3px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+            padding-top: 6px;
+        }
+
+        /* ── Print ── */
+        @media print {
+            body { margin: 0; max-width: none; }
+            .header, .bucket-liquidity, .bucket-lifestyle, .bucket-legacy,
+            thead th, .four-pct-card, .tip-box, .badge {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-text">
+            <h1>TSP &amp; Retirement Income Worksheet</h1>
+            <div class="subtitle">VUB Financial Readiness Course &mdash; Module 4</div>
+        </div>
+        <div class="badge">Worksheet</div>
+    </div>
+
+    <!-- 1. TSP Fund Quick Reference -->
+    <div class="section">
+        <div class="section-title"><span class="num">1</span>TSP Fund Quick Reference</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fund</th>
+                    <th>Full Name</th>
+                    <th>Risk Level</th>
+                    <th>What It Tracks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>G Fund</td>
+                    <td>Government Securities</td>
+                    <td>Lowest risk</td>
+                    <td>Government bonds</td>
+                </tr>
+                <tr>
+                    <td>F Fund</td>
+                    <td>Fixed Income</td>
+                    <td>Low-moderate risk</td>
+                    <td>Bond index</td>
+                </tr>
+                <tr>
+                    <td>C Fund</td>
+                    <td>Common Stock</td>
+                    <td>Moderate risk</td>
+                    <td>S&amp;P 500 index</td>
+                </tr>
+                <tr>
+                    <td>S Fund</td>
+                    <td>Small Cap</td>
+                    <td>Higher risk</td>
+                    <td>Small/mid-cap index</td>
+                </tr>
+                <tr>
+                    <td>I Fund</td>
+                    <td>International</td>
+                    <td>Higher risk</td>
+                    <td>International index</td>
+                </tr>
+                <tr>
+                    <td>L Funds</td>
+                    <td>Lifecycle</td>
+                    <td>Auto-adjusting</td>
+                    <td>Target-date blend</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 2. Three-Bucket Strategy -->
+    <div class="section">
+        <div class="section-title"><span class="num">2</span>Three-Bucket Strategy</div>
+        <div class="buckets">
+            <div class="bucket bucket-liquidity">
+                <div class="bucket-label">Liquidity</div>
+                <div class="bucket-years">1 &ndash; 5 Years</div>
+                <div class="bucket-items">Cash, CDs,<br>Money Market</div>
+            </div>
+            <div class="bucket bucket-lifestyle">
+                <div class="bucket-label">Lifestyle</div>
+                <div class="bucket-years">3 &ndash; 10 Years</div>
+                <div class="bucket-items">Bonds,<br>Balanced Funds</div>
+            </div>
+            <div class="bucket bucket-legacy">
+                <div class="bucket-label">Legacy</div>
+                <div class="bucket-years">10+ Years</div>
+                <div class="bucket-items">Stocks,<br>Growth Assets</div>
+            </div>
+        </div>
+        <div class="bucket-rule"><strong>Rule:</strong> Draw from Liquidity only. Never sell Legacy in a downturn.</div>
+    </div>
+
+    <!-- 3. 4% Rule Quick Math -->
+    <div class="section">
+        <div class="section-title"><span class="num">3</span>4% Rule Quick Math</div>
+        <div class="four-pct-grid">
+            <div class="four-pct-card">
+                <div class="portfolio">$250K</div>
+                <div class="annual">$10,000/yr</div>
+                <div class="monthly">$833/mo</div>
+            </div>
+            <div class="four-pct-card">
+                <div class="portfolio">$500K</div>
+                <div class="annual">$20,000/yr</div>
+                <div class="monthly">$1,667/mo</div>
+            </div>
+            <div class="four-pct-card">
+                <div class="portfolio">$750K</div>
+                <div class="annual">$30,000/yr</div>
+                <div class="monthly">$2,500/mo</div>
+            </div>
+            <div class="four-pct-card">
+                <div class="portfolio">$1M</div>
+                <div class="annual">$40,000/yr</div>
+                <div class="monthly">$3,333/mo</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. My Retirement Income Worksheet -->
+    <div class="section">
+        <div class="section-title"><span class="num">4</span>My Retirement Income</div>
+        <div class="worksheet">
+            <div class="worksheet-row">
+                <span class="label">Military Retired Pay <span class="tax-note">(taxable)</span></span>
+                <span class="blank">$ ___________</span>
+                <span class="per-mo">/mo</span>
+            </div>
+            <div class="worksheet-row">
+                <span class="label">VA Disability <span class="tax-note">(tax-free)</span></span>
+                <span class="blank">$ ___________</span>
+                <span class="per-mo">/mo</span>
+            </div>
+            <div class="worksheet-row">
+                <span class="label">Social Security <span class="tax-note">(partially taxable)</span></span>
+                <span class="blank">$ ___________</span>
+                <span class="per-mo">/mo</span>
+            </div>
+            <div class="worksheet-row">
+                <span class="label">TSP / IRA Withdrawals <span class="tax-note">(taxable)</span></span>
+                <span class="blank">$ ___________</span>
+                <span class="per-mo">/mo</span>
+            </div>
+            <div class="worksheet-row">
+                <span class="label">Other Income <span class="tax-note">(pension, part-time, rental, etc.)</span></span>
+                <span class="blank">$ ___________</span>
+                <span class="per-mo">/mo</span>
+            </div>
+            <div class="worksheet-row">
+                <span class="label">TOTAL MONTHLY INCOME</span>
+                <span class="blank">$ ___________</span>
+                <span class="per-mo">/mo</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. State Tax Tip -->
+    <div class="section">
+        <div class="tip-box">
+            <div class="tip-title">State Tax Tip</div>
+            <div>
+                <strong>9 states with no income tax:</strong>
+                <span class="state-list">Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, Wyoming</span>
+            </div>
+            <div class="warning">Warning: No income tax does not mean low cost of living. Watch for higher property taxes, sales taxes, and insurance costs.</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Veterans Upward Bound &mdash; West Virginia &ensp;|&ensp; Financial Readiness Course &ensp;|&ensp; Consult a qualified financial advisor for personal decisions.
+    </div>
+
+</body>
+</html>

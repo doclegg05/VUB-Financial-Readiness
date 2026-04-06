@@ -12,3 +12,9 @@ desktop.ini
 *.swp
 *.swo
 *~
+
+# Dependencies & test output
+node_modules/
+test-results/
+playwright-report/
+benchmarks/
