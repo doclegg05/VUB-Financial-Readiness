@@ -2,7 +2,7 @@
   "name": "vub-financial-readiness-course",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "main": "js/script.js",
   "scripts": {
     "test": "npx playwright test",
     "benchmark:baseline": "node scripts/run-benchmark.js --label=baseline",

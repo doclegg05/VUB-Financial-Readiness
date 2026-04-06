@@ -18,14 +18,14 @@ Single-page application with sidebar navigation, 5 content modules, dark/light t
 | File | Purpose |
 |:-----|:--------|
 | `index.html` | Single-page app shell with all module content |
-| `styles.css` | Design system (CSS custom properties, responsive, dark mode) |
-| `script.js` | Navigation, theme toggle, hash routing |
+| `css/styles.css` | Design system (CSS custom properties, responsive, dark mode) |
+| `js/script.js` | Navigation, theme toggle, hash routing |
 
 ### External Dependencies
 
 | Dependency | Source | Purpose |
 |:-----------|:-------|:--------|
-| Inter + Outfit fonts | Google Fonts CDN | Typography |
+| Playfair Display + Source Sans 3 | Google Fonts CDN | Typography |
 | Font Awesome 6.4 | cdnjs CDN | Icons |
 
 ---
