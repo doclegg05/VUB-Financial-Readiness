@@ -22,6 +22,7 @@ benchmarks/
 # Local-only content (not for public repo)
 Admin Paperwork/
 videos/
+study-resources/financial-readiness-podcast.mp3
 
 # AI tool plugins (installed locally, not course content)
 .adal/
