@@ -7,7 +7,7 @@ test.describe('Slide Counts', () => {
     });
 
     const modules = [
-        { id: 'module1', expected: 12 },
+        { id: 'module1', expected: 14 },
         { id: 'module2', expected: 12 },
         { id: 'module3', expected: 15 },
         { id: 'module4', expected: 14 },

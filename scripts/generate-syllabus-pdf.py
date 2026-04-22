@@ -91,7 +91,7 @@ def build_pdf():
     info_data = [[
         Paragraph("<b>Instructor:</b> Britt Legg", styles["body"]),
         Paragraph("<b>Schedule:</b> Mondays, 4:30 &ndash; 6:30 PM", styles["body"]),
-        Paragraph("<b>Dates:</b> April 27 &ndash; June 1, 2026", styles["body"]),
+        Paragraph("<b>Dates:</b> April 27 &ndash; June 8, 2026", styles["body"]),
         Paragraph("<b>Location:</b> VUB Computer Lab", styles["body"]),
     ]]
     info_table = Table(info_data, colWidths=[1.75 * inch] * 4)
