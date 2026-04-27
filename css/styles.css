@@ -310,6 +310,40 @@ h1, h2, h3, h4, h5 {
     box-shadow: 0 10px 15px -3px rgba(251, 191, 36, 0.3);
 }
 
+/* Hero action button row — keeps all CTAs aligned and wraps gracefully */
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+/* Pre-Test: gold outline (matches accent) */
+.btn-primary.btn-pre-test {
+    background-color: var(--clr-surface);
+    color: var(--clr-accent);
+    border: 2px solid var(--clr-accent);
+}
+.btn-primary.btn-pre-test:hover {
+    background-color: var(--clr-accent);
+    color: var(--clr-heading);
+    box-shadow: 0 10px 15px -3px rgba(200, 168, 78, 0.3);
+}
+
+/* Post-Test: red filled — distinct from pre-test so students don't confuse them */
+.btn-primary.btn-post-test {
+    background-color: var(--clr-danger);
+    color: var(--clr-surface);
+    border: 2px solid var(--clr-danger);
+}
+.btn-primary.btn-post-test:hover {
+    background-color: #c92e2e;
+    border-color: #c92e2e;
+    color: var(--clr-surface);
+    box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.35);
+}
+
 /* COURSE CARDS */
 .section-heading {
     margin-bottom: 2rem;
