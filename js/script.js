@@ -112,8 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sectionId === currentSection && pres.active && pres.moduleId === sectionId) return;
         currentSection = sectionId;
 
-        // Exit presentation mode first if active
-        if (pres.active && !sectionId.startsWith('module')) {
+        const targetSection = document.getElementById(sectionId);
+        const isPresentationSection = !!(targetSection && targetSection.querySelector('.presentation-container'));
+
+        // Exit presentation mode if the destination isn't a presentation section
+        if (pres.active && !isPresentationSection) {
             pres.active = false;
             body.classList.remove('presentation-mode');
         }
@@ -121,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.forEach(link => link.classList.remove('active'));
         sections.forEach(section => section.classList.remove('active'));
 
-        const targetSection = document.getElementById(sectionId);
         if (targetSection) {
             targetSection.classList.add('active');
         }
@@ -137,8 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         closeSidebar();
 
-        // Enter presentation mode for module sections
-        if (sectionId.startsWith('module') && targetSection && targetSection.querySelector('.presentation-container')) {
+        // Enter presentation mode for any section that has a presentation container
+        if (isPresentationSection) {
             enterPresentation(sectionId);
         }
     }
