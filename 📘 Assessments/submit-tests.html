@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Tests | VUB Financial Readiness Course</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1b2e4a;
+      --primary-light: #2d5aa0;
+      --primary-dark: #0d1117;
+      --accent: #c8a84e;
+      --accent-light: #d4b86a;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --muted: #EEF4FA;
+      --gray: #5A6A7A;
+      --gray-light: #8A9AAA;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .header p {
+      font-size: 1.05rem;
+      color: var(--accent-light);
+      margin-top: 0.3rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .intro {
+      background: var(--light);
+      padding: 1.5rem 1.75rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-left: 5px solid var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .intro h2 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .intro p {
+      color: var(--gray);
+      font-size: 1.05rem;
+    }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 720px) {
+      .test-grid { grid-template-columns: 1fr; }
+    }
+
+    .test-card {
+      background: var(--light);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid transparent;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .test-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      border-color: var(--accent);
+    }
+
+    .test-card-header {
+      background: var(--primary);
+      color: var(--light);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .test-card-header .icon {
+      font-size: 2.5rem;
+      color: var(--accent-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .test-card-header h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .test-card-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .test-card-body p {
+      color: var(--gray);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .test-meta {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .test-meta li {
+      padding: 0.35rem 0;
+      color: var(--primary-dark);
+      font-size: 0.95rem;
+    }
+
+    .test-meta li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+
+    .btn-take-test {
+      display: block;
+      background: var(--accent);
+      color: var(--primary-dark);
+      text-align: center;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 1rem;
+      border-radius: 6px;
+      font-size: 1.15rem;
+      letter-spacing: 0.5px;
+      transition: background 0.15s;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn-take-test:hover {
+      background: var(--accent-light);
+    }
+
+    .btn-take-test.disabled {
+      background: var(--gray-light);
+      color: var(--light);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .setup-warning {
+      background: #fdf4e3;
+      border-left: 5px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      margin-bottom: 1.75rem;
+      color: var(--primary-dark);
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .setup-warning.visible {
+      display: block;
+    }
+
+    .setup-warning strong {
+      color: var(--primary);
+    }
+
+    .footer-link {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .footer-link a {
+      color: var(--primary-light);
+      text-decoration: none;
+    }
+
+    .footer-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>VUB Financial Readiness — Submit Test</h1>
+    <p>Pre-Test &amp; Post-Test Submission</p>
+  </header>
+
+  <div class="container">
+    <div id="setupWarning" class="setup-warning">
+      <strong>Setup needed:</strong> The Google Form URLs haven’t been pasted in yet.
+      Run <code>scripts/google-forms-setup.gs</code> in Apps Script (see
+      <code>📘 Assessments/SETUP-GOOGLE-FORMS.md</code>), then replace
+      <code>PRE_TEST_URL_HERE</code> and <code>POST_TEST_URL_HERE</code> in this file
+      with the URLs the script logs.
+    </div>
+
+    <div class="intro">
+      <h2>How this works</h2>
+      <p>
+        Click the button for the test you’re taking today. The test opens in a Google Form —
+        answer all 20 questions, then click <strong>Submit</strong>. Your answers go directly
+        to the instructor’s grading sheet. No account is needed.
+      </p>
+    </div>
+
+    <div class="test-grid">
+      <!-- Pre-Test Card -->
+      <div class="test-card">
+        <div class="test-card-header">
+          <div class="icon">📋</div>
+          <h3>Pre-Test</h3>
+        </div>
+        <div class="test-card-body">
+          <p>Take this on <strong>Day 1</strong> before any course content. Honest answers help us measure your progress.</p>
+          <ul class="test-meta">
+            <li>20 questions</li>
+            <li>~15 minutes</li>
+            <li>Multiple choice</li>
+            <li>No grade penalty — baseline only</li>
+          </ul>
+          <a id="preTestBtn" class="btn-take-test" href="https://docs.google.com/forms/d/e/1FAIpQLSdlfuMAOBqf50K_jbosOTqlC8DCcFcH16vrIYpk_O0FSpE4wQ/viewform" target="_blank" rel="noopener">
+            Open Pre-Test →
+          </a>
+        </div>
+      </div>
+
+      <!-- Post-Test Card -->
+      <div class="test-card">
+        <div class="test-card-header">
+          <div class="icon">🎯</div>
+          <h3>Post-Test</h3>
+        </div>
+        <div class="test-card-body">
+          <p>Take this on the <strong>final day</strong> after completing all five modules. Same questions — measures growth.</p>
+          <ul class="test-meta">
+            <li>20 questions</li>
+            <li>~15 minutes</li>
+            <li>Multiple choice</li>
+            <li>Compare to your pre-test score</li>
+          </ul>
+          <a id="postTestBtn" class="btn-take-test" href="https://docs.google.com/forms/d/e/1FAIpQLSfKbXfwmH-ht-0PZBSRJzd0GZLYkt6Ogm2Fp1n4HkGO-dfkpQ/viewform" target="_blank" rel="noopener">
+            Open Post-Test →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-link">
+      <a href="../index.html">← Back to course home</a>
+    </div>
+  </div>
+
+  <script>
+    // If the URLs haven't been replaced yet, disable the buttons and show the setup warning.
+    (function () {
+      var pre = document.getElementById('preTestBtn');
+      var post = document.getElementById('postTestBtn');
+      var warn = document.getElementById('setupWarning');
+      var preMissing = pre.getAttribute('href') === 'PRE_TEST_URL_HERE';
+      var postMissing = post.getAttribute('href') === 'POST_TEST_URL_HERE';
+
+      if (preMissing) {
+        pre.classList.add('disabled');
+        pre.textContent = 'Pre-Test URL not set';
+      }
+      if (postMissing) {
+        post.classList.add('disabled');
+        post.textContent = 'Post-Test URL not set';
+      }
+      if (preMissing || postMissing) {
+        warn.classList.add('visible');
+      }
+    })();
+  </script>
+</body>
+</html>

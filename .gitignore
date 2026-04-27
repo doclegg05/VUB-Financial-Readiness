@@ -21,6 +21,10 @@ benchmarks/
 dist/
 .netlify/
 
+# Python
+__pycache__/
+*.pyc
+
 # Local-only content (not for public repo)
 Admin Paperwork/
 *Admin Paperwork/*

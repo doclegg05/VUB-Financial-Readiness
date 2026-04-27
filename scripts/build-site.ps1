@@ -64,4 +64,8 @@ Get-ChildItem -LiteralPath $siteRoot -Recurse -File |
     Where-Object { $_.Extension -in @(".mp4", ".mp3") } |
     Remove-Item -Force
 
+Get-ChildItem -LiteralPath $siteRoot -Recurse -File |
+    Where-Object { $_.Name -like "*answer-key.pdf" } |
+    Remove-Item -Force
+
 Write-Host "Built website: $siteRoot"
