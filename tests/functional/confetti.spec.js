@@ -29,6 +29,7 @@ test.describe('Confetti', () => {
         await page.waitForSelector('#confetti-container.active', { timeout: 3000 });
         await page.waitForFunction(
             () => !document.querySelector('#confetti-container.active'),
+            null,
             { timeout: 7000 }
         );
     });

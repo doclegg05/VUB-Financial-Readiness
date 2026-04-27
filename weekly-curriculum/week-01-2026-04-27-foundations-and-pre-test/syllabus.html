@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instructor Guide | VUB Financial Readiness Course</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #3b82f6;
+      --accent: #fbbf24;
+      --accent-dark: #f59e0b;
+      --light: #ffffff;
+      --off-white: #f8fafc;
+      --gray: #64748b;
+      --text: #334155;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --info: #0ea5e9;
+      --va-blue: #003F72;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--va-blue) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+
+    .header-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Overview Box */
+    .overview-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .overview-box h2 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .overview-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Course Map */
+    .course-map {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .course-map-card {
+      background: var(--off-white);
+      border: 2px solid transparent;
+      border-radius: 10px;
+      padding: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .course-map-card:hover {
+      border-color: var(--primary-light);
+    }
+
+    .course-map-card .module-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary-light);
+      margin-bottom: 0.25rem;
+    }
+
+    .course-map-card h4 {
+      color: var(--primary);
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .course-map-card p {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin: 0;
+    }
+
+    .course-map-card .slide-count {
+      font-size: 0.75rem;
+      color: var(--accent-dark);
+      font-weight: 600;
+      margin-top: 0.35rem;
+    }
+
+    /* Section Heading */
+    .section-heading {
+      color: var(--primary);
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--off-white);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-header {
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px 8px 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline-body {
+      border: 2px solid var(--va-blue);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid var(--off-white);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-time {
+      background: var(--off-white);
+      padding: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timeline-content {
+      padding: 0.75rem 1rem;
+    }
+
+    .timeline-content h4 {
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-content p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin: 0;
+    }
+
+    .timeline-content ul {
+      list-style: none;
+      margin-top: 0.35rem;
+    }
+
+    .timeline-content ul li {
+      font-size: 0.85rem;
+      color: var(--gray);
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .timeline-content ul li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    /* Activity Badge */
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+
+    .activity-lecture {
+      background: rgba(30, 58, 138, 0.15);
+      color: var(--primary);
+    }
+
+    .activity-demo {
+      background: rgba(251, 191, 36, 0.2);
+      color: #8B7500;
+    }
+
+    .activity-discussion {
+      background: rgba(14, 165, 233, 0.15);
+      color: #0369a1;
+    }
+
+    .activity-practice {
+      background: rgba(40, 167, 69, 0.15);
+      color: var(--success);
+    }
+
+    .activity-break {
+      background: rgba(156, 39, 176, 0.15);
+      color: #7B1FA2;
+    }
+
+    .activity-warmup {
+      background: rgba(255, 152, 0, 0.15);
+      color: #E65100;
+    }
+
+    .activity-review {
+      background: rgba(220, 53, 69, 0.15);
+      color: var(--danger);
+    }
+
+    .activity-apply {
+      background: rgba(76, 175, 80, 0.15);
+      color: #2E7D32;
+    }
+
+    /* Module Detail Section */
+    .module-detail {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .module-detail h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .module-detail-meta {
+      display: flex;
+      gap: 1.25rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    .module-detail-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .module-detail h4 {
+      font-size: 0.85rem;
+      color: var(--primary);
+      margin: 0.75rem 0 0.35rem;
+    }
+
+    .module-detail ul {
+      list-style: none;
+    }
+
+    .module-detail ul li {
+      padding: 0.25rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      font-size: 0.85rem;
+    }
+
+    .module-detail ul li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    .talking-points li::before {
+      content: ">";
+      color: var(--primary-light);
+    }
+
+    /* Instructor Notes */
+    .notes-section {
+      background: rgba(251, 191, 36, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .notes-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .notes-section ul {
+      list-style: none;
+    }
+
+    .notes-section li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .notes-section li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Discussion Questions */
+    .discussion-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .discussion-section h3 {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .discussion-list {
+      list-style: none;
+    }
+
+    .discussion-list li {
+      background: var(--off-white);
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .discussion-list li strong {
+      display: block;
+      font-style: normal;
+      color: var(--primary);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Materials Checklist */
+    .materials-section {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .materials-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .material-category h4 {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .material-category ul {
+      list-style: none;
+    }
+
+    .material-category li {
+      padding: 0.25rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .material-category li::before {
+      content: "\2610";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    /* Tips Box */
+    .tips-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tips-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tips-box ul {
+      list-style: none;
+    }
+
+    .tips-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .tips-box li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    /* Warning/Caution Box */
+    .caution-box {
+      background: rgba(220, 53, 69, 0.08);
+      border: 2px solid var(--danger);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .caution-box h3 {
+      color: var(--danger);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .caution-box ul {
+      list-style: none;
+    }
+
+    .caution-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .caution-box li::before {
+      content: "\26A0";
+      position: absolute;
+      left: 0;
+    }
+
+    /* Resources Box */
+    .resources-box {
+      background: rgba(14, 165, 233, 0.08);
+      border: 2px solid var(--info);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .resources-box h3 {
+      color: var(--info);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .resources-box ul {
+      list-style: none;
+    }
+
+    .resources-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .resources-box li::before {
+      content: "\1F517";
+      position: absolute;
+      left: 0;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        padding: 0.25in;
+      }
+
+      .header, .timeline-header, .discussion-section h3 {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .module-detail, .notes-section, .tips-box, .caution-box, .resources-box {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div>
+        <h1>Financial Readiness Course</h1>
+        <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">Veterans Upward Bound (VUB) - West Virginia</p>
+      </div>
+      <span class="header-badge">Instructor Guide</span>
+    </div>
+    <div class="header-meta">
+      <span>&#128197; Single-Session Workshop</span>
+      <span>&#9201; 2.5 - 3 Hours</span>
+      <span>&#128101; Veterans Group</span>
+      <span>&#128205; Computer Lab</span>
+      <span>&#128187; 5 Modules, 61 Slides, 5 Handouts</span>
+    </div>
+  </header>
+
+  <!-- Course Overview -->
+  <div class="overview-box">
+    <h2>&#127919; Course Purpose</h2>
+    <p>This workshop delivers financial literacy and retirement planning education specifically tailored for military veterans. The course covers the full retirement landscape: transition timelines, disability compensation, healthcare integration, investment protection, and legacy planning.</p>
+    <p><strong>Format:</strong> Instructor-led presentation using the web-based slide system. Each module is self-contained with its own chapter navigation, progress tracking, and completion celebration. The application runs locally with no internet required for core content.</p>
+  </div>
+
+  <!-- Course Map -->
+  <h2 class="section-heading">&#128506; Course Module Map</h2>
+  <div class="course-map">
+    <div class="course-map-card">
+      <div class="module-num">Module 1</div>
+      <h4>Retirement Timelines & Preparation</h4>
+      <p>Retirement pay, TSP, Social Security optimization</p>
+      <div class="slide-count">12 slides + handout</div>
+    </div>
+    <div class="course-map-card">
+      <div class="module-num">Module 2</div>
+      <h4>Disability Pay & Compensation</h4>
+      <p>VA Waiver, CRDP vs CRSC, Social Security interaction</p>
+      <div class="slide-count">12 slides + handout</div>
+    </div>
+    <div class="course-map-card">
+      <div class="module-num">Module 3</div>
+      <h4>Healthcare & Long-Term Care</h4>
+      <p>VA healthcare, Medicare/TRICARE for Life, CHAMPVA, Aid & Attendance</p>
+      <div class="slide-count">13 slides + handout</div>
+    </div>
+    <div class="course-map-card">
+      <div class="module-num">Module 4</div>
+      <h4>Managing Your Retirement Income</h4>
+      <p>Sequence risk, bucket strategy, 4% rule, income stacking, state taxes</p>
+      <div class="slide-count">11 slides + handout</div>
+    </div>
+    <div class="course-map-card">
+      <div class="module-num">Module 5</div>
+      <h4>Legacy Planning</h4>
+      <p>SBP, DIC, estate planning, VA burial, beneficiary designations</p>
+      <div class="slide-count">13 slides + handout</div>
+    </div>
+  </div>
+
+  <!-- Session Timeline -->
+  <div class="timeline">
+    <div class="timeline-header">&#9200; Session Timeline (2.5 - 3 Hours)</div>
+    <div class="timeline-body">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00 - 0:10</div>
+        <div class="timeline-content">
+          <h4>Welcome & Introduction <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <p>Introduce yourself and the course. Ask participants about their service branch and retirement status. Set expectations: this is education, not personal financial advice. Distribute any printed materials.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:10 - 0:35</div>
+        <div class="timeline-content">
+          <h4>Module 1: Retirement Timelines <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Walk through the 12 slides covering retirement pay, Social Security optimization, TSP withdrawals, and VA claims. Distribute the Retirement Transition Checklist handout at the start.</p>
+          <ul>
+            <li>Walk through the retirement pay calculation (High-3 vs BRS)</li>
+            <li>Cover Social Security filing age strategy (62 vs 67 vs 70)</li>
+            <li>Cover all 5 TSP fund options and withdrawal rules</li>
+            <li>Highlight TAP and VSO resources</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:35 - 0:45</div>
+        <div class="timeline-content">
+          <h4>Module 1 Discussion <span class="activity-type activity-discussion">Discussion</span></h4>
+          <p>"How many of you have already gone through your transition? What was the hardest part administratively?" Let veterans share experiences. Those who have been through it can mentor those who haven't.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:45 - 1:10</div>
+        <div class="timeline-content">
+          <h4>Module 2: Disability Compensation <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Cover the VA Waiver, CRDP vs CRSC comparison, annual election, and Social Security interaction. This is the most complex module -- go slowly through the side-by-side comparison slide.</p>
+          <ul>
+            <li>Use the stat cards to make dollar-for-dollar offset concrete</li>
+            <li>Clarify that CRDP is automatic, CRSC requires DD 2860</li>
+            <li>Stress: VA disability does NOT reduce Social Security</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:10 - 1:20</div>
+        <div class="timeline-content">
+          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <p>10-minute break. Encourage participants to write down any questions that came up during Modules 1-2. Offer to answer individual questions during break.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:20 - 1:45</div>
+        <div class="timeline-content">
+          <h4>Module 3: Healthcare & Long-Term Care <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Cover Medicare enrollment at 65, TRICARE for Life coordination, and Aid & Attendance. The 2026 A&A rates are a highlight -- many veterans don't know this benefit exists.</p>
+          <ul>
+            <li>Emphasize: Medicare Parts A & B required to keep TRICARE for Life</li>
+            <li>TRICARE for Life = Medicare pays first, TRICARE covers the rest</li>
+            <li>Aid & Attendance net worth limit: $163,699 (2026)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:45 - 2:05</div>
+        <div class="timeline-content">
+          <h4>Module 4: Managing Your Retirement Income <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Explain sequence of returns risk with a concrete example. Walk through the three-bucket strategy. Cover state tax treatment and the hidden costs warning (property taxes, insurance).</p>
+          <ul>
+            <li>Use the bucket icons to make the strategy visual and memorable</li>
+            <li>The state tax map is a great discussion starter</li>
+            <li>Remind: VA disability is tax-free at federal AND state levels</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">2:05 - 2:15</div>
+        <div class="timeline-content">
+          <h4>Module 4 Discussion <span class="activity-type activity-discussion">Discussion</span></h4>
+          <p>"Has anyone here considered relocating in retirement for tax reasons? What other factors did you weigh?" This is often a lively discussion -- veterans have strong opinions about where to retire.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">2:15 - 2:35</div>
+        <div class="timeline-content">
+          <h4>Module 5: Legacy Planning <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Cover SBP overview, premiums, pros and cons, DIC interaction, and financial modeling recommendation. This is the most personal module -- be sensitive to the topic of end-of-life planning.</p>
+          <ul>
+            <li>Stress the irrevocable nature of the SBP election</li>
+            <li>The pros/cons slides are great for structured comparison</li>
+            <li>End with the financial advisor recommendation</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">2:35 - 2:50</div>
+        <div class="timeline-content">
+          <h4>Course Review & Study Resources <span class="activity-type activity-review">Review</span></h4>
+          <p>Navigate to the Study Resources section. Show the quiz and flashcards. Walk through one quiz question as an example. Point out the podcast, study guide, and infographic for at-home review.</p>
+          <ul>
+            <li>Open the quiz to show the format (10 multiple-choice questions)</li>
+            <li>Demonstrate one flashcard flip</li>
+            <li>Mention the audio overview for those who prefer listening</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">2:50 - 3:00</div>
+        <div class="timeline-content">
+          <h4>Q&A and Wrap-Up <span class="activity-type activity-apply">Application</span></h4>
+          <p>Open the floor for final questions. Summarize the three most important takeaways. Remind participants of the financial advisor disclaimer. Thank them for their service and participation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Module-by-Module Teaching Notes -->
+  <h2 class="section-heading">&#128218; Module Teaching Notes</h2>
+
+  <div class="module-detail">
+    <h3>&#127941; Module 1: Retirement Timelines & Preparation</h3>
+    <div class="module-detail-meta">
+      <span>&#128196; 12 slides</span>
+      <span>&#9201; ~25 min presentation + 10 min discussion</span>
+      <span>&#128203; 5 chapters</span>
+    </div>
+    <h4>Key Concepts to Emphasize</h4>
+    <ul>
+      <li><strong>Retirement Pay Systems:</strong> High-3 vs BRS -- most of these veterans are under the legacy High-3 system. Explain how the calculation works and what they should expect.</li>
+      <li><strong>Social Security Optimization:</strong> Filing age decisions (62 vs 67 vs 70) and how military retirement pay interacts with Social Security benefits.</li>
+      <li><strong>TSP Withdrawal Strategies:</strong> Cover all 5 TSP fund options and the withdrawal rules that apply in retirement -- lump sum, installments, and annuity options.</li>
+      <li><strong>VA Claims Process:</strong> Many long-separated veterans have never filed or need to file supplemental claims. Direct them to VA.gov and local VSOs.</li>
+    </ul>
+    <h4>Common Questions</h4>
+    <ul class="talking-points">
+      <li>"When should I start taking Social Security?" It depends on health, other income, and whether you need the money now. Delaying to 70 increases monthly payments by ~77% vs taking at 62.</li>
+      <li>"Can I still file a VA claim years after separation?" Yes. There is no time limit on filing a VA disability claim.</li>
+    </ul>
+  </div>
+
+  <div class="module-detail">
+    <h3>&#9878; Module 2: Disability Pay & Compensation</h3>
+    <div class="module-detail-meta">
+      <span>&#128196; 12 slides</span>
+      <span>&#9201; ~25 min presentation</span>
+      <span>&#128203; 5 chapters</span>
+    </div>
+    <h4>Key Concepts to Emphasize</h4>
+    <ul>
+      <li><strong>VA Waiver:</strong> Dollar-for-dollar offset is the foundation of everything else in this module. Make sure they understand this before moving on.</li>
+      <li><strong>CRDP vs CRSC:</strong> The side-by-side comparison is the most important slide. Pause here and let them absorb both columns.</li>
+      <li><strong>Tax Difference:</strong> CRDP = taxable, CRSC = non-taxable. For some veterans this difference is thousands of dollars per year.</li>
+      <li><strong>Annual Election:</strong> Veterans who qualify for both should run the numbers every year -- rating changes can shift which program pays more.</li>
+      <li><strong>VA Pension & Lookback Rule:</strong> Veterans with limited income and wartime service may qualify for VA Pension. The 3-year lookback rule on asset transfers is critical to understand before applying.</li>
+      <li><strong>Fraud & Scam Prevention:</strong> Veterans lost $584M to scams in recent years. Cover the common scam types targeting veterans: VA impersonation, benefit buyout offers, and predatory lending.</li>
+    </ul>
+    <h4>Common Questions</h4>
+    <ul class="talking-points">
+      <li>"How do I know if I qualify for CRSC?" You need combat-related disabilities. File DD 2860 with your service branch -- they determine the combat nexus.</li>
+      <li>"Will my VA disability affect my Social Security?" No. VA disability compensation is completely separate and does not reduce SS benefits.</li>
+    </ul>
+  </div>
+
+  <div class="module-detail">
+    <h3>&#129657; Module 3: Healthcare & Long-Term Care</h3>
+    <div class="module-detail-meta">
+      <span>&#128196; 13 slides</span>
+      <span>&#9201; ~25 min presentation</span>
+      <span>&#128203; 5 chapters</span>
+    </div>
+    <h4>Key Concepts to Emphasize</h4>
+    <ul>
+      <li><strong>Medicare at 65:</strong> Veterans MUST enroll in Medicare Parts A & B at 65 to keep TRICARE for Life. Late enrollment = permanently higher premiums.</li>
+      <li><strong>TRICARE for Life:</strong> It's a wraparound -- Medicare pays first, TRICARE covers the rest. This is one of the best health benefits available.</li>
+      <li><strong>Medicare Part D vs VA Pharmacy:</strong> VA drug coverage is comprehensive but requires VA pharmacies. Part D offers local pharmacy flexibility.</li>
+      <li><strong>Aid & Attendance:</strong> Many veterans don't know this exists. The 2026 rates ($2,424-$3,845/month) are significant. Highlight the 3-year look-back on asset transfers.</li>
+    </ul>
+    <h4>Common Questions</h4>
+    <ul class="talking-points">
+      <li>"Do I need Medicare if I have VA healthcare?" VA healthcare covers VA facilities. Medicare gives you access to any Medicare-accepting provider. Most veterans benefit from having both.</li>
+      <li>"What's the net worth limit for A&A?" $163,699 in 2026. This includes most assets except primary residence and personal vehicle.</li>
+    </ul>
+  </div>
+
+  <div class="module-detail">
+    <h3>&#128200; Module 4: Managing Your Retirement Income</h3>
+    <div class="module-detail-meta">
+      <span>&#128196; 11 slides</span>
+      <span>&#9201; ~25 min presentation + 10 min discussion</span>
+      <span>&#128203; 6 chapters</span>
+    </div>
+    <h4>Key Concepts to Emphasize</h4>
+    <ul>
+      <li><strong>Sequence of Returns:</strong> Use the concrete example: a 15% drop in year 1 vs year 10 has dramatically different outcomes. This is not about average returns -- it's about timing.</li>
+      <li><strong>Bucket Strategy:</strong> Liquidity (1-5 yrs), Lifestyle (3-10 yrs), Legacy (10+ yrs). The key insight: never sell from the Legacy bucket during a downturn.</li>
+      <li><strong>State Tax Map:</strong> 9 states with no income tax. But warn about hidden costs -- Florida and Texas have high property taxes and insurance.</li>
+      <li><strong>DTI Impact:</strong> Tax-free income increases VA loan buying power. This connects military benefits to practical homebuying decisions.</li>
+      <li><strong>Debt in Retirement:</strong> Managing debt on a fixed income -- mortgage payoff decisions, avoiding high-interest debt, and the danger of co-signing loans for family members.</li>
+    </ul>
+    <h4>Common Questions</h4>
+    <ul class="talking-points">
+      <li>"Should I move to a no-tax state?" It depends on total cost of living. Property taxes, insurance, and cost of housing can offset the savings. Encourage them to do the full calculation.</li>
+      <li>"What about my TSP?" TSP withdrawals are taxable. The bucket strategy applies to how they draw from TSP alongside other income sources.</li>
+    </ul>
+  </div>
+
+  <div class="module-detail">
+    <h3>&#127793; Module 5: Legacy Planning</h3>
+    <div class="module-detail-meta">
+      <span>&#128196; 13 slides</span>
+      <span>&#9201; ~25 min presentation</span>
+      <span>&#128203; 5 chapters</span>
+    </div>
+    <h4>Key Concepts to Emphasize</h4>
+    <ul>
+      <li><strong>SBP = 55%:</strong> Surviving beneficiary receives 55% of the selected base amount. It's inflation-indexed and guaranteed for life.</li>
+      <li><strong>Irrevocable:</strong> The SBP election (or declination) via DD Form 2656 cannot be changed. Declining requires spouse's notarized signature.</li>
+      <li><strong>Paid-Up Status:</strong> 360 months of premiums AND age 70. Both conditions must be met -- this surprises many retirees.</li>
+      <li><strong>DIC Offset:</strong> If DIC applies, it may offset SBP payments. This is a nuance that trips up many families.</li>
+      <li><strong>Cognitive Decline Planning:</strong> Power of attorney, trusted contact designations, and advance directives should be in place while the veteran is still competent. This is especially important given the higher rates of TBI and dementia in the veteran population.</li>
+    </ul>
+    <h4>Sensitivity Note</h4>
+    <ul class="talking-points">
+      <li>Legacy planning involves discussing death and the financial impact on surviving family. Be direct but compassionate.</li>
+      <li>Some participants may have already lost spouses or may be going through difficult family situations. Be aware of the room.</li>
+      <li>Close with the financial advisor recommendation -- emphasize that every family's situation is unique.</li>
+    </ul>
+  </div>
+
+  <!-- Discussion Questions -->
+  <div class="discussion-section">
+    <h3>&#128172; Discussion Questions by Module</h3>
+    <ul class="discussion-list">
+      <li>
+        <strong>Module 1 - Opener:</strong>
+        "How many of you have already separated or retired? What was the most confusing part of the administrative process?"
+      </li>
+      <li>
+        <strong>Module 2 - After CRDP/CRSC Comparison:</strong>
+        "Has anyone here dealt with the DFAS lag after a rating change? What happened?"
+      </li>
+      <li>
+        <strong>Module 3 - Medicare Section:</strong>
+        "How many of you are already enrolled in Medicare? Did you know TRICARE for Life covers what Medicare doesn't?"
+      </li>
+      <li>
+        <strong>Module 4 - State Tax Map:</strong>
+        "Has anyone relocated or considered relocating for tax reasons? What factors did you weigh beyond income tax?"
+      </li>
+      <li>
+        <strong>Module 5 - After SBP Pros/Cons:</strong>
+        "For those who elected SBP -- looking back, are you glad you did? What would you tell someone who hasn't decided yet?"
+      </li>
+      <li>
+        <strong>Wrap-Up:</strong>
+        "What's one thing you learned today that you wish you had known earlier in your career?"
+      </li>
+    </ul>
+  </div>
+
+  <!-- Instructor Notes -->
+  <div class="notes-section">
+    <h3>&#128221; Instructor Notes</h3>
+    <ul>
+      <li><strong>Pacing:</strong> The timeline is designed for 2.5-3 hours. If short on time, abbreviate the Module 4 discussion and reduce the Study Resources walkthrough. Modules 1-3 are the highest priority.</li>
+      <li><strong>Experience Levels:</strong> Some participants will be pre-retirement, others decades into it. Use the experienced veterans as informal mentors -- their real-world stories reinforce the material.</li>
+      <li><strong>Financial Advice Boundary:</strong> You are educating, not advising. When asked "should I do X?" redirect to "here are the factors to consider, and I'd recommend talking to a financial advisor about your specific situation."</li>
+      <li><strong>Emotional Topics:</strong> Disability ratings, end-of-life planning, and VA frustrations can be emotional. Acknowledge feelings, don't rush past them, and keep the tone respectful.</li>
+      <li><strong>Acronym Overload:</strong> This course is acronym-heavy (CRDP, CRSC, SBP, DIC, RMD, TSP). The slides define each on first use, but repeat the full name when participants look confused.</li>
+      <li><strong>Dark Mode:</strong> The presentation supports dark mode via the theme toggle in the sidebar. If the projector washes out the light theme, switch to dark mode for better contrast.</li>
+    </ul>
+  </div>
+
+  <!-- Materials Checklist -->
+  <div class="materials-section">
+    <h3>&#128230; Materials Checklist</h3>
+    <div class="materials-grid">
+      <div class="material-category">
+        <h4>Technology</h4>
+        <ul>
+          <li>Projector connected & working</li>
+          <li>Browser open to index.html</li>
+          <li>Test all 5 module presentations</li>
+          <li>Verify dark/light mode toggle</li>
+          <li>Test keyboard navigation (arrows)</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Study Resources</h4>
+        <ul>
+          <li>Quiz loads (quiz.html)</li>
+          <li>Flashcards load (flashcards.html)</li>
+          <li>Podcast plays (MP3 file)</li>
+          <li>Infographic displays</li>
+          <li>Study guide accessible</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Handouts (Print)</h4>
+        <ul>
+          <li>Retirement Transition Checklist</li>
+          <li>CRDP vs CRSC Comparison</li>
+          <li>Healthcare Benefits Reference</li>
+          <li>TSP & Retirement Income Worksheet</li>
+          <li>SBP Decision Worksheet</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Classroom</h4>
+        <ul>
+          <li>Workstations powered on</li>
+          <li>Course URL on each screen</li>
+          <li>Whiteboard/markers available</li>
+          <li>Water and refreshments for break</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tips for Success -->
+  <div class="tips-box">
+    <h3>&#10003; Tips for Success</h3>
+    <ul>
+      <li>Open with respect for their service -- this audience values directness and authenticity</li>
+      <li>Use the presentation sidebar to jump between slides if a question pulls you ahead</li>
+      <li>When a veteran shares a personal story, connect it back to the content: "That's exactly what this slide covers"</li>
+      <li>The completion celebrations (confetti) at the end of each module add levity -- let them enjoy it</li>
+      <li>Encourage participants to bookmark the course on their lab computers for self-study after class</li>
+      <li>The flashcards and quiz are great for a quick review at the end if time permits</li>
+      <li>If a question gets too specific ("Should I elect CRSC?"), redirect: "That depends on your specific rating and combat history -- let's talk after class or connect you with a VSO"</li>
+    </ul>
+  </div>
+
+  <!-- Content Cautions -->
+  <div class="caution-box">
+    <h3>&#9888; Content Cautions</h3>
+    <ul>
+      <li><strong>Not Financial Advice:</strong> This course provides education, not personalized recommendations. Always direct specific questions to a qualified financial advisor, tax professional, or attorney.</li>
+      <li><strong>Benefit Amounts Change:</strong> Dollar amounts, net worth limits, and rates cited are for 2026 and may change with annual COLA adjustments.</li>
+      <li><strong>State Tax Laws Evolve:</strong> The state tax landscape changes frequently. Encourage participants to verify current laws for their specific state before making relocation decisions.</li>
+      <li><strong>No Investment Recommendations:</strong> Never recommend specific investment products, funds, or financial advisors. Point participants to VA.gov, DFAS.mil, or their local Veterans Service Organization (VSO).</li>
+    </ul>
+  </div>
+
+  <!-- Official Resources -->
+  <div class="resources-box">
+    <h3>&#128279; Official Resources for Referrals</h3>
+    <ul>
+      <li><strong>VA.gov</strong> -- Claims, benefits, healthcare enrollment</li>
+      <li><strong>DFAS.mil</strong> -- Military retired pay, CRDP/CRSC, myPay portal</li>
+      <li><strong>TRICARE.mil</strong> -- TRICARE for Life enrollment and plan details</li>
+      <li><strong>SSA.gov</strong> -- Social Security benefits, earnings record, retirement estimator</li>
+      <li><strong>Medicare.gov</strong> -- Enrollment, plan comparison, Part D options</li>
+      <li><strong>TSP.gov</strong> -- Thrift Savings Plan account management, withdrawal options</li>
+      <li><strong>Local VSO</strong> -- Free claims assistance, benefits counseling, advocacy</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Financial Readiness Course | Instructor Guide & Syllabus</p>
+    <p style="margin-top: 0.5rem; font-style: italic;">Questions? Contact: Britt Legg</p>
+  </footer>
+</body>
+</html>

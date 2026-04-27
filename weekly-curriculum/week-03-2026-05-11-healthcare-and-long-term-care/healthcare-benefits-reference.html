@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Benefits Quick Reference — VUB Financial Readiness Course</title>
+    <style>
+        /* Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.4in 0.5in;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.88rem;
+            line-height: 1.45;
+            color: #1a1a1a;
+            background: #fff;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #003F72 60%, #1e3a8a 100%);
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 2px;
+        }
+
+        .header-left .subtitle {
+            font-size: 0.78rem;
+            opacity: 0.85;
+        }
+
+        .badge {
+            background: #fbbf24;
+            color: #1e3a8a;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 4px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        /* Section headings */
+        .section-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #1e3a8a;
+            border-bottom: 2px solid #fbbf24;
+            padding-bottom: 3px;
+            margin-bottom: 8px;
+        }
+
+        /* Coverage Comparison Grid */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 14px;
+            font-size: 0.82rem;
+        }
+
+        .comparison-table thead th {
+            background: #1e3a8a;
+            color: #fff;
+            padding: 6px 8px;
+            text-align: left;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .comparison-table thead th:first-child {
+            background: #003F72;
+            width: 15%;
+        }
+
+        .comparison-table tbody td {
+            padding: 5px 8px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f1f5f9;
+        }
+
+        .comparison-table tbody td:first-child {
+            font-weight: 600;
+            color: #003F72;
+            white-space: nowrap;
+        }
+
+        .comparison-table .best-for td {
+            font-style: italic;
+            color: #1e3a8a;
+            font-weight: 500;
+            border-bottom: 2px solid #fbbf24;
+        }
+
+        /* Two-column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        /* Info boxes */
+        .info-box {
+            border: 1.5px solid #cbd5e1;
+            border-radius: 5px;
+            padding: 10px 12px;
+            background: #f8fafc;
+        }
+
+        .info-box.champva {
+            border-left: 4px solid #003F72;
+        }
+
+        .info-box.aid-attend {
+            border-left: 4px solid #fbbf24;
+        }
+
+        .info-box h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+
+        .info-box p, .info-box li {
+            font-size: 0.82rem;
+            line-height: 1.4;
+        }
+
+        .info-box ul {
+            padding-left: 16px;
+            margin-top: 4px;
+        }
+
+        .info-box li {
+            margin-bottom: 2px;
+        }
+
+        /* Rates table */
+        .rates-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 6px 0 4px;
+            font-size: 0.82rem;
+        }
+
+        .rates-table td {
+            padding: 3px 6px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .rates-table td:first-child {
+            font-weight: 500;
+        }
+
+        .rates-table td:last-child {
+            font-weight: 700;
+            color: #1e3a8a;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .net-worth-note {
+            font-size: 0.78rem;
+            color: #64748b;
+            margin-top: 4px;
+            padding-top: 4px;
+            border-top: 1px dashed #cbd5e1;
+        }
+
+        /* Eligibility box */
+        .eligibility-box {
+            border: 1.5px solid #cbd5e1;
+            border-radius: 5px;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            background: #f8fafc;
+        }
+
+        .eligibility-box h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+
+        .eligibility-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .eligibility-cols div h4 {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #003F72;
+            margin-bottom: 3px;
+        }
+
+        .eligibility-cols ul {
+            padding-left: 16px;
+            font-size: 0.82rem;
+        }
+
+        .eligibility-cols li {
+            margin-bottom: 1px;
+        }
+
+        /* Warning box */
+        .warning-box {
+            background: #fef3c7;
+            border: 1.5px solid #f59e0b;
+            border-radius: 5px;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .warning-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .warning-box p {
+            font-size: 0.82rem;
+            line-height: 1.4;
+        }
+
+        .warning-box strong {
+            color: #92400e;
+        }
+
+        /* Deadline box */
+        .deadline-box {
+            background: linear-gradient(135deg, #1e3a8a, #003F72);
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .deadline-icon {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .deadline-box .deadline-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #fbbf24;
+        }
+
+        .deadline-box .deadline-text {
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            font-size: 0.72rem;
+            color: #94a3b8;
+            padding-top: 8px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* Print overrides */
+        @media print {
+            body {
+                font-size: 0.86rem;
+            }
+
+            .header, .deadline-box, .warning-box, .info-box, .eligibility-box {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <h1>Healthcare Benefits Quick Reference</h1>
+            <div class="subtitle">VUB Financial Readiness Course &mdash; Module 3</div>
+        </div>
+        <div class="badge">Quick Reference</div>
+    </div>
+
+    <!-- Coverage Comparison -->
+    <div class="section-title">Coverage Comparison</div>
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>VA Healthcare</th>
+                <th>Medicare</th>
+                <th>TRICARE for Life</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Where</td>
+                <td>VA facilities only</td>
+                <td>Any Medicare-accepting provider</td>
+                <td>Any TRICARE-accepting provider</td>
+            </tr>
+            <tr>
+                <td>Cost</td>
+                <td>Copays vary by priority group</td>
+                <td>Part B premium $202.90/mo (2026)</td>
+                <td>No premium (requires Medicare Parts A &amp; B)</td>
+            </tr>
+            <tr>
+                <td>Prescriptions</td>
+                <td>VA pharmacy (low-cost)</td>
+                <td>Part D plan (separate premium)</td>
+                <td>TRICARE pharmacy network</td>
+            </tr>
+            <tr class="best-for">
+                <td>Best For</td>
+                <td>Service-connected care</td>
+                <td>Broadest provider access</td>
+                <td>Wraps around Medicare gaps</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- CHAMPVA + Aid & Attendance -->
+    <div class="two-col">
+        <div class="info-box champva">
+            <h3>CHAMPVA &mdash; Dependent Coverage</h3>
+            <p>For spouses and dependents of veterans who are permanently and totally disabled (or who died from service-connected conditions).</p>
+            <ul>
+                <li>Covers <strong>75%</strong> of allowable charges</li>
+                <li><strong>$50/person</strong> annual deductible</li>
+                <li><strong>$3,000</strong> annual catastrophic cap</li>
+                <li>No enrollment fee or monthly premium</li>
+            </ul>
+        </div>
+        <div class="info-box aid-attend">
+            <h3>Aid &amp; Attendance &mdash; 2026 Rates</h3>
+            <table class="rates-table">
+                <tr><td>Two Veterans Married</td><td>$3,845/mo</td></tr>
+                <tr><td>Married Veteran</td><td>$2,874/mo</td></tr>
+                <tr><td>Single Veteran</td><td>$2,424/mo</td></tr>
+                <tr><td>Surviving Spouse</td><td>$1,558/mo</td></tr>
+            </table>
+            <div class="net-worth-note">
+                Net worth limit: <strong>$163,699</strong> &nbsp;|&nbsp; 3-year look-back period applies
+            </div>
+        </div>
+    </div>
+
+    <!-- Eligibility -->
+    <div class="eligibility-box">
+        <h3>Aid &amp; Attendance Eligibility Requirements</h3>
+        <div class="eligibility-cols">
+            <div>
+                <h4>Service Requirements</h4>
+                <ul>
+                    <li>90+ days active duty service</li>
+                    <li>At least 1 day during a wartime period</li>
+                    <li>Discharge other than dishonorable</li>
+                    <li>Age 65+ <em>or</em> permanently disabled</li>
+                </ul>
+            </div>
+            <div>
+                <h4>5 Activities of Daily Living (ADLs)</h4>
+                <ul>
+                    <li><strong>Bathing</strong> &mdash; washing &amp; grooming</li>
+                    <li><strong>Mobility</strong> &mdash; transferring &amp; walking</li>
+                    <li><strong>Dressing</strong> &mdash; putting on clothing</li>
+                    <li><strong>Toileting</strong> &mdash; using the restroom</li>
+                    <li><strong>Eating</strong> &mdash; feeding oneself</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Warning -->
+    <div class="warning-box">
+        <span class="warning-icon">&#9888;</span>
+        <p><strong>Medicaid Warning:</strong> If you receive Medicaid-funded nursing home care, Aid &amp; Attendance benefits are reduced to approximately <strong>$90/month</strong>. Plan accordingly and consult a VA-accredited claims agent before applying.</p>
+    </div>
+
+    <!-- Key Deadline -->
+    <div class="deadline-box">
+        <span class="deadline-icon">&#128197;</span>
+        <div>
+            <div class="deadline-label">Key Deadline</div>
+            <div class="deadline-text">Enroll in Medicare Parts A &amp; B at age 65. Missing your Initial Enrollment Period results in permanently higher premiums for the rest of your life.</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Veterans Upward Bound &mdash; West Virginia &nbsp;|&nbsp; Financial Readiness Course
+    </div>
+
+</body>
+</html>

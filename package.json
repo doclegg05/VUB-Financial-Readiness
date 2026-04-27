@@ -4,7 +4,10 @@
   "description": "",
   "main": "js/script.js",
   "scripts": {
+    "build:site": "powershell -ExecutionPolicy Bypass -File scripts/build-site.ps1",
     "test": "npx playwright test",
+    "package:travel": "powershell -ExecutionPolicy Bypass -File scripts/create-travel-package.ps1",
+    "package:travel:no-videos": "powershell -ExecutionPolicy Bypass -File scripts/create-travel-package.ps1 -SkipVideos",
     "benchmark:baseline": "node scripts/run-benchmark.js --label=baseline",
     "benchmark:fixed": "node scripts/run-benchmark.js --label=fixed",
     "compare": "node scripts/compare-results.js benchmarks/baseline.json benchmarks/fixed.json"

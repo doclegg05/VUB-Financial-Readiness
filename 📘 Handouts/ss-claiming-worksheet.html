@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Security Claiming Strategy Worksheet — VUB Financial Readiness Course</title>
+    <style>
+        /* ===== Reset & Page Setup ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.4in 0.5in 0.4in 0.5in;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: #1a1a1a;
+            background: #fff;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.4in 0.5in;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            background: linear-gradient(135deg, #1b2e4a 0%, #0d1b2a 60%, #1b2e4a 100%);
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            margin-bottom: 2px;
+        }
+
+        .header-left .subtitle {
+            font-size: 0.78rem;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        .badge {
+            background: #c8a84e;
+            color: #1b2e4a;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        /* ===== Section Headers ===== */
+        .section-header {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #1b2e4a;
+            margin: 10px 0 6px 0;
+            padding-bottom: 3px;
+            border-bottom: 2px solid #c8a84e;
+        }
+
+        /* ===== Info Boxes ===== */
+        .info-box {
+            border: 1.5px solid #cbd5e1;
+            border-radius: 5px;
+            padding: 10px 14px;
+            margin-bottom: 10px;
+            background: #f8fafc;
+        }
+
+        .info-box h2 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-box p {
+            font-size: 0.84rem;
+            line-height: 1.45;
+        }
+
+        .info-box.survivor {
+            border-color: #1b2e4a;
+            border-left: 4px solid #1b2e4a;
+            background: #eff6ff;
+        }
+
+        .info-box.survivor h2 {
+            color: #1b2e4a;
+        }
+
+        .info-box.veteran-advantage {
+            border-color: #c8a84e;
+            border-left: 4px solid #c8a84e;
+            background: #fffbeb;
+        }
+
+        .info-box.veteran-advantage h2 {
+            color: #92400e;
+        }
+
+        .info-box.breakeven {
+            border-color: #475569;
+            border-left: 4px solid #475569;
+            background: #f1f5f9;
+        }
+
+        .info-box.breakeven h2 {
+            color: #334155;
+        }
+
+        /* ===== Fill-in Fields ===== */
+        .fill-in-group {
+            margin-bottom: 10px;
+        }
+
+        .fill-in-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 6px;
+            font-size: 0.84rem;
+        }
+
+        .fill-in-row label {
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .fill-in-line {
+            flex: 1;
+            border-bottom: 1.5px dotted #94a3b8;
+            min-width: 120px;
+            height: 1.2em;
+        }
+
+        .fill-in-row .note {
+            font-size: 0.75rem;
+            color: #64748b;
+            font-style: italic;
+            white-space: nowrap;
+        }
+
+        .fill-in-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 24px;
+        }
+
+        /* ===== Comparison Table ===== */
+        .claiming-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+        }
+
+        .claiming-table thead th {
+            padding: 6px 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-align: center;
+            color: #fff;
+            background: #1b2e4a;
+        }
+
+        .claiming-table thead th:first-child {
+            border-radius: 5px 0 0 0;
+            text-align: center;
+        }
+
+        .claiming-table thead th:last-child {
+            border-radius: 0 5px 0 0;
+            background: #c8a84e;
+            color: #1b2e4a;
+            min-width: 110px;
+        }
+
+        .claiming-table tbody td {
+            padding: 5px 8px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .claiming-table tbody tr:last-child td {
+            border-bottom: 2px solid #94a3b8;
+        }
+
+        .claiming-table tbody td:first-child {
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .claiming-table tbody tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        .claiming-table tbody tr.fra-row td {
+            background: #eff6ff;
+            font-weight: 600;
+        }
+
+        .claiming-table tbody td.write-in {
+            border-bottom: 1.5px dotted #94a3b8;
+            background: #fffbeb;
+            min-width: 100px;
+        }
+
+        /* ===== Survivor Fill-in ===== */
+        .survivor-fields {
+            margin-top: 8px;
+        }
+
+        .survivor-fields .fill-in-row {
+            margin-bottom: 4px;
+        }
+
+        /* ===== Quick Math Box ===== */
+        .math-box {
+            background: #f1f5f9;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 5px;
+            padding: 10px 14px;
+            margin-bottom: 10px;
+        }
+
+        .math-box .math-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 5px;
+            font-size: 0.84rem;
+        }
+
+        .math-box .math-row label {
+            min-width: 260px;
+            font-weight: 500;
+        }
+
+        .math-box .math-row .fill-in-line {
+            min-width: 80px;
+            max-width: 140px;
+        }
+
+        .math-box .math-row .operator {
+            font-weight: 700;
+            color: #64748b;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        /* ===== Decision Section ===== */
+        .decision-box {
+            border: 2px solid #c8a84e;
+            border-radius: 5px;
+            padding: 10px 14px;
+            margin-bottom: 10px;
+            background: #fffdf5;
+        }
+
+        .decision-box h2 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #1b2e4a;
+            margin-bottom: 6px;
+        }
+
+        .decision-box .fill-in-row {
+            margin-bottom: 5px;
+        }
+
+        .reason-line {
+            width: 100%;
+            border-bottom: 1.5px dotted #94a3b8;
+            height: 1.4em;
+            margin-top: 4px;
+        }
+
+        /* ===== Checklist ===== */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            font-size: 0.84rem;
+        }
+
+        .checklist li {
+            padding: 3px 0;
+            padding-left: 22px;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border: 1.5px solid #94a3b8;
+            border-radius: 2px;
+            background: #fff;
+        }
+
+        /* ===== Bottom Grid ===== */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .bottom-grid .info-box {
+            margin-bottom: 0;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            text-align: center;
+            font-size: 0.72rem;
+            color: #64748b;
+            padding-top: 8px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .footer p {
+            margin-bottom: 2px;
+        }
+
+        /* ===== Print Styles ===== */
+        @media print {
+            body {
+                padding: 0;
+                font-size: 0.86rem;
+            }
+
+            .header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .claiming-table thead th,
+            .claiming-table tbody td.write-in,
+            .claiming-table tbody tr.fra-row td,
+            .claiming-table tbody tr:nth-child(even) td,
+            .info-box,
+            .math-box,
+            .decision-box {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .info-box, .claiming-table, .bottom-grid, .decision-box, .math-box {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <h1>Social Security Claiming Strategy Worksheet</h1>
+            <div class="subtitle">VUB Financial Readiness Course</div>
+        </div>
+        <div class="badge">Planning Tool</div>
+    </div>
+
+    <!-- Section 1: Your Information -->
+    <div class="section-header">Section 1: Your Information</div>
+    <div class="fill-in-group">
+        <div class="fill-in-grid">
+            <div class="fill-in-row">
+                <label>Your name:</label>
+                <div class="fill-in-line"></div>
+            </div>
+            <div class="fill-in-row">
+                <label>Date of birth:</label>
+                <div class="fill-in-line"></div>
+            </div>
+            <div class="fill-in-row">
+                <label>Full Retirement Age (FRA):</label>
+                <div class="fill-in-line"></div>
+                <span class="note">(67 for most born after 1960)</span>
+            </div>
+            <div class="fill-in-row">
+                <label>FRA benefit (from ssa.gov):</label>
+                <div class="fill-in-line"></div>
+            </div>
+            <div class="fill-in-row">
+                <label>Spouse's name:</label>
+                <div class="fill-in-line"></div>
+            </div>
+            <div class="fill-in-row">
+                <label>Spouse's date of birth:</label>
+                <div class="fill-in-line"></div>
+            </div>
+        </div>
+        <div class="fill-in-row" style="max-width: 50%;">
+            <label>Spouse's FRA benefit:</label>
+            <div class="fill-in-line"></div>
+        </div>
+    </div>
+
+    <!-- Section 2: Benefit by Claiming Age -->
+    <div class="section-header">Section 2: What You'd Receive at Each Age</div>
+    <table class="claiming-table">
+        <thead>
+            <tr>
+                <th>Claiming Age</th>
+                <th>% of FRA Benefit</th>
+                <th>If FRA = $2,500</th>
+                <th>If FRA = $3,000</th>
+                <th>Your Estimate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>62</td>
+                <td>70%</td>
+                <td>$1,750</td>
+                <td>$2,100</td>
+                <td class="write-in"></td>
+            </tr>
+            <tr>
+                <td>63</td>
+                <td>75%</td>
+                <td>$1,875</td>
+                <td>$2,250</td>
+                <td class="write-in"></td>
+            </tr>
+            <tr>
+                <td>64</td>
+                <td>80%</td>
+                <td>$2,000</td>
+                <td>$2,400</td>
+                <td class="write-in"></td>
+            </tr>
+            <tr>
+                <td>65</td>
+                <td>86.7%</td>
+                <td>$2,167</td>
+                <td>$2,600</td>
+                <td class="write-in"></td>
+            </tr>
+            <tr>
+                <td>66</td>
+                <td>93.3%</td>
+                <td>$2,333</td>
+                <td>$2,800</td>
+                <td class="write-in"></td>
+            </tr>
+            <tr class="fra-row">
+                <td>67 (FRA)</td>
+                <td>100%</td>
+                <td>$2,500</td>
+                <td>$3,000</td>
+                <td class="write-in"></td>
+            </tr>
+            <tr>
+                <td>68</td>
+                <td>108%</td>
+                <td>$2,700</td>
+                <td>$3,240</td>
+                <td class="write-in"></td>
+            </tr>
+            <tr>
+                <td>69</td>
+                <td>116%</td>
+                <td>$2,900</td>
+                <td>$3,480</td>
+                <td class="write-in"></td>
+            </tr>
+            <tr>
+                <td>70</td>
+                <td>124%</td>
+                <td>$3,100</td>
+                <td>$3,720</td>
+                <td class="write-in"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Section 3: Survivor Benefit Impact -->
+    <div class="info-box survivor">
+        <h2>Section 3: The Survivor Benefit Impact</h2>
+        <p>
+            Your surviving spouse inherits the <strong>higher</strong> of the two benefits.
+            If you claim at 62, your spouse gets your reduced amount for the rest of their life.
+            If you claim at 70, they get your maximum amount.
+        </p>
+        <div class="survivor-fields">
+            <div class="fill-in-row">
+                <label>If I claim at 62, my survivor benefit =</label>
+                <div class="fill-in-line" style="max-width: 120px;"></div>
+                <span>/month</span>
+            </div>
+            <div class="fill-in-row">
+                <label>If I claim at 70, my survivor benefit =</label>
+                <div class="fill-in-line" style="max-width: 120px;"></div>
+                <span>/month</span>
+            </div>
+            <div class="fill-in-row">
+                <label>Difference over 20 years of survivorship =</label>
+                <div class="fill-in-line" style="max-width: 120px;"></div>
+                <span class="note">(monthly difference &times; 240)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Break-Even Analysis -->
+    <div class="info-box breakeven">
+        <h2>Section 4: Break-Even Analysis</h2>
+        <p>
+            If you delay from 62 to 70, you give up 8 years of smaller checks to get larger checks forever after.
+            The break-even point is approximately <strong>age 82</strong>.
+        </p>
+        <p style="margin-top: 4px; font-size: 0.8rem; color: #475569;">
+            Average life expectancy for a 65-year-old male: <strong>84</strong> &nbsp;|&nbsp;
+            Average life expectancy for a 65-year-old female: <strong>87</strong>
+        </p>
+    </div>
+
+    <div class="math-box">
+        <div style="font-weight: 700; font-size: 0.84rem; margin-bottom: 6px; color: #1b2e4a;">Quick Math: Is Waiting Worth It?</div>
+        <div class="math-row">
+            <label>Monthly difference (age 70 vs 62):</label>
+            <div class="fill-in-line"></div>
+        </div>
+        <div class="math-row">
+            <label>Months of "missed" income (8 years):</label>
+            <span class="operator">&times; 96</span>
+        </div>
+        <div class="math-row">
+            <label>Total "investment" by waiting:</label>
+            <div class="fill-in-line"></div>
+        </div>
+        <div class="math-row">
+            <label>Extra monthly income at 70:</label>
+            <div class="fill-in-line"></div>
+        </div>
+        <div class="math-row">
+            <label>Months to break even (investment &divide; extra monthly):</label>
+            <div class="fill-in-line"></div>
+        </div>
+        <div class="math-row">
+            <label>Break-even age:</label>
+            <div class="fill-in-line"></div>
+        </div>
+    </div>
+
+    <!-- Section 5 & 6 side by side -->
+    <div class="bottom-grid">
+        <!-- Section 5: Veteran Advantage -->
+        <div class="info-box veteran-advantage">
+            <h2>Section 5: Why Many Veterans Have an Advantage</h2>
+            <p>
+                If you have <strong>any</strong> guaranteed income floor &mdash; military retired pay, a civilian pension, VA disability, or some combination &mdash; you may not <strong>need</strong> Social Security at 62. That lets you afford to wait. Every year you delay past FRA adds <strong>8%</strong> to your benefit for life. If you don't have a pension floor, claiming timing matters even more &mdash; the eight-percent-per-year delay credit is the largest guaranteed raise in retirement.
+            </p>
+        </div>
+
+        <!-- Section 6: Your Decision -->
+        <div class="decision-box">
+            <h2>Section 6: Your Decision</h2>
+            <div class="fill-in-row">
+                <label>I plan to claim at age:</label>
+                <div class="fill-in-line"></div>
+            </div>
+            <div class="fill-in-row">
+                <label>Spouse plans to claim at age:</label>
+                <div class="fill-in-line"></div>
+            </div>
+            <div>
+                <label style="font-size: 0.84rem; font-weight: 500;">Reason:</label>
+                <div class="reason-line"></div>
+                <div class="reason-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 7: Next Steps -->
+    <div class="section-header">Section 7: Next Steps</div>
+    <ul class="checklist">
+        <li>Create an account at <strong>ssa.gov/myaccount</strong></li>
+        <li>Review your earnings record for accuracy</li>
+        <li>Check your projected benefits at 62, 67, and 70</li>
+        <li>Discuss timing strategy with your spouse</li>
+        <li>Consider consulting a financial advisor for complex situations</li>
+    </ul>
+
+    <!-- Footer -->
+    <div class="footer" style="margin-top: 10px;">
+        <p>Veterans Upward Bound &mdash; West Virginia | Financial Readiness Course</p>
+        <p>This worksheet is for educational purposes. Consult a financial advisor for personalized guidance.</p>
+    </div>
+
+</body>
+</html>

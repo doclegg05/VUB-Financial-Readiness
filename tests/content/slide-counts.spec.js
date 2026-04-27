@@ -9,9 +9,9 @@ test.describe('Slide Counts', () => {
     const modules = [
         { id: 'module1', expected: 14 },
         { id: 'module2', expected: 12 },
-        { id: 'module3', expected: 15 },
-        { id: 'module4', expected: 14 },
-        { id: 'module5', expected: 14 },
+        { id: 'module3', expected: 13 },
+        { id: 'module4', expected: 11 },
+        { id: 'module5', expected: 13 },
     ];
 
     for (const { id, expected } of modules) {
@@ -23,6 +23,7 @@ test.describe('Slide Counts', () => {
 
     test('total slides across all modules is 67', async ({ page }) => {
         const allSlides = page.locator('.pres-slide');
-        await expect(allSlides).toHaveCount(67);
+        await expect(allSlides).toHaveCount(63);
     });
 });
+

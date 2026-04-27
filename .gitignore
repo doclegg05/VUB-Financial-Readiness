@@ -18,10 +18,17 @@ node_modules/
 test-results/
 playwright-report/
 benchmarks/
+dist/
+.netlify/
 
 # Local-only content (not for public repo)
 Admin Paperwork/
+*Admin Paperwork/*
+!*Admin Paperwork/
+!*Admin Paperwork/student-upload-instructions.html
 videos/
+*.mp3
+*.mp4
 study-resources/financial-readiness-podcast.mp3
 
 # AI tool plugins (installed locally, not course content)
