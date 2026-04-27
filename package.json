@@ -4,7 +4,8 @@
   "description": "",
   "main": "js/script.js",
   "scripts": {
-    "build:site": "powershell -ExecutionPolicy Bypass -File scripts/build-site.ps1",
+    "build:site": "node scripts/build-site.js",
+    "build:site:win": "powershell -ExecutionPolicy Bypass -File scripts/build-site.ps1",
     "pdf:assessments": "python scripts/generate-assessment-pdfs.py",
     "test": "npx playwright test",
     "package:travel": "powershell -ExecutionPolicy Bypass -File scripts/create-travel-package.ps1",
