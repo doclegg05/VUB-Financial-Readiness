@@ -17,7 +17,7 @@ Open **`weekly-curriculum/`**. It contains one folder for each week in the teach
 | Week 1 | First class meeting | Pre-test + Module 1 |
 | Week 2 | Second class meeting | Module 2 |
 | Week 3 | Third class meeting | Module 3 |
-| Week 4 | Fourth class meeting | Module 4 |
+| Week 4 | Fourth class meeting | Module 4: income systems and retirement cash flow |
 | Week 5 | No-class week | Memorial Day break |
 | Week 6 | Sixth class meeting | Module 5 |
 | Week 7 | Final class meeting | Review + post-test |
@@ -46,7 +46,7 @@ Explorer groups these at the top of the folder list.
 |---|---|
 | 📘 Admin Paperwork | Instructor contracts, one-page syllabus |
 | 📘 Assessments | Pre-test and post-test HTML pages |
-| 📘 Handouts | Printable handouts (10 files — schedule, worksheets, reference sheets) |
+| 📘 Handouts | Printable handouts (11 files — schedule, worksheets, reference sheets) |
 | 📘 Study Resources | Flashcards, quiz, podcast, slide deck, study guide, infographic |
 | 📘 Teacher Guides | Teacher's guide PDFs |
 

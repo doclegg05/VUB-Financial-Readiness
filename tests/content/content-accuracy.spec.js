@@ -58,4 +58,13 @@ test.describe('Content Accuracy', () => {
         });
         expect(hasOldText).toBe(false);
     });
+
+    test('Module 4 explains income-system interactions', async ({ page }) => {
+        const html = await page.locator('#module4').innerHTML();
+        expect(html).toContain('Systems Map');
+        expect(html).toContain('Tax Domino Effect');
+        expect(html).toContain('AGI');
+        expect(html).toContain('Medicare');
+        expect(html).toContain('IRMAA');
+    });
 });
