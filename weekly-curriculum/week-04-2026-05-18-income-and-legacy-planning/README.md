@@ -10,8 +10,9 @@ Module 4: Managing Retirement Income
 2. Use the new systems map to explain how DFAS, VA, SSA, IRS, Medicare, state tax rules, and lenders measure income differently.
 3. Teach the tax domino effect: traditional withdrawals can affect AGI, Social Security taxation, Medicare IRMAA, state taxes, and fixed-income debt pressure.
 4. Use `module4-step-by-step-explainer.pdf` as the instructor deep-dive for slide-by-slide teaching notes.
-5. Use the TSP handout and state benefits reference for applied practice.
-6. Reserve 10 minutes for questions and a preview of the Memorial Day break.
+5. Use `module4-practical-scenarios.pdf` for small-group cases, board prompts, and instructor-led application checks.
+6. Use the TSP handout and state benefits reference for applied practice.
+7. Reserve 10 minutes for questions and a preview of the Memorial Day break.
 
 ## Suggested Timing
 
@@ -28,6 +29,8 @@ Module 4: Managing Retirement Income
 - `retirement-income-systems-map.html`
 - `module4-step-by-step-explainer.pdf`
 - `module4-step-by-step-explainer.html`
+- `module4-practical-scenarios.pdf`
+- `module4-practical-scenarios.html`
 - `state-benefits-reference.html`
 - `instructor-notes.html`
 - `research-notes.md`
