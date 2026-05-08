@@ -77,12 +77,12 @@ For Week 1:
 3. Upload the CSV file to the `01 Pre-Test Results` Google Drive folder.
 4. File name should look like `vub-pre-test-last-name-week-1.csv`.
 
-For Week 6:
+For Week 7:
 
 1. Complete the post-test.
 2. Click `Download Results (CSV)`.
 3. Upload the CSV file to the `02 Post-Test Results` Google Drive folder.
-4. File name should look like `vub-post-test-last-name-week-6.csv`.
+4. File name should look like `vub-post-test-last-name-week-7.csv`.
 
 ## Instructor Verification
 

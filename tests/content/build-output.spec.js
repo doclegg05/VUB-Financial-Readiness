@@ -59,6 +59,7 @@ test.describe('Built Output', () => {
             path.join('intermediate-computer-skills', 'weeks', 'week-01', 'presentation.html'),
             path.join('📘 Assessments', 'pre-test-answer-key.pdf'),
             path.join('📘 Assessments', 'post-test-answer-key.pdf'),
+            path.join('📘 Handouts', 'course-schedule.pdf'),
             path.join('📘 Teacher Guides', 'module1-teachers-guide.pdf'),
             'student-upload-instructions.html',
             path.join('shared', 'progress.js'),

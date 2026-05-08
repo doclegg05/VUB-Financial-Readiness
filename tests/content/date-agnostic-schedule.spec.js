@@ -6,10 +6,7 @@ const root = path.resolve(__dirname, '..', '..');
 
 const files = [
     'START HERE.md',
-    'weekly-curriculum/README.md',
     'weekly-curriculum/GOOGLE-DRIVE-COLLECTION.md',
-    '📘 Handouts/course-schedule.html',
-    'weekly-curriculum/week-01-2026-04-27-foundations-and-pre-test/course-schedule.html',
     'intermediate-computer-skills.html',
     'intermediate-computer-skills/syllabus-overview.html',
 ];
@@ -55,5 +52,32 @@ test.describe('Date-Agnostic Lesson Schedule', () => {
         }
 
         expect(matches).toEqual([]);
+    });
+});
+
+test.describe('Financial Readiness Course Schedule', () => {
+
+    test('course schedule handout reflects the Spring 2026 seven-week calendar', async () => {
+        const html = fs.readFileSync(path.join(root, '📘 Handouts/course-schedule.html'), 'utf8');
+
+        for (const expected of [
+            '7 Mondays (April 27 &ndash; June 8, 2026; no class May 25)',
+            '<td>May 18</td>',
+            '<td>Module 4</td>',
+            '<td>Managing Retirement Income</td>',
+            '<td>May 25</td>',
+            '<td>Memorial Day</td>',
+            '<td>June 1</td>',
+            '<td>Module 5</td>',
+            '<td>Legacy Planning</td>',
+            '<td>June 8</td>',
+            '<td>Review + Post-Test</td>',
+        ]) {
+            expect(html).toContain(expected);
+        }
+
+        expect(html).not.toContain('Modules 4 + 5');
+        expect(html).not.toContain('Module 5 is covered during Week 4');
+        expect(fs.existsSync(path.join(root, '📘 Handouts/course-schedule.pdf'))).toBe(true);
     });
 });
