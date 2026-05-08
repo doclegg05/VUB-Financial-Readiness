@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4 Step-by-Step Instructor Explainer</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1e3a8a;
+            --navy-dark: #0f172a;
+            --blue: #2563eb;
+            --gold: #fbbf24;
+            --gold-dark: #b45309;
+            --green: #15803d;
+            --red: #b91c1c;
+            --ink: #1f2937;
+            --muted: #475569;
+            --line: #cbd5e1;
+            --soft-blue: #eff6ff;
+            --soft-gold: #fffbeb;
+            --soft-green: #f0fdf4;
+            --soft-red: #fef2f2;
+            --paper: #ffffff;
+            --shade: #f8fafc;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.58in 0.62in 0.58in 0.62in;
+        }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 10.5pt;
+            line-height: 1.45;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        h1, h2, h3, h4, .eyebrow, .badge, table {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            font-size: 28pt;
+            line-height: 1.05;
+            color: #ffffff;
+            margin: 0 0 8pt 0;
+        }
+
+        h2 {
+            font-size: 17pt;
+            color: var(--navy);
+            margin: 18pt 0 8pt 0;
+            padding-bottom: 4pt;
+            border-bottom: 2pt solid var(--gold);
+        }
+
+        h3 {
+            font-size: 13pt;
+            color: var(--navy);
+            margin: 0 0 6pt 0;
+        }
+
+        h4 {
+            font-size: 10pt;
+            color: var(--navy-dark);
+            margin: 8pt 0 3pt 0;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        p {
+            margin: 0 0 7pt 0;
+        }
+
+        ul, ol {
+            margin: 4pt 0 8pt 18pt;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 3pt;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.8pt;
+            line-height: 1.3;
+            margin: 6pt 0 10pt 0;
+        }
+
+        th {
+            background: var(--navy);
+            color: #ffffff;
+            text-align: left;
+            padding: 5pt;
+            font-weight: 700;
+        }
+
+        td {
+            border: 0.7pt solid var(--line);
+            padding: 5pt;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) td {
+            background: var(--shade);
+        }
+
+        .cover {
+            min-height: 9.1in;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 58%, #315ba8 100%);
+            color: #ffffff;
+            border-radius: 10pt;
+            padding: 42pt 40pt;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 10pt;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 10pt;
+        }
+
+        .subtitle {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14pt;
+            line-height: 1.45;
+            max-width: 6.4in;
+            color: #dbeafe;
+        }
+
+        .cover-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12pt;
+            margin-top: 28pt;
+        }
+
+        .cover-card {
+            border: 1pt solid rgba(255,255,255,0.28);
+            background: rgba(255,255,255,0.08);
+            border-radius: 7pt;
+            padding: 12pt;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 9.5pt;
+            color: #f8fafc;
+        }
+
+        .cover-card strong {
+            color: #ffffff;
+        }
+
+        .small-meta {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 9pt;
+            color: #dbeafe;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        .callout {
+            border-left: 4pt solid var(--blue);
+            background: var(--soft-blue);
+            border-radius: 0 6pt 6pt 0;
+            padding: 8pt 10pt;
+            margin: 8pt 0 10pt 0;
+            page-break-inside: avoid;
+        }
+
+        .callout.warning {
+            border-left-color: var(--red);
+            background: var(--soft-red);
+        }
+
+        .callout.gold {
+            border-left-color: var(--gold-dark);
+            background: var(--soft-gold);
+        }
+
+        .callout.green {
+            border-left-color: var(--green);
+            background: var(--soft-green);
+        }
+
+        .step {
+            page-break-inside: avoid;
+            border: 1pt solid var(--line);
+            border-radius: 7pt;
+            padding: 11pt 12pt;
+            margin-bottom: 11pt;
+            background: #ffffff;
+        }
+
+        .step-header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8pt;
+            align-items: start;
+            margin-bottom: 7pt;
+        }
+
+        .badge {
+            background: var(--navy);
+            color: #ffffff;
+            border-radius: 4pt;
+            padding: 4pt 7pt;
+            font-size: 8.5pt;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .step h3 {
+            margin-top: 0;
+        }
+
+        .micro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8pt;
+        }
+
+        .mini {
+            border: 0.7pt solid var(--line);
+            border-radius: 6pt;
+            padding: 7pt 8pt;
+            background: var(--shade);
+            min-height: 78pt;
+        }
+
+        .mini h4 {
+            margin-top: 0;
+        }
+
+        .board {
+            border: 1.5pt solid var(--navy);
+            border-radius: 7pt;
+            padding: 9pt 10pt;
+            background: #ffffff;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 9.2pt;
+            margin: 7pt 0;
+        }
+
+        .formula {
+            background: var(--soft-gold);
+            border: 1pt solid var(--gold);
+            border-radius: 6pt;
+            padding: 8pt;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 700;
+            color: var(--navy-dark);
+            text-align: center;
+            margin: 6pt 0 9pt 0;
+        }
+
+        .source-list {
+            font-size: 8.7pt;
+            color: var(--muted);
+            word-break: break-word;
+        }
+
+        .footer-note {
+            border-top: 1pt solid var(--line);
+            margin-top: 12pt;
+            padding-top: 7pt;
+            font-size: 8.5pt;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        @media print {
+            .step, .callout, .mini {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="cover">
+        <div>
+            <div class="eyebrow">Veterans Upward Bound Financial Readiness Course</div>
+            <h1>Module 4 Step-by-Step Instructor Explainer</h1>
+            <p class="subtitle">A deeper teaching companion for Managing Your Retirement Income. Use it to explain the systems behind veteran cash flow, taxes, RMDs, Social Security taxation, Medicare premiums, state tax, debt pressure, and buying power.</p>
+            <div class="cover-grid">
+                <div class="cover-card"><strong>Designed for:</strong><br>Instructor preparation and live classroom delivery.</div>
+                <div class="cover-card"><strong>Follows:</strong><br>The 14-slide Module 4 presentation flow.</div>
+                <div class="cover-card"><strong>Use with:</strong><br>Retirement Income Systems Map, TSP worksheet, and state benefits reference.</div>
+                <div class="cover-card"><strong>Boundary:</strong><br>Education only. Refer personal tax, investment, and legal decisions to qualified professionals.</div>
+            </div>
+        </div>
+        <div class="small-meta">Prepared for Spring 2026 classroom delivery. Verify dollar thresholds and benefit rules before future cohorts.</div>
+    </section>
+
+    <section class="page-break">
+        <h2>How to Use This Explainer</h2>
+        <div class="callout">
+            <p><strong>Teaching frame:</strong> Module 4 is not just "retirement income." It is the point where students learn that one household can have multiple payment systems and multiple measurement systems. A veteran may receive enough cash each month but still create tax, Medicare, state-tax, or debt-pressure consequences through one poorly timed withdrawal.</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Presentation Segment</th>
+                    <th>Instructor Goal</th>
+                    <th>Suggested Move</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Slides 1-3</td>
+                    <td>Students identify their retirement paycheck.</td>
+                    <td>List income sources and label taxable, tax-free, partially taxable, or unknown.</td>
+                </tr>
+                <tr>
+                    <td>Slides 4-6</td>
+                    <td>Students understand the systems behind the paycheck.</td>
+                    <td>Draw payment systems on the left and measurement systems on the right.</td>
+                </tr>
+                <tr>
+                    <td>Slides 7-9</td>
+                    <td>Students see how taxes and location change net income.</td>
+                    <td>Use the tax domino effect and MSG Rivera relocation scenario.</td>
+                </tr>
+                <tr>
+                    <td>Slides 10-12</td>
+                    <td>Students connect debt, RMDs, and inflation to decisions.</td>
+                    <td>Ask what can be controlled before December 31.</td>
+                </tr>
+                <tr>
+                    <td>Slides 13-14</td>
+                    <td>Students leave with a practical review checklist.</td>
+                    <td>Repeat the five-question control panel at the end.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Core Vocabulary</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Term</th>
+                    <th>Instructor Explanation</th>
+                    <th>Why It Matters in Module 4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Cash flow</td>
+                    <td>Money available to pay monthly expenses.</td>
+                    <td>VA disability may help cash flow even when it does not raise federal taxable income.</td>
+                </tr>
+                <tr>
+                    <td>AGI</td>
+                    <td>Adjusted gross income on the federal tax return.</td>
+                    <td>Traditional withdrawals, pensions, wages, and interest can raise AGI.</td>
+                </tr>
+                <tr>
+                    <td>Combined income</td>
+                    <td>AGI + tax-exempt interest + half of Social Security benefits.</td>
+                    <td>This determines whether Social Security benefits become taxable.</td>
+                </tr>
+                <tr>
+                    <td>MAGI for Medicare</td>
+                    <td>Modified adjusted gross income used by Medicare/SSA for IRMAA.</td>
+                    <td>A large withdrawal can raise Medicare premiums two years later.</td>
+                </tr>
+                <tr>
+                    <td>RMD</td>
+                    <td>Required minimum distribution from tax-deferred retirement accounts.</td>
+                    <td>RMDs can force taxable income even when the veteran does not need the cash.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="page-break">
+        <h2>Step-by-Step Teaching Notes</h2>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 1</span>
+                <h3>Title &amp; Objectives: Set the Control-Panel Frame</h3>
+            </div>
+            <p><strong>Go deeper:</strong> Tell students that this lesson is about building a retirement control panel. A control panel has different gauges: cash in the bank, taxable income, Social Security taxation, Medicare premiums, RMD deadlines, state tax rules, and debt payments. The goal is not to make everyone a tax expert. The goal is to know which gauge to check before making a large money decision.</p>
+            <div class="micro-grid">
+                <div class="mini">
+                    <h4>Say this</h4>
+                    <p>"Today we are not chasing one magic number. We are learning which system reacts when money moves."</p>
+                </div>
+                <div class="mini">
+                    <h4>Watch for</h4>
+                    <p>Students may treat "income" as one concept. Keep separating monthly cash flow from taxable income and benefit thresholds.</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 2</span>
+                <h3>Income Stacking: Build the Retirement Paycheck</h3>
+            </div>
+            <p><strong>Go deeper:</strong> The income stack is not only about adding dollars. It is about labeling each dollar. Military retired pay and CRDP are generally taxable as retired pay. VA disability compensation and CRSC are tax-free. Social Security may be partly taxable. Traditional TSP/IRA withdrawals are generally ordinary income; qualified Roth withdrawals are tax-free.</p>
+            <div class="board">
+                Board prompt: "Write each income source in one of four columns: taxable, tax-free, partly taxable, or unknown."
+            </div>
+            <p><strong>Instructor note:</strong> The "unknown" column is not a failure. It is the reason the class needs the systems map.</p>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 3</span>
+                <h3>Discussion: Map Your Retirement Income</h3>
+            </div>
+            <p><strong>Go deeper:</strong> Ask students to list sources without sharing dollar amounts publicly. Privacy matters. Then ask them to mark which sources are guaranteed monthly income and which are optional decisions. This distinction is critical: a pension check arrives; a TSP withdrawal is chosen unless an RMD forces it.</p>
+            <div class="micro-grid">
+                <div class="mini">
+                    <h4>Follow-up questions</h4>
+                    <ul>
+                        <li>Which source arrives automatically?</li>
+                        <li>Which source requires a withdrawal request?</li>
+                        <li>Which source has a tax form in January?</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Misconception</h4>
+                    <p>"If it hits my bank account, it must be taxable." Correct this gently. Some deposits are tax-free but still vital for cash-flow planning.</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 4</span>
+                <h3>Systems Map: Who Sends Money vs. Who Measures Income</h3>
+            </div>
+            <p><strong>Go deeper:</strong> This is the key slide. Draw two columns. On the left: DFAS, VA, SSA, TSP/IRA custodian. On the right: IRS, Medicare/SSA, state tax agency, lenders. Explain that the left side sends or administers money. The right side measures income for taxes, premiums, state rules, and debt capacity.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Payment / Admin System</th>
+                        <th>What Students Should Know</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>DFAS</td>
+                        <td>Military retired pay, CRDP, CRSC processing, tax withholding, 1099-R reporting.</td>
+                    </tr>
+                    <tr>
+                        <td>VA</td>
+                        <td>Disability compensation, pension, Aid &amp; Attendance. VA disability compensation is tax-free.</td>
+                    </tr>
+                    <tr>
+                        <td>SSA</td>
+                        <td>Social Security payments, SSA-1099, voluntary tax withholding, Medicare premium notices.</td>
+                    </tr>
+                    <tr>
+                        <td>TSP / IRA custodian</td>
+                        <td>Withdrawals, RMD notices, tax withholding, 1099-R reporting.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="callout gold">
+                <p><strong>Teaching line:</strong> "The agency that sends a payment is not always the agency that decides how the payment affects your taxes or premiums."</p>
+            </div>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 5</span>
+                <h3>Tax Domino Effect: One Withdrawal Can Touch Several Systems</h3>
+            </div>
+            <p><strong>Go deeper:</strong> Use a traditional TSP/IRA withdrawal as the example because it is the clearest domino. It raises ordinary income. That raises AGI. Higher AGI can increase the taxable share of Social Security through the combined-income formula. Higher MAGI can create Medicare Part B and Part D IRMAA two years later. The state may also tax the withdrawal depending on local rules.</p>
+            <div class="formula">Traditional withdrawal &rarr; AGI &rarr; taxable Social Security &rarr; Medicare IRMAA lookback &rarr; possible state tax</div>
+            <p><strong>Contrast:</strong> VA disability compensation and CRSC are tax-free. They matter for household cash flow, but they do not behave like traditional retirement-plan withdrawals on the federal return.</p>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 6</span>
+                <h3>Activity: Control the Calendar Before December 31</h3>
+            </div>
+            <p><strong>Go deeper:</strong> This activity converts the systems map into action. Ask each table to decide which choices are fixed and which are controllable before year-end. RMD completion, tax withholding, traditional-versus-Roth source choice, QCD use, large purchase timing, and debt payoff timing may all matter before December 31.</p>
+            <div class="micro-grid">
+                <div class="mini">
+                    <h4>Good student answer</h4>
+                    <p>"The pension and VA payment are fixed. The TSP withdrawal amount is a decision. We should check taxes before taking a large amount."</p>
+                </div>
+                <div class="mini">
+                    <h4>Instructor boundary</h4>
+                    <p>Do not recommend a specific Roth conversion, withdrawal amount, or investment change. Refer personal calculations to a tax professional or fee-only planner.</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 7</span>
+                <h3>Federal Taxation: Label the Income Correctly</h3>
+            </div>
+            <p><strong>Go deeper:</strong> The tax slide should be taught as a sorting exercise. Military retired pay is generally taxable. CRDP is taxed in the same manner as retired pay. VA disability compensation is tax-free. CRSC is non-taxable and requires branch approval. Social Security taxation depends on combined income, and traditional TSP/IRA withdrawals can push that calculation upward.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Income Type</th>
+                        <th>Classroom Label</th>
+                        <th>Instructor Warning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Military retired pay</td>
+                        <td>Taxable ordinary income</td>
+                        <td>Verify withholding through myPay or the payer.</td>
+                    </tr>
+                    <tr>
+                        <td>VA disability compensation</td>
+                        <td>Tax-free</td>
+                        <td>Do not include in federal gross income.</td>
+                    </tr>
+                    <tr>
+                        <td>CRDP</td>
+                        <td>Taxable restored retired pay</td>
+                        <td>Automatic if eligible, but not tax-free.</td>
+                    </tr>
+                    <tr>
+                        <td>CRSC</td>
+                        <td>Non-taxable combat-related compensation</td>
+                        <td>Requires application through the service branch.</td>
+                    </tr>
+                    <tr>
+                        <td>Traditional TSP / IRA</td>
+                        <td>Taxable when withdrawn</td>
+                        <td>Can affect AGI, Social Security taxation, IRMAA, and state tax.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 8</span>
+                <h3>State Tax Landscape: Teach Total Cost, Not Tax Tourism</h3>
+            </div>
+            <p><strong>Go deeper:</strong> Students often over-focus on "no income tax" states. Use the state slide to broaden the decision. MyArmyBenefits' January 2026 update reported 9 states with no income tax, 28 states fully exempting military retired pay, 13 with partial or conditional exemptions, and D.C. fully taxing it for tax year 2025. For West Virginia students, note that WV exempts military retired pay and fully exempts Social Security from state income tax starting in tax year 2026.</p>
+            <div class="callout warning">
+                <p><strong>Do not oversimplify:</strong> A no-income-tax state may have higher property tax, insurance, sales tax, housing costs, or healthcare access challenges. Relocation is a total-cost and quality-of-life decision.</p>
+            </div>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 9</span>
+                <h3>Discussion: MSG Rivera's Relocation Decision</h3>
+            </div>
+            <p><strong>Go deeper:</strong> Make this a decision audit. Ask what MSG Rivera must verify before moving. Is military retired pay already exempt where he lives? Would TSP withdrawals be taxed? What happens to property taxes, homeowners insurance, VA facility access, spouse employment, family support, and long-term care options?</p>
+            <div class="board">
+                Board prompt: "Before moving for taxes, compare: income tax, TSP taxation, property tax, insurance, healthcare access, spouse work, family support, and housing cost."
+            </div>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 10</span>
+                <h3>Debt in Retirement: Fixed Income Changes the Risk</h3>
+            </div>
+            <p><strong>Go deeper:</strong> Debt is a systems issue because a monthly payment can force a taxable withdrawal. A credit card balance is not just a balance; it can create a chain reaction: payment pressure, traditional withdrawal, higher AGI, higher taxable Social Security, possible Medicare premium effects later, and less flexibility during inflation.</p>
+            <div class="micro-grid">
+                <div class="mini">
+                    <h4>Explain APR plainly</h4>
+                    <p>"A 22% credit card rate is like a negative investment return every year until it is paid."</p>
+                </div>
+                <div class="mini">
+                    <h4>Use caution</h4>
+                    <p>Do not tell a student to liquidate retirement accounts to pay debt. Teach tradeoffs and referral points.</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 11</span>
+                <h3>Managing RMDs: Required Does Not Mean Random</h3>
+            </div>
+            <p><strong>Go deeper:</strong> RMDs force taxable distributions from tax-deferred accounts. Under current IRS guidance, RMDs generally begin at age 73 for current retirees, and age 75 applies to later cohorts such as those born in 1960 or later. Missed amounts may trigger a 25% excise tax, reduced to 10% if corrected in time. The first RMD can be delayed until April 1 of the following year, but doing so can create two taxable RMDs in one year.</p>
+            <div class="callout gold">
+                <p><strong>Teaching line:</strong> "RMD planning is not about avoiding the rule. It is about avoiding surprise income in the wrong year."</p>
+            </div>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 12</span>
+                <h3>Inflation &amp; Buying Power: COLA Is a Hidden Asset</h3>
+            </div>
+            <p><strong>Go deeper:</strong> Military retired pay, VA disability compensation, and Social Security have annual COLA adjustments. That makes them more valuable than a flat payment of the same starting amount. Private pensions, fixed annuities, and cash savings may not keep up. Connect this to buying power, not abstract economics.</p>
+            <div class="board">
+                Board prompt: "Which of your income sources gets a COLA? Which ones stay flat?"
+            </div>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 13</span>
+                <h3>Key Takeaways: Repeat the Five-Question Control Panel</h3>
+            </div>
+            <p><strong>Go deeper:</strong> Instead of ending with a list, end with a diagnostic routine students can reuse:</p>
+            <ol>
+                <li>Who sends this money?</li>
+                <li>Will a tax form report it?</li>
+                <li>Does it raise AGI, combined income, or Medicare MAGI?</li>
+                <li>Does the state treat it differently?</li>
+                <li>Can the timing or source be controlled before year-end?</li>
+            </ol>
+        </article>
+
+        <article class="step">
+            <div class="step-header">
+                <span class="badge">Slide 14</span>
+                <h3>Module Complete: Bridge to Legacy Planning</h3>
+            </div>
+            <p><strong>Go deeper:</strong> Preview Module 5 by connecting income decisions to spouse and survivor outcomes. A retirement income plan is not complete if only one person in the household understands where the money comes from, which payments continue, and which accounts require action.</p>
+            <div class="callout green">
+                <p><strong>Exit prompt:</strong> "Before next class, identify one account, payment, or document that someone else in your household should know how to find."</p>
+            </div>
+        </article>
+    </section>
+
+    <section class="page-break">
+        <h2>Instructor Reference: High-Accuracy Teaching Points</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Use This Classroom Language</th>
+                    <th>Avoid Saying</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>VA disability</td>
+                    <td>VA disability compensation is a tax-free monthly payment and is excluded from federal gross income.</td>
+                    <td>"It never counts for anything." It may matter for some non-tax programs or lender calculations.</td>
+                </tr>
+                <tr>
+                    <td>CRDP vs. CRSC</td>
+                    <td>CRDP is taxed like retired pay; CRSC is non-taxable combat-related compensation that requires application.</td>
+                    <td>"CRSC is always better." The dollar amount and eligibility matter.</td>
+                </tr>
+                <tr>
+                    <td>Social Security taxation</td>
+                    <td>Up to 85% of benefits may be taxable depending on combined income.</td>
+                    <td>"Social Security is tax-free" or "all Social Security is taxed."</td>
+                </tr>
+                <tr>
+                    <td>RMDs</td>
+                    <td>RMDs generally begin at 73 for current retirees, with age 75 for later cohorts; missed amounts can trigger a 25% excise tax, reduced to 10% if timely corrected.</td>
+                    <td>"RMDs start at 72" or "the penalty is always 50%."</td>
+                </tr>
+                <tr>
+                    <td>Medicare IRMAA</td>
+                    <td>Higher income can increase Part B and Part D premiums; Medicare generally uses MAGI from the IRS return two years prior.</td>
+                    <td>"Only current-year income matters."</td>
+                </tr>
+                <tr>
+                    <td>State tax</td>
+                    <td>State rules change. Verify current state and income-type treatment before a relocation decision.</td>
+                    <td>"Move to a no-tax state and you are done."</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Mini Case Study for Extra Depth</h2>
+        <div class="callout">
+            <p><strong>Scenario:</strong> A retired veteran receives military retired pay, VA disability compensation, and Social Security. He wants to withdraw $18,000 from a traditional TSP account to pay off a vehicle and credit card balance.</p>
+            <p><strong>Ask the room:</strong> What systems might react? Good answers include IRS AGI, taxable Social Security, possible Medicare IRMAA two years later, state tax treatment of the TSP withdrawal, debt-to-income relief after payoff, and the loss of future tax-deferred growth.</p>
+            <p><strong>Instructor close:</strong> The withdrawal might be reasonable or unreasonable depending on rates, tax bracket, cash reserve, and household goals. The educational point is that it is not just an $18,000 decision; it is a systems decision.</p>
+        </div>
+
+        <h2>Source Notes for Instructor Confidence</h2>
+        <div class="source-list">
+            <ul>
+                <li>IRS, Retirement plan and IRA required minimum distributions FAQs: https://www.irs.gov/retirement-plans/retirement-plan-and-ira-required-minimum-distributions-faqs</li>
+                <li>IRS, Retirement topics - Required minimum distributions: https://www.irs.gov/rmd</li>
+                <li>IRS, Veterans tax information and services: https://www.irs.gov/individuals/information-for-veterans</li>
+                <li>SSA, Must I pay taxes on Social Security benefits?: https://www.ssa.gov/faqs/en/questions/KA-02471.html</li>
+                <li>Medicare, 2026 Medicare costs: https://www.medicare.gov/publications/11579-medicare-costs.pdf</li>
+                <li>DFAS, CRDP/CRSC payment guidance: https://www.dfas.mil/RetiredMilitary/disability/payment/</li>
+                <li>Soldier for Life/MyArmyBenefits, 2026 state tax update: https://soldierforlife.army.mil/Army-Retirement/Retirement-Planning/Change-of-Mission-Newsletter/2026-01-Check-State-Taxes-Before-Moving</li>
+            </ul>
+        </div>
+        <div class="footer-note">This resource supports classroom instruction only. It is not tax, investment, legal, or benefits advice for an individual student.</div>
+    </section>
+</body>
+</html>
