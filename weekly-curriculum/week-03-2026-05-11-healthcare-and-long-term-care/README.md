@@ -1,4 +1,4 @@
-# Week 3 - Monday, May 4, 2026
+# Week 3 - Healthcare and Long-Term Care
 
 ## Focus
 

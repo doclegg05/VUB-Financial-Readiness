@@ -1,14 +1,14 @@
-# Week 5 - Monday, May 25, 2026
+# Week 5 - No-Class / Flex Week
 
-No class in observance of Memorial Day.
+No new lesson material is scheduled for this week.
 
 ## Instructor Note
 
-There is no new material this week. Module 5 is folded into the May 18 class, and the next meeting on Monday, June 1, 2026 is reserved for review and the post-test.
+There is no new material this week. Module 5 is folded into Week 4, and the next class meeting is reserved for review and the post-test.
 
 ## Optional Student Reminder
 
-Before June 1, review:
+Before the review/post-test meeting, review:
 
 - `weekly-curriculum/week-06-2026-06-01-review-and-post-test/study-guide.md`
 - `weekly-curriculum/week-06-2026-06-01-review-and-post-test/flashcards.html`
