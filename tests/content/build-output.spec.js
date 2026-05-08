@@ -61,6 +61,7 @@ test.describe('Built Output', () => {
             path.join('📘 Assessments', 'post-test-answer-key.pdf'),
             path.join('📘 Handouts', 'course-schedule.pdf'),
             path.join('📘 Handouts', 'retirement-income-systems-map.html'),
+            path.join('📘 Teacher Guides', 'module4-step-by-step-explainer.pdf'),
             path.join('📘 Teacher Guides', 'module1-teachers-guide.pdf'),
             'student-upload-instructions.html',
             path.join('shared', 'progress.js'),

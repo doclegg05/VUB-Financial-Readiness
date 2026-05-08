@@ -67,4 +67,10 @@ test.describe('Content Accuracy', () => {
         expect(html).toContain('Medicare');
         expect(html).toContain('IRMAA');
     });
+
+    test('Module 4 links the instructor deep-dive PDF', async ({ page }) => {
+        const html = await page.locator('#module4').innerHTML();
+        expect(html).toContain('module4-step-by-step-explainer.pdf');
+        expect(html).toContain('Instructor Deep-Dive PDF');
+    });
 });

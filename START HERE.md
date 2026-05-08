@@ -48,7 +48,7 @@ Explorer groups these at the top of the folder list.
 | 📘 Assessments | Pre-test and post-test HTML pages |
 | 📘 Handouts | Printable handouts (11 files — schedule, worksheets, reference sheets) |
 | 📘 Study Resources | Flashcards, quiz, podcast, slide deck, study guide, infographic |
-| 📘 Teacher Guides | Teacher's guide PDFs |
+| 📘 Teacher Guides | Teacher's guide PDFs, including the Module 4 step-by-step explainer |
 
 ## Other teaching files (at the top level)
 
