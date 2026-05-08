@@ -2,6 +2,8 @@
 
 This checklist is for deploying the VUB Learning Lab static site to Netlify.
 
+Production URL: https://vubcourse.netlify.app
+
 ## 1. Preflight
 
 - Confirm the working tree contains only intended changes.

@@ -2,6 +2,8 @@
 
 Veterans Upward Bound (VUB) Learning Lab is a static course site for classroom-based instruction. It gives instructors and students a simple launchpad for course pages, handouts, study resources, and financial readiness lessons.
 
+Production site: https://vubcourse.netlify.app
+
 ## Audience
 
 The site is built for VUB students, especially adult learners and military veterans working in a computer lab setting. Copy and navigation should stay direct, readable, and classroom-friendly.
