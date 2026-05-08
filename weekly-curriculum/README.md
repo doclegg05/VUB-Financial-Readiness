@@ -9,7 +9,7 @@ This folder organizes the course into a reusable seven-week teaching sequence. T
 | 1 | Week 1 | Pre-test + Module 1: Retirement Timelines & Preparation |
 | 2 | Week 2 | Module 2: Disability Pay & Compensation |
 | 3 | Week 3 | Module 3: Healthcare & Long-Term Care |
-| 4 | Week 4 | Module 4: Managing Retirement Income |
+| 4 | Week 4 | Module 4: Managing Retirement Income and income-system interactions |
 | 5 | Week 5 | No class - Memorial Day |
 | 6 | Week 6 | Module 5: Legacy Planning |
 | 7 | Week 7 | Review + post-test |

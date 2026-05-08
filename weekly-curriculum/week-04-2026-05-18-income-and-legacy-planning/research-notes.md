@@ -9,6 +9,14 @@ What current federal, state, and consumer-finance evidence should guide Week 4 i
 
 ## Key Findings
 
+### Systems Framing
+
+Week 4 should explain veteran retirement finance as an interaction among payment systems and measurement systems. DFAS, VA, SSA, and plan custodians send money or administer accounts. IRS, Medicare/SSA, state tax agencies, and lenders measure income using different definitions and thresholds. This distinction helps students understand why a household can feel financially stable in cash-flow terms while still creating tax, Medicare premium, or debt-to-income consequences.
+
+The most teachable control point is the traditional retirement-account withdrawal. A traditional TSP or IRA withdrawal generally raises federal adjusted gross income, which can increase the taxable share of Social Security benefits under the combined-income formula. Medicare uses modified adjusted gross income from the IRS tax return two years prior to determine whether Part B and Part D income-related monthly adjustment amounts apply. This means a one-time withdrawal or Roth conversion can have a delayed premium consequence.
+
+This systems frame also clarifies the contrast between tax-free sources and taxable withdrawals. VA disability compensation and CRSC are tax-free, while CRDP is taxed in the same manner as retired pay. That difference is not just a label: it affects what appears on the federal return, what raises AGI, and what students should discuss with a tax professional before year-end.
+
 ### Federal Tax Treatment
 
 Military retired pay based on age or length of service is taxable as pension income at the federal level. VA-administered veterans' benefits, including disability compensation and pension payments for disabilities, are generally not included in taxable income. This supports the course's core "taxable vs. tax-free income stack" framing.
@@ -41,6 +49,8 @@ Do not assume a move from North Carolina to Texas saves state tax on MSG Rivera'
 
 Teach RMD penalties as "25%, or 10% if corrected within two years" rather than simply "25%." The harsher statement is memorable but incomplete.
 
+Add a "control calendar" exercise before tax time: what must happen before December 31, what can be delayed, which forms will arrive in January, and which decisions could affect Medicare premiums two years later.
+
 For WV students, explicitly say: WV does not tax military retired pay, and Social Security is fully exempt from WV income tax starting in tax year 2026. Then pivot to the broader relocation lesson: total cost of living matters more than income tax alone.
 
 ## References
@@ -51,7 +61,15 @@ Internal Revenue Service. (2026). Retirement topics - Required minimum distribut
 
 Internal Revenue Service. (2025). Publication 525, Taxable and Nontaxable Income. https://www.irs.gov/publications/p525
 
+Internal Revenue Service. (2025). Regular & disability benefits. https://www.irs.gov/faqs/social-security-income/regular-disability-benefits
+
+Medicare. (2026). 2026 Medicare costs. https://www.medicare.gov/publications/11579-medicare-costs.pdf
+
 Social Security Administration. (2026). Retirement Benefits (Publication No. 05-10035). https://www.ssa.gov/pubs/EN-05-10035.pdf
+
+Defense Finance and Accounting Service. (n.d.). Combat-Related Special Compensation (CRSC) and Concurrent Retirement Disability Pay (CRDP). https://www.dfas.mil/RetiredMilitary/disability/payment/
+
+U.S. Department of Veterans Affairs. (2026). VA disability compensation. https://www.va.gov/disability/
 
 U.S. Congress. (2022). H.R. 2617, Consolidated Appropriations Act, 2023, SECURE 2.0 summary. https://www.congress.gov/bill/117th-congress/house-bill/2617
 
