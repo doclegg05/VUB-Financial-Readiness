@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page Not Found | VUB Learning Lab</title>
+    <style>
+        :root {
+            --navy: #1e3a8a;
+            --navy-dark: #172554;
+            --gold: #fbbf24;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --muted: #475569;
+            --border: #dbeafe;
+            --shadow: 0 24px 60px rgba(30, 58, 138, 0.16);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            background:
+                linear-gradient(135deg, rgba(30, 58, 138, 0.10), rgba(251, 191, 36, 0.16)),
+                var(--background);
+            display: grid;
+            place-items: center;
+            padding: 32px 18px;
+        }
+
+        main {
+            width: min(760px, 100%);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 36px;
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: var(--navy);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0 0 14px;
+            color: var(--navy-dark);
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            line-height: 1.05;
+        }
+
+        p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.08rem;
+            line-height: 1.65;
+        }
+
+        .note {
+            margin-top: 18px;
+            padding: 16px 18px;
+            border-left: 5px solid var(--gold);
+            background: #fffbeb;
+            color: #3f2f08;
+        }
+
+        nav {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            min-height: 58px;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--navy);
+            background: #f8fbff;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        a:hover,
+        a:focus {
+            color: #111827;
+            border-color: var(--gold);
+            outline: 3px solid rgba(251, 191, 36, 0.35);
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 560px) {
+            main {
+                padding: 28px 20px;
+            }
+
+            nav {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <p class="eyebrow">VUB Learning Lab</p>
+        <h1>That page is not in this course packet.</h1>
+        <p>The link may have moved, or the page name may have been typed incorrectly. Use one of the classroom links below to get back on track.</p>
+        <p class="note">Instructor note: if this came from a handout or slide, update the link before the next lab session.</p>
+        <nav aria-label="Course links">
+            <a href="/">Learning Lab Dashboard</a>
+            <a href="/financial-readiness.html">Financial Readiness</a>
+            <a href="/intermediate-computer-skills.html">Intermediate Computer Skills</a>
+            <a href="/syllabus.html">Syllabus</a>
+        </nav>
+    </main>
+</body>
+</html>

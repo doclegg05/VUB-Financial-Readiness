@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Windows Tips &amp; Productivity Workshop | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D; --primary-light: #2C4A7C;
+      --windows-blue: #0078D4; --windows-blue-dark: #005A9E;
+      --accent: #C9A227; --accent-light: #E6C65C;
+      --light: #FFFFFF; --off-white: #F5F7FA; --gray: #5A6A7A;
+      --success: #28A745; --warning: #FFC107; --danger: #DC3545; --info: #17A2B8;
+    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); color: #333; line-height: 1.6; padding: 0.5in; max-width: 8.5in; margin: 0 auto; }
+    .header { background: linear-gradient(135deg, #0078D4 0%, #005A9E 100%); color: var(--light); padding: 1.25rem 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-subtitle { font-size: 0.95rem; opacity: 0.9; margin-top: 0.15rem; }
+    .header-meta { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; }
+    .header-badge { background: var(--accent); color: var(--windows-blue); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .header-right { text-align: right; flex-shrink: 0; }
+    .header-time { font-size: 0.8rem; opacity: 0.85; margin-top: 0.5rem; }
+    .name-field { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-size: 1rem; }
+    .name-field label { font-weight: 600; color: var(--windows-blue); }
+    .name-field .line { flex: 1; border-bottom: 2px dashed var(--gray); max-width: 300px; }
+    .goal-box { background: linear-gradient(135deg, var(--off-white) 0%, #EDF2F7 100%); border: 2px solid var(--accent); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem; }
+    .goal-box h2 { color: var(--windows-blue); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .goal-box .build-list { list-style: none; margin-top: 0.75rem; }
+    .goal-box .build-list li { font-size: 0.95rem; padding: 0.25rem 0; color: #333; }
+    .goal-box .build-list li::before { content: "\2713  "; color: var(--success); font-weight: 700; }
+    .part-header { background: var(--windows-blue); color: var(--light); padding: 0.75rem 1rem; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+    .part-header h2 { font-size: 1.15rem; margin: 0; }
+    .part-timing { background: var(--accent); color: var(--windows-blue); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
+    .part-type { background: rgba(255,255,255,0.2); color: var(--light); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.65rem; font-weight: 600; margin-left: 0.5rem; }
+    .part-content { border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 8px 8px; padding: 1.25rem; margin-bottom: 0.5rem; }
+    .section { margin-bottom: 1.25rem; }
+    .section-title { background: var(--off-white); color: var(--windows-blue); padding: 0.5rem 1rem; border-left: 4px solid var(--accent); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .checklist { list-style: none; }
+    .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; margin-bottom: 0.5rem; background: var(--off-white); border-radius: 8px; font-size: 0.95rem; }
+    .checkbox { width: 22px; height: 22px; border: 2px solid var(--windows-blue); border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--windows-blue); }
+    .checklist-text .detail { display: block; font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem; }
+    .key { display: inline-block; background: var(--off-white); border: 2px solid #ccc; border-bottom: 3px solid #aaa; border-radius: 4px; padding: 0.1rem 0.4rem; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.85rem; font-weight: 600; color: var(--primary); min-width: 1.5rem; text-align: center; }
+    .tip-box { background: #FFF8E1; border-left: 4px solid var(--accent); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .tip-box strong { color: #856404; }
+    .warning-box { background: #FFF3F3; border-left: 4px solid var(--danger); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .warning-box strong { color: var(--danger); }
+    .table-preview { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 0.75rem 0; }
+    .table-preview th { background: var(--windows-blue); color: var(--light); padding: 0.5rem; text-align: left; font-weight: 600; }
+    .table-preview td { padding: 0.5rem; border-bottom: 1px solid #E2E8F0; }
+    .table-preview tr:nth-child(even) { background: var(--off-white); }
+    .checkpoint-box { background: linear-gradient(135deg, rgba(0,120,212,0.1) 0%, rgba(0,120,212,0.04) 100%); border: 2px solid var(--windows-blue); border-radius: 10px; padding: 1rem; margin: 1.25rem 0; }
+    .checkpoint-box h4 { color: var(--windows-blue); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .checkpoint-box .check-items { list-style: none; margin: 0; padding: 0; }
+    .checkpoint-box .check-items li { font-size: 0.9rem; color: #333; padding: 0.2rem 0; }
+    .fill-line { display: flex; align-items: center; gap: 0.5rem; margin: 0.75rem 0; font-size: 0.9rem; }
+    .fill-line .label { color: var(--gray); white-space: nowrap; }
+    .fill-line .blank { flex: 1; border-bottom: 1px dashed var(--gray); min-height: 1.5rem; }
+    .success-box { background: rgba(40,167,69,0.1); border: 2px solid var(--success); border-radius: 10px; padding: 1.25rem; margin-top: 2rem; }
+    .success-box h3 { color: var(--success); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .success-box p { font-size: 0.9rem; color: var(--gray); margin-bottom: 0.5rem; }
+    .success-box .skills-earned { list-style: none; margin-top: 0.5rem; }
+    .success-box .skills-earned li { font-size: 0.9rem; padding: 0.2rem 0; }
+    .success-box .skills-earned li::before { content: "\2B50  "; }
+    .footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid var(--off-white); text-align: center; font-size: 0.8rem; color: var(--gray); }
+    @media print {
+      body { padding: 0.25in; }
+      .header, .part-header, .checkbox, .checkpoint-box, .table-preview th, .key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { page-break-before: auto; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div>
+      <span class="header-badge">WORKSHOP</span>
+      <h1 style="margin-top: 0.35rem;">Windows Tips &amp; Productivity</h1>
+      <div class="header-subtitle">Keyboard Shortcuts, Window Management &amp; Personalization</div>
+      <div class="header-meta">Week 2 | VUB Intermediate Computer Skills | February 16, 2026</div>
+    </div>
+    <div class="header-right">
+      <div class="header-time">~60 minutes</div>
+      <div class="header-time">4 parts</div>
+    </div>
+  </header>
+
+  <div class="name-field">
+    <label>Name:</label><div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label><div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <div class="goal-box">
+    <h2>Today You Will</h2>
+    <ul class="build-list">
+      <li>Master keyboard shortcuts that save time every day</li>
+      <li>Snap windows side-by-side for multitasking</li>
+      <li>Take and save screenshots</li>
+      <li>Customize your computer for easier use</li>
+    </ul>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="part-header">
+    <h2>Part 1: Keyboard Shortcuts Boot Camp</h2>
+    <div><span class="part-timing">~15 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Open Notepad</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Open Notepad using a keyboard shortcut</strong>
+        <span class="detail">Press the <span class="key">Windows</span> key on your keyboard (between Ctrl and Alt). Type "notepad" (just start typing!). Press <span class="key">Enter</span> &mdash; Notepad opens!</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Type a Practice Paragraph</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Type: &ldquo;I am learning keyboard shortcuts at VUB today.&rdquo;</strong>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 &mdash; Try Copy and Paste</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Copy and paste using keyboard shortcuts</strong>
+        <span class="detail">Press <span class="key">Ctrl</span> + <span class="key">A</span> to select ALL text. Press <span class="key">Ctrl</span> + <span class="key">C</span> to COPY. Press <span class="key">Enter</span> twice to make blank lines. Press <span class="key">Ctrl</span> + <span class="key">V</span> to PASTE.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 4 &mdash; Try Undo and Redo</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Undo and redo your changes</strong>
+        <span class="detail">Press <span class="key">Ctrl</span> + <span class="key">Z</span> to UNDO (paste disappears!). Press <span class="key">Ctrl</span> + <span class="key">Z</span> again (blank lines disappear!). Press <span class="key">Ctrl</span> + <span class="key">Y</span> to REDO (brings it back!).</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 5 &mdash; Try Cut</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Cut and paste text</strong>
+        <span class="detail">Select all text with <span class="key">Ctrl</span> + <span class="key">A</span>. Press <span class="key">Ctrl</span> + <span class="key">X</span> to CUT (text disappears &mdash; it is on your clipboard!). Press <span class="key">Ctrl</span> + <span class="key">V</span> to paste it back.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 6 &mdash; Save Your File</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Save with a keyboard shortcut</strong>
+        <span class="detail">Press <span class="key">Ctrl</span> + <span class="key">S</span> to SAVE. Save to Desktop as &ldquo;Shortcuts Practice&rdquo;.</span>
+      </div></li></ul>
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> Think of C-V-X as: <strong>C</strong> = Copy, <strong>V</strong> = paste down (like a V arrow), <strong>X</strong> = cut (like scissors X).
+    </div>
+    <h3 class="section-title">Shortcut Reference</h3>
+    <table class="table-preview">
+      <thead><tr><th>Shortcut</th><th>What It Does</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">Ctrl</span>+<span class="key">C</span></td><td>Copy</td></tr>
+        <tr><td><span class="key">Ctrl</span>+<span class="key">V</span></td><td>Paste</td></tr>
+        <tr><td><span class="key">Ctrl</span>+<span class="key">X</span></td><td>Cut</td></tr>
+        <tr><td><span class="key">Ctrl</span>+<span class="key">Z</span></td><td>Undo</td></tr>
+        <tr><td><span class="key">Ctrl</span>+<span class="key">Y</span></td><td>Redo</td></tr>
+        <tr><td><span class="key">Ctrl</span>+<span class="key">A</span></td><td>Select All</td></tr>
+        <tr><td><span class="key">Ctrl</span>+<span class="key">S</span></td><td>Save</td></tr>
+        <tr><td><span class="key">Ctrl</span>+<span class="key">P</span></td><td>Print</td></tr>
+        <tr><td><span class="key">Alt</span>+<span class="key">Tab</span></td><td>Switch windows</td></tr>
+        <tr><td><span class="key">Win</span>+<span class="key">L</span></td><td>Lock screen</td></tr>
+      </tbody>
+    </table>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items"><li>&#9744; I can copy, paste, undo, redo, and save using keyboard shortcuts</li></ul>
+    </div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="part-header">
+    <h2>Part 2: Window Management &amp; Multitasking</h2>
+    <div><span class="part-timing">~15 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Open Three Programs</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Open 3 programs at once</strong>
+        <span class="detail">Notepad (already open). File Explorer: press <span class="key">Windows</span> + <span class="key">E</span>. Your web browser: click its icon on the taskbar.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Snap Windows Side by Side</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Snap two windows side by side</strong>
+        <span class="detail">Click on Notepad to make it active. Press <span class="key">Windows</span> + <span class="key">&larr;</span> &mdash; it snaps to the left half! Click on File Explorer. Press <span class="key">Windows</span> + <span class="key">&rarr;</span> &mdash; it snaps to the right half!</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 &mdash; Switch Between Windows</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Switch windows with Alt+Tab</strong>
+        <span class="detail">Press <span class="key">Alt</span> + <span class="key">Tab</span> &mdash; a preview shows all open windows. Keep holding <span class="key">Alt</span> and press <span class="key">Tab</span> again to cycle through. Release to switch to that window.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 4 &mdash; Maximize and Minimize</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Maximize and minimize with keyboard</strong>
+        <span class="detail">Press <span class="key">Windows</span> + <span class="key">&uarr;</span> to MAXIMIZE a window. Press <span class="key">Windows</span> + <span class="key">&darr;</span> to RESTORE it (or minimize if already restored).</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 5 &mdash; Pin a Program to the Taskbar</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Pin a program to your taskbar</strong>
+        <span class="detail">Right-click the Notepad icon on the taskbar. Click &ldquo;Pin to taskbar.&rdquo; Now it stays there even after you close Notepad!</span>
+      </div></li></ul>
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> Snapping windows is great for following instructions on one side while working on the other side &mdash; like following this workshop!
+    </div>
+    <div class="fill-line">
+      <span class="label">My favorite window shortcut so far:</span><span class="blank"></span>
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; I can snap windows side-by-side</li>
+        <li>&#9744; I can switch between programs with Alt+Tab</li>
+        <li>&#9744; I pinned a program to my taskbar</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="part-header">
+    <h2>Part 3: Screenshots &amp; Snipping Tool</h2>
+    <div><span class="part-timing">~15 min</span><span class="part-type">INDEPENDENT</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Full Screen Screenshot</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Take a full-screen screenshot</strong>
+        <span class="detail">Press <span class="key">Print Screen</span> key (might say PrtScn on your keyboard). Open Paint (<span class="key">Windows</span> key, type &ldquo;paint&rdquo;). Press <span class="key">Ctrl</span> + <span class="key">V</span> to paste your screenshot there.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Active Window Screenshot</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Capture just one window</strong>
+        <span class="detail">Click on a window to make it active. Press <span class="key">Alt</span> + <span class="key">Print Screen</span> (captures only that window!). Open Paint and press <span class="key">Ctrl</span> + <span class="key">V</span>.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 &mdash; Snip &amp; Sketch (Best Method!)</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Use Snip &amp; Sketch to capture a selection</strong>
+        <span class="detail">Press <span class="key">Windows</span> + <span class="key">Shift</span> + <span class="key">S</span>. Your screen dims &mdash; draw a rectangle around what you want. A notification appears &mdash; click it to open Snip &amp; Sketch. Click the save icon to save as an image.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 4 &mdash; Save Your Screenshot</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Save your screenshot as a file</strong>
+        <span class="detail">In Snip &amp; Sketch or Paint, press <span class="key">Ctrl</span> + <span class="key">S</span>. Save to your Desktop as &ldquo;My Screenshot.&rdquo;</span>
+      </div></li></ul>
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> <span class="key">Windows</span>+<span class="key">Shift</span>+<span class="key">S</span> is the MOST USEFUL screenshot shortcut. It works everywhere and lets you select exactly what you want.
+    </div>
+    <div class="warning-box">
+      <strong>Caution:</strong> Screenshots can capture sensitive information (passwords, personal data). Be careful what is on screen before sharing screenshots.
+    </div>
+    <div class="fill-line">
+      <span class="label">I saved my screenshot to:</span><span class="blank"></span>
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; I can take a screenshot using at least two different methods</li>
+        <li>&#9744; I saved a screenshot as a file</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="part-header">
+    <h2>Part 4: Personalize &amp; Accessibility</h2>
+    <div><span class="part-timing">~15 min</span><span class="part-type">INDEPENDENT</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Make Text Larger</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Increase display scale</strong>
+        <span class="detail">Right-click on the Desktop &rarr; click &ldquo;Display settings.&rdquo; Find &ldquo;Scale and layout&rdquo; section. Change &ldquo;Scale&rdquo; from 100% to 125%. Everything gets bigger and easier to read!</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Try the Magnifier</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Use the Magnifier tool</strong>
+        <span class="detail">Press <span class="key">Windows</span> + <span class="key">+</span> to turn on Magnifier. Move your mouse around &mdash; the screen zooms in! Press <span class="key">Windows</span> + <span class="key">+</span> again to zoom in more. Press <span class="key">Windows</span> + <span class="key">-</span> to zoom out. Press <span class="key">Windows</span> + <span class="key">Esc</span> to turn off Magnifier.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 &mdash; Change Your Desktop Wallpaper</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Personalize your desktop background</strong>
+        <span class="detail">Right-click on the Desktop &rarr; &ldquo;Personalize.&rdquo; Click &ldquo;Background.&rdquo; Choose a picture or solid color you like.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 4 &mdash; Adjust Mouse Pointer Size (Optional)</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Make the mouse pointer larger</strong>
+        <span class="detail">Open Settings (<span class="key">Windows</span> + <span class="key">I</span>). Go to &ldquo;Accessibility&rdquo; &rarr; &ldquo;Mouse pointer and touch.&rdquo; Drag the slider to make the pointer larger. Try different pointer styles.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 5 &mdash; Try Night Light (Optional)</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Turn on Night Light for easier viewing</strong>
+        <span class="detail">Open Settings &rarr; System &rarr; Display. Find &ldquo;Night light&rdquo; and turn it on. Makes the screen warmer/less blue &mdash; easier on eyes at night.</span>
+      </div></li></ul>
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> You can always change these settings back! Nothing here is permanent. Experiment and find what is comfortable for you.
+    </div>
+    <div class="fill-line">
+      <span class="label">Two settings I changed: 1.</span><span class="blank"></span>
+    </div>
+    <div class="fill-line">
+      <span class="label">2.</span><span class="blank"></span>
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items"><li>&#9744; I changed at least 2 settings to make my computer easier to use</li></ul>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-box">
+    <h3>Workshop Complete!</h3>
+    <p>Congratulations! You have mastered Windows productivity skills that will save you time every day!</p>
+    <ul class="skills-earned">
+      <li>Use keyboard shortcuts for copy, paste, undo, and more</li>
+      <li>Snap windows side-by-side for multitasking</li>
+      <li>Take and save screenshots</li>
+      <li>Customize your computer display and accessibility settings</li>
+    </ul>
+    <p style="margin-top: 0.75rem; font-weight: 600; color: var(--windows-blue);">
+      Practice these shortcuts daily &mdash; they will become second nature!
+    </p>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound &mdash; West Virginia</strong> | Week 2: Windows Tips &amp; Productivity</p>
+    <p style="margin-top: 0.25rem;">Keep this handout! Use it as a reference when working on your computer at home.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VA Portals Quick Reference | VUB Intermediate Computer Skills</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--va-blue) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Portal Cards */
+    .portal-card {
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      border-left: 5px solid var(--va-blue);
+    }
+
+    .portal-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .portal-icon {
+      font-size: 2rem;
+    }
+
+    .portal-info h2 {
+      color: var(--va-blue);
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .portal-url {
+      font-family: 'Consolas', monospace;
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      display: inline-block;
+      margin-top: 0.25rem;
+    }
+
+    .portal-description {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.75rem;
+    }
+
+    .portal-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      background: white;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+    }
+
+    .feature-item::before {
+      content: "✓";
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    /* Comparison Table */
+    .comparison-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .comparison-table thead {
+      background: var(--va-blue);
+      color: var(--light);
+    }
+
+    .comparison-table th {
+      padding: 0.75rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .comparison-table tbody tr:nth-child(even) {
+      background: var(--off-white);
+    }
+
+    .check-mark {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .x-mark {
+      color: var(--va-red);
+    }
+
+    /* Quick Tips */
+    .tips-section {
+      background: rgba(201, 162, 39, 0.15);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .tips-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .tips-list {
+      list-style: none;
+    }
+
+    .tips-list li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .tips-list li::before {
+      content: "💡";
+      position: absolute;
+      left: 0;
+    }
+
+    /* Warning Box */
+    .warning-box {
+      background: rgba(196, 38, 46, 0.1);
+      border: 2px solid var(--va-red);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .warning-box h3 {
+      color: var(--va-red);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .warning-box ul {
+      list-style: none;
+      font-size: 0.9rem;
+    }
+
+    .warning-box li {
+      padding: 0.25rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .warning-box li::before {
+      content: "⚠️";
+      position: absolute;
+      left: 0;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .comparison-table thead {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .portal-features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>🏛️ VA Portals Quick Reference</h1>
+      <p style="font-size: 0.9rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 1</p>
+    </div>
+    <span class="header-badge">HANDOUT</span>
+  </header>
+
+  <!-- VA.gov Portal Card -->
+  <div class="portal-card">
+    <div class="portal-header">
+      <div class="portal-icon">🏛️</div>
+      <div class="portal-info">
+        <h2>VA.gov</h2>
+        <span class="portal-url">va.gov</span>
+      </div>
+    </div>
+    <p class="portal-description">
+      The main VA website — your one-stop shop for all VA services. This is the starting point for most veteran services online.
+    </p>
+    <div class="portal-features">
+      <div class="feature-item">Check benefits status</div>
+      <div class="feature-item">Apply for benefits</div>
+      <div class="feature-item">View claim status</div>
+      <div class="feature-item">Download VA letters</div>
+      <div class="feature-item">Update contact info</div>
+      <div class="feature-item">Find VA locations</div>
+    </div>
+  </div>
+
+  <!-- MyHealtheVet Portal Card -->
+  <div class="portal-card" style="border-left-color: var(--success);">
+    <div class="portal-header">
+      <div class="portal-icon">🏥</div>
+      <div class="portal-info">
+        <h2>MyHealtheVet</h2>
+        <span class="portal-url" style="background: var(--success);">myhealth.va.gov</span>
+      </div>
+    </div>
+    <p class="portal-description">
+      Your personal health portal for managing VA health care. Message doctors, refill prescriptions, and view your medical records.
+    </p>
+    <div class="portal-features">
+      <div class="feature-item">Secure message doctors</div>
+      <div class="feature-item">Refill prescriptions</div>
+      <div class="feature-item">View lab results</div>
+      <div class="feature-item">Schedule appointments</div>
+      <div class="feature-item">Download health records</div>
+      <div class="feature-item">Track health data</div>
+    </div>
+  </div>
+
+  <!-- eBenefits Portal Card -->
+  <div class="portal-card" style="border-left-color: var(--accent);">
+    <div class="portal-header">
+      <div class="portal-icon">📋</div>
+      <div class="portal-info">
+        <h2>eBenefits</h2>
+        <span class="portal-url" style="background: var(--accent); color: var(--primary);">ebenefits.va.gov</span>
+      </div>
+    </div>
+    <p class="portal-description">
+      Benefits management portal (being phased into VA.gov). Some features are still only available here. Check here for documents and forms.
+    </p>
+    <div class="portal-features">
+      <div class="feature-item">Certificate of eligibility</div>
+      <div class="feature-item">Dependent info</div>
+      <div class="feature-item">Service records</div>
+      <div class="feature-item">VA payment history</div>
+    </div>
+  </div>
+
+  <!-- Comparison Table -->
+  <div class="comparison-section">
+    <h2 class="section-title">Which Portal Should I Use?</h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>I Want To...</th>
+          <th>VA.gov</th>
+          <th>MyHealtheVet</th>
+          <th>eBenefits</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Message my doctor</td>
+          <td class="x-mark">—</td>
+          <td class="check-mark">✓ Best</td>
+          <td class="x-mark">—</td>
+        </tr>
+        <tr>
+          <td>Refill prescriptions</td>
+          <td class="x-mark">—</td>
+          <td class="check-mark">✓ Best</td>
+          <td class="x-mark">—</td>
+        </tr>
+        <tr>
+          <td>Check claim status</td>
+          <td class="check-mark">✓ Best</td>
+          <td class="x-mark">—</td>
+          <td class="check-mark">✓</td>
+        </tr>
+        <tr>
+          <td>Download VA letters</td>
+          <td class="check-mark">✓ Best</td>
+          <td class="x-mark">—</td>
+          <td class="check-mark">✓</td>
+        </tr>
+        <tr>
+          <td>View medical records</td>
+          <td class="x-mark">—</td>
+          <td class="check-mark">✓ Best</td>
+          <td class="x-mark">—</td>
+        </tr>
+        <tr>
+          <td>Update direct deposit</td>
+          <td class="check-mark">✓ Best</td>
+          <td class="x-mark">—</td>
+          <td class="check-mark">✓</td>
+        </tr>
+        <tr>
+          <td>Find a VA facility</td>
+          <td class="check-mark">✓ Best</td>
+          <td class="x-mark">—</td>
+          <td class="x-mark">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Tips Section -->
+  <div class="tips-section">
+    <h3>💡 Quick Tips</h3>
+    <ul class="tips-list">
+      <li><strong>Bookmark these sites!</strong> Save VA.gov and MyHealtheVet to your browser favorites.</li>
+      <li><strong>One login works for all.</strong> Your VA.gov (ID.me) login works on all three portals.</li>
+      <li><strong>Keep your info updated.</strong> Make sure your phone, email, and address are current in VA.gov.</li>
+      <li><strong>Download the app!</strong> MyHealtheVet has a mobile app for your phone.</li>
+    </ul>
+  </div>
+
+  <!-- Warning Box -->
+  <div class="warning-box">
+    <h3>🛡️ Stay Safe Online</h3>
+    <ul>
+      <li><strong>Always type the URL directly</strong> — don't click links in emails claiming to be from the VA</li>
+      <li><strong>Look for .gov</strong> — Real VA sites end in .gov (not .com or .org)</li>
+      <li><strong>Check for the lock icon</strong> — Make sure you see 🔒 in your browser's address bar</li>
+      <li><strong>Never share your password</strong> — VA employees will NEVER ask for your password</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 1: VA Online Services</p>
+  </footer>
+</body>
+</html>

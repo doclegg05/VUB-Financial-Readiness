@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 7 Syllabus: Introduction to AI Tools | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --ai-purple: #7C3AED;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--ai-purple) 0%, #5B21B6 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.75rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .meta-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .meta-card {
+      background: var(--off-white);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .meta-card h3 {
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .meta-card p {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .section {
+      margin-bottom: 1.5rem;
+    }
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--ai-purple);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .objectives-list {
+      list-style: none;
+      padding: 0;
+    }
+    .objectives-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+    .objectives-list li::before {
+      content: '🎯';
+      flex-shrink: 0;
+    }
+    .timeline {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid #eee;
+    }
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+    .timeline-time {
+      background: var(--off-white);
+      padding: 0.75rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--primary);
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .timeline-content {
+      padding: 0.75rem 1rem;
+    }
+    .timeline-content h4 {
+      color: var(--ai-purple);
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
+    }
+    .timeline-content p {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+    .activity-lecture { background: rgba(27, 54, 93, 0.15); color: var(--primary); }
+    .activity-demo { background: rgba(201, 162, 39, 0.2); color: #8B7500; }
+    .activity-practice { background: rgba(40, 167, 69, 0.15); color: var(--success); }
+    .activity-discussion { background: rgba(23, 162, 184, 0.15); color: #17A2B8; }
+    .activity-warmup { background: rgba(255, 152, 0, 0.15); color: #E65100; }
+    .activity-eval { background: rgba(156, 39, 176, 0.15); color: #7B1FA2; }
+    .activity-apply { background: rgba(0, 150, 136, 0.15); color: #00796B; }
+    .activity-break { background: rgba(158, 158, 158, 0.15); color: #616161; }
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .material-card {
+      background: var(--off-white);
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    .material-card h4 {
+      color: var(--ai-purple);
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .material-card ul {
+      margin-left: 1.25rem;
+      font-size: 0.9rem;
+    }
+    .material-card li {
+      margin-bottom: 0.25rem;
+    }
+    .notes-box {
+      background: rgba(124, 58, 237, 0.1);
+      border: 1px solid var(--ai-purple);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .notes-box h4 {
+      color: var(--ai-purple);
+      margin-bottom: 0.5rem;
+    }
+    .notes-box ul {
+      margin-left: 1.25rem;
+      font-size: 0.9rem;
+    }
+    .notes-box li {
+      margin-bottom: 0.5rem;
+    }
+    .discussion-questions {
+      list-style: decimal;
+      margin-left: 1.25rem;
+    }
+    .discussion-questions li {
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+    .discussion-phase {
+      font-weight: 600;
+      color: var(--ai-purple);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      margin-top: 0.75rem;
+      margin-bottom: 0.25rem;
+    }
+    .discussion-phase:first-child {
+      margin-top: 0;
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>Week 7: Introduction to AI Tools</h1>
+      <p style="font-size: 0.9rem; opacity: 0.9;">Instructor Syllabus</p>
+    </div>
+    <span class="header-badge">SYLLABUS</span>
+  </header>
+
+  <div class="meta-info">
+    <div class="meta-card">
+      <h3>Date</h3>
+      <p>March 23, 2026</p>
+    </div>
+    <div class="meta-card">
+      <h3>Duration</h3>
+      <p>2 Hours (WIPPEA)</p>
+    </div>
+    <div class="meta-card">
+      <h3>Week</h3>
+      <p>7 of 8</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Learning Objectives</h2>
+    <ul class="objectives-list">
+      <li>Explain what artificial intelligence is in simple, practical terms</li>
+      <li>Access ChatGPT and create a free account</li>
+      <li>Navigate the ChatGPT interface confidently</li>
+      <li>Write effective prompts that get helpful responses</li>
+      <li>Apply AI tools to practical tasks: writing, planning, and learning</li>
+      <li>Understand AI limitations and practice safe usage</li>
+      <li>Complete a multi-part hands-on workshop using AI independently</li>
+      <li>Test AI accuracy by fact-checking responses against known information</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">WIPPEA Session Timeline (120 Minutes)</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00 - 0:08</div>
+        <div class="timeline-content">
+          <h4>Warm-Up <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <p>AI Myth vs. Fact — present 4 statements, students guess myth or fact. Discussion: What do you think AI can/can't do? Address fears and excitement.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:08 - 0:15</div>
+        <div class="timeline-content">
+          <h4>Introduction <span class="activity-type activity-lecture">Lecture</span></h4>
+          <p>Learning objectives, today's agenda, preview what they'll accomplish (first conversation, prompt mastery, real tasks, fact-checking).</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:15 - 0:35</div>
+        <div class="timeline-content">
+          <h4>Presentation <span class="activity-type activity-demo">Demo</span></h4>
+          <p>Condensed lecture: What is AI (simple explanation), AI in daily life, how AI assistants work, getting started with ChatGPT (live demo + account setup), interface tour, writing good prompts, weak vs strong examples.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:35 - 0:55</div>
+        <div class="timeline-content">
+          <h4>Practice (Guided) <span class="activity-type activity-practice">Practice</span></h4>
+          <p>AI Tools Workshop Parts 1-2: First conversation (10 min) — send first prompt, observe follow-ups. Prompting Challenge (10 min) — weak vs strong comparison, improve 3 prompts. Distribute workshop handout at 0:35.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:55 - 1:05</div>
+        <div class="timeline-content">
+          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <p>Keep ChatGPT tab open. Assist anyone still setting up accounts.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:05 - 1:45</div>
+        <div class="timeline-content">
+          <h4>Practice (Independent) <span class="activity-type activity-practice">Practice</span></h4>
+          <p>Workshop Parts 3-4: Real-world tasks (20 min) — VA letter, meal plan on $50 budget, learn something new, draft email. Fact or Fiction (15 min) — ask questions you know the answer to, test hallucinations, reflection on trust.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:45 - 1:55</div>
+        <div class="timeline-content">
+          <h4>Evaluation <span class="activity-type activity-eval">Evaluation</span></h4>
+          <p>Share best prompts, discuss surprises and errors. Quick show of hands: "Who found something AI got wrong?" Golden rule discussion.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:55 - 2:00</div>
+        <div class="timeline-content">
+          <h4>Application <span class="activity-type activity-apply">Application</span></h4>
+          <p>Try 3 tasks at home (letter, trip plan, recipe). Always verify important info. Preview Week 8: Mobile Integration & Review.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Materials Needed</h2>
+    <div class="materials-grid">
+      <div class="material-card">
+        <h4>Instructor Materials</h4>
+        <ul>
+          <li>Presentation slides (presentation.html)</li>
+          <li>Projector with internet access</li>
+          <li>ChatGPT account for demo</li>
+          <li>Backup examples if site is slow</li>
+          <li>Print workshop handouts (1 per student)</li>
+        </ul>
+      </div>
+      <div class="material-card">
+        <h4>Student Materials</h4>
+        <ul>
+          <li>AI Tools Workshop (NEW)</li>
+          <li>AI Quick Start Guide</li>
+          <li>Email addresses (from Week 3)</li>
+          <li>Notebook for prompts</li>
+        </ul>
+      </div>
+      <div class="material-card">
+        <h4>Technical Requirements</h4>
+        <ul>
+          <li>Computers with internet access</li>
+          <li>Chrome, Firefox, or Edge browser</li>
+          <li>chat.openai.com accessible</li>
+          <li>Email access for account creation</li>
+        </ul>
+      </div>
+      <div class="material-card">
+        <h4>Backup Plan</h4>
+        <ul>
+          <li>Print screenshots of ChatGPT interface</li>
+          <li>Prepare example conversations</li>
+          <li>Alternative: Claude.ai as backup AI</li>
+          <li>Offline prompt writing exercises</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Instructor Notes</h2>
+    <div class="notes-box">
+      <h4>WIPPEA Pacing & Workshop Logistics</h4>
+      <ul>
+        <li><strong>Distribute the AI Tools Workshop handout at the 0:35 mark</strong> when guided practice begins.</li>
+        <li><strong>Parts 1-2 are instructor-led (guided).</strong> Parts 3-4 are student-driven (independent).</li>
+        <li><strong>Pacing:</strong> Account creation can eat into time. If needed, shorten the presentation and go straight to guided practice.</li>
+      </ul>
+      <h4 style="margin-top: 1rem;">Key Teaching Points</h4>
+      <ul>
+        <li><strong>Address fears early:</strong> Some students may have concerns about AI "taking over" or being dangerous. Acknowledge these concerns and focus on AI as a helpful tool, like a calculator or search engine.</li>
+        <li><strong>Start simple:</strong> Begin with basic prompts before moving to complex ones. "What is the capital of France?" before "Help me write a letter."</li>
+        <li><strong>Emphasize the conversation:</strong> AI works best when you have a back-and-forth. If the first answer isn't right, ask for changes!</li>
+        <li><strong>Watch for frustration:</strong> Account creation can be tricky. Have students help each other and be ready to assist.</li>
+        <li><strong>Real-world relevance:</strong> Use veteran-specific examples (VA correspondence, benefits questions, family communication).</li>
+        <li><strong>Safety is paramount:</strong> Reinforce NEVER sharing personal information. This is crucial for this population.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Common Questions & Answers</h2>
+    <div class="notes-box">
+      <h4>Be Prepared For:</h4>
+      <ul>
+        <li><strong>"Is this spying on me?"</strong> - ChatGPT doesn't know who you are unless you tell it. Don't share personal info and you're safe.</li>
+        <li><strong>"Does it cost money?"</strong> - The basic version is free. Plus version ($20/mo) exists but isn't necessary.</li>
+        <li><strong>"Can it write my emails for me?"</strong> - Yes! That's one of its best uses. Always review before sending.</li>
+        <li><strong>"Will it replace jobs?"</strong> - AI is a tool that helps humans work, like a hammer helps a carpenter. It doesn't replace the person.</li>
+        <li><strong>"How does it know so much?"</strong> - It learned from reading billions of web pages, like someone who read every book in every library.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Discussion Questions</h2>
+    <p class="discussion-phase">Warm-Up</p>
+    <ol class="discussion-questions">
+      <li>What do you think AI can do? What can't it do? Any fears or excitement?</li>
+    </ol>
+    <p class="discussion-phase">After Presentation</p>
+    <ol class="discussion-questions" start="2">
+      <li>How is asking AI a question different from doing a Google search?</li>
+    </ol>
+    <p class="discussion-phase">Evaluation</p>
+    <ol class="discussion-questions" start="3">
+      <li>What was your best prompt? Did you find anything ChatGPT got wrong?</li>
+    </ol>
+    <p class="discussion-phase">Wrap-Up</p>
+    <ol class="discussion-questions" start="4">
+      <li>What's one AI task you'll try at home this week? Why is it important to always verify?</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Assessment Checklist</h2>
+    <div class="notes-box">
+      <h4>By End of Class, Students Should Be Able To:</h4>
+      <ul>
+        <li>&#9744; Log into ChatGPT independently</li>
+        <li>&#9744; Type a simple question and receive a response</li>
+        <li>&#9744; Explain the difference between a weak and strong prompt</li>
+        <li>&#9744; Write a prompt asking for help with a specific task</li>
+        <li>&#9744; List at least 3 things they should NEVER share with AI</li>
+        <li>&#9744; Describe one practical use for AI in their own life</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Next Week Preview</h2>
+    <div class="notes-box" style="background: rgba(40, 167, 69, 0.1); border-color: var(--success);">
+      <h4 style="color: var(--success);">Week 8: Mobile Integration & Course Review</h4>
+      <ul>
+        <li>Connecting phones to computers</li>
+        <li>Mobile apps for Gmail and Google Drive</li>
+        <li>Course review and celebration</li>
+        <li>Post-test assessment</li>
+        <li><strong>Remind students:</strong> Final week! Bring questions and be ready to celebrate!</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 7: Introduction to AI Tools</p>
+  </footer>
+</body>
+</html>

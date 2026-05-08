@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 5 Instructor Guide | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --excel-green: #217346;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--excel-green) 0%, #1a5c38 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+    .header-meta span { display: flex; align-items: center; gap: 0.35rem; }
+    .overview-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .overview-box h2 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+    .objectives-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.5rem;
+    }
+    .objectives-list li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .objectives-list li::before { content: "🎯"; position: absolute; left: 0; }
+    .timeline { margin-bottom: 1.5rem; }
+    .timeline-header {
+      background: var(--excel-green);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px 8px 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .timeline-body {
+      border: 2px solid var(--excel-green);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid var(--off-white);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-time {
+      background: var(--off-white);
+      padding: 0.75rem;
+      font-weight: 600;
+      color: var(--excel-green);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .timeline-content { padding: 0.75rem 1rem; }
+    .timeline-content h4 { color: var(--primary); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .timeline-content p { font-size: 0.85rem; color: var(--gray); margin: 0; }
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+    .activity-lecture { background: rgba(27, 54, 93, 0.15); color: var(--primary); }
+    .activity-demo { background: rgba(201, 162, 39, 0.2); color: #8B7500; }
+    .activity-practice { background: rgba(40, 167, 69, 0.15); color: var(--success); }
+    .activity-discussion { background: rgba(23, 162, 184, 0.15); color: #17A2B8; }
+    .activity-warmup { background: rgba(255, 152, 0, 0.15); color: #E65100; }
+    .activity-eval { background: rgba(156, 39, 176, 0.15); color: #7B1FA2; }
+    .activity-apply { background: rgba(0, 150, 136, 0.15); color: #00796B; }
+    .activity-break { background: rgba(158, 158, 158, 0.15); color: #616161; }
+    .notes-section {
+      background: rgba(201, 162, 39, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1.5rem;
+    }
+    .notes-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .notes-section ul { list-style: none; }
+    .notes-section li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .notes-section li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .materials-section {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .materials-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .material-category h4 {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .material-category ul { list-style: none; }
+    .material-category li {
+      padding: 0.25rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .material-category li::before { content: "☐"; position: absolute; left: 0; color: var(--excel-green); }
+    .discussion-section { margin-bottom: 1.5rem; }
+    .discussion-section h3 {
+      background: var(--excel-green);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+    .discussion-list { list-style: none; }
+    .discussion-list li {
+      background: var(--off-white);
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    .discussion-list li strong {
+      display: block;
+      font-style: normal;
+      color: var(--primary);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+    .tips-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .tips-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .tips-box ul { list-style: none; }
+    .tips-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .tips-box li::before { content: "✓"; position: absolute; left: 0; color: var(--success); font-weight: 700; }
+    .formula-box {
+      background: rgba(33, 115, 70, 0.1);
+      border: 2px solid var(--excel-green);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .formula-box h3 {
+      color: var(--excel-green);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .formula-box code {
+      background: #f0f0f0;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0; }
+      .header, .timeline-header, .discussion-section h3 {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div>
+        <h1>Week 5: Microsoft Excel Intermediate</h1>
+        <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">VUB Intermediate Computer Skills</p>
+      </div>
+      <span class="header-badge">Instructor Guide</span>
+    </div>
+    <div class="header-meta">
+      <span>📅 March 9, 2026</span>
+      <span>⏱️ 2 Hours (WIPPEA)</span>
+      <span>👥 Veterans Group</span>
+      <span>📍 Computer Lab</span>
+    </div>
+  </header>
+
+  <div class="overview-box">
+    <h2>🎯 Learning Objectives</h2>
+    <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--gray);">By the end of this session, participants will be able to:</p>
+    <ul class="objectives-list">
+      <li>Understand cells, rows, columns, and cell addresses</li>
+      <li>Create basic formulas: SUM, AVERAGE, MAX, MIN, COUNT</li>
+      <li>Sort data in ascending or descending order</li>
+      <li>Filter data to show only specific items</li>
+      <li>Create a simple bar or pie chart from data</li>
+      <li>Build a basic personal budget spreadsheet</li>
+      <li>Apply conditional formatting to highlight over/under budget spending</li>
+      <li>Complete a multi-part hands-on workshop independently</li>
+    </ul>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-header">⏰ WIPPEA Session Timeline (120 Minutes)</div>
+    <div class="timeline-body">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00-0:08</div>
+        <div class="timeline-content">
+          <h4>Money Mystery <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <p>Quick mental math challenges: "You spend $12.50 on lunch for 5 days — total?" Motivates learning formulas. Discussion: What numbers do you deal with regularly? Bills? Prescriptions? Mileage?</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:08-0:15</div>
+        <div class="timeline-content">
+          <h4>Why Excel & Today's Roadmap <span class="activity-type activity-lecture">Introduction</span></h4>
+          <p>Preview learning objectives: formulas, sorting, filtering, charts. Show the finished budget tracker they'll build. Connect to veteran life: tracking VA copays, monthly bills, medication costs.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:15-0:35</div>
+        <div class="timeline-content">
+          <h4>Excel Essentials <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Condensed lecture covering: cells/rows/columns, formula basics (start with =), SUM, AVERAGE, MAX, MIN, COUNT, sorting A-Z/Z-A, filtering with dropdown arrows, chart types (bar, pie, line). Use slides with interactive excel-grid examples.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:35-0:55</div>
+        <div class="timeline-content">
+          <h4>Workshop Parts 1 & 2 <span class="activity-type activity-practice">Guided Practice</span></h4>
+          <p>Distribute Excel Budget Workshop handout. Part 1 (10 min): Create budget with 8 categories, format as currency. Part 2 (15 min, starts at ~0:45): SUM, AVERAGE, MAX, MIN formulas, fill handle, difference column. Walk around constantly — cell selection trips people up.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:55-1:05</div>
+        <div class="timeline-content">
+          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <p>Remind everyone: press Ctrl+S to save before stepping away. Name file "Budget_YourName" if not done. Don't close Excel.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:05-1:45</div>
+        <div class="timeline-content">
+          <h4>Workshop Parts 3 & 4 <span class="activity-type activity-practice">Independent Practice</span></h4>
+          <p>Part 3 (15 min): Sort by amount, filter expenses >$100, create bar chart with budgeted vs actual. Part 4 (20 min, starts at ~1:20): Replace sample data with real spending, add categories, apply conditional formatting (green=under budget, red=over). Circulate and assist — let students work at their own pace.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:45-1:55</div>
+        <div class="timeline-content">
+          <h4>Partner Swap & Show <span class="activity-type activity-eval">Evaluation</span></h4>
+          <p>Partner swap: change one number in partner's Actual column — do formulas, chart, and conditional formatting auto-update? Share screens: who has the most creative chart? Which formulas surprised you? Quick knowledge check questions.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:55-2:00</div>
+        <div class="timeline-content">
+          <h4>Your Excel Challenge <span class="activity-type activity-apply">Application</span></h4>
+          <p>This week: track real spending daily in your budget. Update the Actual column each evening. Bring your completed budget to Week 6 — we'll save it to Google Drive so you can access it from any device! Preview: Cloud Computing & Google Drive.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="formula-box">
+    <h3>📊 Key Formulas Reference</h3>
+    <ul style="list-style: none;">
+      <li style="margin-bottom: 0.5rem;"><code>=SUM(A1:A10)</code> — Adds up all values from A1 to A10</li>
+      <li style="margin-bottom: 0.5rem;"><code>=AVERAGE(A1:A10)</code> — Calculates the average (mean)</li>
+      <li style="margin-bottom: 0.5rem;"><code>=MAX(A1:A10)</code> — Finds the highest value</li>
+      <li style="margin-bottom: 0.5rem;"><code>=MIN(A1:A10)</code> — Finds the lowest value</li>
+      <li><code>=COUNT(A1:A10)</code> — Counts how many cells contain numbers</li>
+    </ul>
+  </div>
+
+  <div class="notes-section">
+    <h3>📝 Instructor Notes</h3>
+    <ul>
+      <li><strong>Equals Sign:</strong> The #1 mistake is forgetting to start formulas with =. Emphasize this repeatedly.</li>
+      <li><strong>Cell References:</strong> Explain why we use A1 instead of typing "10" - if data changes, the formula updates automatically.</li>
+      <li><strong>Range Notation:</strong> The colon means "through" - A1:A10 means "A1 through A10".</li>
+      <li><strong>AutoSum Shortcut:</strong> Alt+= is a huge time-saver. Demo it multiple times.</li>
+      <li><strong>Patience with Clicking:</strong> Many will struggle to select the right cells. Walk around and assist.</li>
+      <li><strong>Real-World Connection:</strong> Use veteran-relevant examples: tracking VA appointment costs, medication expenses, or gas mileage.</li>
+      <li><strong>Workshop Handout:</strong> Distribute the Excel Budget Workshop handout at the 0:35 mark when guided practice begins.</li>
+      <li><strong>Guided vs. Independent:</strong> Parts 1-2 are instructor-led (guided). Walk through each step together. Parts 3-4 are student-driven (independent) — circulate and assist individually.</li>
+      <li><strong>Pacing:</strong> If the class is ahead, extend the independent practice. If behind, skip Part 4 bonus challenges and go straight to evaluation.</li>
+    </ul>
+  </div>
+
+  <div class="materials-section">
+    <h3>📦 Materials Checklist</h3>
+    <div class="materials-grid">
+      <div class="material-category">
+        <h4>Handouts (Print)</h4>
+        <ul>
+          <li>Excel Budget Workshop (NEW)</li>
+          <li>Excel Quick Reference</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Technology</h4>
+        <ul>
+          <li>Microsoft Excel on all workstations</li>
+          <li>Projector connected & working</li>
+          <li>Sample data file (optional)</li>
+          <li>Presentation loaded</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Preparation</h4>
+        <ul>
+          <li>Verify Excel opens on all PCs</li>
+          <li>Create sample expense data for demo</li>
+          <li>Practice formula demonstrations</li>
+          <li>Test chart creation steps</li>
+          <li>Print workshop handouts (1 per student)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="discussion-section">
+    <h3>💬 Discussion Questions</h3>
+    <ul class="discussion-list">
+      <li>
+        <strong>Warm-Up:</strong>
+        "What do you spend money on every month? Groceries, bills, gas? What if you could track all of it in one place?"
+      </li>
+      <li>
+        <strong>After Presentation:</strong>
+        "Can you think of things in your life where you add up numbers? Monthly bills? Groceries? That's exactly what SUM is for!"
+      </li>
+      <li>
+        <strong>Guided Practice:</strong>
+        "When might you want to sort data from highest to lowest? What about alphabetically?"
+      </li>
+      <li>
+        <strong>Evaluation:</strong>
+        "Which formula will you use most at home? Was anything about formulas surprising?"
+      </li>
+      <li>
+        <strong>Wrap-up:</strong>
+        "What's one real expense you'll start tracking in Excel this week?"
+      </li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>✅ Tips for Success</h3>
+    <ul>
+      <li>Walk around constantly during formula practice - cell selection trips people up</li>
+      <li>Show the same formula multiple times in different contexts</li>
+      <li>If someone's formula shows an error, check: Did they start with =? Is the range correct?</li>
+      <li>Encourage peer help - those who "get it" can assist neighbors</li>
+      <li>Keep the budget activity simple - 4-5 categories is plenty</li>
+      <li>Celebrate small wins - "Your formula worked! Excel just did math for you!"</li>
+    </ul>
+  </div>
+
+  <div class="notes-section" style="background: rgba(23, 162, 184, 0.1); border-color: #17A2B8;">
+    <h3 style="color: #17A2B8;">🔮 Looking Ahead: Week 6</h3>
+    <ul>
+      <li><strong>Topic:</strong> Cloud Computing & Google Drive</li>
+      <li><strong>Key Concepts:</strong> What is the cloud, Google Drive basics, uploading, sharing, Google Docs</li>
+      <li><strong>Prep Needed:</strong> Ensure everyone remembers their Gmail login from Week 3</li>
+      <li><strong>Connection:</strong> "You can save Excel files to Google Drive and access them anywhere!"</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Instructor Guide - Week 5</p>
+    <p style="margin-top: 0.5rem; font-style: italic;">Questions? Contact: Britt Legg</p>
+  </footer>
+</body>
+</html>

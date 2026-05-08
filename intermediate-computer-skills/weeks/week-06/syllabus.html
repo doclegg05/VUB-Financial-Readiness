@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 6 Instructor Guide | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --google-blue: #4285F4;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--google-blue) 0%, #1a73e8 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+    .overview-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .overview-box h2 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+    .objectives-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.5rem;
+    }
+    .objectives-list li {
+      padding: 0.35rem 0 0.35rem 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .objectives-list li::before { content: "🎯"; position: absolute; left: 0; }
+    .timeline { margin-bottom: 1.5rem; }
+    .timeline-header {
+      background: var(--google-blue);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px 8px 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .timeline-body {
+      border: 2px solid var(--google-blue);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid var(--off-white);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-time {
+      background: var(--off-white);
+      padding: 0.75rem;
+      font-weight: 600;
+      color: var(--google-blue);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .timeline-content { padding: 0.75rem 1rem; }
+    .timeline-content h4 { color: var(--primary); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .timeline-content p { font-size: 0.85rem; color: var(--gray); margin: 0; }
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+    .activity-lecture { background: rgba(27, 54, 93, 0.15); color: var(--primary); }
+    .activity-demo { background: rgba(201, 162, 39, 0.2); color: #8B7500; }
+    .activity-practice { background: rgba(40, 167, 69, 0.15); color: var(--success); }
+    .activity-discussion { background: rgba(23, 162, 184, 0.15); color: #17A2B8; }
+    .activity-warmup { background: rgba(255, 152, 0, 0.15); color: #E65100; }
+    .activity-eval { background: rgba(156, 39, 176, 0.15); color: #7B1FA2; }
+    .activity-apply { background: rgba(0, 150, 136, 0.15); color: #00796B; }
+    .activity-break { background: rgba(158, 158, 158, 0.15); color: #616161; }
+    .notes-section {
+      background: rgba(201, 162, 39, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1.5rem;
+    }
+    .notes-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .notes-section ul { list-style: none; }
+    .notes-section li {
+      padding: 0.35rem 0 0.35rem 1.25rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .notes-section li::before {
+      content: "\2192";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .materials-section {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .materials-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .material-category h4 {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .material-category ul { list-style: none; }
+    .material-category li {
+      padding: 0.25rem 0 0.25rem 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .material-category li::before { content: "\2610"; position: absolute; left: 0; color: var(--google-blue); }
+    .discussion-section { margin-bottom: 1.5rem; }
+    .discussion-section h3 {
+      background: var(--google-blue);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+    .discussion-list { list-style: none; }
+    .discussion-list li {
+      background: var(--off-white);
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    .discussion-list li strong {
+      display: block;
+      font-style: normal;
+      color: var(--primary);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+    .tips-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .tips-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .tips-box ul { list-style: none; }
+    .tips-box li {
+      padding: 0.35rem 0 0.35rem 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .tips-box li::before { content: "\2713"; position: absolute; left: 0; color: var(--success); font-weight: 700; }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0; }
+      .header, .timeline-header, .discussion-section h3 { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div>
+        <h1>Week 6: Cloud Computing & Google Drive</h1>
+        <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">VUB Intermediate Computer Skills</p>
+      </div>
+      <span class="header-badge">Instructor Guide</span>
+    </div>
+    <div class="header-meta">
+      <span>&#x1F4C5; March 16, 2026</span>
+      <span>&#x23F1;&#xFE0F; 2 Hours (WIPPEA)</span>
+      <span>&#x1F465; Veterans Group</span>
+      <span>&#x1F4CD; Computer Lab</span>
+    </div>
+  </header>
+
+  <div class="overview-box">
+    <h2>&#x1F3AF; Learning Objectives</h2>
+    <ul class="objectives-list">
+      <li>Explain what "the cloud" means in simple terms</li>
+      <li>Navigate the Google Drive interface</li>
+      <li>Upload files from computer to Google Drive</li>
+      <li>Create and organize folders in Drive</li>
+      <li>Share files with specific people or via link</li>
+      <li>Create a basic Google Doc</li>
+      <li>Collaborate on a shared Google Doc with real-time editing</li>
+      <li>Complete a multi-part hands-on workshop independently</li>
+    </ul>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-header">&#x23F0; WIPPEA Session Timeline (120 Minutes)</div>
+    <div class="timeline-body">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00-0:08</div>
+        <div class="timeline-content">
+          <h4>Warm-Up <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <p>Coffee Shop Disaster scenario: you're at the VA office, need your DD-214, but your computer is at home. Discussion: when have you been stuck without a file you needed?</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:08-0:15</div>
+        <div class="timeline-content">
+          <h4>Introduction <span class="activity-type activity-lecture">Intro</span></h4>
+          <p>What is the cloud? Today's agenda and preview of what they'll build: an organized Drive with 4 folders, a shared doc, and access from any device. Connect to Week 5 budget &mdash; we'll upload it to Drive.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:15-0:35</div>
+        <div class="timeline-content">
+          <h4>Presentation <span class="activity-type activity-demo">Presentation</span></h4>
+          <p>Core lecture: cloud concept (safe deposit box analogy), Google Drive interface, uploading methods, folder creation, sharing permissions (Viewer/Editor), Google Docs intro + auto-save.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:35-0:55</div>
+        <div class="timeline-content">
+          <h4>Practice &mdash; Guided <span class="activity-type activity-practice">Guided</span></h4>
+          <p>Cloud &amp; Google Drive Workshop Parts 1-2: Create 4 color-coded folders, upload 3 files, rename, star, organize into folders. Distribute workshop handout at 0:35.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:55-1:05</div>
+        <div class="timeline-content">
+          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <p>Files auto-saved in cloud &mdash; no need to save! Stretch, questions.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:05-1:45</div>
+        <div class="timeline-content">
+          <h4>Practice &mdash; Independent <span class="activity-type activity-practice">Independent</span></h4>
+          <p>Workshop Parts 3-4: Create shared Google Doc "Class Contact List" with a classmate (real-time collaboration). Access Anywhere Challenge: incognito window verification, optional phone check.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:45-1:55</div>
+        <div class="timeline-content">
+          <h4>Evaluation <span class="activity-type activity-eval">Evaluation</span></h4>
+          <p>Cross-device verification: show neighbor your folders, verify shared doc appears for both, check Drive in incognito window. Phone bonus check.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:55-2:00</div>
+        <div class="timeline-content">
+          <h4>Application <span class="activity-type activity-apply">Application</span></h4>
+          <p>Upload 5 important documents this week, create a Google Doc grocery list for phone access, upload Week 5 Excel budget. Preview Week 7: AI Tools.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <h3>&#x1F4DD; Instructor Notes</h3>
+    <ul>
+      <li><strong>Workshop Handout:</strong> Distribute the Cloud &amp; Google Drive Workshop handout at the 0:35 mark when guided practice begins.</li>
+      <li><strong>Guided vs. Independent:</strong> Parts 1-2 are instructor-led (guided). Walk through each step on the projector. Parts 3-4 are student-driven (independent) &mdash; circulate and assist.</li>
+      <li><strong>Pacing:</strong> If Gmail login issues eat into time, shorten the presentation and go straight to guided practice. The workshop handout covers all key concepts.</li>
+      <li><strong>Gmail Login:</strong> They'll need their Gmail from Week 3. Have password reset ready as backup.</li>
+      <li><strong>Security Concerns:</strong> Some may be hesitant about "putting files online." Reassure them about Google's security, but also remind them not to store extremely sensitive items (SSN, banking passwords).</li>
+      <li><strong>The Cloud Analogy:</strong> "Bank safe deposit box" works well. Also: "Like having a copy of your house key at a trusted friend's house."</li>
+      <li><strong>Auto-Save Magic:</strong> The auto-save feature really impresses people. Point it out explicitly &mdash; "Notice you don't have to click Save!"</li>
+      <li><strong>Phone Access:</strong> If time permits, show how they can access Drive from their phones &mdash; this often clicks as a huge benefit.</li>
+    </ul>
+  </div>
+
+  <div class="materials-section">
+    <h3>&#x1F4E6; Materials Checklist</h3>
+    <div class="materials-grid">
+      <div class="material-category">
+        <h4>Handouts (Print)</h4>
+        <ul>
+          <li>Cloud &amp; Google Drive Workshop (NEW)</li>
+          <li>Google Drive Quick Reference</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Technology</h4>
+        <ul>
+          <li>Internet connection working</li>
+          <li>Chrome browser on all PCs</li>
+          <li>Sample files for upload practice</li>
+          <li>Projector for demonstrations</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Preparation</h4>
+        <ul>
+          <li>Test drive.google.com access</li>
+          <li>Create sample files for uploading</li>
+          <li>Print workshop handouts (1 per student)</li>
+          <li>Have Gmail password reset steps ready</li>
+          <li>Test sharing between accounts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="discussion-section">
+    <h3>&#x1F4AC; Discussion Questions</h3>
+    <ul class="discussion-list">
+      <li><strong>Warm-Up:</strong> "Has anyone ever needed a file that was at home when you weren't? What happened?"</li>
+      <li><strong>After Presentation:</strong> "Does the 'bank safe deposit box' analogy help? What files would you want in your cloud safe deposit box?"</li>
+      <li><strong>Guided Practice:</strong> "How does it feel knowing your files are now backed up in two places? Which folder will get the most files?"</li>
+      <li><strong>Evaluation:</strong> "Were you able to access your files from the incognito window? What surprised you about real-time collaboration?"</li>
+      <li><strong>Wrap-Up:</strong> "What's the first important document you'll upload to Drive this week?"</li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>&#x2705; Tips for Success</h3>
+    <ul>
+      <li>Gmail login issues are common &mdash; budget extra time at the start if needed</li>
+      <li>The drag-and-drop upload method is intuitive but requires two windows side by side</li>
+      <li>When demonstrating sharing, use your instructor email so they can practice sharing with you</li>
+      <li>Emphasize that Google Docs is FREE &mdash; this surprises many people</li>
+      <li>Connect to previous weeks: "You can upload those Word docs or Excel files we made!"</li>
+      <li>If someone finishes early, have them try accessing Drive from their phone</li>
+    </ul>
+  </div>
+
+  <div class="notes-section" style="background: rgba(23, 162, 184, 0.1); border-color: #17A2B8;">
+    <h3 style="color: #17A2B8;">&#x1F52E; Looking Ahead: Week 7</h3>
+    <ul>
+      <li><strong>Topic:</strong> Introduction to AI Tools</li>
+      <li><strong>Key Concepts:</strong> What is AI, ChatGPT basics, practical uses, limitations</li>
+      <li><strong>Prep Needed:</strong> Familiarize yourself with ChatGPT if you haven't already</li>
+      <li><strong>Connection:</strong> "AI can help you write emails, answer questions, and plan tasks &mdash; like a smart assistant!"</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Instructor Guide - Week 6</p>
+    <p style="margin-top: 0.5rem; font-style: italic;">Questions? Contact: Britt Legg</p>
+  </footer>
+</body>
+</html>

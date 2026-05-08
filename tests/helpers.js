@@ -1,8 +1,10 @@
 /**
  * Navigate to a module by clicking its nav link and waiting for presentation mode.
  */
+const COURSE_URL = '/financial-readiness.html';
+
 async function enterModule(page, moduleId) {
-    await page.goto('/');
+    await page.goto(COURSE_URL);
     await page.evaluate(() => localStorage.clear());
     await page.waitForSelector('#home.active');
     await page.click(`.nav-links a[data-section="${moduleId}"]`);
@@ -13,4 +15,4 @@ async function enterModule(page, moduleId) {
     await page.waitForSelector(`#${moduleId} .pres-slide.active`);
 }
 
-module.exports = { enterModule };
+module.exports = { COURSE_URL, enterModule };

@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 7: Introduction to AI Tools | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B365D;
+      --primary-dark: #0D1B2A;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --ai-purple: #7C3AED;
+      --ai-purple-dark: #5B21B6;
+      --ai-purple-light: #A78BFA;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .logo {
+      text-align: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .logo h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .logo p {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .week-indicator {
+      background: var(--ai-purple);
+      color: var(--light);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .week-indicator .week-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .week-indicator .week-title {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .chapter {
+      margin-bottom: 1rem;
+    }
+
+    .chapter-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .chapter-slides {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .slide-link {
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slide-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .slide-link.active {
+      background: var(--ai-purple);
+      font-weight: 600;
+    }
+
+    .slide-link.completed::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource-link::before {
+      content: "\2193 ";
+      opacity: 0.6;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .progress-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--ai-purple) 0%, var(--ai-purple-light) 100%);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Slides Container */
+    .slides-container {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .slide {
+      display: none;
+      background: var(--light);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 1000px;
+      min-height: 600px;
+      padding: 3rem;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Styles */
+    .slide-header {
+      margin-bottom: 2rem;
+    }
+
+    .slide-title {
+      font-size: 2.25rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray);
+    }
+
+    .slide-content {
+      font-size: 1.5rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .slide-content ul, .slide-content ol {
+      margin-left: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .slide-content li {
+      margin-bottom: 1rem;
+    }
+
+    /* Title Slide */
+    .title-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+    }
+
+    .title-slide .slide-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-slide .slide-title {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .title-slide .slide-subtitle {
+      font-size: 1.5rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .course-info {
+      font-size: 1rem;
+      color: var(--ai-purple);
+      font-weight: 600;
+    }
+
+    /* Info Boxes */
+    .info-box {
+      background: var(--off-white);
+      border-left: 4px solid var(--ai-purple);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+    }
+
+    .info-box.success {
+      border-left-color: var(--success);
+      background: rgba(40, 167, 69, 0.1);
+    }
+
+    .info-box.warning {
+      border-left-color: var(--accent);
+      background: rgba(201, 162, 39, 0.1);
+    }
+
+    .info-box-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .info-box-content {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Key Points */
+    .key-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--off-white);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .key-point-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .key-point-text {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .key-point-text strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .column {
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+
+    .column h3 {
+      color: var(--ai-purple);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .column ul {
+      margin-left: 1.25rem;
+    }
+
+    .column li {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Steps List */
+    .steps-list {
+      list-style: none;
+      margin-left: 0 !important;
+      counter-reset: step-counter;
+    }
+
+    .steps-list li {
+      position: relative;
+      padding-left: 3.5rem;
+      margin-bottom: 1.5rem;
+      counter-increment: step-counter;
+    }
+
+    .steps-list li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--ai-purple);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    /* Demo Box */
+    .demo-box {
+      background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .demo-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .demo-box p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Chat Example */
+    .chat-example {
+      background: #f8f8f8;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .chat-message {
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .chat-message.user {
+      justify-content: flex-end;
+    }
+
+    .chat-bubble {
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      max-width: 80%;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .chat-message.ai .chat-bubble {
+      background: white;
+      border: 1px solid #ddd;
+    }
+
+    .chat-message.user .chat-bubble {
+      background: var(--ai-purple);
+      color: white;
+    }
+
+    .chat-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--gray);
+    }
+
+    /* Practice Card */
+    .practice-card {
+      background: white;
+      border: 2px solid var(--ai-purple);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .practice-card h4 {
+      color: var(--ai-purple);
+      margin-bottom: 0.75rem;
+      font-size: 1.2rem;
+    }
+
+    .practice-card p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Navigation Footer */
+    .nav-footer {
+      background: var(--light);
+      border-top: 1px solid #eee;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.prev {
+      background: var(--off-white);
+      color: var(--primary);
+    }
+
+    .nav-btn.prev:hover {
+      background: #e8e8e8;
+    }
+
+    .nav-btn.next {
+      background: var(--ai-purple);
+      color: white;
+    }
+
+    .nav-btn.next:hover {
+      background: var(--ai-purple-dark);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .slide-counter {
+      font-size: 0.9rem;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* Completion Slide */
+    .completion-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+    }
+
+    .completion-badge {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+    }
+
+    .completion-badge span {
+      font-size: 4rem;
+    }
+
+    .completion-slide h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .completion-slide p {
+      font-size: 1.25rem;
+      color: var(--gray);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .completion-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--ai-purple);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      display: none;
+    }
+
+    .confetti.active {
+      display: block;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti-fall 3s ease-out forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Handout Prompt */
+    .handout-prompt {
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      color: var(--primary);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .handout-prompt-icon {
+      font-size: 2rem;
+    }
+
+    .handout-prompt-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="logo">
+      <h2>VUB Computer Skills</h2>
+      <p>Intermediate Course</p>
+    </div>
+
+    <div class="week-indicator">
+      <div class="week-num">Week 7</div>
+      <div class="week-title">Introduction to AI Tools</div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Warm-Up</div>
+      <div class="chapter-slides">
+        <div class="slide-link active" data-slide="0">Welcome & Overview</div>
+        <div class="slide-link" data-slide="1">AI Myth vs. Fact</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Introduction</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="2">Learning Objectives</div>
+        <div class="slide-link" data-slide="3">AI Explained Simply</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Understanding AI</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="4">AI in Daily Life</div>
+        <div class="slide-link" data-slide="5">How AI Works</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Using ChatGPT</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="6">Getting Started</div>
+        <div class="slide-link" data-slide="7">ChatGPT Interface</div>
+        <div class="slide-link" data-slide="8">Writing Prompts</div>
+        <div class="slide-link" data-slide="9">Prompt Examples</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Practice</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="10">Workshop Time!</div>
+        <div class="slide-link" data-slide="11">Break</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Safety & Evaluation</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="12">What AI Cannot Do</div>
+        <div class="slide-link" data-slide="13">Staying Safe</div>
+        <div class="slide-link" data-slide="14">Show & Share</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Application</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="15">Your AI Challenge</div>
+        <div class="slide-link" data-slide="16">Week Complete!</div>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <div class="resources-title">Resources</div>
+      <a class="resource-link" href="handouts/ai-workshop.html" target="_blank">AI Workshop</a>
+      <a class="resource-link" href="handouts/ai-quick-start.html" target="_blank">AI Quick Start</a>
+      <a class="resource-link" href="handouts/chatgpt-activity.html" target="_blank">ChatGPT Activity</a>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="slides-container">
+      <!-- Slide 0: Title -->
+      <div class="slide active title-slide">
+        <div class="slide-icon">🤖</div>
+        <h1 class="slide-title">Introduction to AI Tools</h1>
+        <p class="slide-subtitle">Discover how AI assistants can help with everyday tasks</p>
+        <p class="course-info">Week 7 of 8 • March 23, 2026</p>
+      </div>
+
+      <!-- Slide 1: AI Myth vs. Fact (NEW warm-up) -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">AI Myth vs. Fact</h1>
+          <p class="slide-subtitle">How much do you know about artificial intelligence?</p>
+        </div>
+        <div class="slide-content">
+          <p style="font-size: 1.25rem; margin-bottom: 1.5rem;">For each statement, decide: is it a <strong>MYTH</strong> or a <strong>FACT</strong>?</p>
+
+          <div class="key-point">
+            <div class="key-point-icon">1️⃣</div>
+            <div class="key-point-text">
+              <strong>"AI can think and feel emotions like humans"</strong>
+              <span style="color: #dc3545;">MYTH — AI processes text patterns. It doesn't think, feel, or understand.</span>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">2️⃣</div>
+            <div class="key-point-text">
+              <strong>"AI can help you write emails and letters"</strong>
+              <span style="color: var(--success);">FACT — This is one of AI's best practical uses!</span>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">3️⃣</div>
+            <div class="key-point-text">
+              <strong>"AI is always 100% accurate"</strong>
+              <span style="color: #dc3545;">MYTH — AI can make mistakes and even "make up" information (hallucinate).</span>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">4️⃣</div>
+            <div class="key-point-text">
+              <strong>"You already use AI every day without realizing it"</strong>
+              <span style="color: var(--success);">FACT — Spam filters, autocorrect, voice assistants — all AI!</span>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-box-title">Discussion</div>
+            <div class="info-box-content">Which answer surprised you most? What other questions do you have about AI before we begin?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Learning Objectives -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Today's Learning Objectives</h1>
+          <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🎯</div>
+            <div class="key-point-text">
+              <strong>Understand What AI Is</strong>
+              Explain artificial intelligence in simple, practical terms
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">💬</div>
+            <div class="key-point-text">
+              <strong>Use ChatGPT</strong>
+              Access ChatGPT and have a basic conversation with the AI
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">✍️</div>
+            <div class="key-point-text">
+              <strong>Write Good Prompts</strong>
+              Ask questions that get helpful, useful answers
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">⚠️</div>
+            <div class="key-point-text">
+              <strong>Know the Limits</strong>
+              Understand what AI can and cannot do safely
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: AI Explained Simply -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">What is Artificial Intelligence?</h1>
+          <p class="slide-subtitle">A simple explanation</p>
+        </div>
+        <div class="slide-content">
+          <div class="info-box">
+            <div class="info-box-title">AI in Plain English</div>
+            <div class="info-box-content">
+              AI is a computer program that has learned from millions of examples to understand language and provide helpful responses - like a very well-read assistant.
+            </div>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h3>🧠 How It Learned</h3>
+              <ul>
+                <li>Read billions of web pages</li>
+                <li>Studied books and articles</li>
+                <li>Learned patterns in language</li>
+                <li>Trained to be helpful</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>💡 Think of it like...</h3>
+              <ul>
+                <li>A very fast research assistant</li>
+                <li>Someone who read the entire library</li>
+                <li>A writing helper that never sleeps</li>
+                <li>A patient tutor for any topic</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: AI in Daily Life -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">AI You Already Use</h1>
+          <p class="slide-subtitle">AI is more common than you might think!</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">📧</div>
+            <div class="key-point-text">
+              <strong>Email Spam Filters</strong>
+              Gmail uses AI to keep junk mail out of your inbox
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📺</div>
+            <div class="key-point-text">
+              <strong>TV Recommendations</strong>
+              Netflix suggests shows based on what you've watched
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🗣️</div>
+            <div class="key-point-text">
+              <strong>Voice Assistants</strong>
+              Siri, Alexa, and Google Assistant understand your voice
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🔤</div>
+            <div class="key-point-text">
+              <strong>Autocorrect & Autocomplete</strong>
+              Your phone predicts what you're trying to type
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: How AI Assistants Work -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">How AI Assistants Work</h1>
+          <p class="slide-subtitle">Understanding the basics</p>
+        </div>
+        <div class="slide-content">
+          <ol class="steps-list">
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">You type a question or request</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Called a "prompt" - your message to the AI</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">The AI analyzes your words</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">It figures out what you're asking for</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">It generates a response</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Using patterns from everything it learned</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">You can continue the conversation</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Ask follow-up questions or request changes</span>
+            </li>
+          </ol>
+
+          <div class="info-box success">
+            <div class="info-box-title">Key Point</div>
+            <div class="info-box-content">
+              AI doesn't "think" like humans. It predicts what helpful response would come next based on patterns in language.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Getting Started with ChatGPT -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Getting Started with ChatGPT</h1>
+          <p class="slide-subtitle">How to access this popular AI tool</p>
+        </div>
+        <div class="slide-content">
+          <ol class="steps-list">
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Go to chat.openai.com</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Type this in your browser's address bar</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Create a free account</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Sign up with your email or Google account</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Start chatting!</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Type your question in the text box at the bottom</span>
+            </li>
+          </ol>
+
+          <div class="demo-box">
+            <h3>🖥️ Live Demo</h3>
+            <p>Let's go to ChatGPT together and create accounts</p>
+          </div>
+
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-text">Refer to your "AI Quick Start Guide" handout for step-by-step instructions</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: The ChatGPT Interface -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">The ChatGPT Interface</h1>
+          <p class="slide-subtitle">What you'll see on screen</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>📍 Left Sidebar</h3>
+              <ul>
+                <li><strong>New Chat</strong> - Start fresh conversation</li>
+                <li><strong>History</strong> - Your past conversations</li>
+                <li><strong>Settings</strong> - Account options</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>📝 Main Area</h3>
+              <ul>
+                <li><strong>Conversation</strong> - Your chat history</li>
+                <li><strong>Text Box</strong> - Where you type</li>
+                <li><strong>Send Button</strong> - Submit your message</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-box-title">💡 Helpful Tip</div>
+            <div class="info-box-content">
+              The free version (ChatGPT) works great for everyday tasks. You don't need to pay for the Plus version.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Writing Good Prompts -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Writing Good Prompts</h1>
+          <p class="slide-subtitle">Get better answers by asking better questions</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">✅</div>
+            <div class="key-point-text">
+              <strong>Be Specific</strong>
+              Instead of "Help me write" try "Help me write a thank you note to my doctor"
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">✅</div>
+            <div class="key-point-text">
+              <strong>Give Context</strong>
+              Tell the AI who it's for and what tone you want (formal, friendly, brief)
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">✅</div>
+            <div class="key-point-text">
+              <strong>Ask for Changes</strong>
+              You can say "make it shorter" or "use simpler words"
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">✅</div>
+            <div class="key-point-text">
+              <strong>One Thing at a Time</strong>
+              Break big requests into smaller steps
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: Prompt Examples -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Prompt Examples</h1>
+          <p class="slide-subtitle">See the difference good prompts make</p>
+        </div>
+        <div class="slide-content">
+          <div class="chat-example">
+            <p class="chat-label" style="color: #dc3545;">❌ Weak Prompt:</p>
+            <div class="chat-message user">
+              <div class="chat-bubble">"Write a letter"</div>
+            </div>
+          </div>
+
+          <div class="chat-example">
+            <p class="chat-label" style="color: var(--success);">✅ Strong Prompt:</p>
+            <div class="chat-message user">
+              <div class="chat-bubble">"Help me write a formal letter to the VA requesting a copy of my medical records. Keep it brief and professional."</div>
+            </div>
+          </div>
+
+          <div class="info-box success">
+            <div class="info-box-title">The Strong Prompt Includes:</div>
+            <div class="info-box-content">
+              ✓ What (letter) ✓ Who (VA) ✓ Purpose (request records) ✓ Tone (formal, brief)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 10: Workshop Time! (NEW) -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Workshop Time!</h1>
+          <p class="slide-subtitle">Hands-on practice with ChatGPT</p>
+        </div>
+        <div class="slide-content">
+          <div class="info-box">
+            <div class="info-box-title">AI Tools Workshop — Parts 1 & 2 (Guided)</div>
+            <div class="info-box-content">Use the <strong>AI Tools Workshop</strong> handout to follow along.</div>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h3>Part 1: First Conversation (10 min)</h3>
+              <ul>
+                <li>Send your first message to ChatGPT</li>
+                <li>Ask a follow-up question</li>
+                <li>See how AI remembers context</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>Part 2: Prompting Challenge (15 min)</h3>
+              <ul>
+                <li>Compare weak vs. strong prompts</li>
+                <li>Learn the prompt formula</li>
+                <li>Improve 3 weak prompts</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="info-box success">
+            <div class="info-box-title">Remember the Prompt Formula</div>
+            <div class="info-box-content">Strong Prompt = <strong>WHAT</strong> you want + <strong>WHO</strong> it's for + <strong>HOW</strong> you want it (tone, length, format)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: Break Time (NEW) -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Break Time</h1>
+          <p class="slide-subtitle">10 minutes — Don't close ChatGPT!</p>
+        </div>
+        <div class="slide-content">
+          <div style="text-align: center; padding: 2rem 0;">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">☕</div>
+            <h2 style="color: var(--primary); margin-bottom: 1.5rem;">10-Minute Break</h2>
+          </div>
+
+          <div class="info-box warning">
+            <div class="info-box-title">Before You Step Away</div>
+            <div class="info-box-content">
+              <ul style="margin-top: 0.5rem;">
+                <li>Keep your ChatGPT tab open — we'll continue after break</li>
+                <li>Your conversation history saves automatically</li>
+                <li>Feel free to keep chatting if you want!</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-box-title">After Break: Independent Practice</div>
+            <div class="info-box-content">You'll complete real-world AI tasks on your own (VA letter, meal plan, email) and then test whether AI can be trusted. Parts 3 & 4 of the workshop!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: What AI Cannot Do -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">What AI Cannot Do</h1>
+          <p class="slide-subtitle">Understanding AI's limitations</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point" style="background: rgba(220, 53, 69, 0.1);">
+            <div class="key-point-icon">❌</div>
+            <div class="key-point-text">
+              <strong>Access the Internet in Real-Time</strong>
+              AI's knowledge has a cutoff date - it can't look up current news or prices
+            </div>
+          </div>
+          <div class="key-point" style="background: rgba(220, 53, 69, 0.1);">
+            <div class="key-point-icon">❌</div>
+            <div class="key-point-text">
+              <strong>Know Personal Information</strong>
+              It doesn't know your name, history, or account details unless you tell it
+            </div>
+          </div>
+          <div class="key-point" style="background: rgba(220, 53, 69, 0.1);">
+            <div class="key-point-icon">❌</div>
+            <div class="key-point-text">
+              <strong>Replace Professional Advice</strong>
+              Not a substitute for doctors, lawyers, or financial advisors
+            </div>
+          </div>
+          <div class="key-point" style="background: rgba(220, 53, 69, 0.1);">
+            <div class="key-point-icon">❌</div>
+            <div class="key-point-text">
+              <strong>Be 100% Accurate</strong>
+              AI can make mistakes or "hallucinate" (make up) information
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 13: Staying Safe with AI -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Staying Safe with AI</h1>
+          <p class="slide-subtitle">Important safety guidelines</p>
+        </div>
+        <div class="slide-content">
+          <div class="info-box warning">
+            <div class="info-box-title">🔒 Never Share with AI:</div>
+            <div class="info-box-content">
+              <ul style="margin-top: 0.5rem;">
+                <li>Social Security numbers</li>
+                <li>Bank account or credit card numbers</li>
+                <li>Passwords or PINs</li>
+                <li>Medical record numbers</li>
+                <li>Full address or date of birth</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h3>✅ Safe to Share</h3>
+              <ul>
+                <li>General questions</li>
+                <li>Writing requests</li>
+                <li>Learning topics</li>
+                <li>Planning help</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>🔍 Always Verify</h3>
+              <ul>
+                <li>Medical information</li>
+                <li>Legal advice</li>
+                <li>Financial decisions</li>
+                <li>Important dates/facts</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 14: Show & Share (NEW evaluation) -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Show & Share</h1>
+          <p class="slide-subtitle">Share your best prompts and biggest surprises!</p>
+        </div>
+        <div class="slide-content">
+          <div class="info-box">
+            <div class="info-box-title">Share with the Class</div>
+            <div class="info-box-content">What was your best prompt? Read it aloud and show the response you got.</div>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h3>💬 Discussion</h3>
+              <ul>
+                <li>Which AI task was most useful to you?</li>
+                <li>What surprised you about ChatGPT?</li>
+                <li>Did you find any errors in AI's answers?</li>
+                <li>Would you use AI again at home?</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>🔍 Fact Check Results</h3>
+              <ul>
+                <li>What did AI get right?</li>
+                <li>What did AI get wrong?</li>
+                <li>How would you verify the information?</li>
+                <li>When should you NOT trust AI?</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="info-box warning">
+            <div class="info-box-title">The Golden Rule of AI</div>
+            <div class="info-box-content">AI is a helpful starting point, not the final answer. Always verify important information with official sources, especially for medical, legal, and financial decisions.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 15: Your AI Challenge (NEW application) -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Your AI Challenge</h1>
+          <p class="slide-subtitle">Put your AI skills to work this week!</p>
+        </div>
+        <div class="slide-content">
+          <div class="info-box">
+            <div class="info-box-title">This Week's Mission</div>
+            <div class="info-box-content">Try <strong>3 real AI tasks</strong> at home this week. For each one, check whether the information is accurate.</div>
+          </div>
+
+          <ol class="steps-list">
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Write a letter or email</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Try a thank-you note, complaint letter, or message to family</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Plan something</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Trip packing list, weekly meals, home improvement checklist</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Learn something new</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Ask about a topic you're curious about — then verify with a second source</span>
+            </li>
+          </ol>
+
+          <div class="info-box success">
+            <div class="info-box-title">Remember</div>
+            <div class="info-box-content">
+              ✅ Be specific in your prompts &nbsp;&nbsp; ✅ Ask follow-up questions &nbsp;&nbsp; ✅ Always verify important info &nbsp;&nbsp; ❌ Never share personal data
+            </div>
+          </div>
+
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-text">Take your workshop handout home for prompt ideas and safety reminders!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 16: Completion -->
+      <div class="slide completion-slide">
+        <div class="completion-badge">
+          <span>🤖</span>
+        </div>
+        <h2>Week 7 Complete!</h2>
+        <p>You've learned the basics of AI tools and how to use ChatGPT safely and effectively!</p>
+        <div class="completion-stats">
+          <div class="stat">
+            <div class="stat-value">7</div>
+            <div class="stat-label">Weeks Done</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">1</div>
+            <div class="stat-label">Week Left</div>
+          </div>
+        </div>
+        <div class="info-box success" style="margin-top: 2rem; max-width: 500px;">
+          <div class="info-box-title">Next Week: Mobile Integration & Course Review</div>
+          <div class="info-box-content">We'll connect everything together and celebrate your progress!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div class="nav-footer">
+      <button class="nav-btn prev" id="prevBtn" disabled>
+        ← Previous
+      </button>
+      <span class="slide-counter">
+        Slide <span id="currentSlide">1</span> of <span id="totalSlides">17</span>
+      </span>
+      <button class="nav-btn next" id="nextBtn">
+        Next →
+      </button>
+    </div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div class="confetti" id="confetti"></div>
+
+  <script src="../../../shared/progress.js"></script>
+  <script src="../../../shared/glossary.js" defer></script>
+  <script>
+    // Presentation State
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideLinks = document.querySelectorAll('.slide-link');
+
+    // DOM Elements
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSlideSpan = document.getElementById('currentSlide');
+    const totalSlidesSpan = document.getElementById('totalSlides');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const confettiContainer = document.getElementById('confetti');
+
+    // Initialize
+    totalSlidesSpan.textContent = totalSlides;
+    loadProgress();
+    updateSlide();
+
+    // Navigation Functions
+    function updateSlide() {
+      // Update slides
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      // Update sidebar links
+      slideLinks.forEach((link, index) => {
+        link.classList.toggle('active', index === currentSlide);
+        if (index < currentSlide) {
+          link.classList.add('completed');
+        }
+      });
+
+      // Update navigation buttons
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.textContent = currentSlide === totalSlides - 1 ? 'Finish ✓' : 'Next →';
+
+      // Update counter
+      currentSlideSpan.textContent = currentSlide + 1;
+
+      // Update progress
+      const progress = Math.round((currentSlide / (totalSlides - 1)) * 100);
+      progressFill.style.width = progress + '%';
+      progressText.textContent = progress;
+
+      // Save progress
+      saveProgress();
+
+      // Trigger confetti on completion
+      if (currentSlide === totalSlides - 1) {
+        setTimeout(triggerConfetti, 500);
+      }
+
+      // Scroll slide into view in sidebar
+      const activeLink = document.querySelector('.slide-link.active');
+      if (activeLink) {
+        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlide();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    // Event Listeners
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    slideLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const slideIndex = parseInt(link.dataset.slide);
+        goToSlide(slideIndex);
+      });
+    });
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'PageUp':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          goToSlide(totalSlides - 1);
+          break;
+      }
+    });
+
+    // Progress Persistence (via shared VubProgress library)
+    function saveProgress() {
+      if (window.VubProgress) VubProgress.saveSlide('ics', 7, currentSlide, totalSlides);
+    }
+
+    function loadProgress() {
+      if (window.VubProgress) {
+        const entry = VubProgress.get('ics', 7);
+        if (entry && typeof entry.slide === 'number') currentSlide = entry.slide;
+      }
+    }
+
+    // Confetti Animation
+    function triggerConfetti() {
+      confettiContainer.classList.add('active');
+      confettiContainer.innerHTML = '';
+
+      const colors = ['#7C3AED', '#C9A227', '#1B365D', '#28A745', '#E6C65C', '#A78BFA'];
+
+      for (let i = 0; i < 100; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 2 + 's';
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confettiContainer.appendChild(piece);
+      }
+
+      setTimeout(() => {
+        confettiContainer.classList.remove('active');
+      }, 5000);
+    }
+
+    // Touch/Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+  </script>
+</body>
+</html>

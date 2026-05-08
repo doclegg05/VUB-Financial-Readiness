@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Quick Reference | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --excel-green: #217346;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.5;
+      padding: 0.4in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--excel-green) 0%, #1a5c38 100%);
+      color: var(--light);
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.35rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .section { margin-bottom: 1rem; }
+    .section-title {
+      background: var(--excel-green);
+      color: var(--light);
+      padding: 0.4rem 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      border-radius: 5px;
+    }
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .formula-card {
+      background: var(--off-white);
+      padding: 0.75rem;
+      border-radius: 6px;
+      border-left: 4px solid var(--excel-green);
+    }
+    .formula-card h4 {
+      color: var(--excel-green);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+    .formula-card code {
+      display: block;
+      background: #e8e8e8;
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.9rem;
+      margin: 0.35rem 0;
+      color: var(--excel-green);
+      font-weight: 600;
+    }
+    .formula-card p {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin: 0;
+    }
+    kbd {
+      display: inline-block;
+      background: linear-gradient(180deg, #f5f5f5 0%, #e0e0e0 100%);
+      color: #333;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid #ccc;
+      border-bottom: 2px solid #aaa;
+    }
+    .shortcut-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.4rem;
+    }
+    .shortcut-item {
+      display: flex;
+      align-items: center;
+      padding: 0.4rem 0.6rem;
+      background: var(--off-white);
+      border-radius: 6px;
+      gap: 0.5rem;
+    }
+    .shortcut-keys {
+      min-width: 80px;
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+    }
+    .shortcut-desc {
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    .plus { color: var(--gray); font-weight: 700; margin: 0 0.1rem; }
+    .task-box {
+      background: var(--off-white);
+      padding: 0.75rem;
+      border-radius: 6px;
+    }
+    .task-box h4 {
+      color: var(--primary);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .task-box ol {
+      margin-left: 1.25rem;
+      font-size: 0.85rem;
+    }
+    .task-box li { margin-bottom: 0.35rem; }
+    .tip-box {
+      background: rgba(40, 167, 69, 0.1);
+      border-left: 4px solid var(--success);
+      padding: 0.6rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+    }
+    .tip-box strong { color: var(--primary); }
+    .warning-box {
+      background: rgba(220, 53, 69, 0.08);
+      border-left: 4px solid #DC3545;
+      padding: 0.6rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.8rem;
+    }
+    .footer {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0.25in; }
+      .header, .section-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>📊 Excel Quick Reference</h1>
+      <p style="font-size: 0.8rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 5</p>
+    </div>
+    <span class="header-badge">REFERENCE</span>
+  </header>
+
+  <div class="section">
+    <h2 class="section-title">🔢 Essential Formulas</h2>
+    <div class="two-column">
+      <div class="formula-card">
+        <h4>SUM - Add Numbers</h4>
+        <code>=SUM(A1:A10)</code>
+        <p>Adds all values from A1 through A10</p>
+      </div>
+      <div class="formula-card">
+        <h4>AVERAGE - Find Mean</h4>
+        <code>=AVERAGE(A1:A10)</code>
+        <p>Calculates the average of values</p>
+      </div>
+      <div class="formula-card">
+        <h4>MAX - Highest Value</h4>
+        <code>=MAX(A1:A10)</code>
+        <p>Finds the largest number in range</p>
+      </div>
+      <div class="formula-card">
+        <h4>MIN - Lowest Value</h4>
+        <code>=MIN(A1:A10)</code>
+        <p>Finds the smallest number in range</p>
+      </div>
+      <div class="formula-card">
+        <h4>COUNT - Count Numbers</h4>
+        <code>=COUNT(A1:A10)</code>
+        <p>Counts cells that contain numbers</p>
+      </div>
+      <div class="formula-card">
+        <h4>Simple Math</h4>
+        <code>=A1+B1</code>
+        <p>Add cells. Also: -subtract, *multiply, /divide</p>
+      </div>
+    </div>
+    <div class="warning-box" style="margin-top: 0.75rem;">
+      <strong>⚠️ Remember:</strong> Every formula MUST start with an equals sign (=). Without it, Excel treats your entry as text, not a formula!
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">⌨️ Keyboard Shortcuts</h2>
+    <div class="shortcut-grid">
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Alt</kbd><span class="plus">+</span><kbd>=</kbd></div>
+        <span class="shortcut-desc">AutoSum (instant SUM)</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>S</kbd></div>
+        <span class="shortcut-desc">Save workbook</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Z</kbd></div>
+        <span class="shortcut-desc">Undo last action</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Tab</kbd></div>
+        <span class="shortcut-desc">Move to next cell (right)</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Enter</kbd></div>
+        <span class="shortcut-desc">Move to next cell (down)</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Delete</kbd></div>
+        <span class="shortcut-desc">Clear cell contents</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">📋 Common Tasks</h2>
+    <div class="two-column">
+      <div class="task-box">
+        <h4>Sort Data</h4>
+        <ol>
+          <li>Click any cell in the column to sort</li>
+          <li>Go to <strong>Data</strong> tab</li>
+          <li>Click <strong>A→Z</strong> (ascending) or <strong>Z→A</strong> (descending)</li>
+        </ol>
+      </div>
+      <div class="task-box">
+        <h4>Filter Data</h4>
+        <ol>
+          <li>Click any cell in your data</li>
+          <li>Go to <strong>Data</strong> tab → <strong>Filter</strong></li>
+          <li>Click dropdown arrow on header</li>
+          <li>Uncheck items to hide them</li>
+        </ol>
+      </div>
+      <div class="task-box">
+        <h4>Create a Chart</h4>
+        <ol>
+          <li>Select your data (including headers)</li>
+          <li>Go to <strong>Insert</strong> tab</li>
+          <li>Choose chart type (Column, Pie, Line)</li>
+          <li>Click to insert</li>
+        </ol>
+      </div>
+      <div class="task-box">
+        <h4>Format Numbers as Currency</h4>
+        <ol>
+          <li>Select cells with numbers</li>
+          <li>Go to <strong>Home</strong> tab</li>
+          <li>Click <strong>$</strong> in Number group</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">📊 When to Use Each Chart</h2>
+    <div class="two-column">
+      <div class="task-box" style="border-left: 4px solid var(--excel-green);">
+        <h4 style="color: var(--excel-green);">Column/Bar Chart</h4>
+        <p style="font-size: 0.85rem;">Compare different categories<br><em>Example: Expenses by month</em></p>
+      </div>
+      <div class="task-box" style="border-left: 4px solid var(--accent);">
+        <h4 style="color: #8B7500;">Pie Chart</h4>
+        <p style="font-size: 0.85rem;">Show parts of a whole (%)<br><em>Example: Budget breakdown</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>💡 Pro Tips:</strong>
+    The colon (:) in formulas means "through" — so A1:A10 means "A1 through A10".
+    Use <kbd>Alt</kbd>+<kbd>=</kbd> below a column of numbers to instantly insert a SUM formula!
+    Always save your work with <kbd>Ctrl</kbd>+<kbd>S</kbd> before closing.
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong> | Intermediate Computer Skills | Week 5</p>
+    <p style="margin-top: 0.25rem;">Keep this at your workstation for quick reference!</p>
+  </footer>
+</body>
+</html>

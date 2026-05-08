@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Workshop | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D; --primary-dark: #0D1B2A; --primary-light: #2C4A7C;
+      --accent-gold: #C9A227; --accent-gold-dark: #A88B1F;
+      --light: #FFFFFF; --off-white: #F5F7FA; --gray: #5A6A7A;
+      --success: #28A745; --warning: #FFC107; --danger: #DC3545;
+    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); color: #333; line-height: 1.6; padding: 0.5in; max-width: 8.5in; margin: 0 auto; }
+    .header { background: linear-gradient(135deg, var(--accent-gold) 0%, #D4AF37 100%); color: var(--primary); padding: 1.25rem 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-subtitle { font-size: 0.95rem; opacity: 0.85; margin-top: 0.15rem; }
+    .header-meta { font-size: 0.8rem; opacity: 0.7; margin-top: 0.25rem; }
+    .header-badge { background: var(--primary); color: var(--accent-gold); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .header-right { text-align: right; flex-shrink: 0; }
+    .header-time { font-size: 0.8rem; opacity: 0.8; margin-top: 0.5rem; }
+    .name-field { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-size: 1rem; }
+    .name-field label { font-weight: 600; color: var(--primary); }
+    .name-field .line { flex: 1; border-bottom: 2px dashed var(--gray); max-width: 300px; }
+    .goal-box { background: linear-gradient(135deg, var(--off-white) 0%, #EDF2F7 100%); border: 2px solid var(--accent-gold); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem; }
+    .goal-box h2 { color: var(--primary); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .goal-box p { font-size: 0.95rem; color: var(--gray); }
+    .build-list { list-style: none; margin-top: 0.75rem; }
+    .build-list li { font-size: 0.95rem; padding: 0.25rem 0; color: #333; }
+    .build-list li::before { content: "\2713  "; color: var(--success); font-weight: 700; }
+    .part-header { background: var(--primary); color: var(--light); padding: 0.75rem 1rem; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+    .part-header h2 { font-size: 1.15rem; margin: 0; }
+    .part-timing { background: var(--accent-gold); color: var(--primary); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
+    .part-type { background: rgba(255,255,255,0.2); color: var(--light); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.65rem; font-weight: 600; margin-left: 0.5rem; }
+    .part-content { border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 8px 8px; padding: 1.25rem; margin-bottom: 0.5rem; }
+    .part-goal { font-size: 0.95rem; margin-bottom: 1rem; padding: 0.5rem 0.75rem; background: var(--off-white); border-radius: 6px; border-left: 4px solid var(--accent-gold); }
+    .part-goal strong { color: var(--primary); }
+    .section { margin-bottom: 1.25rem; }
+    .section-title { background: var(--off-white); color: var(--primary); padding: 0.5rem 1rem; border-left: 4px solid var(--accent-gold); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .checklist { list-style: none; }
+    .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; margin-bottom: 0.5rem; background: var(--off-white); border-radius: 8px; font-size: 0.95rem; }
+    .checkbox { width: 22px; height: 22px; border: 2px solid var(--primary); border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--primary); }
+    .checklist-text .detail { display: block; font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem; }
+    .fill-section { background: var(--off-white); padding: 1rem 1.25rem; border-radius: 10px; margin-top: 1rem; }
+    .fill-section h3 { color: var(--primary); font-size: 1rem; margin-bottom: 0.75rem; }
+    .fill-line { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; font-size: 0.9rem; }
+    .fill-line .label { color: var(--gray); }
+    .tip-box { background: #E8F5E9; border-left: 4px solid var(--success); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .tip-box strong { color: #2E7D32; }
+    .warning-box { background: #FFF3F3; border-left: 4px solid var(--danger); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .warning-box strong { color: var(--danger); }
+    .example-box { background: #FFF8E1; border-left: 4px solid var(--warning); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .example-box strong { color: #856404; }
+    .checkpoint-box { background: linear-gradient(135deg, rgba(201,162,39,0.12) 0%, rgba(201,162,39,0.05) 100%); border: 2px solid var(--accent-gold); border-radius: 10px; padding: 1rem; margin: 1.25rem 0; }
+    .checkpoint-box h4 { color: var(--primary); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .check-items { list-style: none; margin: 0; padding: 0; }
+    .check-items li { font-size: 0.9rem; color: #333; padding: 0.2rem 0; }
+    .bingo-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 2px solid var(--primary); margin: 1rem 0; width: 100%; }
+    .bingo-cell { border: 1px solid #CBD5E0; padding: 0.5rem 0.4rem; text-align: center; font-size: 0.75rem; min-height: 70px; display: flex; align-items: center; justify-content: center; background: #FAFBFC; line-height: 1.35; }
+    .bingo-cell.free-space { background: linear-gradient(135deg, var(--accent-gold) 0%, #D4AF37 100%); color: var(--primary); font-weight: 700; font-size: 0.85rem; }
+    .bingo-cell.header-cell { background: var(--primary); color: var(--light); font-weight: 700; font-size: 1.1rem; min-height: 40px; padding: 0.4rem; }
+    .reflection-section { background: var(--off-white); padding: 1.25rem; border-radius: 10px; margin-top: 1.25rem; }
+    .reflection-section h3 { color: var(--primary); font-size: 1rem; margin-bottom: 1rem; }
+    .reflection-line { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 1rem; font-size: 0.9rem; }
+    .reflection-line .label { color: #333; white-space: nowrap; }
+    .reflection-line .blank { flex: 1; border-bottom: 1px dashed var(--gray); min-height: 1.5rem; }
+    .success-box { background: linear-gradient(135deg, rgba(201,162,39,0.15) 0%, rgba(201,162,39,0.05) 100%); border: 2px solid var(--accent-gold); border-radius: 10px; padding: 1.25rem; margin-top: 2rem; }
+    .success-box h3 { color: var(--accent-gold-dark); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .success-box p { font-size: 0.9rem; color: var(--gray); margin-bottom: 0.5rem; }
+    .skills-earned { list-style: none; margin-top: 0.5rem; }
+    .skills-earned li { font-size: 0.9rem; padding: 0.2rem 0; }
+    .skills-earned li::before { content: "\2B50  "; }
+    .footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid var(--off-white); text-align: center; font-size: 0.8rem; color: var(--gray); }
+    @media print {
+      body { padding: 0.25in; }
+      .header, .part-header, .checkbox, .checkpoint-box, .bingo-cell, .bingo-cell.header-cell, .bingo-cell.free-space { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section { page-break-inside: avoid; }
+      .bingo-grid { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div>
+      <span class="header-badge">WORKSHOP</span>
+      <h1 style="margin-top: 0.35rem;">Mobile Setup &amp; Course Review</h1>
+      <div class="header-subtitle">Mobile Integration &amp; Skill Bingo Celebration</div>
+      <div class="header-meta">Week 8 | VUB Intermediate Computer Skills | March 30, 2026</div>
+    </div>
+    <div class="header-right">
+      <div class="header-time">~35 minutes</div>
+      <div class="header-time">2 parts</div>
+    </div>
+  </header>
+
+  <div class="name-field">
+    <label>Name:</label>
+    <div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label>
+    <div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <div class="goal-box">
+    <h2>What You Will Accomplish Today</h2>
+    <p>This is the final workshop of the course! You will verify your mobile setup and celebrate everything you have learned across all 8 weeks.</p>
+    <ul class="build-list">
+      <li>Confirm Gmail and Google Drive apps work on your phone (or document the steps for home)</li>
+      <li>Send a test email from your phone and verify it syncs to your computer</li>
+      <li>Play Skill Bingo to review all the skills from the entire course</li>
+      <li>Reflect on your growth and identify skills to keep practicing</li>
+    </ul>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="part-header">
+    <h2>Part 1: Mobile Setup Challenge</h2>
+    <div><span class="part-timing">~15 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal"><strong>Goal:</strong> Verify that Gmail and Google Drive apps work on your phone, or write down the steps to set them up at home.</div>
+
+    <div class="tip-box"><strong>Tip:</strong> Make sure you are connected to the classroom WiFi before starting. Ask your instructor for the network name and password if needed.</div>
+
+    <div class="section">
+      <h3 class="section-title">Step 1: Check the Gmail App</h3>
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>On your phone, open the App Store (iPhone) or Play Store (Android)</strong><span class="detail">Look for the blue App Store icon (iPhone) or the colorful Play Store triangle (Android)</span></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Search for "Gmail" &mdash; check if it is already installed</strong><span class="detail">If you see an "Open" button, it is installed. If you see "Get" or "Install," it needs to be downloaded.</span></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>If installed: Open Gmail and verify you are signed in with your class Gmail account</strong><span class="detail">You should see your inbox with emails from this course. If not signed in, tap your profile icon and add your account.</span></div></li>
+      </ul>
+      <div class="fill-section">
+        <h3>My Gmail App Status</h3>
+        <div class="fill-line"><span class="label">&#9744; Already installed and signed in</span></div>
+        <div class="fill-line"><span class="label">&#9744; Need to install at home</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Step 2: Check the Google Drive App</h3>
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Search for "Google Drive" in your app store</strong><span class="detail">Same process as Gmail &mdash; look for the triangular Drive icon in green, yellow, and blue.</span></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>If installed: Open Google Drive and verify your folders are visible</strong><span class="detail">Navigate to My Drive and look for the folders you created in Week 6 (VA, Medical, Financial, Personal).</span></div></li>
+      </ul>
+      <div class="fill-section">
+        <h3>My Drive App Status</h3>
+        <div class="fill-line"><span class="label">&#9744; Already installed and signed in</span></div>
+        <div class="fill-line"><span class="label">&#9744; Need to install at home</span></div>
+      </div>
+      <div class="tip-box"><strong>Tip:</strong> No smartphone? No problem! Write down the steps and try at home using your WiFi. The important thing is knowing how to do it.</div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Step 3: Send a Test Email from Your Phone</h3>
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Open the Gmail app on your phone</strong></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Tap the Compose button (pencil icon or "+" button)</strong></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Type a classmate's email address in the "To" field</strong></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Subject: "Test from my phone"</strong></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Body: "This is [your name] sending from my phone!"</strong></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Tap Send (the arrow icon)</strong></div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Step 4: Verify Sync</h3>
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>On your COMPUTER, open Gmail in the browser</strong><span class="detail">Check that the test email you just sent appears in your Sent folder on the computer too.</span></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Open a file from Google Drive on your phone</strong><span class="detail">Navigate to one of your Week 6 folders and tap a file to open it. This proves your files are accessible anywhere.</span></div></li>
+      </ul>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; I can send and receive email on my phone OR I wrote down the setup steps for home</li>
+        <li>&#9744; I can access Google Drive on my phone OR I documented the steps to install it</li>
+        <li>&#9744; I verified that my sent email syncs between phone and computer</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="part-header">
+    <h2>Part 2: Course Review &mdash; Skill Bingo</h2>
+    <div><span class="part-timing">~20 min</span><span class="part-type">INTERACTIVE</span></div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal"><strong>Goal:</strong> Review skills from all 7 previous weeks by playing Skill Bingo with your classmates.</div>
+
+    <div class="section">
+      <h3 class="section-title">How to Play</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Walk around the room. Find a classmate who can <strong>demonstrate or explain</strong> each skill. Have them <strong>sign the square</strong>. Get 5 in a row (horizontal, vertical, or diagonal) to win!</p>
+      <div class="example-box"><strong>Rules:</strong> Each classmate can sign a maximum of 2 squares on your card. You cannot sign your own card. The FREE space in the center counts for every line.</div>
+      <div class="tip-box"><strong>Tip:</strong> Be honest! Only sign squares for skills you are confident about. This is a chance to celebrate what you know and discover what to review.</div>
+    </div>
+
+    <div class="bingo-grid">
+      <div class="bingo-cell header-cell">B</div>
+      <div class="bingo-cell header-cell">I</div>
+      <div class="bingo-cell header-cell">N</div>
+      <div class="bingo-cell header-cell">G</div>
+      <div class="bingo-cell header-cell">O</div>
+      <div class="bingo-cell">I can log into VA.gov using ID.me</div>
+      <div class="bingo-cell">I can use Ctrl+C and Ctrl+V to copy and paste</div>
+      <div class="bingo-cell">I can create labels in Gmail</div>
+      <div class="bingo-cell">I can apply Heading styles in Word</div>
+      <div class="bingo-cell">I can use the SUM formula in Excel</div>
+      <div class="bingo-cell">I can send a Secure Message on MyHealtheVet</div>
+      <div class="bingo-cell">I can snap two windows side-by-side</div>
+      <div class="bingo-cell">I can spot a phishing email</div>
+      <div class="bingo-cell">I can insert a table in Word</div>
+      <div class="bingo-cell">I can create a chart in Excel</div>
+      <div class="bingo-cell">I can check my VA claim status online</div>
+      <div class="bingo-cell">I can take a screenshot with Win+Shift+S</div>
+      <div class="bingo-cell free-space">FREE SPACE</div>
+      <div class="bingo-cell">I can add headers and page numbers in Word</div>
+      <div class="bingo-cell">I can sort and filter data in Excel</div>
+      <div class="bingo-cell">I can refill a prescription on MyHealtheVet</div>
+      <div class="bingo-cell">I can make text larger in Display Settings</div>
+      <div class="bingo-cell">I can add a signature in Gmail</div>
+      <div class="bingo-cell">I can upload a file to Google Drive</div>
+      <div class="bingo-cell">I can write a good AI prompt</div>
+      <div class="bingo-cell">I can search Gmail to find old emails</div>
+      <div class="bingo-cell">I can use the AVERAGE formula in Excel</div>
+      <div class="bingo-cell">I can share a Google Doc with someone</div>
+      <div class="bingo-cell">I can organize files into Drive folders</div>
+      <div class="bingo-cell">I can fact-check an AI response</div>
+    </div>
+
+    <div class="warning-box"><strong>Remember:</strong> AI tools like ChatGPT can make mistakes (called "hallucinations"). Always fact-check important information &mdash; that is a skill from Week 7!</div>
+
+    <div class="reflection-section">
+      <h3>Course Reflection</h3>
+      <div class="reflection-line"><span class="label">My strongest skill from this course:</span><span class="blank"></span></div>
+      <div class="reflection-line"><span class="label">The skill I want to practice more:</span><span class="blank"></span></div>
+      <div class="reflection-line"><span class="label">One thing I will teach someone else:</span><span class="blank"></span></div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; I completed at least one Bingo line (5 in a row)</li>
+        <li>&#9744; I filled in all three reflection questions above</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="success-box">
+    <h3>Course Complete &mdash; Congratulations!</h3>
+    <p>You completed the entire VUB Intermediate Computer Skills course! You now have skills in VA services, Windows productivity, email, Word, Excel, cloud computing, AI tools, and mobile access. Keep practicing and keep growing!</p>
+    <ul class="skills-earned">
+      <li>VA Online Services &mdash; navigating VA.gov, MyHealtheVet, and eBenefits</li>
+      <li>Windows Productivity &mdash; Keyboard shortcuts, window management, and screenshots</li>
+      <li>Email Productivity &mdash; Gmail labels, signatures, search, and phishing defense</li>
+      <li>Microsoft Word &mdash; styles, tables, headers, footers, and page numbers</li>
+      <li>Microsoft Excel &mdash; formulas, charts, sorting, and filtering</li>
+      <li>Cloud Computing &mdash; Google Drive folders, uploading, sharing, and Google Docs</li>
+      <li>AI Tools &mdash; writing prompts, fact-checking, and hallucination awareness</li>
+      <li>Mobile Access &mdash; Gmail and Google Drive on your phone</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound &mdash; West Virginia</strong> | Week 8: Mobile Integration &amp; Course Review</p>
+    <p style="margin-top: 0.25rem;">Keep this handout! It is a summary of every skill you learned in this course.</p>
+  </footer>
+
+</body>
+</html>

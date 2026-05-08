@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 8 Syllabus: Mobile Integration & Course Review | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --red: #B31942;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      color: var(--primary);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.75rem; margin: 0; }
+    .header-badge {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .final-badge {
+      background: var(--red);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    .meta-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .meta-card {
+      background: var(--off-white);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .meta-card h3 {
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .meta-card p {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .section {
+      margin-bottom: 1.5rem;
+    }
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .objectives-list {
+      list-style: none;
+      padding: 0;
+    }
+    .objectives-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+    .objectives-list li::before {
+      content: '🎯';
+      flex-shrink: 0;
+    }
+    .timeline {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid #eee;
+    }
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+    .timeline-time {
+      background: var(--off-white);
+      padding: 0.75rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--primary);
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .timeline-content {
+      padding: 0.75rem 1rem;
+    }
+    .timeline-content h4 {
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
+    }
+    .timeline-content p {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+    .timeline-content.highlight {
+      background: rgba(201, 162, 39, 0.1);
+    }
+    .timeline-content.highlight h4 {
+      color: var(--red);
+    }
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .material-card {
+      background: var(--off-white);
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    .material-card h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .material-card ul {
+      margin-left: 1.25rem;
+      font-size: 0.9rem;
+    }
+    .material-card li {
+      margin-bottom: 0.25rem;
+    }
+    .notes-box {
+      background: rgba(201, 162, 39, 0.1);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .notes-box h4 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .notes-box ul {
+      margin-left: 1.25rem;
+      font-size: 0.9rem;
+    }
+    .notes-box li {
+      margin-bottom: 0.5rem;
+    }
+    .celebration-box {
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      color: var(--primary);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    .celebration-box h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .celebration-box p {
+      font-size: 0.95rem;
+    }
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.4rem 0;
+      font-size: 0.9rem;
+    }
+    .checklist li::before {
+      content: '☐';
+      font-size: 1rem;
+    }
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+    .activity-lecture { background: rgba(27, 54, 93, 0.15); color: #1B365D; }
+    .activity-demo { background: rgba(201, 162, 39, 0.15); color: #8B6914; }
+    .activity-practice { background: rgba(40, 167, 69, 0.15); color: #1B7A34; }
+    .activity-discussion { background: rgba(23, 162, 184, 0.15); color: #117A8B; }
+    .activity-warmup { background: rgba(255, 152, 0, 0.15); color: #E65100; }
+    .activity-eval { background: rgba(156, 39, 176, 0.15); color: #7B1FA2; }
+    .activity-apply { background: rgba(0, 150, 136, 0.15); color: #00796B; }
+    .activity-break { background: rgba(158, 158, 158, 0.15); color: #616161; }
+    .activity-assessment { background: rgba(179, 25, 66, 0.15); color: #B31942; }
+    .activity-celebration { background: rgba(201, 162, 39, 0.15); color: #8B6914; }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>Week 8: Mobile Integration & Review</h1>
+      <p style="font-size: 0.9rem;">Instructor Syllabus</p>
+    </div>
+    <span class="header-badge">FINAL WEEK</span>
+  </header>
+
+  <div style="text-align: center;">
+    <span class="final-badge">🎓 Course Completion Day!</span>
+  </div>
+
+  <div class="meta-info">
+    <div class="meta-card">
+      <h3>Date</h3>
+      <p>March 30, 2026</p>
+    </div>
+    <div class="meta-card">
+      <h3>Duration</h3>
+      <p>2 Hours (WIPPEA)</p>
+    </div>
+    <div class="meta-card">
+      <h3>Week</h3>
+      <p>8 of 8</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Learning Objectives</h2>
+    <ul class="objectives-list">
+      <li>Set up Gmail and Google Drive apps on mobile devices</li>
+      <li>Understand how syncing keeps files and emails consistent across devices</li>
+      <li>Review key concepts from all 8 weeks of the course</li>
+      <li>Complete the post-test to measure learning improvement</li>
+      <li>Celebrate course completion and discuss next steps</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Lesson Timeline (2 Hours)</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00–0:08</div>
+        <div class="timeline-content">
+          <h4>8-Week Journey Warm-up <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <p>Round-robin: "What skill are you most proud of?" Timeline reflection on 8 weeks of learning</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:08–0:15</div>
+        <div class="timeline-content">
+          <h4>Introduction & Agenda <span class="activity-type activity-lecture">Lecture</span></h4>
+          <p>Review today's plan: mobile setup, review game, post-test, celebration. Set expectations</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:15–0:25</div>
+        <div class="timeline-content">
+          <h4>Mobile Integration <span class="activity-type activity-demo">Demo</span></h4>
+          <p>Gmail app & Google Drive app walkthrough. Demonstrate sync between phone and computer</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:25–0:40</div>
+        <div class="timeline-content">
+          <h4>Workshop Part 1: Mobile Setup <span class="activity-type activity-practice">Practice</span></h4>
+          <p>Distribute Review Workshop handout. Students verify Gmail/Drive apps on phones. Send test email from phone. (15 min, guided)</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:40–0:50</div>
+        <div class="timeline-content">
+          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <p>Save work, stretch, prepare for review game</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:50–1:10</div>
+        <div class="timeline-content">
+          <h4>Workshop Part 2: Skill Bingo <span class="activity-type activity-practice">Practice</span></h4>
+          <p>Course review game covering all 7 weeks. Students walk around room, find classmates who can demonstrate skills, get signatures. (20 min, interactive)</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:10–1:15</div>
+        <div class="timeline-content">
+          <h4>Post-Test Preparation <span class="activity-type activity-lecture">Lecture</span></h4>
+          <p>Explain post-test format: 20 questions, same as pre-test, measures growth not pass/fail. Calm and supportive atmosphere</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:15–1:45</div>
+        <div class="timeline-content highlight">
+          <h4>Post-Test Assessment <span class="activity-type activity-assessment">Assessment</span></h4>
+          <p>20 questions covering all topics. Students work independently at their computers. Assist with printing PDF reports</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:45–1:55</div>
+        <div class="timeline-content">
+          <h4>Results & Evaluation <span class="activity-type activity-eval">Eval</span></h4>
+          <p>Compare pre/post scores. Share improvement highlights. Peer sharing: "What did you learn?"</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:55–2:00</div>
+        <div class="timeline-content">
+          <h4>Celebration & Closing <span class="activity-type activity-celebration">Celebration</span></h4>
+          <p>Certificates, thank you, next steps discussion, class photo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Materials Needed</h2>
+    <div class="materials-grid">
+      <div class="material-card">
+        <h4>Instructor Materials</h4>
+        <ul>
+          <li>Presentation slides (presentation.html)</li>
+          <li>Post-test (post-test.html)</li>
+          <li>Review Workshop handout (NEW)</li>
+          <li>Projector with internet access</li>
+          <li>Certificates (if available)</li>
+        </ul>
+      </div>
+      <div class="material-card">
+        <h4>Student Materials</h4>
+        <ul>
+          <li>Review Workshop handout</li>
+          <li>All previous handouts (for reference)</li>
+          <li>Personal smartphones (if available)</li>
+          <li>Gmail credentials from Week 3</li>
+        </ul>
+      </div>
+      <div class="material-card">
+        <h4>Celebration Items (Optional)</h4>
+        <ul>
+          <li>Refreshments</li>
+          <li>Course completion certificates</li>
+          <li>Group photo opportunity</li>
+          <li>Printed PDF reports</li>
+        </ul>
+      </div>
+      <div class="material-card">
+        <h4>Technical Requirements</h4>
+        <ul>
+          <li>Computers with internet</li>
+          <li>Post-test accessible in browser</li>
+          <li>Printer for PDF reports</li>
+          <li>Wi-Fi for mobile devices</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Instructor Notes</h2>
+    <div class="notes-box">
+      <h4>Key Teaching Points</h4>
+      <ul>
+        <li><strong>Mobile Setup:</strong> Not everyone will have a smartphone. Focus on demonstrating concepts. Those with phones can follow along; others can set up at home using the handout.</li>
+        <li><strong>Review Pacing:</strong> Keep the review high-level. Hit key points rather than re-teaching. Use it to refresh memory before the post-test.</li>
+        <li><strong>Post-Test Environment:</strong> Create a calm, supportive atmosphere. Remind students this isn't pass/fail—it measures growth.</li>
+        <li><strong>Comparison Feature:</strong> The post-test will automatically compare to pre-test results if available in localStorage. This creates a powerful "before/after" moment.</li>
+        <li><strong>Celebration:</strong> This is a significant achievement! Many adults are intimidated by technology. Completing this course is worthy of genuine celebration.</li>
+      </ul>
+    </div>
+    <div class="notes-box" style="margin-top: 1rem;">
+      <h4>WIPPEA Pacing & Workshop Logistics</h4>
+      <ul>
+        <li>Distribute Review Workshop handouts at 0:25 (start of Practice phase)</li>
+        <li>Part 1 is GUIDED — walk through mobile setup step by step</li>
+        <li>Part 2 is INTERACTIVE — Skill Bingo gets students up and moving</li>
+        <li>Allow flexibility: some students won't have smartphones — they write down steps for home</li>
+        <li>Bingo game serves as both review AND energy boost before the post-test</li>
+        <li>Keep post-test atmosphere calm and encouraging — "This measures growth, not grades"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="celebration-box">
+    <h3>🎉 Celebration Moment!</h3>
+    <p>Take time to genuinely celebrate your students' achievements. 8 weeks of learning technology is no small feat. Consider sharing improvement statistics and personal growth stories.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Post-Test Administration</h2>
+    <div class="notes-box">
+      <h4>Post-Test Checklist</h4>
+      <ul class="checklist">
+        <li>Ensure post-test.html is loaded on all student computers</li>
+        <li>Verify printer is ready for PDF reports</li>
+        <li>Remind students: 20 questions, no time limit, can change answers</li>
+        <li>Encourage students to take their time and read carefully</li>
+        <li>Assist with printing PDF reports after completion</li>
+        <li>If pre-test data exists, students will see their improvement!</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Review Topics Checklist</h2>
+    <div class="notes-box">
+      <h4>Quick Review Points by Week</h4>
+      <ul>
+        <li><strong>Week 1:</strong> VA.gov navigation, MyHealtheVet messaging, ID.me verification, eBenefits</li>
+        <li><strong>Week 2:</strong> Keyboard shortcuts (Ctrl+C/V/Z), window snapping, screenshots, accessibility settings</li>
+        <li><strong>Week 3:</strong> Gmail compose, CC/BCC, attachments, labels, signatures, search operators</li>
+        <li><strong>Week 4:</strong> Word styles, headers/footers, tables, page numbers, spell check</li>
+        <li><strong>Week 5:</strong> Excel formulas (SUM, AVERAGE, MAX, MIN), formatting, charts, sorting/filtering</li>
+        <li><strong>Week 6:</strong> Google Drive folders, uploading, sharing, Google Docs, access from anywhere</li>
+        <li><strong>Week 7:</strong> ChatGPT conversations, prompt engineering, real-world tasks, fact-checking, hallucination awareness</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Next Steps Discussion</h2>
+    <div class="notes-box">
+      <h4>Topics to Cover</h4>
+      <ul>
+        <li><strong>Practice at Home:</strong> Encourage daily use of learned skills</li>
+        <li><strong>Use Handouts:</strong> Keep them as reference guides</li>
+        <li><strong>Help Others:</strong> Teaching reinforces learning</li>
+        <li><strong>Stay Safe:</strong> Reinforce internet safety practices</li>
+        <li><strong>VUB Resources:</strong> Mention other programs available</li>
+        <li><strong>Questions:</strong> Offer to answer any lingering questions</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Closing Ceremony Suggestions</h2>
+    <div class="notes-box">
+      <h4>Making It Memorable</h4>
+      <ul>
+        <li>Share aggregate class improvement statistics (average pre vs post)</li>
+        <li>Recognize individual achievements or memorable moments</li>
+        <li>Allow students to share what skill they're most excited about using</li>
+        <li>Take a class photo if appropriate</li>
+        <li>Provide printed certificates if available</li>
+        <li>Thank students for their dedication and service to our country</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 8: Mobile Integration & Course Review</p>
+    <p style="margin-top: 0.5rem; font-style: italic;">Thank you for serving as an instructor for our veteran community!</p>
+  </footer>
+</body>
+</html>

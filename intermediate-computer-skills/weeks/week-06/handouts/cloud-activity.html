@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Setup Activity | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --google-blue: #4285F4;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--google-blue) 0%, #1a73e8 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .name-field {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    .name-field label { font-weight: 600; color: var(--primary); }
+    .name-field .line {
+      flex: 1;
+      border-bottom: 2px solid var(--gray);
+      max-width: 300px;
+    }
+    .section { margin-bottom: 1.5rem; }
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--google-blue);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--off-white);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--google-blue);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--primary); }
+    .checklist-text .detail {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+    .folder-list {
+      background: var(--off-white);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    .folder-list h4 {
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+    .folder-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed #ccc;
+    }
+    .folder-item:last-child { border-bottom: none; }
+    .folder-item .folder-icon { font-size: 1.25rem; }
+    .folder-item .blank {
+      flex: 1;
+      border-bottom: 1px solid var(--gray);
+    }
+    .success-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+    }
+    .success-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .success-box ul {
+      margin-left: 1.25rem;
+      font-size: 0.9rem;
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>☁️ Cloud Setup Activity</h1>
+      <p style="font-size: 0.9rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 6</p>
+    </div>
+    <span class="header-badge">ACTIVITY</span>
+  </header>
+
+  <div class="name-field">
+    <label>Name:</label>
+    <div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label>
+    <div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">🎯 Goal: Set Up Your Google Drive</h2>
+    <p style="font-size: 0.95rem; padding: 0.5rem;">
+      Today you'll organize your Google Drive with folders, upload a file, create a Google Doc,
+      and practice sharing. Follow the steps below and check off each task as you complete it.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 1: Access Google Drive</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Open your web browser</strong>
+          <span class="detail">Use Chrome, Firefox, or Edge</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Go to drive.google.com</strong>
+          <span class="detail">Type this address in the address bar and press Enter</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Sign in with your Gmail account</strong>
+          <span class="detail">Use the email and password you created in Week 3</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 2: Create Folders</h2>
+    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Create three folders to organize your Drive:</p>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Create folder: "VA Documents"</strong>
+          <span class="detail">+ New → New folder → Type "VA Documents" → Create</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Create folder: "Personal"</strong>
+          <span class="detail">Same steps as above</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Create folder: "Photos"</strong>
+          <span class="detail">Same steps as above</span>
+        </div>
+      </li>
+    </ul>
+
+    <div class="folder-list">
+      <h4>Write the names of your folders:</h4>
+      <div class="folder-item">
+        <span class="folder-icon">📁</span>
+        <span>1.</span>
+        <div class="blank"></div>
+      </div>
+      <div class="folder-item">
+        <span class="folder-icon">📁</span>
+        <span>2.</span>
+        <div class="blank"></div>
+      </div>
+      <div class="folder-item">
+        <span class="folder-icon">📁</span>
+        <span>3.</span>
+        <div class="blank"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 3: Upload a File</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Find a file on your computer</strong>
+          <span class="detail">Use the sample file your instructor provided, or any document</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Upload the file to Google Drive</strong>
+          <span class="detail">+ New → File upload → Select file → Open</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Move the file into your "Personal" folder</strong>
+          <span class="detail">Drag the file onto the folder, or right-click → Move to</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 4: Create a Google Doc</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Create a new Google Doc</strong>
+          <span class="detail">+ New → Google Docs</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Name your document</strong>
+          <span class="detail">Click "Untitled document" at top and type "My Grocery List"</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Type a simple grocery list</strong>
+          <span class="detail">Add 5-10 items you might buy at the store</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Watch for "Saved to Drive"</strong>
+          <span class="detail">Notice at the top - your document saves automatically!</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 5: Practice Sharing</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Go back to Google Drive</strong>
+          <span class="detail">Click the Drive icon in top left, or go to drive.google.com</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Star your Google Doc</strong>
+          <span class="detail">Right-click on "My Grocery List" → Add to Starred</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Share your document with the instructor</strong>
+          <span class="detail">Right-click → Share → Enter instructor's email → Viewer → Send</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="success-box">
+    <h3>🎉 Congratulations!</h3>
+    <p style="margin-bottom: 0.5rem;">You've set up your Google Drive! You now have:</p>
+    <ul>
+      <li>3 organized folders</li>
+      <li>A file uploaded to the cloud</li>
+      <li>A Google Doc that saves automatically</li>
+      <li>Experience sharing files</li>
+    </ul>
+    <p style="margin-top: 0.75rem; font-size: 0.9rem;"><strong>Bonus:</strong> Try accessing drive.google.com from your phone!</p>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 6: Cloud Computing</p>
+  </footer>
+</body>
+</html>

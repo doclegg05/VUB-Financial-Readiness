@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Windows Keyboard Shortcuts — Quick Reference</title>
+<style>
+  :root { --windows-blue: #0078D4; --primary: #1B365D; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.95rem; color: #1a1a1a;
+    max-width: 8.5in; padding: 0.5in; margin: 0 auto; background: #fff; line-height: 1.3; }
+  .header { background: linear-gradient(135deg, #0078D4 0%, #005A9E 100%); color: #fff;
+    padding: 0.5rem 0.75rem; border-radius: 6px; margin-bottom: 0.4rem; display: flex;
+    justify-content: space-between; align-items: center; flex-wrap: wrap; }
+  .header h1 { font-size: 1.15rem; font-weight: 700; }
+  .badge { background: rgba(255,255,255,0.25); padding: 0.15rem 0.5rem; border-radius: 3px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; }
+  .header .subtitle { width: 100%; font-size: 0.75rem; opacity: 0.9; margin-top: 0.15rem; }
+  .key { display: inline-block; background: #f0f0f0; border: 2px solid #ccc;
+    border-bottom: 3px solid #aaa; border-radius: 4px; padding: 0.1rem 0.4rem;
+    font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9rem; font-weight: 600;
+    color: var(--primary); min-width: 1.5rem; text-align: center; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+  .section { break-inside: avoid; }
+  .section-header { padding: 0.2rem 0.5rem; border-radius: 3px; color: #fff;
+    font-weight: 700; font-size: 0.8rem; margin-bottom: 0.2rem; }
+  .sh-blue { background: var(--primary); }
+  .sh-light { background: #2E5A88; }
+  .sh-teal { background: #1a6b5a; }
+  .sh-purple { background: #4a3b6b; }
+  .essential { grid-column: 1 / -1; }
+  .essential table { font-size: 1rem; }
+  .essential .section-header { background: var(--windows-blue); font-size: 0.85rem; padding: 0.25rem 0.5rem; }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 0.15rem 0.3rem; border-bottom: 1px solid #e0e0e0; vertical-align: middle; }
+  td:first-child { white-space: nowrap; width: 45%; }
+  tr:last-child td { border-bottom: none; }
+  .plus { margin: 0 0.1rem; font-weight: 600; color: #666; }
+  .footer { margin-top: 0.4rem; text-align: center; font-size: 0.7rem; color: #666;
+    border-top: 1px solid #ddd; padding-top: 0.25rem; }
+  .tip { background: #FFF8E1; border: 1px solid #FFD54F; border-radius: 4px;
+    padding: 0.25rem 0.5rem; margin-top: 0.35rem; font-size: 0.8rem; text-align: center; }
+  .tip strong { color: var(--primary); }
+  @media print {
+    body { padding: 0.25in; }
+    .header, .section-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Windows Keyboard Shortcuts &mdash; Quick Reference</h1>
+  <span class="badge">KEEP AT YOUR DESK</span>
+  <div class="subtitle">VUB Intermediate Computer Skills &mdash; Week 2</div>
+</div>
+
+<div class="section essential">
+  <div class="section-header">&#11088; Everyday Essentials (use these first!)</div>
+  <table>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">C</span></td><td>Copy selected text or file</td></tr>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">V</span></td><td>Paste what you copied</td></tr>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">X</span></td><td>Cut (copy + delete)</td></tr>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">Z</span></td><td>Undo last action</td></tr>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">Y</span></td><td>Redo (undo the undo)</td></tr>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">A</span></td><td>Select everything</td></tr>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">S</span></td><td>Save your work</td></tr>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">P</span></td><td>Print</td></tr>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">F</span></td><td>Find / search on page</td></tr>
+  </table>
+</div>
+
+<div class="grid">
+  <div class="section">
+    <div class="section-header sh-blue">Windows Navigation</div>
+    <table>
+      <tr><td><span class="key">Win</span></td><td>Open Start menu</td></tr>
+      <tr><td><span class="key">Alt</span> <span class="plus">+</span> <span class="key">Tab</span></td><td>Switch between windows</td></tr>
+      <tr><td><span class="key">Alt</span> <span class="plus">+</span> <span class="key">F4</span></td><td>Close current window</td></tr>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">L</span></td><td>Lock your computer</td></tr>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">D</span></td><td>Show desktop (minimize all)</td></tr>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">E</span></td><td>Open File Explorer</td></tr>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">I</span></td><td>Open Settings</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-header sh-light">Window Snapping</div>
+    <table>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">&larr;</span></td><td>Snap window to left half</td></tr>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">&rarr;</span></td><td>Snap window to right half</td></tr>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">&uarr;</span></td><td>Maximize window</td></tr>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">&darr;</span></td><td>Minimize / restore window</td></tr>
+    </table>
+
+    <div class="section-header sh-teal" style="margin-top:0.35rem">Screenshots</div>
+    <table>
+      <tr><td><span class="key">PrtScn</span></td><td>Capture entire screen</td></tr>
+      <tr><td><span class="key">Alt</span> <span class="plus">+</span> <span class="key">PrtScn</span></td><td>Capture active window only</td></tr>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">Shift</span> <span class="plus">+</span> <span class="key">S</span></td><td>Snip &amp; Sketch (select area)</td></tr>
+    </table>
+
+    <div class="section-header sh-purple" style="margin-top:0.35rem">Accessibility</div>
+    <table>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">+</span></td><td>Turn on / zoom in Magnifier</td></tr>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">&minus;</span></td><td>Zoom out Magnifier</td></tr>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">Esc</span></td><td>Turn off Magnifier</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="tip"><strong>Pro tip:</strong> The best way to learn shortcuts is to use ONE new shortcut every day until it becomes automatic!</div>
+<div class="footer">Veterans Upward Bound &mdash; West Virginia &nbsp;|&nbsp; Keep this card at your desk for quick reference!</div>
+</body>
+</html>

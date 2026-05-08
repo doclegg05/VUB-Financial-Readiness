@@ -26,6 +26,7 @@ Module 4 + condensed Module 5: Managing Retirement Income and Legacy Planning
 - `state-benefits-reference.html`
 - `sbp-decision-worksheet.html`
 - `instructor-notes.html`
+- `research-notes.md`
 
 ## Videos
 

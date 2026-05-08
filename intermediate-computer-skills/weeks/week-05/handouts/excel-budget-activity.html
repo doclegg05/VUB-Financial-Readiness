@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Budget Activity | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --excel-green: #217346;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--excel-green) 0%, #1a5c38 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .name-field {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    .name-field label {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .name-field .line {
+      flex: 1;
+      border-bottom: 2px solid var(--gray);
+      max-width: 300px;
+    }
+    .section { margin-bottom: 1.5rem; }
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--excel-green);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--off-white);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--excel-green);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--primary); }
+    .checklist-text .detail {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+    .example-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-family: 'Consolas', monospace;
+      font-size: 0.85rem;
+    }
+    .example-table th, .example-table td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    .example-table th {
+      background: var(--excel-green);
+      color: white;
+      font-weight: 600;
+    }
+    .example-table .row-num {
+      background: #f0f0f0;
+      color: #666;
+      font-weight: normal;
+      width: 30px;
+      text-align: center;
+    }
+    .example-table .formula {
+      background: rgba(201, 162, 39, 0.2);
+      font-style: italic;
+    }
+    .blank-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    .blank-table th, .blank-table td {
+      border: 1px solid #999;
+      padding: 0.6rem;
+      text-align: left;
+      min-height: 2rem;
+    }
+    .blank-table th {
+      background: var(--off-white);
+      font-weight: 600;
+    }
+    .blank-table td {
+      height: 2rem;
+    }
+    .formula-hint {
+      background: rgba(33, 115, 70, 0.1);
+      border: 1px dashed var(--excel-green);
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin: 0.75rem 0;
+    }
+    .formula-hint code {
+      background: #e8e8e8;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      font-family: 'Consolas', monospace;
+    }
+    .success-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+    }
+    .success-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .success-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>📊 Excel Budget Activity</h1>
+      <p style="font-size: 0.9rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 5</p>
+    </div>
+    <span class="header-badge">ACTIVITY</span>
+  </header>
+
+  <div class="name-field">
+    <label>Name:</label>
+    <div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label>
+    <div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">🎯 Goal: Create a Monthly Budget Tracker</h2>
+    <p style="font-size: 0.95rem; padding: 0.5rem;">
+      In this activity, you'll create a simple budget spreadsheet using formulas to automatically calculate totals.
+      Follow the steps below and check each task as you complete it.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">📋 Example: What You'll Create</h2>
+    <table class="example-table">
+      <tr>
+        <th></th>
+        <th>A</th>
+        <th>B</th>
+        <th>C</th>
+        <th>D</th>
+      </tr>
+      <tr>
+        <td class="row-num">1</td>
+        <td><strong>Category</strong></td>
+        <td><strong>Budgeted</strong></td>
+        <td><strong>Actual</strong></td>
+        <td><strong>Difference</strong></td>
+      </tr>
+      <tr>
+        <td class="row-num">2</td>
+        <td>Rent/Mortgage</td>
+        <td>$800</td>
+        <td>$800</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td class="row-num">3</td>
+        <td>Groceries</td>
+        <td>$300</td>
+        <td>$325</td>
+        <td>-$25</td>
+      </tr>
+      <tr>
+        <td class="row-num">4</td>
+        <td>Utilities</td>
+        <td>$150</td>
+        <td>$142</td>
+        <td>$8</td>
+      </tr>
+      <tr>
+        <td class="row-num">5</td>
+        <td>Transportation</td>
+        <td>$100</td>
+        <td>$95</td>
+        <td>$5</td>
+      </tr>
+      <tr>
+        <td class="row-num">6</td>
+        <td>Entertainment</td>
+        <td>$50</td>
+        <td>$75</td>
+        <td>-$25</td>
+      </tr>
+      <tr>
+        <td class="row-num">7</td>
+        <td><strong>TOTAL</strong></td>
+        <td class="formula">=SUM(B2:B6)</td>
+        <td class="formula">=SUM(C2:C6)</td>
+        <td class="formula">=SUM(D2:D6)</td>
+      </tr>
+    </table>
+    <p style="font-size: 0.85rem; color: var(--gray);"><em>Yellow cells show where you'll type formulas. The Difference column uses =C2-B2 (Actual minus Budgeted).</em></p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 1: Set Up Your Spreadsheet</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Open Microsoft Excel</strong>
+          <span class="detail">Start menu → Microsoft Excel, or click Excel icon</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Create a new blank workbook</strong>
+          <span class="detail">Click "Blank workbook" on the start screen</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Save your file immediately</strong>
+          <span class="detail">Ctrl+S → Name it "Budget_YourName" → Save to Documents</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 2: Enter Headers and Data</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Type headers in Row 1</strong>
+          <span class="detail">A1: Category | B1: Budgeted | C1: Actual | D1: Difference</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Enter 5 expense categories in column A</strong>
+          <span class="detail">Start in A2. Examples: Rent, Groceries, Utilities, Gas, Entertainment</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Enter budgeted amounts in column B</strong>
+          <span class="detail">How much you PLAN to spend on each category</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Enter actual amounts in column C</strong>
+          <span class="detail">How much you ACTUALLY spent (can be same or different)</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 3: Add Formulas</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Calculate the Difference for each row</strong>
+          <span class="detail">In D2, type: =C2-B2 (Actual minus Budgeted)</span>
+        </div>
+      </li>
+    </ul>
+    <div class="formula-hint">
+      <strong>💡 Hint:</strong> After typing <code>=C2-B2</code> in D2, you can copy it down! Select D2, press <kbd>Ctrl</kbd>+<kbd>C</kbd>, select D3:D6, press <kbd>Ctrl</kbd>+<kbd>V</kbd>.
+    </div>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Copy the formula down to all rows</strong>
+          <span class="detail">Fill D3, D4, D5, D6 with the difference formula</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Add TOTAL row</strong>
+          <span class="detail">In A7, type: TOTAL</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Add SUM formula for Budgeted total</strong>
+          <span class="detail">In B7, type: =SUM(B2:B6)</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Add SUM formula for Actual total</strong>
+          <span class="detail">In C7, type: =SUM(C2:C6)</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Add SUM formula for Difference total</strong>
+          <span class="detail">In D7, type: =SUM(D2:D6)</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 4: Format Your Budget</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Format numbers as currency</strong>
+          <span class="detail">Select B2:D7 → Home tab → Click $ button</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Bold the headers</strong>
+          <span class="detail">Select A1:D1 → Press Ctrl+B (or click Bold button)</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Bold the TOTAL row</strong>
+          <span class="detail">Select A7:D7 → Press Ctrl+B</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Bonus Challenge: Add a Chart</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Create a chart comparing Budgeted vs Actual</strong>
+          <span class="detail">Select A1:C6 → Insert tab → Column Chart → Choose first option</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">✏️ Planning Space</h2>
+    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Plan your budget categories and amounts here before entering them in Excel:</p>
+    <table class="blank-table">
+      <tr>
+        <th style="width: 35%;">Category</th>
+        <th style="width: 25%;">Budgeted</th>
+        <th style="width: 25%;">Actual</th>
+        <th style="width: 15%;">Difference</th>
+      </tr>
+      <tr><td></td><td>$</td><td>$</td><td></td></tr>
+      <tr><td></td><td>$</td><td>$</td><td></td></tr>
+      <tr><td></td><td>$</td><td>$</td><td></td></tr>
+      <tr><td></td><td>$</td><td>$</td><td></td></tr>
+      <tr><td></td><td>$</td><td>$</td><td></td></tr>
+      <tr><td><strong>TOTAL</strong></td><td>$</td><td>$</td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="success-box">
+    <h3>🎉 You Did It!</h3>
+    <p>
+      You've created a working budget spreadsheet with formulas! Now if you change any of your
+      Budgeted or Actual amounts, the Difference and TOTAL will update automatically. That's the
+      power of Excel formulas!
+    </p>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 5: Microsoft Excel</p>
+  </footer>
+</body>
+</html>

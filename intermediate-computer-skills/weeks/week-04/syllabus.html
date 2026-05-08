@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 4 Instructor Guide | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --word-blue: #2B579A;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--word-blue) 0%, #1E4080 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+    .header-meta span { display: flex; align-items: center; gap: 0.35rem; }
+    .overview-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .overview-box h2 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .objectives-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.5rem;
+    }
+    .objectives-list li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .objectives-list li::before { content: "\1F3AF"; position: absolute; left: 0; }
+    .timeline { margin-bottom: 1.5rem; }
+    .timeline-header {
+      background: var(--word-blue);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px 8px 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .timeline-body {
+      border: 2px solid var(--word-blue);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid var(--off-white);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-time {
+      background: var(--off-white);
+      padding: 0.75rem;
+      font-weight: 600;
+      color: var(--word-blue);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .timeline-content { padding: 0.75rem 1rem; }
+    .timeline-content h4 { color: var(--primary); font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .timeline-content p { font-size: 0.85rem; color: var(--gray); margin: 0; }
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+    .activity-lecture { background: rgba(27, 54, 93, 0.15); color: var(--primary); }
+    .activity-demo { background: rgba(201, 162, 39, 0.2); color: #8B7500; }
+    .activity-practice { background: rgba(40, 167, 69, 0.15); color: var(--success); }
+    .activity-discussion { background: rgba(23, 162, 184, 0.15); color: #17A2B8; }
+    .activity-warmup { background: rgba(255, 193, 7, 0.2); color: #856404; }
+    .activity-eval { background: rgba(220, 53, 69, 0.15); color: var(--danger); }
+    .activity-apply { background: rgba(111, 66, 193, 0.15); color: #6F42C1; }
+    .activity-break { background: rgba(108, 117, 125, 0.15); color: #6C757D; }
+    .notes-section {
+      background: rgba(201, 162, 39, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1.5rem;
+    }
+    .notes-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .notes-section ul { list-style: none; }
+    .notes-section li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .notes-section li::before {
+      content: "\2192";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .materials-section {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .materials-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .material-category h4 {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .material-category ul { list-style: none; }
+    .material-category li {
+      padding: 0.25rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .material-category li::before { content: "\2610"; position: absolute; left: 0; color: var(--word-blue); }
+    .discussion-section { margin-bottom: 1.5rem; }
+    .discussion-section h3 {
+      background: var(--word-blue);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .discussion-list { list-style: none; }
+    .discussion-list li {
+      background: var(--off-white);
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    .discussion-list li strong {
+      display: block;
+      font-style: normal;
+      color: var(--primary);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+    .tips-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .tips-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tips-box ul { list-style: none; }
+    .tips-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .tips-box li::before { content: "\2713"; position: absolute; left: 0; color: var(--success); font-weight: 700; }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0; }
+      .header, .timeline-header, .discussion-section h3 {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div>
+        <h1>Week 4: Microsoft Word Intermediate</h1>
+        <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">VUB Intermediate Computer Skills</p>
+      </div>
+      <span class="header-badge">Instructor Guide</span>
+    </div>
+    <div class="header-meta">
+      <span>&#x1F4C5; March 2, 2026</span>
+      <span>&#x23F1;&#xFE0F; 2 Hours (WIPPEA)</span>
+      <span>&#x1F465; Veterans Group</span>
+      <span>&#x1F4CD; Computer Lab</span>
+    </div>
+  </header>
+
+  <div class="overview-box">
+    <h2>&#x1F3AF; Learning Objectives</h2>
+    <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--gray);">By the end of this session, participants will be able to:</p>
+    <ul class="objectives-list">
+      <li>Apply built-in styles for consistent document formatting</li>
+      <li>Find and customize templates for common documents</li>
+      <li>Create and format tables for organized data</li>
+      <li>Add headers, footers, and page numbers</li>
+      <li>Use spell check and review tools</li>
+      <li>Follow formatting best practices for professional documents</li>
+      <li>Apply formatting skills independently through guided workshop</li>
+      <li>Create a complete VA Appeal Letter with styles, tables, and headers</li>
+    </ul>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-header">&#x23F0; WIPPEA Session Timeline (120 Minutes)</div>
+    <div class="timeline-body">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00-0:08</div>
+        <div class="timeline-content">
+          <h4>Document Makeover <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <p>Show bad vs professional document side-by-side. Discussion: "Which would you trust?" Surface what makes documents look professional (headings, consistent fonts, tables). Connect to Week 3 email skills.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:08-0:15</div>
+        <div class="timeline-content">
+          <h4>Today's Roadmap <span class="activity-type activity-lecture">Introduction</span></h4>
+          <p>Preview the 2-hour plan. Distribute <strong>Word Document Workshop</strong> handout. What they'll build: VA Appeal Letter with styles, tables, headers.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:15-0:35</div>
+        <div class="timeline-content">
+          <h4>Core Presentation <span class="activity-type activity-demo">Presentation</span></h4>
+          <p>Move briskly through slides 3-14. Key topics: Word interface/ribbon, styles (Title, Heading 1, Heading 2), templates, creating &amp; formatting tables, headers &amp; footers, page numbers, formatting best practices, spell check. Keep concise since students will practice hands-on.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:35-0:55</div>
+        <div class="timeline-content">
+          <h4>Workshop Parts 1 &amp; 2 <span class="activity-type activity-practice">Guided Practice</span></h4>
+          <p><strong>Part 1 - Styles Foundation (15 min):</strong> Walk through creating VA Appeal Letter with Title and Heading 1 styles, using Navigation Pane. <strong>Part 2 - Tables for Data (15 min):</strong> Build service history table (3 cols x 4 rows) and medical evidence table (2 cols x 3 rows), apply table styles.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:55-1:05</div>
+        <div class="timeline-content">
+          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <p>Save work, stretch. Check students' progress on Parts 1-2.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:05-1:45</div>
+        <div class="timeline-content">
+          <h4>Workshop Parts 3 &amp; 4 <span class="activity-type activity-discussion">Independent Practice</span></h4>
+          <p><strong>Part 3 - Headers, Footers &amp; Page Numbers (10 min):</strong> Students add header with name/date, centered page numbers, page break with new section. <strong>Part 4 - Polish &amp; Review (20 min):</strong> Spell check, bullet lists, bold key terms, margins, print preview, save document. Early finishers try bonus challenges.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:45-1:55</div>
+        <div class="timeline-content">
+          <h4>Show &amp; Share <span class="activity-type activity-eval">Evaluation</span></h4>
+          <p>Partner check: show VA Appeal Letter. Peer review checklist: styles applied? Tables formatted? Header/footer present? Spell check done? Volunteers share. Knowledge Check questions.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:55-2:00</div>
+        <div class="timeline-content">
+          <h4>Word Challenge &amp; Preview <span class="activity-type activity-apply">Application</span></h4>
+          <p>At-home challenge: create medication tracking doc, write a formal letter with styles, email the VA Appeal Letter to yourself. Preview Week 5: Excel Intermediate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <h3>&#x1F4DD; Instructor Notes</h3>
+    <ul>
+      <li><strong>Pacing:</strong> Lecture is only 20 minutes. Move briskly - students practice each skill in the workshop.</li>
+      <li><strong>Workshop Handout:</strong> Distribute during Introduction phase.</li>
+      <li><strong>Guided vs Independent:</strong> Parts 1 &amp; 2 are instructor-led. Parts 3 &amp; 4 are student-driven.</li>
+      <li><strong>Word Versions:</strong> Most concepts work in Word 2016, 2019, 2021, and 365. Interface may vary slightly - point out any differences you notice.</li>
+      <li><strong>Styles Concept:</strong> This is often new for participants. Use the analogy of "presets" in a camera - one-click formatting.</li>
+      <li><strong>Table Navigation:</strong> Emphasize Tab key to move between cells. Many try to click each cell individually.</li>
+      <li><strong>Save Often:</strong> Remind them to save frequently. Consider demonstrating AutoSave for 365 users.</li>
+      <li><strong>Practical Examples:</strong> Use veteran-relevant examples: VA appeal letter, medication list, contact sheet.</li>
+      <li><strong>Don't Overwhelm:</strong> Focus on the basics. Advanced features like mail merge can wait for another course.</li>
+    </ul>
+  </div>
+
+  <div class="materials-section">
+    <h3>&#x1F4E6; Materials Checklist</h3>
+    <div class="materials-grid">
+      <div class="material-category">
+        <h4>Handouts (Print)</h4>
+        <ul>
+          <li>Word Quick Reference</li>
+          <li>Word Document Workshop (NEW)</li>
+          <li>Word Document Activity</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Technology</h4>
+        <ul>
+          <li>Microsoft Word on all workstations</li>
+          <li>Projector connected &amp; working</li>
+          <li>Sample documents for demo</li>
+          <li>Presentation loaded</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Preparation</h4>
+        <ul>
+          <li>Verify Word opens on all PCs</li>
+          <li>Create sample document for demo</li>
+          <li>Test template search feature</li>
+          <li>Practice table creation steps</li>
+          <li>Print workshop handouts (1 per student)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="discussion-section">
+    <h3>&#x1F4AC; Discussion Prompts by WIPPEA Phase</h3>
+    <ul class="discussion-list">
+      <li>
+        <strong>Warm-Up (Document Makeover):</strong>
+        "Which of these two documents would you trust more - the messy one or the professional one? What makes the difference?"
+      </li>
+      <li>
+        <strong>Introduction (Today's Roadmap):</strong>
+        "What kinds of documents do you create most often? Letters? Lists? Have you ever struggled to make them look professional?"
+      </li>
+      <li>
+        <strong>Presentation (Core Slides):</strong>
+        "Can you see how using styles would be faster than manually changing fonts and sizes each time? What documents could you use this for?"
+      </li>
+      <li>
+        <strong>Guided Practice (Workshop Parts 1-2):</strong>
+        "What information in your life could be organized in a table? Medications, appointments, contacts, expenses?"
+      </li>
+      <li>
+        <strong>Evaluation (Show &amp; Share):</strong>
+        "What was the most useful skill you practiced today? What would you do differently next time?"
+      </li>
+      <li>
+        <strong>Application (Word Challenge):</strong>
+        "What's one document you'll create at home this week using what you learned today?"
+      </li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>&#x2705; Tips for Success</h3>
+    <ul>
+      <li>Walk around constantly - many need individual help finding ribbon items</li>
+      <li>Show each step slowly on projector, then have them do it, then move on</li>
+      <li>If someone falls behind, help them catch up before the next topic</li>
+      <li>Encourage peer help - early finishers can assist neighbors</li>
+      <li>Remind them F7 for spell check - emphasize checking before sharing documents</li>
+      <li>Connect to previous weeks: "Now you can create a document and email it!"</li>
+    </ul>
+  </div>
+
+  <div class="notes-section" style="background: rgba(23, 162, 184, 0.1); border-color: #17A2B8;">
+    <h3 style="color: #17A2B8;">&#x1F52E; Looking Ahead: Week 5</h3>
+    <ul>
+      <li><strong>Topic:</strong> Microsoft Excel Intermediate</li>
+      <li><strong>Key Concepts:</strong> Formulas (SUM, AVERAGE), charts, sorting &amp; filtering, budgets</li>
+      <li><strong>Prep Needed:</strong> Verify Microsoft Excel is installed on all workstations</li>
+      <li><strong>Connection:</strong> Link Word tables to Excel spreadsheets - "same data, more power"</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Instructor Guide - Week 4</p>
+    <p style="margin-top: 0.5rem; font-style: italic;">Questions? Contact: Britt Legg</p>
+  </footer>
+</body>
+</html>

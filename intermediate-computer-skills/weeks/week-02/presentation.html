@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 2: Windows Tips & Productivity | VUB Intermediate Computer Skills</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* VUB Navy/Patriotic Theme */
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --primary-dark: #0D1B2A;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --red: #B31942;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --muted: #EEF4FA;
+      --gray: #5A6A7A;
+      --gray-light: #8A9AAA;
+      --success: #28A745;
+      --danger: #DC3545;
+      --warning: #FFC107;
+      --info: #17A2B8;
+      --windows-blue: #0078D4;
+      --windows-blue-dark: #005A9E;
+      --windows-blue-light: #2899F5;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--primary-dark);
+      color: var(--primary-dark);
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* Layout */
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 300px;
+      background: var(--primary);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .sidebar-logo {
+      color: var(--light);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-title {
+      color: var(--accent);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .week-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+    }
+
+    .chapter-list {
+      list-style: none;
+      flex: 1;
+    }
+
+    .chapter-item {
+      margin-bottom: 0.25rem;
+    }
+
+    .chapter-header {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .chapter-header:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .chapter-item.active > .chapter-header {
+      background: rgba(201,162,39,0.2);
+      color: var(--light);
+      border-left-color: var(--accent);
+    }
+
+    .chapter-arrow {
+      font-size: 0.7rem;
+      transition: transform 0.3s ease;
+    }
+
+    .chapter-item.expanded .chapter-arrow {
+      transform: rotate(90deg);
+    }
+
+    .slide-list {
+      list-style: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding-left: 1rem;
+    }
+
+    .chapter-item.expanded .slide-list {
+      max-height: 500px;
+    }
+
+    .slide-item {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .slide-item:hover {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.8);
+    }
+
+    .slide-item.active {
+      background: rgba(201,162,39,0.3);
+      color: var(--light);
+    }
+
+    /* Resources Section */
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.25rem;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .resource-link::before {
+      content: "\01F4C4 ";
+      opacity: 0.8;
+    }
+
+    .slide-counter {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: auto;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--off-white);
+      position: relative;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      height: 4px;
+      background: var(--muted);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    /* Slide Area */
+    .slide-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 3rem;
+    }
+
+    .slide {
+      display: none;
+      max-width: 1000px;
+      margin: 0 auto;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Types */
+    .slide-title {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .slide-title h1 {
+      font-size: 2.75rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .slide-title .subtitle {
+      font-size: 1.5rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .slide-title .week-indicator {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .slide-title .course-badge {
+      display: block;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--gray-light);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .slide-content h2 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .slide-content h3 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin: 1.5rem 0 1rem;
+    }
+
+    .slide-content p {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    .slide-content ul, .slide-content ol {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: var(--gray);
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-content li {
+      margin-bottom: 0.75rem;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--light);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-icon {
+      font-size: 2rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Alert Boxes */
+    .alert {
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid;
+    }
+
+    .alert-danger {
+      background: rgba(220,53,69,0.1);
+      border-color: var(--danger);
+      color: #721C24;
+    }
+
+    .alert-warning {
+      background: rgba(255,193,7,0.15);
+      border-color: var(--warning);
+      color: #856404;
+    }
+
+    .alert-success {
+      background: rgba(40,167,69,0.1);
+      border-color: var(--success);
+      color: #155724;
+    }
+
+    .alert-info {
+      background: rgba(23,162,184,0.1);
+      border-color: var(--info);
+      color: #0C5460;
+    }
+
+    .alert-title {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Three Column Layout */
+    .three-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    /* Key Points */
+    .key-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--light);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .key-point-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .key-point-text {
+      font-size: 1.1rem;
+      color: var(--gray);
+    }
+
+    .key-point-text strong {
+      color: var(--primary);
+    }
+
+    /* Keyboard Key Styles */
+    .key {
+      display: inline-block;
+      background: var(--off-white);
+      border: 2px solid #ccc;
+      border-bottom: 3px solid #aaa;
+      border-radius: 5px;
+      padding: 0.15rem 0.5rem;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 2rem;
+      text-align: center;
+    }
+
+    .shortcut-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--off-white);
+      border-radius: 10px;
+      margin-bottom: 0.75rem;
+    }
+
+    .shortcut-keys {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      flex-shrink: 0;
+      min-width: 180px;
+    }
+
+    .shortcut-keys .plus {
+      color: var(--gray);
+      font-weight: 600;
+    }
+
+    .shortcut-desc {
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .shortcut-desc strong {
+      color: var(--primary);
+    }
+
+    /* Demo Box */
+    .demo-box {
+      background: var(--primary);
+      color: var(--light);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.15rem;
+      line-height: 1.8;
+    }
+
+    .demo-box strong {
+      color: var(--accent-light);
+    }
+
+    .demo-box .demo-label {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    /* Info Box Variants */
+    .info-box {
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      background: rgba(0,120,212,0.08);
+      border-left: 4px solid var(--windows-blue);
+      color: #1a3a5c;
+    }
+
+    .info-box.success {
+      background: rgba(40,167,69,0.1);
+      border-left-color: var(--success);
+      color: #155724;
+    }
+
+    .info-box.celebration {
+      background: rgba(201,162,39,0.12);
+      border-left-color: var(--accent);
+      color: #5a4500;
+    }
+
+    /* Handout Prompt */
+    .handout-prompt {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: var(--primary-dark);
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(201,162,39,0.3);
+    }
+
+    /* Snap Demo - Visual Mockup */
+    .snap-demo {
+      display: flex;
+      gap: 4px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      padding: 6px;
+      margin: 1.5rem 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .snap-demo .snap-window {
+      flex: 1;
+      border-radius: 6px;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1rem;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .snap-demo .snap-window.left {
+      background: var(--windows-blue);
+      color: var(--light);
+    }
+
+    .snap-demo .snap-window.right {
+      background: var(--primary);
+      color: var(--light);
+    }
+
+    .snap-demo .snap-window .snap-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Taskbar Demo */
+    .taskbar-demo {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .taskbar-demo .taskbar-start {
+      background: var(--windows-blue);
+      color: var(--light);
+      border-radius: 4px;
+      padding: 0.4rem 0.75rem;
+      font-size: 1.2rem;
+      cursor: default;
+    }
+
+    .taskbar-demo .taskbar-search {
+      background: #2d2d2d;
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      flex: 1;
+      max-width: 300px;
+    }
+
+    .taskbar-demo .taskbar-icon {
+      font-size: 1.4rem;
+      cursor: default;
+      padding: 0.25rem;
+    }
+
+    .taskbar-demo .taskbar-time {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.8rem;
+      margin-left: auto;
+      text-align: right;
+      line-height: 1.3;
+    }
+
+    /* Screenshot Demo */
+    .screenshot-demo {
+      background: rgba(0,0,0,0.7);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      color: var(--light);
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .screenshot-demo .screenshot-toolbar {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .screenshot-demo .screenshot-btn {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+      color: var(--light);
+      font-size: 1.2rem;
+      cursor: default;
+    }
+
+    .screenshot-demo .screenshot-btn.active {
+      background: var(--windows-blue);
+      border-color: var(--windows-blue-light);
+    }
+
+    .screenshot-demo .screenshot-label {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* Step List */
+    .step-list {
+      counter-reset: step;
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .step-list li {
+      position: relative;
+      padding-left: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-list li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2rem;
+      height: 2rem;
+      background: var(--accent);
+      color: var(--primary-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    /* Navigation */
+    .nav-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--light);
+      border-top: 1px solid var(--muted);
+    }
+
+    .nav-btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .nav-btn.prev {
+      background: var(--muted);
+      color: var(--primary);
+    }
+
+    .nav-btn.prev:hover:not(:disabled) {
+      background: var(--gray-light);
+      color: var(--light);
+    }
+
+    .nav-btn.next {
+      background: var(--primary);
+      color: var(--light);
+    }
+
+    .nav-btn.next:hover:not(:disabled) {
+      background: var(--primary-light);
+    }
+
+    /* Completion Slide */
+    .completion-slide {
+      text-align: center;
+      padding: 3rem;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      border-radius: 16px;
+      color: var(--light);
+    }
+
+    .completion-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      border-radius: 50%;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 25px rgba(201,162,39,0.4);
+    }
+
+    .completion-title {
+      font-size: 2.5rem;
+      color: var(--light);
+      margin-bottom: 1rem;
+    }
+
+    .completion-subtitle {
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 2rem;
+    }
+
+    .completion-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .completion-stat {
+      text-align: center;
+    }
+
+    .completion-stat .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+    }
+
+    .completion-stat .stat-label {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .completion-message {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      display: none;
+    }
+
+    .confetti.active {
+      display: block;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti-fall 3s ease-out forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 250px;
+      }
+
+      .slide-area {
+        padding: 2rem;
+      }
+
+      .two-column, .three-column {
+        grid-template-columns: 1fr;
+      }
+
+      .shortcut-keys {
+        min-width: 140px;
+      }
+
+      .completion-stats {
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+
+      .slide-title h1 {
+        font-size: 2rem;
+      }
+
+      .slide-content h2 {
+        font-size: 1.5rem;
+      }
+
+      .slide-content p,
+      .slide-content ul,
+      .slide-content ol {
+        font-size: 1.1rem;
+      }
+
+      .shortcut-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .shortcut-keys {
+        min-width: auto;
+      }
+
+      .snap-demo {
+        flex-direction: column;
+      }
+
+      .completion-stats {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    /* Print */
+    @media print {
+      .sidebar, .nav-controls, .progress-bar {
+        display: none;
+      }
+
+      .slide {
+        display: block !important;
+        page-break-after: always;
+      }
+
+      .completion-slide {
+        color: var(--primary-dark);
+        background: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">Veterans Upward Bound</div>
+        <div class="sidebar-title">Intermediate Computer Skills</div>
+        <span class="week-badge">Week 2 of 8</span>
+      </div>
+
+      <ul class="chapter-list">
+        <li class="chapter-item active expanded" data-chapter="1">
+          <div class="chapter-header">
+            <span class="chapter-arrow">&#9654;</span>
+            Warm-Up
+          </div>
+          <ul class="slide-list">
+            <li class="slide-item active" data-slide="0">Title</li>
+            <li class="slide-item" data-slide="1">Speed Challenge</li>
+          </ul>
+        </li>
+
+        <li class="chapter-item" data-chapter="2">
+          <div class="chapter-header">
+            <span class="chapter-arrow">&#9654;</span>
+            Introduction
+          </div>
+          <ul class="slide-list">
+            <li class="slide-item" data-slide="2">Today's Agenda</li>
+          </ul>
+        </li>
+
+        <li class="chapter-item" data-chapter="3">
+          <div class="chapter-header">
+            <span class="chapter-arrow">&#9654;</span>
+            Shortcuts
+          </div>
+          <ul class="slide-list">
+            <li class="slide-item" data-slide="3">Why Learn Windows Tips?</li>
+            <li class="slide-item" data-slide="4">Essential Shortcuts</li>
+            <li class="slide-item" data-slide="5">More Shortcuts</li>
+          </ul>
+        </li>
+
+        <li class="chapter-item" data-chapter="4">
+          <div class="chapter-header">
+            <span class="chapter-arrow">&#9654;</span>
+            Windows
+          </div>
+          <ul class="slide-list">
+            <li class="slide-item" data-slide="6">Window Snapping</li>
+            <li class="slide-item" data-slide="7">The Taskbar</li>
+          </ul>
+        </li>
+
+        <li class="chapter-item" data-chapter="5">
+          <div class="chapter-header">
+            <span class="chapter-arrow">&#9654;</span>
+            Tools
+          </div>
+          <ul class="slide-list">
+            <li class="slide-item" data-slide="8">Screenshots</li>
+            <li class="slide-item" data-slide="9">Accessibility</li>
+          </ul>
+        </li>
+
+        <li class="chapter-item" data-chapter="6">
+          <div class="chapter-header">
+            <span class="chapter-arrow">&#9654;</span>
+            Practice
+          </div>
+          <ul class="slide-list">
+            <li class="slide-item" data-slide="10">Workshop Time</li>
+            <li class="slide-item" data-slide="11">Break</li>
+          </ul>
+        </li>
+
+        <li class="chapter-item" data-chapter="7">
+          <div class="chapter-header">
+            <span class="chapter-arrow">&#9654;</span>
+            Wrap-Up
+          </div>
+          <ul class="slide-list">
+            <li class="slide-item" data-slide="12">Show & Share</li>
+            <li class="slide-item" data-slide="13">Productivity Challenge</li>
+            <li class="slide-item" data-slide="14">Completion</li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="resources-section">
+        <div class="resources-title">Resources</div>
+        <a href="handouts/windows-workshop.html" class="resource-link">Windows Workshop</a>
+        <a href="handouts/keyboard-shortcuts-reference.html" class="resource-link">Shortcuts Reference Card</a>
+        <a href="handouts/telehealth-tips.html" class="resource-link">Telehealth Tips</a>
+        <a href="handouts/video-call-checklist.html" class="resource-link">Video Call Checklist</a>
+        <a href="handouts/zoom-quick-start.html" class="resource-link">Zoom Quick Start</a>
+      </div>
+
+      <div class="slide-counter">
+        Slide <span id="currentSlide">1</span> of <span id="totalSlides">15</span>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressBar"></div>
+      </div>
+
+      <div class="slide-area">
+
+        <!-- Slide 0: Title (Chapter 1 - Warm-Up) -->
+        <section class="slide slide-title active" data-chapter="1">
+          <h1>&#9000;&#65039; Windows Tips &amp; Productivity</h1>
+          <p class="subtitle">Work smarter, not harder!</p>
+          <span class="week-indicator">Week 2 of 8 &bull; February 16, 2026</span>
+          <span class="course-badge">VUB Intermediate Computer Skills</span>
+        </section>
+
+        <!-- Slide 1: Speed Challenge (Chapter 1 - Warm-Up) -->
+        <section class="slide slide-content" data-chapter="1">
+          <h2>&#9889; The Speed Challenge</h2>
+          <p>How fast can you open Notepad?</p>
+
+          <div class="demo-box">
+            <span class="demo-label">Method 1 (The Long Way)</span>
+            Click Start &rarr; Scroll through apps &rarr; Find "Notepad" &rarr; Click it<br>
+            <strong>&#9201;&#65039; Time: About 10&ndash;15 seconds</strong>
+          </div>
+
+          <div class="demo-box" style="background: var(--success);">
+            <span class="demo-label" style="color: #d4edda;">Method 2 (The Fast Way)</span>
+            Press <strong>Windows key</strong> &rarr; Type "<strong>note</strong>" &rarr; Press <strong>Enter</strong><br>
+            <strong>&#9201;&#65039; Time: About 3 seconds!</strong>
+          </div>
+
+          <div class="info-box celebration">
+            &#128172; <strong>Discussion:</strong> What if you could save time like that on EVERYTHING you do on the computer?
+          </div>
+        </section>
+
+        <!-- Slide 2: Today's Agenda (Chapter 2 - Introduction) -->
+        <section class="slide slide-content" data-chapter="2">
+          <h2>&#128203; Today's Agenda</h2>
+          <p>2 hours of productivity power-ups</p>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#9000;&#65039;</span>
+            <div class="key-point-text">
+              <strong>Keyboard Shortcuts</strong> &mdash; The essential shortcuts everyone should know
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#129695;</span>
+            <div class="key-point-text">
+              <strong>Window Management</strong> &mdash; Snap, resize, and multitask like a pro
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#128248;</span>
+            <div class="key-point-text">
+              <strong>Screenshots</strong> &mdash; Capture anything on your screen
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#9881;&#65039;</span>
+            <div class="key-point-text">
+              <strong>Accessibility</strong> &mdash; Make your computer work for YOU
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#128296;</span>
+            <div class="key-point-text">
+              <strong>Workshop</strong> &mdash; Hands-on practice with all these skills
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 3: Why Learn Windows Tips? (Chapter 3 - Shortcuts) -->
+        <section class="slide slide-content" data-chapter="3">
+          <h2>&#129300; Why Learn Windows Tips?</h2>
+          <p>Save time every single day</p>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#9200;</span>
+            <div class="key-point-text">
+              <strong>Save Time</strong> &mdash; Keyboard shortcuts can save 8 days per year for daily computer users
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#128170;</span>
+            <div class="key-point-text">
+              <strong>Work Smarter</strong> &mdash; Do in 2 seconds what used to take 10
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#129504;</span>
+            <div class="key-point-text">
+              <strong>Build Confidence</strong> &mdash; Feel like a computer expert
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#128279;</span>
+            <div class="key-point-text">
+              <strong>Foundation Skills</strong> &mdash; These shortcuts work in Word, Excel, Gmail, and every program we'll learn
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 4: Essential Keyboard Shortcuts (Chapter 3 - Shortcuts) -->
+        <section class="slide slide-content" data-chapter="3">
+          <h2>&#9000;&#65039; Essential Keyboard Shortcuts</h2>
+          <p>The Big Five you'll use every day</p>
+
+          <div class="shortcut-row">
+            <div class="shortcut-keys">
+              <span class="key">Ctrl</span>
+              <span class="plus">+</span>
+              <span class="key">C</span>
+            </div>
+            <div class="shortcut-desc"><strong>Copy</strong> &mdash; Like a photocopy &mdash; the original stays</div>
+          </div>
+
+          <div class="shortcut-row">
+            <div class="shortcut-keys">
+              <span class="key">Ctrl</span>
+              <span class="plus">+</span>
+              <span class="key">V</span>
+            </div>
+            <div class="shortcut-desc"><strong>Paste</strong> &mdash; Places your copy wherever the cursor is</div>
+          </div>
+
+          <div class="shortcut-row">
+            <div class="shortcut-keys">
+              <span class="key">Ctrl</span>
+              <span class="plus">+</span>
+              <span class="key">X</span>
+            </div>
+            <div class="shortcut-desc"><strong>Cut</strong> &mdash; Like moving &mdash; original disappears</div>
+          </div>
+
+          <div class="shortcut-row">
+            <div class="shortcut-keys">
+              <span class="key">Ctrl</span>
+              <span class="plus">+</span>
+              <span class="key">Z</span>
+            </div>
+            <div class="shortcut-desc"><strong>Undo</strong> &mdash; Your best friend &mdash; fixes mistakes instantly!</div>
+          </div>
+
+          <div class="shortcut-row">
+            <div class="shortcut-keys">
+              <span class="key">Ctrl</span>
+              <span class="plus">+</span>
+              <span class="key">S</span>
+            </div>
+            <div class="shortcut-desc"><strong>Save</strong> &mdash; Do this often! Saves your work</div>
+          </div>
+
+          <div class="alert alert-success">
+            <div class="alert-title">&#128161; Remember</div>
+            These shortcuts work in EVERY program &mdash; Word, Excel, Gmail, everywhere!
+          </div>
+        </section>
+
+        <!-- Slide 5: More Shortcuts (Chapter 3 - Shortcuts) -->
+        <section class="slide slide-content" data-chapter="3">
+          <h2>&#128640; More Shortcuts</h2>
+          <p>Navigate and select like a pro</p>
+
+          <div class="two-column">
+            <div class="column">
+              <h3>Navigation</h3>
+              <div class="shortcut-row">
+                <div class="shortcut-keys">
+                  <span class="key">Alt</span>
+                  <span class="plus">+</span>
+                  <span class="key">Tab</span>
+                </div>
+                <div class="shortcut-desc">Switch between windows</div>
+              </div>
+              <div class="shortcut-row">
+                <div class="shortcut-keys">
+                  <span class="key">Win</span>
+                  <span class="plus">+</span>
+                  <span class="key">L</span>
+                </div>
+                <div class="shortcut-desc">Lock your computer</div>
+              </div>
+              <div class="shortcut-row">
+                <div class="shortcut-keys">
+                  <span class="key">Win</span>
+                  <span class="plus">+</span>
+                  <span class="key">D</span>
+                </div>
+                <div class="shortcut-desc">Show desktop</div>
+              </div>
+              <div class="shortcut-row">
+                <div class="shortcut-keys">
+                  <span class="key">Win</span>
+                  <span class="plus">+</span>
+                  <span class="key">E</span>
+                </div>
+                <div class="shortcut-desc">Open File Explorer</div>
+              </div>
+              <div class="shortcut-row">
+                <div class="shortcut-keys">
+                  <span class="key">Alt</span>
+                  <span class="plus">+</span>
+                  <span class="key">F4</span>
+                </div>
+                <div class="shortcut-desc">Close current window</div>
+              </div>
+            </div>
+
+            <div class="column">
+              <h3>Selection &amp; Editing</h3>
+              <div class="shortcut-row">
+                <div class="shortcut-keys">
+                  <span class="key">Ctrl</span>
+                  <span class="plus">+</span>
+                  <span class="key">A</span>
+                </div>
+                <div class="shortcut-desc">Select All</div>
+              </div>
+              <div class="shortcut-row">
+                <div class="shortcut-keys">
+                  <span class="key">Ctrl</span>
+                  <span class="plus">+</span>
+                  <span class="key">P</span>
+                </div>
+                <div class="shortcut-desc">Print</div>
+              </div>
+              <div class="shortcut-row">
+                <div class="shortcut-keys">
+                  <span class="key">Ctrl</span>
+                  <span class="plus">+</span>
+                  <span class="key">F</span>
+                </div>
+                <div class="shortcut-desc">Find / Search</div>
+              </div>
+              <div class="shortcut-row">
+                <div class="shortcut-keys">
+                  <span class="key">Ctrl</span>
+                  <span class="plus">+</span>
+                  <span class="key">Y</span>
+                </div>
+                <div class="shortcut-desc">Redo</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 6: Window Management & Snapping (Chapter 4 - Windows) -->
+        <section class="slide slide-content" data-chapter="4">
+          <h2>&#129695; Window Management</h2>
+          <p>Your screen, your way</p>
+
+          <div class="shortcut-row">
+            <div class="shortcut-keys">
+              <span class="key">Win</span>
+              <span class="plus">+</span>
+              <span class="key">&larr;</span>
+            </div>
+            <div class="shortcut-desc"><strong>Snap to left half</strong> of screen</div>
+          </div>
+
+          <div class="shortcut-row">
+            <div class="shortcut-keys">
+              <span class="key">Win</span>
+              <span class="plus">+</span>
+              <span class="key">&rarr;</span>
+            </div>
+            <div class="shortcut-desc"><strong>Snap to right half</strong> of screen</div>
+          </div>
+
+          <div class="shortcut-row">
+            <div class="shortcut-keys">
+              <span class="key">Win</span>
+              <span class="plus">+</span>
+              <span class="key">&uarr;</span>
+            </div>
+            <div class="shortcut-desc"><strong>Maximize</strong> window</div>
+          </div>
+
+          <div class="shortcut-row">
+            <div class="shortcut-keys">
+              <span class="key">Win</span>
+              <span class="plus">+</span>
+              <span class="key">&darr;</span>
+            </div>
+            <div class="shortcut-desc"><strong>Minimize</strong> / Restore window</div>
+          </div>
+
+          <div class="snap-demo">
+            <div class="snap-window left">
+              <div class="snap-icon">&#128196;</div>
+              Tutorial / Instructions
+            </div>
+            <div class="snap-window right">
+              <div class="snap-icon">&#128221;</div>
+              Your Work
+            </div>
+          </div>
+
+          <div class="info-box">
+            &#128161; <strong>Perfect for:</strong> Following a tutorial on one side while working on the other!
+          </div>
+        </section>
+
+        <!-- Slide 7: The Taskbar (Chapter 4 - Windows) -->
+        <section class="slide slide-content" data-chapter="4">
+          <h2>&#128421;&#65039; The Taskbar: Your Command Center</h2>
+          <p>Quick access to everything</p>
+
+          <div class="taskbar-demo">
+            <div class="taskbar-start">&#9776;</div>
+            <div class="taskbar-search">&#128269; Type here to search</div>
+            <div class="taskbar-icon">&#128193;</div>
+            <div class="taskbar-icon">&#127760;</div>
+            <div class="taskbar-icon">&#128231;</div>
+            <div class="taskbar-icon">&#128196;</div>
+            <div class="taskbar-time">4:30 PM<br>2/16/2026</div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#128204;</span>
+            <div class="key-point-text">
+              <strong>Pin your favorites</strong> &mdash; Right-click any program &rarr; "Pin to taskbar"
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#128260;</span>
+            <div class="key-point-text">
+              <strong>Rearrange</strong> &mdash; Drag icons to change their order
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#128269;</span>
+            <div class="key-point-text">
+              <strong>Search</strong> &mdash; Click the search icon or just press the Windows key and type
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#128203;</span>
+            <div class="key-point-text">
+              <strong>Task View</strong> &mdash; Press <span class="key">Win</span> <span class="plus">+</span> <span class="key">Tab</span> to see all open windows at once
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 8: Screenshots & Snipping Tool (Chapter 5 - Tools) -->
+        <section class="slide slide-content" data-chapter="5">
+          <h2>&#128248; Screenshots &amp; Snipping Tool</h2>
+          <p>Capture anything on your screen</p>
+
+          <div class="shortcut-row">
+            <div class="shortcut-keys">
+              <span class="key">PrtScn</span>
+            </div>
+            <div class="shortcut-desc"><strong>Print Screen</strong> &mdash; Captures entire screen to clipboard</div>
+          </div>
+
+          <div class="shortcut-row">
+            <div class="shortcut-keys">
+              <span class="key">Alt</span>
+              <span class="plus">+</span>
+              <span class="key">PrtScn</span>
+            </div>
+            <div class="shortcut-desc"><strong>Active Window</strong> &mdash; Captures only the active window</div>
+          </div>
+
+          <div class="shortcut-row" style="background: rgba(0,120,212,0.1); border: 2px solid var(--windows-blue);">
+            <div class="shortcut-keys">
+              <span class="key">Win</span>
+              <span class="plus">+</span>
+              <span class="key">Shift</span>
+              <span class="plus">+</span>
+              <span class="key">S</span>
+            </div>
+            <div class="shortcut-desc"><strong>THE BEST ONE</strong> &mdash; Select exactly what you want!</div>
+          </div>
+
+          <div class="screenshot-demo">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-btn active">&#11036;</div>
+              <div class="screenshot-btn">&#11093;</div>
+              <div class="screenshot-btn">&#9645;</div>
+              <div class="screenshot-btn">&#9724;&#65039;</div>
+            </div>
+            <div class="screenshot-label">Snip &amp; Sketch overlay &mdash; drag to select a region</div>
+          </div>
+
+          <div class="info-box">
+            &#128161; After using <span class="key">Win</span>+<span class="key">Shift</span>+<span class="key">S</span>, click the notification to annotate and save your screenshot.
+          </div>
+
+          <div class="alert alert-info">
+            <div class="alert-title">&#128077; Great for</div>
+            Saving error messages, sharing what's on your screen, keeping receipts
+          </div>
+        </section>
+
+        <!-- Slide 9: Accessibility & Display Settings (Chapter 5 - Tools) -->
+        <section class="slide slide-content" data-chapter="5">
+          <h2>&#9881;&#65039; Make Your Computer Work for YOU</h2>
+          <p>Accessibility and display settings</p>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#128269;</span>
+            <div class="key-point-text">
+              <strong>Magnifier</strong> &mdash; Press <span class="key">Win</span> <span class="plus">+</span> <span class="key">+</span> to zoom in, <span class="key">Win</span> <span class="plus">+</span> <span class="key">Esc</span> to exit
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#128207;</span>
+            <div class="key-point-text">
+              <strong>Text Size</strong> &mdash; Settings &rarr; Display &rarr; Scale: change to 125% or 150%
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#128433;&#65039;</span>
+            <div class="key-point-text">
+              <strong>Mouse Pointer</strong> &mdash; Settings &rarr; Accessibility &rarr; Make pointer larger and more visible
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#127769;</span>
+            <div class="key-point-text">
+              <strong>Night Light</strong> &mdash; Reduces blue light for comfortable evening use
+            </div>
+          </div>
+
+          <div class="info-box success">
+            &#9989; All these settings can be changed back anytime. Experiment!
+          </div>
+        </section>
+
+        <!-- Slide 10: Workshop Time! (Chapter 6 - Practice) -->
+        <section class="slide slide-content" data-chapter="6">
+          <h2>&#128296; Workshop Time!</h2>
+          <p>Hands-on practice with your new skills</p>
+
+          <div class="handout-prompt">&#128203; Your instructor will hand out the Windows Workshop</div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#9312;</span>
+            <div class="key-point-text">
+              <strong>Part 1: Keyboard Shortcuts Boot Camp</strong> &mdash; 15 minutes, guided practice
+            </div>
+          </div>
+
+          <div class="key-point">
+            <span class="key-point-icon">&#9313;</span>
+            <div class="key-point-text">
+              <strong>Part 2: Window Management &amp; Multitasking</strong> &mdash; 15 minutes, guided practice
+            </div>
+          </div>
+
+          <div class="info-box">
+            &#128161; After the break, you'll continue with Parts 3&ndash;4 independently.
+          </div>
+        </section>
+
+        <!-- Slide 11: Break Time (Chapter 6 - Practice) -->
+        <section class="slide slide-content" data-chapter="6">
+          <h2>&#9749; Break Time!</h2>
+          <p>10 minutes</p>
+
+          <div class="demo-box">
+            <span class="demo-label">Before you go&hellip;</span>
+            &#128190; <strong>Save your work</strong> (<span class="key" style="background:#fff; border-color:#ccc;">Ctrl</span> + <span class="key" style="background:#fff; border-color:#ccc;">S</span>)<br><br>
+            &#128064; <strong>Stretch and rest your eyes</strong> &mdash; Look at something 20 feet away for 20 seconds<br><br>
+            &#9201;&#65039; We'll continue with <strong>screenshots and accessibility</strong> after the break
+          </div>
+        </section>
+
+        <!-- Slide 12: Show & Share (Chapter 7 - Wrap-Up) -->
+        <section class="slide slide-content" data-chapter="7">
+          <h2>&#127891; Show &amp; Share</h2>
+          <p>Let's see what you learned!</p>
+
+          <div class="two-column">
+            <div class="column">
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-icon">&#128101;</span>
+                  <span class="card-title">Show a Partner</span>
+                </div>
+                <ul style="font-size: 1.05rem;">
+                  <li>Demo your <strong>favorite keyboard shortcut</strong></li>
+                  <li>Show a <strong>screenshot</strong> you took</li>
+                  <li>Show a <strong>setting you changed</strong></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="column">
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-icon">&#127942;</span>
+                  <span class="card-title">Quick Challenge</span>
+                </div>
+                <ul style="font-size: 1.05rem;">
+                  <li>Without looking at notes: <strong>Copy and paste</strong> some text</li>
+                  <li><strong>Snap two windows</strong> side by side</li>
+                  <li>Take a <strong>screenshot</strong> of this slide</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-box celebration">
+            &#127881; You just learned skills that most people never discover!
+          </div>
+        </section>
+
+        <!-- Slide 13: Your Productivity Challenge (Chapter 7 - Wrap-Up) -->
+        <section class="slide slide-content" data-chapter="7">
+          <h2>&#128170; Your Productivity Challenge</h2>
+          <p>This week's homework</p>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon">&#128221;</span>
+              <span class="card-title">Practice This Week</span>
+            </div>
+            <ol class="step-list">
+              <li><strong>Use at least 3 keyboard shortcuts</strong> every day this week</li>
+              <li><strong>Take a screenshot</strong> of something and save it to your Desktop</li>
+              <li><strong>Snap two windows side-by-side</strong> while working</li>
+              <li><strong>Adjust one accessibility setting</strong> that helps you</li>
+            </ol>
+          </div>
+
+          <div class="handout-prompt">&#128203; Keep your Keyboard Shortcuts Reference Card at your desk!</div>
+
+          <div class="info-box">
+            &#128197; <strong>Next week:</strong> Email Productivity with Gmail &mdash; your shortcuts will come in handy!
+          </div>
+        </section>
+
+        <!-- Slide 14: Completion (Chapter 7 - Wrap-Up) -->
+        <section class="slide completion-slide" data-chapter="7">
+          <div class="completion-badge">&#9000;&#65039;</div>
+          <h2 class="completion-title">Week 2 Complete!</h2>
+          <p class="completion-subtitle">You're now a Windows power user!</p>
+
+          <div class="completion-stats">
+            <div class="completion-stat">
+              <span class="stat-number">15</span>
+              <span class="stat-label">Shortcuts Learned</span>
+            </div>
+            <div class="completion-stat">
+              <span class="stat-number">4</span>
+              <span class="stat-label">New Tools</span>
+            </div>
+            <div class="completion-stat">
+              <span class="stat-number">&infin;</span>
+              <span class="stat-label">Time Saved</span>
+            </div>
+          </div>
+
+          <p class="completion-message">
+            These skills work in EVERY program you'll learn in this course!
+          </p>
+        </section>
+
+      </div>
+
+      <!-- Navigation Controls -->
+      <div class="nav-controls">
+        <button class="nav-btn prev" id="prevBtn" disabled>
+          &#8592; Previous
+        </button>
+        <button class="nav-btn next" id="nextBtn">
+          Next &#8594;
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Confetti Container -->
+  <div class="confetti" id="confetti"></div>
+
+  <script src="../../../shared/progress.js"></script>
+  <script src="../../../shared/glossary.js" defer></script>
+  <script>
+    // Slide Navigation
+    const slides = document.querySelectorAll('.slide');
+    const slideItems = document.querySelectorAll('.slide-item');
+    const chapterItems = document.querySelectorAll('.chapter-item');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const currentSlideEl = document.getElementById('currentSlide');
+    const totalSlidesEl = document.getElementById('totalSlides');
+    const confetti = document.getElementById('confetti');
+
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    totalSlidesEl.textContent = totalSlides;
+
+    function updateSlide(index) {
+      // Update slides
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+
+      // Update sidebar
+      slideItems.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+      });
+
+      // Update chapters
+      const currentChapter = slides[index].dataset.chapter;
+      chapterItems.forEach(chapter => {
+        const isActive = chapter.dataset.chapter === currentChapter;
+        chapter.classList.toggle('active', isActive);
+        chapter.classList.toggle('expanded', isActive);
+      });
+
+      // Update progress
+      const progress = ((index + 1) / totalSlides) * 100;
+      progressBar.style.width = `${progress}%`;
+      currentSlideEl.textContent = index + 1;
+
+      // Update buttons
+      prevBtn.disabled = index === 0;
+      nextBtn.textContent = index === totalSlides - 1 ? 'Finish \u2713' : 'Next \u2192';
+
+      // Show confetti on last slide
+      if (index === totalSlides - 1) {
+        showConfetti();
+      }
+
+      currentSlide = index;
+
+      // Save progress
+      if (window.VubProgress) {
+        VubProgress.saveSlide('ics', 2, currentSlide, totalSlides);
+      }
+
+      // Scroll slide area to top
+      document.querySelector('.slide-area').scrollTop = 0;
+    }
+
+    function showConfetti() {
+      confetti.innerHTML = '';
+      confetti.classList.add('active');
+
+      const colors = ['#1B365D', '#C9A227', '#B31942', '#28A745', '#0078D4'];
+
+      for (let i = 0; i < 100; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 2 + 's';
+        piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        confetti.appendChild(piece);
+      }
+
+      setTimeout(() => {
+        confetti.classList.remove('active');
+      }, 5000);
+    }
+
+    // Event Listeners
+    prevBtn.addEventListener('click', () => {
+      if (currentSlide > 0) {
+        updateSlide(currentSlide - 1);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentSlide < totalSlides - 1) {
+        updateSlide(currentSlide + 1);
+      }
+    });
+
+    // Click on slide items
+    slideItems.forEach((item, index) => {
+      item.addEventListener('click', () => {
+        updateSlide(index);
+      });
+    });
+
+    // Click on chapter headers
+    chapterItems.forEach(chapter => {
+      const header = chapter.querySelector('.chapter-header');
+      header.addEventListener('click', () => {
+        chapter.classList.toggle('expanded');
+      });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        if (currentSlide < totalSlides - 1) {
+          updateSlide(currentSlide + 1);
+        }
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        if (currentSlide > 0) {
+          updateSlide(currentSlide - 1);
+        }
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        updateSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        updateSlide(totalSlides - 1);
+      }
+    });
+
+    // Touch / Swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const slideArea = document.querySelector('.slide-area');
+
+    slideArea.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slideArea.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0 && currentSlide < totalSlides - 1) {
+          // Swipe left -> next slide
+          updateSlide(currentSlide + 1);
+        } else if (diff < 0 && currentSlide > 0) {
+          // Swipe right -> previous slide
+          updateSlide(currentSlide - 1);
+        }
+      }
+    }, { passive: true });
+
+    // Load saved progress
+    if (window.VubProgress) {
+      const entry = VubProgress.get('ics', 2);
+      if (entry && typeof entry.slide === 'number') {
+        updateSlide(entry.slide);
+      }
+    }
+  </script>
+</body>
+</html>

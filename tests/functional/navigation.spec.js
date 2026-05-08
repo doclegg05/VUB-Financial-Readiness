@@ -1,9 +1,10 @@
 const { test, expect } = require('@playwright/test');
+const { COURSE_URL } = require('../helpers');
 
 test.describe('Navigation', () => {
 
     test.beforeEach(async ({ page }) => {
-        await page.goto('/');
+        await page.goto(COURSE_URL);
         await page.waitForSelector('#home.active');
     });
 
