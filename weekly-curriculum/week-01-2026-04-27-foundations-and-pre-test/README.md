@@ -1,4 +1,4 @@
-# Week 1 - Monday, April 27, 2026
+# Week 1 - Foundations and Pre-Test
 
 ## Focus
 

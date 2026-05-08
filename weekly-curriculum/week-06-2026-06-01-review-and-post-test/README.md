@@ -1,4 +1,4 @@
-# Week 6 - Monday, June 1, 2026
+# Week 6 - Review and Post-Test
 
 ## Focus
 

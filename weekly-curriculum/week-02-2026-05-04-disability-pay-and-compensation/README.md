@@ -1,4 +1,4 @@
-# Week 2 - Monday, May 4, 2026
+# Week 2 - Disability Pay and Compensation
 
 ## Focus
 

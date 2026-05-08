@@ -5,21 +5,21 @@ Readiness course. Here is a map so you can find what you need quickly.
 
 ## To launch the course in class
 
-Double-click **`index.html`**. The course opens in your web browser with all 5
-modules, the sidebar, dark mode, and every link wired up.
+Double-click **`index.html`**. The Learning Lab dashboard opens in your web
+browser with course links, assessments, handouts, and study resources wired up.
 
 ## To teach week by week
 
-Open **`weekly-curriculum/`**. It contains one folder for each Monday meeting:
+Open **`weekly-curriculum/`**. It contains one folder for each week in the teaching sequence:
 
-| Week | Date | Focus |
+| Week | Sequence | Focus |
 |---|---|---|
-| Week 1 | April 27, 2026 | Pre-test + Module 1 |
-| Week 2 | May 4, 2026 | Module 2 |
-| Week 3 | May 11, 2026 | Module 3 |
-| Week 4 | May 18, 2026 | Modules 4 + 5 compressed into one class |
-| Week 5 | May 25, 2026 | No class - Memorial Day |
-| Week 6 | June 1, 2026 | Review + post-test |
+| Week 1 | First class meeting | Pre-test + Module 1 |
+| Week 2 | Second class meeting | Module 2 |
+| Week 3 | Third class meeting | Module 3 |
+| Week 4 | Fourth class meeting | Modules 4 + 5 compressed into one class |
+| Week 5 | No-class / flex week | No new lesson material |
+| Week 6 | Final class meeting | Review + post-test |
 
 Each weekly folder includes a README with the teaching flow and copies of the
 handouts or assessments needed for that session. The original 📘 folders remain

@@ -1,4 +1,4 @@
-# Week 4 - Monday, May 18, 2026
+# Week 4 - Income and Legacy Planning
 
 ## Focus
 
@@ -10,7 +10,7 @@ Module 4 + condensed Module 5: Managing Retirement Income and Legacy Planning
 2. Keep the Module 4 discussion tight: sequence risk, bucket strategy, RMDs, taxes, and debt.
 3. Teach a condensed Module 5 from `index.html#module5`.
 4. Prioritize SBP decision factors, beneficiary designations, estate documents, and trusted contacts.
-5. Reserve 10 minutes for questions and a preview of the June 1 review/post-test session.
+5. Reserve 10 minutes for questions and a preview of the Week 6 review/post-test session.
 
 ## Suggested Timing
 

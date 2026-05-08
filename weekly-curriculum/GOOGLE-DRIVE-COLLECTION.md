@@ -7,7 +7,7 @@ Use Google Drive as the main place where students return their pre-test and post
 Create one Google Drive folder named:
 
 ```text
-VUB Financial Readiness - Assessment Results - Spring 2026
+VUB Financial Readiness - Assessment Results - Current Cohort
 ```
 
 Inside it, create:
@@ -65,7 +65,7 @@ Upload that file to Google Drive and open it with Google Sheets. It gives you th
 Suggested Google Sheet name:
 
 ```text
-VUB Financial Readiness - Assessment Results Tracker - Spring 2026
+VUB Financial Readiness - Assessment Results Tracker - Current Cohort
 ```
 
 ## Student Workflow
@@ -75,14 +75,14 @@ For Week 1:
 1. Complete the pre-test.
 2. Click `Download Results (CSV)`.
 3. Upload the CSV file to the `01 Pre-Test Results` Google Drive folder.
-4. File name should look like `vub-pre-test-last-name-2026-04-27.csv`.
+4. File name should look like `vub-pre-test-last-name-week-1.csv`.
 
 For Week 6:
 
 1. Complete the post-test.
 2. Click `Download Results (CSV)`.
 3. Upload the CSV file to the `02 Post-Test Results` Google Drive folder.
-4. File name should look like `vub-post-test-last-name-2026-06-01.csv`.
+4. File name should look like `vub-post-test-last-name-week-6.csv`.
 
 ## Instructor Verification
 
