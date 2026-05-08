@@ -16,6 +16,7 @@ Pre-test + Module 1: Retirement Timelines & Preparation
 
 - `pre-test.html`
 - `course-schedule.html`
+- `course-schedule.pdf`
 - `retirement-transition-checklist.html`
 - `ss-claiming-worksheet.html`
 - `tsp-retirement-income.html`

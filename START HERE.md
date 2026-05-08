@@ -17,9 +17,10 @@ Open **`weekly-curriculum/`**. It contains one folder for each week in the teach
 | Week 1 | First class meeting | Pre-test + Module 1 |
 | Week 2 | Second class meeting | Module 2 |
 | Week 3 | Third class meeting | Module 3 |
-| Week 4 | Fourth class meeting | Modules 4 + 5 compressed into one class |
-| Week 5 | No-class / flex week | No new lesson material |
-| Week 6 | Final class meeting | Review + post-test |
+| Week 4 | Fourth class meeting | Module 4 |
+| Week 5 | No-class week | Memorial Day break |
+| Week 6 | Sixth class meeting | Module 5 |
+| Week 7 | Final class meeting | Review + post-test |
 
 Each weekly folder includes a README with the teaching flow and copies of the
 handouts or assessments needed for that session. The original 📘 folders remain
