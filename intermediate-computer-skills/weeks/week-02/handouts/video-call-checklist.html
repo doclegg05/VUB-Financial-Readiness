@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Call Checklist | VUB Intermediate Computer Skills</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --danger: #DC3545;
+      --warning: #FFC107;
+      --zoom-blue: #2D8CFF;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Intro */
+    .intro {
+      background: var(--off-white);
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Checklist */
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--off-white);
+      border-radius: 8px;
+    }
+
+    .checkbox {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--primary);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .checklist-content {
+      flex: 1;
+    }
+
+    .checklist-content strong {
+      color: var(--primary);
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .checklist-content p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+
+    /* Two Columns */
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .do-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .do-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .dont-box {
+      background: rgba(220, 53, 69, 0.08);
+      border: 2px solid var(--danger);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .dont-box h3 {
+      color: var(--danger);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .do-box ul, .dont-box ul {
+      list-style: none;
+      font-size: 0.9rem;
+    }
+
+    .do-box li, .dont-box li {
+      padding: 0.3rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .do-box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .dont-box li::before {
+      content: "✕";
+      position: absolute;
+      left: 0;
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    /* Troubleshooting */
+    .troubleshoot-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .troubleshoot-table thead {
+      background: var(--primary);
+      color: var(--light);
+    }
+
+    .troubleshoot-table th {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .troubleshoot-table td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .troubleshoot-table tbody tr:nth-child(even) {
+      background: var(--off-white);
+    }
+
+    /* Tips Box */
+    .tips-box {
+      background: rgba(201, 162, 39, 0.15);
+      border-left: 4px solid var(--accent);
+      padding: 0.75rem 1rem;
+      border-radius: 0 8px 8px 0;
+      margin-top: 1rem;
+    }
+
+    .tips-box strong {
+      color: var(--primary);
+    }
+
+    .tips-box p {
+      font-size: 0.85rem;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .troubleshoot-table thead {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .two-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>✅ Video Call Checklist</h1>
+      <p style="font-size: 0.9rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 2</p>
+    </div>
+    <span class="header-badge">HANDOUT</span>
+  </header>
+
+  <div class="intro">
+    <strong>Use this checklist before every important video call!</strong> Being prepared helps ensure a smooth experience and makes a good impression.
+  </div>
+
+  <!-- Before Your Call -->
+  <div class="section">
+    <h2 class="section-title">🔧 Before Your Call (15 Minutes Ahead)</h2>
+    <ul class="checklist">
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Test your camera</strong>
+          <p>Go to Settings > Privacy > Camera to make sure it's working</p>
+        </div>
+      </li>
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Test your microphone</strong>
+          <p>Go to Settings > Privacy > Microphone to verify it's enabled</p>
+        </div>
+      </li>
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Check your speakers or headphones</strong>
+          <p>Make sure volume is up and you can hear audio</p>
+        </div>
+      </li>
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Find the meeting link or ID</strong>
+          <p>Check your email or text for the meeting information</p>
+        </div>
+      </li>
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Close unnecessary programs</strong>
+          <p>This helps your computer run the video call smoothly</p>
+        </div>
+      </li>
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Charge your laptop (if applicable)</strong>
+          <p>Or make sure it's plugged in to avoid running out of battery</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Your Video Call Space -->
+  <div class="section">
+    <h2 class="section-title">🏠 Setting Up Your Space</h2>
+    <div class="two-columns">
+      <div class="do-box">
+        <h3>✅ DO:</h3>
+        <ul>
+          <li>Face a window for natural light on your face</li>
+          <li>Choose a quiet room</li>
+          <li>Position camera at eye level</li>
+          <li>Have a plain or tidy background</li>
+          <li>Sit in a comfortable chair</li>
+          <li>Keep water nearby</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h3>❌ DON'T:</h3>
+        <ul>
+          <li>Sit with a window behind you</li>
+          <li>Have a messy background</li>
+          <li>Point camera up at your face</li>
+          <li>Leave TV or radio on</li>
+          <li>Sit in a noisy area</li>
+          <li>Eat during the call</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- During Your Call -->
+  <div class="section">
+    <h2 class="section-title">📞 During Your Call</h2>
+    <ul class="checklist">
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Mute yourself when not speaking</strong>
+          <p>Reduces background noise for everyone else</p>
+        </div>
+      </li>
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Look at the camera when talking</strong>
+          <p>It's like making eye contact with the other person</p>
+        </div>
+      </li>
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Speak clearly and a bit slower</strong>
+          <p>Audio quality can sometimes make fast speech hard to understand</p>
+        </div>
+      </li>
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Use the chat for questions</strong>
+          <p>If you don't want to interrupt, type your question in the chat</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Troubleshooting -->
+  <div class="section">
+    <h2 class="section-title">🔧 Quick Fixes for Common Problems</h2>
+    <table class="troubleshoot-table">
+      <thead>
+        <tr>
+          <th>Problem</th>
+          <th>Try This</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>They can't hear me</td>
+          <td>Check if you're muted (click the microphone icon)</td>
+        </tr>
+        <tr>
+          <td>I can't hear them</td>
+          <td>Check your computer's volume; make sure speakers/headphones are connected</td>
+        </tr>
+        <tr>
+          <td>They can't see me</td>
+          <td>Check if video is off (click the camera icon); check camera privacy settings</td>
+        </tr>
+        <tr>
+          <td>Video is choppy/freezing</td>
+          <td>Turn off your video to save bandwidth; close other programs</td>
+        </tr>
+        <tr>
+          <td>I got disconnected</td>
+          <td>Click the meeting link again to rejoin; check your internet</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tips-box">
+      <strong>💡 When in Doubt:</strong> Leave the meeting and rejoin using the same link. This fixes most problems!
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 2: Video Conferencing</p>
+  </footer>
+</body>
+</html>

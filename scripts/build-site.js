@@ -12,19 +12,55 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const OUT_REL = process.argv[2] || path.join("dist", "site");
 const SITE_ROOT = path.join(ROOT, OUT_REL);
+const LOCAL_INTERMEDIATE_COURSE = path.join(ROOT, "intermediate-computer-skills");
+
+const REQUIRED_ITEMS = [
+  "index.html",
+  "404.html",
+  "financial-readiness.html",
+  "assets",
+  "css",
+  "js",
+  "shared",
+  "student-upload-instructions.html",
+  "intermediate-computer-skills.html",
+  "intermediate-computer-skills",
+  "intermediate-computer-skills/syllabus-overview.html",
+  "intermediate-computer-skills/weeks/week-01/presentation.html",
+];
 
 // Files & folders copied into the build verbatim
 const ITEMS = [
   "index.html",
+  "404.html",
+  "financial-readiness.html",
+  "intermediate-computer-skills.html",
   "course-description.html",
   "course-description.pdf",
   "syllabus.html",
   "syllabus.pdf",
   "syllabus-one-page.pdf",
+  "assets",
   "css",
   "js",
+  "shared",
+  "student-upload-instructions.html",
   "templates",
   "weekly-curriculum",
+];
+
+const BUNDLED_COURSES = [
+  {
+    source: LOCAL_INTERMEDIATE_COURSE,
+    dest: "intermediate-computer-skills",
+    items: [
+      "syllabus-overview.html",
+      "css",
+      "js",
+      "assets",
+      "weeks",
+    ],
+  },
 ];
 
 // Folders that may have an emoji prefix (📘 Assessments, etc.)
@@ -32,7 +68,10 @@ const PUBLIC_TEACHING_FOLDERS = [
   "Assessments",
   "Handouts",
   "Study Resources",
+  "Teacher Guides",
 ];
+
+const REQUIRED_TEACHING_FOLDERS = PUBLIC_TEACHING_FOLDERS;
 
 function rmrf(target) {
   if (fs.existsSync(target)) {
@@ -90,6 +129,15 @@ function walkFiles(dir) {
 rmrf(SITE_ROOT);
 fs.mkdirSync(SITE_ROOT, { recursive: true });
 
+const missingRequired = REQUIRED_ITEMS.filter((item) => !fs.existsSync(path.join(ROOT, item)));
+const missingTeachingFolders = REQUIRED_TEACHING_FOLDERS
+  .filter((suffix) => !findFolderSuffix(suffix))
+  .map((suffix) => `*${suffix}`);
+
+if (missingRequired.length || missingTeachingFolders.length) {
+  throw new Error(`Cannot build site. Missing required item(s): ${missingRequired.concat(missingTeachingFolders).join(", ")}`);
+}
+
 for (const item of ITEMS) {
   const source = path.join(ROOT, item);
   if (fs.existsSync(source)) {
@@ -104,22 +152,29 @@ for (const suffix of PUBLIC_TEACHING_FOLDERS) {
   }
 }
 
-// Special case: only ship student-upload-instructions.html from Admin Paperwork
-const adminFolder = findFolderSuffix("Admin Paperwork");
-if (adminFolder) {
-  const uploadInstructions = path.join(adminFolder, "student-upload-instructions.html");
-  if (fs.existsSync(uploadInstructions)) {
-    fs.copyFileSync(uploadInstructions, path.join(SITE_ROOT, "student-upload-instructions.html"));
+for (const course of BUNDLED_COURSES) {
+  if (!fs.existsSync(course.source)) {
+    console.warn(`Skipped missing sibling course: ${course.source}`);
+    continue;
+  }
+
+  const courseDest = path.join(SITE_ROOT, course.dest);
+  fs.mkdirSync(courseDest, { recursive: true });
+  for (const item of course.items) {
+    const source = path.join(course.source, item);
+    if (fs.existsSync(source)) {
+      copy(source, courseDest);
+    }
   }
 }
 
-// Strip large media (mp3/mp4) and answer-key PDFs from the production output
+// Strip large media (mp3/mp4) from the production output.
+// Instructor materials and answer keys are intentionally public for open educational reuse.
 let stripped = 0;
 for (const file of walkFiles(SITE_ROOT)) {
   const lower = file.toLowerCase();
   const isMedia = lower.endsWith(".mp4") || lower.endsWith(".mp3");
-  const isAnswerKey = path.basename(file).toLowerCase().includes("answer-key.pdf");
-  if (isMedia || isAnswerKey) {
+  if (isMedia) {
     fs.rmSync(file, { force: true });
     stripped += 1;
   }
@@ -127,5 +182,5 @@ for (const file of walkFiles(SITE_ROOT)) {
 
 console.log(`Built website: ${SITE_ROOT}`);
 if (stripped) {
-  console.log(`  Stripped ${stripped} media/answer-key file(s) from output.`);
+  console.log(`  Stripped ${stripped} large media file(s) from output.`);
 }

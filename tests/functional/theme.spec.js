@@ -1,9 +1,10 @@
 const { test, expect } = require('@playwright/test');
+const { COURSE_URL } = require('../helpers');
 
 test.describe('Theme Toggle', () => {
 
     test.beforeEach(async ({ page }) => {
-        await page.goto('/');
+        await page.goto(COURSE_URL);
         await page.evaluate(() => localStorage.clear());
         await page.reload();
         await page.waitForSelector('#home.active');

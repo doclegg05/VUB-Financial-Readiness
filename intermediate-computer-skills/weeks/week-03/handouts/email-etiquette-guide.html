@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Etiquette Guide | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --danger: #DC3545;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.5;
+      padding: 0.4in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, #2C4A7C 100%);
+      color: var(--light);
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.35rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .section { margin-bottom: 1rem; }
+    .section-title {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.4rem 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      border-radius: 5px;
+    }
+    .email-example {
+      background: var(--light);
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 0.75rem 0;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+    }
+    .email-example .email-header {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .email-example .email-field {
+      display: flex;
+      margin-bottom: 0.35rem;
+    }
+    .email-example .email-field strong {
+      width: 70px;
+      color: var(--gray);
+      flex-shrink: 0;
+    }
+    .email-example .email-body { line-height: 1.6; }
+    .good-example {
+      border-color: var(--success);
+      background: rgba(40, 167, 69, 0.03);
+    }
+    .bad-example {
+      border-color: var(--danger);
+      background: rgba(220, 53, 69, 0.03);
+    }
+    .example-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+    .good-label {
+      background: rgba(40, 167, 69, 0.15);
+      color: var(--success);
+    }
+    .bad-label {
+      background: rgba(220, 53, 69, 0.15);
+      color: var(--danger);
+    }
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .do-box, .dont-box {
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+    .do-box {
+      background: rgba(40, 167, 69, 0.08);
+      border-left: 4px solid var(--success);
+    }
+    .dont-box {
+      background: rgba(220, 53, 69, 0.08);
+      border-left: 4px solid var(--danger);
+    }
+    .do-box h4 { color: var(--success); margin-bottom: 0.5rem; }
+    .dont-box h4 { color: var(--danger); margin-bottom: 0.5rem; }
+    .do-box ul, .dont-box ul { margin-left: 1rem; }
+    .do-box li, .dont-box li { margin-bottom: 0.35rem; }
+    .checklist {
+      background: var(--off-white);
+      padding: 0.75rem;
+      border-radius: 6px;
+    }
+    .checklist h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+    .checklist ul {
+      list-style: none;
+      font-size: 0.85rem;
+    }
+    .checklist li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .checklist li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+    .tip-box {
+      background: rgba(201, 162, 39, 0.15);
+      border-left: 4px solid var(--accent);
+      padding: 0.6rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+    }
+    .footer {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0.25in; }
+      .header, .section-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>✉️ Email Etiquette Guide</h1>
+      <p style="font-size: 0.8rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 3</p>
+    </div>
+    <span class="header-badge">GUIDE</span>
+  </header>
+
+  <div class="section">
+    <h2 class="section-title">📝 Professional Email Structure</h2>
+    <span class="example-label good-label">✓ GOOD EXAMPLE</span>
+    <div class="email-example good-example">
+      <div class="email-header">
+        <div class="email-field"><strong>To:</strong> dr.jones@vahealth.gov</div>
+        <div class="email-field"><strong>Subject:</strong> Medication Refill Request - John Smith (Last 4: 1234)</div>
+      </div>
+      <div class="email-body">
+        <p>Dear Dr. Jones,</p>
+        <p style="margin: 0.75rem 0;">I hope this message finds you well. I am writing to request a refill of my blood pressure medication (Lisinopril 10mg). My current supply will run out on March 15th.</p>
+        <p style="margin: 0.75rem 0;">I would like to pick up the prescription at the Clarksburg VA pharmacy. Please let me know if you need any additional information.</p>
+        <p style="margin: 0.75rem 0;">Thank you for your time.</p>
+        <p style="margin-top: 0.75rem;">Best regards,<br>John Smith<br>(304) 555-0123</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">❌ What NOT to Do</h2>
+    <span class="example-label bad-label">✗ BAD EXAMPLE</span>
+    <div class="email-example bad-example">
+      <div class="email-header">
+        <div class="email-field"><strong>To:</strong> doc</div>
+        <div class="email-field"><strong>Subject:</strong> HELP!!!</div>
+      </div>
+      <div class="email-body">
+        <p>hey i need my pills refilled ASAP!!! can u do that 4 me??? its really important!!!!</p>
+        <p style="margin-top: 0.5rem;">thx</p>
+      </div>
+    </div>
+    <p style="font-size: 0.8rem; color: var(--danger); margin-top: 0.5rem;"><strong>Problems:</strong> Vague subject, unprofessional greeting, text speak, all caps, excessive punctuation, missing contact info, no specific details</p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">✓ Do's and ✗ Don'ts</h2>
+    <div class="two-column">
+      <div class="do-box">
+        <h4>✓ DO</h4>
+        <ul>
+          <li>Use a clear, specific subject line</li>
+          <li>Start with a greeting (Dear, Hello, Hi)</li>
+          <li>State your purpose in the first sentence</li>
+          <li>Keep it brief and focused</li>
+          <li>Proofread before sending</li>
+          <li>Use proper capitalization</li>
+          <li>Include your contact information</li>
+          <li>Respond within 24-48 hours</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h4>✗ DON'T</h4>
+        <ul>
+          <li>USE ALL CAPS (looks like shouting)</li>
+          <li>Use text speak (u, ur, thx, 4, 2)</li>
+          <li>Use excessive punctuation (!!!???)</li>
+          <li>Write when emotional - wait, reread</li>
+          <li>Leave the subject line blank</li>
+          <li>Forward chain emails</li>
+          <li>Reply All unnecessarily</li>
+          <li>Share others' emails without permission</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">📋 Subject Line Examples</h2>
+    <div class="two-column">
+      <div class="do-box">
+        <h4>✓ Good Subject Lines</h4>
+        <ul style="list-style: none; margin-left: 0;">
+          <li>✓ "Appointment Request for March"</li>
+          <li>✓ "Question About Benefits - John Smith"</li>
+          <li>✓ "Prescription Refill - Last 4: 1234"</li>
+          <li>✓ "Follow-up: Meeting on 2/23"</li>
+          <li>✓ "Application for Job Posting #4521"</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h4>✗ Bad Subject Lines</h4>
+        <ul style="list-style: none; margin-left: 0;">
+          <li>✗ "URGENT!!!"</li>
+          <li>✗ "Question"</li>
+          <li>✗ "Hi"</li>
+          <li>✗ (blank)</li>
+          <li>✗ "Please read this"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">✅ Before You Hit Send</h2>
+    <div class="checklist">
+      <h4>Pre-Send Checklist</h4>
+      <ul>
+        <li>Is the recipient's email address correct?</li>
+        <li>Is my subject line clear and specific?</li>
+        <li>Did I include a greeting?</li>
+        <li>Is my purpose clear in the first sentence?</li>
+        <li>Have I proofread for spelling/grammar?</li>
+        <li>If mentioned attachment, is it attached?</li>
+        <li>Did I include my name and contact info?</li>
+        <li>Am I CC'ing the right people (if needed)?</li>
+        <li>Would I be okay if this was forwarded?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>💡 The 24-Hour Rule:</strong> If you're angry or emotional about something, write the email but <strong>don't send it</strong>. Save it as a draft and wait 24 hours. Reread it with fresh eyes before deciding to send.
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong> | Intermediate Computer Skills | Week 3</p>
+    <p style="margin-top: 0.25rem;">Email is permanent - take a moment to get it right!</p>
+  </footer>
+</body>
+</html>

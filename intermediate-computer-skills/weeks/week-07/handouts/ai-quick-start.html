@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Quick Start Guide | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --danger: #DC3545;
+      --ai-purple: #7C3AED;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--ai-purple) 0%, #5B21B6 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .section { margin-bottom: 1.5rem; }
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--ai-purple);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .steps-list {
+      list-style: none;
+    }
+    .steps-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--off-white);
+      border-radius: 8px;
+    }
+    .step-num {
+      background: var(--ai-purple);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-text { flex: 1; }
+    .step-text strong { color: var(--primary); display: block; }
+    .step-text span {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .tip-box {
+      background: rgba(124, 58, 237, 0.1);
+      border: 1px solid var(--ai-purple);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    .tip-box h4 {
+      color: var(--ai-purple);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+    .tip-box p, .tip-box li {
+      font-size: 0.95rem;
+    }
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .do-box, .dont-box {
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    .do-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 1px solid var(--success);
+    }
+    .dont-box {
+      background: rgba(220, 53, 69, 0.1);
+      border: 1px solid var(--danger);
+    }
+    .do-box h4 { color: var(--success); }
+    .dont-box h4 { color: var(--danger); }
+    .do-box ul, .dont-box ul {
+      margin-left: 1.25rem;
+      font-size: 0.9rem;
+    }
+    .do-box li, .dont-box li {
+      margin-bottom: 0.5rem;
+    }
+    .prompt-example {
+      background: #f8f8f8;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 0.75rem 0;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+    .prompt-example.good {
+      border-left: 4px solid var(--success);
+    }
+    .prompt-example.weak {
+      border-left: 4px solid var(--danger);
+    }
+    .prompt-label {
+      font-family: 'Segoe UI', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+    .prompt-label.good { color: var(--success); }
+    .prompt-label.weak { color: var(--danger); }
+    .use-case {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: var(--off-white);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+    .use-case-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .use-case-text {
+      flex: 1;
+    }
+    .use-case-text strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .use-case-text span {
+      font-size: 0.85rem;
+      color: var(--gray);
+      font-style: italic;
+    }
+    .safety-alert {
+      background: rgba(220, 53, 69, 0.1);
+      border: 2px solid var(--danger);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    .safety-alert h4 {
+      color: var(--danger);
+      margin-bottom: 0.5rem;
+    }
+    .safety-alert ul {
+      margin-left: 1.25rem;
+    }
+    .safety-alert li {
+      margin-bottom: 0.25rem;
+      font-size: 0.95rem;
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>AI Quick Start Guide</h1>
+      <p style="font-size: 0.9rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 7</p>
+    </div>
+    <span class="header-badge">REFERENCE</span>
+  </header>
+
+  <div class="section">
+    <h2 class="section-title">What is ChatGPT?</h2>
+    <p style="padding: 0.5rem; font-size: 0.95rem;">
+      ChatGPT is an AI assistant that can help you write, answer questions, explain topics, and assist with planning.
+      It works like having a conversation with a very knowledgeable helper. It's free to use!
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Getting Started: Create Your Account</h2>
+    <ul class="steps-list">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>Open your web browser</strong>
+          <span>Use Chrome, Firefox, or Edge</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>Go to: chat.openai.com</strong>
+          <span>Type this in the address bar and press Enter</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>Click "Sign up"</strong>
+          <span>Look for this button in the top right corner</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <strong>Choose "Continue with Google"</strong>
+          <span>Use your Gmail account from Week 3 - easiest option!</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">5</div>
+        <div class="step-text">
+          <strong>Select your Gmail account</strong>
+          <span>Click your email address to sign in</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">6</div>
+        <div class="step-text">
+          <strong>You're ready to chat!</strong>
+          <span>Type your first question in the box at the bottom</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Writing Good Prompts</h2>
+    <p style="padding: 0.5rem 0.5rem 0; font-size: 0.95rem;">
+      A "prompt" is your message to the AI. Better prompts get better answers!
+    </p>
+
+    <div class="tip-box">
+      <h4>The Prompt Formula:</h4>
+      <p style="margin: 0.5rem 0; font-weight: 600;">Strong Prompt = <strong>WHAT</strong> you want + <strong>WHO</strong> it's for + <strong>HOW</strong> you want it</p>
+      <ul style="margin-left: 1.25rem;">
+        <li><strong>WHAT</strong> — Say exactly what you need (a letter, an explanation, a list)</li>
+        <li><strong>WHO</strong> — Give context about the audience (for a veteran, for a beginner)</li>
+        <li><strong>HOW</strong> — Specify the tone, length, or format (formal, under 200 words, bullet points)</li>
+      </ul>
+    </div>
+
+    <p style="padding: 0.5rem; font-weight: 600; color: var(--primary);">Compare These Examples:</p>
+
+    <div class="prompt-example weak">
+      <div class="prompt-label weak">Weak Prompt:</div>
+      "Write a letter"
+    </div>
+
+    <div class="prompt-example good">
+      <div class="prompt-label good">Strong Prompt:</div>
+      "Help me write a brief, formal letter to the VA requesting a copy of my service records. Keep it professional and to the point."
+    </div>
+
+    <div class="prompt-example weak">
+      <div class="prompt-label weak">Weak Prompt:</div>
+      "What's Medicare?"
+    </div>
+
+    <div class="prompt-example good">
+      <div class="prompt-label good">Strong Prompt:</div>
+      "Explain the difference between Medicare Part A and Part B in simple terms that a beginner can understand."
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Practical Uses for AI</h2>
+    <div class="use-case">
+      <div class="use-case-icon">📧</div>
+      <div class="use-case-text">
+        <strong>Writing Emails</strong>
+        <span>"Help me write a polite email to reschedule my doctor's appointment"</span>
+      </div>
+    </div>
+    <div class="use-case">
+      <div class="use-case-icon">📝</div>
+      <div class="use-case-text">
+        <strong>Drafting Letters</strong>
+        <span>"Write a thank you letter to my grandson for the birthday gift"</span>
+      </div>
+    </div>
+    <div class="use-case">
+      <div class="use-case-icon">📋</div>
+      <div class="use-case-text">
+        <strong>Making Lists</strong>
+        <span>"Create a packing list for a 5-day trip to visit family in Florida"</span>
+      </div>
+    </div>
+    <div class="use-case">
+      <div class="use-case-icon">🔍</div>
+      <div class="use-case-text">
+        <strong>Explaining Things</strong>
+        <span>"Explain how to set up automatic bill pay in simple steps"</span>
+      </div>
+    </div>
+    <div class="use-case">
+      <div class="use-case-icon">🍳</div>
+      <div class="use-case-text">
+        <strong>Recipe Ideas</strong>
+        <span>"Suggest 5 easy dinner recipes using chicken and vegetables"</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Do's and Don'ts</h2>
+    <div class="two-column">
+      <div class="do-box">
+        <h4>Do:</h4>
+        <ul>
+          <li>Ask for help with writing</li>
+          <li>Request explanations of topics</li>
+          <li>Use it for planning and lists</li>
+          <li>Ask follow-up questions</li>
+          <li>Say "make it simpler" or "make it shorter"</li>
+          <li>Verify important information elsewhere</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h4>Don't:</h4>
+        <ul>
+          <li>Share personal information</li>
+          <li>Trust it for medical advice</li>
+          <li>Believe everything without checking</li>
+          <li>Use it for legal decisions</li>
+          <li>Share passwords or account numbers</li>
+          <li>Expect it to know current news</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Stay Safe!</h2>
+    <div class="safety-alert">
+      <h4>NEVER Share These With AI:</h4>
+      <ul>
+        <li>Social Security Number</li>
+        <li>Bank account or credit card numbers</li>
+        <li>Passwords or PINs</li>
+        <li>Medical record numbers</li>
+        <li>Your full address</li>
+        <li>Date of birth</li>
+      </ul>
+    </div>
+    <div class="tip-box">
+      <h4>Remember:</h4>
+      <p>AI is a helpful tool, but it's not perfect. Always double-check important information with official sources (like VA.gov for benefits questions).</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Quick Reference: Useful Starter Prompts</h2>
+    <div class="prompt-example good" style="margin-bottom: 0.5rem;">
+      "Explain [topic] in simple terms a beginner can understand"
+    </div>
+    <div class="prompt-example good" style="margin-bottom: 0.5rem;">
+      "Help me write a [formal/friendly] [email/letter] about [topic]"
+    </div>
+    <div class="prompt-example good" style="margin-bottom: 0.5rem;">
+      "Create a step-by-step guide for [task]"
+    </div>
+    <div class="prompt-example good" style="margin-bottom: 0.5rem;">
+      "Make a checklist for [activity or event]"
+    </div>
+    <div class="prompt-example good">
+      "Summarize this in 3-5 bullet points: [paste text]"
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 7: Introduction to AI Tools</p>
+  </footer>
+</body>
+</html>

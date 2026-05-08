@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatGPT Practice Activity | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --ai-purple: #7C3AED;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--ai-purple) 0%, #5B21B6 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .name-field {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    .name-field label { font-weight: 600; color: var(--primary); }
+    .name-field .line {
+      flex: 1;
+      border-bottom: 2px solid var(--gray);
+      max-width: 300px;
+    }
+    .section { margin-bottom: 1.5rem; }
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--ai-purple);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .intro {
+      padding: 0.5rem;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .exercise {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .exercise-num {
+      background: var(--ai-purple);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .exercise-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+    .exercise-task {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+    .exercise-task strong {
+      color: var(--ai-purple);
+    }
+    .write-area {
+      border: 2px dashed var(--gray);
+      border-radius: 8px;
+      padding: 1rem;
+      min-height: 80px;
+      background: white;
+    }
+    .write-area label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+    .write-line {
+      border-bottom: 1px solid #ddd;
+      height: 2rem;
+      margin-bottom: 0.25rem;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+    }
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--ai-purple);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .checkbox-text {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    .tip-box {
+      background: rgba(124, 58, 237, 0.1);
+      border: 1px solid var(--ai-purple);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .tip-box strong {
+      color: var(--ai-purple);
+    }
+    .reflection-box {
+      background: rgba(201, 162, 39, 0.1);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .reflection-box h4 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .reflection-lines {
+      margin-top: 0.5rem;
+    }
+    .reflection-lines .write-line {
+      height: 1.75rem;
+    }
+    .success-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+    }
+    .success-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .success-box p {
+      font-size: 0.9rem;
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>ChatGPT Practice Activity</h1>
+      <p style="font-size: 0.9rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 7</p>
+    </div>
+    <span class="header-badge">ACTIVITY</span>
+  </header>
+
+  <div class="name-field">
+    <label>Name:</label>
+    <div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label>
+    <div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Goal: Practice Using ChatGPT</h2>
+    <p class="intro">
+      In this activity, you'll practice writing prompts and using ChatGPT for different tasks.
+      Complete each exercise and check off the box when done. Take your time!
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Exercise 1: Your First Conversation</h2>
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-num">1</div>
+        <div class="exercise-title">Start Simple</div>
+      </div>
+      <div class="exercise-task">
+        <strong>Task:</strong> Log into ChatGPT and ask a simple question: "What is the capital of West Virginia?"
+      </div>
+      <div class="checkbox-item">
+        <div class="checkbox"></div>
+        <div class="checkbox-text">I logged into ChatGPT successfully</div>
+      </div>
+      <div class="checkbox-item">
+        <div class="checkbox"></div>
+        <div class="checkbox-text">I typed the question and received an answer</div>
+      </div>
+      <div class="write-area">
+        <label>What answer did you receive?</label>
+        <div class="write-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Exercise 2: Writing Help</h2>
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-num">2</div>
+        <div class="exercise-title">Write an Email</div>
+      </div>
+      <div class="exercise-task">
+        <strong>Task:</strong> Ask ChatGPT to help you write an email. Choose ONE of these options:
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li>An email to reschedule a doctor's appointment</li>
+          <li>A thank you email to a friend</li>
+          <li>An email asking about a product return</li>
+        </ul>
+      </div>
+      <div class="write-area">
+        <label>Write your prompt here (what you'll type to ChatGPT):</label>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+      <div class="checkbox-item">
+        <div class="checkbox"></div>
+        <div class="checkbox-text">I typed my prompt and ChatGPT wrote an email for me</div>
+      </div>
+      <div class="tip-box">
+        <strong>Tip:</strong> If the email is too long, type: "Make it shorter." If it's too formal, type: "Make it more casual."
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Exercise 3: Explain Something</h2>
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-num">3</div>
+        <div class="exercise-title">Get an Explanation</div>
+      </div>
+      <div class="exercise-task">
+        <strong>Task:</strong> Ask ChatGPT to explain something you've wondered about. Examples:
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li>"Explain how WiFi works in simple terms"</li>
+          <li>"What's the difference between a debit card and a credit card?"</li>
+          <li>"Explain what streaming TV services are"</li>
+        </ul>
+      </div>
+      <div class="write-area">
+        <label>Write your prompt:</label>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+      <div class="checkbox-item">
+        <div class="checkbox"></div>
+        <div class="checkbox-text">I received a helpful explanation</div>
+      </div>
+      <div class="write-area">
+        <label>Write one thing you learned from the answer:</label>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Exercise 4: Make a List</h2>
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-num">4</div>
+        <div class="exercise-title">Create a Helpful List</div>
+      </div>
+      <div class="exercise-task">
+        <strong>Task:</strong> Ask ChatGPT to create a list for you. Choose ONE:
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li>A packing list for a weekend trip</li>
+          <li>A grocery list for healthy meals</li>
+          <li>A checklist for preparing your home for winter</li>
+          <li>Gift ideas for a family member</li>
+        </ul>
+      </div>
+      <div class="write-area">
+        <label>Write your prompt (be specific about details!):</label>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+      <div class="checkbox-item">
+        <div class="checkbox"></div>
+        <div class="checkbox-text">ChatGPT created a useful list for me</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Exercise 5: Improve a Prompt</h2>
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-num">5</div>
+        <div class="exercise-title">Make It Better</div>
+      </div>
+      <div class="exercise-task">
+        <strong>Task:</strong> This prompt is weak: <em>"Write something about cooking."</em><br><br>
+        Rewrite it to be a STRONG prompt with specific details, context, and format.
+      </div>
+      <div class="write-area">
+        <label>Your improved prompt:</label>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+      <div class="checkbox-item">
+        <div class="checkbox"></div>
+        <div class="checkbox-text">I tested my improved prompt in ChatGPT</div>
+      </div>
+      <div class="checkbox-item">
+        <div class="checkbox"></div>
+        <div class="checkbox-text">The response was more helpful than a weak prompt would get</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Bonus Challenge</h2>
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-num">+</div>
+        <div class="exercise-title">Your Own Task</div>
+      </div>
+      <div class="exercise-task">
+        <strong>Task:</strong> Think of something in your own life where ChatGPT could help you.
+        Write a prompt and try it!
+      </div>
+      <div class="write-area">
+        <label>What would you like help with?</label>
+        <div class="write-line"></div>
+      </div>
+      <div class="write-area">
+        <label>Write your prompt:</label>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+      <div class="checkbox-item">
+        <div class="checkbox"></div>
+        <div class="checkbox-text">I tried my own prompt and it worked!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reflection-box">
+    <h4>Reflection Questions</h4>
+    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Answer these after completing the exercises:</p>
+    <div class="reflection-lines">
+      <p style="font-size: 0.9rem; margin-bottom: 0.25rem;">1. What was the most useful thing ChatGPT helped you with today?</p>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <p style="font-size: 0.9rem; margin: 0.5rem 0 0.25rem;">2. What will you remember to do when writing prompts?</p>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <p style="font-size: 0.9rem; margin: 0.5rem 0 0.25rem;">3. What should you NEVER share with AI? (Name 2 things)</p>
+      <div class="write-line"></div>
+    </div>
+  </div>
+
+  <div class="success-box">
+    <h3>Great Work!</h3>
+    <p>
+      You've practiced using AI as a helpful tool. Remember: better prompts = better answers!
+      Keep your Quick Start Guide handy for reference at home.
+    </p>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 7: Introduction to AI Tools</p>
+  </footer>
+</body>
+</html>

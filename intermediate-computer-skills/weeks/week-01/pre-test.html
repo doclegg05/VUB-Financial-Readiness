@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-Test Assessment | VUB Intermediate Computer Skills</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* VUB Navy/Patriotic Theme */
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --primary-dark: #0D1B2A;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --red: #B31942;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --muted: #EEF4FA;
+      --gray: #5A6A7A;
+      --gray-light: #8A9AAA;
+      --success: #28A745;
+      --danger: #DC3545;
+      --info: #17A2B8;
+      --va-blue: #003F72;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .quiz-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--light);
+      padding: 2rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .quiz-header h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-header p {
+      color: var(--accent-light);
+      font-size: 1rem;
+    }
+
+    .course-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary-dark);
+      padding: 0.25rem 1rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      background: rgba(255,255,255,0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 10px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+      border-radius: 5px;
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    .progress-text {
+      color: var(--light);
+      font-size: 0.875rem;
+      font-weight: 600;
+      min-width: 100px;
+      text-align: right;
+    }
+
+    /* Main Content */
+    .quiz-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Instructions Section */
+    .instructions {
+      background: var(--light);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-left: 4px solid var(--accent);
+    }
+
+    .instructions h2 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .instructions ul {
+      margin-left: 1.5rem;
+      color: var(--gray);
+    }
+
+    .instructions li {
+      margin-bottom: 0.5rem;
+    }
+
+    .instructions .important {
+      background: rgba(201,162,39,0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    /* Question Card */
+    .question-card {
+      background: var(--light);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      display: none;
+    }
+
+    .question-card.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--muted);
+    }
+
+    .question-number {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    .question-category {
+      background: var(--muted);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .question-text {
+      font-size: 1.25rem;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    /* Answer Options */
+    .answer-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .answer-option {
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--muted);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 1.1rem;
+    }
+
+    .answer-option:hover {
+      border-color: var(--primary-light);
+      background: var(--off-white);
+    }
+
+    .answer-option.selected {
+      border-color: var(--accent);
+      background: rgba(201,162,39,0.1);
+    }
+
+    .answer-option input {
+      display: none;
+    }
+
+    .answer-marker {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--gray-light);
+      border-radius: 50%;
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--gray);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .answer-option.selected .answer-marker {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--primary-dark);
+    }
+
+    .answer-text {
+      flex: 1;
+    }
+
+    /* Navigation */
+    .quiz-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      margin-top: 1rem;
+    }
+
+    .nav-btn {
+      padding: 0.875rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-prev {
+      background: var(--muted);
+      color: var(--primary);
+    }
+
+    .btn-prev:hover:not(:disabled) {
+      background: var(--gray-light);
+      color: var(--light);
+    }
+
+    .btn-next {
+      background: var(--primary);
+      color: var(--light);
+    }
+
+    .btn-next:hover:not(:disabled) {
+      background: var(--primary-light);
+    }
+
+    .btn-submit {
+      background: var(--accent);
+      color: var(--primary-dark);
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      background: var(--accent-light);
+    }
+
+    /* Question Dots */
+    .question-dots {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .q-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .q-dot.answered {
+      background: var(--success);
+    }
+
+    .q-dot.current {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+
+    .q-dot:hover {
+      transform: scale(1.2);
+    }
+
+    /* Results Section */
+    .results-section {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .results-section.active {
+      display: block;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .results-card {
+      background: var(--light);
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .results-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .results-title {
+      font-size: 1.75rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .results-subtitle {
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .score-display {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--light);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .score-number {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .score-breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .breakdown-item {
+      background: var(--muted);
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .breakdown-category {
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.25rem;
+    }
+
+    .breakdown-score {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .results-message {
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+
+    .results-message.excellent {
+      background: rgba(40,167,69,0.1);
+      border: 2px solid var(--success);
+      color: #155724;
+    }
+
+    .results-message.good {
+      background: rgba(23,162,184,0.1);
+      border: 2px solid var(--info);
+      color: #0c5460;
+    }
+
+    .results-message.building {
+      background: rgba(201,162,39,0.1);
+      border: 2px solid var(--accent);
+      color: #856404;
+    }
+
+    .btn-restart {
+      background: var(--primary);
+      color: var(--light);
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-right: 1rem;
+    }
+
+    .btn-restart:hover {
+      background: var(--primary-light);
+    }
+
+    .btn-continue {
+      background: var(--accent);
+      color: var(--primary-dark);
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-continue:hover {
+      background: var(--accent-light);
+    }
+
+    /* Start Section */
+    .start-section {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .start-section.hidden {
+      display: none;
+    }
+
+    .start-card {
+      background: var(--light);
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .start-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .start-title {
+      font-size: 1.75rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .start-subtitle {
+      color: var(--gray);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .test-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-item {
+      background: var(--muted);
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .info-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .info-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .topic-list {
+      text-align: left;
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+
+    .topic-list h3 {
+      font-size: 0.875rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .topic-list ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .topic-list li {
+      padding: 0.5rem 0;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .topic-list li::before {
+      content: "📋";
+      font-size: 0.875rem;
+    }
+
+    .btn-start {
+      background: var(--accent);
+      color: var(--primary-dark);
+      padding: 1.25rem 3rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-start:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(201,162,39,0.3);
+    }
+
+    /* Quiz Section */
+    .quiz-section {
+      display: none;
+    }
+
+    .quiz-section.active {
+      display: block;
+    }
+
+    /* Name Input */
+    .name-input-group {
+      margin-bottom: 2rem;
+    }
+
+    .name-input-group label {
+      display: block;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .name-input-group input {
+      width: 100%;
+      max-width: 400px;
+      padding: 1rem;
+      font-size: 1.1rem;
+      border: 2px solid var(--muted);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .name-input-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(201,162,39,0.2);
+    }
+
+    /* Print Report Button */
+    .btn-print {
+      background: #1B365D;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-right: 1rem;
+    }
+
+    .btn-print:hover {
+      background: #2C4A7C;
+    }
+
+    /* Print Report Section - Hidden on screen */
+    .print-report {
+      display: none;
+    }
+
+    /* Print Styles */
+    @media print {
+      /* Hide everything except report */
+      body * {
+        visibility: hidden;
+      }
+
+      .print-report,
+      .print-report * {
+        visibility: visible;
+      }
+
+      .print-report {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white;
+        padding: 0.5in;
+      }
+
+      /* Report Header */
+      .report-header {
+        border-bottom: 3px solid #1B365D;
+        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .report-header h1 {
+        color: #1B365D;
+        font-size: 1.5rem;
+        margin: 0 0 0.25rem 0;
+      }
+
+      .report-header h2 {
+        color: #5A6A7A;
+        font-size: 1rem;
+        font-weight: normal;
+        margin: 0 0 0.5rem 0;
+      }
+
+      .report-header .test-type {
+        background: #1B365D;
+        color: white;
+        padding: 0.25rem 1rem;
+        display: inline-block;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      /* Student Info */
+      .report-info {
+        display: flex;
+        justify-content: space-between;
+        background: #F5F7FA;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 4px;
+      }
+
+      .report-info-item {
+        text-align: left;
+      }
+
+      .report-info-label {
+        font-size: 0.7rem;
+        color: #5A6A7A;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .report-info-value {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1B365D;
+      }
+
+      /* Score Summary */
+      .report-score-summary {
+        text-align: center;
+        padding: 1.5rem;
+        background: #1B365D;
+        color: white;
+        margin-bottom: 1.5rem;
+        border-radius: 4px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .report-score-number {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #C9A227;
+        line-height: 1;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .report-score-detail {
+        font-size: 1rem;
+        opacity: 0.9;
+        margin-top: 0.5rem;
+      }
+
+      /* Category Breakdown */
+      .report-section-title {
+        font-size: 0.875rem;
+        color: #1B365D;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #C9A227;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .report-categories {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .report-category {
+        background: #F5F7FA;
+        padding: 0.75rem;
+        text-align: center;
+        border-radius: 4px;
+      }
+
+      .report-category-name {
+        font-size: 0.6rem;
+        color: #5A6A7A;
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+      }
+
+      .report-category-score {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1B365D;
+      }
+
+      /* Question Results Table */
+      .report-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .report-table th {
+        background: #1B365D;
+        color: white;
+        padding: 0.5rem;
+        text-align: left;
+        font-weight: 600;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .report-table td {
+        padding: 0.5rem;
+        border-bottom: 1px solid #DEE2E6;
+        vertical-align: top;
+      }
+
+      .report-table tr:nth-child(even) {
+        background: #F8F9FA;
+      }
+
+      .report-table .col-num {
+        width: 30px;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      .report-table .col-question {
+        width: auto;
+      }
+
+      .report-table .col-answer {
+        width: 60px;
+        text-align: center;
+      }
+
+      .report-table .col-correct {
+        width: 60px;
+        text-align: center;
+      }
+
+      .report-table .col-result {
+        width: 40px;
+        text-align: center;
+        font-size: 1rem;
+      }
+
+      .result-correct {
+        color: #28A745;
+      }
+
+      .result-incorrect {
+        color: #DC3545;
+      }
+
+      /* Footer */
+      .report-footer {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid #DEE2E6;
+        text-align: center;
+        font-size: 0.75rem;
+        color: #5A6A7A;
+      }
+
+      .report-footer strong {
+        color: #1B365D;
+      }
+
+      /* Page break handling */
+      .report-table {
+        page-break-inside: auto;
+      }
+
+      .report-table tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .quiz-header h1 {
+        font-size: 1.25rem;
+      }
+
+      .quiz-container {
+        padding: 1rem;
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+      }
+
+      .answer-option {
+        padding: 0.875rem 1rem;
+        font-size: 1rem;
+      }
+
+      .test-info {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="quiz-header">
+    <h1>📝 Pre-Course Assessment</h1>
+    <p>VUB Intermediate Computer Skills</p>
+    <span class="course-badge">Baseline Knowledge Check</span>
+
+    <div class="progress-container" id="progressContainer" style="display: none;">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text" id="progressText">0 of 20</div>
+    </div>
+  </header>
+
+  <div class="quiz-container">
+    <!-- Start Section -->
+    <div class="start-section" id="startSection">
+      <div class="start-card">
+        <div class="start-icon">🎯</div>
+        <h2 class="start-title">Welcome to Your Pre-Test!</h2>
+        <p class="start-subtitle">
+          This assessment helps us understand your current skill level so we can
+          tailor the course to your needs. Don't worry about getting everything right!
+        </p>
+
+        <div class="test-info">
+          <div class="info-item">
+            <div class="info-icon">❓</div>
+            <div class="info-label">Questions</div>
+            <div class="info-value">20</div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">⏱️</div>
+            <div class="info-label">Time</div>
+            <div class="info-value">No Limit</div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🔄</div>
+            <div class="info-label">Can Change</div>
+            <div class="info-value">Yes</div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📊</div>
+            <div class="info-label">Purpose</div>
+            <div class="info-value">Baseline</div>
+          </div>
+        </div>
+
+        <div class="topic-list">
+          <h3>Topics Covered</h3>
+          <ul>
+            <li>VA Online Services (VA.gov, MyHealtheVet)</li>
+            <li>Video Conferencing & Telehealth</li>
+            <li>Email Productivity</li>
+            <li>Microsoft Word & Excel</li>
+            <li>Cloud Computing Basics</li>
+            <li>AI Tools</li>
+          </ul>
+        </div>
+
+        <div class="name-input-group">
+          <label for="participantName">Please enter your name:</label>
+          <input type="text" id="participantName" placeholder="Your full name" required>
+        </div>
+
+        <button class="btn-start" id="btnStart">Begin Assessment →</button>
+      </div>
+    </div>
+
+    <!-- Quiz Section -->
+    <div class="quiz-section" id="quizSection">
+      <div class="instructions">
+        <h2>📌 Instructions</h2>
+        <ul>
+          <li>Read each question carefully before selecting your answer</li>
+          <li>Click on your answer choice to select it</li>
+          <li>Use the navigation buttons or question dots to move between questions</li>
+          <li>You can change your answers at any time before submitting</li>
+        </ul>
+        <p class="important">
+          ℹ️ This is a baseline assessment — it's okay if you don't know all the answers!
+          The purpose is to see where you're starting so we can measure your progress.
+        </p>
+      </div>
+
+      <!-- Question Dots Navigation -->
+      <div class="question-dots" id="questionDots"></div>
+
+      <!-- Questions Container -->
+      <div id="questionsContainer"></div>
+
+      <!-- Navigation -->
+      <div class="quiz-navigation">
+        <button class="nav-btn btn-prev" id="btnPrev" disabled>
+          ← Previous
+        </button>
+        <button class="nav-btn btn-next" id="btnNext">
+          Next →
+        </button>
+        <button class="nav-btn btn-submit" id="btnSubmit" style="display: none;">
+          Submit Assessment ✓
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-section" id="resultsSection">
+      <div class="results-card">
+        <div class="results-icon">🏆</div>
+        <h2 class="results-title">Assessment Complete!</h2>
+        <p class="results-subtitle" id="participantGreeting">Thank you for completing the pre-test.</p>
+
+        <div class="score-display">
+          <div class="score-number" id="finalScore">0%</div>
+          <div class="score-label">Overall Score</div>
+        </div>
+
+        <div class="score-breakdown" id="scoreBreakdown"></div>
+
+        <div class="results-message" id="resultsMessage"></div>
+
+        <p style="color: var(--gray); margin-bottom: 1.5rem; font-size: 0.9rem;">
+          Your instructor has recorded your baseline score. At the end of the course,
+          you'll take a similar assessment to see how much you've learned!
+        </p>
+
+        <button class="btn-print" onclick="generateReport()">🖨️ Print Report (PDF)</button>
+        <button class="btn-restart" onclick="location.reload()">Retake Assessment</button>
+        <a href="presentation.html" class="btn-continue">Continue to Lesson →</a>
+      </div>
+    </div>
+
+    <!-- Print Report Section (Hidden on screen, visible when printing) -->
+    <div class="print-report" id="printReport">
+      <div class="report-header">
+        <h1>VETERANS UPWARD BOUND - WEST VIRGINIA</h1>
+        <h2>Intermediate Computer Skills</h2>
+        <span class="test-type">PRE-TEST ASSESSMENT REPORT</span>
+      </div>
+
+      <div class="report-info">
+        <div class="report-info-item">
+          <div class="report-info-label">Student Name</div>
+          <div class="report-info-value" id="reportName">—</div>
+        </div>
+        <div class="report-info-item">
+          <div class="report-info-label">Test Date</div>
+          <div class="report-info-value" id="reportDate">—</div>
+        </div>
+        <div class="report-info-item">
+          <div class="report-info-label">Instructor</div>
+          <div class="report-info-value">Britt Legg</div>
+        </div>
+      </div>
+
+      <div class="report-score-summary">
+        <div class="report-score-number" id="reportScore">0%</div>
+        <div class="report-score-detail" id="reportScoreDetail">0 of 20 correct</div>
+      </div>
+
+      <h3 class="report-section-title">Score by Category</h3>
+      <div class="report-categories" id="reportCategories"></div>
+
+      <h3 class="report-section-title">Detailed Results</h3>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th class="col-num">#</th>
+            <th class="col-question">Question</th>
+            <th class="col-answer">Answer</th>
+            <th class="col-correct">Correct</th>
+            <th class="col-result"></th>
+          </tr>
+        </thead>
+        <tbody id="reportTableBody"></tbody>
+      </table>
+
+      <div class="report-footer">
+        <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+        <p>Intermediate Computer Skills Course | Pre-Test Assessment</p>
+        <p>This report documents the student's baseline knowledge at the start of the course.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Quiz Questions Data - Updated for new curriculum
+    const questions = [
+      // VA ONLINE SERVICES (3 questions)
+      {
+        id: 1,
+        category: "VA Online Services",
+        question: "Which website is the main VA portal for accessing benefits, health care, and records?",
+        options: [
+          { letter: "A", text: "va.com" },
+          { letter: "B", text: "va.gov" },
+          { letter: "C", text: "veterans.org" },
+          { letter: "D", text: "myva.net" }
+        ],
+        correct: "B"
+      },
+      {
+        id: 2,
+        category: "VA Online Services",
+        question: "What is MyHealtheVet primarily used for?",
+        options: [
+          { letter: "A", text: "Filing disability claims" },
+          { letter: "B", text: "Managing health care - messaging doctors, refilling prescriptions, viewing records" },
+          { letter: "C", text: "Applying for VA home loans" },
+          { letter: "D", text: "Finding VA job openings" }
+        ],
+        correct: "B"
+      },
+      {
+        id: 3,
+        category: "VA Online Services",
+        question: "What is ID.me used for when accessing VA websites?",
+        options: [
+          { letter: "A", text: "Paying VA bills online" },
+          { letter: "B", text: "Verifying your identity to securely log in" },
+          { letter: "C", text: "Changing your VA benefits" },
+          { letter: "D", text: "Canceling VA appointments" }
+        ],
+        correct: "B"
+      },
+
+      // VIDEO CONFERENCING (3 questions)
+      {
+        id: 4,
+        category: "Video Conferencing",
+        question: "Which of these is a video conferencing application commonly used for telehealth appointments?",
+        options: [
+          { letter: "A", text: "Microsoft Word" },
+          { letter: "B", text: "Google Drive" },
+          { letter: "C", text: "Zoom" },
+          { letter: "D", text: "File Explorer" }
+        ],
+        correct: "C"
+      },
+      {
+        id: 5,
+        category: "Video Conferencing",
+        question: "What should you do FIRST before joining a video call?",
+        options: [
+          { letter: "A", text: "Start talking immediately" },
+          { letter: "B", text: "Check that your camera and microphone are working" },
+          { letter: "C", text: "Turn off your computer" },
+          { letter: "D", text: "Close all other programs" }
+        ],
+        correct: "B"
+      },
+      {
+        id: 6,
+        category: "Video Conferencing",
+        question: "What does the 'mute' button do during a video call?",
+        options: [
+          { letter: "A", text: "Turns off your camera" },
+          { letter: "B", text: "Ends the meeting" },
+          { letter: "C", text: "Turns off your microphone so others can't hear you" },
+          { letter: "D", text: "Makes everyone else quiet" }
+        ],
+        correct: "C"
+      },
+
+      // EMAIL (3 questions)
+      {
+        id: 7,
+        category: "Email",
+        question: "What does 'CC' mean when sending an email?",
+        options: [
+          { letter: "A", text: "Cancel Copy" },
+          { letter: "B", text: "Carbon Copy - sends a copy to additional recipients" },
+          { letter: "C", text: "Computer Code" },
+          { letter: "D", text: "Confidential Content" }
+        ],
+        correct: "B"
+      },
+      {
+        id: 8,
+        category: "Email",
+        question: "What is an email attachment?",
+        options: [
+          { letter: "A", text: "A link to a website" },
+          { letter: "B", text: "A file sent along with an email message" },
+          { letter: "C", text: "The subject line of an email" },
+          { letter: "D", text: "The email sender's signature" }
+        ],
+        correct: "B"
+      },
+      {
+        id: 9,
+        category: "Email",
+        question: "What is the purpose of email folders or labels?",
+        options: [
+          { letter: "A", text: "To make emails load faster" },
+          { letter: "B", text: "To organize emails into categories" },
+          { letter: "C", text: "To send emails to multiple people" },
+          { letter: "D", text: "To change the font of emails" }
+        ],
+        correct: "B"
+      },
+
+      // MICROSOFT OFFICE (5 questions)
+      {
+        id: 10,
+        category: "Microsoft Office",
+        question: "In Microsoft Word, what does 'Ctrl + S' do?",
+        options: [
+          { letter: "A", text: "Selects all text" },
+          { letter: "B", text: "Saves the document" },
+          { letter: "C", text: "Starts spell check" },
+          { letter: "D", text: "Searches for text" }
+        ],
+        correct: "B"
+      },
+      {
+        id: 11,
+        category: "Microsoft Office",
+        question: "What is a Word template used for?",
+        options: [
+          { letter: "A", text: "Adding pictures to documents" },
+          { letter: "B", text: "A pre-formatted document you can customize and reuse" },
+          { letter: "C", text: "Printing documents" },
+          { letter: "D", text: "Sending documents by email" }
+        ],
+        correct: "B"
+      },
+      {
+        id: 12,
+        category: "Microsoft Office",
+        question: "In Excel, what formula would add up numbers in cells A1 through A5?",
+        options: [
+          { letter: "A", text: "=ADD(A1:A5)" },
+          { letter: "B", text: "=TOTAL(A1-A5)" },
+          { letter: "C", text: "=SUM(A1:A5)" },
+          { letter: "D", text: "=PLUS(A1,A5)" }
+        ],
+        correct: "C"
+      },
+      {
+        id: 13,
+        category: "Microsoft Office",
+        question: "What does 'sorting' data in Excel mean?",
+        options: [
+          { letter: "A", text: "Deleting unnecessary data" },
+          { letter: "B", text: "Arranging data in a specific order (alphabetical, numerical, etc.)" },
+          { letter: "C", text: "Adding colors to cells" },
+          { letter: "D", text: "Copying data to another sheet" }
+        ],
+        correct: "B"
+      },
+      {
+        id: 14,
+        category: "Microsoft Office",
+        question: "What is a header in Microsoft Word?",
+        options: [
+          { letter: "A", text: "The first paragraph of a document" },
+          { letter: "B", text: "Text that appears at the top of every page" },
+          { letter: "C", text: "The document title" },
+          { letter: "D", text: "Bold text in a document" }
+        ],
+        correct: "B"
+      },
+
+      // CLOUD COMPUTING (3 questions)
+      {
+        id: 15,
+        category: "Cloud Computing",
+        question: "What does 'cloud storage' mean?",
+        options: [
+          { letter: "A", text: "Storing files on weather satellites" },
+          { letter: "B", text: "Storing files online instead of just on your computer" },
+          { letter: "C", text: "A type of USB drive" },
+          { letter: "D", text: "Deleting files to free up space" }
+        ],
+        correct: "B"
+      },
+      {
+        id: 16,
+        category: "Cloud Computing",
+        question: "Which of these is an example of cloud storage?",
+        options: [
+          { letter: "A", text: "A USB flash drive" },
+          { letter: "B", text: "Your computer's hard drive" },
+          { letter: "C", text: "Google Drive" },
+          { letter: "D", text: "A CD-ROM disc" }
+        ],
+        correct: "C"
+      },
+      {
+        id: 17,
+        category: "Cloud Computing",
+        question: "What is a major benefit of cloud storage?",
+        options: [
+          { letter: "A", text: "Files can only be accessed from one computer" },
+          { letter: "B", text: "Files are automatically deleted after 30 days" },
+          { letter: "C", text: "Files can be accessed from any device with internet" },
+          { letter: "D", text: "Files take up more space on your computer" }
+        ],
+        correct: "C"
+      },
+
+      // AI TOOLS (3 questions)
+      {
+        id: 18,
+        category: "AI Tools",
+        question: "What is ChatGPT?",
+        options: [
+          { letter: "A", text: "A video editing program" },
+          { letter: "B", text: "An AI assistant that can answer questions and help with writing" },
+          { letter: "C", text: "A social media website" },
+          { letter: "D", text: "A type of email service" }
+        ],
+        correct: "B"
+      },
+      {
+        id: 19,
+        category: "AI Tools",
+        question: "What is a 'prompt' when using AI tools like ChatGPT?",
+        options: [
+          { letter: "A", text: "An error message" },
+          { letter: "B", text: "The question or instruction you give to the AI" },
+          { letter: "C", text: "A computer virus" },
+          { letter: "D", text: "A type of password" }
+        ],
+        correct: "B"
+      },
+      {
+        id: 20,
+        category: "AI Tools",
+        question: "Which of these is a safe and appropriate use of AI tools?",
+        options: [
+          { letter: "A", text: "Sharing personal passwords with AI" },
+          { letter: "B", text: "Trusting AI for medical diagnoses without consulting a doctor" },
+          { letter: "C", text: "Getting help writing a letter or learning about a topic" },
+          { letter: "D", text: "Giving AI your Social Security number" }
+        ],
+        correct: "C"
+      }
+    ];
+
+    // Quiz State
+    let currentQuestion = 0;
+    let answers = {};
+    let participantName = "";
+
+    // DOM Elements
+    const startSection = document.getElementById('startSection');
+    const quizSection = document.getElementById('quizSection');
+    const resultsSection = document.getElementById('resultsSection');
+    const questionsContainer = document.getElementById('questionsContainer');
+    const questionDots = document.getElementById('questionDots');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const btnStart = document.getElementById('btnStart');
+    const participantInput = document.getElementById('participantName');
+
+    // Initialize Quiz
+    function init() {
+      renderQuestions();
+      renderQuestionDots();
+      updateNavigation();
+
+      // Event Listeners
+      btnStart.addEventListener('click', startQuiz);
+      btnPrev.addEventListener('click', prevQuestion);
+      btnNext.addEventListener('click', nextQuestion);
+      btnSubmit.addEventListener('click', submitQuiz);
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!quizSection.classList.contains('active')) return;
+
+        if (e.key === 'ArrowRight' || e.key === 'Enter') {
+          if (currentQuestion < questions.length - 1) {
+            nextQuestion();
+          }
+        } else if (e.key === 'ArrowLeft') {
+          if (currentQuestion > 0) {
+            prevQuestion();
+          }
+        } else if (e.key >= '1' && e.key <= '4') {
+          const optionIndex = parseInt(e.key) - 1;
+          const letters = ['A', 'B', 'C', 'D'];
+          if (optionIndex < 4) {
+            selectAnswer(questions[currentQuestion].id, letters[optionIndex]);
+          }
+        }
+      });
+
+      // Enter to start
+      participantInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          startQuiz();
+        }
+      });
+    }
+
+    // Render Questions
+    function renderQuestions() {
+      questionsContainer.innerHTML = questions.map((q, index) => `
+        <div class="question-card ${index === 0 ? 'active' : ''}" data-question="${index}">
+          <div class="question-header">
+            <span class="question-number">Question ${q.id} of ${questions.length}</span>
+            <span class="question-category">${q.category}</span>
+          </div>
+          <p class="question-text">${q.question}</p>
+          <div class="answer-options">
+            ${q.options.map(opt => `
+              <label class="answer-option" data-question-id="${q.id}" data-letter="${opt.letter}">
+                <input type="radio" name="q${q.id}" value="${opt.letter}">
+                <span class="answer-marker">${opt.letter}</span>
+                <span class="answer-text">${opt.text}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      // Add click handlers to options
+      document.querySelectorAll('.answer-option').forEach(option => {
+        option.addEventListener('click', () => {
+          const questionId = parseInt(option.dataset.questionId);
+          const letter = option.dataset.letter;
+          selectAnswer(questionId, letter);
+        });
+      });
+    }
+
+    // Render Question Dots
+    function renderQuestionDots() {
+      questionDots.innerHTML = questions.map((q, index) => `
+        <div class="q-dot ${index === 0 ? 'current' : ''}" data-index="${index}" title="Question ${index + 1}"></div>
+      `).join('');
+
+      // Add click handlers to dots
+      document.querySelectorAll('.q-dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+          goToQuestion(parseInt(dot.dataset.index));
+        });
+      });
+    }
+
+    // Start Quiz
+    function startQuiz() {
+      participantName = participantInput.value.trim();
+      if (!participantName) {
+        participantInput.focus();
+        participantInput.style.borderColor = 'var(--danger)';
+        return;
+      }
+
+      startSection.classList.add('hidden');
+      quizSection.classList.add('active');
+      progressContainer.style.display = 'flex';
+      updateProgress();
+    }
+
+    // Select Answer
+    function selectAnswer(questionId, letter) {
+      answers[questionId] = letter;
+
+      // Update UI
+      const questionCard = document.querySelector(`[data-question-id="${questionId}"]`).closest('.question-card');
+      questionCard.querySelectorAll('.answer-option').forEach(opt => {
+        opt.classList.remove('selected');
+        if (opt.dataset.letter === letter) {
+          opt.classList.add('selected');
+        }
+      });
+
+      // Update dot
+      const questionIndex = questions.findIndex(q => q.id === questionId);
+      document.querySelectorAll('.q-dot')[questionIndex].classList.add('answered');
+
+      updateProgress();
+      updateNavigation();
+    }
+
+    // Navigation Functions
+    function nextQuestion() {
+      if (currentQuestion < questions.length - 1) {
+        goToQuestion(currentQuestion + 1);
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestion > 0) {
+        goToQuestion(currentQuestion - 1);
+      }
+    }
+
+    function goToQuestion(index) {
+      document.querySelectorAll('.question-card').forEach((card, i) => {
+        card.classList.toggle('active', i === index);
+      });
+
+      document.querySelectorAll('.q-dot').forEach((dot, i) => {
+        dot.classList.toggle('current', i === index);
+      });
+
+      currentQuestion = index;
+      updateNavigation();
+    }
+
+    function updateNavigation() {
+      btnPrev.disabled = currentQuestion === 0;
+
+      const isLastQuestion = currentQuestion === questions.length - 1;
+      const allAnswered = Object.keys(answers).length === questions.length;
+
+      btnNext.style.display = isLastQuestion ? 'none' : 'flex';
+      btnSubmit.style.display = isLastQuestion ? 'flex' : 'none';
+      btnSubmit.disabled = !allAnswered;
+    }
+
+    function updateProgress() {
+      const answered = Object.keys(answers).length;
+      const percentage = (answered / questions.length) * 100;
+      progressFill.style.width = `${percentage}%`;
+      progressText.textContent = `${answered} of ${questions.length}`;
+    }
+
+    // Submit Quiz
+    function submitQuiz() {
+      if (Object.keys(answers).length < questions.length) {
+        alert('Please answer all questions before submitting.');
+        return;
+      }
+
+      // Calculate scores
+      const categories = {};
+      let totalCorrect = 0;
+
+      questions.forEach(q => {
+        if (!categories[q.category]) {
+          categories[q.category] = { correct: 0, total: 0 };
+        }
+        categories[q.category].total++;
+
+        if (answers[q.id] === q.correct) {
+          totalCorrect++;
+          categories[q.category].correct++;
+        }
+      });
+
+      const overallPercentage = Math.round((totalCorrect / questions.length) * 100);
+
+      // Display Results
+      quizSection.classList.remove('active');
+      progressContainer.style.display = 'none';
+      resultsSection.classList.add('active');
+
+      document.getElementById('participantGreeting').textContent =
+        `Great job, ${participantName}! Here's your baseline assessment.`;
+      document.getElementById('finalScore').textContent = `${overallPercentage}%`;
+
+      // Score Breakdown
+      const breakdownHTML = Object.entries(categories).map(([cat, data]) => {
+        const catPercent = Math.round((data.correct / data.total) * 100);
+        return `
+          <div class="breakdown-item">
+            <div class="breakdown-category">${cat}</div>
+            <div class="breakdown-score">${data.correct}/${data.total} (${catPercent}%)</div>
+          </div>
+        `;
+      }).join('');
+      document.getElementById('scoreBreakdown').innerHTML = breakdownHTML;
+
+      // Results Message
+      let messageClass, messageText;
+      if (overallPercentage >= 80) {
+        messageClass = 'excellent';
+        messageText = `🌟 Excellent foundation! You have strong baseline skills. This course will help you master advanced techniques and discover new capabilities.`;
+      } else if (overallPercentage >= 50) {
+        messageClass = 'good';
+        messageText = `👍 Good starting point! You have solid fundamentals. This course will fill in gaps and build your confidence with intermediate skills.`;
+      } else {
+        messageClass = 'building';
+        messageText = `📈 Great opportunity for growth! Don't worry about the score — this is exactly what pre-tests are for. You'll see significant improvement by the end of the course!`;
+      }
+
+      const resultsMessage = document.getElementById('resultsMessage');
+      resultsMessage.className = `results-message ${messageClass}`;
+      resultsMessage.textContent = messageText;
+
+      // Store results (for instructor reference)
+      const results = {
+        name: participantName,
+        date: new Date().toLocaleDateString(),
+        score: overallPercentage,
+        answers: answers,
+        categories: categories
+      };
+      console.log('Pre-Test Results:', results);
+
+      // Try to save to localStorage for later comparison
+      try {
+        localStorage.setItem('vub_pretest_results', JSON.stringify(results));
+      } catch(e) {
+        console.log('Could not save to localStorage');
+      }
+
+      // Store for report generation
+      window.quizResults = {
+        name: participantName,
+        date: new Date().toLocaleDateString(),
+        totalCorrect: totalCorrect,
+        totalQuestions: questions.length,
+        percentage: overallPercentage,
+        categories: categories,
+        answers: answers
+      };
+    }
+
+    // Generate Print Report
+    function generateReport() {
+      const results = window.quizResults;
+      if (!results) {
+        alert('No results to print. Please complete the assessment first.');
+        return;
+      }
+
+      // Populate report header info
+      document.getElementById('reportName').textContent = results.name;
+      document.getElementById('reportDate').textContent = results.date;
+      document.getElementById('reportScore').textContent = results.percentage + '%';
+      document.getElementById('reportScoreDetail').textContent =
+        `${results.totalCorrect} of ${results.totalQuestions} correct`;
+
+      // Populate category breakdown
+      const categoriesHTML = Object.entries(results.categories).map(([cat, data]) => {
+        const percent = Math.round((data.correct / data.total) * 100);
+        return `
+          <div class="report-category">
+            <div class="report-category-name">${cat}</div>
+            <div class="report-category-score">${data.correct}/${data.total} (${percent}%)</div>
+          </div>
+        `;
+      }).join('');
+      document.getElementById('reportCategories').innerHTML = categoriesHTML;
+
+      // Populate detailed results table
+      const tableHTML = questions.map(q => {
+        const studentAnswer = results.answers[q.id] || '—';
+        const isCorrect = studentAnswer === q.correct;
+        const studentAnswerText = q.options.find(o => o.letter === studentAnswer)?.text || '—';
+        const correctAnswerText = q.options.find(o => o.letter === q.correct)?.text || '—';
+
+        return `
+          <tr>
+            <td class="col-num">${q.id}</td>
+            <td class="col-question">${q.question}</td>
+            <td class="col-answer">${studentAnswer}</td>
+            <td class="col-correct">${q.correct}</td>
+            <td class="col-result ${isCorrect ? 'result-correct' : 'result-incorrect'}">
+              ${isCorrect ? '✓' : '✗'}
+            </td>
+          </tr>
+        `;
+      }).join('');
+      document.getElementById('reportTableBody').innerHTML = tableHTML;
+
+      // Trigger print
+      window.print();
+    }
+
+    // Initialize when DOM ready
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

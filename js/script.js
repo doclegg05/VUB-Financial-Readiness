@@ -66,6 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.classList.add('sidebar-overlay');
     document.body.appendChild(overlay);
 
+    const presOverlay = document.createElement('div');
+    presOverlay.classList.add('pres-mobile-overlay');
+    document.body.appendChild(presOverlay);
+
     function toggleSidebar() {
         sidebar.classList.toggle('open');
         overlay.classList.toggle('active');
@@ -89,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     hamburgerBtn.addEventListener('click', toggleSidebar);
     overlay.addEventListener('click', closeSidebar);
+    presOverlay.addEventListener('click', () => setMobileSlideMenu(false));
 
 
     // --- Navigation & Single Page Logic ---
@@ -179,13 +184,23 @@ document.addEventListener('DOMContentLoaded', () => {
         pres.chapters = Array.from(container.querySelectorAll('.pres-chapter'));
 
         body.classList.add('presentation-mode');
+        setMobileSlideMenu(false);
 
         // Sync theme toggle state for this module's presentation sidebar
         updateThemeIcon(currentTheme());
+        ensurePresentationMobileControls(container);
 
-        // Load saved progress
-        const saved = localStorage.getItem(`vub_fin_${moduleId}_progress`);
-        const startIndex = saved ? Math.max(0, Math.min(parseInt(saved, 10) || 0, pres.slides.length - 1)) : 0;
+        // Load saved progress (via shared VubProgress library when available)
+        let startIndex = 0;
+        if (window.VubProgress) {
+            const entry = VubProgress.get('fr', moduleId);
+            if (entry && typeof entry.slide === 'number') {
+                startIndex = Math.max(0, Math.min(entry.slide, pres.slides.length - 1));
+            }
+        } else {
+            const saved = localStorage.getItem(`vub_fin_${moduleId}_progress`);
+            startIndex = saved ? Math.max(0, Math.min(parseInt(saved, 10) || 0, pres.slides.length - 1)) : 0;
+        }
         updatePresSlide(startIndex);
 
         // Move focus to the slide area
@@ -201,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pres.slideItems = [];
         pres.chapters = [];
         body.classList.remove('presentation-mode');
+        setMobileSlideMenu(false);
 
         // Restore focus to the relevant nav link
         if (moduleId) {
@@ -263,7 +279,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         pres.currentSlide = index;
-        localStorage.setItem(`vub_fin_${pres.moduleId}_progress`, index);
+        if (window.VubProgress) {
+            VubProgress.saveSlide('fr', pres.moduleId, index, pres.slides.length);
+        } else {
+            localStorage.setItem(`vub_fin_${pres.moduleId}_progress`, index);
+        }
 
         // Scroll slide area to top
         const slideArea = pres.container.querySelector('.pres-slide-area');
@@ -304,6 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (slideItem) {
             const slideIndex = parseInt(slideItem.dataset.slide, 10);
             if (!isNaN(slideIndex)) updatePresSlide(slideIndex);
+            setMobileSlideMenu(false);
             return;
         }
 
@@ -317,7 +338,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Back button
         if (e.target.closest('.pres-back-btn')) {
+            setMobileSlideMenu(false);
             exitPresentation();
+            return;
+        }
+
+        if (e.target.closest('.pres-slide-menu-toggle')) {
+            setMobileSlideMenu(!body.classList.contains('pres-mobile-nav-open'));
             return;
         }
     }
@@ -349,6 +376,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Keyboard Navigation ---
     document.addEventListener('keydown', (e) => {
         if (!pres.active) return;
+
+        if (e.key === 'Escape' && body.classList.contains('pres-mobile-nav-open')) {
+            e.preventDefault();
+            setMobileSlideMenu(false);
+            return;
+        }
 
         // Don't capture keys if user is on an interactive sidebar element or input
         const tag = document.activeElement.tagName.toLowerCase();
@@ -386,6 +419,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
         }
     });
+
+    function ensurePresentationMobileControls(container) {
+        const controls = container.querySelector('.pres-nav-controls');
+        if (!controls || controls.querySelector('.pres-slide-menu-toggle')) return;
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'pres-nav-btn pres-slide-menu-toggle';
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '<i class="fa-solid fa-list"></i> <span>Slides</span>';
+
+        const nextBtn = controls.querySelector('.pres-next');
+        if (nextBtn) {
+            controls.insertBefore(btn, nextBtn);
+        } else {
+            controls.appendChild(btn);
+        }
+    }
+
+    function setMobileSlideMenu(open) {
+        body.classList.toggle('pres-mobile-nav-open', open);
+        document.querySelectorAll('.pres-slide-menu-toggle').forEach(btn => {
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+    }
 
 
     // --- Touch/Swipe Support ---

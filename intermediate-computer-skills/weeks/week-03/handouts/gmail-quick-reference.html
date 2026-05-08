@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gmail Quick Reference | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.5;
+      padding: 0.4in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, #2C4A7C 100%);
+      color: var(--light);
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.35rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .section { margin-bottom: 1rem; }
+    .section-title {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.4rem 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      border-radius: 5px;
+    }
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .task-box {
+      background: var(--off-white);
+      padding: 0.75rem;
+      border-radius: 6px;
+    }
+    .task-box h4 {
+      color: var(--primary);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .task-box ol, .task-box ul {
+      margin-left: 1.25rem;
+      font-size: 0.85rem;
+    }
+    .task-box li { margin-bottom: 0.35rem; }
+    kbd {
+      display: inline-block;
+      background: linear-gradient(180deg, #f5f5f5 0%, #e0e0e0 100%);
+      color: #333;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid #ccc;
+      border-bottom: 2px solid #aaa;
+    }
+    .shortcut-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.4rem;
+    }
+    .shortcut-item {
+      display: flex;
+      align-items: center;
+      padding: 0.4rem 0.6rem;
+      background: var(--off-white);
+      border-radius: 6px;
+      gap: 0.5rem;
+    }
+    .shortcut-keys {
+      min-width: 70px;
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+    }
+    .shortcut-desc {
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    .tip-box {
+      background: rgba(40, 167, 69, 0.1);
+      border-left: 4px solid var(--success);
+      padding: 0.6rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+    }
+    .tip-box strong { color: var(--primary); }
+    .footer {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0.25in; }
+      .header, .section-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>📧 Gmail Quick Reference</h1>
+      <p style="font-size: 0.8rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 3</p>
+    </div>
+    <span class="header-badge">REFERENCE</span>
+  </header>
+
+  <div class="section">
+    <h2 class="section-title">⌨️ Gmail Keyboard Shortcuts</h2>
+    <p style="font-size: 0.8rem; color: var(--gray); margin-bottom: 0.5rem;">Note: Enable shortcuts in Settings > See all settings > Keyboard shortcuts > ON</p>
+    <div class="shortcut-grid">
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>C</kbd></div>
+        <span class="shortcut-desc">Compose new email</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>/</kbd></div>
+        <span class="shortcut-desc">Search mail</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>R</kbd></div>
+        <span class="shortcut-desc">Reply to email</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>A</kbd></div>
+        <span class="shortcut-desc">Reply all</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>F</kbd></div>
+        <span class="shortcut-desc">Forward email</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>E</kbd></div>
+        <span class="shortcut-desc">Archive email</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>#</kbd></div>
+        <span class="shortcut-desc">Delete email</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>S</kbd></div>
+        <span class="shortcut-desc">Star/unstar email</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">📋 Common Tasks</h2>
+    <div class="two-column">
+      <div class="task-box">
+        <h4>Create a Label</h4>
+        <ol>
+          <li>Scroll down left sidebar, click <strong>More</strong></li>
+          <li>Click <strong>Create new label</strong></li>
+          <li>Type label name, click <strong>Create</strong></li>
+        </ol>
+      </div>
+      <div class="task-box">
+        <h4>Apply a Label</h4>
+        <ol>
+          <li>Open email or check the checkbox</li>
+          <li>Click <strong>label icon</strong> (tag) in toolbar</li>
+          <li>Check labels to apply, click <strong>Apply</strong></li>
+        </ol>
+      </div>
+      <div class="task-box">
+        <h4>Create Signature</h4>
+        <ol>
+          <li>Click gear icon > <strong>See all settings</strong></li>
+          <li>Scroll to <strong>Signature</strong> section</li>
+          <li>Click <strong>Create new</strong>, type signature</li>
+          <li>Scroll down, click <strong>Save Changes</strong></li>
+        </ol>
+      </div>
+      <div class="task-box">
+        <h4>Add Attachment</h4>
+        <ol>
+          <li>Click <strong>Compose</strong> for new email</li>
+          <li>Click <strong>paperclip icon</strong> at bottom</li>
+          <li>Browse, select file, wait for upload</li>
+          <li>Or drag file directly into compose window</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">🔍 Search Operators</h2>
+    <div class="two-column">
+      <div class="task-box">
+        <h4>Find by Person</h4>
+        <ul style="list-style: none; margin-left: 0;">
+          <li><code style="background: #eee; padding: 2px 6px; border-radius: 3px;">from:va.gov</code> - From VA</li>
+          <li><code style="background: #eee; padding: 2px 6px; border-radius: 3px;">to:john@email.com</code> - Sent to John</li>
+        </ul>
+      </div>
+      <div class="task-box">
+        <h4>Find by Content</h4>
+        <ul style="list-style: none; margin-left: 0;">
+          <li><code style="background: #eee; padding: 2px 6px; border-radius: 3px;">subject:appointment</code> - In subject</li>
+          <li><code style="background: #eee; padding: 2px 6px; border-radius: 3px;">has:attachment</code> - Has files</li>
+        </ul>
+      </div>
+      <div class="task-box">
+        <h4>Find by Date</h4>
+        <ul style="list-style: none; margin-left: 0;">
+          <li><code style="background: #eee; padding: 2px 6px; border-radius: 3px;">after:2025/01/01</code> - After date</li>
+          <li><code style="background: #eee; padding: 2px 6px; border-radius: 3px;">before:2025/06/01</code> - Before date</li>
+        </ul>
+      </div>
+      <div class="task-box">
+        <h4>Find by Status</h4>
+        <ul style="list-style: none; margin-left: 0;">
+          <li><code style="background: #eee; padding: 2px 6px; border-radius: 3px;">is:unread</code> - Unread only</li>
+          <li><code style="background: #eee; padding: 2px 6px; border-radius: 3px;">is:starred</code> - Starred only</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">📬 CC vs BCC</h2>
+    <div class="two-column">
+      <div class="task-box">
+        <h4>CC (Carbon Copy)</h4>
+        <ul>
+          <li>All recipients can see CC'd people</li>
+          <li>Use to keep others "in the loop"</li>
+          <li>Example: CC your supervisor</li>
+        </ul>
+      </div>
+      <div class="task-box">
+        <h4>BCC (Blind Carbon Copy)</h4>
+        <ul>
+          <li>BCC recipients are hidden</li>
+          <li>Use for large groups (protects privacy)</li>
+          <li>Prevents Reply All chaos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>💡 Remember:</strong> Archive instead of Delete when in doubt! Archived emails are hidden but still searchable.
+    Click <strong>All Mail</strong> in the sidebar to see everything. Attachment limit is <strong>25 MB</strong>.
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong> | Intermediate Computer Skills | Week 3</p>
+    <p style="margin-top: 0.25rem;">Keep this at your workstation for quick reference!</p>
+  </footer>
+</body>
+</html>
