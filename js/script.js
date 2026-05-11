@@ -386,6 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Don't capture keys if user is on an interactive sidebar element or input
         const tag = document.activeElement.tagName.toLowerCase();
         const isInteractive = tag === 'button' || tag === 'input' || tag === 'textarea'
+            || tag === 'select' || tag === 'a'
             || document.activeElement.closest('.pres-chapter-header')
             || document.activeElement.closest('.pres-slide-item');
         if (e.key === ' ' && isInteractive) return;

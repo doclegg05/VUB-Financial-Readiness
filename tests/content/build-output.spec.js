@@ -61,6 +61,10 @@ test.describe('Built Output', () => {
             path.join('📘 Assessments', 'post-test-answer-key.pdf'),
             path.join('📘 Handouts', 'course-schedule.pdf'),
             path.join('📘 Handouts', 'retirement-income-systems-map.html'),
+            path.join('📘 Handouts', 'module4-income-stack-worksheet.html'),
+            path.join('📘 Handouts', 'module4-income-stack-worksheet.pdf'),
+            path.join('📘 Handouts', 'module4-before-december-31-checklist.html'),
+            path.join('📘 Handouts', 'module4-before-december-31-checklist.pdf'),
             path.join('📘 Teacher Guides', 'module4-step-by-step-explainer.pdf'),
             path.join('📘 Teacher Guides', 'module4-practical-scenarios.pdf'),
             path.join('📘 Teacher Guides', 'module1-teachers-guide.pdf'),
@@ -71,6 +75,31 @@ test.describe('Built Output', () => {
         for (const file of required) {
             expect(fs.existsSync(path.join(outDir, file)), `${file} should exist in built output`).toBe(true);
         }
+    });
+
+    test('Module 4 PDF resources are distinct and correctly generated', async () => {
+        const stepByStepPath = path.join(outDir, '📘 Teacher Guides', 'module4-step-by-step-explainer.pdf');
+        const scenariosPath = path.join(outDir, '📘 Teacher Guides', 'module4-practical-scenarios.pdf');
+        const stepByStep = fs.readFileSync(stepByStepPath, 'latin1');
+        const scenarios = fs.readFileSync(scenariosPath, 'latin1');
+
+        expect(fs.statSync(stepByStepPath).size).toBeGreaterThan(100000);
+        expect(fs.statSync(scenariosPath).size).toBeGreaterThan(100000);
+        expect(stepByStep).toContain('Module 4 Step-by-Step Instructor Explainer');
+        expect(scenarios).toContain('Module 4 Practical Scenarios');
+        expect(scenarios).not.toContain('Module 4 Step-by-Step Instructor Explainer');
+    });
+
+    test('Module 4 student handout PDFs are created', async () => {
+        const worksheetHtml = fs.readFileSync(path.join(outDir, '📘 Handouts', 'module4-income-stack-worksheet.html'), 'utf8');
+        const checklistHtml = fs.readFileSync(path.join(outDir, '📘 Handouts', 'module4-before-december-31-checklist.html'), 'utf8');
+        const worksheetPdfPath = path.join(outDir, '📘 Handouts', 'module4-income-stack-worksheet.pdf');
+        const checklistPdfPath = path.join(outDir, '📘 Handouts', 'module4-before-december-31-checklist.pdf');
+
+        expect(worksheetHtml).toContain('My Income Stack Worksheet');
+        expect(checklistHtml).toContain('Before December 31 Checklist');
+        expect(fs.statSync(worksheetPdfPath).size).toBeGreaterThan(20000);
+        expect(fs.statSync(checklistPdfPath).size).toBeGreaterThan(20000);
     });
 
     test('local href and src references resolve in built HTML', async () => {

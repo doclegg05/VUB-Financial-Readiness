@@ -11,8 +11,10 @@ Module 4: Managing Retirement Income
 3. Teach the tax domino effect: traditional withdrawals can affect AGI, Social Security taxation, Medicare IRMAA, state taxes, and fixed-income debt pressure.
 4. Use `module4-step-by-step-explainer.pdf` as the instructor deep-dive for slide-by-slide teaching notes.
 5. Use `module4-practical-scenarios.pdf` for small-group cases, board prompts, and instructor-led application checks.
-6. Use the TSP handout and state benefits reference for applied practice.
-7. Reserve 10 minutes for questions and a preview of the Memorial Day break.
+6. Use `module4-income-stack-worksheet.pdf` when students map their own retirement income sources.
+7. Use `module4-before-december-31-checklist.pdf` during the year-end planning activity.
+8. Use the TSP handout and state benefits reference for applied practice.
+9. Reserve 10 minutes for questions and a preview of the Memorial Day break.
 
 ## Suggested Timing
 
@@ -31,6 +33,10 @@ Module 4: Managing Retirement Income
 - `module4-step-by-step-explainer.html`
 - `module4-practical-scenarios.pdf`
 - `module4-practical-scenarios.html`
+- `module4-income-stack-worksheet.pdf`
+- `module4-income-stack-worksheet.html`
+- `module4-before-december-31-checklist.pdf`
+- `module4-before-december-31-checklist.html`
 - `state-benefits-reference.html`
 - `instructor-notes.html`
 - `research-notes.md`

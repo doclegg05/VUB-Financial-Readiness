@@ -19,6 +19,8 @@ New-Item -ItemType Directory -Path $packageRoot -Force | Out-Null
 
 $items = @(
     "index.html",
+    "financial-readiness.html",
+    "404.html",
     "START HERE.md",
     "SATELLITE CLASSROOM SETUP.md",
     "course-description.html",
@@ -28,6 +30,7 @@ $items = @(
     "syllabus-one-page.pdf",
     "css",
     "js",
+    "shared",
     "templates",
     "weekly-curriculum"
 )
@@ -64,6 +67,10 @@ if (-not $SkipVideos) {
         New-Item -ItemType Directory -Path $videoDest -Force | Out-Null
         Copy-Item -LiteralPath $videoOutput -Destination $videoDest -Recurse -Force
     }
+} else {
+    Get-ChildItem -LiteralPath $packageRoot -Recurse -File |
+        Where-Object { $_.Extension -in @(".mp3", ".mp4") } |
+        ForEach-Object { Remove-Item -LiteralPath $_.FullName -Force }
 }
 
 if (Test-Path $zipPath) {

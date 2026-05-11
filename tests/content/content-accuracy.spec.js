@@ -61,8 +61,8 @@ test.describe('Content Accuracy', () => {
 
     test('Module 4 explains income-system interactions', async ({ page }) => {
         const html = await page.locator('#module4').innerHTML();
-        expect(html).toContain('Systems Map');
-        expect(html).toContain('Tax Domino Effect');
+        expect(html).toContain('Money flows in from four sources');
+        expect(html).toContain('One withdrawal. Four tax events.');
         expect(html).toContain('AGI');
         expect(html).toContain('Medicare');
         expect(html).toContain('IRMAA');
@@ -78,5 +78,51 @@ test.describe('Content Accuracy', () => {
         const html = await page.locator('#module4').innerHTML();
         expect(html).toContain('module4-practical-scenarios.pdf');
         expect(html).toContain('Practical Scenarios PDF');
+    });
+
+    test('Module 4 links the added student handout PDFs', async ({ page }) => {
+        const html = await page.locator('#module4').innerHTML();
+        expect(html).toContain('module4-income-stack-worksheet.pdf');
+        expect(html).toContain('My Income Stack Worksheet');
+        expect(html).toContain('module4-before-december-31-checklist.pdf');
+        expect(html).toContain('Before Dec. 31 Checklist');
+    });
+
+    test('Module 4 prepares students for Income & Taxes assessment items', async ({ page }) => {
+        const html = await page.locator('#module4').innerHTML();
+        expect(html).toContain('VA Disability (70%)');
+        expect(html).toContain('Tax-free');
+        expect(html).toContain('25%');
+        expect(html).toContain('Texas, Florida, and Nevada');
+        expect(html).toContain('97%');
+    });
+
+    test('Module 4 slide buttons link the right PDFs without step-by-step buttons', async ({ page }) => {
+        const buttons = await page.locator('#module4 .pres-pdf-button').evaluateAll((links) => {
+            return links.map((link) => ({
+                text: link.textContent.trim(),
+                href: link.getAttribute('href'),
+            }));
+        });
+
+        expect(buttons).toEqual([
+            {
+                text: 'My Income Stack Worksheet',
+                href: '📘 Handouts/module4-income-stack-worksheet.pdf',
+            },
+            {
+                text: 'Before Dec. 31 Checklist',
+                href: '📘 Handouts/module4-before-december-31-checklist.pdf',
+            },
+            {
+                text: 'Practical Scenarios PDF',
+                href: '📘 Teacher Guides/module4-practical-scenarios.pdf',
+            },
+            {
+                text: 'Relocation Scenario PDF',
+                href: '📘 Teacher Guides/module4-practical-scenarios.pdf',
+            },
+        ]);
+        expect(buttons.some((button) => button.href.includes('module4-step-by-step-explainer.pdf'))).toBe(false);
     });
 });
