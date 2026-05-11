@@ -65,8 +65,17 @@ test.describe('Built Output', () => {
             path.join('📘 Handouts', 'module4-income-stack-worksheet.pdf'),
             path.join('📘 Handouts', 'module4-before-december-31-checklist.html'),
             path.join('📘 Handouts', 'module4-before-december-31-checklist.pdf'),
+            path.join('📘 Handouts', 'sbp-decision-worksheet.pdf'),
+            path.join('📘 Handouts', 'survivor-income-map.html'),
+            path.join('📘 Handouts', 'survivor-income-map.pdf'),
+            path.join('📘 Handouts', 'beneficiary-document-locator.html'),
+            path.join('📘 Handouts', 'beneficiary-document-locator.pdf'),
+            path.join('📘 Handouts', 'end-of-life-readiness-checklist.html'),
+            path.join('📘 Handouts', 'end-of-life-readiness-checklist.pdf'),
             path.join('📘 Teacher Guides', 'module4-step-by-step-explainer.pdf'),
             path.join('📘 Teacher Guides', 'module4-practical-scenarios.pdf'),
+            path.join('📘 Teacher Guides', 'module5-practical-scenarios.html'),
+            path.join('📘 Teacher Guides', 'module5-practical-scenarios.pdf'),
             path.join('📘 Teacher Guides', 'module1-teachers-guide.pdf'),
             'student-upload-instructions.html',
             path.join('shared', 'progress.js'),
@@ -108,6 +117,39 @@ test.describe('Built Output', () => {
         expect(checklistHtml).toContain('Before December 31 Checklist');
         expect(fs.statSync(worksheetPdfPath).size).toBeGreaterThan(20000);
         expect(fs.statSync(checklistPdfPath).size).toBeGreaterThan(20000);
+    });
+
+    test('Module 5 scenario source includes instructor answer guidance', async () => {
+        const scenariosHtml = fs.readFileSync(path.join(outDir, '📘 Teacher Guides', 'module5-practical-scenarios.html'), 'utf8');
+
+        expect(scenariosHtml).toContain('Answer Key: Instructor Guidance');
+        expect(scenariosHtml).toContain('Expected answer');
+        expect(scenariosHtml).toContain('Scenario 8: VA Burial Pre-Need');
+    });
+
+    test('Module 5 student handout PDFs are created', async () => {
+        const sbpHtml = fs.readFileSync(path.join(outDir, '📘 Handouts', 'sbp-decision-worksheet.html'), 'utf8');
+        const survivorHtml = fs.readFileSync(path.join(outDir, '📘 Handouts', 'survivor-income-map.html'), 'utf8');
+        const locatorHtml = fs.readFileSync(path.join(outDir, '📘 Handouts', 'beneficiary-document-locator.html'), 'utf8');
+        const readinessHtml = fs.readFileSync(path.join(outDir, '📘 Handouts', 'end-of-life-readiness-checklist.html'), 'utf8');
+        const scenarioPdfPath = path.join(outDir, '📘 Teacher Guides', 'module5-practical-scenarios.pdf');
+
+        expect(sbpHtml).toContain('SBP-DIC offset has been fully eliminated');
+        expect(sbpHtml).not.toContain('may be offset by the DIC amount');
+        expect(survivorHtml).toContain('Survivor Income Map');
+        expect(locatorHtml).toContain('Beneficiary &amp; Document Locator');
+        expect(readinessHtml).toContain('End-of-Life Readiness Checklist');
+        expect(readinessHtml).toContain('Facilitator guidance');
+
+        for (const file of [
+            path.join(outDir, '📘 Handouts', 'sbp-decision-worksheet.pdf'),
+            path.join(outDir, '📘 Handouts', 'survivor-income-map.pdf'),
+            path.join(outDir, '📘 Handouts', 'beneficiary-document-locator.pdf'),
+            path.join(outDir, '📘 Handouts', 'end-of-life-readiness-checklist.pdf'),
+            scenarioPdfPath,
+        ]) {
+            expect(fs.statSync(file).size, `${file} should be a generated PDF`).toBeGreaterThan(20000);
+        }
     });
 
     test('local href and src references resolve in built HTML', async () => {

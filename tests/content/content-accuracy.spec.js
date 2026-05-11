@@ -97,6 +97,14 @@ test.describe('Content Accuracy', () => {
         expect(html).toContain('97%');
     });
 
+    test('Module 4 includes the interactive income stack visualization', async ({ page }) => {
+        const html = await page.locator('#module4').innerHTML();
+        expect(html).toContain('Try the Retirement Income Stack');
+        expect(html).toContain('data-income-stack-visualizer');
+        expect(html).toContain('Monthly tax-free baseline');
+        expect(html).toContain('85% of Social Security');
+    });
+
     test('Module 4 slide buttons link the right PDFs without step-by-step buttons', async ({ page }) => {
         const buttons = await page.locator('#module4 .pres-pdf-button').evaluateAll((links) => {
             return links.map((link) => ({
@@ -124,5 +132,41 @@ test.describe('Content Accuracy', () => {
             },
         ]);
         expect(buttons.some((button) => button.href.includes('module4-step-by-step-explainer.pdf'))).toBe(false);
+    });
+
+    test('Module 5 links the added end-of-life and survivor planning PDFs', async ({ page }) => {
+        const html = await page.locator('#module5').innerHTML();
+
+        expect(html).toContain('sbp-decision-worksheet.pdf');
+        expect(html).toContain('survivor-income-map.pdf');
+        expect(html).toContain('beneficiary-document-locator.pdf');
+        expect(html).toContain('end-of-life-readiness-checklist.pdf');
+        expect(html).toContain('module5-practical-scenarios.pdf');
+        expect(html).toContain('End-of-Life Readiness');
+        expect(html).toContain('Practical Scenarios');
+    });
+
+    test('Module 5 prepares students for Legacy & Protection assessment items', async ({ page }) => {
+        const html = await page.locator('#module5').innerHTML();
+
+        expect(html).toContain('55%');
+        expect(html).toContain('SBP-DIC offset');
+        expect(html).toContain('fully eliminated');
+        expect(html).toContain('Durable Power of Attorney');
+        expect(html).toContain('trusted contact');
+        expect(html).toContain('beneficiary designations');
+        expect(html).toContain('advance directive');
+    });
+
+    test('Module 5 slide buttons target the created PDFs', async ({ page }) => {
+        const hrefs = await page.locator('#module5 .pres-pdf-button').evaluateAll((links) => {
+            return links.map((link) => link.getAttribute('href'));
+        });
+
+        expect(hrefs).toContain('📘 Handouts/sbp-decision-worksheet.pdf');
+        expect(hrefs).toContain('📘 Handouts/survivor-income-map.pdf');
+        expect(hrefs).toContain('📘 Handouts/beneficiary-document-locator.pdf');
+        expect(hrefs).toContain('📘 Handouts/end-of-life-readiness-checklist.pdf');
+        expect(hrefs).toContain('📘 Teacher Guides/module5-practical-scenarios.pdf');
     });
 });

@@ -61,9 +61,9 @@ test.describe('Mobile Responsive', () => {
         await page.click('#module4 .pres-slide-menu-toggle');
         await page.click('#module4 .pres-chapter[data-chapter="taxes"] .pres-chapter-header');
         await expect(page.locator('#module4 .pres-chapter[data-chapter="taxes"]')).toHaveClass(/expanded/);
-        await page.click('#module4 .pres-slide-item[data-slide="6"]');
+        await page.click('#module4 .pres-slide-item[data-slide="7"]');
 
-        await expect(page.locator('#module4 .pres-current')).toHaveText('7');
+        await expect(page.locator('#module4 .pres-current')).toHaveText('8');
         await expect(page.locator('body')).not.toHaveClass(/pres-mobile-nav-open/);
     });
 });

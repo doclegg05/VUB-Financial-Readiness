@@ -55,6 +55,118 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             btn.setAttribute('aria-label', ariaAction);
         });
+
+        requestAnimationFrame(() => initializeIncomeStackVisualizers(document));
+    }
+
+    function formatStackCurrency(value) {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            maximumFractionDigits: 0,
+        }).format(value);
+    }
+
+    function initializeIncomeStackVisualizers(scope) {
+        scope.querySelectorAll('[data-income-stack-visualizer]').forEach(widget => {
+            if (widget.dataset.stackInitialized !== 'true') {
+                widget.dataset.stackInitialized = 'true';
+                widget.querySelectorAll('[data-stack-input]').forEach(input => {
+                    input.addEventListener('input', () => updateIncomeStackVisualizer(widget));
+                });
+            }
+            updateIncomeStackVisualizer(widget);
+        });
+    }
+
+    function stackValue(widget, name) {
+        const input = widget.querySelector(`[data-stack-input="${name}"]`);
+        return input ? parseFloat(input.value) || 0 : 0;
+    }
+
+    function updateStackText(widget, selector, value) {
+        const target = widget.querySelector(selector);
+        if (target) target.textContent = formatStackCurrency(value);
+    }
+
+    function updateIncomeStackVisualizer(widget) {
+        const va = stackValue(widget, 'va');
+        const pension = stackValue(widget, 'pension');
+        const ss = stackValue(widget, 'ss');
+        const tsp = stackValue(widget, 'tsp');
+        const roth = stackValue(widget, 'roth');
+
+        const taxable = pension + tsp + (ss * 0.85);
+        const taxFree = va + roth + (ss * 0.15);
+        const total = taxable + taxFree;
+
+        updateStackText(widget, '[data-stack-value="va"]', va);
+        updateStackText(widget, '[data-stack-value="pension"]', pension);
+        updateStackText(widget, '[data-stack-value="ss"]', ss);
+        updateStackText(widget, '[data-stack-value="tsp"]', tsp);
+        updateStackText(widget, '[data-stack-value="roth"]', roth);
+        updateStackText(widget, '[data-stack-output="taxFree"]', taxFree);
+        updateStackText(widget, '[data-stack-output="taxable"]', taxable);
+        updateStackText(widget, '[data-stack-output="total"]', total);
+
+        const canvas = widget.querySelector('[data-stack-chart]');
+        if (canvas) drawIncomeStackChart(canvas, taxFree, taxable);
+    }
+
+    function cssVar(name, fallback) {
+        const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        return value || fallback;
+    }
+
+    function drawIncomeStackChart(canvas, taxFree, taxable) {
+        const wrap = canvas.closest('.income-stack-chart-wrap');
+        const total = taxFree + taxable;
+        const parentWidth = wrap ? wrap.clientWidth : 260;
+        const size = Math.max(220, Math.min(parentWidth, 285));
+        const dpr = window.devicePixelRatio || 1;
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = Math.round(size * dpr);
+        canvas.height = Math.round(size * dpr);
+        canvas.style.width = `${size}px`;
+        canvas.style.height = `${size}px`;
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, size, size);
+
+        const center = size / 2;
+        const radius = (size / 2) - 16;
+        const lineWidth = Math.max(34, size * 0.16);
+        const colors = {
+            taxFree: cssVar('--clr-success', '#15803d'),
+            taxable: cssVar('--clr-danger', '#b91c1c'),
+            empty: cssVar('--clr-border', '#cbd5e1'),
+        };
+
+        ctx.lineWidth = lineWidth;
+        ctx.lineCap = 'butt';
+
+        if (total <= 0) {
+            ctx.beginPath();
+            ctx.strokeStyle = colors.empty;
+            ctx.arc(center, center, radius, 0, Math.PI * 2);
+            ctx.stroke();
+            return;
+        }
+
+        let start = -Math.PI / 2;
+        [
+            { value: taxFree, color: colors.taxFree },
+            { value: taxable, color: colors.taxable },
+        ].forEach(segment => {
+            if (segment.value <= 0) return;
+            const angle = (segment.value / total) * Math.PI * 2;
+            ctx.beginPath();
+            ctx.strokeStyle = segment.color;
+            ctx.arc(center, center, radius, start, start + angle);
+            ctx.stroke();
+            start += angle;
+        });
     }
 
 
@@ -288,6 +400,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Scroll slide area to top
         const slideArea = pres.container.querySelector('.pres-slide-area');
         if (slideArea) slideArea.scrollTop = 0;
+
+        initializeIncomeStackVisualizers(pres.slides[index]);
     }
 
 
@@ -389,7 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
             || tag === 'select' || tag === 'a'
             || document.activeElement.closest('.pres-chapter-header')
             || document.activeElement.closest('.pres-slide-item');
-        if (e.key === ' ' && isInteractive) return;
+        if (isInteractive && ['ArrowRight', 'ArrowLeft', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(e.key)) return;
 
         switch (e.key) {
             case 'ArrowRight':
@@ -445,6 +559,8 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
     }
+
+    window.addEventListener('resize', () => initializeIncomeStackVisualizers(document));
 
 
     // --- Touch/Swipe Support ---

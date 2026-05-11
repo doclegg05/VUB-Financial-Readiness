@@ -1773,11 +1773,196 @@ body.presentation-mode .section-pane.active {
 .income-stack-legend-item--taxfree::before { background: var(--clr-success); }
 .income-stack-legend-item--partial::before { background: var(--clr-accent); }
 
+.income-stack-visualizer-slide p {
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin-bottom: 1rem;
+}
+
+.income-stack-visualizer {
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.income-stack-vis-grid {
+    display: grid;
+    grid-template-columns: minmax(270px, 0.92fr) minmax(320px, 1.08fr);
+    gap: 1.1rem;
+    padding: 1rem;
+}
+
+.income-stack-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.stack-control label {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    color: var(--clr-heading);
+    font-weight: 700;
+    font-size: 0.92rem;
+    line-height: 1.25;
+}
+
+.stack-control label span {
+    color: var(--clr-text);
+    font-size: 0.78rem;
+    font-weight: 600;
+    opacity: 0.72;
+    text-align: right;
+}
+
+.stack-control input[type="range"] {
+    width: 100%;
+    margin: 0.35rem 0 0.15rem;
+    accent-color: var(--clr-primary-light);
+    cursor: pointer;
+}
+
+.stack-control-values {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--clr-text);
+    font-size: 0.74rem;
+    opacity: 0.82;
+}
+
+.stack-control-values strong {
+    color: var(--clr-primary-light);
+    font-size: 0.88rem;
+    opacity: 1;
+}
+
+.income-stack-chart-panel {
+    background: rgba(59, 130, 246, 0.05);
+    border: 1px solid var(--clr-border);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.85rem;
+}
+
+.income-stack-chart-wrap {
+    position: relative;
+    min-height: 245px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.income-stack-chart-wrap canvas {
+    display: block;
+    max-width: 100%;
+}
+
+.income-stack-chart-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    text-align: center;
+}
+
+.income-stack-chart-center strong {
+    color: var(--clr-heading);
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    line-height: 1;
+}
+
+.income-stack-chart-center span {
+    color: var(--clr-text);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-top: 0.35rem;
+    max-width: 130px;
+    text-transform: uppercase;
+}
+
+.income-stack-summary {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.stack-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid var(--clr-border);
+    border-radius: 6px;
+    padding: 0.72rem 0.85rem;
+    background: var(--clr-bg);
+}
+
+.stack-summary-row span {
+    color: var(--clr-text);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.stack-summary-row strong {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    white-space: nowrap;
+}
+
+.stack-summary-row--taxfree {
+    border-color: rgba(22, 163, 74, 0.35);
+    background: rgba(22, 163, 74, 0.08);
+}
+
+.stack-summary-row--taxfree strong { color: var(--clr-success); }
+
+.stack-summary-row--taxable {
+    border-color: rgba(179, 25, 66, 0.35);
+    background: rgba(179, 25, 66, 0.08);
+}
+
+.stack-summary-row--taxable strong { color: var(--clr-danger); }
+
+.income-stack-simulation-note {
+    background: rgba(148, 163, 184, 0.12);
+    border-top: 1px solid var(--clr-border);
+    color: var(--clr-text);
+    font-size: 0.82rem;
+    font-style: italic;
+    line-height: 1.45;
+    padding: 0.8rem 1rem;
+}
+
 @media (max-width: 640px) {
     .income-stack-layer,
     .income-stack-total {
         flex-direction: column;
         align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .income-stack-vis-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .income-stack-chart-wrap {
+        min-height: 230px;
+    }
+
+    .stack-summary-row {
+        align-items: flex-start;
+        flex-direction: column;
         gap: 0.25rem;
     }
 }

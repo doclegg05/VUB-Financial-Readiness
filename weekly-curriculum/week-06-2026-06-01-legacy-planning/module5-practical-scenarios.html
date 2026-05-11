@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5 Practical Scenarios - Instructor Resource</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1e3a8a;
+            --navy-dark: #0f172a;
+            --blue: #2563eb;
+            --gold: #fbbf24;
+            --gold-dark: #b45309;
+            --green: #15803d;
+            --red: #b91c1c;
+            --ink: #1f2937;
+            --muted: #475569;
+            --line: #cbd5e1;
+            --paper: #ffffff;
+            --shade: #f8fafc;
+            --soft-blue: #eff6ff;
+            --soft-gold: #fffbeb;
+            --soft-green: #f0fdf4;
+            --soft-red: #fef2f2;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.55in 0.62in;
+        }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 10.1pt;
+            line-height: 1.42;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        h1, h2, h3, h4, .eyebrow, .badge, table {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            font-size: 27pt;
+            line-height: 1.05;
+            color: #ffffff;
+            margin: 0 0 8pt 0;
+        }
+
+        h2 {
+            font-size: 16pt;
+            color: var(--navy);
+            margin: 18pt 0 8pt 0;
+            padding-bottom: 4pt;
+            border-bottom: 2pt solid var(--gold);
+        }
+
+        h3 {
+            font-size: 12.5pt;
+            color: var(--navy);
+            margin: 0 0 6pt 0;
+        }
+
+        h4 {
+            font-size: 9.2pt;
+            color: var(--navy-dark);
+            margin: 7pt 0 3pt 0;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        p {
+            margin: 0 0 7pt 0;
+        }
+
+        ul, ol {
+            margin: 4pt 0 8pt 18pt;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 3pt;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.8pt;
+            line-height: 1.3;
+            margin: 6pt 0 10pt 0;
+        }
+
+        th {
+            background: var(--navy);
+            color: #ffffff;
+            text-align: left;
+            padding: 5pt;
+        }
+
+        td {
+            border: 0.7pt solid var(--line);
+            padding: 5pt;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) td {
+            background: var(--shade);
+        }
+
+        .cover {
+            min-height: 9.1in;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 58%, #315ba8 100%);
+            color: #ffffff;
+            border-radius: 10pt;
+            padding: 42pt 40pt;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 10pt;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 10pt;
+        }
+
+        .subtitle {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14pt;
+            line-height: 1.45;
+            max-width: 6.5in;
+            color: #dbeafe;
+        }
+
+        .cover-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12pt;
+            margin-top: 28pt;
+        }
+
+        .cover-card {
+            border: 1pt solid rgba(255,255,255,0.28);
+            background: rgba(255,255,255,0.08);
+            border-radius: 7pt;
+            padding: 12pt;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 9.5pt;
+            color: #f8fafc;
+        }
+
+        .cover-card strong {
+            color: #ffffff;
+        }
+
+        .small-meta {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 9pt;
+            color: #dbeafe;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        .callout {
+            border-left: 4pt solid var(--blue);
+            background: var(--soft-blue);
+            border-radius: 0 6pt 6pt 0;
+            padding: 8pt 10pt;
+            margin: 8pt 0 10pt 0;
+            page-break-inside: avoid;
+        }
+
+        .callout.warning {
+            border-left-color: var(--red);
+            background: var(--soft-red);
+        }
+
+        .callout.gold {
+            border-left-color: var(--gold-dark);
+            background: var(--soft-gold);
+        }
+
+        .scenario {
+            page-break-inside: avoid;
+            border: 1pt solid var(--line);
+            border-radius: 7pt;
+            padding: 11pt 12pt;
+            margin-bottom: 12pt;
+            background: #ffffff;
+        }
+
+        .scenario-header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8pt;
+            align-items: start;
+            margin-bottom: 7pt;
+        }
+
+        .badge {
+            background: var(--navy);
+            color: #ffffff;
+            border-radius: 4pt;
+            padding: 4pt 7pt;
+            font-size: 8.4pt;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .facts {
+            border: 1pt solid var(--line);
+            border-radius: 6pt;
+            background: var(--shade);
+            padding: 7pt 8pt;
+            margin: 7pt 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8pt;
+        }
+
+        .mini {
+            border: 0.7pt solid var(--line);
+            border-radius: 6pt;
+            padding: 7pt 8pt;
+            background: var(--shade);
+        }
+
+        .mini h4 {
+            margin-top: 0;
+        }
+
+        .board {
+            border: 1.5pt solid var(--navy);
+            border-radius: 7pt;
+            padding: 8pt 10pt;
+            background: #ffffff;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 9pt;
+            margin: 7pt 0;
+        }
+
+        .answer-key-intro {
+            border: 1pt solid var(--line);
+            border-radius: 7pt;
+            padding: 8pt 10pt;
+            background: var(--shade);
+            margin-bottom: 10pt;
+        }
+
+        .answer-item {
+            border-left: 3pt solid var(--gold);
+            background: #ffffff;
+            padding: 8pt 10pt;
+            margin: 8pt 0;
+            border-radius: 0 6pt 6pt 0;
+            page-break-inside: avoid;
+        }
+
+        .answer-item h3 {
+            font-size: 11pt;
+            margin: 0 0 4pt;
+            color: var(--navy);
+        }
+
+        .answer-label {
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .source-list {
+            font-size: 8.5pt;
+            color: var(--muted);
+            word-break: break-word;
+        }
+
+        .footer-note {
+            border-top: 1pt solid var(--line);
+            margin-top: 12pt;
+            padding-top: 7pt;
+            font-size: 8.5pt;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        @media print {
+            .scenario, .callout, .mini, .answer-item {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="cover">
+        <div>
+            <div class="eyebrow">Veterans Upward Bound Financial Readiness Course</div>
+            <h1>Module 5 Practical Scenarios</h1>
+            <p class="subtitle">Instructor-ready cases for helping students apply legacy planning to SBP, survivor income, beneficiary forms, end-of-life care, cognitive decline, VA burial planning, and first steps after death.</p>
+            <div class="cover-grid">
+                <div class="cover-card"><strong>Designed for:</strong><br>Discussion, small groups, board work, and instructor examples.</div>
+                <div class="cover-card"><strong>Use after:</strong><br>The SBP, DIC, estate documents, beneficiary, and protection slides.</div>
+                <div class="cover-card"><strong>Includes:</strong><br>8 practical scenarios with prompts, analysis, and an answer key.</div>
+                <div class="cover-card"><strong>Boundary:</strong><br>Education only. Do not give personal tax, investment, legal, medical, or benefits advice.</div>
+            </div>
+        </div>
+        <div class="small-meta">Prepared for Spring 2026 delivery. Verify VA, DFAS, SSA, Medicare, state law, and local legal requirements before future cohorts.</div>
+    </section>
+
+    <section class="page-break">
+        <h2>How to Teach These Scenarios</h2>
+        <div class="callout">
+            <p><strong>Recommended method:</strong> Assign each table one case. Ask students to identify who has authority, which benefit or account controls the outcome, what the family needs to know, and the safest next step. Then compare answers as a class.</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Instructor Question</th>
+                    <th>What You Want Students to Notice</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Who can act?</td>
+                    <td>Executor, trustee, durable financial POA, health care agent, beneficiary, surviving spouse, VSO, or court-appointed representative.</td>
+                </tr>
+                <tr>
+                    <td>What controls the money?</td>
+                    <td>SBP election, DIC eligibility, beneficiary designation, POD/TOD title, trust, will, pension survivor election, or state probate law.</td>
+                </tr>
+                <tr>
+                    <td>What controls the care decision?</td>
+                    <td>Healthcare power of attorney, advance directive / living will, state surrogate law, doctor orders, and the student's communicated values.</td>
+                </tr>
+                <tr>
+                    <td>What should the family verify before acting?</td>
+                    <td>Current documents, agency rules, account titles, beneficiary confirmations, state law, medical guidance, and professional advice.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="page-break">
+        <h2>Scenario Set</h2>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 1</span>
+                <h3>Finances Are Set, Family Is Not</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> Mr. Daniels has a paid-off home, steady military retired pay, VA disability compensation, savings, and no major debt. His spouse says, "I know we're okay, but I don't know where anything is or who to call if something happens."</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>Account access and family instructions</li>
+                        <li>Will, POA, advance directive, and beneficiary forms</li>
+                        <li>DFAS, VA, SSA, insurers, bank, and retirement custodians</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>Having enough money does not mean the family is prepared. The missing piece is a clear operating manual.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "What should be in the family binder before the next birthday or holiday?"</div>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 2</span>
+                <h3>SBP + DIC After 2023</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> A retired veteran elected SBP and has several service-connected conditions. His spouse heard from a friend that VA DIC will cancel out SBP, so she thinks SBP "doesn't matter."</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>DFAS SBP annuity</li>
+                        <li>VA Dependency and Indemnity Compensation</li>
+                        <li>Cause-of-death and service-connection evidence</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>The SBP-DIC offset was fully eliminated as of January 1, 2023. Eligible spouses can receive full SBP and full DIC.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "Who should verify eligibility and what records would help the survivor?"</div>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 3</span>
+                <h3>Declined SBP Years Ago</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> SFC Moore declined SBP at retirement because money was tight. He is now remarried and wants to know whether he can "just add SBP now" to protect his spouse.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>SBP election rules and rare open seasons</li>
+                        <li>Life insurance underwriting</li>
+                        <li>Self-insurance through savings and investments</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>There is no automatic do-over. Future open seasons require congressional authorization, and alternatives do not perfectly replace SBP.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "What should he compare before assuming life insurance or savings can replace an inflation-indexed lifetime annuity?"</div>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 4</span>
+                <h3>Outdated Beneficiary After Remarriage</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> Mr. Allen remarried five years ago. His will names his current spouse, but his old TSP and VGLI beneficiary confirmations still list his former spouse.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>TSP beneficiary designation and order of precedence</li>
+                        <li>Life insurance beneficiary forms</li>
+                        <li>Divorce decree or court order language</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>Beneficiary designations can override the will. A current estate document does not fix an outdated account beneficiary.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "Which documents should he update and which professional should review the divorce-related issue?"</div>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 5</span>
+                <h3>Cognitive Decline Warning Signs</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> Ms. Brooks has missed bills, made several unusual withdrawals, and started relying on a neighbor to "handle paperwork." Her daughter wants to help but has no legal authority.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>Durable financial power of attorney</li>
+                        <li>Trusted contact and bank/brokerage alerts</li>
+                        <li>Medical evaluation, APS, VA fiduciary if needed</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>The time to name trusted people is before capacity is in question. Delay can push the family toward court involvement.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "What protective steps can preserve dignity without handing someone unlimited control?"</div>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 6</span>
+                <h3>The First 30 Days After Death</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> A surviving spouse has the death certificate but does not know who to call first. Bills are arriving, a debt collector called, and several bank accounts were used for autopay.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>Funeral home, death certificates, and burial planning</li>
+                        <li>DFAS, VA/VSO, SSA, pension providers, insurers</li>
+                        <li>Executor, attorney, tax preparer, and financial advisor</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>The survivor needs a calm checklist and should not rush to pay unknown claims before getting guidance.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "What calls are urgent, and what can wait until the executor or advisor has reviewed it?"</div>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 7</span>
+                <h3>Healthcare Agent Under Pressure</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> Adult children disagree about whether their father would want a ventilator and feeding tube after a severe stroke. He talked about "not being kept alive like that," but never completed an advance directive.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>Healthcare power of attorney / health care agent</li>
+                        <li>Advance directive or living will</li>
+                        <li>Doctor, hospital ethics support, state surrogate law</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>End-of-life planning is not only about money. Clear care wishes can prevent family conflict when emotions are high.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "What care preferences should be discussed before a crisis: CPR, ventilator, feeding tube, dialysis, hospice, comfort care, and spiritual needs?"</div>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 8</span>
+                <h3>VA Burial Pre-Need</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> A veteran wants burial in a VA national cemetery but assumes the family will "figure it out." No one knows where his DD214 is, which cemetery he prefers, or whether he has applied for a pre-need decision.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>VA national cemetery pre-need eligibility</li>
+                        <li>DD214 and supporting documents</li>
+                        <li>Funeral home, VA scheduling office, and family wishes</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>Pre-need planning reduces the paperwork burden on the family and makes the veteran's burial wishes easier to honor.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "What should be written down now so the family is not guessing at the time of need?"</div>
+        </article>
+    </section>
+
+    <section class="page-break">
+        <h2>Answer Key: Instructor Guidance</h2>
+        <div class="answer-key-intro">
+            <p>Use these answers to guide discussion, not to grade personal choices. A strong student answer identifies the controlling document or benefit, names a practical next step, and avoids giving legal, medical, tax, investment, or benefits advice.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 1: Finances Are Set, Family Is Not</h3>
+            <p><span class="answer-label">Expected answer:</span> The missing items are access, authority, and instructions: document locator, account list, beneficiary confirmations, durable financial POA, healthcare POA, advance directive, will/trust, password process, and family meeting.</p>
+            <p><span class="answer-label">Instructor notes:</span> Stress that a "good net worth" does not help a spouse who cannot locate accounts, claim benefits, or pay bills during grief.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 2: SBP + DIC After 2023</h3>
+            <p><span class="answer-label">Expected answer:</span> The SBP-DIC offset has been fully eliminated. If the spouse is eligible for DIC and SBP was elected, the spouse may receive full SBP from DFAS and full DIC from VA. Verify with DFAS, VA, and a VSO.</p>
+            <p><span class="answer-label">Instructor notes:</span> Correct outdated language gently because many veterans were taught the old rule for years.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 3: Declined SBP Years Ago</h3>
+            <p><span class="answer-label">Expected answer:</span> He cannot assume SBP can be added now. He should check whether any current open season exists, then compare private life insurance, self-insurance, survivor Social Security, pension options, and the spouse's expected income using the Survivor Income Map.</p>
+            <p><span class="answer-label">Instructor notes:</span> Do not promise future open seasons. They require congressional authorization and may include premiums or buy-in costs.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 4: Outdated Beneficiary After Remarriage</h3>
+            <p><span class="answer-label">Expected answer:</span> He should update TSP, VGLI or other life insurance, IRA/401(k), bank POD/TOD, and other beneficiary records. A will does not necessarily override beneficiary forms. A qualified attorney should review divorce decree or court order requirements.</p>
+            <p><span class="answer-label">Instructor notes:</span> This is the key "beneficiary forms override the will" case.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 5: Cognitive Decline Warning Signs</h3>
+            <p><span class="answer-label">Expected answer:</span> The family should seek medical evaluation, review whether a durable POA already exists, add or verify trusted contacts, set alerts and spending controls, consult an attorney if capacity is uncertain, and contact APS or VA fiduciary channels if exploitation is suspected.</p>
+            <p><span class="answer-label">Instructor notes:</span> Balance protection with dignity. Avoid naming someone as agent solely because they are nearby.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 6: The First 30 Days After Death</h3>
+            <p><span class="answer-label">Expected answer:</span> Order certified death certificates, work with the funeral home, notify DFAS, VA/VSO, SSA, life insurers, pension providers, banks, and retirement custodians, and contact the executor, attorney, tax preparer, and financial advisor. Do not rush unknown bills without guidance.</p>
+            <p><span class="answer-label">Instructor notes:</span> The survivor needs a sequence, not a lecture. Encourage a written first-week checklist.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 7: Healthcare Agent Under Pressure</h3>
+            <p><span class="answer-label">Expected answer:</span> A healthcare POA and advance directive / living will should be completed before a crisis. The student should discuss values and specific treatments such as CPR, ventilator, feeding tube, dialysis, antibiotics, hospice, and comfort care with the chosen agent.</p>
+            <p><span class="answer-label">Instructor notes:</span> VA Form 10-0137 can document a health care agent and living will preferences for VA care, but students should also verify state-specific requirements.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 8: VA Burial Pre-Need</h3>
+            <p><span class="answer-label">Expected answer:</span> He should gather DD214 or service records, consider VA Form 40-10007 pre-need eligibility, write down cemetery and funeral preferences, tell family where the pre-need letter is stored, and list the National Cemetery Scheduling Office or funeral home contact.</p>
+            <p><span class="answer-label">Instructor notes:</span> Pre-need eligibility does not force the family to use a VA cemetery, but it reduces uncertainty at the time of need.</p>
+        </div>
+    </section>
+
+    <section class="page-break">
+        <h2>Source Notes for Instructor</h2>
+        <div class="callout gold">
+            <p><strong>Accuracy note:</strong> Federal and state rules change. Verify current rules before future cohorts, especially DIC rates, SBP open seasons, VA burial procedures, Medicare hospice guidance, and state estate-document execution requirements.</p>
+        </div>
+        <ul class="source-list">
+            <li>DFAS: SBP-DIC offset elimination effective January 1, 2023; Survivor Benefit Plan and paid-up status guidance.</li>
+            <li>VA: 2026 DIC surviving spouse rates; VA Form 10-0137 Advance Directive; VA Form 40-10007 pre-need burial eligibility guidance.</li>
+            <li>Medicare: Hospice care coverage under Medicare Part A when eligibility requirements are met.</li>
+            <li>FINRA / SEC / NASAA: Trusted contact guidance and senior investor protection resources.</li>
+            <li>OPM / TSP: Beneficiary order-of-precedence and beneficiary designation guidance.</li>
+        </ul>
+        <p class="footer-note">VUB Financial Readiness Course | Module 5 Practical Scenarios | Education only</p>
+    </section>
+</body>
+</html>
