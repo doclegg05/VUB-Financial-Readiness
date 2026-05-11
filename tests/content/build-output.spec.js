@@ -90,6 +90,14 @@ test.describe('Built Output', () => {
         expect(scenarios).not.toContain('Module 4 Step-by-Step Instructor Explainer');
     });
 
+    test('Module 4 scenario source includes instructor answer guidance', async () => {
+        const scenariosHtml = fs.readFileSync(path.join(outDir, '📘 Teacher Guides', 'module4-practical-scenarios.html'), 'utf8');
+
+        expect(scenariosHtml).toContain('Answer Key: Instructor Guidance');
+        expect(scenariosHtml).toContain('Expected answer');
+        expect(scenariosHtml).toContain('Scenario 10: Inflation and the Flat Pension');
+    });
+
     test('Module 4 student handout PDFs are created', async () => {
         const worksheetHtml = fs.readFileSync(path.join(outDir, '📘 Handouts', 'module4-income-stack-worksheet.html'), 'utf8');
         const checklistHtml = fs.readFileSync(path.join(outDir, '📘 Handouts', 'module4-before-december-31-checklist.html'), 'utf8');
@@ -121,5 +129,13 @@ test.describe('Built Output', () => {
         }
 
         expect(missing).toEqual([]);
+    });
+
+    test('project instructions require answer keys for question-based materials', async () => {
+        const agents = fs.readFileSync(path.join(root, 'AGENTS.md'), 'utf8');
+
+        expect(agents).toContain('Answer Keys & Instructor Guidance');
+        expect(agents).toContain('asks a question');
+        expect(agents).toContain('answer key');
     });
 });

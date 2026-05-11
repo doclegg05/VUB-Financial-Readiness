@@ -99,6 +99,11 @@ Surface:         #ffffff (light) / #1e293b (dark)
 - Include disclaimers where appropriate ("consult a financial advisor")
 - Cite specific regulations when referencing eligibility rules
 
+### Answer Keys & Instructor Guidance
+- Any new student-facing item that asks a question, presents a scenario, includes practice problems, discussion prompts, quizzes, worksheets, or "what would you do?" activities must include an answer key, facilitator notes, or instructor guidance in the same resource packet or a clearly linked instructor companion
+- If the prompt is reflective or personal and has no single right answer, provide expected discussion points, acceptable answer ranges, red flags, and referral/professional-boundary notes
+- Do not ship question-based PDFs, handouts, assessments, or classroom activities without generating and linking the corresponding answer key or instructor guide
+
 ---
 
 ## Modular Instructions

@@ -259,6 +259,33 @@
             margin: 7pt 0;
         }
 
+        .answer-key-intro {
+            border: 1pt solid var(--line);
+            border-radius: 7pt;
+            padding: 8pt 10pt;
+            background: var(--shade);
+            margin-bottom: 10pt;
+        }
+
+        .answer-item {
+            border-left: 3pt solid var(--gold);
+            background: #ffffff;
+            padding: 8pt 10pt;
+            margin: 8pt 0;
+            border-radius: 0 6pt 6pt 0;
+        }
+
+        .answer-item h3 {
+            font-size: 11pt;
+            margin: 0 0 4pt;
+            color: var(--navy);
+        }
+
+        .answer-label {
+            font-weight: 700;
+            color: var(--navy);
+        }
+
         .source-list {
             font-size: 8.5pt;
             color: var(--muted);
@@ -275,7 +302,7 @@
         }
 
         @media print {
-            .scenario, .callout, .mini {
+            .scenario, .callout, .mini, .answer-item {
                 page-break-inside: avoid;
             }
         }
@@ -602,6 +629,73 @@
             <div class="board">Board prompt: "Which income sources keep up automatically, and which require a plan?"</div>
             <p><strong>Instructor caution:</strong> Do not recommend specific investments. Teach the buying-power problem and the need for a long-term plan.</p>
         </article>
+    </section>
+
+    <section class="page-break">
+        <h2>Answer Key: Instructor Guidance</h2>
+        <div class="answer-key-intro">
+            <p><strong>How to use this section:</strong> These are the expected teaching points for each board prompt. Many Module 4 questions do not have one universal right answer because tax status, benefits, state rules, and household facts change the result. Use these notes to guide discussion, name the red flags, and keep the class inside the education-only boundary.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 1: Roof Repair Withdrawal</h3>
+            <p><span class="answer-label">Expected answer:</span> He should compare emergency savings, a staged repair, a payment plan or short-term financing, a smaller taxable withdrawal, possible Roth sources if qualified, and withholding adjustments before taking a large traditional TSP withdrawal.</p>
+            <p><span class="answer-label">Instructor notes:</span> The key lesson is the tax domino effect. A traditional TSP withdrawal can raise AGI, increase the taxable portion of Social Security, affect Medicare IRMAA later, and trigger state tax or withholding surprises.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 2: More Gross or More After-Tax?</h3>
+            <p><span class="answer-label">Expected answer:</span> Students should compare after-tax income, not the largest gross payment. CRDP is generally taxable retired pay restoration, while CRSC is generally tax-free compensation for approved combat-related disability.</p>
+            <p><span class="answer-label">Instructor notes:</span> The right choice depends on the veteran's award, tax bracket, and household situation. Emphasize annual election review and referral to DFAS, the service CRSC office, and a tax professional for personal decisions.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 3: First RMD Delay</h3>
+            <p><span class="answer-label">Expected answer:</span> If she delays the first RMD until April 1, she may need to take two RMDs in the same tax year: the delayed first RMD by April 1 and the second RMD by December 31.</p>
+            <p><span class="answer-label">Instructor notes:</span> Two RMDs in one year can raise AGI, make more Social Security taxable, affect Medicare premiums, and reduce flexibility for other income decisions. The teaching point is calendar control before year-end.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 4: Moving for Taxes</h3>
+            <p><span class="answer-label">Expected answer:</span> Students should name costs that may rise even when income tax falls: property tax, homeowners insurance, rent or housing prices, sales tax, transportation, healthcare access, travel back to family, and long-term care options.</p>
+            <p><span class="answer-label">Instructor notes:</span> A no-income-tax state is not automatically cheaper. Compare total cost of living and benefit access. For West Virginia in 2026, remind students that military retired pay and Social Security treatment may already be favorable, so IRA withdrawals and total household costs matter.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 5: Credit Card Debt</h3>
+            <p><span class="answer-label">Expected answer:</span> The true cost is more than the credit card balance if the payoff comes from a taxable traditional IRA or TSP withdrawal. He may need to withdraw extra to cover taxes, and the income may affect Social Security taxation, Medicare premiums, and state tax.</p>
+            <p><span class="answer-label">Instructor notes:</span> Students should compare the card APR, monthly cash-flow relief, tax cost, emergency reserve impact, and other debt options. Avoid telling the student to withdraw or not withdraw; teach the comparison.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 6: Part-Time Job Surprise</h3>
+            <p><span class="answer-label">Expected answer:</span> Combined income for Social Security tax purposes generally includes AGI, nontaxable interest, and one-half of Social Security benefits. Wages and IRA withdrawals can both increase AGI.</p>
+            <p><span class="answer-label">Instructor notes:</span> The practical fix is planning before the extra income arrives: estimate taxes, adjust withholding or estimated payments, and avoid assuming Social Security is always tax-free.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 7: Roth Conversion</h3>
+            <p><span class="answer-label">Expected answer:</span> A CPA or planner should model current tax bracket, conversion size, future RMDs, Social Security taxation, Medicare IRMAA, state tax, cash available to pay conversion taxes, spouse or survivor impact, and beneficiary goals.</p>
+            <p><span class="answer-label">Instructor notes:</span> There is no blanket correct conversion amount. The teaching point is controlled taxable income: a Roth conversion can be useful, but only when the tax cost and timing are understood.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 8: Medicare Premium Letter</h3>
+            <p><span class="answer-label">Expected answer:</span> The premium increase likely came from Medicare IRMAA, which uses modified adjusted gross income from two years prior. A home sale gain and IRA withdrawal can raise MAGI enough to affect future Medicare premiums.</p>
+            <p><span class="answer-label">Instructor notes:</span> Students should understand the two-year lookback. An appeal may be possible only when a qualifying life-changing event applies, usually through SSA Form SSA-44. The prevention lesson is to plan large income events before they happen.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 9: IRA QCD</h3>
+            <p><span class="answer-label">Expected answer:</span> A qualified charitable distribution is different because the money goes directly from the IRA custodian to the qualified charity. For an eligible IRA owner, it can keep that amount out of taxable income and may count toward the RMD.</p>
+            <p><span class="answer-label">Instructor notes:</span> The student should not take the money personally first if the goal is QCD treatment. Also remind the class that QCD rules generally apply to IRAs, not direct TSP distributions, so custodian and tax guidance matter.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 10: Inflation and the Flat Pension</h3>
+            <p><span class="answer-label">Expected answer:</span> Social Security, VA disability compensation, and military retired pay may receive cost-of-living adjustments. A private pension, annuity, or cash savings may not keep pace unless the contract or account strategy provides for growth.</p>
+            <p><span class="answer-label">Instructor notes:</span> The main answer is buying power. Students should identify which income streams adjust automatically, which stay flat, and where they need a long-term plan for healthcare, insurance, housing, and emergency costs. Do not recommend specific investments.</p>
+        </div>
     </section>
 
     <section class="page-break">
