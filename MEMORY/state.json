@@ -1,0 +1,30 @@
+{
+  "project": "VUB Lessons",
+  "lastUpdated": "2026-05-14",
+  "status": "Assessment intake MVP consolidated into deployable Netlify repo",
+  "notes": [
+    "Created assessment-service-kit for a service-first VUB test report offering.",
+    "Added reusable client intake, service offer, build brief, prompt pack, production checklist, question bank template, and standalone HTML assessment/report template.",
+    "MEMORY/state.json was missing before this update, so this file was created.",
+    "Assessment intake MVP now includes intake.html, classes/index.html, the first class landing page, and classes/_admin-workflow.md.",
+    "intake.html is prepared for Netlify Forms with file upload, honeypot spam field, browser-required validation, and .docx-preferred upload guidance.",
+    "Next milestone is deploying to Netlify and testing one real uploaded Word document end to end.",
+    "Cleanup consolidated intake.html, classes, assessment-service-kit, and MEMORY into the VUB Financial Readiness Course Git/Netlify repo.",
+    "Updated the Netlify build script to publish intake.html and classes into dist/site.",
+    "Updated deploy-repo paths so logos and Intermediate Computer Skills tests resolve from the production site root."
+  ],
+  "recentFiles": [
+    "assessment-service-kit/README.md",
+    "assessment-service-kit/service-offer.md",
+    "assessment-service-kit/client-intake.md",
+    "assessment-service-kit/build-brief-template.md",
+    "assessment-service-kit/vibe-code-prompt-pack.md",
+    "assessment-service-kit/production-checklist.md",
+    "assessment-service-kit/question-bank-template.json",
+    "assessment-service-kit/assessment-template.html",
+    "intake.html",
+    "classes/index.html",
+    "classes/computer-skills-spring-2026-beckley/index.html",
+    "classes/_admin-workflow.md"
+  ]
+}
