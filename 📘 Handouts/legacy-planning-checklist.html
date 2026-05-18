@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacy Planning Action Checklist — VUB Financial Readiness Course</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        @page { size: letter; margin: 0.4in; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.86rem;
+            line-height: 1.45;
+            color: #1a1a1a;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.45in;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #003F72 60%, #1e3a8a 100%);
+            color: #ffffff;
+            padding: 0.42in 0.4in 0.34in;
+            border-radius: 6px;
+            margin-bottom: 0.16in;
+            position: relative;
+        }
+
+        .header-title { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.1em; }
+        .header-subtitle { font-size: 0.8rem; opacity: 0.88; }
+
+        .badge {
+            position: absolute;
+            top: 0.32in;
+            right: 0.4in;
+            background: #fbbf24;
+            color: #1e3a8a;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.2em 0.7em;
+            border-radius: 3px;
+        }
+
+        .intro {
+            background: #f0f4fa;
+            border: 1.5px solid #1e3a8a;
+            border-radius: 5px;
+            padding: 0.12in 0.2in;
+            margin-bottom: 0.16in;
+            font-size: 0.8rem;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .intro strong { color: #003F72; }
+
+        .section {
+            margin-bottom: 0.14in;
+            page-break-inside: avoid;
+        }
+
+        .section-heading {
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            border-bottom: 1.5px solid #fbbf24;
+            padding-bottom: 0.03in;
+            margin-bottom: 0.07in;
+        }
+
+        .section-heading .num {
+            display: inline-block;
+            background: #1e3a8a;
+            color: #ffffff;
+            font-size: 0.66rem;
+            width: 1.25em;
+            height: 1.25em;
+            line-height: 1.25em;
+            text-align: center;
+            border-radius: 3px;
+            margin-right: 0.4em;
+        }
+
+        .check-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.02in 0.35in;
+            padding-left: 0.05in;
+        }
+
+        .check-item {
+            font-size: 0.8rem;
+            line-height: 1.5;
+            padding: 0.02in 0;
+        }
+
+        .check-item::before {
+            content: "\2610\00a0\00a0";
+            font-size: 1.05em;
+            color: #1e3a8a;
+        }
+
+        .check-item .note { color: #555; font-size: 0.92em; }
+
+        .full-row { grid-column: 1 / -1; }
+
+        .warn {
+            background: #fef2f2;
+            border-left: 3px solid #dc2626;
+            border-radius: 3px;
+            padding: 0.07in 0.14in;
+            margin-top: 0.06in;
+            font-size: 0.75rem;
+            color: #991b1b;
+            font-weight: 600;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .actions {
+            background: #fffbeb;
+            border: 1.5px solid #fbbf24;
+            border-radius: 5px;
+            padding: 0.14in 0.2in;
+            margin-top: 0.05in;
+            page-break-inside: avoid;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .actions h2 {
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 0.04in;
+        }
+
+        .actions p { font-size: 0.78rem; color: #78350f; margin-bottom: 0.08in; }
+
+        .action-line {
+            display: flex;
+            align-items: baseline;
+            gap: 0.12in;
+            font-size: 0.82rem;
+            margin-bottom: 0.07in;
+        }
+
+        .action-line .label { flex-shrink: 0; font-weight: 700; color: #92400e; }
+        .action-line .line { border-bottom: 1.5px solid #b8923a; flex-grow: 1; height: 1em; }
+
+        .disclaimer {
+            font-size: 0.7rem;
+            color: #777;
+            font-style: italic;
+            text-align: center;
+            margin: 0.12in 0 0.06in;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #777;
+            border-top: 1px solid #ccc;
+            padding-top: 0.07in;
+        }
+
+        @media print {
+            body { padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <span class="badge">Veteran Handout</span>
+        <div class="header-title">Legacy Planning Action Checklist</div>
+        <div class="header-subtitle">VUB Financial Readiness Course — Module 5 &bull; Your forms and decisions, in one place</div>
+    </div>
+
+    <div class="intro">
+        <strong>How to use this:</strong> Work through each section at your own pace. A checked box means the form is filed, the document exists, or the decision is made &mdash; not just thought about. <strong>This is an education checklist, not advice.</strong> For the actual decisions, talk to a VA-accredited elder-law attorney, a Veterans Service Organization (VSO), or a fee-only financial advisor.
+    </div>
+
+    <div class="section">
+        <div class="section-heading"><span class="num">1</span>Survivor Benefit Plan (SBP)</div>
+        <div class="check-grid">
+            <span class="check-item">I know whether I elected the Survivor Benefit Plan at retirement <span class="note">(check DD Form 2656 or myPay)</span></span>
+            <span class="check-item">If I have it, I know my base amount, my premium, and the 55% my spouse would receive</span>
+            <span class="check-item">I know when my premiums become "paid-up" <span class="note">(30 years of premiums AND age 70)</span></span>
+            <span class="check-item">If I declined it, I have identified my alternative survivor plan and will watch for the next Open Season</span>
+        </div>
+        <div class="warn">Do not buy an "SBP replacement annuity" without review by a fee-only advisor &mdash; no private product fully matches it.</div>
+    </div>
+
+    <div class="section">
+        <div class="section-heading"><span class="num">2</span>Survivor Compensation &mdash; Dependency &amp; Indemnity Compensation (DIC)</div>
+        <div class="check-grid">
+            <span class="check-item">I understand whether my spouse could qualify for Dependency &amp; Indemnity Compensation <span class="note">(service-connected death, or 100% rated for 10+ years)</span></span>
+            <span class="check-item">My spouse knows this benefit is <em>not automatic</em> &mdash; it must be applied for with VA Form 21P-534EZ, within one year of death for full back-pay</span>
+            <span class="check-item full-row">I understand that since January 1, 2023, the Survivor Benefit Plan and Dependency &amp; Indemnity Compensation are paid in full with no offset</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-heading"><span class="num">3</span>The Four Estate Documents</div>
+        <div class="check-grid">
+            <span class="check-item">Last Will &amp; Testament &mdash; current and properly signed</span>
+            <span class="check-item">Durable Power of Attorney for finances &mdash; and it includes the word "durable"</span>
+            <span class="check-item">Healthcare Power of Attorney &mdash; a health care agent is named</span>
+            <span class="check-item">Advance Directive / Living Will &mdash; my care wishes are written down</span>
+        </div>
+        <div class="warn">Free or low-cost help: military legal assistance, a Veterans Service Organization, or a VA-accredited attorney. The forms are easy &mdash; the strategy is what an attorney is paid to think through.</div>
+    </div>
+
+    <div class="section">
+        <div class="section-heading"><span class="num">4</span>Beneficiary Designations &mdash; Review Every Year</div>
+        <div class="check-grid">
+            <span class="check-item">Survivor Benefit Plan <span class="note">(DD Form 2656)</span></span>
+            <span class="check-item">Thrift Savings Plan <span class="note">(Form TSP-3)</span></span>
+            <span class="check-item">Military life insurance &mdash; SGLI / VGLI / VA life insurance</span>
+            <span class="check-item">IRAs, 401(k), and 403(b) accounts</span>
+            <span class="check-item">Bank &amp; brokerage accounts <span class="note">(payable- or transfer-on-death)</span></span>
+            <span class="check-item">Private life insurance policies</span>
+        </div>
+        <div class="warn">Beneficiary forms override your will. After any divorce or remarriage, update every one &mdash; an outdated form sends the money to the wrong person.</div>
+    </div>
+
+    <div class="section">
+        <div class="section-heading"><span class="num">5</span>VA Burial Planning</div>
+        <div class="check-grid">
+            <span class="check-item">I have filed VA Form 40-10007 <span class="note">(pre-need burial eligibility determination)</span></span>
+            <span class="check-item">My cemetery, funeral, or cremation preferences are written down</span>
+            <span class="check-item">My DD-214 is stored where my family can find it <span class="note">(original, copies, and a digital scan)</span></span>
+            <span class="check-item">My family knows about the burial flag, headstone/marker, military honors, and burial allowance</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-heading"><span class="num">6</span>Protect Against Decline &amp; Exploitation</div>
+        <div class="check-grid">
+            <span class="check-item">I have added a trusted contact at every bank and brokerage <span class="note">(free, 5 minutes each)</span></span>
+            <span class="check-item">If I have a trust, a successor trustee is named</span>
+            <span class="check-item">If my VA benefits are significant, I have a VA fiduciary in mind</span>
+            <span class="check-item">I know the warning signs of financial exploitation and who to call</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-heading"><span class="num">7</span>The Family Conversation</div>
+        <div class="check-grid">
+            <span class="check-item">My family knows <strong>where my documents are</strong></span>
+            <span class="check-item">My family knows <strong>who my financial contacts are</strong></span>
+            <span class="check-item">My family knows <strong>what accounts I have</strong></span>
+            <span class="check-item">It is written on one page, and two trusted people know where that page is</span>
+            <span class="check-item full-row">I have talked through my care wishes with my health care agent &mdash; CPR, ventilator, feeding tube, hospice, comfort care</span>
+        </div>
+    </div>
+
+    <div class="actions">
+        <h2>My Next Three Actions</h2>
+        <p>Pick the three items above that matter most and commit to a date for each.</p>
+        <div class="action-line"><span class="label">1.</span><span class="line"></span><span class="label" style="font-weight:400;">by</span><span class="line" style="max-width:1.6in;"></span></div>
+        <div class="action-line"><span class="label">2.</span><span class="line"></span><span class="label" style="font-weight:400;">by</span><span class="line" style="max-width:1.6in;"></span></div>
+        <div class="action-line"><span class="label">3.</span><span class="line"></span><span class="label" style="font-weight:400;">by</span><span class="line" style="max-width:1.6in;"></span></div>
+    </div>
+
+    <div class="disclaimer">
+        Education only — not tax, legal, investment, medical, or benefits advice for any individual. Verify current forms and rules with the issuing agency.
+    </div>
+
+    <div class="footer">
+        Veterans Upward Bound — West Virginia | Financial Readiness Course
+    </div>
+
+</body>
+</html>

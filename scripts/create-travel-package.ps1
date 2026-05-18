@@ -20,6 +20,7 @@ New-Item -ItemType Directory -Path $packageRoot -Force | Out-Null
 $items = @(
     "index.html",
     "financial-readiness.html",
+    "module4-income-stack-chart-preview.html",
     "404.html",
     "START HERE.md",
     "SATELLITE CLASSROOM SETUP.md",

@@ -5,6 +5,7 @@
     --clr-surface: #ffffff;
     --clr-surface-hover: #FAF1D9;
     --clr-text: #1A2B3C;
+    --clr-text-muted: #46566B;
     --clr-heading: #0C1A35;
 
     --clr-primary: #0C1A35;
@@ -47,6 +48,7 @@ body.dark-mode {
     --clr-surface: #142240;
     --clr-surface-hover: #1E335A;
     --clr-text: #E2E8F0;
+    --clr-text-muted: rgba(226, 232, 240, 0.65);
     --clr-heading: #FDF9F4;
     --clr-sidebar: #0a1626;
     --clr-border: #2A3D5C;
