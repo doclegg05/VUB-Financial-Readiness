@@ -1,0 +1,100 @@
+action,old_path,new_path,notes
+KEEP,index.html,/index.html,Homepage catalog (from root index.html). Already at correct root path.
+MOVE,intake.html,/instructors/intake.html,Assessment intake page to instructors area per spec 5.2.
+MOVE,syllabus-overview.html,/instructors/syllabus-overview.html,Syllabus overview to instructors area.
+KEEP,courses.json,/courses.json,Does NOT yet exist; to be authored in M3 as catalog manifest.
+KEEP,shared/glossary.css,/shared/glossary.css,Shared glossary styles; root shared/ is source of truth.
+KEEP,shared/glossary.js,/shared/glossary.js,Shared glossary behavior.
+KEEP,shared/print.css,/shared/print.css,Shared print stylesheet.
+KEEP,shared/progress.js,/shared/progress.js,Shared progress tracking.
+MOVE,VUB Logo.png,/assets/VUB Logo.png,Brand logo 1.88MB; source for logo derivatives + favicon. Only ONE logo file exists.
+MOVE,VUB Financial Readiness Course/financial-readiness.html,/courses/financial-readiness/financial-readiness.html,FR single-page course app.
+MOVE,VUB Financial Readiness Course/course-description.html,/courses/financial-readiness/course-description.html,Course description page.
+MOVE,VUB Financial Readiness Course/course-description.pdf,/courses/financial-readiness/course-description.pdf,Course description PDF.
+MOVE,VUB Financial Readiness Course/syllabus.html,/courses/financial-readiness/syllabus.html,FR syllabus (course-facing).
+MOVE,VUB Financial Readiness Course/syllabus.pdf,/courses/financial-readiness/syllabus.pdf,FR syllabus PDF.
+MOVE,VUB Financial Readiness Course/syllabus-one-page.pdf,/courses/financial-readiness/syllabus-one-page.pdf,One-page syllabus PDF.
+MOVE,VUB Financial Readiness Course/module4-income-stack-chart-preview.html,/courses/financial-readiness/module4-income-stack-chart-preview.html,Module 4 chart preview page.
+MOVE,VUB Financial Readiness Course/student-upload-instructions.html,/courses/financial-readiness/student-upload-instructions.html,Student upload instructions (also in build REQUIRED_ITEMS).
+MOVE,VUB Financial Readiness Course/css/styles.css,/courses/financial-readiness/css/styles.css,FR course styles.
+MOVE,VUB Financial Readiness Course/js/script.js,/courses/financial-readiness/js/script.js,FR course script.
+MOVE,VUB Financial Readiness Course/weekly-curriculum/,/courses/financial-readiness/weekly-curriculum/,7 dated week folders + 3 collection MDs; FR cohort curriculum (move whole).
+MOVE,VUB Financial Readiness Course/videos/,/courses/financial-readiness/videos/,Module videos + thumbnails + NotebookLM videos; large media may be stripped from deploy.
+MOVE,VUB Financial Readiness Course/templates/vub-assessment-results-tracker.csv,/courses/financial-readiness/templates/vub-assessment-results-tracker.csv,Assessment results tracker template.
+EXCLUDE,VUB Financial Readiness Course/404.html,,404 fallback is a deploy-root concern; re-author at platform root in M3. Flagged.
+EXCLUDE,VUB Financial Readiness Course/index.html,,FR-subrepo homepage; duplicate of root index.html (deploy entry). Root is source of truth.
+EXCLUDE,VUB Financial Readiness Course/intermediate-computer-skills.html,,ICS dashboard duplicate; keep ONE under /courses/computer-skills/ (see ICS section). Flagged.
+RENAME,VUB Financial Readiness Course/📘 Assessments/,/courses/financial-readiness/assessments/,10 items pre/post-test html+pdf answer-keys forms submit-tests SETUP-GOOGLE-FORMS.md. emoji to kebab.
+RENAME,VUB Financial Readiness Course/📘 Study Resources/,/courses/financial-readiness/study-resources/,11 items flashcards quiz study-guide mind-map podcast.mp3 infographic slide-deck.pdf. emoji to kebab.
+RENAME,VUB Financial Readiness Course/📘 Handouts/,/courses/financial-readiness/handouts/,25 items worksheets checklists reference html+pdf. emoji to kebab.
+RENAME,VUB Financial Readiness Course/📘 Teacher Guides/,/instructors/teacher-guides/,13 items module1-5 guides + practical-scenarios/tough-questions/step-by-step. emoji to instructors area.
+RENAME,VUB Financial Readiness Course/📘 Admin Paperwork/,/instructors/admin-paperwork/,4 items InstructorContract docx+pdf student-upload-instructions.html syllabus-one-page.pdf. NOT in brief; mapped by analogy. UNSURE.
+MOVE,VUB Financial Readiness Course/README.md,/courses/financial-readiness/README.md,FR course readme.
+MOVE,VUB Financial Readiness Course/START HERE.md,/courses/financial-readiness/START HERE.md,FR onboarding doc.
+MOVE,VUB Financial Readiness Course/SATELLITE CLASSROOM SETUP.md,/instructors/satellite-classroom-setup.md,Instructor setup doc to instructors area.
+MOVE,VUB Financial Readiness Course/AGENTS.md,/courses/financial-readiness/AGENTS.md,FR-subrepo governance doc (distinct from root AGENTS.md). Collapse decision in M3.
+MOVE,VUB Financial Readiness Course/CLAUDE.md,/courses/financial-readiness/CLAUDE.md,FR-subrepo project instructions.
+EXCLUDE,VUB Financial Readiness Course/CLAUDE.local.md,,Local-override file EXCLUDE from shared. Path-link/summarize only.
+EXCLUDE,VUB Financial Readiness Course/shared/,,Duplicate of root shared/ (subset). Root is source of truth. Collapse in M3.
+EXCLUDE,VUB Financial Readiness Course/assets/,,Contains vub-logo.svg; root /assets/ is canonical. Decide logo-derivative source in M3.
+EXCLUDE,VUB Financial Readiness Course/classes/,,Duplicate of root classes/. Root copy handled in Instructors section.
+EXCLUDE,VUB Financial Readiness Course/intake.html,,Duplicate of root intake.html. Root is source of truth.
+EXCLUDE,VUB Financial Readiness Course/assessment-service-kit/,,Duplicate of root assessment-service-kit/. Root copy handled below.
+EXCLUDE,VUB Financial Readiness Course/docs/,,FR-subrepo docs = superpowers/ vendored skill docs. Vendored.
+EXCLUDE,VUB Financial Readiness Course/MEMORY/,,FR-subrepo state.json dev-state; not shared content.
+EXCLUDE,VUB Financial Readiness Course/.git/,,Subrepo git dir; handled by repo-merge strategy in M3.
+EXCLUDE,VUB Financial Readiness Course/.gitignore,,Subrepo ignore rules; superseded by platform-root config in M3.
+MOVE,VUB Financial Readiness Course/intermediate-computer-skills/weeks/,/courses/computer-skills/weeks/,Canonical ICS weeks (week-01..08); 46-file canonical tree per duplicate-inventory.
+MOVE,VUB Financial Readiness Course/intermediate-computer-skills/css/slides.css,/courses/computer-skills/css/slides.css,ICS slide styles.
+MOVE,VUB Financial Readiness Course/intermediate-computer-skills/css/styles.css,/courses/computer-skills/css/styles.css,ICS course styles.
+MOVE,VUB Financial Readiness Course/intermediate-computer-skills/syllabus-overview.html,/courses/computer-skills/syllabus-overview.html,ICS syllabus overview (build REQUIRED_ITEMS references this).
+MOVE,VUB Financial Readiness Course/intermediate-computer-skills.html,/courses/computer-skills/index.html,Sibling ICS dashboard; becomes course entry; supersedes duplicate FR-root copy.
+MOVE,classes/index.html,/instructors/classes/index.html,Class-instances index. Root classes/ is source of truth.
+MOVE,classes/computer-skills-spring-2026-beckley/,/instructors/classes/computer-skills-spring-2026-beckley/,Spring-2026 Beckley class instance (move whole).
+MOVE,classes/_admin-workflow.md,/instructors/classes/_admin-workflow.md,Class admin workflow notes (underscore working note; not a .local.md override).
+ARCHIVE,VUB Intermediate Computer Course/,/_archive/VUB-Course-2026-06-03/,Copy #2 Spring-2026 Beckley ICS cohort (whole dir). Frozen on tag preflight-freeze-2026-06-03. Do NOT merge into canonical.
+ARCHIVE,weeks/week-01/presentation.html,/_archive/dead-stub-week-01/presentation.html,Copy #3 confirmed 0-byte dead stub. Archive never delete. Empty parent weeks/ retired with it.
+KEEP,docs/migration/manifest.md,/_archive/migration/manifest.md,Spec 5.2: /_archive/ holds retired duplicates + this manifest. Relocate alongside archive in M3.
+RELOCATE,VUB Financial Readiness Course/netlify.toml,/netlify.toml,Site-wide deploy config; emoji-folder rewrites must re-point to new kebab dirs.
+RELOCATE,VUB Financial Readiness Course/package.json,/package.json,npm scripts + Playwright/serve devDeps. Conflicts with root package.json stub; reconcile in M3.
+RELOCATE,VUB Financial Readiness Course/package-lock.json,/package-lock.json,Lockfile. Conflicts with root stub lockfile; reconcile.
+RELOCATE,VUB Financial Readiness Course/DEPLOYMENT.md,/DEPLOYMENT.md,Deploy checklist.
+RELOCATE,VUB Financial Readiness Course/playwright.config.js,/playwright.config.js,Test runner config (testDir ./tests, serve :3939, baseURL update needed).
+RELOCATE,VUB Financial Readiness Course/scripts/build-site.js,/scripts/build-site.js,Re-point ROOT + ITEMS + REQUIRED_ITEMS to consolidated /courses/ layout.
+RELOCATE,VUB Financial Readiness Course/scripts/build-site.ps1,/scripts/build-site.ps1,Windows build counterpart.
+RELOCATE,VUB Financial Readiness Course/scripts/compare-results.js,/scripts/compare-results.js,Benchmark compare.
+RELOCATE,VUB Financial Readiness Course/scripts/run-benchmark.js,/scripts/run-benchmark.js,Benchmark runner.
+RELOCATE,VUB Financial Readiness Course/scripts/create-travel-package.ps1,/scripts/create-travel-package.ps1,Offline travel-package bundler.
+RELOCATE,VUB Financial Readiness Course/scripts/generate-assessment-pdfs.py,/scripts/generate-assessment-pdfs.py,Assessment PDF generator.
+RELOCATE,VUB Financial Readiness Course/scripts/generate-syllabus-pdf.py,/scripts/generate-syllabus-pdf.py,Syllabus PDF generator.
+RELOCATE,VUB Financial Readiness Course/scripts/generate-module1-teachers-guide.py,/scripts/generate-module1-teachers-guide.py,Module 1 teacher-guide PDF generator.
+RELOCATE,VUB Financial Readiness Course/scripts/generate-module2-teachers-guide.py,/scripts/generate-module2-teachers-guide.py,Module 2 teacher-guide PDF generator.
+RELOCATE,VUB Financial Readiness Course/scripts/generate-module3-teachers-guide.py,/scripts/generate-module3-teachers-guide.py,Module 3 teacher-guide PDF generator.
+RELOCATE,VUB Financial Readiness Course/scripts/generate-module4-teachers-guide.py,/scripts/generate-module4-teachers-guide.py,Module 4 teacher-guide PDF generator.
+RELOCATE,VUB Financial Readiness Course/scripts/generate-module5-teachers-guide.py,/scripts/generate-module5-teachers-guide.py,Module 5 teacher-guide PDF generator.
+RELOCATE,VUB Financial Readiness Course/scripts/_teacher_guide_common.py,/scripts/_teacher_guide_common.py,Shared Python helper for teacher-guide generators.
+RELOCATE,VUB Financial Readiness Course/scripts/google-forms-setup.gs,/scripts/google-forms-setup.gs,Google Apps Script; relocate only if assessment workflow needs it.
+RELOCATE,VUB Financial Readiness Course/tests/helpers.js,/tests/helpers.js,Playwright helper (COURSE_URL /financial-readiness.html; re-point).
+RELOCATE,VUB Financial Readiness Course/tests/content/,/tests/content/,8 content specs (build-output content-accuracy dashboard date-agnostic-schedule deployment-config links-integrity modules-present slide-counts).
+RELOCATE,VUB Financial Readiness Course/tests/functional/,/tests/functional/,6 functional specs (confetti mobile navigation sidebar-chapters slide-engine theme).
+RELOCATE,VUB Financial Readiness Course/benchmarks/,/benchmarks/,Benchmark JSON (baseline fixed comparison).
+EXCLUDE,VUB Financial Readiness Course/dist/,,Build artifacts (site site-audit site-test site-win FLASHDRIVE backups+zips serve logs). Regenerated by build.
+EXCLUDE,VUB Financial Readiness Course/node_modules/,,Vendored deps; regenerated by npm install.
+EXCLUDE,VUB Financial Readiness Course/scripts/__pycache__/,,Python bytecode cache.
+EXCLUDE,VUB Financial Readiness Course/test-results/,,Playwright runtime output.
+EXCLUDE,VUB Financial Readiness Course/skills/,,Vendored skill library (adapt animate audit ...). Not platform content.
+EXCLUDE,VUB Financial Readiness Course/skills-lock.json,,Lockfile for vendored skills.
+EXCLUDE,"VUB Financial Readiness Course/.adal/ .agents/ .augment/ .claude/ .codebuddy/ .commandcode/ .continue/ .cortex/ .crush/ .factory/ .goose/ .iflow/ .junie/ .kilocode/ .kiro/ .kode/ .mcpjam/ .mux/ .neovate/ .openhands/ .pi/ .pochi/ .qoder/ .qwen/ .remember/ .roo/ .trae/ .vibe/ .windsurf/ .zencoder/",,30 local AI-tool/IDE config dotfolders in FR subrepo. Local-only EXCLUDE (grouped as one row).
+EXCLUDE,VUB Intermediate Computer Course/Remotion/,,Inside Copy #2 (archived whole). Vendored; not separately moved.
+EXCLUDE,VUB Intermediate Computer Course/reference-design/,,Inside Copy #2 (archived whole). Reference design; not separately moved.
+EXCLUDE,.claude/,,Root local Claude settings; root .gitignore already excludes.
+EXCLUDE,.playwright-mcp/,,Root Playwright-MCP scratch dir (runtime).
+EXCLUDE,design.md/,,Vendored junk (a directory not a markdown file) per rule.
+EXCLUDE,.gitignore,,Root ignore rules; folded into platform config in M3.
+EXCLUDE,MEMORY/,,Platform dev-state state.json; root .gitignore already excludes. Not shared content.
+EXCLUDE,package.json + package-lock.json (root stubs),,231 B root npm stubs; superseded by RELOCATEd FR toolchain package.json; reconcile in M3.
+KEEP,CLAUDE.md,/CLAUDE.md,Canonical platform governance (11432 B). Stays at root.
+KEEP,AGENTS.md,/AGENTS.md,Agent/governance doc (identical 11432 B to CLAUDE.md; likely dual-name duplicate; reconcile in M3).
+KEEP,docs/,/docs/,Project docs (plans specs preflight migration). Stays at root.
+MOVE,Meeting Notes/,/docs/meeting-notes/,10 meeting briefs md+pdf. Fold into platform docs; kebab the folder.
+MOVE,assessment-service-kit/,/instructors/assessment-service-kit/,Reusable assessment kit (8 items). Instructor/service tooling. UNSURE (could stay root tool).
