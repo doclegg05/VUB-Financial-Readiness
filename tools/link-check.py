@@ -14,6 +14,13 @@ roots = sys.argv[1:] or ["courses", "instructors", "index.html"]
 REF_RE = re.compile(r'(?:href|src)\s*=\s*["\']([^"\']+)["\']', re.I)
 SKIP = ("http://", "https://", "//", "mailto:", "tel:", "#", "data:", "javascript:")
 
+# Site root for resolving absolute ("/...") refs the way a server would.
+# When scanning a single built directory (e.g. dist/site), that dir IS the site root;
+# otherwise the platform root is the site root.
+site_root = ROOT
+if len(roots) == 1 and os.path.isdir(os.path.join(ROOT, roots[0])):
+    site_root = os.path.join(ROOT, roots[0])
+
 def html_files(paths):
     for p in paths:
         ap = os.path.join(ROOT, p)
@@ -40,7 +47,10 @@ for f in html_files(roots):
         target = r.split("#", 1)[0].split("?", 1)[0]
         if not target:
             continue
-        resolved = os.path.normpath(os.path.join(base, target))
+        if target.startswith("/"):
+            resolved = os.path.normpath(os.path.join(site_root, target.lstrip("/")))
+        else:
+            resolved = os.path.normpath(os.path.join(base, target))
         if not os.path.exists(resolved):
             broken.append((os.path.relpath(f, ROOT), ref, os.path.relpath(resolved, ROOT)))
 

@@ -1,0 +1,16 @@
+{
+  "name": "vublessons",
+  "version": "1.0.0",
+  "description": "VUB Learning — Veterans Upward Bound course platform (static site)",
+  "scripts": {
+    "build:site": "node scripts/build-site.js",
+    "dev": "serve .",
+    "serve:dist": "serve dist/site",
+    "links": "python tools/link-check.py",
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "serve": "^14.2.6"
+  }
+}

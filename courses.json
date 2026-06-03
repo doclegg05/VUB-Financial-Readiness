@@ -1,0 +1,42 @@
+{
+  "$comment": "Catalog data for the VUB Learning platform. Drives the homepage catalog and course consoles (consumed in M4). Paths are relative to the site root.",
+  "courses": [
+    {
+      "id": "computer-skills",
+      "title": "Intermediate Computer Skills",
+      "subtitle": "Eight weeks of practical computer lessons for veterans.",
+      "type": "weeks",
+      "path": "courses/computer-skills/",
+      "entry": "courses/computer-skills/index.html",
+      "preTest": "courses/computer-skills/weeks/week-01/pre-test.html",
+      "postTest": "courses/computer-skills/weeks/week-08/post-test.html",
+      "lessons": [
+        { "n": 1, "title": "VA Online Services", "topic": "VA.gov, MyHealtheVet, eBenefits", "path": "courses/computer-skills/weeks/week-01/presentation.html", "statusKey": "ics:w1" },
+        { "n": 2, "title": "Windows Tips & Productivity", "topic": "Shortcuts, window management, screenshots", "path": "courses/computer-skills/weeks/week-02/presentation.html", "statusKey": "ics:w2" },
+        { "n": 3, "title": "Email Productivity (Gmail)", "topic": "Compose, organize, attachments, safety", "path": "courses/computer-skills/weeks/week-03/presentation.html", "statusKey": "ics:w3" },
+        { "n": 4, "title": "Microsoft Word", "topic": "Documents, formatting, printing", "path": "courses/computer-skills/weeks/week-04/presentation.html", "statusKey": "ics:w4" },
+        { "n": 5, "title": "Microsoft Excel", "topic": "Spreadsheets, budgets, basic formulas", "path": "courses/computer-skills/weeks/week-05/presentation.html", "statusKey": "ics:w5" },
+        { "n": 6, "title": "Cloud Computing & Google Drive", "topic": "Storage, sharing, sync", "path": "courses/computer-skills/weeks/week-06/presentation.html", "statusKey": "ics:w6" },
+        { "n": 7, "title": "Introduction to AI Tools", "topic": "ChatGPT and responsible use", "path": "courses/computer-skills/weeks/week-07/presentation.html", "statusKey": "ics:w7" },
+        { "n": 8, "title": "Mobile Integration & Review", "topic": "Phones, review, Post-Test", "path": "courses/computer-skills/weeks/week-08/presentation.html", "statusKey": "ics:w8" }
+      ]
+    },
+    {
+      "id": "financial-readiness",
+      "title": "VUB Financial Readiness",
+      "subtitle": "Benefits, retirement income, healthcare, and legacy planning for veterans.",
+      "type": "modules",
+      "path": "courses/financial-readiness/",
+      "entry": "courses/financial-readiness/financial-readiness.html",
+      "preTest": "courses/financial-readiness/assessments/pre-test-form.html",
+      "postTest": "courses/financial-readiness/assessments/post-test-form.html",
+      "lessons": [
+        { "n": 1, "title": "Retirement Timelines & Preparation", "topic": "Social Security claiming, TSP", "path": "courses/financial-readiness/financial-readiness.html#module1", "statusKey": "fr:module1" },
+        { "n": 2, "title": "Disability Pay & Compensation", "topic": "CRSC vs CRDP, VA waiver", "path": "courses/financial-readiness/financial-readiness.html#module2", "statusKey": "fr:module2" },
+        { "n": 3, "title": "Healthcare & Long-Term Care", "topic": "Medicare/TRICARE, Aid & Attendance", "path": "courses/financial-readiness/financial-readiness.html#module3", "statusKey": "fr:module3" },
+        { "n": 4, "title": "Managing Your Retirement Income", "topic": "Tax-efficient withdrawals, RMDs", "path": "courses/financial-readiness/financial-readiness.html#module4", "statusKey": "fr:module4" },
+        { "n": 5, "title": "Legacy Planning", "topic": "Survivor Benefit Plan (SBP)", "path": "courses/financial-readiness/financial-readiness.html#module5", "statusKey": "fr:module5" }
+      ]
+    }
+  ]
+}

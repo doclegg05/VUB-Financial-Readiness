@@ -1,0 +1,55 @@
+[build]
+    command = "npm run build:site"
+    publish = "dist/site"
+
+[[headers]]
+    for = "/*"
+    [headers.values]
+        X-Content-Type-Options = "nosniff"
+        Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+    for = "/*.html"
+    [headers.values]
+        Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+    for = "/assets/*"
+    [headers.values]
+        Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+    for = "/shared/*"
+    [headers.values]
+        Cache-Control = "public, max-age=3600, must-revalidate"
+
+# Pretty-URL aliases for the consolidated layout
+[[redirects]]
+    from = "/financial-readiness"
+    to = "/courses/financial-readiness/financial-readiness.html"
+    status = 200
+
+[[redirects]]
+    from = "/computer-skills"
+    to = "/courses/computer-skills/index.html"
+    status = 200
+
+[[redirects]]
+    from = "/syllabus"
+    to = "/courses/financial-readiness/syllabus.html"
+    status = 200
+
+[[redirects]]
+    from = "/intake"
+    to = "/instructors/intake.html"
+    status = 200
+
+[[redirects]]
+    from = "/classes"
+    to = "/instructors/classes/"
+    status = 301
+
+[[redirects]]
+    from = "/*"
+    to = "/404.html"
+    status = 404
