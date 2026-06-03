@@ -24,7 +24,7 @@ Carry:
 - One second copy on your laptop or external drive
 - One cloud copy, such as OneDrive, Google Drive, GitHub, or Netlify
 - Printed schedule and a few paper pre/post-test copies in case the lab setup fails
-- Printed student upload instructions from `📘 Admin Paperwork/student-upload-instructions.html`
+- Printed student upload instructions from `admin-paperwork/student-upload-instructions.html`
 
 ## Create The Travel Package
 
@@ -64,13 +64,13 @@ Give students either:
 For Week 1, students open:
 
 ```text
-📘 Assessments/pre-test.html
+assessments/pre-test.html
 ```
 
 For Week 6, students open:
 
 ```text
-📘 Assessments/post-test.html
+assessments/post-test.html
 ```
 
 At the end of each test, students should click:

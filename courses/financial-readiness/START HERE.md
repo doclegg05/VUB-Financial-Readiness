@@ -23,7 +23,7 @@ Open **`weekly-curriculum/`**. It contains one folder for each week in the teach
 | Week 7 | Final class meeting | Review + post-test |
 
 Each weekly folder includes a README with the teaching flow and copies of the
-handouts or assessments needed for that session. The original 📘 folders remain
+handouts or assessments needed for that session. The original folders remain
 in place so the web app links keep working.
 
 ## To prepare for the satellite classroom
@@ -37,18 +37,18 @@ npm run package:travel
 
 That creates a travel folder and zip backup in `dist/`.
 
-## Teaching folders (look for the 📘)
+## Teaching folders
 
-Anything starting with 📘 is content you'll actually use in class. Windows
+Anything starting with is content you'll actually use in class. Windows
 Explorer groups these at the top of the folder list.
 
 | Folder | What's inside |
 |---|---|
-| 📘 Admin Paperwork | Instructor contracts, one-page syllabus |
-| 📘 Assessments | Pre-test and post-test HTML pages |
-| 📘 Handouts | Printable handouts (11 files — schedule, worksheets, reference sheets) |
-| 📘 Study Resources | Flashcards, quiz, podcast, slide deck, study guide, infographic |
-| 📘 Teacher Guides | Teacher's guide PDFs, including the Module 4 step-by-step explainer and practical scenarios |
+| admin-paperwork | Instructor contracts, one-page syllabus |
+| assessments | Pre-test and post-test HTML pages |
+| handouts | Printable handouts (11 files — schedule, worksheets, reference sheets) |
+| study-resources | Flashcards, quiz, podcast, slide deck, study guide, infographic |
+| teacher-guides | Teacher's guide PDFs, including the Module 4 step-by-step explainer and practical scenarios |
 
 ## Other teaching files (at the top level)
 
@@ -80,5 +80,5 @@ have to open them to teach a lesson:
 
 ---
 
-*If you ever need to rename a 📘 folder, tell Claude — some of them are wired
+*If you ever need to rename a folder, tell Claude — some of them are wired
 into `index.html` and renaming by hand will break links.*

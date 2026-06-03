@@ -58,7 +58,7 @@ Both Sheets land in your Drive folder. Every student submission becomes a new ro
 
 ## Step 3 — Paste the URLs into `submit-tests.html`
 
-1. Open `📘 Assessments/submit-tests.html` in any text editor.
+1. Open `assessments/submit-tests.html` in any text editor.
 2. Find the placeholder **`PRE_TEST_URL_HERE`** and replace it with the Pre-Test
    *student* URL from step 1.
 3. Find **`POST_TEST_URL_HERE`** and replace it with the Post-Test *student* URL.
@@ -69,7 +69,7 @@ once both URLs are in place.
 
 ## Step 4 — Test it
 
-1. Open `📘 Assessments/submit-tests.html` in a browser.
+1. Open `assessments/submit-tests.html` in a browser.
 2. Click **Open Pre-Test**, fill in a fake name and answers, submit.
 3. Open the Pre-Test response Sheet — your test row should be there.
 4. Repeat for the Post-Test.

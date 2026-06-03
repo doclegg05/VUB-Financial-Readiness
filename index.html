@@ -1002,10 +1002,10 @@
     </a>
 
     <ul class="nav-links" role="list">
-      <li><a href="VUB Financial Readiness Course/financial-readiness.html"><i class="fa-solid fa-dollar-sign" aria-hidden="true"></i> Financial Readiness</a></li>
-      <li><a href="VUB Financial Readiness Course/intermediate-computer-skills.html"><i class="fa-solid fa-computer" aria-hidden="true"></i> Computer Skills</a></li>
-      <li><a href="VUB Financial Readiness Course/syllabus.html"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Syllabi</a></li>
-      <li><a href="classes/"><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Classes</a></li>
+      <li><a href="courses/financial-readiness/financial-readiness.html"><i class="fa-solid fa-dollar-sign" aria-hidden="true"></i> Financial Readiness</a></li>
+      <li><a href="courses/computer-skills/index.html"><i class="fa-solid fa-computer" aria-hidden="true"></i> Computer Skills</a></li>
+      <li><a href="courses/financial-readiness/syllabus.html"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Syllabi</a></li>
+      <li><a href="instructors/classes/"><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Classes</a></li>
       <li><a href="#courses" class="nav-cta">Browse Courses</a></li>
     </ul>
   </nav>
@@ -1072,7 +1072,7 @@
           <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
           View Courses
         </a>
-        <a href="VUB Financial Readiness Course/syllabus.html" class="btn btn-ghost">
+        <a href="courses/financial-readiness/syllabus.html" class="btn btn-ghost">
           <i class="fa-solid fa-book-open" aria-hidden="true"></i>
           Course Syllabi
         </a>
@@ -1162,10 +1162,10 @@
           </div>
 
           <div class="course-footer">
-            <a href="VUB Financial Readiness Course/financial-readiness.html" class="btn btn-navy">
+            <a href="courses/financial-readiness/financial-readiness.html" class="btn btn-navy">
               <i class="fa-solid fa-play" aria-hidden="true"></i> Enter Course
             </a>
-            <a href="VUB Financial Readiness Course/syllabus.html" class="btn btn-outline">
+            <a href="courses/financial-readiness/syllabus.html" class="btn btn-outline">
               <i class="fa-solid fa-book-open" aria-hidden="true"></i> Syllabus
             </a>
           </div>
@@ -1221,10 +1221,10 @@
           </div>
 
           <div class="course-footer">
-            <a href="VUB Financial Readiness Course/intermediate-computer-skills.html" class="btn btn-navy">
+            <a href="courses/computer-skills/index.html" class="btn btn-navy">
               <i class="fa-solid fa-play" aria-hidden="true"></i> Enter Course
             </a>
-            <a href="syllabus-overview.html" class="btn btn-outline">
+            <a href="courses/computer-skills/syllabus-overview.html" class="btn btn-outline">
               <i class="fa-solid fa-book-open" aria-hidden="true"></i> Overview
             </a>
           </div>
@@ -1247,7 +1247,7 @@
 
       <div class="resources-grid">
 
-        <a href="VUB Financial Readiness Course/📘 Assessments/pre-test-form.html" class="resource-card reveal reveal-delay-1">
+        <a href="courses/financial-readiness/assessments/pre-test-form.html" class="resource-card reveal reveal-delay-1">
           <div class="resource-icon icon-gold" aria-hidden="true">
             <i class="fa-solid fa-clipboard-question"></i>
           </div>
@@ -1258,7 +1258,7 @@
           <i class="fa-solid fa-arrow-right resource-arrow" aria-hidden="true"></i>
         </a>
 
-        <a href="VUB Intermediate Computer Course/weeks/week-01/pre-test.html" class="resource-card reveal reveal-delay-2">
+        <a href="courses/computer-skills/weeks/week-01/pre-test.html" class="resource-card reveal reveal-delay-2">
           <div class="resource-icon icon-blue" aria-hidden="true">
             <i class="fa-solid fa-clipboard-check"></i>
           </div>
@@ -1269,7 +1269,7 @@
           <i class="fa-solid fa-arrow-right resource-arrow" aria-hidden="true"></i>
         </a>
 
-        <a href="VUB Financial Readiness Course/📘 Study Resources/flashcards.html" class="resource-card reveal reveal-delay-3">
+        <a href="courses/financial-readiness/study-resources/flashcards.html" class="resource-card reveal reveal-delay-3">
           <div class="resource-icon icon-green" aria-hidden="true">
             <i class="fa-solid fa-bolt"></i>
           </div>
@@ -1280,7 +1280,7 @@
           <i class="fa-solid fa-arrow-right resource-arrow" aria-hidden="true"></i>
         </a>
 
-        <a href="VUB Intermediate Computer Course/weeks/week-08/post-test.html" class="resource-card reveal reveal-delay-4">
+        <a href="courses/computer-skills/weeks/week-08/post-test.html" class="resource-card reveal reveal-delay-4">
           <div class="resource-icon icon-red" aria-hidden="true">
             <i class="fa-solid fa-flag-checkered"></i>
           </div>
@@ -1385,7 +1385,7 @@
       <div class="footer-meta">
         <strong>Veterans Upward Bound — West Virginia</strong><br>
         Empowering veterans through education &amp; technology<br>
-        <a href="intake.html" style="color:rgba(255,255,255,0.55);font-size:0.78rem;letter-spacing:0.05em;">
+        <a href="instructors/intake.html" style="color:rgba(255,255,255,0.55);font-size:0.78rem;letter-spacing:0.05em;">
           <i class="fa-solid fa-upload" aria-hidden="true" style="font-size:0.7rem;"></i>
           For Instructors — Submit a Test
         </a>
@@ -1421,9 +1421,9 @@
       // Build a safe relative URL based on course ID
       if (last.courseId === 'ics') {
         const w = String(last.weekId).padStart(2, '0');
-        linkEl.href = 'VUB Intermediate Computer Course/weeks/week-' + w + '/presentation.html';
+        linkEl.href = 'courses/computer-skills/weeks/week-' + w + '/presentation.html';
       } else if (last.courseId === 'fr') {
-        linkEl.href = 'VUB Financial Readiness Course/financial-readiness.html#' + last.weekId;
+        linkEl.href = 'courses/financial-readiness/financial-readiness.html#' + last.weekId;
       } else {
         return; // unknown course, leave banner hidden
       }

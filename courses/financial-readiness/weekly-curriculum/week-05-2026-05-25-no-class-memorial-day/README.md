@@ -11,5 +11,5 @@ There is no new material this week. The next class meeting is Module 5: Legacy P
 Before Module 5, review:
 
 - `financial-readiness.html#module5`
-- `📘 Handouts/sbp-decision-worksheet.html`
+- `handouts/sbp-decision-worksheet.html`
 
