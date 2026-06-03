@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" class="vub-brand" data-text-size="">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VUB Brand Sheet</title>
+<link rel="icon" href="favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/brand.css">
+<style>
+  body{margin:0;padding:var(--space-8);}
+  .wrap{max-width:1000px;margin:0 auto;}
+  .row{display:flex;gap:var(--space-6);flex-wrap:wrap;align-items:center;margin:var(--space-6) 0;}
+  .chip{display:flex;align-items:center;justify-content:center;width:160px;height:160px;border-radius:var(--radius);}
+  .on-light{background:var(--cream);border:1px solid var(--border);}
+  .on-dark{background:var(--navy-deep);}
+  .chip img{width:120px;height:120px;}
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--space-3);}
+  .sw{border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;font-size:var(--fs-small);}
+  .sw .fill{height:64px;} .sw .lbl{padding:.4rem .6rem;}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:8px;
+       font-weight:700;border:none;cursor:pointer;text-decoration:none;}
+  .btn-gold{background:var(--gold);color:var(--navy);}
+  .btn-navy{background:var(--navy);color:#fff;}
+  .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+        box-shadow:var(--shadow-card);padding:var(--space-6);max-width:360px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Veterans Upward Bound — Brand Sheet</h1>
+  <p style="color:var(--muted)">Generated for Milestone 2. Logo, palette, type, and components from <code>shared/brand.css</code>.</p>
+
+  <h2>Logo</h2>
+  <div class="row">
+    <div class="chip on-light"><img src="vub-seal.svg" alt="VUB seal on light"></div>
+    <div class="chip on-dark"><img src="vub-seal-badge.png" alt="VUB seal badge on dark"></div>
+    <div class="chip on-dark"><img src="vub-seal-white.png" alt="VUB seal white knockout on dark"></div>
+  </div>
+
+  <h2>Palette</h2>
+  <div class="swatches" id="sw"></div>
+
+  <h2>Type</h2>
+  <p style="font-family:var(--font-display);font-size:var(--fs-h1)">Playfair Display — Display H1</p>
+  <p style="font-family:var(--font-display);font-size:var(--fs-h2)">Playfair Display — H2</p>
+  <p style="font-size:var(--fs-slide)">Source Sans 3 — slide/body 24px. Practical, accessible, built around the skills that matter.</p>
+  <p style="font-size:var(--fs-base)">Source Sans 3 — base reading 18px, line-height 1.7.</p>
+
+  <h2>Components</h2>
+  <div class="row">
+    <a class="btn btn-navy" href="#">Enter Course</a>
+    <a class="btn btn-gold" href="#">Take Pre-Test</a>
+  </div>
+  <div class="card"><h3>Course card</h3><p style="color:var(--muted)">Sample card using brand tokens, shadow, and radius.</p></div>
+
+  <h2>Text-size control (older-learner hook)</h2>
+  <div class="row">
+    <button class="btn btn-navy" onclick="document.documentElement.dataset.textSize=''">A (default)</button>
+    <button class="btn btn-navy" onclick="document.documentElement.dataset.textSize='lg'">A+ (large)</button>
+    <button class="btn btn-navy" onclick="document.documentElement.dataset.textSize='xl'">A++ (x-large)</button>
+  </div>
+</div>
+<script>
+  const tokens=[["--navy","Navy (seal)"],["--navy-deep","Navy deep"],["--gold","Gold"],
+    ["--gold-light","Gold light"],["--crimson","Crimson"],["--cream","Cream"],
+    ["--ink","Ink"],["--muted","Muted"]];
+  const cs=getComputedStyle(document.documentElement);
+  document.getElementById('sw').innerHTML=tokens.map(([v,n])=>{
+    const c=cs.getPropertyValue(v).trim();
+    return `<div class="sw"><div class="fill" style="background:${c}"></div><div class="lbl"><b>${n}</b><br>${c}</div></div>`;
+  }).join('');
+</script>
+</body>
+</html>

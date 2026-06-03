@@ -1,0 +1,66 @@
+/* shared/brand.css — VUB design tokens (single source of truth).
+   Navy sampled from the official seal ink (#312C4C). Targets WCAG AAA for body text. */
+:root {
+  /* Brand navy (from the seal) */
+  --navy:        #312C4C;   /* primary brand / body text on light (AAA on white & cream) */
+  --navy-deep:   #211D38;   /* hero / footer backgrounds */
+  --navy-mid:    #3D3760;
+  --navy-light:  #4A4470;   /* hover states on dark */
+  /* Gold accents — large text / accents ONLY, never small body */
+  --gold:        #C9A227;
+  --gold-light:  #E4C45A;
+  --gold-pale:   #F5E9C0;
+  /* Patriotic accent */
+  --crimson:     #B31942;
+  --crimson-dark:#8B1432;
+  /* Neutrals / surfaces */
+  --white:       #FFFFFF;
+  --cream:       #FDF9F4;   /* soft page bg (kinder to older eyes than stark white) */
+  --off-white:   #F5F7FA;
+  --ink:         #1A2230;   /* default body text (AAA on cream) */
+  --muted:       #51606E;   /* secondary text — keep >=4.5:1 on cream */
+  --border:      #D8D0C0;
+  /* Status (icon + text always accompany color) */
+  --success:#1E7F44; --danger:#C2283C; --warning:#B5840B; --info:#1A6E86;
+  /* Focus */
+  --focus:       #F5C84C;
+
+  /* Typography */
+  --font-display:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:   'Source Sans 3', 'Segoe UI', Tahoma, Verdana, sans-serif;
+  --fs-base: 18px;    /* min reading size */
+  --fs-slide: 24px;   /* on-screen lesson body */
+  --fs-h1: clamp(2rem, 4vw, 3rem);
+  --fs-h2: clamp(1.6rem, 3vw, 2.25rem);
+  --fs-h3: 1.3rem;
+  --fs-small: 0.95rem;
+  --lh: 1.7;          /* generous line-height */
+
+  /* Spacing / shape */
+  --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem;
+  --space-6:1.5rem; --space-8:2rem; --space-12:3rem;
+  --radius: 12px; --radius-sm: 6px;
+  --shadow-card: 0 8px 40px rgba(33,29,56,.12), 0 2px 8px rgba(33,29,56,.06);
+  --shadow-hover:0 20px 60px rgba(33,29,56,.20), 0 4px 16px rgba(33,29,56,.10);
+
+  /* Accessibility */
+  --tap-min: 44px;    /* min interactive target */
+}
+
+/* Older-learner text-size control hook: set data-text-size on <html> */
+html[data-text-size="lg"]  { --fs-base: 20px; --fs-slide: 28px; --lh: 1.8; }
+html[data-text-size="xl"]  { --fs-base: 22px; --fs-slide: 32px; --lh: 1.85; }
+
+/* Baseline applications (opt-in via class to avoid disturbing existing pages in M2) */
+.vub-brand, .vub-brand body {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh);
+  color: var(--ink);
+  background: var(--cream);
+}
+.vub-brand :is(a,button):focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+.vub-brand :is(button,.btn,[role="button"]) { min-height: var(--tap-min); }
+.vub-brand h1,.vub-brand h2,.vub-brand h3 { font-family: var(--font-display); color: var(--navy); line-height: 1.15; }
+
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

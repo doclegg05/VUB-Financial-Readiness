@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VUB Learning — Veterans Upward Bound</title>
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────── */
+    :root {
+      --navy:        #0C1A35;
+      --navy-mid:    #142240;
+      --navy-light:  #1E335A;
+      --gold:        #C9A227;
+      --gold-light:  #E4C45A;
+      --gold-pale:   #F5E9C0;
+      --crimson:     #B31942;
+      --white:       #FFFFFF;
+      --cream:       #FDF9F4;
+      --ink:         #1A2B3C;
+      --muted:       #5A6A7A;
+      --border:      #D8D0C0;
+      --card-bg:     #FFFFFF;
+      --focus:       #F5C84C;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Source Sans 3', 'Segoe UI', Verdana, sans-serif;
+
+      --shadow-card: 0 8px 40px rgba(12, 26, 53, 0.12), 0 2px 8px rgba(12, 26, 53, 0.06);
+      --shadow-hover: 0 20px 60px rgba(12, 26, 53, 0.2), 0 4px 16px rgba(12, 26, 53, 0.1);
+      --radius: 12px;
+    }
+
+    /* ─── Reset & Base ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--ink);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Navigation ────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      height: 68px;
+      background: rgba(12, 26, 53, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      border: 1.5px solid rgba(201, 162, 39, 0.4);
+      padding: 2px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .nav-brand-star {
+      color: var(--gold);
+      font-size: 0.6rem;
+      vertical-align: middle;
+      margin: 0 0.1em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-light);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .nav-links .nav-cta {
+      color: var(--navy);
+      background: var(--gold);
+      padding: 0.45rem 1.1rem;
+      font-weight: 700;
+      border-radius: 6px;
+    }
+
+    .nav-links .nav-cta:hover {
+      background: var(--gold-light);
+      color: var(--navy);
+    }
+
+    /* ─── Hero ──────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--navy);
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 60px,
+          rgba(201, 162, 39, 0.04) 60px,
+          rgba(201, 162, 39, 0.04) 61px
+        ),
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 60px,
+          rgba(255, 255, 255, 0.015) 60px,
+          rgba(255, 255, 255, 0.015) 61px
+        );
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 70%;
+      height: 130%;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(201, 162, 39, 0.07) 0%,
+        rgba(30, 51, 90, 0.15) 50%,
+        transparent 70%
+      );
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--cream));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.35rem 0.85rem 0.35rem 0.5rem;
+      background: rgba(201, 162, 39, 0.12);
+      border: 1px solid rgba(201, 162, 39, 0.3);
+      border-radius: 40px;
+      color: var(--gold-light);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.1s ease forwards;
+    }
+
+    .hero-eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 8px var(--gold);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.25s ease forwards;
+    }
+
+    .hero-headline-accent {
+      color: var(--gold);
+      display: block;
+      font-style: italic;
+    }
+
+    .hero-divider {
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, var(--gold), transparent);
+      margin: 1.75rem 0;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.4s ease forwards;
+    }
+
+    .hero-subheadline {
+      max-width: 640px;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.5s ease forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.6s ease forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      min-height: 52px;
+      text-decoration: none;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .btn-gold:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201, 162, 39, 0.4);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.85);
+      border: 1.5px solid rgba(255,255,255,0.25);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.5);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .btn-navy {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .btn-navy:hover {
+      background: var(--navy-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(12, 26, 53, 0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover {
+      background: var(--cream);
+      border-color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.75s ease forwards;
+    }
+
+    .hero-stat { display: flex; flex-direction: column; }
+
+    .hero-stat-number {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+
+    .hero-stat-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.12);
+      align-self: stretch;
+    }
+
+    .hero-stars {
+      position: absolute;
+      top: 2.5rem;
+      right: clamp(1.25rem, 6vw, 5rem);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      opacity: 0;
+      animation: fadeIn 1.2s 0.9s ease forwards;
+    }
+
+    .star-row { display: flex; gap: 1rem; }
+
+    .star-icon { color: var(--gold); opacity: 0.25; font-size: 1rem; }
+    .star-icon.bright { opacity: 0.7; }
+    .star-icon.medium { opacity: 0.45; }
+
+    /* ─── Courses Section ───────────────────────────────── */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 4vw, 2.5rem);
+    }
+
+    .section-header { margin-bottom: 2.5rem; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--crimson);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.15;
+    }
+
+    .section-subtitle {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .course-card {
+      position: relative;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(12,26,53,0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .course-card.visible {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .course-banner {
+      position: relative;
+      height: 170px;
+      overflow: hidden;
+    }
+
+    .course-banner-bg {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .banner-financial {
+      background: linear-gradient(140deg, #0C2340 0%, #1A4A6B 60%, #2A6A4A 100%);
+    }
+
+    .banner-computer {
+      background: linear-gradient(140deg, #0C1A35 0%, #1E3060 60%, #2A3878 100%);
+    }
+
+    .banner-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.18;
+      background-image: repeating-linear-gradient(
+        90deg, rgba(201,162,39,0.4) 0 1px, transparent 1px 40px
+      ),
+      repeating-linear-gradient(
+        0deg, rgba(201,162,39,0.2) 0 1px, transparent 1px 40px
+      );
+    }
+
+    .banner-emblem {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .banner-code {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.12);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .banner-badge {
+      background: rgba(201, 162, 39, 0.9);
+      color: var(--navy);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border-radius: 20px;
+    }
+
+    .banner-ribbon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 56px 56px 0 0;
+      border-color: rgba(201,162,39,0.25) transparent transparent transparent;
+    }
+
+    .course-body {
+      padding: 1.75rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .course-category {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--crimson);
+    }
+
+    .course-divot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    .course-level {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .course-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 0.85rem;
+    }
+
+    .course-description {
+      color: var(--muted);
+      font-size: 0.97rem;
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .course-modules {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .module-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.3rem 0.65rem;
+      background: rgba(12, 26, 53, 0.05);
+      border: 1px solid rgba(12, 26, 53, 0.1);
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .module-pill-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .course-stats {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1rem 1.75rem;
+      background: rgba(12, 26, 53, 0.03);
+      border-top: 1px solid rgba(12, 26, 53, 0.06);
+    }
+
+    .course-stat { display: flex; flex-direction: column; }
+
+    .course-stat-value {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 1rem;
+    }
+
+    .course-stat-key {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .course-footer {
+      padding: 1.25rem 1.75rem;
+      display: flex;
+      gap: 0.65rem;
+      border-top: 1px solid rgba(12, 26, 53, 0.06);
+    }
+
+    .course-footer .btn {
+      flex: 1;
+      font-size: 0.92rem;
+      padding: 0.65rem 1rem;
+      min-height: 46px;
+    }
+
+    /* ─── Resources Section ─────────────────────────────── */
+    .resources-section {
+      background: var(--navy);
+      padding: clamp(2.5rem, 5vw, 4rem) 0;
+    }
+
+    .resources-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+    }
+
+    .resources-section .section-label { color: var(--gold-light); }
+    .resources-section .section-label::before { background: var(--gold-light); }
+    .resources-section .section-title { color: var(--white); }
+    .resources-section .section-subtitle { color: rgba(255,255,255,0.6); }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .resource-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      transition: all 0.22s ease;
+      cursor: pointer;
+    }
+
+    .resource-card:hover {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(201, 162, 39, 0.35);
+      transform: translateY(-3px);
+    }
+
+    .resource-icon {
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-size: 1.1rem;
+    }
+
+    .icon-gold { background: rgba(201, 162, 39, 0.15); color: var(--gold-light); }
+    .icon-red  { background: rgba(179, 25, 66, 0.2);  color: #E85A7A; }
+    .icon-blue { background: rgba(59, 130, 246, 0.15); color: #7EAFF5; }
+    .icon-green{ background: rgba(34, 197, 94, 0.12);  color: #6EE4A0; }
+
+    .resource-text { flex: 1; }
+
+    .resource-name {
+      font-weight: 700;
+      color: var(--white);
+      font-size: 0.97rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .resource-desc {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.4;
+    }
+
+    .resource-arrow {
+      flex-shrink: 0;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.85rem;
+      margin-top: 0.2rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .resource-card:hover .resource-arrow {
+      color: var(--gold);
+      transform: translateX(3px);
+    }
+
+    /* ─── Mission Section ───────────────────────────────── */
+    .mission-section { padding: clamp(3rem, 6vw, 5rem) 0; }
+
+    .mission-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .mission-quote { position: relative; }
+
+    .mission-quote-mark {
+      font-family: var(--font-display);
+      font-size: 8rem;
+      line-height: 0.6;
+      color: var(--gold);
+      opacity: 0.2;
+      position: absolute;
+      top: 0;
+      left: -1rem;
+      pointer-events: none;
+    }
+
+    .mission-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.5vw, 1.65rem);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--navy);
+      line-height: 1.5;
+      padding-left: 1rem;
+      border-left: 4px solid var(--gold);
+    }
+
+    .mission-attribution {
+      margin-top: 1.25rem;
+      padding-left: 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .mission-facts { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .fact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 12px rgba(12,26,53,0.06);
+      border: 1px solid rgba(12,26,53,0.06);
+    }
+
+    .fact-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+
+    .fact-icon-navy { background: rgba(12,26,53,0.08); color: var(--navy); }
+    .fact-icon-gold { background: rgba(201,162,39,0.12); color: #9A7B1A; }
+    .fact-icon-red  { background: rgba(179,25,66,0.1); color: var(--crimson); }
+
+    .fact-content h4 {
+      font-weight: 700;
+      font-size: 0.97rem;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+
+    .fact-content p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* ─── Instructor Section ────────────────────────────── */
+    .instructor-section {
+      background: linear-gradient(160deg, var(--navy-mid) 0%, var(--navy) 100%);
+      padding: clamp(2.5rem, 5vw, 4rem) 0;
+    }
+
+    .instructor-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .instructor-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--navy);
+      flex-shrink: 0;
+      border: 3px solid rgba(201,162,39,0.4);
+      box-shadow: 0 0 0 6px rgba(201,162,39,0.1);
+    }
+
+    .instructor-info { flex: 1; min-width: 200px; }
+
+    .instructor-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+
+    .instructor-title {
+      font-size: 0.9rem;
+      color: var(--gold-light);
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .instructor-bio {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+    }
+
+    .instructor-contact { margin-left: auto; flex-shrink: 0; }
+
+    /* ─── Footer ────────────────────────────────────────── */
+    footer {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(201,162,39,0.15);
+      padding: 2rem clamp(1.25rem, 4vw, 3rem);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .footer-brand { display: flex; align-items: center; gap: 0.6rem; }
+
+    .footer-brand-text {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .footer-brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      padding: 2px;
+      border: 1px solid rgba(201,162,39,0.3);
+    }
+
+    .footer-meta {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.4);
+      text-align: right;
+    }
+
+    .footer-meta strong { color: rgba(255,255,255,0.7); }
+
+    .footer-stars {
+      display: flex;
+      gap: 0.4rem;
+      color: var(--gold);
+      font-size: 0.7rem;
+      opacity: 0.5;
+      margin: 0 auto;
+    }
+
+    /* ─── Animations ────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ─── Responsive ────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .mission-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-stars { display: none; }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      .hero-stat-divider { display: none; }
+      .courses-grid { grid-template-columns: 1fr; }
+      .instructor-inner { flex-direction: column; text-align: center; }
+      .instructor-contact { margin-left: 0; }
+      .footer-meta { text-align: left; }
+    }
+
+    @media (max-width: 520px) {
+      body { font-size: 17px; }
+      .hero-stat-divider { display: none; }
+      .course-footer { flex-direction: column; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+  </style>
+</head>
+
+<body class="vub-dashboard">
+
+  <!-- ══ Navigation ══════════════════════════════════════ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a class="nav-brand" href="index.html" aria-label="VUB Learning home">
+      <img class="nav-brand-logo" src="assets/vub-seal.svg" alt="" width="36" height="36">
+      VUB <span class="nav-brand-star">✦</span> Learning
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="VUB Financial Readiness Course/financial-readiness.html"><i class="fa-solid fa-dollar-sign" aria-hidden="true"></i> Financial Readiness</a></li>
+      <li><a href="VUB Financial Readiness Course/intermediate-computer-skills.html"><i class="fa-solid fa-computer" aria-hidden="true"></i> Computer Skills</a></li>
+      <li><a href="VUB Financial Readiness Course/syllabus.html"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Syllabi</a></li>
+      <li><a href="classes/"><i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i> Classes</a></li>
+      <li><a href="#courses" class="nav-cta">Browse Courses</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══ Resume Banner (shown only if learner has progress) ═ -->
+  <aside id="resumeBanner" hidden style="background:var(--navy-mid);border-bottom:1px solid rgba(201,162,39,0.25);">
+    <div style="max-width:1200px;margin:0 auto;padding:0.85rem clamp(1.25rem, 4vw, 2.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:0.85rem;color:rgba(255,255,255,0.92);">
+        <i class="fa-solid fa-bookmark" style="color:var(--gold);font-size:1.1rem;" aria-hidden="true"></i>
+        <span id="resumeBannerText" style="font-size:0.97rem;font-weight:600;">Welcome back.</span>
+      </div>
+      <a id="resumeBannerLink" class="btn btn-gold" href="#" style="min-height:42px;padding:0.5rem 1.1rem;font-size:0.9rem;">
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        Continue
+      </a>
+    </div>
+  </aside>
+
+  <!-- ══ Hero ════════════════════════════════════════════ -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <div class="hero-stars" aria-hidden="true">
+      <div class="star-row">
+        <i class="fa-solid fa-star star-icon bright"></i>
+        <i class="fa-solid fa-star star-icon medium"></i>
+        <i class="fa-solid fa-star star-icon"></i>
+      </div>
+      <div class="star-row">
+        <i class="fa-solid fa-star star-icon"></i>
+        <i class="fa-solid fa-star star-icon medium"></i>
+        <i class="fa-solid fa-star star-icon bright"></i>
+        <i class="fa-solid fa-star star-icon"></i>
+      </div>
+      <div class="star-row">
+        <i class="fa-solid fa-star star-icon medium"></i>
+        <i class="fa-solid fa-star star-icon"></i>
+        <i class="fa-solid fa-star star-icon"></i>
+        <i class="fa-solid fa-star star-icon medium"></i>
+        <i class="fa-solid fa-star star-icon"></i>
+      </div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-eyebrow" aria-label="Veterans Upward Bound — West Virginia">
+        <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+        Veterans Upward Bound &nbsp;—&nbsp; West Virginia
+      </div>
+
+      <h1 class="hero-headline" id="hero-heading">
+        Build Skills.<br>
+        <span class="hero-headline-accent">Serve Your Future.</span>
+      </h1>
+
+      <div class="hero-divider" aria-hidden="true"></div>
+
+      <p class="hero-subheadline">
+        Courses designed for veterans — practical, accessible, and built around the skills
+        that matter most in today's digital world.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#courses" class="btn btn-gold">
+          <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+          View Courses
+        </a>
+        <a href="VUB Financial Readiness Course/syllabus.html" class="btn btn-ghost">
+          <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+          Course Syllabi
+        </a>
+      </div>
+
+      <div class="hero-stats" role="list" aria-label="Course statistics">
+        <div class="hero-stat" role="listitem">
+          <span class="hero-stat-number">2</span>
+          <span class="hero-stat-label">Courses Available</span>
+        </div>
+        <div class="hero-stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat" role="listitem">
+          <span class="hero-stat-number">14</span>
+          <span class="hero-stat-label">Weeks of Content</span>
+        </div>
+        <div class="hero-stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat" role="listitem">
+          <span class="hero-stat-number">100%</span>
+          <span class="hero-stat-label">Veteran Focused</span>
+        </div>
+        <div class="hero-stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat" role="listitem">
+          <span class="hero-stat-number">Free</span>
+          <span class="hero-stat-label">No Cost to Students</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Courses ══════════════════════════════════════════ -->
+  <section id="courses" aria-labelledby="courses-heading">
+    <div class="section">
+      <div class="section-header reveal">
+        <p class="section-label">Curriculum</p>
+        <h2 class="section-title" id="courses-heading">Choose Your Course</h2>
+        <p class="section-subtitle">Each course is taught by a VUB instructor and includes interactive lessons, printable handouts, and assessments.</p>
+      </div>
+
+      <div class="courses-grid">
+
+        <!-- Financial Readiness -->
+        <article class="course-card reveal reveal-delay-1" aria-labelledby="course-fr-title">
+          <div class="course-banner">
+            <div class="course-banner-bg banner-financial">
+              <div class="banner-pattern" aria-hidden="true"></div>
+              <div class="banner-emblem">
+                <span class="banner-code" aria-hidden="true">FR</span>
+                <span class="banner-badge">Financial Readiness</span>
+              </div>
+            </div>
+            <div class="banner-ribbon" aria-hidden="true"></div>
+          </div>
+
+          <div class="course-body">
+            <div class="course-meta-row">
+              <span class="course-category">Finance</span>
+              <span class="course-divot" aria-hidden="true"></span>
+              <span class="course-level">All Levels</span>
+            </div>
+            <h3 class="course-title" id="course-fr-title">VUB Financial Readiness</h3>
+            <p class="course-description">
+              Benefits, retirement income, healthcare costs, long-term care, estate planning,
+              and a comprehensive review — everything veterans need to achieve financial confidence.
+            </p>
+            <div class="course-modules" role="list" aria-label="Course modules">
+              <span class="module-pill" role="listitem"><span class="module-pill-dot" aria-hidden="true"></span>VA Benefits</span>
+              <span class="module-pill" role="listitem"><span class="module-pill-dot" aria-hidden="true"></span>Retirement Income</span>
+              <span class="module-pill" role="listitem"><span class="module-pill-dot" aria-hidden="true"></span>Healthcare</span>
+              <span class="module-pill" role="listitem"><span class="module-pill-dot" aria-hidden="true"></span>Long-Term Care</span>
+              <span class="module-pill" role="listitem"><span class="module-pill-dot" aria-hidden="true"></span>Legacy Planning</span>
+            </div>
+          </div>
+
+          <div class="course-stats" role="list" aria-label="Course details">
+            <div class="course-stat" role="listitem">
+              <span class="course-stat-value">6 Modules</span>
+              <span class="course-stat-key">Content</span>
+            </div>
+            <div class="course-stat" role="listitem">
+              <span class="course-stat-value">Interactive</span>
+              <span class="course-stat-key">Lessons</span>
+            </div>
+            <div class="course-stat" role="listitem">
+              <span class="course-stat-value">Included</span>
+              <span class="course-stat-key">Assessments</span>
+            </div>
+          </div>
+
+          <div class="course-footer">
+            <a href="VUB Financial Readiness Course/financial-readiness.html" class="btn btn-navy">
+              <i class="fa-solid fa-play" aria-hidden="true"></i> Enter Course
+            </a>
+            <a href="VUB Financial Readiness Course/syllabus.html" class="btn btn-outline">
+              <i class="fa-solid fa-book-open" aria-hidden="true"></i> Syllabus
+            </a>
+          </div>
+        </article>
+
+        <!-- Intermediate Computer Skills -->
+        <article class="course-card reveal reveal-delay-2" aria-labelledby="course-ics-title">
+          <div class="course-banner">
+            <div class="course-banner-bg banner-computer">
+              <div class="banner-pattern" aria-hidden="true"></div>
+              <div class="banner-emblem">
+                <span class="banner-code" aria-hidden="true">ICS</span>
+                <span class="banner-badge">Computer Skills</span>
+              </div>
+            </div>
+            <div class="banner-ribbon" aria-hidden="true"></div>
+          </div>
+
+          <div class="course-body">
+            <div class="course-meta-row">
+              <span class="course-category">Technology</span>
+              <span class="course-divot" aria-hidden="true"></span>
+              <span class="course-level">Intermediate</span>
+            </div>
+            <h3 class="course-title" id="course-ics-title">Intermediate Computer Skills</h3>
+            <p class="course-description">
+              Eight weeks of practical computer lessons covering VA online services, Windows
+              productivity, Gmail, Microsoft Office, Google Drive, AI tools, and more.
+            </p>
+            <div class="course-modules" role="list" aria-label="Course topics">
+              <span class="module-pill" role="listitem"><span class="module-pill-dot" aria-hidden="true"></span>VA Online Services</span>
+              <span class="module-pill" role="listitem"><span class="module-pill-dot" aria-hidden="true"></span>Windows Tips</span>
+              <span class="module-pill" role="listitem"><span class="module-pill-dot" aria-hidden="true"></span>Gmail</span>
+              <span class="module-pill" role="listitem"><span class="module-pill-dot" aria-hidden="true"></span>Microsoft Office</span>
+              <span class="module-pill" role="listitem"><span class="module-pill-dot" aria-hidden="true"></span>Google Drive</span>
+              <span class="module-pill" role="listitem"><span class="module-pill-dot" aria-hidden="true"></span>AI Tools</span>
+            </div>
+          </div>
+
+          <div class="course-stats" role="list" aria-label="Course details">
+            <div class="course-stat" role="listitem">
+              <span class="course-stat-value">8 Weeks</span>
+              <span class="course-stat-key">Duration</span>
+            </div>
+            <div class="course-stat" role="listitem">
+              <span class="course-stat-value">2 Hrs/Week</span>
+              <span class="course-stat-key">Commitment</span>
+            </div>
+            <div class="course-stat" role="listitem">
+              <span class="course-stat-value">Pre &amp; Post</span>
+              <span class="course-stat-key">Assessment</span>
+            </div>
+          </div>
+
+          <div class="course-footer">
+            <a href="VUB Financial Readiness Course/intermediate-computer-skills.html" class="btn btn-navy">
+              <i class="fa-solid fa-play" aria-hidden="true"></i> Enter Course
+            </a>
+            <a href="syllabus-overview.html" class="btn btn-outline">
+              <i class="fa-solid fa-book-open" aria-hidden="true"></i> Overview
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Quick Resources ═══════════════════════════════════ -->
+  <section class="resources-section" aria-labelledby="resources-heading">
+    <div class="resources-inner">
+      <div class="section-header reveal">
+        <p class="section-label">Quick Access</p>
+        <h2 class="section-title" id="resources-heading" style="color:var(--white);">
+          Tests &amp; Study Materials
+        </h2>
+        <p class="section-subtitle">Jump directly to assessments, flashcards, and handouts.</p>
+      </div>
+
+      <div class="resources-grid">
+
+        <a href="VUB Financial Readiness Course/📘 Assessments/pre-test-form.html" class="resource-card reveal reveal-delay-1">
+          <div class="resource-icon icon-gold" aria-hidden="true">
+            <i class="fa-solid fa-clipboard-question"></i>
+          </div>
+          <div class="resource-text">
+            <div class="resource-name">Financial Pre-Test</div>
+            <div class="resource-desc">Baseline assessment for the Financial Readiness course</div>
+          </div>
+          <i class="fa-solid fa-arrow-right resource-arrow" aria-hidden="true"></i>
+        </a>
+
+        <a href="VUB Intermediate Computer Course/weeks/week-01/pre-test.html" class="resource-card reveal reveal-delay-2">
+          <div class="resource-icon icon-blue" aria-hidden="true">
+            <i class="fa-solid fa-clipboard-check"></i>
+          </div>
+          <div class="resource-text">
+            <div class="resource-name">Computer Skills Pre-Test</div>
+            <div class="resource-desc">Baseline assessment for the Computer Skills course</div>
+          </div>
+          <i class="fa-solid fa-arrow-right resource-arrow" aria-hidden="true"></i>
+        </a>
+
+        <a href="VUB Financial Readiness Course/📘 Study Resources/flashcards.html" class="resource-card reveal reveal-delay-3">
+          <div class="resource-icon icon-green" aria-hidden="true">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <div class="resource-text">
+            <div class="resource-name">Financial Flashcards</div>
+            <div class="resource-desc">Review key terms and benefit concepts</div>
+          </div>
+          <i class="fa-solid fa-arrow-right resource-arrow" aria-hidden="true"></i>
+        </a>
+
+        <a href="VUB Intermediate Computer Course/weeks/week-08/post-test.html" class="resource-card reveal reveal-delay-4">
+          <div class="resource-icon icon-red" aria-hidden="true">
+            <i class="fa-solid fa-flag-checkered"></i>
+          </div>
+          <div class="resource-text">
+            <div class="resource-name">Computer Skills Post-Test</div>
+            <div class="resource-desc">Final assessment for the Computer Skills course</div>
+          </div>
+          <i class="fa-solid fa-arrow-right resource-arrow" aria-hidden="true"></i>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Mission ══════════════════════════════════════════ -->
+  <section class="mission-section" aria-labelledby="mission-heading">
+    <div class="mission-inner">
+      <div class="mission-quote reveal">
+        <div class="mission-quote-mark" aria-hidden="true">"</div>
+        <blockquote>
+          <p class="mission-text">
+            Veterans have already demonstrated extraordinary commitment. Our job is to give
+            them the tools to carry that same dedication into their civilian lives.
+          </p>
+          <footer class="mission-attribution">
+            — Veterans Upward Bound, West Virginia
+          </footer>
+        </blockquote>
+      </div>
+
+      <div class="mission-facts" role="list">
+        <div class="fact-item reveal reveal-delay-1" role="listitem">
+          <div class="fact-icon fact-icon-navy" aria-hidden="true">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <div class="fact-content">
+            <h4>Built for Veterans</h4>
+            <p>Every lesson uses real veteran scenarios — VA portals, military records, and benefit systems students actually use.</p>
+          </div>
+        </div>
+
+        <div class="fact-item reveal reveal-delay-2" role="listitem">
+          <div class="fact-icon fact-icon-gold" aria-hidden="true">
+            <i class="fa-solid fa-universal-access"></i>
+          </div>
+          <div class="fact-content">
+            <h4>Accessible by Design</h4>
+            <p>Large text, high contrast, keyboard navigation, and screen reader support — meeting WCAG 2.1 AA standards.</p>
+          </div>
+        </div>
+
+        <div class="fact-item reveal reveal-delay-3" role="listitem">
+          <div class="fact-icon fact-icon-red" aria-hidden="true">
+            <i class="fa-solid fa-hands-holding-circle"></i>
+          </div>
+          <div class="fact-content">
+            <h4>Hands-On Learning</h4>
+            <p>Andragogy principles applied throughout — problem-centered tasks, practical skills, and immediate real-world application.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Instructor ════════════════════════════════════════ -->
+  <section class="instructor-section" aria-labelledby="instructor-heading">
+    <div class="instructor-inner">
+      <div class="instructor-avatar" aria-hidden="true">BL</div>
+      <div class="instructor-info">
+        <h2 class="instructor-name" id="instructor-heading">Britt Legg</h2>
+        <p class="instructor-title">Instructor — Veterans Upward Bound, West Virginia</p>
+        <p class="instructor-bio">
+          Dedicated to helping veterans bridge the technology gap and succeed in today's digital world.
+          All courses are free for enrolled VUB students.
+        </p>
+      </div>
+      <div class="instructor-contact">
+        <a href="mailto:britt.legg76@gmail.com" class="btn btn-gold">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          Contact Instructor
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Footer ═══════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="assets/vub-seal.svg" alt="" width="32" height="32">
+        <span class="footer-brand-text">VUB Learning</span>
+      </div>
+
+      <div class="footer-stars" aria-hidden="true">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
+
+      <div class="footer-meta">
+        <strong>Veterans Upward Bound — West Virginia</strong><br>
+        Empowering veterans through education &amp; technology<br>
+        <a href="intake.html" style="color:rgba(255,255,255,0.55);font-size:0.78rem;letter-spacing:0.05em;">
+          <i class="fa-solid fa-upload" aria-hidden="true" style="font-size:0.7rem;"></i>
+          For Instructors — Submit a Test
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="shared/progress.js"></script>
+  <script src="shared/glossary.js" defer></script>
+  <script>
+    // Resume banner — only show if learner has prior progress on this device.
+    (function () {
+      if (!window.VubProgress) return;
+      const last = VubProgress.getLastActivity();
+      if (!last) return;
+      const banner = document.getElementById('resumeBanner');
+      const textEl = document.getElementById('resumeBannerText');
+      const linkEl = document.getElementById('resumeBannerLink');
+
+      const COURSE_NAMES = { ics: 'Computer Skills', fr: 'Financial Readiness' };
+      const COURSE_LABELS = { ics: 'Week', fr: 'Module' };
+      const courseName = COURSE_NAMES[last.courseId] || 'your course';
+      const unit = COURSE_LABELS[last.courseId] || 'Section';
+
+      if (last.percent >= 95) {
+        textEl.textContent = courseName + ' — ' + unit + ' ' + last.weekId + ' complete. Pick up where you left off.';
+      } else if (last.percent > 0) {
+        textEl.textContent = 'Resume ' + courseName + ' — ' + unit + ' ' + last.weekId + ' (' + last.percent + '%)';
+      } else {
+        textEl.textContent = 'Continue ' + courseName + ' — ' + unit + ' ' + last.weekId;
+      }
+
+      // Build a safe relative URL based on course ID
+      if (last.courseId === 'ics') {
+        const w = String(last.weekId).padStart(2, '0');
+        linkEl.href = 'VUB Intermediate Computer Course/weeks/week-' + w + '/presentation.html';
+      } else if (last.courseId === 'fr') {
+        linkEl.href = 'VUB Financial Readiness Course/financial-readiness.html#' + last.weekId;
+      } else {
+        return; // unknown course, leave banner hidden
+      }
+      banner.hidden = false;
+    })();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
