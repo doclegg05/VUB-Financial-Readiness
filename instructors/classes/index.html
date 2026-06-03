@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classes — VUB Learning</title>
+  <meta name="description" content="Active VUB cohorts and their assessment pages.">
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #0C1A35; --navy-mid: #142240; --navy-light: #1E335A;
+      --gold: #C9A227; --gold-light: #E4C45A; --gold-pale: #F5E9C0;
+      --crimson: #B31942; --white: #FFFFFF; --cream: #FDF9F4;
+      --ink: #1A2B3C; --muted: #5A6A7A; --border: #D8D0C0;
+      --focus: #F5C84C;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Source Sans 3', 'Segoe UI', Verdana, sans-serif;
+      --shadow-card: 0 8px 40px rgba(12, 26, 53, 0.12), 0 2px 8px rgba(12, 26, 53, 0.06);
+      --shadow-hover: 0 20px 60px rgba(12, 26, 53, 0.2), 0 4px 16px rgba(12, 26, 53, 0.1);
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      font-size: 18px; line-height: 1.65;
+      color: var(--ink); background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px;
+    }
+
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      height: 68px;
+      background: rgba(12, 26, 53, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 0.75rem;
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 1.25rem; font-weight: 700;
+    }
+    .nav-brand-logo {
+      width: 36px; height: 36px; border-radius: 6px;
+      border: 1.5px solid rgba(201, 162, 39, 0.4);
+      padding: 2px; background: rgba(255,255,255,0.06);
+    }
+    .nav-brand-star { color: var(--gold); font-size: 0.6rem; margin: 0 0.1em; }
+    .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+    .nav-links a {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem; font-weight: 600;
+      border-radius: 6px;
+    }
+    .nav-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.06); }
+
+    .page-hero {
+      background: var(--navy);
+      color: var(--white);
+      padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 5vw, 4rem) clamp(3rem, 7vw, 4.5rem);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(201, 162, 39, 0.04) 60px, rgba(201, 162, 39, 0.04) 61px);
+      pointer-events: none;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--cream));
+    }
+    .page-hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.35rem 0.85rem 0.35rem 0.5rem;
+      background: rgba(201, 162, 39, 0.12);
+      border: 1px solid rgba(201, 162, 39, 0.3);
+      border-radius: 40px;
+      color: var(--gold-light);
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .eyebrow-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); box-shadow: 0 0 8px var(--gold);
+    }
+    .page-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800; line-height: 1.1;
+      color: var(--white);
+    }
+    .page-headline-accent { color: var(--gold); font-style: italic; display: block; }
+    .page-subheadline {
+      max-width: 640px; margin-top: 0.85rem;
+      font-size: clamp(1rem, 1.7vw, 1.15rem);
+      color: rgba(255,255,255,0.78);
+      line-height: 1.6;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1100px; width: 100%;
+      margin: -2.5rem auto 0;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem) clamp(2.5rem, 5vw, 4rem);
+      position: relative; z-index: 2;
+    }
+
+    .classes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .class-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(12,26,53,0.07);
+      padding: 1.75rem;
+      display: flex; flex-direction: column;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .class-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .class-status {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 0.65rem;
+    }
+    .class-status .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--crimson);
+      box-shadow: 0 0 0 4px rgba(179, 25, 66, 0.15);
+    }
+    .class-status-archived { color: var(--muted); }
+    .class-status-archived .dot { background: var(--muted); box-shadow: none; }
+
+    .class-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 0.35rem;
+    }
+    .class-cohort {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .class-meta {
+      display: flex; gap: 1.5rem;
+      padding: 0.85rem 0;
+      margin: 0 -0.25rem 1.25rem;
+      border-top: 1px solid rgba(12,26,53,0.06);
+      border-bottom: 1px solid rgba(12,26,53,0.06);
+    }
+    .meta-item { display: flex; flex-direction: column; padding: 0 0.25rem; }
+    .meta-value { font-weight: 700; color: var(--navy); font-size: 0.97rem; }
+    .meta-key {
+      font-size: 0.72rem; color: var(--muted);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .class-actions {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: auto;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.45rem;
+      padding: 0.6rem 1.1rem;
+      font-family: var(--font-body);
+      font-size: 0.92rem; font-weight: 700;
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      flex: 1; min-width: 130px;
+    }
+    .btn-navy { background: var(--navy); color: var(--white); }
+    .btn-navy:hover { background: var(--navy-light); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--navy);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { background: var(--cream); border-color: var(--navy); }
+
+    /* Empty / admin strip */
+    .admin-strip {
+      margin-top: 2.5rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--gold-pale);
+      border: 1px solid rgba(201, 162, 39, 0.4);
+      border-radius: var(--radius);
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      align-items: center; justify-content: space-between;
+    }
+    .admin-strip-text { color: var(--ink); font-size: 0.95rem; }
+    .admin-strip strong { color: var(--navy); }
+    .btn-gold { background: var(--gold); color: var(--navy); }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    footer {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(201,162,39,0.15);
+      padding: 1.5rem clamp(1.25rem, 4vw, 3rem);
+      margin-top: 3rem;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 1rem;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 0.6rem; }
+    .footer-brand-text {
+      font-family: var(--font-display);
+      font-size: 1.05rem; font-weight: 700; color: var(--white);
+    }
+    .footer-brand-logo {
+      width: 32px; height: 32px; border-radius: 6px;
+      padding: 2px; border: 1px solid rgba(201,162,39,0.3);
+    }
+    .footer-meta {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.4);
+      text-align: right;
+    }
+    .footer-meta strong { color: rgba(255,255,255,0.7); }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .footer-meta { text-align: left; }
+      .class-meta { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a class="nav-brand" href="../index.html" aria-label="VUB Learning home">
+      <img class="nav-brand-logo" src="../VUB Financial Readiness Course/assets/vub-logo.svg" alt="" width="36" height="36">
+      VUB <span class="nav-brand-star">✦</span> Learning
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a></li>
+      <li><a href="../intake.html"><i class="fa-solid fa-upload" aria-hidden="true"></i> Submit a Test</a></li>
+      <li><a href="mailto:britt.legg76@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-hero">
+    <div class="page-hero-inner">
+      <div class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        VUB Assessment Reporting
+      </div>
+      <h1 class="page-headline">
+        Active Classes
+        <span class="page-headline-accent">&amp; Cohorts.</span>
+      </h1>
+      <p class="page-subheadline">
+        Each class has a private link with its own pre-test and post-test.
+        Instructors share the class link with students at the start of the term.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <div class="classes-grid">
+
+      <!-- ── Computer Skills — Spring 2026 / Beckley ─ -->
+      <article class="class-card">
+        <div class="class-status">
+          <span class="dot" aria-hidden="true"></span>
+          Active
+        </div>
+        <h2 class="class-title">Intermediate Computer Skills</h2>
+        <p class="class-cohort">Spring 2026 — Beckley, WV</p>
+
+        <div class="class-meta">
+          <div class="meta-item">
+            <span class="meta-value">Feb 9, 2026</span>
+            <span class="meta-key">Start</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-value">8 weeks</span>
+            <span class="meta-key">Duration</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-value">Britt Legg</span>
+            <span class="meta-key">Instructor</span>
+          </div>
+        </div>
+
+        <div class="class-actions">
+          <a href="computer-skills-spring-2026-beckley/" class="btn btn-navy">
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            Open Class Page
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Admin strip — visible to anyone, but only useful to admin -->
+    <div class="admin-strip">
+      <div class="admin-strip-text">
+        <strong>Need to add a new class?</strong>
+        Submit pre/post test materials and a new class page will be created.
+      </div>
+      <a href="../intake.html" class="btn btn-gold">
+        <i class="fa-solid fa-upload" aria-hidden="true"></i>
+        Submit a Test
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="../VUB Financial Readiness Course/assets/vub-logo.svg" alt="" width="32" height="32">
+        <span class="footer-brand-text">VUB Learning</span>
+      </div>
+      <div class="footer-meta">
+        <strong>Veterans Upward Bound — West Virginia</strong><br>
+        Assessment Reporting Service
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

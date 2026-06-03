@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 5: Microsoft Excel Intermediate | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --danger: #DC3545;
+      --excel-green: #217346;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: var(--primary);
+      color: var(--light);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .sidebar-header h1 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: var(--accent);
+    }
+
+    .sidebar-header p { font-size: 0.8rem; opacity: 0.9; }
+
+    .chapter { margin-bottom: 0.75rem; }
+
+    .chapter-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .chapter-slides { display: flex; flex-direction: column; gap: 0.25rem; }
+
+    .slide-link {
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .slide-link:hover { background: rgba(255,255,255,0.1); }
+
+    .slide-link.active {
+      background: var(--accent);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .slide-link.completed::before {
+      content: "\2713 ";
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource-link::before {
+      content: "\2193 ";
+      opacity: 0.6;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .progress-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .progress-text { font-size: 0.75rem; text-align: center; opacity: 0.9; }
+
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .slide-container {
+      width: 100%;
+      max-width: 1000px;
+      background: var(--light);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      display: none;
+      padding: 2.5rem;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .slide.active { display: flex; }
+
+    .slide-header { margin-bottom: 2rem; }
+
+    .slide-header h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-header .subtitle { color: var(--gray); font-size: 1.1rem; }
+
+    .slide-content {
+      flex: 1;
+      font-size: 1.25rem;
+      line-height: 1.8;
+    }
+
+    .slide-content h3 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .slide-content h3:first-child { margin-top: 0; }
+
+    .slide-content ul, .slide-content ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .slide-content li { margin-bottom: 0.75rem; }
+    .slide-content p { margin-bottom: 1rem; }
+
+    .title-slide {
+      text-align: center;
+      justify-content: center;
+    }
+
+    .title-slide h2 { font-size: 2.75rem; margin-bottom: 0.5rem; }
+
+    .title-slide .week-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-slide .subtitle {
+      font-size: 1.5rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .meta { font-size: 1rem; color: var(--gray); }
+
+    .highlight-box {
+      background: rgba(201, 162, 39, 0.15);
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+    }
+
+    .highlight-box.tip {
+      background: rgba(40, 167, 69, 0.1);
+      border-color: var(--success);
+    }
+
+    .highlight-box.warning {
+      background: rgba(220, 53, 69, 0.1);
+      border-color: var(--danger);
+    }
+
+    .highlight-box.excel {
+      background: rgba(33, 115, 70, 0.1);
+      border-color: var(--excel-green);
+    }
+
+    .highlight-box h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 1rem 0;
+    }
+
+    .column {
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .column h4 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    kbd {
+      display: inline-block;
+      background: linear-gradient(180deg, #f5f5f5 0%, #e0e0e0 100%);
+      color: #333;
+      padding: 0.25rem 0.6rem;
+      border-radius: 5px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.9em;
+      font-weight: 600;
+      border: 1px solid #ccc;
+      border-bottom: 3px solid #aaa;
+    }
+
+    .step-list {
+      counter-reset: step;
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .step-list li {
+      counter-increment: step;
+      padding-left: 3rem;
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .step-list li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+      background: var(--primary);
+      color: var(--light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .icon-item {
+      background: var(--off-white);
+      padding: 1.25rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .icon-item .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+    .icon-item h5 { color: var(--primary); margin-bottom: 0.25rem; }
+
+    .icon-item p { font-size: 0.9rem; color: var(--gray); margin: 0; }
+
+    /* Excel-specific styles */
+    .excel-grid {
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-family: 'Consolas', monospace;
+      font-size: 0.9rem;
+    }
+
+    .excel-grid th, .excel-grid td {
+      border: 1px solid #ccc;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      min-width: 80px;
+    }
+
+    .excel-grid th {
+      background: #f0f0f0;
+      font-weight: normal;
+      color: #666;
+    }
+
+    .excel-grid .row-header {
+      background: #f0f0f0;
+      color: #666;
+      font-weight: normal;
+    }
+
+    .excel-grid .selected {
+      background: rgba(33, 115, 70, 0.2);
+      border: 2px solid var(--excel-green);
+    }
+
+    .excel-grid .formula {
+      background: rgba(201, 162, 39, 0.2);
+      font-weight: 600;
+    }
+
+    .formula-box {
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 1rem;
+      font-family: 'Consolas', monospace;
+      margin: 0.5rem 0;
+    }
+
+    .formula-box code {
+      color: var(--excel-green);
+      font-weight: 600;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2.5rem;
+      border-top: 1px solid #eee;
+    }
+
+    .nav-btn {
+      background: var(--primary);
+      color: var(--light);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    .nav-btn:hover { background: var(--primary-light); }
+    .nav-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+    .nav-btn.secondary {
+      background: var(--off-white);
+      color: var(--primary);
+    }
+
+    .nav-btn.secondary:hover { background: #e0e0e0; }
+
+    .slide-counter { font-size: 0.9rem; color: var(--gray); }
+
+    .celebration {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(27, 54, 93, 0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: var(--light);
+      text-align: center;
+    }
+
+    .celebration.active { display: flex; }
+    .celebration h2 { font-size: 3rem; margin-bottom: 1rem; }
+    .celebration p { font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem; }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti-fall 3s linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 100%; height: auto; position: relative; }
+      .main-content { margin-left: 0; }
+      .two-column { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <h1>VUB Intermediate Computer Skills</h1>
+      <p>Week 5: Microsoft Excel</p>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Warm-Up</div>
+      <div class="chapter-slides">
+        <div class="slide-link active" data-slide="0">Welcome & Overview</div>
+        <div class="slide-link" data-slide="1">Money Mystery</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Introduction</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="2">Why Excel Matters</div>
+        <div class="slide-link" data-slide="3">The Excel Interface</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Formulas</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="4">Introduction to Formulas</div>
+        <div class="slide-link" data-slide="5">SUM Formula</div>
+        <div class="slide-link" data-slide="6">AVERAGE Formula</div>
+        <div class="slide-link" data-slide="7">Other Useful Formulas</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Data Management</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="8">Sorting Data</div>
+        <div class="slide-link" data-slide="9">Filtering Data</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Charts & Budget</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="10">Creating Charts</div>
+        <div class="slide-link" data-slide="11">Chart Types</div>
+        <div class="slide-link" data-slide="12">Budget Spreadsheet</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Practice</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="13">Workshop Time!</div>
+        <div class="slide-link" data-slide="14">Break</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Evaluation</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="15">Knowledge Check</div>
+        <div class="slide-link" data-slide="16">Show & Share</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Application</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="17">Your Excel Challenge</div>
+        <div class="slide-link" data-slide="18">Next Week Preview</div>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <div class="resources-title">Resources</div>
+      <a class="resource-link" href="handouts/excel-workshop.html" target="_blank">Excel Workshop</a>
+      <a class="resource-link" href="handouts/excel-quick-reference.html" target="_blank">Excel Quick Reference</a>
+      <a class="resource-link" href="handouts/excel-budget-activity.html" target="_blank">Budget Activity</a>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 5%;"></div>
+      </div>
+      <div class="progress-text"><span id="progressText">1</span> of <span id="totalSlides">19</span> slides</div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="slide-container">
+      <!-- Slide 0: Title / Welcome & Overview -->
+      <div class="slide active title-slide" data-index="0">
+        <span class="week-badge">Week 5</span>
+        <h2>Microsoft Excel Intermediate</h2>
+        <p class="subtitle">Formulas, Charts & Data Management</p>
+        <p class="meta">VUB Intermediate Computer Skills<br>Week 5 of 8</p>
+      </div>
+
+      <!-- Slide 1: Money Mystery (Warm-Up) -->
+      <div class="slide" data-index="1">
+        <div class="slide-header">
+          <h2>Money Mystery</h2>
+          <p class="subtitle">Can you solve these without a calculator?</p>
+        </div>
+        <div class="slide-content">
+          <p>Let's see how fast your brain can crunch numbers!</p>
+          <div class="two-column">
+            <div class="column">
+              <h4>Quick Math Challenge</h4>
+              <ul>
+                <li>You spend $12.50 on lunch for 5 days. Total? <em style="color: var(--gray);">($62.50)</em></li>
+                <li>Your electric bill was $142, $156, and $138 for 3 months. Average? <em style="color: var(--gray);">($145.33)</em></li>
+                <li>Gas costs: $45, $52, $38, $61. Highest? Lowest? <em style="color: var(--gray);">($61, $38)</em></li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Now Imagine...</h4>
+              <ul>
+                <li>What if you had <strong>50 expenses</strong> to add up?</li>
+                <li>What if you needed the average of <strong>a year of bills</strong>?</li>
+                <li>That's what <strong>Excel formulas</strong> do — instantly!</li>
+              </ul>
+            </div>
+          </div>
+          <div class="highlight-box excel">
+            <h4>Discussion</h4>
+            <p>What numbers do you deal with regularly? Bills? Prescriptions? Mileage? Today, Excel will do ALL the math for you!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Why Excel Matters -->
+      <div class="slide" data-index="2">
+        <div class="slide-header">
+          <h2>Why Excel Matters</h2>
+          <p class="subtitle">Numbers, calculations, and organization</p>
+        </div>
+        <div class="slide-content">
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">💰</div>
+              <h5>Budgeting</h5>
+              <p>Track income, expenses, savings goals</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📊</div>
+              <h5>Tracking</h5>
+              <p>Medications, appointments, health data</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📋</div>
+              <h5>Lists</h5>
+              <p>Inventory, contacts, to-do items</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📈</div>
+              <h5>Analysis</h5>
+              <p>Visualize trends, compare data</p>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Today's Goals</h4>
+            <ul>
+              <li>Use <strong>formulas</strong> to calculate totals and averages</li>
+              <li><strong>Sort and filter</strong> data to find what you need</li>
+              <li>Create <strong>charts</strong> to visualize your data</li>
+              <li>Build a practical <strong>budget spreadsheet</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: The Excel Interface -->
+      <div class="slide" data-index="3">
+        <div class="slide-header">
+          <h2>The Excel Interface</h2>
+          <p class="subtitle">Understanding cells, rows, and columns</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h4>Key Terms</h4>
+              <ul>
+                <li><strong>Cell</strong> - One box where you enter data</li>
+                <li><strong>Row</strong> - Horizontal line (numbered 1, 2, 3...)</li>
+                <li><strong>Column</strong> - Vertical line (lettered A, B, C...)</li>
+                <li><strong>Cell Address</strong> - Location like "A1" or "B5"</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Important Areas</h4>
+              <ul>
+                <li><strong>Formula Bar</strong> - Shows cell contents</li>
+                <li><strong>Name Box</strong> - Shows selected cell address</li>
+                <li><strong>Sheet Tabs</strong> - Multiple worksheets</li>
+                <li><strong>Ribbon</strong> - Tools and commands</li>
+              </ul>
+            </div>
+          </div>
+
+          <table class="excel-grid">
+            <tr>
+              <th></th>
+              <th>A</th>
+              <th>B</th>
+              <th>C</th>
+            </tr>
+            <tr>
+              <td class="row-header">1</td>
+              <td class="selected">A1</td>
+              <td>B1</td>
+              <td>C1</td>
+            </tr>
+            <tr>
+              <td class="row-header">2</td>
+              <td>A2</td>
+              <td>B2</td>
+              <td>C2</td>
+            </tr>
+          </table>
+          <p style="font-size: 0.9rem; color: var(--gray);">Cell "A1" is selected (highlighted in green)</p>
+        </div>
+      </div>
+
+      <!-- Slide 4: Introduction to Formulas -->
+      <div class="slide" data-index="4">
+        <div class="slide-header">
+          <h2>Introduction to Formulas</h2>
+          <p class="subtitle">Let Excel do the math for you</p>
+        </div>
+        <div class="slide-content">
+          <p>A <strong>formula</strong> is an instruction that tells Excel to calculate something. All formulas start with an <strong>equals sign (=)</strong>.</p>
+
+          <div class="highlight-box excel">
+            <h4>Formula Rules</h4>
+            <ul>
+              <li>Always start with <code>=</code></li>
+              <li>Use cell addresses (like A1, B2) instead of typing numbers</li>
+              <li>When the source data changes, the formula updates automatically!</li>
+            </ul>
+          </div>
+
+          <h3>Simple Math Example</h3>
+          <table class="excel-grid">
+            <tr>
+              <th></th>
+              <th>A</th>
+              <th>B</th>
+              <th>C</th>
+            </tr>
+            <tr>
+              <td class="row-header">1</td>
+              <td>10</td>
+              <td>5</td>
+              <td class="formula">=A1+B1</td>
+            </tr>
+            <tr>
+              <td class="row-header">2</td>
+              <td></td>
+              <td></td>
+              <td>Result: 15</td>
+            </tr>
+          </table>
+
+          <p>In cell C1, the formula <code>=A1+B1</code> adds the values in A1 and B1. If you change A1 to 20, C1 automatically becomes 25!</p>
+        </div>
+      </div>
+
+      <!-- Slide 5: SUM Formula -->
+      <div class="slide" data-index="5">
+        <div class="slide-header">
+          <h2>SUM Formula</h2>
+          <p class="subtitle">Add up a range of numbers</p>
+        </div>
+        <div class="slide-content">
+          <p>The <strong>SUM</strong> function adds up all numbers in a range. It's the most commonly used formula in Excel!</p>
+
+          <div class="formula-box">
+            <code>=SUM(A1:A5)</code><br>
+            <span style="font-size: 0.85rem; color: var(--gray);">Adds all values from A1 through A5</span>
+          </div>
+
+          <h3>Example: Monthly Expenses</h3>
+          <table class="excel-grid">
+            <tr>
+              <th></th>
+              <th>A</th>
+              <th>B</th>
+            </tr>
+            <tr>
+              <td class="row-header">1</td>
+              <td>Groceries</td>
+              <td>$320</td>
+            </tr>
+            <tr>
+              <td class="row-header">2</td>
+              <td>Utilities</td>
+              <td>$150</td>
+            </tr>
+            <tr>
+              <td class="row-header">3</td>
+              <td>Gas</td>
+              <td>$80</td>
+            </tr>
+            <tr>
+              <td class="row-header">4</td>
+              <td>Insurance</td>
+              <td>$200</td>
+            </tr>
+            <tr>
+              <td class="row-header">5</td>
+              <td><strong>Total</strong></td>
+              <td class="formula">=SUM(B1:B4)</td>
+            </tr>
+          </table>
+          <p style="margin-top: 0.5rem;">Result in B5: <strong>$750</strong></p>
+
+          <div class="highlight-box tip">
+            <h4>Quick Tip: AutoSum</h4>
+            <p>Select the cell below your numbers, then press <kbd>Alt</kbd> + <kbd>=</kbd> to instantly insert a SUM formula!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: AVERAGE Formula -->
+      <div class="slide" data-index="6">
+        <div class="slide-header">
+          <h2>AVERAGE Formula</h2>
+          <p class="subtitle">Find the mean of your numbers</p>
+        </div>
+        <div class="slide-content">
+          <p>The <strong>AVERAGE</strong> function calculates the mean (average) of a range of numbers.</p>
+
+          <div class="formula-box">
+            <code>=AVERAGE(B1:B4)</code><br>
+            <span style="font-size: 0.85rem; color: var(--gray);">Calculates the average of values from B1 through B4</span>
+          </div>
+
+          <h3>Example: Test Scores</h3>
+          <table class="excel-grid">
+            <tr>
+              <th></th>
+              <th>A</th>
+              <th>B</th>
+            </tr>
+            <tr>
+              <td class="row-header">1</td>
+              <td>Quiz 1</td>
+              <td>85</td>
+            </tr>
+            <tr>
+              <td class="row-header">2</td>
+              <td>Quiz 2</td>
+              <td>92</td>
+            </tr>
+            <tr>
+              <td class="row-header">3</td>
+              <td>Quiz 3</td>
+              <td>78</td>
+            </tr>
+            <tr>
+              <td class="row-header">4</td>
+              <td>Quiz 4</td>
+              <td>95</td>
+            </tr>
+            <tr>
+              <td class="row-header">5</td>
+              <td><strong>Average</strong></td>
+              <td class="formula">=AVERAGE(B1:B4)</td>
+            </tr>
+          </table>
+          <p style="margin-top: 0.5rem;">Result in B5: <strong>87.5</strong></p>
+
+          <div class="highlight-box">
+            <h4>Practical Uses</h4>
+            <ul>
+              <li>Average monthly spending</li>
+              <li>Average blood pressure readings</li>
+              <li>Average miles driven per week</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: Other Useful Formulas -->
+      <div class="slide" data-index="7">
+        <div class="slide-header">
+          <h2>Other Useful Formulas</h2>
+          <p class="subtitle">COUNT, MAX, and MIN</p>
+        </div>
+        <div class="slide-content">
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">🔢</div>
+              <h5>COUNT</h5>
+              <p>=COUNT(A1:A10)<br>Counts how many cells have numbers</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">⬆️</div>
+              <h5>MAX</h5>
+              <p>=MAX(A1:A10)<br>Finds the highest number</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">⬇️</div>
+              <h5>MIN</h5>
+              <p>=MIN(A1:A10)<br>Finds the lowest number</p>
+            </div>
+          </div>
+
+          <h3>Example: Expense Analysis</h3>
+          <table class="excel-grid">
+            <tr>
+              <th></th>
+              <th>A</th>
+              <th>B</th>
+            </tr>
+            <tr>
+              <td class="row-header">1</td>
+              <td>Total</td>
+              <td>=SUM(B1:B4)</td>
+            </tr>
+            <tr>
+              <td class="row-header">2</td>
+              <td>Average</td>
+              <td>=AVERAGE(B1:B4)</td>
+            </tr>
+            <tr>
+              <td class="row-header">3</td>
+              <td>Highest</td>
+              <td>=MAX(B1:B4)</td>
+            </tr>
+            <tr>
+              <td class="row-header">4</td>
+              <td>Lowest</td>
+              <td>=MIN(B1:B4)</td>
+            </tr>
+            <tr>
+              <td class="row-header">5</td>
+              <td>Count</td>
+              <td>=COUNT(B1:B4)</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Slide 8: Sorting Data -->
+      <div class="slide" data-index="8">
+        <div class="slide-header">
+          <h2>Sorting Data</h2>
+          <p class="subtitle">Organize your information</p>
+        </div>
+        <div class="slide-content">
+          <p>Sorting rearranges your data in a specific order - alphabetically, numerically, by date, etc.</p>
+
+          <ol class="step-list">
+            <li>Click any cell in the column you want to sort by</li>
+            <li>Go to <strong>Data</strong> tab on the Ribbon</li>
+            <li>Click <strong>Sort A to Z</strong> (ascending) or <strong>Sort Z to A</strong> (descending)</li>
+          </ol>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Before Sort (by Amount)</h4>
+              <table class="excel-grid" style="width: 100%;">
+                <tr><th>Item</th><th>Amount</th></tr>
+                <tr><td>Groceries</td><td>$320</td></tr>
+                <tr><td>Gas</td><td>$80</td></tr>
+                <tr><td>Insurance</td><td>$200</td></tr>
+              </table>
+            </div>
+            <div class="column">
+              <h4>After Sort (Highest First)</h4>
+              <table class="excel-grid" style="width: 100%;">
+                <tr><th>Item</th><th>Amount</th></tr>
+                <tr><td>Groceries</td><td>$320</td></tr>
+                <tr><td>Insurance</td><td>$200</td></tr>
+                <tr><td>Gas</td><td>$80</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="highlight-box warning">
+            <h4>Important!</h4>
+            <p>Make sure to select ALL your data (or click inside the data range) before sorting. Otherwise, only one column will sort and your data will become mismatched!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: Filtering Data -->
+      <div class="slide" data-index="9">
+        <div class="slide-header">
+          <h2>Filtering Data</h2>
+          <p class="subtitle">Show only what you need</p>
+        </div>
+        <div class="slide-content">
+          <p>Filtering temporarily hides rows that don't match your criteria. The data isn't deleted - just hidden from view.</p>
+
+          <ol class="step-list">
+            <li>Click any cell in your data</li>
+            <li>Go to <strong>Data</strong> tab</li>
+            <li>Click <strong>Filter</strong> (dropdown arrows appear on headers)</li>
+            <li>Click a dropdown arrow and choose what to show</li>
+          </ol>
+
+          <div class="highlight-box excel">
+            <h4>Example Uses</h4>
+            <ul>
+              <li>Show only expenses over $100</li>
+              <li>Show only "Food" category items</li>
+              <li>Show only appointments in March</li>
+            </ul>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>To Remove Filter</h4>
+            <p>Click <strong>Data</strong> → <strong>Clear</strong> to show all data again, or click the dropdown and select "Clear Filter".</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 10: Creating Charts -->
+      <div class="slide" data-index="10">
+        <div class="slide-header">
+          <h2>Creating Charts</h2>
+          <p class="subtitle">Visualize your data</p>
+        </div>
+        <div class="slide-content">
+          <p>Charts make it easy to understand data at a glance. Excel can create charts automatically from your data.</p>
+
+          <ol class="step-list">
+            <li><strong>Select your data</strong> including headers (e.g., A1:B5)</li>
+            <li>Go to <strong>Insert</strong> tab</li>
+            <li>Click a chart type in the <strong>Charts</strong> group</li>
+            <li>Choose a specific chart style</li>
+            <li>Excel creates the chart - you can move and resize it</li>
+          </ol>
+
+          <div class="highlight-box tip">
+            <h4>Quick Charts</h4>
+            <p>Select your data and press <kbd>Alt</kbd> + <kbd>F1</kbd> to instantly create a chart on the same sheet!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: Chart Types -->
+      <div class="slide" data-index="11">
+        <div class="slide-header">
+          <h2>Chart Types</h2>
+          <p class="subtitle">Choosing the right visualization</p>
+        </div>
+        <div class="slide-content">
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">📊</div>
+              <h5>Column/Bar Chart</h5>
+              <p>Compare quantities across categories (expenses by month)</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🥧</div>
+              <h5>Pie Chart</h5>
+              <p>Show parts of a whole (budget breakdown)</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📈</div>
+              <h5>Line Chart</h5>
+              <p>Show trends over time (weight tracking)</p>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>When to Use Each</h4>
+            <ul>
+              <li><strong>Column:</strong> Comparing different items (Jan vs Feb vs Mar expenses)</li>
+              <li><strong>Pie:</strong> Showing percentages (30% food, 20% gas, 50% rent)</li>
+              <li><strong>Line:</strong> Showing change over time (daily blood pressure)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: Budget Spreadsheet -->
+      <div class="slide" data-index="12">
+        <div class="slide-header">
+          <h2>Budget Spreadsheet</h2>
+          <p class="subtitle">Putting it all together</p>
+        </div>
+        <div class="slide-content">
+          <p>Let's create a simple monthly budget using everything we've learned!</p>
+
+          <table class="excel-grid">
+            <tr>
+              <th></th>
+              <th>A</th>
+              <th>B</th>
+              <th>C</th>
+            </tr>
+            <tr>
+              <td class="row-header">1</td>
+              <td><strong>Category</strong></td>
+              <td><strong>Budgeted</strong></td>
+              <td><strong>Actual</strong></td>
+            </tr>
+            <tr>
+              <td class="row-header">2</td>
+              <td>Rent/Mortgage</td>
+              <td>$800</td>
+              <td>$800</td>
+            </tr>
+            <tr>
+              <td class="row-header">3</td>
+              <td>Groceries</td>
+              <td>$300</td>
+              <td>$325</td>
+            </tr>
+            <tr>
+              <td class="row-header">4</td>
+              <td>Utilities</td>
+              <td>$150</td>
+              <td>$142</td>
+            </tr>
+            <tr>
+              <td class="row-header">5</td>
+              <td>Transportation</td>
+              <td>$100</td>
+              <td>$95</td>
+            </tr>
+            <tr>
+              <td class="row-header">6</td>
+              <td><strong>TOTAL</strong></td>
+              <td class="formula">=SUM(B2:B5)</td>
+              <td class="formula">=SUM(C2:C5)</td>
+            </tr>
+          </table>
+
+          <div class="highlight-box">
+            <h4>Add More Analysis</h4>
+            <ul>
+              <li><strong>Difference:</strong> =C6-B6 (Are you over or under budget?)</li>
+              <li><strong>Chart:</strong> Create a bar chart comparing Budgeted vs Actual</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 13: Workshop Time! (Practice) -->
+      <div class="slide" data-index="13">
+        <div class="slide-header">
+          <h2>Workshop Time!</h2>
+          <p class="subtitle">Build your own budget tracker</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Excel Budget Workshop — Parts 1 & 2 (Guided)</h4>
+            <p>Use the <strong>Excel Budget Workshop</strong> handout to follow along.</p>
+          </div>
+          <div class="two-column">
+            <div class="column">
+              <h4>Part 1: Data Entry (10 min)</h4>
+              <ul>
+                <li>Create headers: Category, Budgeted, Actual</li>
+                <li>Enter 8 expense categories</li>
+                <li>Format amounts as currency</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Part 2: Formulas (15 min)</h4>
+              <ul>
+                <li>SUM for totals</li>
+                <li>AVERAGE, MAX, MIN</li>
+                <li>Difference column</li>
+                <li>Fill Handle trick</li>
+              </ul>
+            </div>
+          </div>
+          <div class="highlight-box tip">
+            <h4>Remember</h4>
+            <p>Every formula starts with <strong>=</strong> (equals sign). If it shows as text, you forgot the equals sign!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 14: Break Time -->
+      <div class="slide" data-index="14">
+        <div class="slide-header">
+          <h2>Break Time</h2>
+          <p class="subtitle">10 minutes — Save your work first!</p>
+        </div>
+        <div class="slide-content">
+          <div style="text-align: center; padding: 2rem 0;">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">☕</div>
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem;">10-Minute Break</h3>
+          </div>
+          <div class="highlight-box warning">
+            <h4>Before You Get Up</h4>
+            <ul>
+              <li>Press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save your spreadsheet</li>
+              <li>Name it "Budget_YourName" if you haven't already</li>
+              <li>Don't close Excel — we'll continue after break!</li>
+            </ul>
+          </div>
+          <div class="highlight-box excel">
+            <h4>After Break: Independent Practice</h4>
+            <p>You'll sort, filter, create charts, and personalize your budget with real data. Parts 3 & 4 of the workshop!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 15: Knowledge Check (Evaluation) -->
+      <div class="slide" data-index="15">
+        <div class="slide-header">
+          <h2>Knowledge Check</h2>
+          <p class="subtitle">Let's review what we learned!</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Question 1</h4>
+            <p>What symbol must every formula start with?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>The equals sign (=)</em></p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Question 2</h4>
+            <p>Which formula adds up a range of numbers?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>=SUM(range)</em></p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Question 3</h4>
+            <p>What's the difference between sorting and filtering?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>Sorting rearranges data in order; filtering hides data that doesn't match criteria.</em></p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Question 4</h4>
+            <p>Which chart type is best for showing parts of a whole (percentages)?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>Pie chart</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 16: Show & Share (Evaluation) -->
+      <div class="slide" data-index="16">
+        <div class="slide-header">
+          <h2>Show & Share</h2>
+          <p class="subtitle">Partner check — test each other's formulas!</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Partner Swap Challenge</h4>
+            <p>Trade seats with your neighbor and try this test:</p>
+          </div>
+          <ol class="step-list">
+            <li>Find one expense amount in your partner's "Actual" column and change the number</li>
+            <li>Watch the TOTAL, AVERAGE, MAX, or MIN — did the formulas update automatically?</li>
+            <li>Check the Difference column — did it recalculate too?</li>
+            <li>Change the number back to the original value when done!</li>
+          </ol>
+          <div class="two-column">
+            <div class="column">
+              <h4>Check Your Partner's Work</h4>
+              <ul>
+                <li>✓ All formulas recalculated?</li>
+                <li>✓ Chart updated with the new data?</li>
+                <li>✓ Conditional formatting colors correct?</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Discussion</h4>
+              <ul>
+                <li>What surprised you about formulas?</li>
+                <li>Which formula will you use most?</li>
+                <li>Any tricks you discovered?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 17: Your Excel Challenge (Application) -->
+      <div class="slide" data-index="17">
+        <div class="slide-header">
+          <h2>Your Excel Challenge</h2>
+          <p class="subtitle">Put your skills to work this week!</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>This Week's Mission</h4>
+            <p>Track your <strong>real spending</strong> every day this week in your budget spreadsheet.</p>
+          </div>
+          <ol class="step-list">
+            <li><strong>Open your budget</strong> each evening and update the "Actual" column</li>
+            <li><strong>Add new categories</strong> if you spend on something not in your list</li>
+            <li><strong>Watch your formulas</strong> — totals, averages, and charts update automatically!</li>
+            <li><strong>Bring your budget to Week 6</strong> — we'll save it to Google Drive so you can access it anywhere</li>
+          </ol>
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">🔢</div>
+              <h5>Formulas</h5>
+              <p>=SUM, =AVERAGE, =MAX, =MIN</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🔄</div>
+              <h5>Sort & Filter</h5>
+              <p>Organize and find data fast</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📊</div>
+              <h5>Charts</h5>
+              <p>See your budget at a glance</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">💰</div>
+              <h5>Your Budget</h5>
+              <p>Real data, real savings!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 18: Next Week Preview -->
+      <div class="slide" data-index="18">
+        <div class="slide-header">
+          <h2>Next Week Preview</h2>
+          <p class="subtitle">Week 6: Cloud Computing & Google Drive</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Coming Up: Week 6</h4>
+            <p>We'll learn about storing files in the cloud and using Google Drive!</p>
+          </div>
+
+          <h3>Topics We'll Cover:</h3>
+          <ul>
+            <li><strong>What is the Cloud?</strong> - Understanding online storage</li>
+            <li><strong>Google Drive</strong> - Free storage, access anywhere</li>
+            <li><strong>Uploading & Organizing</strong> - Move files to the cloud</li>
+            <li><strong>Sharing</strong> - Send files and collaborate</li>
+            <li><strong>Google Docs</strong> - Create documents online</li>
+          </ul>
+
+          <div class="highlight-box tip">
+            <h4>Before Next Week</h4>
+            <p>Make sure you remember your Gmail login from Week 3 - Google Drive uses the same account!</p>
+          </div>
+
+          <div style="text-align: center; margin-top: 2rem; padding: 2rem; background: var(--off-white); border-radius: 12px;">
+            <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Great work today!</h3>
+            <p style="color: var(--gray);">You can now use Excel for budgeting and data analysis. See you next class!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="nav-buttons">
+        <button class="nav-btn secondary" id="prevBtn" disabled>← Previous</button>
+        <span class="slide-counter">Slide <span id="currentSlide">1</span> of <span id="totalSlides">19</span></span>
+        <button class="nav-btn" id="nextBtn">Next →</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="celebration" id="celebration">
+    <h2>Congratulations!</h2>
+    <p>You've completed Week 5: Microsoft Excel Intermediate</p>
+    <button class="nav-btn" onclick="closeCelebration()" style="margin-top: 1rem;">Continue</button>
+  </div>
+
+  <script src="../../../shared/progress.js"></script>
+  <script src="../../../shared/glossary.js" defer></script>
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideLinks = document.querySelectorAll('.slide-link');
+
+    document.getElementById('totalSlides').textContent = totalSlides;
+    loadProgress();
+    updateSlide();
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (currentSlide > 0) { currentSlide--; updateSlide(); }
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (currentSlide < totalSlides - 1) { currentSlide++; updateSlide(); }
+      else { showCelebration(); }
+    });
+
+    slideLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        currentSlide = parseInt(link.dataset.slide);
+        updateSlide();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        if (currentSlide < totalSlides - 1) { currentSlide++; updateSlide(); }
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        if (currentSlide > 0) { currentSlide--; updateSlide(); }
+      } else if (e.key === 'Home') { currentSlide = 0; updateSlide(); }
+      else if (e.key === 'End') { currentSlide = totalSlides - 1; updateSlide(); }
+    });
+
+    function updateSlide() {
+      slides.forEach((slide, index) => slide.classList.toggle('active', index === currentSlide));
+      slideLinks.forEach(link => {
+        link.classList.toggle('active', parseInt(link.dataset.slide) === currentSlide);
+        if (parseInt(link.dataset.slide) < currentSlide) link.classList.add('completed');
+      });
+      document.getElementById('prevBtn').disabled = currentSlide === 0;
+      document.getElementById('nextBtn').textContent = currentSlide === totalSlides - 1 ? 'Finish' : 'Next →';
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+      const progress = ((currentSlide + 1) / totalSlides) * 100;
+      document.getElementById('progressFill').style.width = progress + '%';
+      document.getElementById('progressText').textContent = currentSlide + 1;
+      saveProgress();
+    }
+
+    function saveProgress() {
+      if (window.VubProgress) VubProgress.saveSlide('ics', 5, currentSlide, totalSlides);
+    }
+    function loadProgress() {
+      if (window.VubProgress) {
+        const entry = VubProgress.get('ics', 5);
+        if (entry && typeof entry.slide === 'number') currentSlide = entry.slide;
+      }
+    }
+
+    function showCelebration() {
+      document.getElementById('celebration').classList.add('active');
+      createConfetti();
+    }
+
+    function closeCelebration() { document.getElementById('celebration').classList.remove('active'); }
+
+    function createConfetti() {
+      const celebration = document.getElementById('celebration');
+      const colors = ['#C9A227', '#1B365D', '#28A745', '#217346', '#FFFFFF'];
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        celebration.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    }
+  </script>
+</body>
+</html>

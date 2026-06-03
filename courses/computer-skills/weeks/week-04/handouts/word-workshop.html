@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Document Workshop | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --info: #17A2B8;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-top: 0.15rem;
+    }
+    .header-meta {
+      font-size: 0.8rem;
+      opacity: 0.75;
+      margin-top: 0.25rem;
+    }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .header-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .header-time {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-top: 0.5rem;
+    }
+    .name-field {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    .name-field label {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .name-field .line {
+      flex: 1;
+      border-bottom: 2px dashed var(--gray);
+      max-width: 300px;
+    }
+    .goal-box {
+      background: linear-gradient(135deg, var(--off-white) 0%, #EDF2F7 100%);
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .goal-box h2 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .goal-box p {
+      font-size: 0.95rem;
+      color: var(--gray);
+    }
+    .goal-box .build-list {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+    .goal-box .build-list li {
+      font-size: 0.95rem;
+      padding: 0.25rem 0;
+      color: #333;
+    }
+    .goal-box .build-list li::before {
+      content: "\2713  ";
+      color: var(--success);
+      font-weight: 700;
+    }
+    .part-header {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.75rem 1rem;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    .part-header h2 { font-size: 1.15rem; margin: 0; }
+    .part-timing {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .part-type {
+      background: rgba(255,255,255,0.2);
+      color: var(--light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    .part-content {
+      border: 1px solid #E2E8F0;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .part-goal {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--off-white);
+      border-radius: 6px;
+      border-left: 4px solid var(--accent);
+    }
+    .part-goal strong { color: var(--primary); }
+    .section { margin-bottom: 1.25rem; }
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--accent);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .step-group { margin-bottom: 1rem; }
+    .step-label {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+    .step-detail {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.25rem;
+      padding-left: 0.5rem;
+    }
+    .step-path {
+      font-family: Consolas, 'Courier New', monospace;
+      background: #EDF2F7;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--primary);
+      display: inline-block;
+      margin: 0.25rem 0;
+    }
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--off-white);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--primary);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--primary); }
+    .checklist-text .detail {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+    .fill-section {
+      background: var(--off-white);
+      padding: 1.25rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .fill-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .fill-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .fill-line .label {
+      min-width: 140px;
+      color: var(--gray);
+    }
+    .fill-line .blank {
+      flex: 1;
+      border-bottom: 1px dashed var(--gray);
+      min-height: 1.5rem;
+    }
+    .tip-box {
+      background: #E8F5E9;
+      border-left: 4px solid var(--success);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .tip-box strong { color: #2E7D32; }
+    .warning-box {
+      background: #FFF3F3;
+      border-left: 4px solid var(--danger);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .warning-box strong { color: var(--danger); }
+    .example-box {
+      background: #FFF8E1;
+      border-left: 4px solid var(--warning);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .example-box strong { color: #856404; }
+    .checkpoint-box {
+      background: linear-gradient(135deg, rgba(201, 162, 39, 0.12) 0%, rgba(201, 162, 39, 0.05) 100%);
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1.25rem 0;
+    }
+    .checkpoint-box h4 {
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .checkpoint-box .check-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .checkpoint-box .check-items li {
+      font-size: 0.9rem;
+      color: #333;
+      padding: 0.2rem 0;
+    }
+    .table-preview {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 0.75rem 0;
+    }
+    .table-preview th {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem;
+      text-align: left;
+      font-weight: 600;
+    }
+    .table-preview td {
+      padding: 0.5rem;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .table-preview tr:nth-child(even) { background: var(--off-white); }
+    .bonus-box {
+      background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.03) 100%);
+      border: 2px dashed var(--accent);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .bonus-box h4 {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .bonus-box ul {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .bonus-box ul li {
+      padding: 0.2rem 0;
+    }
+    .keyboard-shortcut {
+      font-family: Consolas, 'Courier New', monospace;
+      background: #EDF2F7;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      color: var(--primary);
+      border: 1px solid #D1D9E6;
+    }
+    .success-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-top: 2rem;
+    }
+    .success-box h3 {
+      color: var(--success);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .success-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+    .success-box .skills-earned {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+    .success-box .skills-earned li {
+      font-size: 0.9rem;
+      padding: 0.2rem 0;
+    }
+    .success-box .skills-earned li::before {
+      content: "\2B50  ";
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0.25in; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .checkbox { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .checkpoint-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .table-preview th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { page-break-before: auto; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <span class="header-badge">WORKSHOP</span>
+      <h1 style="margin-top: 0.35rem;">Word Document Workshop</h1>
+      <div class="header-subtitle">Building a Professional VA Appeal Letter</div>
+      <div class="header-meta">Week 4 | VUB Intermediate Computer Skills</div>
+    </div>
+    <div class="header-right">
+      <div class="header-time">~60 minutes</div>
+      <div class="header-time">4 parts</div>
+    </div>
+  </header>
+
+  <!-- NAME FIELD -->
+  <div class="name-field">
+    <label>Name:</label>
+    <div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label>
+    <div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <!-- GOAL BOX -->
+  <div class="goal-box">
+    <h2>What You Will Build Today</h2>
+    <p>By the end of this workshop, you will have created a professional, multi-page VA Appeal Letter in Microsoft Word. Here is what you will accomplish:</p>
+    <ul class="build-list">
+      <li>A properly structured document using Title and Heading styles</li>
+      <li>Professional tables for service history and medical evidence</li>
+      <li>Headers, footers, and automatic page numbers</li>
+      <li>A polished, spell-checked document ready to print or submit</li>
+    </ul>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 1: STYLES FOUNDATION                    -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 1: Styles Foundation</h2>
+    <div>
+      <span class="part-timing">~15 min</span>
+      <span class="part-type">GUIDED</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Create a VA Appeal Letter using Title and Heading styles with the Navigation Pane.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Create Your Document Structure</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Follow along with your instructor to build the foundation of your appeal letter using Word's built-in styles.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Open Microsoft Word and create a new blank document</strong>
+            <span class="detail">Start menu &rarr; type "Word" &rarr; click "Blank document"</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Type the document title: "Appeal for Benefits Reconsideration"</strong>
+            <span class="detail">Just type it as regular text for now &mdash; we will style it in the next step</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Select the title text, go to Home tab &rarr; Styles group</strong>
+            <span class="detail">Click and drag to highlight all the title text, then look for the Styles section on the ribbon</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click the "Title" style &mdash; text becomes large and formatted</strong>
+            <span class="detail">The Title style is in the Styles gallery on the Home tab. Your text will change size and font automatically.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Press Enter, then type: "Section 1: Service History"</strong>
+            <span class="detail">This will be your first major section heading</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Select this text and apply the "Heading 1" style</strong>
+            <span class="detail">Find "Heading 1" in the Styles gallery &mdash; it is right next to the Title style</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Below that, type a brief paragraph:</strong>
+            <span class="detail">"I served in the United States [Branch] from [Year] to [Year], stationed at [Location]." &mdash; Replace the brackets with your own information.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Press Enter twice, then type: "Section 2: Medical Evidence"</strong>
+            <span class="detail">Pressing Enter twice creates a blank line between sections for readability</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Apply "Heading 1" style to this line</strong>
+            <span class="detail">Select the text first, then click Heading 1 in the Styles gallery</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Add paragraph: "The following medical records support my claim for disability benefits."</strong>
+            <span class="detail">Press Enter after the heading and type this sentence as normal body text</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Open the Navigation Pane: View tab &rarr; check "Navigation Pane"</strong>
+            <span class="detail">Click the View tab at the top, then check the Navigation Pane box in the Show group</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Verify both headings appear in the Navigation Pane &mdash; click one to jump to it</strong>
+            <span class="detail">You should see "Section 1: Service History" and "Section 2: Medical Evidence" listed on the left side. Click either one to jump directly to that section.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> Styles are not just about looks &mdash; they create a document outline that makes long documents easy to navigate. The Navigation Pane uses your headings to build a clickable table of contents.
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; Document has Title style applied to "Appeal for Benefits Reconsideration"</li>
+        <li>&#9744; Two Heading 1 sections visible (Service History and Medical Evidence)</li>
+        <li>&#9744; Navigation Pane shows both headings on the left side</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 2: TABLES FOR DATA                      -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 2: Tables for Data</h2>
+    <div>
+      <span class="part-timing">~15 min</span>
+      <span class="part-type">GUIDED</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Build service history and medical evidence tables to organize your supporting data.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Table 1: Service History</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Tables are the best way to present organized data in a professional document. Follow these steps to create your first table.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click below the Section 1 paragraph text</strong>
+            <span class="detail">Place your cursor on the line after your service history paragraph</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Go to Insert tab &rarr; Table &rarr; drag to select 3 columns x 4 rows</strong>
+            <span class="detail">Click Insert, then Table, and use the grid to highlight 3 across and 4 down</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Fill in the header row: Duty Station | Dates | MOS/Role</strong>
+            <span class="detail">Click in the first cell and type "Duty Station", press Tab to move to the next cell</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Fill in 3 rows with your service data</strong>
+            <span class="detail">Use your own information or the sample data below</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="example-box">
+        <strong>Sample data you can use:</strong>
+        <table class="table-preview" style="margin-top: 0.5rem;">
+          <thead>
+            <tr><th>Duty Station</th><th>Dates</th><th>MOS/Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Fort Bragg, NC</td><td>2001 - 2004</td><td>11B Infantry</td></tr>
+            <tr><td>Camp Lejeune, NC</td><td>2004 - 2007</td><td>11B Infantry</td></tr>
+            <tr><td>Fort Hood, TX</td><td>2007 - 2010</td><td>11B Senior NCO</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click anywhere in the table &rarr; Table Design tab appears</strong>
+            <span class="detail">A new "Table Design" tab will show up on the ribbon when your cursor is inside the table</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Choose a table style from the gallery</strong>
+            <span class="detail">Try "Grid Table 4 - Accent 1" for a clean, professional blue look. Hover over styles to preview them.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Check the "Header Row" checkbox to bold the first row</strong>
+            <span class="detail">This option is in the Table Style Options group on the Table Design tab</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Table 2: Medical Evidence</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Now create a second table to list your supporting medical documents.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click below the Section 2 paragraph text</strong>
+            <span class="detail">Place your cursor after the medical evidence paragraph</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Insert a table: 2 columns x 3 rows</strong>
+            <span class="detail">Insert tab &rarr; Table &rarr; drag to select 2 across and 3 down</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Header row: Document | Date</strong>
+            <span class="detail">Type "Document" in the first cell, Tab to the second cell, type "Date"</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Fill in the evidence rows</strong>
+            <span class="detail">Use your own records or the sample data below</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="example-box">
+        <strong>Sample medical evidence data:</strong>
+        <table class="table-preview" style="margin-top: 0.5rem;">
+          <thead>
+            <tr><th>Document</th><th>Date</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>VA Disability Exam Report</td><td>Jan 2025</td></tr>
+            <tr><td>Primary Care Records</td><td>2024</td></tr>
+            <tr><td>Specialist Referral</td><td>Dec 2024</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Apply a matching table style to this table</strong>
+            <span class="detail">Click in the table &rarr; Table Design tab &rarr; pick the same style you used for Table 1</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; Service history table has 3 columns and header formatting</li>
+        <li>&#9744; Medical evidence table has 2 columns with data filled in</li>
+        <li>&#9744; Both tables have a professional style applied</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 3: HEADERS, FOOTERS & PAGE NUMBERS      -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 3: Headers, Footers & Page Numbers</h2>
+    <div>
+      <span class="part-timing">~10 min</span>
+      <span class="part-type">GUIDED</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Add a header with your name and date, page numbers, and a page break to create a multi-page document.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Add a Header</h3>
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Go to Insert tab &rarr; Header &rarr; choose "Blank" (first option)</strong>
+            <span class="detail">This opens the header area at the top of your page for editing</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Type your name on the left side</strong>
+            <span class="detail">Your cursor should already be on the left. Type your full name.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Press Tab twice to move to the right side, type today's date</strong>
+            <span class="detail">The first Tab moves to center, the second Tab moves to the right. Type today's date.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click "Close Header and Footer"</strong>
+            <span class="detail">Click the "Close Header and Footer" button on the ribbon, or double-click in the main document area</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Add Page Numbers</h3>
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Go to Insert tab &rarr; Page Number &rarr; Bottom of Page &rarr; "Plain Number 2" (centered)</strong>
+            <span class="detail">This places a centered page number at the bottom of every page automatically</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click "Close Header and Footer"</strong>
+            <span class="detail">Return to your document by clicking the button or double-clicking in the main text area</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Create a Page Break</h3>
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Place your cursor at the end of your document</strong>
+            <span class="detail">Click after the last line of text and press End on your keyboard, or press <span class="keyboard-shortcut">Ctrl+End</span></span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Insert a page break: Insert tab &rarr; Page Break</strong>
+            <span class="detail">Or use the keyboard shortcut: <span class="keyboard-shortcut">Ctrl+Enter</span></span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>On the new page, type: "Section 3: Supporting Statement"</strong>
+            <span class="detail">You should now be on page 2 of your document</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Apply "Heading 1" style to this new section title</strong>
+            <span class="detail">Select the text and click Heading 1 in the Styles gallery on the Home tab</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Verify the Navigation Pane now shows 3 sections</strong>
+            <span class="detail">Look at the Navigation Pane on the left &mdash; you should see all three section headings listed</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> Headers and footers appear on EVERY page automatically. This is perfect for your name, date, and page numbers on multi-page documents like appeal letters and medical requests.
+      </div>
+
+      <div class="warning-box">
+        <strong>Common Mistake:</strong> Do not press Enter many times to get to a new page. Always use Insert &rarr; Page Break (or <span class="keyboard-shortcut">Ctrl+Enter</span>). Pressing Enter creates blank lines that shift when you edit the document.
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; Header shows your name (left) and date (right)</li>
+        <li>&#9744; Page numbers appear centered at the bottom of each page</li>
+        <li>&#9744; Document has at least 2 pages separated by a page break</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 4: POLISH & REVIEW                      -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 4: Polish & Review</h2>
+    <div>
+      <span class="part-timing">~20 min</span>
+      <span class="part-type">INDEPENDENT</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Complete the document with spell check, formatting, bullet lists, and print preview. Work through these steps on your own.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Spell Check Your Document</h3>
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Go to Review tab &rarr; click "Spelling & Grammar"</strong>
+            <span class="detail">Or press <span class="keyboard-shortcut">F7</span> on your keyboard. Word will scan your entire document for errors.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Fix any highlighted errors &mdash; click "Accept" or type the correction</strong>
+            <span class="detail">Word will highlight each error and suggest a fix. Review each one carefully before accepting.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Add a Bullet List</h3>
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click below the "Section 3: Supporting Statement" heading</strong>
+            <span class="detail">Place your cursor on the blank line under the heading on page 2</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Go to Home tab &rarr; click the Bullets button, then type these items:</strong>
+            <span class="detail">Press Enter after each item to create the next bullet point</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="example-box">
+        <strong>Type these three bullet points:</strong><br>
+        &bull; Documented injury during active duty service<br>
+        &bull; Consistent medical treatment since discharge<br>
+        &bull; Impact on daily activities and employment
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Final Formatting</h3>
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Bold key terms: select important words &rarr; press <span class="keyboard-shortcut">Ctrl+B</span></strong>
+            <span class="detail">Try bolding words like "disability," "active duty," and "medical evidence" throughout your document</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Adjust margins: Layout tab &rarr; Margins &rarr; choose "Normal" (1 inch all sides)</strong>
+            <span class="detail">Normal margins give your document a clean, professional look with equal spacing on all sides</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Print Preview: File &rarr; Print (or press <span class="keyboard-shortcut">Ctrl+P</span>)</strong>
+            <span class="detail">Review how your document will look on paper. Check that headers, page numbers, and tables look correct. Press Escape to go back without printing.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Save your document: press <span class="keyboard-shortcut">Ctrl+S</span></strong>
+            <span class="detail">Name it "VA_Appeal_Letter_[YourName]" (example: VA_Appeal_Letter_Smith). Save it to your Desktop or Documents folder.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="warning-box">
+        <strong>Important:</strong> Save your work frequently! Press <span class="keyboard-shortcut">Ctrl+S</span> every few minutes. If Word or your computer crashes, unsaved work is lost.
+      </div>
+    </div>
+
+    <div class="bonus-box">
+      <h4>Bonus Challenges (Done Early? Try These!)</h4>
+      <ul>
+        <li>Add a "Respectfully submitted," closing with your signature block (name, branch, date) at the bottom of the document</li>
+        <li>Change the font of the body text to Times New Roman, 12pt (select all body text &rarr; Home tab &rarr; Font dropdown)</li>
+        <li>Add a horizontal line between sections (place cursor between sections &rarr; Home tab &rarr; Borders dropdown &rarr; Horizontal Line)</li>
+      </ul>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Final Checkpoint &mdash; Review your work:</h4>
+      <ul class="check-items">
+        <li>&#9744; Spell check complete with no errors remaining</li>
+        <li>&#9744; Bullet list created under Section 3 with three items</li>
+        <li>&#9744; Key terms are bolded throughout the document</li>
+        <li>&#9744; Document saved with proper filename (VA_Appeal_Letter_YourName)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SUCCESS BOX                                  -->
+  <!-- ============================================ -->
+  <div class="success-box">
+    <h3>Workshop Complete!</h3>
+    <p>Outstanding work! You have built a professional, multi-page VA Appeal Letter from scratch. Here is what you accomplished today:</p>
+    <ul class="skills-earned">
+      <li>Applied Title and Heading styles to create a structured document</li>
+      <li>Used the Navigation Pane to browse sections like a table of contents</li>
+      <li>Built and formatted two professional data tables</li>
+      <li>Added headers, footers, and automatic page numbers</li>
+      <li>Created a page break for a multi-page document</li>
+      <li>Ran spell check, added bullet lists, and saved with a professional filename</li>
+    </ul>
+    <p style="margin-top: 0.75rem; font-weight: 600; color: var(--primary);">
+      This Week's Challenge: Use these same skills to create a one-page resume or a letter requesting your military service records. Practice makes permanent!
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound &mdash; West Virginia</strong> | Week 4: Microsoft Word Intermediate</p>
+    <p style="margin-top: 0.25rem;">Keep this handout! Use it as a reference when creating professional documents at home.</p>
+  </footer>
+
+</body>
+</html>

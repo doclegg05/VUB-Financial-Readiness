@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4 Income Stack Chart Preview</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0f172a;
+            --blue: #1e3a8a;
+            --blue-light: #3b82f6;
+            --gold: #fbbf24;
+            --green: #15803d;
+            --red: #b91c1c;
+            --ink: #1e293b;
+            --muted: #64748b;
+            --line: #d8d3c7;
+            --paper: #faf7f0;
+            --surface: #ffffff;
+            --soft-blue: #f0f5ff;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            padding: 32px;
+        }
+
+        .preview-shell {
+            max-width: 1020px;
+            margin: 0 auto;
+        }
+
+        .preview-header {
+            margin-bottom: 18px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--navy);
+            border-radius: 4px;
+            padding: 5px 14px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: var(--navy);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.08;
+            margin: 0 0 10px;
+        }
+
+        .preview-header p {
+            max-width: 900px;
+            margin: 0;
+            color: var(--ink);
+            font-size: 1.05rem;
+            line-height: 1.55;
+        }
+
+        .visualizer {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 18px 38px rgba(15, 23, 42, 0.1);
+        }
+
+        .visualizer-grid {
+            display: grid;
+            grid-template-columns: minmax(280px, 0.92fr) minmax(330px, 1.08fr);
+            gap: 18px;
+            padding: 20px;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .control label {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--navy);
+            font-weight: 800;
+            font-size: 0.96rem;
+        }
+
+        .control label span {
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .control input[type="range"] {
+            width: 100%;
+            margin: 8px 0 4px;
+            accent-color: var(--blue);
+            cursor: pointer;
+        }
+
+        .control-values {
+            display: flex;
+            justify-content: space-between;
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .control-values strong {
+            color: var(--blue);
+            font-size: 0.95rem;
+        }
+
+        .chart-panel {
+            background: var(--soft-blue);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .chart-wrap {
+            position: relative;
+            min-height: 310px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        canvas {
+            display: block;
+            max-width: 100%;
+        }
+
+        .chart-center {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .chart-center strong {
+            color: var(--navy);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .chart-center span {
+            color: var(--ink);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            margin-top: 8px;
+            max-width: 150px;
+            text-transform: uppercase;
+        }
+
+        .summary {
+            display: grid;
+            gap: 10px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 13px 16px;
+            background: var(--surface);
+            font-weight: 800;
+        }
+
+        .summary-row--taxfree {
+            background: rgba(21, 128, 61, 0.08);
+            border-color: rgba(21, 128, 61, 0.35);
+        }
+
+        .summary-row--taxfree strong {
+            color: var(--green);
+        }
+
+        .summary-row--taxable {
+            background: rgba(185, 28, 28, 0.08);
+            border-color: rgba(185, 28, 28, 0.35);
+        }
+
+        .summary-row--taxable strong {
+            color: var(--red);
+        }
+
+        .note {
+            background: rgba(100, 116, 139, 0.12);
+            border-top: 1px solid var(--line);
+            color: var(--ink);
+            font-size: 0.9rem;
+            font-style: italic;
+            line-height: 1.5;
+            padding: 14px 20px;
+        }
+
+        @media (max-width: 760px) {
+            body {
+                padding: 18px;
+            }
+
+            .visualizer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-row {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="preview-shell">
+        <header class="preview-header">
+            <span class="eyebrow">Module 4 Preview</span>
+            <h1>Try the Retirement Income Stack</h1>
+            <p>Move the sliders to see how monthly cash flow can be split between tax-free and taxable portions. This is an educational visualization, not a tax estimate.</p>
+        </header>
+
+        <section class="visualizer" data-income-stack-visualizer>
+            <div class="visualizer-grid">
+                <div class="controls" aria-label="Retirement income stack inputs">
+                    <div class="control">
+                        <label for="preview-stack-va">VA Disability <span>Tax-free</span></label>
+                        <input id="preview-stack-va" type="range" min="0" max="4500" value="1500" step="50" data-stack-input="va">
+                        <div class="control-values"><span>$0</span><strong data-stack-value="va">$1,500</strong><span>$4,500</span></div>
+                    </div>
+                    <div class="control">
+                        <label for="preview-stack-pension">Military / Civilian Pension <span>Taxable</span></label>
+                        <input id="preview-stack-pension" type="range" min="0" max="6000" value="2000" step="50" data-stack-input="pension">
+                        <div class="control-values"><span>$0</span><strong data-stack-value="pension">$2,000</strong><span>$6,000</span></div>
+                    </div>
+                    <div class="control">
+                        <label for="preview-stack-ss">Social Security <span>Often partially taxed</span></label>
+                        <input id="preview-stack-ss" type="range" min="0" max="4000" value="1800" step="50" data-stack-input="ss">
+                        <div class="control-values"><span>$0</span><strong data-stack-value="ss">$1,800</strong><span>$4,000</span></div>
+                    </div>
+                    <div class="control">
+                        <label for="preview-stack-tsp">TSP / IRA Withdrawals <span>Taxable</span></label>
+                        <input id="preview-stack-tsp" type="range" min="0" max="5000" value="500" step="50" data-stack-input="tsp">
+                        <div class="control-values"><span>$0</span><strong data-stack-value="tsp">$500</strong><span>$5,000</span></div>
+                    </div>
+                    <div class="control">
+                        <label for="preview-stack-roth">Roth Withdrawals <span>Tax-free when qualified</span></label>
+                        <input id="preview-stack-roth" type="range" min="0" max="3000" value="0" step="50" data-stack-input="roth">
+                        <div class="control-values"><span>$0</span><strong data-stack-value="roth">$0</strong><span>$3,000</span></div>
+                    </div>
+                </div>
+
+                <div class="chart-panel">
+                    <div class="chart-wrap">
+                        <canvas data-stack-chart width="340" height="340" role="img" aria-label="Doughnut chart comparing tax-free and taxable monthly income"></canvas>
+                        <div class="chart-center">
+                            <strong data-stack-output="total">$5,800</strong>
+                            <span>Total Monthly Cash Flow</span>
+                        </div>
+                    </div>
+                    <div class="summary">
+                        <div class="summary-row summary-row--taxfree">
+                            <span>Monthly tax-free baseline</span>
+                            <strong data-stack-output="taxFree">$1,770</strong>
+                        </div>
+                        <div class="summary-row summary-row--taxable">
+                            <span>Estimated taxable amount</span>
+                            <strong data-stack-output="taxable">$4,030</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                This simulation treats VA disability and qualified Roth withdrawals as tax-free, pension and traditional TSP/IRA withdrawals as taxable, and 85% of Social Security as taxable for illustration. Actual tax treatment depends on combined income, filing status, account rules, and state law.
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0,
+            }).format(value);
+        }
+
+        function stackValue(widget, name) {
+            const input = widget.querySelector(`[data-stack-input="${name}"]`);
+            return input ? parseFloat(input.value) || 0 : 0;
+        }
+
+        function updateText(widget, selector, value) {
+            const target = widget.querySelector(selector);
+            if (target) target.textContent = formatCurrency(value);
+        }
+
+        function drawChart(canvas, taxFree, taxable) {
+            const total = taxFree + taxable;
+            const size = 320;
+            const dpr = window.devicePixelRatio || 1;
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = size * dpr;
+            canvas.height = size * dpr;
+            canvas.style.width = `${size}px`;
+            canvas.style.height = `${size}px`;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            ctx.clearRect(0, 0, size, size);
+            ctx.lineWidth = 52;
+            ctx.lineCap = 'butt';
+
+            if (total <= 0) return;
+
+            let start = -Math.PI / 2;
+            [
+                { value: taxFree, color: '#15803d' },
+                { value: taxable, color: '#b91c1c' },
+            ].forEach(segment => {
+                if (segment.value <= 0) return;
+                const angle = (segment.value / total) * Math.PI * 2;
+                ctx.beginPath();
+                ctx.strokeStyle = segment.color;
+                ctx.arc(size / 2, size / 2, 110, start, start + angle);
+                ctx.stroke();
+                start += angle;
+            });
+        }
+
+        function updateVisualizer(widget) {
+            const va = stackValue(widget, 'va');
+            const pension = stackValue(widget, 'pension');
+            const ss = stackValue(widget, 'ss');
+            const tsp = stackValue(widget, 'tsp');
+            const roth = stackValue(widget, 'roth');
+            const taxable = pension + tsp + (ss * 0.85);
+            const taxFree = va + roth + (ss * 0.15);
+            const total = taxable + taxFree;
+
+            updateText(widget, '[data-stack-value="va"]', va);
+            updateText(widget, '[data-stack-value="pension"]', pension);
+            updateText(widget, '[data-stack-value="ss"]', ss);
+            updateText(widget, '[data-stack-value="tsp"]', tsp);
+            updateText(widget, '[data-stack-value="roth"]', roth);
+            updateText(widget, '[data-stack-output="taxFree"]', taxFree);
+            updateText(widget, '[data-stack-output="taxable"]', taxable);
+            updateText(widget, '[data-stack-output="total"]', total);
+            drawChart(widget.querySelector('[data-stack-chart]'), taxFree, taxable);
+        }
+
+        document.querySelectorAll('[data-income-stack-visualizer]').forEach(widget => {
+            widget.querySelectorAll('[data-stack-input]').forEach(input => {
+                input.addEventListener('input', () => updateVisualizer(widget));
+            });
+            updateVisualizer(widget);
+        });
+    </script>
+</body>
+</html>

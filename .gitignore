@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Claude Code local settings
+.claude/
+
+# Memory/state files (optional - remove this line if you want to track state)
+MEMORY/
+
+# --- Platform additions (M3) ---
+# Large media (videos/podcasts are YouTube/external-hosted; the build strips them)
+*.mp4
+*.mp3
+*.mov
+# Build output
+dist/
+# Vendored / scratch / legacy
+design.md/
+.playwright-mcp/
+# Source logo lives in assets/; ignore the root working copy
+/VUB Logo.png
+# Legacy course subrepos (archived in M3-D; tracked by their own git)
+/VUB Financial Readiness Course/
+/VUB Intermediate Computer Course/

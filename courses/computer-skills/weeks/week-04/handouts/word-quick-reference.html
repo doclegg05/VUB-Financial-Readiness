@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microsoft Word Quick Reference | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --word-blue: #2B579A;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.5;
+      padding: 0.4in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--word-blue) 0%, #1E4080 100%);
+      color: var(--light);
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.35rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .section { margin-bottom: 1rem; }
+    .section-title {
+      background: var(--word-blue);
+      color: var(--light);
+      padding: 0.4rem 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      border-radius: 5px;
+    }
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .task-box {
+      background: var(--off-white);
+      padding: 0.75rem;
+      border-radius: 6px;
+    }
+    .task-box h4 {
+      color: var(--primary);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .task-box ol, .task-box ul {
+      margin-left: 1.25rem;
+      font-size: 0.85rem;
+    }
+    .task-box li { margin-bottom: 0.35rem; }
+    kbd {
+      display: inline-block;
+      background: linear-gradient(180deg, #f5f5f5 0%, #e0e0e0 100%);
+      color: #333;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid #ccc;
+      border-bottom: 2px solid #aaa;
+    }
+    .shortcut-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.4rem;
+    }
+    .shortcut-item {
+      display: flex;
+      align-items: center;
+      padding: 0.4rem 0.6rem;
+      background: var(--off-white);
+      border-radius: 6px;
+      gap: 0.5rem;
+    }
+    .shortcut-keys {
+      min-width: 90px;
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+    }
+    .shortcut-desc {
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    .plus { color: var(--gray); font-weight: 700; margin: 0 0.1rem; }
+    .style-example {
+      background: var(--off-white);
+      padding: 0.75rem;
+      border-radius: 6px;
+      margin: 0.5rem 0;
+    }
+    .style-example .title {
+      font-size: 1.2rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .style-example .heading1 {
+      font-size: 1rem;
+      color: #333;
+      font-weight: 700;
+      margin-top: 0.25rem;
+    }
+    .style-example .heading2 {
+      font-size: 0.9rem;
+      color: #444;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    .style-example .normal {
+      font-size: 0.85rem;
+      color: #666;
+      margin-left: 0.5rem;
+    }
+    .tip-box {
+      background: rgba(40, 167, 69, 0.1);
+      border-left: 4px solid var(--success);
+      padding: 0.6rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+    }
+    .tip-box strong { color: var(--primary); }
+    .footer {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0.25in; }
+      .header, .section-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>📄 Microsoft Word Quick Reference</h1>
+      <p style="font-size: 0.8rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 4</p>
+    </div>
+    <span class="header-badge">REFERENCE</span>
+  </header>
+
+  <div class="section">
+    <h2 class="section-title">⌨️ Essential Keyboard Shortcuts</h2>
+    <div class="shortcut-grid">
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>S</kbd></div>
+        <span class="shortcut-desc">Save document</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Z</kbd></div>
+        <span class="shortcut-desc">Undo last action</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>B</kbd></div>
+        <span class="shortcut-desc">Bold text</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>I</kbd></div>
+        <span class="shortcut-desc">Italic text</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>U</kbd></div>
+        <span class="shortcut-desc">Underline text</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>F7</kbd></div>
+        <span class="shortcut-desc">Spell check</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>P</kbd></div>
+        <span class="shortcut-desc">Print</span>
+      </div>
+      <div class="shortcut-item">
+        <div class="shortcut-keys"><kbd>Alt</kbd><span class="plus">+</span><kbd>Q</kbd></div>
+        <span class="shortcut-desc">Search commands</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">🎨 Using Styles</h2>
+    <div class="style-example">
+      <div class="title">Document Title <span style="font-size: 0.7rem; background: var(--accent); color: var(--primary); padding: 0.1rem 0.3rem; border-radius: 3px;">Title Style</span></div>
+      <div class="heading1">Main Section <span style="font-size: 0.65rem; background: #ddd; padding: 0.1rem 0.3rem; border-radius: 3px;">Heading 1</span></div>
+      <div class="heading2">Subsection <span style="font-size: 0.65rem; background: #eee; padding: 0.1rem 0.3rem; border-radius: 3px;">Heading 2</span></div>
+      <div class="normal">Regular paragraph text... <span style="font-size: 0.65rem; background: #f5f5f5; padding: 0.1rem 0.3rem; border-radius: 3px;">Normal</span></div>
+    </div>
+    <p style="font-size: 0.85rem; margin-top: 0.5rem;"><strong>To Apply:</strong> Select text → Home tab → Click style name in Styles group</p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">📋 Common Tasks</h2>
+    <div class="two-column">
+      <div class="task-box">
+        <h4>Insert Table</h4>
+        <ol>
+          <li>Click where you want the table</li>
+          <li><strong>Insert</strong> tab → <strong>Table</strong></li>
+          <li>Drag to select rows/columns</li>
+          <li>Click to insert</li>
+        </ol>
+      </div>
+      <div class="task-box">
+        <h4>Add Header/Footer</h4>
+        <ol>
+          <li><strong>Insert</strong> tab → <strong>Header</strong> or <strong>Footer</strong></li>
+          <li>Choose a design or "Edit"</li>
+          <li>Type your content</li>
+          <li>Click "Close Header and Footer"</li>
+        </ol>
+      </div>
+      <div class="task-box">
+        <h4>Add Page Numbers</h4>
+        <ol>
+          <li><strong>Insert</strong> tab → <strong>Page Number</strong></li>
+          <li>Choose position (Top/Bottom)</li>
+          <li>Select a style</li>
+          <li>Numbers update automatically</li>
+        </ol>
+      </div>
+      <div class="task-box">
+        <h4>Use Templates</h4>
+        <ol>
+          <li><strong>File</strong> → <strong>New</strong></li>
+          <li>Search or browse templates</li>
+          <li>Click to preview</li>
+          <li>Click <strong>Create</strong></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">📊 Table Formatting</h2>
+    <div class="two-column">
+      <div class="task-box">
+        <h4>Table Design Tab</h4>
+        <ul>
+          <li>Table Styles (colors/borders)</li>
+          <li>Header Row option</li>
+          <li>Banded Rows (alternating)</li>
+        </ul>
+      </div>
+      <div class="task-box">
+        <h4>Layout Tab</h4>
+        <ul>
+          <li>Insert/Delete rows & columns</li>
+          <li>Merge cells</li>
+          <li>Align text in cells</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">📍 Ribbon Tab Guide</h2>
+    <div class="task-box">
+      <ul style="list-style: none; margin-left: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem;">
+        <li><strong>Home:</strong> Font, Paragraph, Styles</li>
+        <li><strong>Insert:</strong> Tables, Pictures, Headers</li>
+        <li><strong>Design:</strong> Document themes</li>
+        <li><strong>Layout:</strong> Margins, Orientation</li>
+        <li><strong>Review:</strong> Spell check, Comments</li>
+        <li><strong>View:</strong> Zoom, Navigation Pane</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>💡 Pro Tips:</strong> Double-click at top/bottom of page to quickly edit header/footer.
+    Use <strong>View → Navigation Pane</strong> to see all headings and jump between sections.
+    Press <kbd>F7</kbd> for spell check before saving!
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong> | Intermediate Computer Skills | Week 4</p>
+    <p style="margin-top: 0.25rem;">Keep this at your workstation for quick reference!</p>
+  </footer>
+</body>
+</html>

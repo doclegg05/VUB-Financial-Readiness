@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Setup Guide | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --android-green: #3DDC84;
+      --apple-gray: #555555;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      color: var(--primary);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-badge {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .section { margin-bottom: 1.5rem; }
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .intro {
+      padding: 0.5rem;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .app-section {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .app-icon {
+      font-size: 2.5rem;
+    }
+    .app-info h3 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+    .app-info p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .platform-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .platform {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .platform h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+    }
+    .platform.android h4 { color: var(--android-green); }
+    .platform.iphone h4 { color: var(--apple-gray); }
+    .steps-list {
+      list-style: none;
+      font-size: 0.9rem;
+    }
+    .steps-list li {
+      padding: 0.4rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .steps-list li::before {
+      content: counter(step);
+      counter-increment: step;
+      position: absolute;
+      left: 0;
+      background: var(--accent);
+      color: var(--primary);
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .platform .steps-list {
+      counter-reset: step;
+    }
+    .tip-box {
+      background: rgba(201, 162, 39, 0.1);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+    }
+    .tip-box strong {
+      color: var(--accent);
+    }
+    .sync-info {
+      background: rgba(40, 167, 69, 0.1);
+      border: 1px solid var(--success);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    .sync-info h4 {
+      color: var(--success);
+      margin-bottom: 0.5rem;
+    }
+    .sync-info ul {
+      margin-left: 1.25rem;
+      font-size: 0.9rem;
+    }
+    .sync-info li {
+      margin-bottom: 0.25rem;
+    }
+    .checklist {
+      list-style: none;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      margin-bottom: 0.25rem;
+      background: var(--off-white);
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--accent);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .safety-box {
+      background: rgba(179, 25, 66, 0.1);
+      border: 1px solid #B31942;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .safety-box h4 {
+      color: #B31942;
+      margin-bottom: 0.5rem;
+    }
+    .safety-box ul {
+      margin-left: 1.25rem;
+      font-size: 0.9rem;
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>📱 Mobile Setup Guide</h1>
+      <p style="font-size: 0.9rem;">VUB Intermediate Computer Skills - Week 8</p>
+    </div>
+    <span class="header-badge">REFERENCE</span>
+  </header>
+
+  <div class="section">
+    <h2 class="section-title">Why Use Mobile Apps?</h2>
+    <p class="intro">
+      Your Gmail and Google Drive work on your phone too! This means you can check email, view files,
+      and even upload photos while away from your computer. Everything stays in sync automatically.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Setting Up Gmail on Your Phone</h2>
+    <div class="app-section">
+      <div class="app-header">
+        <div class="app-icon">📧</div>
+        <div class="app-info">
+          <h3>Gmail App</h3>
+          <p>Free email app from Google</p>
+        </div>
+      </div>
+
+      <div class="platform-tabs">
+        <div class="platform android">
+          <h4>🤖 Android Phone</h4>
+          <ol class="steps-list">
+            <li>Open the Play Store app</li>
+            <li>Search for "Gmail"</li>
+            <li>Tap "Install" (may already be installed)</li>
+            <li>Open Gmail app</li>
+            <li>Tap "Add account"</li>
+            <li>Enter your Gmail address</li>
+            <li>Enter your password</li>
+            <li>Allow notifications when asked</li>
+          </ol>
+        </div>
+        <div class="platform iphone">
+          <h4>🍎 iPhone</h4>
+          <ol class="steps-list">
+            <li>Open the App Store</li>
+            <li>Search for "Gmail"</li>
+            <li>Tap "Get" to download</li>
+            <li>Open Gmail app</li>
+            <li>Tap "Sign in"</li>
+            <li>Enter your Gmail address</li>
+            <li>Enter your password</li>
+            <li>Allow notifications when asked</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <strong>💡 Tip:</strong> Use the same Gmail address you created in Week 3. All your emails, contacts, and labels will be there!
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Setting Up Google Drive on Your Phone</h2>
+    <div class="app-section">
+      <div class="app-header">
+        <div class="app-icon">📁</div>
+        <div class="app-info">
+          <h3>Google Drive App</h3>
+          <p>Access all your cloud files on the go</p>
+        </div>
+      </div>
+
+      <div class="platform-tabs">
+        <div class="platform android">
+          <h4>🤖 Android Phone</h4>
+          <ol class="steps-list">
+            <li>Open the Play Store app</li>
+            <li>Search for "Google Drive"</li>
+            <li>Tap "Install" (may already be installed)</li>
+            <li>Open Drive app</li>
+            <li>Sign in with your Google account</li>
+            <li>You'll see all your folders!</li>
+          </ol>
+        </div>
+        <div class="platform iphone">
+          <h4>🍎 iPhone</h4>
+          <ol class="steps-list">
+            <li>Open the App Store</li>
+            <li>Search for "Google Drive"</li>
+            <li>Tap "Get" to download</li>
+            <li>Open Drive app</li>
+            <li>Sign in with your Google account</li>
+            <li>You'll see all your folders!</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <strong>💡 Tip:</strong> Tap the camera icon in Drive to scan documents or upload photos directly to the cloud!
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">How Syncing Works</h2>
+    <div class="sync-info">
+      <h4>🔄 Automatic Syncing</h4>
+      <ul>
+        <li>Changes you make on your phone appear on your computer</li>
+        <li>Changes you make on your computer appear on your phone</li>
+        <li>Emails you read on your phone show as read everywhere</li>
+        <li>Files you upload from your phone appear in Drive on your computer</li>
+        <li>Everything stays the same across all your devices!</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Helpful Features</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div><strong>Notifications:</strong> Get alerts when new emails arrive</div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div><strong>Search:</strong> Find emails and files quickly using the search bar</div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div><strong>Offline Access:</strong> Mark files to be available without internet</div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div><strong>Share:</strong> Send files directly from your phone</div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div><strong>Photo Backup:</strong> Automatically save phone photos to Drive</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Mobile Safety Tips</h2>
+    <div class="safety-box">
+      <h4>🔒 Keep Your Phone Secure</h4>
+      <ul>
+        <li>Use a screen lock (PIN, pattern, fingerprint, or face)</li>
+        <li>Don't save passwords in browsers on shared devices</li>
+        <li>Be careful using public WiFi for sensitive tasks</li>
+        <li>Log out of apps if others use your phone</li>
+        <li>Keep your apps updated for security fixes</li>
+        <li>Don't click links in suspicious text messages</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Quick Reference</h2>
+    <div class="app-section">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+        <tr style="background: var(--accent); color: var(--primary);">
+          <th style="padding: 0.5rem; text-align: left;">Task</th>
+          <th style="padding: 0.5rem; text-align: left;">App to Use</th>
+        </tr>
+        <tr>
+          <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Check email</td>
+          <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Gmail</td>
+        </tr>
+        <tr style="background: #f9f9f9;">
+          <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Send email with attachment</td>
+          <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Gmail (tap paperclip icon)</td>
+        </tr>
+        <tr>
+          <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">View your files</td>
+          <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Google Drive</td>
+        </tr>
+        <tr style="background: #f9f9f9;">
+          <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Upload a photo</td>
+          <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Google Drive (tap + button)</td>
+        </tr>
+        <tr>
+          <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Share a file</td>
+          <td style="padding: 0.5rem; border-bottom: 1px solid #ddd;">Google Drive (tap ⋮ then Share)</td>
+        </tr>
+        <tr style="background: #f9f9f9;">
+          <td style="padding: 0.5rem;">Scan a document</td>
+          <td style="padding: 0.5rem;">Google Drive (tap + then Scan)</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Troubleshooting</h2>
+    <div class="tip-box">
+      <strong>App won't sign in?</strong> Make sure you're using the correct email address and password. Try the "Forgot password" option if needed.
+    </div>
+    <div class="tip-box" style="margin-top: 0.5rem;">
+      <strong>Not seeing recent files?</strong> Pull down on the screen to refresh, or check your internet connection.
+    </div>
+    <div class="tip-box" style="margin-top: 0.5rem;">
+      <strong>Running out of space?</strong> Go to Settings in the app to manage storage or delete old items you don't need.
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 8: Mobile Integration</p>
+    <p style="margin-top: 0.5rem; font-style: italic;">Congratulations on completing the course!</p>
+  </footer>
+</body>
+</html>

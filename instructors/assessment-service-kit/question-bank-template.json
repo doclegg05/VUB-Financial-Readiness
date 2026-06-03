@@ -1,0 +1,41 @@
+{
+  "_instructions": "Copy this file for a new course. Replace sample values. Keep ids unique and categories consistent across pre-test and post-test.",
+  "programName": "Veterans Upward Bound",
+  "courseName": "Sample Course Name",
+  "assessmentTitle": "Sample Pre-Test",
+  "assessmentType": "pre",
+  "storageKey": "sample-course-2026",
+  "categories": [
+    "Category One",
+    "Category Two",
+    "Category Three"
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "category": "Category One",
+      "objective": "Measure basic understanding of the first course objective.",
+      "prompt": "Which option best describes the purpose of a pre-test?",
+      "options": {
+        "A": "To punish students for what they do not know",
+        "B": "To measure starting knowledge before instruction begins",
+        "C": "To replace all class activities",
+        "D": "To decide whether students are allowed to attend"
+      },
+      "correct": "B"
+    },
+    {
+      "id": 2,
+      "category": "Category Two",
+      "objective": "Measure understanding of documentation records.",
+      "prompt": "Why is a clean assessment report useful for program records?",
+      "options": {
+        "A": "It documents student progress in a consistent format",
+        "B": "It removes the need for instruction",
+        "C": "It guarantees every student earns a perfect score",
+        "D": "It replaces all grant requirements"
+      },
+      "correct": "A"
+    }
+  ]
+}

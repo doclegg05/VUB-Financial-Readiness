@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VA Login Setup Checklist | VUB Intermediate Computer Skills</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--va-blue) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Intro */
+    .intro {
+      background: var(--off-white);
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Checklist */
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--off-white);
+      border-radius: 8px;
+    }
+
+    .checkbox {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--va-blue);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .checklist-content {
+      flex: 1;
+    }
+
+    .checklist-content strong {
+      color: var(--primary);
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .checklist-content p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+
+    /* Step Numbers */
+    .step-number {
+      background: var(--va-blue);
+      color: var(--light);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    /* Steps List */
+    .steps-list {
+      list-style: none;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      background: var(--off-white);
+      border-radius: 10px;
+      border-left: 3px solid var(--va-blue);
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-content h4 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .step-content p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* ID.me Box */
+    .idme-box {
+      background: rgba(0, 63, 114, 0.08);
+      border: 2px solid var(--va-blue);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .idme-box h3 {
+      color: var(--va-blue);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .idme-box p {
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .idme-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .idme-option {
+      background: white;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+
+    .idme-option strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Warning Box */
+    .warning-box {
+      background: rgba(196, 38, 46, 0.1);
+      border: 2px solid var(--va-red);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .warning-box h3 {
+      color: var(--va-red);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .warning-box p {
+      font-size: 0.9rem;
+    }
+
+    /* Success Box */
+    .success-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .success-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .success-box ul {
+      list-style: none;
+      font-size: 0.9rem;
+    }
+
+    .success-box li {
+      padding: 0.25rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .success-box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    /* Notes Box */
+    .notes-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .notes-box h4 {
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .notes-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .step-number {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .idme-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>✅ VA Login Setup Checklist</h1>
+      <p style="font-size: 0.9rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 1</p>
+    </div>
+    <span class="header-badge">HANDOUT</span>
+  </header>
+
+  <div class="intro">
+    <strong>Before you start:</strong> Setting up your VA.gov account gives you access to all VA online services.
+    This process takes about 15-30 minutes. Have your information ready and follow these steps carefully.
+  </div>
+
+  <!-- What You Need -->
+  <div class="section">
+    <h2 class="section-title">📋 What You'll Need</h2>
+    <ul class="checklist">
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>A valid email address</strong>
+          <p>One you check regularly — this is where verification codes will be sent</p>
+        </div>
+      </li>
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Your phone number</strong>
+          <p>For two-factor authentication (adds extra security to your account)</p>
+        </div>
+      </li>
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Government-issued photo ID</strong>
+          <p>Driver's license, state ID, or passport — you may need to take a photo of it</p>
+        </div>
+      </li>
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>Your Social Security Number</strong>
+          <p>For identity verification purposes</p>
+        </div>
+      </li>
+      <li class="checklist-item">
+        <div class="checkbox"></div>
+        <div class="checklist-content">
+          <strong>A webcam or smartphone (optional)</strong>
+          <p>For video verification if needed — not always required</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Step by Step -->
+  <div class="section">
+    <h2 class="section-title">🚀 Step-by-Step Account Setup</h2>
+    <ul class="steps-list">
+      <li class="step-item">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Go to VA.gov</h4>
+          <p>Type <strong>va.gov</strong> directly into your browser's address bar. Don't use a search engine.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Click "Sign In"</h4>
+          <p>Look for the blue "Sign In" button in the top right corner of the page.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Choose "Create Account with ID.me"</h4>
+          <p>ID.me is the secure service the VA uses to verify your identity. Click this option.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h4>Enter your email and create a password</h4>
+          <p>Use a strong password: at least 8 characters with letters, numbers, and symbols.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h4>Verify your email</h4>
+          <p>Check your email for a verification code. Enter it on the website to continue.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">6</div>
+        <div class="step-content">
+          <h4>Set up two-factor authentication</h4>
+          <p>Enter your phone number. You'll receive a code by text message each time you log in.</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">7</div>
+        <div class="step-content">
+          <h4>Verify your identity</h4>
+          <p>Follow the prompts to confirm who you are (see ID.me options below).</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">8</div>
+        <div class="step-content">
+          <h4>You're done!</h4>
+          <p>Once verified, you can access all VA online services with your new account.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ID.me Verification -->
+  <div class="idme-box">
+    <h3>🔐 About ID.me Verification</h3>
+    <p>ID.me needs to verify you are who you say you are. There are several ways to do this:</p>
+    <div class="idme-options">
+      <div class="idme-option">
+        <strong>📸 Self-Service (Fastest)</strong>
+        Take a photo of your ID and a selfie using your computer's camera or phone.
+      </div>
+      <div class="idme-option">
+        <strong>📹 Video Call</strong>
+        Video chat with an ID.me representative who will verify your identity.
+      </div>
+      <div class="idme-option">
+        <strong>🏪 In-Person</strong>
+        Visit a participating location (like UPS or Walgreens) with your ID.
+      </div>
+      <div class="idme-option">
+        <strong>📋 Answer Questions</strong>
+        Answer questions about your history (addresses, employers, etc.).
+      </div>
+    </div>
+  </div>
+
+  <!-- Warning -->
+  <div class="warning-box">
+    <h3>⚠️ Common Problems & Solutions</h3>
+    <p>
+      <strong>Can't verify identity?</strong> Try the video call option — a real person can help.<br>
+      <strong>Forgot your password?</strong> Click "Forgot password" on the login page to reset it.<br>
+      <strong>Not receiving codes?</strong> Check your spam folder or try the phone call option instead of text.
+    </p>
+  </div>
+
+  <!-- Success -->
+  <div class="success-box">
+    <h3>🎉 Once You're Logged In, You Can:</h3>
+    <ul>
+      <li>Check your VA benefits status</li>
+      <li>View and track your disability claims</li>
+      <li>Access MyHealtheVet for health services</li>
+      <li>Download official VA letters</li>
+      <li>Update your contact information</li>
+      <li>Apply for new benefits online</li>
+    </ul>
+  </div>
+
+  <!-- Notes -->
+  <div class="notes-box">
+    <h4>📝 Write Down Your Login Info (Keep in a Safe Place!)</h4>
+    <p style="margin-top: 0.75rem;">
+      <strong>Email used:</strong> ____________________________________<br><br>
+      <strong>Password hint:</strong> ____________________________________<br><br>
+      <strong>Phone number for codes:</strong> ____________________________________
+    </p>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 1: VA Online Services</p>
+  </footer>
+</body>
+</html>

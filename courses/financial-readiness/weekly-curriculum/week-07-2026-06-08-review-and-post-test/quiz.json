@@ -1,0 +1,265 @@
+{
+  "title": "Retirement Quiz",
+  "questions": [
+    {
+      "question": "To qualify for the Aid and Attendance benefit in 2026, what is the approximate net worth limit established by the VA?",
+      "answerOptions": [
+        {
+          "text": "$125,430",
+          "isCorrect": false,
+          "rationale": "This figure is lower than the actual 2026 limit and likely represents a limit from a previous year."
+        },
+        {
+          "text": "$163,699",
+          "isCorrect": true,
+          "rationale": "The source material explicitly states that the net worth limit for financial eligibility in 2026 is approximately $163,699."
+        },
+        {
+          "text": "$250,000",
+          "isCorrect": false,
+          "rationale": "This amount significantly exceeds the VA's established net worth threshold for pension eligibility."
+        },
+        {
+          "text": "$100,000",
+          "isCorrect": false,
+          "rationale": "While the VA does have asset limits, this specific round number is below the 2026 requirement."
+        }
+      ],
+      "hint": "The amount is just over $160,000 for the 2026 calendar year."
+    },
+    {
+      "question": "What is the 'five-year rule' requirement for a federal employee to carry Federal Employees Health Benefits (FEHB) into retirement?",
+      "answerOptions": [
+        {
+          "text": "Continuous enrollment for the last 5 years of service immediately before retirement.",
+          "isCorrect": true,
+          "rationale": "The government requires continuous coverage for the five years preceding retirement to ensure retirees don't just join for the post-employment benefits."
+        },
+        {
+          "text": "Enrollment in any federal health plan for a total of 5 non-consecutive years.",
+          "isCorrect": false,
+          "rationale": "The requirement specifically mandates that the coverage must be continuous rather than cumulative."
+        },
+        {
+          "text": "Being at least 5 years away from the Minimum Retirement Age (MRA) when first enrolling.",
+          "isCorrect": false,
+          "rationale": "The five-year rule is based on the duration of coverage leading up to the retirement date, not the age at enrollment."
+        },
+        {
+          "text": "Having 5 years of total military service that can be credited toward health coverage.",
+          "isCorrect": false,
+          "rationale": "While military service can sometimes count, the primary rule is based on civilian FEHB enrollment periods."
+        }
+      ],
+      "hint": "Consider the necessity of uninterrupted coverage before the day you stop working."
+    },
+    {
+      "question": "Which of the following is a primary difference between Combat-Related Special Compensation (CRSC) and Concurrent Retirement and Disability Pay (CRDP)?",
+      "answerOptions": [
+        {
+          "text": "CRDP is non-taxable, while CRSC is fully taxable as income.",
+          "isCorrect": false,
+          "rationale": "This is actually the opposite of the truth; CRSC is disability-based and non-taxable, whereas CRDP is considered retired pay and is taxable."
+        },
+        {
+          "text": "CRSC requires a formal application to the service branch, while CRDP is usually automatic.",
+          "isCorrect": true,
+          "rationale": "Eligible retirees receive CRDP automatically through coordination between DFAS and the VA, but CRSC requires the retiree to submit DD Form 2860."
+        },
+        {
+          "text": "CRDP requires a 10% disability rating, while CRSC requires a 50% rating.",
+          "isCorrect": false,
+          "rationale": "CRSC has the lower minimum threshold at 10% combat-related disability, while CRDP requires at least a 50% service-connected rating."
+        },
+        {
+          "text": "Only CRDP allows for full concurrent receipt of retirement and disability pay.",
+          "isCorrect": false,
+          "rationale": "Both programs allow for concurrent receipt; they simply have different eligibility criteria and tax treatments."
+        }
+      ],
+      "hint": "Think about which program requires the veteran to take the initiative by filing a specific form."
+    },
+    {
+      "question": "According to the 'Bucket Strategy' for retirement income, which assets should be placed in the 'Liquidity' bucket?",
+      "answerOptions": [
+        {
+          "text": "Growth stocks and aggressive mutual funds intended for years 10-20.",
+          "isCorrect": false,
+          "rationale": "High-volatility assets are inappropriate for short-term needs because a market downturn could force a loss-heavy sale."
+        },
+        {
+          "text": "Cash-equivalents, CDs, and money market accounts for the first 3-5 years of expenses.",
+          "isCorrect": true,
+          "rationale": "The liquidity bucket is designed to provide stable, accessible cash to cover immediate living costs regardless of market performance."
+        },
+        {
+          "text": "Long-term real estate investments and illiquid business holdings.",
+          "isCorrect": false,
+          "rationale": "These assets lack the necessary accessibility for the 'immediate needs' purpose of the first bucket."
+        },
+        {
+          "text": "Tax-advantaged legacy accounts designated for charitable giving.",
+          "isCorrect": false,
+          "rationale": "Legacy funds are intended for the end of the 'runway' or for heirs, not for day-to-day retirement spending."
+        }
+      ],
+      "hint": "This bucket is meant to prevent selling volatile assets during a market downturn."
+    },
+    {
+      "question": "Under the Survivor Benefit Plan (SBP), at what point does a retiree's coverage reach 'paid-up' status, requiring no further premium payments?",
+      "answerOptions": [
+        {
+          "text": "After 20 years of payments, regardless of the retiree's age.",
+          "isCorrect": false,
+          "rationale": "The requirement involves a longer payment duration and a specific age threshold."
+        },
+        {
+          "text": "Once the beneficiary reaches age 65 and becomes Medicare eligible.",
+          "isCorrect": false,
+          "rationale": "The paid-up status of SBP is linked to the retiree's payment history and age, not the beneficiary's Medicare status."
+        },
+        {
+          "text": "After 30 years (360 months) of payments AND reaching age 70.",
+          "isCorrect": true,
+          "rationale": "Federal law requires both conditions\u201430 years of premiums and the retiree being age 70\u2014to be met before premiums cease."
+        },
+        {
+          "text": "Upon the retiree reaching age 62 and qualifying for Social Security.",
+          "isCorrect": false,
+          "rationale": "Social Security eligibility is independent of the SBP premium payment requirements."
+        }
+      ],
+      "hint": "There are two specific milestones involving the number 30 and the number 70."
+    },
+    {
+      "question": "For veterans planning to use the Benefits Delivery at Discharge (BDD) program for VA claims, when must the claim be submitted?",
+      "answerOptions": [
+        {
+          "text": "Within 30 days of the actual retirement date.",
+          "isCorrect": false,
+          "rationale": "The BDD program is designed for pre-separation, and submitting after retirement would fall under a different claim process."
+        },
+        {
+          "text": "Between 90 and 180 days before separation from active duty.",
+          "isCorrect": true,
+          "rationale": "Submitting within this specific window allows the VA to process the claim and potentially provide a rating the day after discharge."
+        },
+        {
+          "text": "Exactly one year before the planned retirement date.",
+          "isCorrect": false,
+          "rationale": "While planning starts early, the specific BDD submission window is closer to the actual separation date."
+        },
+        {
+          "text": "Immediately upon reaching 20 years of creditable service.",
+          "isCorrect": false,
+          "rationale": "Eligibility for retirement and the timeline for BDD claims are separate administrative requirements."
+        }
+      ],
+      "hint": "The window begins six months before discharge and ends three months before discharge."
+    },
+    {
+      "question": "Which of the following is true regarding how VA disability compensation affects Social Security retirement benefits?",
+      "answerOptions": [
+        {
+          "text": "Social Security benefits are reduced by the amount of VA disability received.",
+          "isCorrect": false,
+          "rationale": "VA disability and Social Security retirement are separate programs and do not typically offset each other."
+        },
+        {
+          "text": "VA disability is considered 'earned income' and can reduce Social Security checks for early retirees.",
+          "isCorrect": false,
+          "rationale": "The SSA does not count VA disability as earned income; it is a tax-free benefit for service-connected conditions."
+        },
+        {
+          "text": "You can receive both benefits simultaneously without any reduction to either.",
+          "isCorrect": true,
+          "rationale": "Because they are based on different criteria\u2014service connection vs. age and work history\u2014veterans can collect the full amount of both."
+        },
+        {
+          "text": "You must wait until age 70 to receive both benefits concurrently.",
+          "isCorrect": false,
+          "rationale": "While waiting until 70 maximizes Social Security, concurrent receipt is allowed as soon as one is eligible for both."
+        }
+      ],
+      "hint": "These two programs operate independently, one based on health/service and the other on age/work."
+    },
+    {
+      "question": "In the context of Aid and Attendance, which activity is categorized as an 'Activity of Daily Living' (ADL)?",
+      "answerOptions": [
+        {
+          "text": "Managing financial investments and paying bills.",
+          "isCorrect": false,
+          "rationale": "While important, financial management is an Instrumental Activity of Daily Living (IADL), not one of the five basic ADLs the VA uses for clinical qualification."
+        },
+        {
+          "text": "Driving a personal vehicle or using public transportation.",
+          "isCorrect": false,
+          "rationale": "Transportation is generally considered a community living skill rather than a basic physical self-care activity."
+        },
+        {
+          "text": "Dressing, which includes assistance with buttons, zippers, or putting on clothes.",
+          "isCorrect": true,
+          "rationale": "The source material identifies dressing as one of the five core ADLs, alongside bathing, mobility, toileting, and eating."
+        },
+        {
+          "text": "Performing household chores like vacuuming or doing laundry.",
+          "isCorrect": false,
+          "rationale": "Housekeeping is an IADL and does not meet the clinical 'need for care' requirement for the enhanced pension."
+        }
+      ],
+      "hint": "Think of basic physical tasks required to get through the day, specifically those related to personal attire."
+    },
+    {
+      "question": "What happens to the VA Aid and Attendance benefit amount if a recipient is approved for Medicaid long-term care while in a skilled nursing facility?",
+      "answerOptions": [
+        {
+          "text": "The benefit is terminated completely.",
+          "isCorrect": false,
+          "rationale": "Recipients do not lose eligibility entirely; rather, the payment amount is adjusted due to Medicaid coverage."
+        },
+        {
+          "text": "The benefit is reduced to approximately $90 per month.",
+          "isCorrect": true,
+          "rationale": "VA regulations mandate a reduction to a small personal allowance (around $90) when Medicaid begins covering the costs of the nursing facility."
+        },
+        {
+          "text": "The benefit remains unchanged and acts as a supplement to Medicaid.",
+          "isCorrect": false,
+          "rationale": "Medicaid is a payer of last resort, so other federal benefits are typically reduced to prevent 'double-dipping' on room and board costs."
+        },
+        {
+          "text": "The benefit increases to cover the 'gap' in Medicaid coverage.",
+          "isCorrect": false,
+          "rationale": "VA pension amounts are fixed by law and do not increase based on Medicaid approval."
+        }
+      ],
+      "hint": "The benefit doesn't disappear, but it drops to a very small 'pocket money' amount."
+    },
+    {
+      "question": "Which state is completing its transition to a 'no-income-tax' state in 2026, making military retirement 100% tax-free at the state level?",
+      "answerOptions": [
+        {
+          "text": "California",
+          "isCorrect": false,
+          "rationale": "California is listed as one of the few states that still fully taxes military retirement as regular income."
+        },
+        {
+          "text": "New Hampshire",
+          "isCorrect": true,
+          "rationale": "The source material notes that New Hampshire eliminated its tax on interest and dividends, completing its transition to a no-income-tax state in 2026."
+        },
+        {
+          "text": "Vermont",
+          "isCorrect": false,
+          "rationale": "Vermont is listed as a state that adjusted thresholds but still applies AGI-based exemptions rather than a total exemption."
+        },
+        {
+          "text": "New York",
+          "isCorrect": false,
+          "rationale": "While New York fully exempts military retirement, it is not a 'no-income-tax' state for other types of income."
+        }
+      ],
+      "hint": "This northeastern state is famous for its 'Live Free or Die' motto."
+    }
+  ]
+}

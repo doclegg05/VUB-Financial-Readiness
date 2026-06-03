@@ -1,0 +1,1785 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post-Test Assessment | VUB Financial Readiness Course</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1b2e4a;
+      --primary-light: #2d5aa0;
+      --primary-dark: #0d1117;
+      --accent: #c8a84e;
+      --accent-light: #d4b86a;
+      --red: #B31942;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --muted: #EEF4FA;
+      --gray: #5A6A7A;
+      --gray-light: #8A9AAA;
+      --success: #28A745;
+      --danger: #DC3545;
+      --info: #17A2B8;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .quiz-header {
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      color: var(--primary-dark);
+      padding: 0.3rem 1.5rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .quiz-header h1 {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      line-height: 1.2;
+    }
+
+    .quiz-header p {
+      color: var(--primary);
+      font-size: 0.7rem;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .course-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.05rem 0.55rem;
+      border-radius: 20px;
+      font-size: 0.52rem;
+      font-weight: 700;
+      margin-top: 0.15rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .progress-container {
+      background: rgba(255,255,255,0.3);
+      padding: 0.35rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    .progress-text {
+      color: var(--primary-dark);
+      font-size: 0.75rem;
+      font-weight: 600;
+      min-width: 70px;
+      text-align: right;
+    }
+
+    .quiz-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .instructions {
+      background: var(--light);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-left: 4px solid var(--accent);
+    }
+
+    .instructions h2 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .instructions ul {
+      margin-left: 1.5rem;
+      color: var(--gray);
+    }
+
+    .instructions li {
+      margin-bottom: 0.5rem;
+    }
+
+    .instructions .important {
+      background: rgba(200,168,78,0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .question-card {
+      background: var(--light);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      display: none;
+    }
+
+    .question-card.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--muted);
+    }
+
+    .question-number {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    .question-category {
+      background: var(--muted);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .question-text {
+      font-size: 1.25rem;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .answer-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .answer-option {
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--muted);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 1.1rem;
+    }
+
+    .answer-option:hover {
+      border-color: var(--primary-light);
+      background: var(--off-white);
+    }
+
+    .answer-option.selected {
+      border-color: var(--accent);
+      background: rgba(200,168,78,0.1);
+    }
+
+    .answer-option input {
+      display: none;
+    }
+
+    .answer-marker {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--gray-light);
+      border-radius: 50%;
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--gray);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .answer-option.selected .answer-marker {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--primary-dark);
+    }
+
+    .answer-text {
+      flex: 1;
+    }
+
+    .quiz-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      margin-top: 1rem;
+    }
+
+    .nav-btn {
+      padding: 0.875rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-prev {
+      background: var(--muted);
+      color: var(--primary);
+    }
+
+    .btn-prev:hover:not(:disabled) {
+      background: var(--gray-light);
+      color: var(--light);
+    }
+
+    .btn-next {
+      background: var(--primary);
+      color: var(--light);
+    }
+
+    .btn-next:hover:not(:disabled) {
+      background: var(--primary-light);
+    }
+
+    .btn-submit {
+      background: var(--accent);
+      color: var(--primary-dark);
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      background: var(--accent-light);
+    }
+
+    .question-dots {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .q-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .q-dot.answered {
+      background: var(--success);
+    }
+
+    .q-dot.current {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+
+    .q-dot:hover {
+      transform: scale(1.2);
+    }
+
+    .results-section {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .results-section.active {
+      display: block;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .results-card {
+      background: var(--light);
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .results-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .results-title {
+      font-size: 1.75rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .results-subtitle {
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .score-display {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--light);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .score-number {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .comparison-box {
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .comparison-box h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .comparison-scores {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .comparison-item {
+      text-align: center;
+    }
+
+    .comparison-item .label {
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
+
+    .comparison-item .value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .comparison-arrow {
+      font-size: 2rem;
+      color: var(--success);
+    }
+
+    .improvement {
+      background: rgba(40,167,69,0.1);
+      color: var(--success);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .score-breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .breakdown-item {
+      background: var(--muted);
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .breakdown-category {
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.25rem;
+    }
+
+    .breakdown-score {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .results-message {
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+
+    .results-message.excellent {
+      background: rgba(40,167,69,0.1);
+      border: 2px solid var(--success);
+      color: #155724;
+    }
+
+    .results-message.good {
+      background: rgba(23,162,184,0.1);
+      border: 2px solid var(--info);
+      color: #0c5460;
+    }
+
+    .results-message.building {
+      background: rgba(200,168,78,0.1);
+      border: 2px solid var(--accent);
+      color: #856404;
+    }
+
+    .btn-restart {
+      background: var(--primary);
+      color: var(--light);
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-right: 1rem;
+    }
+
+    .btn-restart:hover {
+      background: var(--primary-light);
+    }
+
+    .btn-continue {
+      background: var(--accent);
+      color: var(--primary-dark);
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-continue:hover {
+      background: var(--accent-light);
+    }
+
+    .start-section {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .start-section.hidden {
+      display: none;
+    }
+
+    .start-card {
+      background: var(--light);
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .start-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .start-title {
+      font-size: 1.75rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .start-subtitle {
+      color: var(--gray);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .test-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-item {
+      background: var(--muted);
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .info-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .info-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .topic-list {
+      text-align: left;
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+
+    .topic-list h3 {
+      font-size: 0.875rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .topic-list ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .topic-list li {
+      padding: 0.5rem 0;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .topic-list li::before {
+      content: "\1F4CB";
+      font-size: 0.875rem;
+    }
+
+    .btn-start {
+      background: var(--accent);
+      color: var(--primary-dark);
+      padding: 1.25rem 3rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-start:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(200,168,78,0.3);
+    }
+
+    .quiz-section {
+      display: none;
+    }
+
+    .quiz-section.active {
+      display: block;
+    }
+
+    .name-input-group {
+      margin-bottom: 2rem;
+    }
+
+    .name-input-group label {
+      display: block;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .name-input-group input {
+      width: 100%;
+      max-width: 400px;
+      padding: 1rem;
+      font-size: 1.1rem;
+      border: 2px solid var(--muted);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .name-input-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(200,168,78,0.2);
+    }
+
+    .btn-print {
+      background: #1b2e4a;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-right: 1rem;
+    }
+
+    .btn-print:hover {
+      background: #2d5aa0;
+    }
+
+    .btn-download {
+      background: var(--success);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-right: 1rem;
+    }
+
+    .btn-download:hover {
+      background: #218838;
+    }
+
+    .print-report {
+      display: none;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      .print-report,
+      .print-report * {
+        visibility: visible;
+      }
+
+      .print-report {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white;
+        padding: 0.5in;
+      }
+
+      .report-header {
+        border-bottom: 3px solid #1b2e4a;
+        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .report-header h1 {
+        color: #1b2e4a;
+        font-size: 1.5rem;
+        margin: 0 0 0.25rem 0;
+      }
+
+      .report-header h2 {
+        color: #5A6A7A;
+        font-size: 1rem;
+        font-weight: normal;
+        margin: 0 0 0.5rem 0;
+      }
+
+      .report-header .test-type {
+        background: #1b2e4a;
+        color: white;
+        padding: 0.25rem 1rem;
+        display: inline-block;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      .report-info {
+        display: flex;
+        justify-content: space-between;
+        background: #F5F7FA;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 4px;
+      }
+
+      .report-info-item {
+        text-align: left;
+      }
+
+      .report-info-label {
+        font-size: 0.7rem;
+        color: #5A6A7A;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .report-info-value {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1b2e4a;
+      }
+
+      .report-score-summary {
+        text-align: center;
+        padding: 1.5rem;
+        background: #1b2e4a;
+        color: white;
+        margin-bottom: 1.5rem;
+        border-radius: 4px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .report-score-number {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #c8a84e;
+        line-height: 1;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .report-score-detail {
+        font-size: 1rem;
+        opacity: 0.9;
+        margin-top: 0.5rem;
+      }
+
+      .report-comparison {
+        background: #F5F7FA;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 4px;
+        text-align: center;
+      }
+
+      .report-comparison h3 {
+        font-size: 0.875rem;
+        color: #1b2e4a;
+        margin-bottom: 0.75rem;
+      }
+
+      .report-comparison-scores {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .report-comp-item {
+        text-align: center;
+      }
+
+      .report-comp-label {
+        font-size: 0.7rem;
+        color: #5A6A7A;
+      }
+
+      .report-comp-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1b2e4a;
+      }
+
+      .report-comp-arrow {
+        font-size: 1.5rem;
+        color: #28A745;
+      }
+
+      .report-improvement {
+        background: rgba(40,167,69,0.1);
+        color: #28A745;
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        font-weight: 700;
+        font-size: 1rem;
+      }
+
+      .report-section-title {
+        font-size: 0.875rem;
+        color: #1b2e4a;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #c8a84e;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .report-categories {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .report-category {
+        background: #F5F7FA;
+        padding: 0.75rem;
+        text-align: center;
+        border-radius: 4px;
+      }
+
+      .report-category-name {
+        font-size: 0.6rem;
+        color: #5A6A7A;
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+      }
+
+      .report-category-score {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1b2e4a;
+      }
+
+      .report-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .report-table th {
+        background: #1b2e4a;
+        color: white;
+        padding: 0.5rem;
+        text-align: left;
+        font-weight: 600;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .report-table td {
+        padding: 0.5rem;
+        border-bottom: 1px solid #DEE2E6;
+        vertical-align: top;
+      }
+
+      .report-table tr:nth-child(even) {
+        background: #F8F9FA;
+      }
+
+      .report-table .col-num {
+        width: 30px;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      .report-table .col-question {
+        width: auto;
+      }
+
+      .report-table .col-answer {
+        width: 60px;
+        text-align: center;
+      }
+
+      .report-table .col-correct {
+        width: 60px;
+        text-align: center;
+      }
+
+      .report-table .col-result {
+        width: 40px;
+        text-align: center;
+        font-size: 1rem;
+      }
+
+      .result-correct {
+        color: #28A745;
+      }
+
+      .result-incorrect {
+        color: #DC3545;
+      }
+
+      .report-footer {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid #DEE2E6;
+        text-align: center;
+        font-size: 0.75rem;
+        color: #5A6A7A;
+      }
+
+      .report-footer strong {
+        color: #1b2e4a;
+      }
+
+      .report-table {
+        page-break-inside: auto;
+      }
+
+      .report-table tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .quiz-header h1 {
+        font-size: 0.85rem;
+      }
+
+      .quiz-container {
+        padding: 1rem;
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+      }
+
+      .answer-option {
+        padding: 0.875rem 1rem;
+        font-size: 1rem;
+      }
+
+      .test-info {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="quiz-header">
+    <h1>&#x1F393; Post-Course Assessment</h1>
+    <p>VUB Financial Readiness Course</p>
+    <span class="course-badge">Final Knowledge Check</span>
+
+    <div class="progress-container" id="progressContainer" style="display: none;">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text" id="progressText">0 of 20</div>
+    </div>
+  </header>
+
+  <div class="quiz-container">
+    <div class="start-section" id="startSection">
+      <div class="start-card">
+        <div class="start-icon">&#x1F3C6;</div>
+        <h2 class="start-title">Congratulations on Completing the Course!</h2>
+        <p class="start-subtitle">
+          This final assessment will show how much you've learned about financial readiness.
+          Show what you've learned!
+        </p>
+
+        <div class="test-info">
+          <div class="info-item">
+            <div class="info-icon">&#x2753;</div>
+            <div class="info-label">Questions</div>
+            <div class="info-value">20</div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">&#x23F1;&#xFE0F;</div>
+            <div class="info-label">Time</div>
+            <div class="info-value">No Limit</div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">&#x1F504;</div>
+            <div class="info-label">Can Change</div>
+            <div class="info-value">Yes</div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">&#x1F4C8;</div>
+            <div class="info-label">Purpose</div>
+            <div class="info-value">Measure Growth</div>
+          </div>
+        </div>
+
+        <div class="topic-list">
+          <h3>Topics Covered (All Modules)</h3>
+          <ul>
+            <li>Retirement Income &amp; Timelines</li>
+            <li>Disability Pay &amp; Benefits</li>
+            <li>Healthcare &amp; Long-Term Care</li>
+            <li>Income &amp; Taxes</li>
+            <li>Legacy Planning &amp; Protection</li>
+          </ul>
+        </div>
+
+        <div class="name-input-group">
+          <label for="participantName">Please enter your name:</label>
+          <input type="text" id="participantName" placeholder="Your full name" required>
+        </div>
+
+        <button class="btn-start" id="btnStart">Begin Final Assessment &#x2192;</button>
+      </div>
+    </div>
+
+    <div class="quiz-section" id="quizSection">
+      <div class="instructions">
+        <h2>&#x1F4CC; Instructions</h2>
+        <ul>
+          <li>Read each question carefully before selecting your answer</li>
+          <li>Click on your answer choice to select it</li>
+          <li>Use the navigation buttons or question dots to move between questions</li>
+          <li>You can change your answers at any time before submitting</li>
+        </ul>
+        <p class="important">
+          &#x1F389; This is your moment to shine! Show what you've learned throughout the course.
+          Your results will be compared to your pre-test to show your improvement!
+        </p>
+      </div>
+
+      <div class="question-dots" id="questionDots"></div>
+
+      <div id="questionsContainer"></div>
+
+      <div class="quiz-navigation">
+        <button class="nav-btn btn-prev" id="btnPrev" disabled>
+          &#x2190; Previous
+        </button>
+        <button class="nav-btn btn-next" id="btnNext">
+          Next &#x2192;
+        </button>
+        <button class="nav-btn btn-submit" id="btnSubmit" style="display: none;">
+          Submit Assessment &#x2713;
+        </button>
+      </div>
+    </div>
+
+    <div class="results-section" id="resultsSection">
+      <div class="results-card">
+        <div class="results-icon">&#x1F393;</div>
+        <h2 class="results-title">Course Complete!</h2>
+        <p class="results-subtitle" id="participantGreeting">Congratulations on finishing the course!</p>
+
+        <div class="score-display">
+          <div class="score-number" id="finalScore">0%</div>
+          <div class="score-label">Post-Test Score</div>
+        </div>
+
+        <div class="comparison-box" id="comparisonBox">
+          <h3>&#x1F4C8; Your Improvement</h3>
+          <div class="comparison-scores">
+            <div class="comparison-item">
+              <div class="label">Pre-Test</div>
+              <div class="value" id="preTestScore">&mdash;</div>
+            </div>
+            <div class="comparison-arrow">&#x2192;</div>
+            <div class="comparison-item">
+              <div class="label">Post-Test</div>
+              <div class="value" id="postTestScore">&mdash;</div>
+            </div>
+            <div class="improvement" id="improvementDisplay">&mdash;</div>
+          </div>
+        </div>
+
+        <div class="score-breakdown" id="scoreBreakdown"></div>
+
+        <div class="results-message" id="resultsMessage"></div>
+
+        <p style="color: var(--gray); margin-bottom: 1.5rem; font-size: 0.9rem;">
+          You've completed the VUB Financial Readiness Course! Print your report
+          to keep a record of your achievement.
+        </p>
+
+        <button class="btn-print" onclick="generateReport()">&#x1F5A8;&#xFE0F; Print Report (PDF)</button>
+        <button class="btn-download" onclick="downloadResults()">Download Results (CSV)</button>
+        <a href="../index.html" class="btn-continue">Back to Course &#x2192;</a>
+      </div>
+    </div>
+
+    <div class="print-report" id="printReport">
+      <div class="report-header">
+        <h1>VETERANS UPWARD BOUND - WEST VIRGINIA</h1>
+        <h2>Financial Readiness Course</h2>
+        <span class="test-type">POST-TEST ASSESSMENT REPORT</span>
+      </div>
+
+      <div class="report-info">
+        <div class="report-info-item">
+          <div class="report-info-label">Student Name</div>
+          <div class="report-info-value" id="reportName">&mdash;</div>
+        </div>
+        <div class="report-info-item">
+          <div class="report-info-label">Test Date</div>
+          <div class="report-info-value" id="reportDate">&mdash;</div>
+        </div>
+        <div class="report-info-item">
+          <div class="report-info-label">Instructor</div>
+          <div class="report-info-value">Britt Legg</div>
+        </div>
+      </div>
+
+      <div class="report-score-summary">
+        <div class="report-score-number" id="reportScore">0%</div>
+        <div class="report-score-detail" id="reportScoreDetail">0 of 20 correct</div>
+      </div>
+
+      <div class="report-comparison" id="reportComparison">
+        <h3>Course Progress Comparison</h3>
+        <div class="report-comparison-scores">
+          <div class="report-comp-item">
+            <div class="report-comp-label">Pre-Test</div>
+            <div class="report-comp-value" id="reportPreTest">&mdash;</div>
+          </div>
+          <div class="report-comp-arrow">&#x2192;</div>
+          <div class="report-comp-item">
+            <div class="report-comp-label">Post-Test</div>
+            <div class="report-comp-value" id="reportPostTest">&mdash;</div>
+          </div>
+          <div class="report-improvement" id="reportImprovement">&mdash;</div>
+        </div>
+      </div>
+
+      <h3 class="report-section-title">Score by Category</h3>
+      <div class="report-categories" id="reportCategories"></div>
+
+      <h3 class="report-section-title">Detailed Results</h3>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th class="col-num">#</th>
+            <th class="col-question">Question</th>
+            <th class="col-answer">Answer</th>
+            <th class="col-correct">Correct</th>
+            <th class="col-result"></th>
+          </tr>
+        </thead>
+        <tbody id="reportTableBody"></tbody>
+      </table>
+
+      <div class="report-footer">
+        <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+        <p>Financial Readiness Course | Post-Test Assessment</p>
+        <p>This report documents the student's knowledge at course completion.</p>
+        <p style="margin-top: 0.5rem;"><strong>Congratulations on completing the course!</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Note: All dynamic content is developer-controlled question data, not user input.
+    // The innerHTML usage here renders only trusted, hardcoded quiz content.
+    var questions = [
+      { id: 1, category: "Retirement Income", question: "How is military retirement pay calculated under the High-3 system?",
+        options: [
+          { letter: "A", text: "Average of last 3 years of service \u00d7 2%" },
+          { letter: "B", text: "Average of highest 36 months of basic pay \u00d7 2.5% \u00d7 years of service" },
+          { letter: "C", text: "Final basic pay \u00d7 years of service" },
+          { letter: "D", text: "Total career earnings \u00f7 years of service" }
+        ], correct: "B" },
+      { id: 2, category: "Retirement Income", question: "At what age must you begin taking Required Minimum Distributions (RMDs) from a traditional TSP or IRA if you were born after 1959?",
+        options: [
+          { letter: "A", text: "65" },
+          { letter: "B", text: "70\u00bd" },
+          { letter: "C", text: "73" },
+          { letter: "D", text: "75" }
+        ], correct: "D" },
+      { id: 3, category: "Retirement Income", question: "What is the maximum Social Security benefit increase for delaying claiming from Full Retirement Age (67) to age 70?",
+        options: [
+          { letter: "A", text: "8% total" },
+          { letter: "B", text: "16% total" },
+          { letter: "C", text: "24% total" },
+          { letter: "D", text: "32% total" }
+        ], correct: "C" },
+      { id: 4, category: "Retirement Income", question: "How does VA disability compensation interact with Social Security benefits?",
+        options: [
+          { letter: "A", text: "VA disability reduces your Social Security dollar-for-dollar" },
+          { letter: "B", text: "VA disability is counted as earned income for Social Security" },
+          { letter: "C", text: "VA disability has no effect on your Social Security benefit" },
+          { letter: "D", text: "You cannot receive both VA disability and Social Security" }
+        ], correct: "C" },
+      { id: 5, category: "Disability & Benefits", question: "What is a secondary service-connected condition?",
+        options: [
+          { letter: "A", text: "A condition that developed after you left the military" },
+          { letter: "B", text: "A new health problem caused or worsened by a condition you\u2019re already service-connected for" },
+          { letter: "C", text: "A condition that affects your spouse" },
+          { letter: "D", text: "A condition with a rating below 30%" }
+        ], correct: "B" },
+      { id: 6, category: "Disability & Benefits", question: "What is the key difference between CRDP and CRSC?",
+        options: [
+          { letter: "A", text: "CRDP is for officers only; CRSC is for enlisted" },
+          { letter: "B", text: "CRDP is taxable and automatic; CRSC is tax-free and requires a combat-related application" },
+          { letter: "C", text: "CRDP pays more than CRSC in all cases" },
+          { letter: "D", text: "There is no difference \u2014 they are the same program" }
+        ], correct: "B" },
+      { id: 7, category: "Disability & Benefits", question: "What is a \u201cclaim shark\u201d?",
+        options: [
+          { letter: "A", text: "A VA-accredited attorney who helps with claims" },
+          { letter: "B", text: "An unaccredited person or company that illegally charges veterans for claims assistance" },
+          { letter: "C", text: "A type of VA benefits appeal" },
+          { letter: "D", text: "A nickname for VSO representatives" }
+        ], correct: "B" },
+      { id: 8, category: "Disability & Benefits", question: "What does the VA\u2019s 36-month lookback rule apply to?",
+        options: [
+          { letter: "A", text: "Military service records" },
+          { letter: "B", text: "Asset transfers before applying for VA pension" },
+          { letter: "C", text: "Medical treatment history" },
+          { letter: "D", text: "Employment records after separation" }
+        ], correct: "B" },
+      { id: 9, category: "Healthcare", question: "What happens if you don\u2019t enroll in Medicare Part B at age 65?",
+        options: [
+          { letter: "A", text: "Nothing \u2014 you can enroll anytime without penalty" },
+          { letter: "B", text: "You pay a 10% premium surcharge for each year you delayed, permanently" },
+          { letter: "C", text: "You lose all VA healthcare benefits" },
+          { letter: "D", text: "Your TRICARE coverage automatically replaces Medicare" }
+        ], correct: "B" },
+      { id: 10, category: "Healthcare", question: "How does TRICARE for Life work with Medicare?",
+        options: [
+          { letter: "A", text: "TRICARE replaces Medicare entirely" },
+          { letter: "B", text: "Medicare pays first, TRICARE covers remaining costs as secondary" },
+          { letter: "C", text: "You must choose one or the other" },
+          { letter: "D", text: "TRICARE pays first, Medicare covers the rest" }
+        ], correct: "B" },
+      { id: 11, category: "Healthcare", question: "What is Aid & Attendance?",
+        options: [
+          { letter: "A", text: "A VA program that provides free home modifications" },
+          { letter: "B", text: "A tax-free VA pension enhancement for veterans who need help with daily living activities" },
+          { letter: "C", text: "A Medicare supplement for hospital stays" },
+          { letter: "D", text: "A TRICARE benefit for prescription drugs" }
+        ], correct: "B" },
+      { id: 12, category: "Healthcare", question: "What is the 2026 net worth limit for VA pension eligibility?",
+        options: [
+          { letter: "A", text: "$50,000" },
+          { letter: "B", text: "$100,000" },
+          { letter: "C", text: "$163,699" },
+          { letter: "D", text: "$250,000" }
+        ], correct: "C" },
+      { id: 13, category: "Income & Taxes", question: "Which of these retirement income sources is completely tax-free?",
+        options: [
+          { letter: "A", text: "Military retired pay" },
+          { letter: "B", text: "Social Security benefits" },
+          { letter: "C", text: "VA disability compensation" },
+          { letter: "D", text: "TSP withdrawals" }
+        ], correct: "C" },
+      { id: 14, category: "Income & Taxes", question: "What is the penalty for missing a Required Minimum Distribution?",
+        options: [
+          { letter: "A", text: "10% of the missed amount" },
+          { letter: "B", text: "25% of the missed amount" },
+          { letter: "C", text: "50% of the missed amount" },
+          { letter: "D", text: "No penalty \u2014 it\u2019s just a guideline" }
+        ], correct: "B" },
+      { id: 15, category: "Income & Taxes", question: "Which states have NO state income tax?",
+        options: [
+          { letter: "A", text: "California, New York, Illinois" },
+          { letter: "B", text: "Texas, Florida, Nevada" },
+          { letter: "C", text: "Virginia, Maryland, Ohio" },
+          { letter: "D", text: "All states tax retirement income equally" }
+        ], correct: "B" },
+      { id: 16, category: "Income & Taxes", question: "What percentage of retirement-age Americans carry non-mortgage debt?",
+        options: [
+          { letter: "A", text: "About 25%" },
+          { letter: "B", text: "About 50%" },
+          { letter: "C", text: "About 75%" },
+          { letter: "D", text: "About 97%" }
+        ], correct: "D" },
+      { id: 17, category: "Legacy & Protection", question: "What does the Survivor Benefit Plan (SBP) provide?",
+        options: [
+          { letter: "A", text: "A one-time lump sum payment to your spouse" },
+          { letter: "B", text: "Up to 55% of your selected base amount as a guaranteed monthly payment for your spouse\u2019s lifetime" },
+          { letter: "C", text: "Free healthcare for your surviving spouse" },
+          { letter: "D", text: "A government life insurance policy" }
+        ], correct: "B" },
+      { id: 18, category: "Legacy & Protection", question: "What happened to the SBP-DIC offset in January 2023?",
+        options: [
+          { letter: "A", text: "It was increased to a larger offset" },
+          { letter: "B", text: "It was fully eliminated \u2014 surviving spouses now receive both SBP and DIC in full" },
+          { letter: "C", text: "It was renamed but stayed the same" },
+          { letter: "D", text: "Nothing changed \u2014 the offset is still in effect" }
+        ], correct: "B" },
+      { id: 19, category: "Legacy & Protection", question: "Which document ensures someone can manage your finances if you become incapacitated?",
+        options: [
+          { letter: "A", text: "Last Will & Testament" },
+          { letter: "B", text: "Advance Directive" },
+          { letter: "C", text: "Durable Power of Attorney" },
+          { letter: "D", text: "Beneficiary Designation Form" }
+        ], correct: "C" },
+      { id: 20, category: "Legacy & Protection", question: "What is a \u201ctrusted contact person\u201d at a financial institution?",
+        options: [
+          { letter: "A", text: "Your bank account co-signer" },
+          { letter: "B", text: "Someone the institution can contact if they suspect financial exploitation" },
+          { letter: "C", text: "The person who inherits your accounts" },
+          { letter: "D", text: "Your financial advisor" }
+        ], correct: "B" }
+    ];
+
+    var currentQuestion = 0;
+    var answers = {};
+    var participantName = "";
+    var preTestResults = null;
+
+    var startSection = document.getElementById('startSection');
+    var quizSection = document.getElementById('quizSection');
+    var resultsSection = document.getElementById('resultsSection');
+    var questionsContainer = document.getElementById('questionsContainer');
+    var questionDots = document.getElementById('questionDots');
+    var progressContainer = document.getElementById('progressContainer');
+    var progressFill = document.getElementById('progressFill');
+    var progressText = document.getElementById('progressText');
+    var btnPrev = document.getElementById('btnPrev');
+    var btnNext = document.getElementById('btnNext');
+    var btnSubmit = document.getElementById('btnSubmit');
+    var btnStart = document.getElementById('btnStart');
+    var participantInput = document.getElementById('participantName');
+
+    function init() {
+      try {
+        var saved = localStorage.getItem('vub_financial_pretest_results');
+        if (saved) {
+          preTestResults = JSON.parse(saved);
+          if (preTestResults.name) {
+            participantInput.value = preTestResults.name;
+          }
+        }
+      } catch(e) {
+        console.log('Could not load pre-test results');
+      }
+
+      renderQuestions();
+      renderQuestionDots();
+      updateNavigation();
+
+      btnStart.addEventListener('click', startQuiz);
+      btnPrev.addEventListener('click', prevQuestion);
+      btnNext.addEventListener('click', nextQuestion);
+      btnSubmit.addEventListener('click', submitQuiz);
+
+      document.addEventListener('keydown', function(e) {
+        if (!quizSection.classList.contains('active')) return;
+        if (e.key === 'ArrowRight' || e.key === 'Enter') {
+          if (currentQuestion < questions.length - 1) nextQuestion();
+        } else if (e.key === 'ArrowLeft') {
+          if (currentQuestion > 0) prevQuestion();
+        } else if (e.key >= '1' && e.key <= '4') {
+          var optionIndex = parseInt(e.key) - 1;
+          var letters = ['A', 'B', 'C', 'D'];
+          if (optionIndex < 4) selectAnswer(questions[currentQuestion].id, letters[optionIndex]);
+        }
+      });
+
+      participantInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') startQuiz();
+      });
+    }
+
+    function renderQuestions() {
+      questionsContainer.innerHTML = questions.map(function(q, index) {
+        return '<div class="question-card ' + (index === 0 ? 'active' : '') + '" data-question="' + index + '">' +
+          '<div class="question-header">' +
+            '<span class="question-number">Question ' + q.id + ' of ' + questions.length + '</span>' +
+            '<span class="question-category">' + q.category + '</span>' +
+          '</div>' +
+          '<p class="question-text">' + q.question + '</p>' +
+          '<div class="answer-options">' +
+            q.options.map(function(opt) {
+              return '<label class="answer-option" data-question-id="' + q.id + '" data-letter="' + opt.letter + '">' +
+                '<input type="radio" name="q' + q.id + '" value="' + opt.letter + '">' +
+                '<span class="answer-marker">' + opt.letter + '</span>' +
+                '<span class="answer-text">' + opt.text + '</span>' +
+              '</label>';
+            }).join('') +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      document.querySelectorAll('.answer-option').forEach(function(option) {
+        option.addEventListener('click', function() {
+          var questionId = parseInt(option.dataset.questionId);
+          var letter = option.dataset.letter;
+          selectAnswer(questionId, letter);
+        });
+      });
+    }
+
+    function renderQuestionDots() {
+      questionDots.innerHTML = questions.map(function(q, index) {
+        return '<div class="q-dot ' + (index === 0 ? 'current' : '') + '" data-index="' + index + '" title="Question ' + (index + 1) + '"></div>';
+      }).join('');
+
+      document.querySelectorAll('.q-dot').forEach(function(dot) {
+        dot.addEventListener('click', function() {
+          goToQuestion(parseInt(dot.dataset.index));
+        });
+      });
+    }
+
+    function startQuiz() {
+      participantName = participantInput.value.trim();
+      if (!participantName) {
+        participantInput.focus();
+        participantInput.style.borderColor = 'var(--danger)';
+        return;
+      }
+      startSection.classList.add('hidden');
+      quizSection.classList.add('active');
+      progressContainer.style.display = 'flex';
+      updateProgress();
+    }
+
+    function selectAnswer(questionId, letter) {
+      answers[questionId] = letter;
+      var questionCard = document.querySelector('[data-question-id="' + questionId + '"]').closest('.question-card');
+      questionCard.querySelectorAll('.answer-option').forEach(function(opt) {
+        opt.classList.remove('selected');
+        if (opt.dataset.letter === letter) opt.classList.add('selected');
+      });
+      var questionIndex = questions.findIndex(function(q) { return q.id === questionId; });
+      document.querySelectorAll('.q-dot')[questionIndex].classList.add('answered');
+      updateProgress();
+      updateNavigation();
+    }
+
+    function nextQuestion() {
+      if (currentQuestion < questions.length - 1) goToQuestion(currentQuestion + 1);
+    }
+
+    function prevQuestion() {
+      if (currentQuestion > 0) goToQuestion(currentQuestion - 1);
+    }
+
+    function goToQuestion(index) {
+      document.querySelectorAll('.question-card').forEach(function(card, i) {
+        card.classList.toggle('active', i === index);
+      });
+      document.querySelectorAll('.q-dot').forEach(function(dot, i) {
+        dot.classList.toggle('current', i === index);
+      });
+      currentQuestion = index;
+      updateNavigation();
+    }
+
+    function updateNavigation() {
+      btnPrev.disabled = currentQuestion === 0;
+      var isLastQuestion = currentQuestion === questions.length - 1;
+      var allAnswered = Object.keys(answers).length === questions.length;
+      btnNext.style.display = isLastQuestion ? 'none' : 'flex';
+      btnSubmit.style.display = isLastQuestion ? 'flex' : 'none';
+      btnSubmit.disabled = !allAnswered;
+    }
+
+    function updateProgress() {
+      var answered = Object.keys(answers).length;
+      var percentage = (answered / questions.length) * 100;
+      progressFill.style.width = percentage + '%';
+      progressText.textContent = answered + ' of ' + questions.length;
+    }
+
+    function submitQuiz() {
+      if (Object.keys(answers).length < questions.length) {
+        alert('Please answer all questions before submitting.');
+        return;
+      }
+
+      var categories = {};
+      var totalCorrect = 0;
+
+      questions.forEach(function(q) {
+        if (!categories[q.category]) categories[q.category] = { correct: 0, total: 0 };
+        categories[q.category].total++;
+        if (answers[q.id] === q.correct) {
+          totalCorrect++;
+          categories[q.category].correct++;
+        }
+      });
+
+      var overallPercentage = Math.round((totalCorrect / questions.length) * 100);
+
+      quizSection.classList.remove('active');
+      progressContainer.style.display = 'none';
+      resultsSection.classList.add('active');
+
+      document.getElementById('participantGreeting').textContent =
+        'Congratulations, ' + participantName + '! You\'ve completed the course!';
+      document.getElementById('finalScore').textContent = overallPercentage + '%';
+
+      var comparisonBox = document.getElementById('comparisonBox');
+      if (preTestResults && preTestResults.score !== undefined) {
+        var preScore = preTestResults.score;
+        var improvement = overallPercentage - preScore;
+
+        document.getElementById('preTestScore').textContent = preScore + '%';
+        document.getElementById('postTestScore').textContent = overallPercentage + '%';
+
+        if (improvement > 0) {
+          document.getElementById('improvementDisplay').textContent = '+' + improvement + '%';
+          document.getElementById('improvementDisplay').style.background = 'rgba(40,167,69,0.1)';
+          document.getElementById('improvementDisplay').style.color = 'var(--success)';
+        } else if (improvement === 0) {
+          document.getElementById('improvementDisplay').textContent = 'Same';
+          document.getElementById('improvementDisplay').style.background = 'rgba(23,162,184,0.1)';
+          document.getElementById('improvementDisplay').style.color = 'var(--info)';
+        } else {
+          document.getElementById('improvementDisplay').textContent = improvement + '%';
+          document.getElementById('improvementDisplay').style.background = 'rgba(220,53,69,0.1)';
+          document.getElementById('improvementDisplay').style.color = 'var(--danger)';
+        }
+        comparisonBox.style.display = 'block';
+      } else {
+        comparisonBox.style.display = 'none';
+      }
+
+      var breakdownHTML = Object.entries(categories).map(function(entry) {
+        var cat = entry[0], data = entry[1];
+        var catPercent = Math.round((data.correct / data.total) * 100);
+        return '<div class="breakdown-item">' +
+          '<div class="breakdown-category">' + cat + '</div>' +
+          '<div class="breakdown-score">' + data.correct + '/' + data.total + ' (' + catPercent + '%)</div>' +
+        '</div>';
+      }).join('');
+      document.getElementById('scoreBreakdown').innerHTML = breakdownHTML;
+
+      var messageClass, messageText;
+      if (overallPercentage >= 80) {
+        messageClass = 'excellent';
+        messageText = '\u{1F31F} Outstanding achievement! You\'ve mastered the financial readiness topics covered in this course. You should feel confident making informed decisions about your military benefits and retirement planning!';
+      } else if (overallPercentage >= 60) {
+        messageClass = 'good';
+        messageText = '\u{1F44D} Great job! You\'ve made significant progress and have a solid understanding of the material. Keep reviewing the handouts to strengthen your knowledge!';
+      } else {
+        messageClass = 'building';
+        messageText = '\u{1F4C8} You\'ve completed the course! Review the course materials and handouts regularly to reinforce what you\'ve learned. Every bit of knowledge helps protect your financial future!';
+      }
+
+      var resultsMessage = document.getElementById('resultsMessage');
+      resultsMessage.className = 'results-message ' + messageClass;
+      resultsMessage.textContent = messageText;
+
+      var results = {
+        name: participantName,
+        date: new Date().toLocaleDateString(),
+        score: overallPercentage,
+        answers: answers,
+        categories: categories,
+        preTestScore: preTestResults ? preTestResults.score : null
+      };
+      console.log('Post-Test Results:', results);
+
+      try {
+        localStorage.setItem('vub_financial_posttest_results', JSON.stringify(results));
+      } catch(e) {
+        console.log('Could not save to localStorage');
+      }
+
+      window.quizResults = {
+        testType: 'Post-Test',
+        name: participantName,
+        date: new Date().toLocaleDateString(),
+        timestamp: new Date().toISOString(),
+        totalCorrect: totalCorrect,
+        totalQuestions: questions.length,
+        percentage: overallPercentage,
+        categories: categories,
+        answers: answers,
+        preTestScore: preTestResults ? preTestResults.score : null
+      };
+    }
+
+    function csvEscape(value) {
+      var text = value === null || value === undefined ? '' : String(value);
+      return '"' + text.replace(/"/g, '""') + '"';
+    }
+
+    function safeFileName(value) {
+      return String(value || 'student')
+        .trim()
+        .replace(/[^a-z0-9]+/gi, '-')
+        .replace(/^-+|-+$/g, '')
+        .toLowerCase() || 'student';
+    }
+
+    function downloadResults() {
+      var results = window.quizResults;
+      if (!results) {
+        alert('No results to download. Please complete the assessment first.');
+        return;
+      }
+
+      var improvement = results.preTestScore !== null ? results.percentage - results.preTestScore : '';
+      var rows = [
+        ['test_type', 'student_name', 'date', 'timestamp', 'score_percent', 'pre_test_score', 'improvement', 'correct', 'total_questions', 'category', 'category_correct', 'category_total', 'category_percent', 'question_id', 'student_answer', 'correct_answer', 'is_correct']
+      ];
+
+      questions.forEach(function(q) {
+        var category = results.categories[q.category];
+        var categoryPercent = Math.round((category.correct / category.total) * 100);
+        var studentAnswer = results.answers[q.id] || '';
+        rows.push([
+          results.testType,
+          results.name,
+          results.date,
+          results.timestamp,
+          results.percentage,
+          results.preTestScore,
+          improvement,
+          results.totalCorrect,
+          results.totalQuestions,
+          q.category,
+          category.correct,
+          category.total,
+          categoryPercent,
+          q.id,
+          studentAnswer,
+          q.correct,
+          studentAnswer === q.correct ? 'yes' : 'no'
+        ]);
+      });
+
+      var csv = rows.map(function(row) {
+        return row.map(csvEscape).join(',');
+      }).join('\r\n');
+
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      var link = document.createElement('a');
+      var dateStamp = new Date().toISOString().slice(0, 10);
+      link.href = URL.createObjectURL(blob);
+      link.download = 'vub-post-test-' + safeFileName(results.name) + '-' + dateStamp + '.csv';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+    }
+
+    function generateReport() {
+      var results = window.quizResults;
+      if (!results) {
+        alert('No results to print. Please complete the assessment first.');
+        return;
+      }
+
+      document.getElementById('reportName').textContent = results.name;
+      document.getElementById('reportDate').textContent = results.date;
+      document.getElementById('reportScore').textContent = results.percentage + '%';
+      document.getElementById('reportScoreDetail').textContent =
+        results.totalCorrect + ' of ' + results.totalQuestions + ' correct';
+
+      var reportComparison = document.getElementById('reportComparison');
+      if (results.preTestScore !== null) {
+        var improvement = results.percentage - results.preTestScore;
+        document.getElementById('reportPreTest').textContent = results.preTestScore + '%';
+        document.getElementById('reportPostTest').textContent = results.percentage + '%';
+
+        if (improvement > 0) {
+          document.getElementById('reportImprovement').textContent = '+' + improvement + '%';
+        } else {
+          document.getElementById('reportImprovement').textContent = improvement + '%';
+        }
+        reportComparison.style.display = 'block';
+      } else {
+        reportComparison.style.display = 'none';
+      }
+
+      var categoriesHTML = Object.entries(results.categories).map(function(entry) {
+        var cat = entry[0], data = entry[1];
+        var percent = Math.round((data.correct / data.total) * 100);
+        return '<div class="report-category">' +
+          '<div class="report-category-name">' + cat + '</div>' +
+          '<div class="report-category-score">' + data.correct + '/' + data.total + ' (' + percent + '%)</div>' +
+        '</div>';
+      }).join('');
+      document.getElementById('reportCategories').innerHTML = categoriesHTML;
+
+      var tableHTML = questions.map(function(q) {
+        var studentAnswer = results.answers[q.id] || '\u2014';
+        var isCorrect = studentAnswer === q.correct;
+        return '<tr>' +
+          '<td class="col-num">' + q.id + '</td>' +
+          '<td class="col-question">' + q.question + '</td>' +
+          '<td class="col-answer">' + studentAnswer + '</td>' +
+          '<td class="col-correct">' + q.correct + '</td>' +
+          '<td class="col-result ' + (isCorrect ? 'result-correct' : 'result-incorrect') + '">' +
+            (isCorrect ? '\u2713' : '\u2717') +
+          '</td>' +
+        '</tr>';
+      }).join('');
+      document.getElementById('reportTableBody').innerHTML = tableHTML;
+
+      window.print();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
+

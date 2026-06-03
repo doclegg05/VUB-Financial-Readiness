@@ -1,0 +1,245 @@
+{
+  "title": "Veteran Flashcards",
+  "cards": [
+    {
+      "front": "What is the minimum active duty service requirement for a veteran to qualify for the VA Aid and Attendance benefit?",
+      "back": "At least 90 days of active duty, with at least one day during an eligible period of war."
+    },
+    {
+      "front": "Which wartime period for Aid and Attendance eligibility spans from August 5, 1964, to May 7, 1975?",
+      "back": "The Vietnam War Era (for veterans who served anywhere in the world)."
+    },
+    {
+      "front": "Under what condition can a veteran younger than 65 qualify for Aid and Attendance?",
+      "back": "They must be totally and permanently disabled or a resident in a skilled nursing facility."
+    },
+    {
+      "front": "What are the five specific activities of daily living (ADLs) recognized by the VA?",
+      "back": "Bathing, mobility/transferring, dressing, toileting, and eating."
+    },
+    {
+      "front": "Define 'standby assistance' in the context of Aid and Attendance ADLs.",
+      "back": "Having another person present within arm's reach to prevent injury during a daily living activity."
+    },
+    {
+      "front": "How does the VA define 'custodial care' for pension eligibility?",
+      "back": "Assistance with at least two ADLs or the requirement of $24/7$ supervision due to cognitive impairment."
+    },
+    {
+      "front": "What is the official document name for a veteran's Report of Separation required for benefit applications?",
+      "back": "DD Form 214."
+    },
+    {
+      "front": "As of 2026, what is the approximate net worth limit for Aid and Attendance eligibility?",
+      "back": "$\\$163,699$."
+    },
+    {
+      "front": "How long is the VA's look-back period for asset transfers regarding pension eligibility?",
+      "back": "Three years."
+    },
+    {
+      "front": "What requirement must a resident of an assisted living facility meet to qualify for Aid and Attendance?",
+      "back": "They must be paying for and receiving assistance with at least two types of daily living activities."
+    },
+    {
+      "front": "What happens to the Aid and Attendance benefit amount if a recipient is approved for Medicaid long-term care?",
+      "back": "The benefit is reduced to approximately $\\$90$ per month."
+    },
+    {
+      "front": "How does Social Security income affect the calculation of Aid and Attendance benefits?",
+      "back": "It is counted as income when determining eligibility and the final benefit amount."
+    },
+    {
+      "front": "Explain the tax status of Combat-Related Special Compensation (CRSC).",
+      "back": "It is a non-taxable special compensation for combat-related disabilities."
+    },
+    {
+      "front": "Unlike CRSC, Concurrent Retirement and Disability Pay (CRDP) is considered _____ for tax purposes.",
+      "back": "Taxable income (recoupment of retired pay)."
+    },
+    {
+      "front": "What is the minimum VA disability rating required for automatic enrollment in CRDP?",
+      "back": "$50 \\%$."
+    },
+    {
+      "front": "What is the minimum VA disability rating required to apply for CRSC?",
+      "back": "$10 \\%$."
+    },
+    {
+      "front": "How often can a military retiree switch between CRSC and CRDP programs?",
+      "back": "Once per year during an annual 'program election' period."
+    },
+    {
+      "front": "Disabilities resulting from 'instrumentalities of war' are specific criteria for which benefit?",
+      "back": "Combat-Related Special Compensation (CRSC)."
+    },
+    {
+      "front": "Describe the 'VA waiver' or 'VA offset' mandated by law for military retirees.",
+      "back": "Retirees must waive a portion of their DoD retired pay equal to the amount of their VA disability compensation."
+    },
+    {
+      "front": "What causes retroactive debits and credits in a veteran's retired pay account when a disability rating changes?",
+      "back": "The time lag in reporting and coordination between the VA and DFAS."
+    },
+    {
+      "front": "According to federal retirement guidelines, when should an employee first request an estimate of their retirement annuity?",
+      "back": "Five years before the proposed retirement date."
+    },
+    {
+      "front": "What is the 'Five-Year Test' for continuing Federal Employees Health Benefits (FEHB) into retirement?",
+      "back": "The employee must be continuously enrolled in FEHB for the five years of service immediately preceding retirement."
+    },
+    {
+      "front": "How does the waiver authority for the FEHB five-year rule differ from the FEGLI rule?",
+      "back": "OPM can waive the FEHB requirement for exceptional circumstances, but there is no waiver authority for FEGLI."
+    },
+    {
+      "front": "Which federal retirement system (CSRS or FERS) allows voluntary annuities to begin on the first, second, or third day of the month?",
+      "back": "Civil Service Retirement System (CSRS)."
+    },
+    {
+      "front": "When does a FERS voluntary retirement annuity typically begin?",
+      "back": "On the first day of the month following retirement."
+    },
+    {
+      "front": "What is the 'Sequence of Returns Risk' in retirement planning?",
+      "back": "The risk that negative market returns early in retirement will disproportionately deplete a portfolio used for income."
+    },
+    {
+      "front": "In a retirement 'bucket strategy,' what is the purpose of the first bucket (Liquidity)?",
+      "back": "To cover day-to-day needs for the first $3$ to $5$ years using cash-equivalent, low-risk investments."
+    },
+    {
+      "front": "The 'Lifestyle' bucket in a retirement strategy typically covers which timeframe?",
+      "back": "Years $3$ through $10$ of retirement."
+    },
+    {
+      "front": "What is the primary benefit of a 'bucket strategy' regarding market volatility?",
+      "back": "It avoids the need to sell fluctuating assets (like stocks) during a down market to meet immediate income needs."
+    },
+    {
+      "front": "Why is it mandatory for military retirees with TRICARE to enroll in Medicare Parts A and B?",
+      "back": "To maintain health coverage through the TRICARE for Life program."
+    },
+    {
+      "front": "How does Medicare Part B coordination work for a GEHA PPO plan holder?",
+      "back": "Medicare becomes the primary insurance, often resulting in waived deductibles and copayments for the secondary FEHB plan."
+    },
+    {
+      "front": "How are military retirement pensions generally treated for federal income tax purposes?",
+      "back": "They are taxed as ordinary income."
+    },
+    {
+      "front": "Name three states that have no state income tax as of 2026.",
+      "back": "Any three from: Alaska, Florida, Nevada, South Dakota, Tennessee, Texas, Washington, or Wyoming."
+    },
+    {
+      "front": "How does living in a state that fully exempts military retirement pay affect a veteran's debt-to-income (DTI) ratio?",
+      "back": "It lowers the DTI ratio by increasing net usable income, thereby increasing home-buying power."
+    },
+    {
+      "front": "The Survivor Benefit Plan (SBP) provides a monthly payout equal to what percentage of the selected base amount?",
+      "back": "$55 \\%$."
+    },
+    {
+      "front": "How does SBP coverage protect against 'longevity risk' for a beneficiary?",
+      "back": "It provides a guaranteed monthly payout for the entire lifetime of the beneficiary, regardless of how long they live."
+    },
+    {
+      "front": "What is the 'paid-up' status for SBP premiums?",
+      "back": "Premiums stop after $30$ years of payments AND reaching age $70$."
+    },
+    {
+      "front": "Why is the SBP decision considered a 'one-time irrevocable' choice?",
+      "back": "It must be made at retirement and, with very few exceptions, cannot be changed or cancelled later."
+    },
+    {
+      "front": "How does VA Disability compensation interact with Social Security retirement benefits?",
+      "back": "They are independent; receiving VA disability does not reduce or offset Social Security retirement checks."
+    },
+    {
+      "front": "What is the main exception where Social Security income *does* affect a VA benefit?",
+      "back": "VA Pension (the needs-based program for wartime veterans)."
+    },
+    {
+      "front": "What is the submission window for a Benefits Delivery at Discharge (BDD) claim?",
+      "back": "Between $90$ and $180$ days before the date of separation."
+    },
+    {
+      "front": "For veterans who served between 1957 and 2001, what 'extra earnings' does Social Security add to their record?",
+      "back": "Up to $\\$1,200$ a year in additional earnings credits for military service."
+    },
+    {
+      "front": "Which VA priority group includes veterans with a $100 \\%$ disability rating?",
+      "back": "Priority Group One."
+    },
+    {
+      "front": "At what age can a veteran begin claiming reduced Social Security retirement benefits?",
+      "back": "Age $62$."
+    },
+    {
+      "front": "What is the 'standard' full retirement age for Social Security for those currently approaching retirement?",
+      "back": "$66$ or $67$, depending on the birth year."
+    },
+    {
+      "front": "What requirement must a surviving spouse meet regarding marriage duration for Aid and Attendance?",
+      "back": "They must have been married to the veteran for at least one year before the veteran died (or had a child together)."
+    },
+    {
+      "front": "If a veteran enters active duty after September 7, 1980, what is the minimum length of service for pension eligibility?",
+      "back": "$24$ months or the full period called to duty, with at least one day during wartime."
+    },
+    {
+      "front": "Term: Countable Income (VA Pension)",
+      "back": "Definition: Gross income minus specific deductible medical and care expenses used to determine financial eligibility."
+    },
+    {
+      "front": "Under the 'Lifestyle' bucket, how is the 'Liquidity' bucket typically replenished?",
+      "back": "By regularly shifting funds from the disciplined asset allocation of the lifestyle bucket into cash-equivalent assets."
+    },
+    {
+      "front": "What happens to a veteran's Aid and Attendance eligibility if they receive a 'Dishonorable' discharge?",
+      "back": "They are disqualified from most VA benefits, including Aid and Attendance."
+    },
+    {
+      "front": "How is 'eating' defined as an ADL for VA purposes?",
+      "back": "Helping someone eat, including cutting up food or feeding the person directly."
+    },
+    {
+      "front": "What is the purpose of the Medicare General Enrollment Period (GEP)?",
+      "back": "It allows individuals who missed their Initial Enrollment Period to sign up between Jan 1 and March 31."
+    },
+    {
+      "front": "Why is VA drug coverage often considered less flexible than Medicare Part D?",
+      "back": "It requires authorization by a VA provider and must be filled through a VA pharmacy or their mail-order system."
+    },
+    {
+      "front": "In SBP planning, what happens to the coverage if the beneficiary dies before the retiree?",
+      "back": "The coverage stops, and there are typically no refunds for premiums already paid."
+    },
+    {
+      "front": "Which form is used for the SBP election by a military retiree?",
+      "back": "DD Form 2656."
+    },
+    {
+      "front": "How does the 'Social Security Fairness Act' generally relate to disability benefits according to the sources?",
+      "back": "It is a topic for veterans to monitor regarding how various benefits might be calculated or adjusted."
+    },
+    {
+      "front": "What is the impact of a 'high property tax' state on a retiree's VA loan affordability compared to income tax?",
+      "back": "Property taxes often create a larger long-term financial hit and increase monthly escrow payments more than state income tax."
+    },
+    {
+      "front": "Explain the benefit of SBP being 'indexed for inflation.'",
+      "back": "The monthly payout increases with the annual Cost of Living Adjustment (COLA) to maintain purchasing power."
+    },
+    {
+      "front": "What timeline is recommended for submitting a military retirement move request (HHG) via dps.move.mil?",
+      "back": "As soon as retirement orders are received, ideally $4$ to $6$ months before retirement."
+    },
+    {
+      "front": "What administrative step must be completed $60$ to $90$ days before retirement if a veteran is waiving military retired pay?",
+      "back": "Send the waiver to the Retired Pay Operations Center of their specific service branch."
+    }
+  ]
+}

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 2 Syllabus: Windows Tips & Productivity | VUB Intermediate Computer Skills</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --danger: #DC3545;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--light);
+      padding: 1.5rem 2rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 { font-size: 1.5rem; margin: 0; }
+
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Info Box */
+    .info-box {
+      background: var(--off-white);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .info-item { text-align: center; }
+
+    .info-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray);
+      margin-bottom: 0.25rem;
+    }
+
+    .info-value { font-size: 1rem; font-weight: 600; color: var(--primary); }
+
+    /* Sections */
+    .section { margin-bottom: 1.5rem; }
+
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Objectives */
+    .objectives-list { list-style: none; margin-bottom: 1rem; }
+
+    .objectives-list li {
+      padding: 0.5rem 0;
+      padding-left: 2rem;
+      position: relative;
+      font-size: 0.95rem;
+    }
+
+    .objectives-list li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    /* Timeline */
+    .timeline {
+      border-left: 3px solid var(--accent);
+      margin-left: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    .timeline-item { position: relative; margin-bottom: 1.25rem; }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.75rem;
+      top: 0.25rem;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .timeline-time {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .timeline-title { font-size: 1rem; font-weight: 600; color: var(--primary); margin: 0.25rem 0; }
+
+    .timeline-content { font-size: 0.9rem; color: var(--gray); }
+    .timeline-content ul { margin-left: 1rem; margin-top: 0.25rem; }
+
+    /* Activity Type Badges */
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+    .activity-warmup { background: rgba(255, 152, 0, 0.15); color: #E65100; }
+    .activity-lecture { background: rgba(27, 54, 93, 0.15); color: #1B365D; }
+    .activity-demo { background: rgba(0, 120, 212, 0.15); color: #0078D4; }
+    .activity-practice { background: rgba(40, 167, 69, 0.15); color: #1B7A34; }
+    .activity-break { background: rgba(158, 158, 158, 0.15); color: #616161; }
+    .activity-eval { background: rgba(156, 39, 176, 0.15); color: #7B1FA2; }
+    .activity-apply { background: rgba(0, 150, 136, 0.15); color: #00796B; }
+
+    /* Materials Box */
+    .materials-box {
+      background: rgba(0, 120, 212, 0.08);
+      border: 2px solid #0078D4;
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .materials-box h3 { color: #0078D4; font-size: 1rem; margin-bottom: 0.75rem; }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .materials-item {
+      font-size: 0.9rem;
+      padding: 0.25rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .materials-col-title {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+      grid-column: span 1;
+    }
+
+    /* Instructor Notes */
+    .notes-box {
+      background: rgba(201, 162, 39, 0.15);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1rem;
+    }
+
+    .notes-box h4 { color: var(--primary); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .notes-box p, .notes-box ul { font-size: 0.9rem; color: var(--gray); }
+    .notes-box ul { margin-left: 1.25rem; margin-top: 0.5rem; }
+
+    /* Discussion Questions */
+    .discussion-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .discussion-box h4 {
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .discussion-box ul { margin-left: 1.5rem; font-size: 0.9rem; color: var(--gray); list-style: disc; }
+    .discussion-box li { margin-bottom: 0.5rem; }
+
+    /* Handout Checklist */
+    .handout-checklist {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    .handout-item {
+      background: var(--off-white);
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .handout-item::before { content: "\1F4C4"; }
+
+    /* Assessment */
+    .assessment-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+    }
+
+    .assessment-box h4 { color: var(--success); font-size: 0.95rem; margin-bottom: 0.75rem; }
+
+    .assessment-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .assessment-item {
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .assessment-item::before { content: "\2610"; font-size: 1rem; color: var(--success); }
+
+    /* Footer */
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Print */
+    @media print {
+      body { padding: 0; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .timeline-item::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .activity-type { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    @media (max-width: 600px) {
+      .info-box { grid-template-columns: repeat(2, 1fr); }
+      .materials-grid, .assessment-grid { grid-template-columns: 1fr; }
+      .handout-checklist { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>Week 2: Windows Tips & Productivity</h1>
+      <p style="font-size: 0.9rem; opacity: 0.9;">VUB Intermediate Computer Skills - Instructor Syllabus</p>
+    </div>
+    <span class="header-badge">INSTRUCTOR SYLLABUS</span>
+  </header>
+
+  <!-- Class Information -->
+  <div class="info-box">
+    <div class="info-item">
+      <div class="info-label">Date</div>
+      <div class="info-value">Week 2 of 8</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Duration</div>
+      <div class="info-value">2 Hours (WIPPEA)</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Week</div>
+      <div class="info-value">2 of 8</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Focus</div>
+      <div class="info-value">Productivity Skills</div>
+    </div>
+  </div>
+
+  <!-- Learning Objectives -->
+  <div class="section">
+    <h2 class="section-title">Learning Objectives</h2>
+    <ul class="objectives-list">
+      <li>Use essential keyboard shortcuts (Copy, Paste, Undo, Save) efficiently</li>
+      <li>Snap and manage multiple windows for multitasking</li>
+      <li>Take and save screenshots using multiple methods</li>
+      <li>Customize display and accessibility settings for personal comfort</li>
+      <li>Complete a hands-on workshop independently using new skills</li>
+    </ul>
+  </div>
+
+  <!-- WIPPEA Timeline -->
+  <div class="section">
+    <h2 class="section-title">WIPPEA Timeline (120 min)</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00 &ndash; 0:08 (8 min)</div>
+        <div class="timeline-title">Speed Challenge Warm-up <span class="activity-type activity-warmup">Warm-up</span></div>
+        <div class="timeline-content">"Open Notepad" race &mdash; Start menu vs. Windows key method. Discussion: "What if you could save time like that on everything?"</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">0:08 &ndash; 0:15 (7 min)</div>
+        <div class="timeline-title">Introduction & Agenda <span class="activity-type activity-lecture">Lecture</span></div>
+        <div class="timeline-content">Review objectives, preview the 4 workshop parts, connect to upcoming weeks (shortcuts work in Word, Excel, Gmail).</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">0:15 &ndash; 0:35 (20 min)</div>
+        <div class="timeline-title">Presentation: Shortcuts, Windows & Tools <span class="activity-type activity-demo">Demo</span></div>
+        <div class="timeline-content">Essential shortcuts (Ctrl+C/V/X/Z/S), window snapping (Win+Arrow), taskbar, screenshots (Win+Shift+S), accessibility settings.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">0:35 &ndash; 0:55 (20 min)</div>
+        <div class="timeline-title">Workshop Parts 1-2 (Guided) <span class="activity-type activity-practice">Practice</span></div>
+        <div class="timeline-content">Distribute Windows Workshop handout. Part 1: Keyboard Shortcuts Boot Camp. Part 2: Window Management & Multitasking. Instructor walks through step-by-step.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">0:55 &ndash; 1:05 (10 min)</div>
+        <div class="timeline-title">Break <span class="activity-type activity-break">Break</span></div>
+        <div class="timeline-content">Save work (practice Ctrl+S!), stretch, rest eyes.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">1:05 &ndash; 1:45 (40 min)</div>
+        <div class="timeline-title">Workshop Parts 3-4 (Independent) <span class="activity-type activity-practice">Practice</span></div>
+        <div class="timeline-content">Part 3: Screenshots & Snipping Tool. Part 4: Personalize & Accessibility. Students work at own pace, instructor circulates for support.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">1:45 &ndash; 1:55 (10 min)</div>
+        <div class="timeline-title">Show & Share <span class="activity-type activity-eval">Eval</span></div>
+        <div class="timeline-content">Partners demo favorite shortcut and show a screenshot they took. Quick challenge: copy/paste, snap windows, take screenshot without looking at notes.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">1:55 &ndash; 2:00 (5 min)</div>
+        <div class="timeline-title">Productivity Challenge <span class="activity-type activity-apply">Application</span></div>
+        <div class="timeline-content">This week: use 3 shortcuts daily, take and save a screenshot, snap windows while working. Preview Week 3: Email with Gmail. Distribute Keyboard Shortcuts Reference Card.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Materials Needed -->
+  <div class="materials-box">
+    <h3>Materials Needed</h3>
+    <div class="materials-grid">
+      <div>
+        <div class="materials-col-title">Instructor Materials</div>
+        <div class="materials-item">Presentation slides (presentation.html)</div>
+        <div class="materials-item">Windows Workshop handout (NEW)</div>
+        <div class="materials-item">Keyboard Shortcuts Reference Card (NEW)</div>
+        <div class="materials-item">Projector with computer</div>
+      </div>
+      <div>
+        <div class="materials-col-title">Student Materials</div>
+        <div class="materials-item">Computer with Windows 10/11</div>
+        <div class="materials-item">Windows Workshop handout</div>
+        <div class="materials-item">Keyboard Shortcuts Reference Card</div>
+        <div class="materials-item">Notepad, Paint, File Explorer (built-in)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instructor Notes: Key Teaching Points -->
+  <div class="notes-box">
+    <h4>Key Teaching Points</h4>
+    <ul>
+      <li>Start with the Speed Challenge &mdash; it immediately shows the value of shortcuts and hooks engagement</li>
+      <li>During the presentation, DEMONSTRATE each shortcut live on the projector &mdash; don't just show slides</li>
+      <li>Let students try each shortcut immediately after you demonstrate it (2-3 attempts)</li>
+      <li>During Workshop Parts 1-2 (guided), go SLOWLY &mdash; these students are learning muscle memory</li>
+      <li>During Workshop Parts 3-4 (independent), circulate and help &mdash; screenshots and settings can be confusing</li>
+      <li>Some students may already know Ctrl+C/V &mdash; encourage them to help neighbors and learn newer shortcuts (Win+Shift+S, Win+Arrow)</li>
+      <li>Emphasize that ALL shortcuts work in every program they'll learn (Word, Excel, Gmail)</li>
+    </ul>
+  </div>
+
+  <!-- Instructor Notes: WIPPEA Pacing -->
+  <div class="notes-box">
+    <h4>WIPPEA Pacing & Workshop Logistics</h4>
+    <ul>
+      <li>Distribute Windows Workshop handout at 0:35 (start of Practice phase)</li>
+      <li>Distribute Keyboard Shortcuts Reference Card at 1:55 (Application phase &mdash; they take it home)</li>
+      <li>Parts 1-2 are GUIDED &mdash; instructor demonstrates each step, students follow along</li>
+      <li>Parts 3-4 are INDEPENDENT &mdash; students work at own pace with instructor support</li>
+      <li>The Show & Share is important &mdash; it builds confidence when students demo to each other</li>
+      <li>Connect to next week: "Your Copy/Paste and Save shortcuts will be essential for Gmail next week!"</li>
+    </ul>
+  </div>
+
+  <!-- Discussion Questions -->
+  <div class="discussion-box">
+    <h4>Discussion Questions (by WIPPEA Phase)</h4>
+    <ul>
+      <li><strong>Warm-up:</strong> "How do you usually open programs &mdash; Start menu, desktop icons, or taskbar?"</li>
+      <li><strong>After Shortcuts:</strong> "Which shortcut do you think you'll use the most? Which surprised you?"</li>
+      <li><strong>After Windows:</strong> "When would snapping two windows side-by-side be useful in real life?"</li>
+      <li><strong>After Screenshots:</strong> "What would you want to take a screenshot of? Error messages? Recipes? Directions?"</li>
+      <li><strong>Evaluation:</strong> "What was the hardest shortcut to remember? What trick helps you remember it?"</li>
+    </ul>
+  </div>
+
+  <!-- Handouts -->
+  <div class="section">
+    <h2 class="section-title">Handouts for This Week</h2>
+    <div class="handout-checklist">
+      <div class="handout-item">Windows Workshop</div>
+      <div class="handout-item">Keyboard Shortcuts Reference Card</div>
+    </div>
+  </div>
+
+  <!-- Assessment -->
+  <div class="assessment-box">
+    <h4>Skills Assessment Checklist</h4>
+    <div class="assessment-grid">
+      <div class="assessment-item">Student can use Ctrl+C, Ctrl+V, Ctrl+Z without looking at notes</div>
+      <div class="assessment-item">Student can snap two windows side-by-side</div>
+      <div class="assessment-item">Student can take a screenshot using at least one method</div>
+      <div class="assessment-item">Student changed at least one display/accessibility setting</div>
+      <div class="assessment-item">Student completed all 4 workshop parts</div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound &mdash; West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 2: Windows Tips & Productivity</p>
+  </footer>
+</body>
+</html>

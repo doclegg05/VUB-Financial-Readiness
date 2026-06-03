@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud & Google Drive Workshop | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --google-blue: #4285F4;
+      --google-blue-dark: #1a73e8;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --info: #17A2B8;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, #4285F4 0%, #1a73e8 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-top: 0.15rem;
+    }
+    .header-meta {
+      font-size: 0.8rem;
+      opacity: 0.75;
+      margin-top: 0.25rem;
+    }
+    .header-badge {
+      background: var(--accent);
+      color: var(--google-blue-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .header-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .header-time {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-top: 0.5rem;
+    }
+    .name-field {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    .name-field label {
+      font-weight: 600;
+      color: var(--google-blue);
+    }
+    .name-field .line {
+      flex: 1;
+      border-bottom: 2px dashed var(--gray);
+      max-width: 300px;
+    }
+    .goal-box {
+      background: linear-gradient(135deg, var(--off-white) 0%, #EDF2F7 100%);
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .goal-box h2 {
+      color: var(--google-blue);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .goal-box p {
+      font-size: 0.95rem;
+      color: var(--gray);
+    }
+    .goal-box .build-list {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+    .goal-box .build-list li {
+      font-size: 0.95rem;
+      padding: 0.25rem 0;
+      color: #333;
+    }
+    .goal-box .build-list li::before {
+      content: "\2713  ";
+      color: var(--success);
+      font-weight: 700;
+    }
+    .part-header {
+      background: var(--google-blue);
+      color: var(--light);
+      padding: 0.75rem 1rem;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    .part-header h2 { font-size: 1.15rem; margin: 0; }
+    .part-timing {
+      background: var(--accent);
+      color: var(--google-blue-dark);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .part-type {
+      background: rgba(255,255,255,0.2);
+      color: var(--light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    .part-content {
+      border: 1px solid #E2E8F0;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .part-goal {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--off-white);
+      border-radius: 6px;
+      border-left: 4px solid var(--accent);
+    }
+    .part-goal strong { color: var(--google-blue); }
+    .section { margin-bottom: 1.25rem; }
+    .section-title {
+      background: var(--off-white);
+      color: var(--google-blue);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--accent);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .step-group { margin-bottom: 1rem; }
+    .step-label {
+      font-weight: 700;
+      color: var(--google-blue);
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+    .step-detail {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.25rem;
+      padding-left: 0.5rem;
+    }
+    .step-path {
+      font-family: Consolas, 'Courier New', monospace;
+      background: #EDF2F7;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--google-blue);
+      display: inline-block;
+      margin: 0.25rem 0;
+    }
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--off-white);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--google-blue);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--google-blue); }
+    .checklist-text .detail {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+    .fill-section {
+      background: var(--off-white);
+      padding: 1.25rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .fill-section h3 {
+      color: var(--google-blue);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .fill-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .fill-line .label {
+      min-width: 140px;
+      color: var(--gray);
+    }
+    .fill-line .blank {
+      flex: 1;
+      border-bottom: 1px dashed var(--gray);
+      min-height: 1.5rem;
+    }
+    .tip-box {
+      background: #E8F5E9;
+      border-left: 4px solid var(--success);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .tip-box strong { color: #2E7D32; }
+    .warning-box {
+      background: #FFF3F3;
+      border-left: 4px solid var(--danger);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .warning-box strong { color: var(--danger); }
+    .example-box {
+      background: #FFF8E1;
+      border-left: 4px solid var(--warning);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .example-box strong { color: #856404; }
+    .checkpoint-box {
+      background: linear-gradient(135deg, rgba(201, 162, 39, 0.12) 0%, rgba(201, 162, 39, 0.05) 100%);
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1.25rem 0;
+    }
+    .checkpoint-box h4 {
+      color: var(--google-blue);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .checkpoint-box .check-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .checkpoint-box .check-items li {
+      font-size: 0.9rem;
+      color: #333;
+      padding: 0.2rem 0;
+    }
+    .table-preview {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 0.75rem 0;
+    }
+    .table-preview th {
+      background: var(--google-blue);
+      color: var(--light);
+      padding: 0.5rem;
+      text-align: left;
+      font-weight: 600;
+    }
+    .table-preview td {
+      padding: 0.5rem;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .table-preview tr:nth-child(even) { background: var(--off-white); }
+    .bonus-box {
+      background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.03) 100%);
+      border: 2px dashed var(--accent);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .bonus-box h4 {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .bonus-box ul {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .bonus-box ul li {
+      padding: 0.2rem 0;
+    }
+    .keyboard-shortcut {
+      font-family: Consolas, 'Courier New', monospace;
+      background: #EDF2F7;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      color: var(--google-blue);
+      border: 1px solid #D1D9E6;
+    }
+    .success-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-top: 2rem;
+    }
+    .success-box h3 {
+      color: var(--success);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .success-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+    .success-box .skills-earned {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+    .success-box .skills-earned li {
+      font-size: 0.9rem;
+      padding: 0.2rem 0;
+    }
+    .success-box .skills-earned li::before {
+      content: "\2B50  ";
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0.25in; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .checkbox { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .checkpoint-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .table-preview th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { page-break-before: auto; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <span class="header-badge">WORKSHOP</span>
+      <h1 style="margin-top: 0.35rem;">Cloud &amp; Google Drive Workshop</h1>
+      <div class="header-subtitle">Organizing Your Digital Life in the Cloud</div>
+      <div class="header-meta">Week 6 | VUB Intermediate Computer Skills</div>
+    </div>
+    <div class="header-right">
+      <div class="header-time">~60 minutes</div>
+      <div class="header-time">4 parts</div>
+    </div>
+  </header>
+
+  <!-- NAME FIELD -->
+  <div class="name-field">
+    <label>Name:</label>
+    <div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label>
+    <div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <!-- GOAL BOX -->
+  <div class="goal-box">
+    <h2>What You Will Build Today</h2>
+    <p>By the end of this workshop, you will have a fully organized Google Drive with color-coded folders, uploaded files, a shared document, and proof you can access your files from anywhere.</p>
+    <ul class="build-list">
+      <li>Four color-coded folders organizing your VA, Medical, Financial, and Personal documents</li>
+      <li>Files uploaded, renamed, starred, and sorted into the right folders</li>
+      <li>A shared Google Doc created collaboratively with a classmate</li>
+      <li>Proof that you can access your Drive files from any device or browser</li>
+    </ul>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 1: ORGANIZING YOUR DRIVE                -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 1: Organizing Your Drive</h2>
+    <div>
+      <span class="part-timing">~15 min</span>
+      <span class="part-type">GUIDED</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Create 4 color-coded folders to organize your cloud storage.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Create Your Folder Structure</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Follow along with your instructor to build a color-coded folder system in Google Drive, just like organizing a filing cabinet.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Open Chrome and go to drive.google.com &mdash; sign in with your Gmail from Week 3</strong>
+            <span class="detail">Type <span class="step-path">drive.google.com</span> in the address bar and press Enter. Use the Gmail account you created in Week 3.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click "+ New" button (top left) &rarr; "New folder" &rarr; name it "VA Documents" &rarr; Create</strong>
+            <span class="detail">The "+ New" button is the large colorful button in the top-left corner of Google Drive</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Right-click the folder &rarr; "Organize" or "Change color" &rarr; choose Navy/Dark Blue</strong>
+            <span class="detail">Right-click on the folder you just created to see the menu. Look for the color option to change the folder color.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Repeat to create "Medical Records" (Red), "Financial" (Green), "Personal" (Purple)</strong>
+            <span class="detail">Click "+ New" &rarr; "New folder" for each one. Then right-click each folder to assign its color.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Verify all 4 folders appear in My Drive with different colors</strong>
+            <span class="detail">You should see four folders in your Drive, each with a distinct color: blue, red, green, and purple</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click each folder to open it &mdash; notice the breadcrumb trail at the top showing your location</strong>
+            <span class="detail">The breadcrumb trail looks like: My Drive &rarr; VA Documents. It shows you where you are, just like a path through folders on your computer.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> Color-coded folders make it easy to find what you need at a glance. Think of it like colored filing cabinet dividers!
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; 4 folders created: VA Documents, Medical Records, Financial, Personal</li>
+        <li>&#9744; Each folder has a different color assigned</li>
+        <li>&#9744; All folders visible in My Drive</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 2: UPLOADING & MANAGING FILES           -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 2: Uploading &amp; Managing Files</h2>
+    <div>
+      <span class="part-timing">~15 min</span>
+      <span class="part-type">GUIDED</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Upload files, rename them, star important ones, and move them into folders.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Upload, Rename, and Organize Files</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Follow along with your instructor to upload files from your computer to the cloud, then organize them into your new folders.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click "+ New" &rarr; "File upload" &rarr; browse to Desktop or Documents &rarr; select any file &rarr; click Open</strong>
+            <span class="detail">A file browser window will open. Navigate to your Desktop or Documents folder and select any file to upload.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Wait for "Upload complete" notification in bottom right</strong>
+            <span class="detail">A small notification will appear in the bottom-right corner when your file finishes uploading</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Upload 2 more files (total of 3 files uploaded)</strong>
+            <span class="detail">Repeat the process: "+ New" &rarr; "File upload" &rarr; select another file. Do this until you have 3 files uploaded.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Right-click an uploaded file &rarr; "Rename" &rarr; give it a clear, descriptive name</strong>
+            <span class="detail">For example, rename a file to "Budget_March_2026.xlsx" so you know exactly what it is at a glance</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Right-click a file &rarr; "Organize" or drag it into one of your color-coded folders</strong>
+            <span class="detail">You can either use the right-click menu to move the file, or click and drag it onto a folder</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Move each of your 3 uploaded files into the appropriate folder</strong>
+            <span class="detail">Think about which folder each file belongs in: VA, Medical, Financial, or Personal</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click the star icon next to your most important file &mdash; starred files appear in the "Starred" section</strong>
+            <span class="detail">Hover over a file and click the star icon on the right side. The star turns yellow when active.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click "Starred" in the left sidebar to verify your starred file appears there</strong>
+            <span class="detail">Look at the left sidebar and click "Starred" to see all your starred files in one place</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> Star the files you access most often. It is like pinning a note to the top of your bulletin board &mdash; quick access without searching!
+      </div>
+
+      <div class="warning-box">
+        <strong>Can't find your file?</strong> If you do not see your uploaded file, check "Recent" in the left sidebar. New uploads always appear there first.
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; 3 files uploaded to Google Drive</li>
+        <li>&#9744; At least 1 file renamed with a clear, descriptive name</li>
+        <li>&#9744; All 3 files moved into appropriate folders</li>
+        <li>&#9744; At least 1 file starred (visible in Starred section)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 3: SHARING & COLLABORATION              -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 3: Sharing &amp; Collaboration</h2>
+    <div>
+      <span class="part-timing">~15 min</span>
+      <span class="part-type">INDEPENDENT</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Create a shared Google Doc and collaborate with a classmate in real time.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Create and Share a Google Doc</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Work through these steps on your own to create a shared document and experience real-time collaboration.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click "+ New" &rarr; "Google Docs" &rarr; "Blank document"</strong>
+            <span class="detail">A new Google Doc will open in a new browser tab</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click "Untitled document" at the top &rarr; rename it "Class Contact List"</strong>
+            <span class="detail">Click on the words "Untitled document" in the upper left to highlight and type the new name</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Type a header: "VUB Class Contact List &mdash; March 2026"</strong>
+            <span class="detail">Type this at the top of the document as a title for the contact list</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Below that, type your name and email address on a new line</strong>
+            <span class="detail">Press Enter to start a new line, then type your full name and your Gmail address</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click the blue "Share" button (top right)</strong>
+            <span class="detail">The Share button is in the upper-right corner of the document. Click it to open the sharing settings.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Type your neighbor's Gmail address &rarr; set permission to "Editor" &rarr; click "Send"</strong>
+            <span class="detail">Ask the person sitting next to you for their Gmail address. Make sure the dropdown says "Editor" so they can type in the document.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Ask your neighbor to open the shared doc from their "Shared with me" section</strong>
+            <span class="detail">Your neighbor should go to Google Drive and click "Shared with me" in the left sidebar to find the document</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Watch as your classmate types their name &mdash; you will see their cursor in real time!</strong>
+            <span class="detail">Look for a colored cursor with your classmate's name next to it. This is live collaboration happening.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Both add at least one more line: phone number, favorite hobby, or branch of service</strong>
+            <span class="detail">Keep adding information so the contact list has multiple entries from both of you</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> Notice the colored cursors? Each person editing gets a different color. This is real-time collaboration &mdash; you are both editing the same document at the same time!
+      </div>
+
+      <div class="example-box">
+        <strong>Sample Contact List:</strong>
+        <table class="table-preview" style="margin-top: 0.5rem;">
+          <thead>
+            <tr><th>Name</th><th>Email</th><th>Branch</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>John Smith</td><td>john.smith@gmail.com</td><td>Army</td></tr>
+            <tr><td>Mary Johnson</td><td>mary.j@gmail.com</td><td>Navy</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Review your work:</h4>
+      <ul class="check-items">
+        <li>&#9744; Google Doc created and renamed "Class Contact List"</li>
+        <li>&#9744; Document shared with at least one classmate as Editor</li>
+        <li>&#9744; Both you and your classmate have added your information</li>
+        <li>&#9744; You can see each other's edits in real time</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 4: ACCESS ANYWHERE CHALLENGE            -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 4: Access Anywhere Challenge</h2>
+    <div>
+      <span class="part-timing">~15 min</span>
+      <span class="part-type">INDEPENDENT</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Prove you can access your files from any browser &mdash; and optionally from your phone.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Access Drive from an Incognito Window</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">This exercise simulates using a different computer. Work through these steps on your own to prove your files live in the cloud, not on one machine.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Open a new Incognito/Private window: press <span class="keyboard-shortcut">Ctrl+Shift+N</span> in Chrome</strong>
+            <span class="detail">An incognito window opens with a dark theme. This simulates being on a brand-new computer with no saved logins.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Go to drive.google.com and sign in with your Gmail</strong>
+            <span class="detail">Type <span class="step-path">drive.google.com</span> in the address bar. You will need to enter your email and password since incognito has no saved logins.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Verify: Can you see all 4 folders? Can you open your starred file?</strong>
+            <span class="detail">Check that your VA Documents, Medical Records, Financial, and Personal folders all appear. Click "Starred" to verify your starred file is there.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Download one file: right-click &rarr; "Download" &rarr; file saves to your computer</strong>
+            <span class="detail">Right-click any file in your Drive and select "Download." The file will save to your Downloads folder.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Upload your Week 4 Word document or Week 5 Excel budget to the appropriate folder</strong>
+            <span class="detail">If you saved your work from previous weeks, upload it now. Click "+ New" &rarr; "File upload" and navigate to the file.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Close the incognito window</strong>
+            <span class="detail">Click the X to close the incognito window. Your files are safe in the cloud &mdash; they do not disappear when you close the window!</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> This proves the point: your files are not trapped on one computer. Any device with internet can access your Google Drive. That is the power of the cloud!
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Optional Phone Challenge (If Time Permits)</h3>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Open Chrome on your phone &rarr; go to drive.google.com &rarr; sign in</strong>
+            <span class="detail">Use your phone's web browser to navigate to Google Drive and log in with the same Gmail account</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Can you see your folders? Open the Class Contact List &mdash; can you edit from your phone?</strong>
+            <span class="detail">Browse your folders and try opening the shared document. Tap on the text to start editing.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Take a photo with your phone &rarr; upload it to your Personal folder directly from mobile</strong>
+            <span class="detail">Open the Personal folder, tap the + button, choose "Upload," and select a photo from your camera roll</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Review your work:</h4>
+      <ul class="check-items">
+        <li>&#9744; Accessed Google Drive from an incognito/private window</li>
+        <li>&#9744; Verified folders and files are visible from a "different computer"</li>
+        <li>&#9744; Downloaded at least one file successfully</li>
+        <li>&#9744; (Bonus) Accessed Drive from phone and verified files appear</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SUCCESS BOX                                  -->
+  <!-- ============================================ -->
+  <div class="success-box">
+    <h3>Workshop Complete!</h3>
+    <p>Outstanding work! You have organized your digital life in the cloud. Here is what you accomplished today:</p>
+    <ul class="skills-earned">
+      <li>Created 4 color-coded folders to organize your cloud storage</li>
+      <li>Uploaded, renamed, starred, and organized files in Google Drive</li>
+      <li>Created a shared Google Doc and collaborated in real time</li>
+      <li>Proved you can access your files from any device or browser</li>
+      <li>Downloaded files from the cloud to your computer</li>
+    </ul>
+    <p style="margin-top: 0.75rem; font-weight: 600; color: var(--google-blue);">
+      This Week's Challenge: Upload 5 important documents from your computer to Google Drive this week. Put each one in the right folder. Create a Google Doc grocery list on your computer and check that you can see it on your phone!
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound &mdash; West Virginia</strong> | Week 6: Cloud Computing &amp; Google Drive</p>
+    <p style="margin-top: 0.25rem;">Keep this handout! Use it as a reference when organizing your Google Drive at home.</p>
+  </footer>
+
+</body>
+</html>

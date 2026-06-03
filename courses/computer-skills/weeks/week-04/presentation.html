@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 4: Microsoft Word Intermediate | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --danger: #DC3545;
+      --word-blue: #2B579A;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background: var(--primary);
+      color: var(--light);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .sidebar-header h1 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: var(--accent);
+    }
+
+    .sidebar-header p {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    .chapter { margin-bottom: 0.75rem; }
+
+    .chapter-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .chapter-slides {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .slide-link {
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slide-link:hover { background: rgba(255,255,255,0.1); }
+
+    .slide-link.active {
+      background: var(--accent);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .slide-link.completed::before {
+      content: "\2713";
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource-link::before {
+      content: "\2193 ";
+      opacity: 0.6;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .progress-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .slide-container {
+      width: 100%;
+      max-width: 1000px;
+      background: var(--light);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      display: none;
+      padding: 2.5rem;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .slide.active { display: flex; }
+
+    .slide-header { margin-bottom: 2rem; }
+
+    .slide-header h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-header .subtitle {
+      color: var(--gray);
+      font-size: 1.1rem;
+    }
+
+    .slide-content {
+      flex: 1;
+      font-size: 1.25rem;
+      line-height: 1.8;
+    }
+
+    .slide-content h3 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .slide-content h3:first-child { margin-top: 0; }
+
+    .slide-content ul, .slide-content ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .slide-content li { margin-bottom: 0.75rem; }
+    .slide-content p { margin-bottom: 1rem; }
+
+    /* Title Slide */
+    .title-slide {
+      text-align: center;
+      justify-content: center;
+    }
+
+    .title-slide h2 {
+      font-size: 2.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .title-slide .week-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-slide .subtitle {
+      font-size: 1.5rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .meta {
+      font-size: 1rem;
+      color: var(--gray);
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: rgba(201, 162, 39, 0.15);
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+    }
+
+    .highlight-box.tip {
+      background: rgba(40, 167, 69, 0.1);
+      border-color: var(--success);
+    }
+
+    .highlight-box.warning {
+      background: rgba(220, 53, 69, 0.1);
+      border-color: var(--danger);
+    }
+
+    .highlight-box.word {
+      background: rgba(43, 87, 154, 0.1);
+      border-color: var(--word-blue);
+    }
+
+    .highlight-box h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 1rem 0;
+    }
+
+    .column {
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .column h4 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    /* Keyboard Key Style */
+    kbd {
+      display: inline-block;
+      background: linear-gradient(180deg, #f5f5f5 0%, #e0e0e0 100%);
+      color: #333;
+      padding: 0.25rem 0.6rem;
+      border-radius: 5px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.9em;
+      font-weight: 600;
+      border: 1px solid #ccc;
+      border-bottom: 3px solid #aaa;
+    }
+
+    /* Step List */
+    .step-list {
+      counter-reset: step;
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .step-list li {
+      counter-increment: step;
+      padding-left: 3rem;
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .step-list li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+      background: var(--primary);
+      color: var(--light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Icon Grid */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .icon-item {
+      background: var(--off-white);
+      padding: 1.25rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .icon-item .icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .icon-item h5 {
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .icon-item p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin: 0;
+    }
+
+    /* Ribbon Visual */
+    .ribbon-demo {
+      background: linear-gradient(180deg, #f3f3f3 0%, #e8e8e8 100%);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+
+    .ribbon-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .ribbon-tab {
+      padding: 0.5rem 1rem;
+      background: #ddd;
+      border: 1px solid #ccc;
+      font-size: 0.9rem;
+      cursor: default;
+    }
+
+    .ribbon-tab.active {
+      background: var(--light);
+      border-bottom-color: var(--light);
+      font-weight: 600;
+    }
+
+    .ribbon-content {
+      background: var(--light);
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-top: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .ribbon-group {
+      text-align: center;
+    }
+
+    .ribbon-group-label {
+      font-size: 0.7rem;
+      color: var(--gray);
+      margin-top: 0.5rem;
+    }
+
+    /* Table Example */
+    .table-example {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    .table-example th, .table-example td {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .table-example th {
+      background: var(--primary);
+      color: var(--light);
+    }
+
+    .table-example tr:nth-child(even) {
+      background: var(--off-white);
+    }
+
+    /* Navigation */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2.5rem;
+      border-top: 1px solid #eee;
+    }
+
+    .nav-btn {
+      background: var(--primary);
+      color: var(--light);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s ease;
+    }
+
+    .nav-btn:hover { background: var(--primary-light); }
+    .nav-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+    .nav-btn.secondary {
+      background: var(--off-white);
+      color: var(--primary);
+    }
+
+    .nav-btn.secondary:hover { background: #e0e0e0; }
+
+    .slide-counter {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* Celebration */
+    .celebration {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(27, 54, 93, 0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: var(--light);
+      text-align: center;
+    }
+
+    .celebration.active { display: flex; }
+    .celebration h2 { font-size: 3rem; margin-bottom: 1rem; }
+    .celebration p { font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem; }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti-fall 3s linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 100%; height: auto; position: relative; }
+      .main-content { margin-left: 0; }
+      .two-column { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <h1>VUB Intermediate Computer Skills</h1>
+      <p>Week 4: Microsoft Word</p>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Warm-Up</div>
+      <div class="chapter-slides">
+        <div class="slide-link active" data-slide="0">Welcome & Overview</div>
+        <div class="slide-link" data-slide="1">Document Makeover</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Introduction</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="2">Today's Roadmap</div>
+        <div class="slide-link" data-slide="3">Why Word Matters</div>
+        <div class="slide-link" data-slide="4">The Word Interface</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Formatting with Styles</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="5">What Are Styles?</div>
+        <div class="slide-link" data-slide="6">Using Built-in Styles</div>
+        <div class="slide-link" data-slide="7">Why Styles Matter</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Templates & Tables</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="8">Using Templates</div>
+        <div class="slide-link" data-slide="9">Creating Tables</div>
+        <div class="slide-link" data-slide="10">Formatting Tables</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Headers & Polish</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="11">Headers & Footers</div>
+        <div class="slide-link" data-slide="12">Page Numbers</div>
+        <div class="slide-link" data-slide="13">Best Practices</div>
+        <div class="slide-link" data-slide="14">Spell Check</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Practice</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="15">Workshop Time!</div>
+        <div class="slide-link" data-slide="16">Break</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Evaluation</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="17">Knowledge Check</div>
+        <div class="slide-link" data-slide="18">Show & Share</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Application</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="19">Your Word Challenge</div>
+        <div class="slide-link" data-slide="20">Next Week Preview</div>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <div class="resources-title">Resources</div>
+      <a class="resource-link" href="handouts/word-workshop.html" target="_blank">Word Workshop</a>
+      <a class="resource-link" href="handouts/word-quick-reference.html" target="_blank">Word Quick Reference</a>
+      <a class="resource-link" href="handouts/word-activity.html" target="_blank">Word Activity</a>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 5%;"></div>
+      </div>
+      <div class="progress-text"><span id="progressText">1</span> of 21 slides</div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="slide-container">
+      <!-- Slide 0: Title (Warm-Up) -->
+      <div class="slide active title-slide" data-index="0">
+        <span class="week-badge">Week 4</span>
+        <h2>Microsoft Word Intermediate</h2>
+        <p class="subtitle">Creating Professional Documents</p>
+        <p class="meta">VUB Intermediate Computer Skills<br>Week 4 of 8</p>
+      </div>
+
+      <!-- Slide 1: Document Makeover (Warm-Up) -->
+      <div class="slide" data-index="1">
+        <div class="slide-header">
+          <h2>Document Makeover</h2>
+          <p class="subtitle">Warm-Up Activity (8 minutes)</p>
+        </div>
+        <div class="slide-content">
+          <p>Which document would you trust more? A messy letter or a clean, formatted one?</p>
+
+          <div class="two-column">
+            <div class="column" style="border-left: 4px solid var(--danger);">
+              <h4 style="color: var(--danger);">The Messy Document</h4>
+              <ul>
+                <li>No title or headings - just a wall of text</li>
+                <li>Multiple fonts and random sizes</li>
+                <li>No page numbers or dates</li>
+                <li>Data listed in paragraphs, not tables</li>
+                <li>Spelling errors throughout</li>
+                <li>No clear sections or organization</li>
+              </ul>
+            </div>
+            <div class="column" style="border-left: 4px solid var(--success);">
+              <h4 style="color: var(--success);">The Professional Document</h4>
+              <ul>
+                <li>Clear title and section headings</li>
+                <li>Consistent font and spacing</li>
+                <li>Header with name, date, and page numbers</li>
+                <li>Data organized in formatted tables</li>
+                <li>Spell-checked and proofread</li>
+                <li>Logical flow from section to section</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Discussion: What Makes It Professional?</h4>
+            <p>Look at the right column - headings, consistent fonts, tables, page numbers. These are the skills we'll learn today!</p>
+          </div>
+
+          <div class="highlight-box word">
+            <h4>Connection to Week 3</h4>
+            <p>Last week we mastered email. This week: the documents you'll <strong>attach</strong> to those emails!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Today's Roadmap (Introduction) -->
+      <div class="slide" data-index="2">
+        <div class="slide-header">
+          <h2>Today's Roadmap</h2>
+          <p class="subtitle">What we'll accomplish in the next 2 hours</p>
+        </div>
+        <div class="slide-content">
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">📋</div>
+              <h5>Learn (20 min)</h5>
+              <p>Styles, templates, tables, headers, formatting</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🔨</div>
+              <h5>Guided Practice (25 min)</h5>
+              <p>Build a VA Appeal Letter with styles, tables, headers</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">☕</div>
+              <h5>Break (10 min)</h5>
+              <p>Save your work, stretch, recharge</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🚀</div>
+              <h5>Independent Practice (35 min)</h5>
+              <p>Polish, spell check, and complete the document</p>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>What You'll Build Today</h4>
+            <p>A <strong>VA Appeal Letter</strong> with Title and Heading styles, a service history table, a medical evidence table, and a header/footer with page numbers.</p>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Workshop Handout</h4>
+            <p>You'll receive a <strong>Word Document Workshop</strong> handout with step-by-step instructions for all activities. Keep it as a reference!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Why Word Skills Matter (Introduction) -->
+      <div class="slide" data-index="3">
+        <div class="slide-header">
+          <h2>Why Word Skills Matter</h2>
+          <p class="subtitle">Documents are everywhere in your life</p>
+        </div>
+        <div class="slide-content">
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">📝</div>
+              <h5>Letters & Correspondence</h5>
+              <p>VA appeals, cover letters, formal complaints</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📋</div>
+              <h5>Resumes</h5>
+              <p>Job applications, volunteer work, education</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📊</div>
+              <h5>Reports & Lists</h5>
+              <p>Medical histories, expense tracking, inventories</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📄</div>
+              <h5>Forms & Applications</h5>
+              <p>Fillable forms, applications, requests</p>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Today's Goals</h4>
+            <ul>
+              <li>Use <strong>Styles</strong> to format documents consistently</li>
+              <li>Find and use <strong>Templates</strong> for common documents</li>
+              <li>Create and format <strong>Tables</strong> for organized data</li>
+              <li>Add professional <strong>Headers, Footers, and Page Numbers</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: The Word Interface -->
+      <div class="slide" data-index="4">
+        <div class="slide-header">
+          <h2>The Word Interface</h2>
+          <p class="subtitle">Getting familiar with the Ribbon</p>
+        </div>
+        <div class="slide-content">
+          <div class="ribbon-demo">
+            <div class="ribbon-tabs">
+              <div class="ribbon-tab">File</div>
+              <div class="ribbon-tab active">Home</div>
+              <div class="ribbon-tab">Insert</div>
+              <div class="ribbon-tab">Design</div>
+              <div class="ribbon-tab">Layout</div>
+              <div class="ribbon-tab">Review</div>
+              <div class="ribbon-tab">View</div>
+            </div>
+            <div class="ribbon-content">
+              <div class="ribbon-group">
+                <div style="font-size: 1.5rem;">📋</div>
+                <div class="ribbon-group-label">Clipboard</div>
+              </div>
+              <div class="ribbon-group">
+                <div style="font-size: 1.5rem;">🔤</div>
+                <div class="ribbon-group-label">Font</div>
+              </div>
+              <div class="ribbon-group">
+                <div style="font-size: 1.5rem;">📐</div>
+                <div class="ribbon-group-label">Paragraph</div>
+              </div>
+              <div class="ribbon-group">
+                <div style="font-size: 1.5rem;">🎨</div>
+                <div class="ribbon-group-label">Styles</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Key Ribbon Tabs</h4>
+              <ul>
+                <li><strong>Home</strong> - Basic formatting, styles</li>
+                <li><strong>Insert</strong> - Tables, pictures, headers</li>
+                <li><strong>Design</strong> - Document themes</li>
+                <li><strong>Layout</strong> - Margins, orientation</li>
+                <li><strong>Review</strong> - Spell check, comments</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Quick Tip</h4>
+              <p>Can't find a feature? Use the <strong>Search bar</strong> at the top of the ribbon (or press <kbd>Alt</kbd> + <kbd>Q</kbd>) and type what you're looking for!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: What Are Styles? -->
+      <div class="slide" data-index="5">
+        <div class="slide-header">
+          <h2>What Are Styles?</h2>
+          <p class="subtitle">Consistent formatting made easy</p>
+        </div>
+        <div class="slide-content">
+          <p>A <strong>Style</strong> is a saved set of formatting options (font, size, color, spacing) that you can apply with one click.</p>
+
+          <div class="two-column">
+            <div class="column" style="border-left: 4px solid var(--danger);">
+              <h4 style="color: var(--danger);">Without Styles</h4>
+              <ul>
+                <li>Format each heading manually</li>
+                <li>Inconsistent font sizes</li>
+                <li>Hard to change later</li>
+                <li>Time-consuming</li>
+              </ul>
+            </div>
+            <div class="column" style="border-left: 4px solid var(--success);">
+              <h4 style="color: var(--success);">With Styles</h4>
+              <ul>
+                <li>One click applies formatting</li>
+                <li>Always consistent</li>
+                <li>Change once, updates everywhere</li>
+                <li>Fast and professional</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box word">
+            <h4>Built-in Styles in Word</h4>
+            <p><strong>Title</strong> - For your document title<br>
+            <strong>Heading 1</strong> - For major sections<br>
+            <strong>Heading 2</strong> - For subsections<br>
+            <strong>Normal</strong> - For regular paragraph text</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Using Built-in Styles -->
+      <div class="slide" data-index="6">
+        <div class="slide-header">
+          <h2>Using Built-in Styles</h2>
+          <p class="subtitle">Step-by-step guide</p>
+        </div>
+        <div class="slide-content">
+          <ol class="step-list">
+            <li>Click in the text you want to format (or select it)</li>
+            <li>Go to the <strong>Home</strong> tab on the Ribbon</li>
+            <li>Look at the <strong>Styles</strong> group on the right side</li>
+            <li>Click the style you want to apply (Title, Heading 1, etc.)</li>
+          </ol>
+
+          <div class="highlight-box tip">
+            <h4>Pro Tip: See More Styles</h4>
+            <p>Click the small arrow in the bottom-right corner of the Styles group to see ALL available styles, including options for quotes, lists, and more.</p>
+          </div>
+
+          <h3>Example Document Structure</h3>
+          <div style="background: var(--off-white); padding: 1rem; border-radius: 8px; font-family: serif;">
+            <div style="font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem;">VA Benefits Appeal Letter <span style="font-size: 0.75rem; background: var(--accent); color: var(--primary); padding: 0.2rem 0.5rem; border-radius: 4px;">Title Style</span></div>
+            <div style="font-size: 1.2rem; color: #333; margin: 0.75rem 0;">Background Information <span style="font-size: 0.75rem; background: #ddd; padding: 0.2rem 0.5rem; border-radius: 4px;">Heading 1</span></div>
+            <div style="font-size: 1rem; color: #666; margin: 0.5rem 0 0.5rem 1rem;">Service History <span style="font-size: 0.75rem; background: #eee; padding: 0.2rem 0.5rem; border-radius: 4px;">Heading 2</span></div>
+            <div style="font-size: 0.9rem; color: #333; margin-left: 1rem;">I served in the US Army from 1985 to 2005... <span style="font-size: 0.75rem; background: #f5f5f5; padding: 0.2rem 0.5rem; border-radius: 4px;">Normal</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: Why Styles Matter -->
+      <div class="slide" data-index="7">
+        <div class="slide-header">
+          <h2>Why Styles Matter</h2>
+          <p class="subtitle">Benefits beyond formatting</p>
+        </div>
+        <div class="slide-content">
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">🎨</div>
+              <h5>Consistent Look</h5>
+              <p>All headings look the same throughout the document</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">⚡</div>
+              <h5>Fast Changes</h5>
+              <p>Modify the style once, all instances update</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📑</div>
+              <h5>Table of Contents</h5>
+              <p>Word can auto-generate TOC from headings</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🧭</div>
+              <h5>Navigation</h5>
+              <p>Use Navigation Pane to jump between sections</p>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Try the Navigation Pane</h4>
+            <p>Go to <strong>View</strong> tab &#8594; Check <strong>Navigation Pane</strong><br>
+            Now you can see all your headings in a sidebar and click to jump to any section instantly!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Using Templates -->
+      <div class="slide" data-index="8">
+        <div class="slide-header">
+          <h2>Using Templates</h2>
+          <p class="subtitle">Don't start from scratch!</p>
+        </div>
+        <div class="slide-content">
+          <p>A <strong>template</strong> is a pre-designed document you can customize. Word has templates for resumes, letters, flyers, and more.</p>
+
+          <ol class="step-list">
+            <li>Open Word and click <strong>File</strong> &#8594; <strong>New</strong></li>
+            <li>Browse the template gallery or search (e.g., "resume" or "letter")</li>
+            <li>Click a template to preview it</li>
+            <li>Click <strong>Create</strong> to use it</li>
+            <li>Replace the placeholder text with your own content</li>
+          </ol>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Popular Templates</h4>
+              <ul>
+                <li>Resume / CV</li>
+                <li>Cover Letter</li>
+                <li>Business Letter</li>
+                <li>Newsletter</li>
+                <li>Flyer / Poster</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Tips for Templates</h4>
+              <ul>
+                <li>Keep the overall structure</li>
+                <li>Replace ALL placeholder text</li>
+                <li>Don't delete formatting accidentally</li>
+                <li>Save as a new file immediately</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: Creating Tables -->
+      <div class="slide" data-index="9">
+        <div class="slide-header">
+          <h2>Creating Tables</h2>
+          <p class="subtitle">Organize information in rows and columns</p>
+        </div>
+        <div class="slide-content">
+          <p>Tables are perfect for organizing data like schedules, expenses, contact lists, and more.</p>
+
+          <ol class="step-list">
+            <li>Click where you want the table</li>
+            <li>Go to <strong>Insert</strong> tab &#8594; <strong>Table</strong></li>
+            <li>Drag to select the number of rows and columns</li>
+            <li>Click to insert the table</li>
+            <li>Click in each cell to add your content</li>
+          </ol>
+
+          <h3>Example: Monthly Expenses</h3>
+          <table class="table-example">
+            <tr>
+              <th>Category</th>
+              <th>January</th>
+              <th>February</th>
+              <th>March</th>
+            </tr>
+            <tr>
+              <td>Groceries</td>
+              <td>$320</td>
+              <td>$285</td>
+              <td>$310</td>
+            </tr>
+            <tr>
+              <td>Utilities</td>
+              <td>$150</td>
+              <td>$165</td>
+              <td>$145</td>
+            </tr>
+            <tr>
+              <td>Transportation</td>
+              <td>$80</td>
+              <td>$95</td>
+              <td>$85</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Slide 10: Formatting Tables -->
+      <div class="slide" data-index="10">
+        <div class="slide-header">
+          <h2>Formatting Tables</h2>
+          <p class="subtitle">Make your tables look professional</p>
+        </div>
+        <div class="slide-content">
+          <p>When you click inside a table, new <strong>Table Design</strong> and <strong>Layout</strong> tabs appear on the ribbon.</p>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Table Design Tab</h4>
+              <ul>
+                <li><strong>Table Styles</strong> - Pre-made color schemes</li>
+                <li><strong>Header Row</strong> - Bold top row</li>
+                <li><strong>Banded Rows</strong> - Alternating colors</li>
+                <li><strong>Borders</strong> - Line styles around cells</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Layout Tab</h4>
+              <ul>
+                <li><strong>Insert</strong> - Add rows/columns</li>
+                <li><strong>Delete</strong> - Remove rows/columns</li>
+                <li><strong>Merge Cells</strong> - Combine cells</li>
+                <li><strong>Alignment</strong> - Text position in cells</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Quick Table Styling</h4>
+            <p>Click anywhere in your table, then click the <strong>Table Design</strong> tab. Hover over different Table Styles to preview them instantly!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: Adding Headers & Footers -->
+      <div class="slide" data-index="11">
+        <div class="slide-header">
+          <h2>Adding Headers & Footers</h2>
+          <p class="subtitle">Content that appears on every page</p>
+        </div>
+        <div class="slide-content">
+          <p><strong>Headers</strong> appear at the top of every page. <strong>Footers</strong> appear at the bottom. They're great for document titles, dates, and page numbers.</p>
+
+          <ol class="step-list">
+            <li>Go to <strong>Insert</strong> tab</li>
+            <li>Click <strong>Header</strong> or <strong>Footer</strong></li>
+            <li>Choose a built-in design or select <strong>Edit Header/Footer</strong></li>
+            <li>Type your text (it will appear on all pages)</li>
+            <li>Click <strong>Close Header and Footer</strong> when done</li>
+          </ol>
+
+          <div class="highlight-box">
+            <h4>What to Put in Headers/Footers</h4>
+            <ul>
+              <li><strong>Header:</strong> Document title, your name, date</li>
+              <li><strong>Footer:</strong> Page numbers, "Confidential", contact info</li>
+            </ul>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Quick Access</h4>
+            <p>Double-click at the very top or bottom of any page to quickly enter the header or footer editing mode!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: Page Numbers -->
+      <div class="slide" data-index="12">
+        <div class="slide-header">
+          <h2>Page Numbers</h2>
+          <p class="subtitle">Essential for multi-page documents</p>
+        </div>
+        <div class="slide-content">
+          <ol class="step-list">
+            <li>Go to <strong>Insert</strong> tab</li>
+            <li>Click <strong>Page Number</strong></li>
+            <li>Choose position: Top of Page, Bottom of Page, or Page Margins</li>
+            <li>Select a style (Plain Number, Bold Numbers, etc.)</li>
+          </ol>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Page Number Positions</h4>
+              <ul>
+                <li>Top of Page (Header)</li>
+                <li>Bottom of Page (Footer)</li>
+                <li>Page Margins (sides)</li>
+                <li>Current Position (in text)</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Formatting Options</h4>
+              <ul>
+                <li>Start at a specific number</li>
+                <li>"Page X of Y" format</li>
+                <li>Different first page</li>
+                <li>Different odd/even pages</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box warning">
+            <h4>Don't Type Page Numbers Manually!</h4>
+            <p>If you add or remove pages, manual numbers won't update. Always use Insert &#8594; Page Number so they update automatically.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 13: Formatting Best Practices -->
+      <div class="slide" data-index="13">
+        <div class="slide-header">
+          <h2>Formatting Best Practices</h2>
+          <p class="subtitle">Professional document appearance</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column" style="border-left: 4px solid var(--success);">
+              <h4 style="color: var(--success);">DO</h4>
+              <ul>
+                <li>Use styles for consistent headings</li>
+                <li>Stick to 1-2 fonts max</li>
+                <li>Use readable font size (11-12pt)</li>
+                <li>Leave adequate margins (1 inch)</li>
+                <li>Use bullet points for lists</li>
+                <li>Add white space between sections</li>
+              </ul>
+            </div>
+            <div class="column" style="border-left: 4px solid var(--danger);">
+              <h4 style="color: var(--danger);">DON'T</h4>
+              <ul>
+                <li>Use multiple decorative fonts</li>
+                <li>Center everything</li>
+                <li>Use ALL CAPS for long text</li>
+                <li>Add excessive colors</li>
+                <li>Overuse bold and italics</li>
+                <li>Forget to proofread</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Professional Font Choices</h4>
+            <p><strong>For body text:</strong> Calibri, Arial, Times New Roman (11-12pt)<br>
+            <strong>For headings:</strong> Same font or a complementary one, slightly larger</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 14: Spell Check & Review -->
+      <div class="slide" data-index="14">
+        <div class="slide-header">
+          <h2>Spell Check & Review</h2>
+          <p class="subtitle">Catch errors before sending</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h4>Automatic Checking</h4>
+              <ul>
+                <li><span style="color: red; text-decoration: underline wavy red;">Red wavy line</span> = Spelling error</li>
+                <li><span style="color: blue; text-decoration: underline wavy blue;">Blue wavy line</span> = Grammar issue</li>
+                <li>Right-click to see suggestions</li>
+                <li>Click suggestion to fix</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Full Spell Check</h4>
+              <ol>
+                <li>Go to <strong>Review</strong> tab</li>
+                <li>Click <strong>Spelling & Grammar</strong></li>
+                <li>Or press <kbd>F7</kbd></li>
+                <li>Review each suggestion</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="highlight-box warning">
+            <h4>Spell Check Isn't Perfect!</h4>
+            <p>Spell check won't catch:</p>
+            <ul>
+              <li>Wrong word spelled correctly (their/there/they're)</li>
+              <li>Names and proper nouns</li>
+              <li>Context errors ("I went to store")</li>
+            </ul>
+            <p><strong>Always read your document yourself!</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 15: Workshop Time! (Practice) -->
+      <div class="slide" data-index="15">
+        <div class="slide-header">
+          <h2>Workshop Time!</h2>
+          <p class="subtitle">Word Document Workshop - Parts 1 & 2 (Guided, 25 min)</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box" style="background: rgba(27, 54, 93, 0.1); border-color: var(--primary);">
+            <h4>Open Your Workshop Handout</h4>
+            <p>Your instructor will hand out the <strong>Word Document Workshop</strong>. We'll work through the first two parts together.</p>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Part 1: Styles Foundation (15 min)</h4>
+              <ul>
+                <li>Create a new blank document</li>
+                <li>Type your VA Appeal Letter text</li>
+                <li>Apply <strong>Title</strong> style to the letter title</li>
+                <li>Apply <strong>Heading 1</strong> to major sections</li>
+                <li>Apply <strong>Heading 2</strong> to subsections</li>
+                <li>Open the <strong>Navigation Pane</strong> to see your structure</li>
+              </ul>
+              <p style="margin-top: 0.5rem;"><em>Follow along with the instructor step-by-step!</em></p>
+            </div>
+            <div class="column">
+              <h4>Part 2: Tables for Data (15 min)</h4>
+              <ul>
+                <li>Insert a <strong>service history table</strong> (4 columns x 4 rows)</li>
+                <li>Add headers: Branch, Dates, Rank, MOS</li>
+                <li>Fill in sample service data</li>
+                <li>Insert a <strong>medical evidence table</strong> (3 columns x 4 rows)</li>
+                <li>Apply a professional <strong>Table Style</strong></li>
+                <li>Format with <strong>Header Row</strong> and <strong>Banded Rows</strong></li>
+              </ul>
+              <p style="margin-top: 0.5rem;"><em>We'll do this one together!</em></p>
+            </div>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Need Help?</h4>
+            <p>Raise your hand anytime. Check off each step in your workshop handout as you complete it.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 16: Break -->
+      <div class="slide" data-index="16">
+        <div class="slide-header">
+          <h2>Break Time!</h2>
+          <p class="subtitle">10-Minute Break</p>
+        </div>
+        <div class="slide-content" style="text-align: center;">
+          <div style="font-size: 4rem; margin: 1rem 0;">☕</div>
+
+          <div class="highlight-box" style="text-align: left;">
+            <h4>Before You Step Away</h4>
+            <ul>
+              <li>Make sure your document is <strong>saved</strong> (<kbd>Ctrl</kbd> + <kbd>S</kbd>)</li>
+              <li>Verify your styles and tables look correct</li>
+              <li>Check off completed steps in your <strong>workshop handout</strong></li>
+            </ul>
+          </div>
+
+          <p style="margin-top: 1.5rem; font-size: 1.1rem;">When we return, you'll work on <strong>Parts 3 & 4</strong> of the workshop independently.</p>
+
+          <div class="highlight-box tip" style="text-align: left;">
+            <h4>Coming Up Next</h4>
+            <ul>
+              <li><strong>Part 3:</strong> Add headers, footers, and page numbers</li>
+              <li><strong>Part 4:</strong> Final polish - spell check, formatting review, and save</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 17: Knowledge Check (Evaluation) -->
+      <div class="slide" data-index="17">
+        <div class="slide-header">
+          <h2>Knowledge Check</h2>
+          <p class="subtitle">Let's review what we learned!</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Question 1</h4>
+            <p>What is the benefit of using Styles instead of manual formatting?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>Consistent formatting, easy to change, enables navigation and TOC features.</em></p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Question 2</h4>
+            <p>Where do you go to insert a table?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>Insert tab &#8594; Table</em></p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Question 3</h4>
+            <p>What's the keyboard shortcut for spell check?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>F7</em></p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Question 4</h4>
+            <p>Why should you NOT type page numbers manually?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>They won't update automatically if pages are added or removed.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 18: Show & Share (Evaluation) -->
+      <div class="slide" data-index="18">
+        <div class="slide-header">
+          <h2>Show & Share</h2>
+          <p class="subtitle">Evaluation Activity (10 minutes)</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Partner Check</h4>
+            <p>Pair up with a neighbor and show each other your VA Appeal Letter:</p>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Show Your Partner</h4>
+              <ol>
+                <li>Your <strong>Title and Heading styles</strong> in the document</li>
+                <li>Your <strong>service history table</strong> and <strong>medical evidence table</strong></li>
+                <li>Your <strong>header with name/date</strong> and page numbers</li>
+              </ol>
+            </div>
+            <div class="column">
+              <h4>Peer Review Checklist</h4>
+              <ul>
+                <li>Does it use Title and Heading styles?</li>
+                <li>Are the tables properly formatted with headers?</li>
+                <li>Does it have a header with name/date and page numbers?</li>
+                <li>Is spell check complete?</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Class Discussion</h4>
+            <p>Volunteers: What was the most useful thing you learned today? Did anyone discover a Word feature on their own?</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 19: Your Word Challenge This Week (Application) -->
+      <div class="slide" data-index="19">
+        <div class="slide-header">
+          <h2>Your Word Challenge This Week</h2>
+          <p class="subtitle">Put your new skills to work!</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>This Week's Mission</h4>
+            <p>Complete these tasks before the next class meeting:</p>
+          </div>
+
+          <ol class="step-list">
+            <li><strong>Create a medication tracking document</strong> - Use a table with columns for Medication, Dosage, Time, and Notes</li>
+            <li><strong>Write a one-page letter</strong> - Use Title style, at least one Heading style, and proper formatting</li>
+            <li><strong>Email your VA Appeal Letter to yourself</strong> - Use your Week 3 email skills to attach and send the document</li>
+            <li><strong>Browse Word templates</strong> - Go to File &#8594; New and explore at least 3 templates</li>
+          </ol>
+
+          <div class="highlight-box tip">
+            <h4>Keep Your Workshop Handout!</h4>
+            <p>Use it as a reference guide at home. The step-by-step instructions will help you remember how to do everything we practiced today.</p>
+          </div>
+
+          <div class="icon-grid" style="margin-top: 1rem;">
+            <div class="icon-item">
+              <div class="icon">🎨</div>
+              <h5>Styles</h5>
+              <p>Title, Heading 1, Heading 2</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📊</div>
+              <h5>Tables</h5>
+              <p>Rows, columns, formatting</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📄</div>
+              <h5>Headers</h5>
+              <p>Name, date, page numbers</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">✨</div>
+              <h5>Polish</h5>
+              <p>Spell check, best practices</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 20: Next Week Preview (Application) -->
+      <div class="slide" data-index="20">
+        <div class="slide-header">
+          <h2>Next Week Preview</h2>
+          <p class="subtitle">Week 5: Microsoft Excel Intermediate</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Coming Up: Week 5</h4>
+            <p>We'll learn to use Excel for calculations, budgets, and data analysis!</p>
+          </div>
+
+          <h3>Topics We'll Cover:</h3>
+          <ul>
+            <li><strong>Basic Formulas</strong> - SUM, AVERAGE, COUNT</li>
+            <li><strong>Creating Charts</strong> - Visualize your data</li>
+            <li><strong>Sorting & Filtering</strong> - Organize large lists</li>
+            <li><strong>Budget Spreadsheet</strong> - Practical money tracking</li>
+          </ul>
+
+          <div class="highlight-box tip">
+            <h4>Before Next Week</h4>
+            <p>Make sure you can open Microsoft Excel. If you don't have it installed, let your instructor know!</p>
+          </div>
+
+          <div style="text-align: center; margin-top: 2rem; padding: 2rem; background: var(--off-white); border-radius: 12px;">
+            <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Great work today!</h3>
+            <p style="color: var(--gray);">You now have the skills to create professional Word documents. See you next class!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="nav-buttons">
+        <button class="nav-btn secondary" id="prevBtn" disabled>&#8592; Previous</button>
+        <span class="slide-counter">Slide <span id="currentSlide">1</span> of <span id="totalSlides">21</span></span>
+        <button class="nav-btn" id="nextBtn">Next &#8594;</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Celebration Overlay -->
+  <div class="celebration" id="celebration">
+    <h2>Congratulations!</h2>
+    <p>You've completed Week 4: Microsoft Word Intermediate</p>
+    <button class="nav-btn" onclick="closeCelebration()" style="margin-top: 1rem;">Continue</button>
+  </div>
+
+  <script src="../../../shared/progress.js"></script>
+  <script src="../../../shared/glossary.js" defer></script>
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideLinks = document.querySelectorAll('.slide-link');
+
+    document.getElementById('totalSlides').textContent = totalSlides;
+    loadProgress();
+    updateSlide();
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (currentSlide > 0) { currentSlide--; updateSlide(); }
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (currentSlide < totalSlides - 1) { currentSlide++; updateSlide(); }
+      else { showCelebration(); }
+    });
+
+    slideLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        currentSlide = parseInt(link.dataset.slide);
+        updateSlide();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        if (currentSlide < totalSlides - 1) { currentSlide++; updateSlide(); }
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        if (currentSlide > 0) { currentSlide--; updateSlide(); }
+      } else if (e.key === 'Home') { currentSlide = 0; updateSlide(); }
+      else if (e.key === 'End') { currentSlide = totalSlides - 1; updateSlide(); }
+    });
+
+    function updateSlide() {
+      slides.forEach((slide, index) => slide.classList.toggle('active', index === currentSlide));
+      slideLinks.forEach((link, index) => {
+        link.classList.toggle('active', parseInt(link.dataset.slide) === currentSlide);
+        if (parseInt(link.dataset.slide) < currentSlide) link.classList.add('completed');
+      });
+      document.getElementById('prevBtn').disabled = currentSlide === 0;
+      document.getElementById('nextBtn').textContent = currentSlide === totalSlides - 1 ? 'Finish' : 'Next \u2192';
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+      const progress = ((currentSlide + 1) / totalSlides) * 100;
+      document.getElementById('progressFill').style.width = progress + '%';
+      document.getElementById('progressText').textContent = currentSlide + 1;
+      saveProgress();
+    }
+
+    function saveProgress() {
+      if (window.VubProgress) VubProgress.saveSlide('ics', 4, currentSlide, totalSlides);
+    }
+    function loadProgress() {
+      if (window.VubProgress) {
+        const entry = VubProgress.get('ics', 4);
+        if (entry && typeof entry.slide === 'number') currentSlide = entry.slide;
+      }
+    }
+
+    function showCelebration() {
+      document.getElementById('celebration').classList.add('active');
+      createConfetti();
+    }
+
+    function closeCelebration() { document.getElementById('celebration').classList.remove('active'); }
+
+    function createConfetti() {
+      const celebration = document.getElementById('celebration');
+      const colors = ['#C9A227', '#1B365D', '#28A745', '#DC3545', '#FFFFFF'];
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        celebration.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    }
+  </script>
+</body>
+</html>

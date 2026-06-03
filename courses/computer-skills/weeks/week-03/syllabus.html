@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 3 Instructor Guide | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+    .header-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .overview-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .overview-box h2 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .objectives-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.5rem;
+    }
+    .objectives-list li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .objectives-list li::before {
+      content: "🎯";
+      position: absolute;
+      left: 0;
+    }
+    .timeline { margin-bottom: 1.5rem; }
+    .timeline-header {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px 8px 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .timeline-body {
+      border: 2px solid var(--primary);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid var(--off-white);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-time {
+      background: var(--off-white);
+      padding: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .timeline-content { padding: 0.75rem 1rem; }
+    .timeline-content h4 {
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+    .timeline-content p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin: 0;
+    }
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+    .activity-lecture { background: rgba(27, 54, 93, 0.15); color: var(--primary); }
+    .activity-demo { background: rgba(201, 162, 39, 0.2); color: #8B7500; }
+    .activity-practice { background: rgba(40, 167, 69, 0.15); color: var(--success); }
+    .activity-discussion { background: rgba(23, 162, 184, 0.15); color: #17A2B8; }
+    .activity-warmup { background: rgba(255, 193, 7, 0.2); color: #856404; }
+    .activity-eval { background: rgba(220, 53, 69, 0.15); color: var(--danger); }
+    .activity-apply { background: rgba(111, 66, 193, 0.15); color: #6F42C1; }
+    .activity-break { background: rgba(108, 117, 125, 0.15); color: #6C757D; }
+    .notes-section {
+      background: rgba(201, 162, 39, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1.5rem;
+    }
+    .notes-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .notes-section ul { list-style: none; }
+    .notes-section li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .notes-section li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .materials-section {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .materials-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .material-category h4 {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .material-category ul { list-style: none; }
+    .material-category li {
+      padding: 0.25rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .material-category li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+    .discussion-section { margin-bottom: 1.5rem; }
+    .discussion-section h3 {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .discussion-list { list-style: none; }
+    .discussion-list li {
+      background: var(--off-white);
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    .discussion-list li strong {
+      display: block;
+      font-style: normal;
+      color: var(--primary);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+    .tips-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .tips-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tips-box ul { list-style: none; }
+    .tips-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .tips-box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+    }
+    .warning-box {
+      background: rgba(255, 193, 7, 0.1);
+      border: 2px solid var(--warning);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .warning-box h3 {
+      color: #856404;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .warning-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0; }
+      .header, .timeline-header, .discussion-section h3 {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div>
+        <h1>Week 3: Email Productivity (Gmail)</h1>
+        <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">VUB Intermediate Computer Skills</p>
+      </div>
+      <span class="header-badge">Instructor Guide</span>
+    </div>
+    <div class="header-meta">
+      <span>📅 Week 3 of 8</span>
+      <span>⏱️ 2 Hours (WIPPEA)</span>
+      <span>👥 Veterans Group</span>
+      <span>📍 Computer Lab</span>
+    </div>
+  </header>
+
+  <div class="overview-box">
+    <h2>🎯 Learning Objectives</h2>
+    <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--gray);">By the end of this session, participants will be able to:</p>
+    <ul class="objectives-list">
+      <li>Navigate the Gmail interface confidently</li>
+      <li>Create and color-code labels to organize emails</li>
+      <li>Compose professional emails with proper etiquette</li>
+      <li>Understand CC, BCC, and Reply All usage</li>
+      <li>Add attachments and manage file sizes</li>
+      <li>Create a professional email signature</li>
+      <li>Identify phishing emails and use search operators</li>
+      <li>Apply skills independently through guided workshop</li>
+    </ul>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-header">⏰ WIPPEA Session Timeline (120 Minutes)</div>
+    <div class="timeline-body">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00-0:08</div>
+        <div class="timeline-content">
+          <h4>Inbox Challenge <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <p>Have students open Gmail and check their inbox count. Round-robin share: "How many unread emails? Can you find a specific email from last week?" Surface common frustrations (can't find emails, too much junk, unsure if safe). Connect to Week 2 safety skills.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:08-0:15</div>
+        <div class="timeline-content">
+          <h4>Today's Roadmap <span class="activity-type activity-lecture">Introduction</span></h4>
+          <p>Present the 2-hour agenda using the Roadmap slide. Preview what they'll build: organized inbox with labels, professional signature, 3 scenario emails. Distribute the <strong>Gmail Mastery Workshop</strong> handout now so they can see the full plan.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:15-0:35</div>
+        <div class="timeline-content">
+          <h4>Core Presentation <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Move briskly through slides 3-15. Key topics: Gmail interface layout, labels vs folders concept, creating and color-coding labels, search operators, email composition and etiquette, CC/BCC/Reply All, attachments, contacts, signatures, spam and phishing review. Show on projector; keep explanations concise since students will practice each skill hands-on in the workshop.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:35-0:55</div>
+        <div class="timeline-content">
+          <h4>Workshop Parts 1 & 2 <span class="activity-type activity-practice">Guided Practice</span></h4>
+          <p><strong>Part 1 - Inbox Organization Sprint (15 min):</strong> Walk through creating 5 color-coded labels step-by-step on projector. Students follow along using their workshop handout. Help them apply labels to existing emails, star important ones, archive old messages.<br><br><strong>Part 2 - Signature Studio (10 min):</strong> Have students draft their signature on paper first (name, branch, phone, email). Then walk through Gmail Settings together to create it. They send a test email to themselves to verify.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:55-1:05</div>
+        <div class="timeline-content">
+          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <p>Remind students to save their work before stepping away. Check that labels and signatures are saved. Students stretch, use restroom, refill coffee. Quick check-in with any students who are behind.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:05-1:45</div>
+        <div class="timeline-content">
+          <h4>Workshop Parts 3 & 4 <span class="activity-type activity-practice">Independent Practice</span></h4>
+          <p><strong>Part 3 - Email Composition Challenge (20 min):</strong> Students work independently on 3 scenario emails (VA appointment, classmate recommendation, vendor complaint). Each has a rubric checklist on the handout. Circulate to provide feedback.<br><br><strong>Part 4 - Security & Search Power-ups (15 min):</strong> Students identify red flags on phishing examples, practice search operators to find old emails, and optionally set up a filter. Early finishers help neighbors or try bonus challenges.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:45-1:55</div>
+        <div class="timeline-content">
+          <h4>Show & Share <span class="activity-type activity-eval">Evaluation</span></h4>
+          <p>Partner check: students pair up and show their labeled inbox, signature, and one scenario email. Partners give feedback using the checklist criteria. Ask for volunteers to share one useful thing they learned. Use Knowledge Check questions (slide 18) for quick formative assessment.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:55-2:00</div>
+        <div class="timeline-content">
+          <h4>Email Challenge & Preview <span class="activity-type activity-apply">Application</span></h4>
+          <p>Assign the at-home challenge: organize 10 real emails, write a VA records request, use a search operator, check Spam folder. Remind them to keep their workshop handout as a reference. Preview Week 4: Microsoft Word Intermediate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <h3>📝 Instructor Notes</h3>
+    <ul>
+      <li><strong>Gmail Accounts:</strong> Verify everyone has a Gmail account at the start. Some may need help logging in or may need to create one. Budget extra time at warm-up if needed.</li>
+      <li><strong>Pacing the Presentation:</strong> The lecture portion is only 20 minutes. Move briskly through concepts - students will practice each skill hands-on during the workshop. Don't linger on slides they'll repeat in practice.</li>
+      <li><strong>Workshop Handout:</strong> Distribute the Gmail Mastery Workshop handout during the Introduction phase. Students should have it in front of them before guided practice begins.</li>
+      <li><strong>Guided vs. Independent:</strong> Parts 1 & 2 are instructor-led (show step, wait, confirm). Parts 3 & 4 are student-driven (circulate, answer questions, don't demo every step).</li>
+      <li><strong>Labels Concept:</strong> The "one email, multiple labels" concept can be confusing. Use the "colored stickers on a document" analogy from the presentation.</li>
+      <li><strong>Etiquette Sensitivity:</strong> Some may feel their current email habits are being criticized. Frame it as "professional contexts" not "right vs wrong."</li>
+      <li><strong>Signature Privacy:</strong> Remind them not to include sensitive info (SSN, full address) in signatures - just name, phone, email.</li>
+      <li><strong>Early Finishers:</strong> Have them help neighbors (peer teaching reinforces learning) or try the bonus challenges in Part 4 of the workshop.</li>
+    </ul>
+  </div>
+
+  <div class="materials-section">
+    <h3>📦 Materials Checklist</h3>
+    <div class="materials-grid">
+      <div class="material-category">
+        <h4>Handouts (Print)</h4>
+        <ul>
+          <li>Gmail Mastery Workshop (NEW)</li>
+          <li>Gmail Quick Reference</li>
+          <li>Email Etiquette Guide</li>
+          <li>Gmail Setup Activity</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Technology</h4>
+        <ul>
+          <li>Projector connected & working</li>
+          <li>Gmail open on each workstation</li>
+          <li>Presentation loaded on projector</li>
+          <li>Sample files for attachment practice</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Preparation</h4>
+        <ul>
+          <li>Log into demo Gmail account</li>
+          <li>Create sample files to attach</li>
+          <li>Prepare good/bad email examples</li>
+          <li>Test projector display of Gmail</li>
+          <li>Print workshop handouts (1 per student)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="discussion-section">
+    <h3>💬 Discussion Prompts by Phase</h3>
+    <ul class="discussion-list">
+      <li>
+        <strong>Warm-Up (Inbox Challenge):</strong>
+        "How many unread emails do you have? Can you find an email from last week in under 30 seconds? What's the most frustrating thing about your inbox?"
+      </li>
+      <li>
+        <strong>Presentation (Labels):</strong>
+        "What categories make sense for YOUR life? VA documents, family, bills, hobbies? Think of 5 labels you'd actually use."
+      </li>
+      <li>
+        <strong>Presentation (Etiquette):</strong>
+        "Has anyone received an email that rubbed you the wrong way? What about it bothered you? (Don't share names!)"
+      </li>
+      <li>
+        <strong>Evaluation (Show & Share):</strong>
+        "What was the most useful thing you learned today? Any tips or tricks you discovered on your own during the workshop?"
+      </li>
+      <li>
+        <strong>Application (Wrap-Up):</strong>
+        "What's one thing you'll do differently with email this week? Who will you send your first properly-formatted email to?"
+      </li>
+    </ul>
+  </div>
+
+  <div class="warning-box">
+    <h3>⚠️ Common Issues to Watch For</h3>
+    <p>
+      <strong>Gmail Account Access:</strong> Some may have forgotten passwords or have old accounts. Budget 5-10 extra minutes at start if needed.<br><br>
+      <strong>Two-Factor Authentication:</strong> If their Gmail has 2FA, they'll need their phone to log in. Make sure they have it.<br><br>
+      <strong>Different Gmail Versions:</strong> Some may have "Classic" Gmail view. The new view is default - help them switch if needed.<br><br>
+      <strong>Attachment Location:</strong> Participants often struggle to find files on their computer. Show them how to navigate to Documents/Downloads.<br><br>
+      <strong>Workshop Pacing:</strong> Some students will finish Parts 3 & 4 early. Direct them to the bonus challenges or have them assist neighbors. Others may not finish all 3 scenario emails - that's OK, they can complete at home.
+    </p>
+  </div>
+
+  <div class="tips-box">
+    <h3>✅ Tips for Success</h3>
+    <ul>
+      <li>Walk around constantly during workshop activities - don't stay at the front</li>
+      <li>During guided practice, show each step slowly, wait for everyone, then proceed</li>
+      <li>During independent practice, let students work at their own pace and ask for help</li>
+      <li>Have early finishers help neighbors (peer teaching reinforces learning)</li>
+      <li>If someone gets lost during guided practice, help them catch up before moving on</li>
+      <li>The workshop handout has checkboxes - encourage students to check off each step</li>
+      <li>Connect back to Week 2 - suspicious emails, phishing awareness in inbox</li>
+      <li>Emphasize the at-home challenge: real practice cements the skills</li>
+    </ul>
+  </div>
+
+  <div class="notes-section" style="background: rgba(23, 162, 184, 0.1); border-color: #17A2B8;">
+    <h3 style="color: #17A2B8;">🔮 Looking Ahead: Week 4</h3>
+    <ul>
+      <li><strong>Topic:</strong> Microsoft Word Intermediate</li>
+      <li><strong>Key Concepts:</strong> Styles, tables, headers & footers, formatting, page layout</li>
+      <li><strong>Prep Needed:</strong> Ensure Microsoft Word is installed and accessible on all workstations</li>
+      <li><strong>Connection:</strong> Link email attachments to creating professional Word documents to send. Students will email their Week 4 Word document to themselves using Week 3 skills.</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Instructor Guide - Week 3</p>
+    <p style="margin-top: 0.5rem; font-style: italic;">Questions? Contact: Britt Legg</p>
+  </footer>
+</body>
+</html>

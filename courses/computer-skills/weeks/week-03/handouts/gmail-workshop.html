@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gmail Mastery Workshop | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --info: #17A2B8;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .name-field {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    .name-field label {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .name-field .line {
+      flex: 1;
+      border-bottom: 2px solid var(--gray);
+      max-width: 300px;
+    }
+    .goal-box {
+      background: linear-gradient(135deg, var(--off-white) 0%, #EDF2F7 100%);
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .goal-box h2 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .goal-box p {
+      font-size: 0.95rem;
+      color: var(--gray);
+    }
+    .goal-box .build-list {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+    .goal-box .build-list li {
+      font-size: 0.95rem;
+      padding: 0.25rem 0;
+      color: #333;
+    }
+    .goal-box .build-list li::before {
+      content: "✓ ";
+      color: var(--success);
+      font-weight: 700;
+    }
+    .part-header {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.75rem 1rem;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    .part-header h2 { font-size: 1.15rem; margin: 0; }
+    .part-timing {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .part-type {
+      background: rgba(255,255,255,0.2);
+      color: var(--light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    .part-content {
+      border: 1px solid #E2E8F0;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .section { margin-bottom: 1.25rem; }
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--accent);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .step-group { margin-bottom: 1rem; }
+    .step-label {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+    .step-detail {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.25rem;
+      padding-left: 0.5rem;
+    }
+    .step-path {
+      font-family: Consolas, 'Courier New', monospace;
+      background: #EDF2F7;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--primary);
+      display: inline-block;
+      margin: 0.25rem 0;
+    }
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--off-white);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--primary);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--primary); }
+    .checklist-text .detail {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+    .fill-section {
+      background: var(--off-white);
+      padding: 1.25rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .fill-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .fill-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .fill-line .label {
+      min-width: 140px;
+      color: var(--gray);
+    }
+    .fill-line .blank {
+      flex: 1;
+      border-bottom: 1px solid var(--gray);
+      min-height: 1.5rem;
+    }
+    .email-box {
+      border: 2px solid var(--gray);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      background: var(--light);
+    }
+    .email-box .field {
+      display: flex;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+    .email-box .field strong {
+      width: 80px;
+      color: var(--gray);
+    }
+    .email-box .field .blank {
+      flex: 1;
+      border-bottom: 1px solid var(--gray);
+    }
+    .email-box .body-area {
+      border: 1px solid #ddd;
+      min-height: 100px;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+    }
+    .email-rubric {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.25rem 1rem;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      background: #FFF8E1;
+      border-radius: 6px;
+    }
+    .email-rubric .criteria { color: #333; }
+    .email-rubric .check-col { color: var(--gray); text-align: center; min-width: 40px; }
+    .signature-box {
+      border: 2px dashed var(--gray);
+      padding: 1rem;
+      border-radius: 8px;
+      min-height: 80px;
+      margin: 1rem 0;
+    }
+    .signature-box p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      font-style: italic;
+    }
+    .checkpoint-box {
+      background: linear-gradient(135deg, rgba(23, 162, 184, 0.1) 0%, rgba(23, 162, 184, 0.05) 100%);
+      border: 2px solid var(--info);
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1.25rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .checkpoint-box .icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .checkpoint-box .text {
+      font-size: 0.9rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .checkpoint-box .text span {
+      display: block;
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.15rem;
+    }
+    .tip-box {
+      background: #FFF8E1;
+      border-left: 4px solid var(--warning);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .tip-box strong { color: #856404; }
+    .warning-box {
+      background: #FFF3F3;
+      border-left: 4px solid var(--danger);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .warning-box strong { color: var(--danger); }
+    .example-box {
+      background: #E8F5E9;
+      border-left: 4px solid var(--success);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .example-box strong { color: #2E7D32; }
+    .phishing-card {
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 0.75rem 0;
+      background: var(--light);
+    }
+    .phishing-card .from-line {
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+    }
+    .phishing-card .subject-line {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .phishing-card .body-text {
+      font-size: 0.85rem;
+      color: #555;
+      border-top: 1px solid #eee;
+      padding-top: 0.5rem;
+    }
+    .red-flags-list {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+    .red-flags-list li {
+      font-size: 0.85rem;
+      padding: 0.35rem 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .red-flags-list li .flag-num {
+      background: var(--danger);
+      color: white;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+    .red-flags-list .blank {
+      display: inline-block;
+      border-bottom: 1px solid var(--gray);
+      min-width: 250px;
+      min-height: 1rem;
+    }
+    .search-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+    }
+    .search-table th {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem;
+      text-align: left;
+      font-weight: 600;
+    }
+    .search-table td {
+      padding: 0.5rem;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .search-table tr:nth-child(even) { background: var(--off-white); }
+    .search-table .mono {
+      font-family: Consolas, 'Courier New', monospace;
+      background: #EDF2F7;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.8rem;
+    }
+    .write-area {
+      border: 1px solid #ddd;
+      min-height: 60px;
+      padding: 0.5rem;
+      border-radius: 4px;
+      margin: 0.5rem 0;
+    }
+    .success-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-top: 2rem;
+    }
+    .success-box h3 {
+      color: var(--success);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .success-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+    .success-box .skills-earned {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+    .success-box .skills-earned li {
+      font-size: 0.9rem;
+      padding: 0.2rem 0;
+    }
+    .success-box .skills-earned li::before {
+      content: "⭐ ";
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0.25in; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .checkbox { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .checkpoint-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { page-break-before: auto; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>📧 Gmail Mastery Workshop</h1>
+      <p style="font-size: 0.9rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 3</p>
+    </div>
+    <span class="header-badge">WORKSHOP</span>
+  </header>
+
+  <div class="name-field">
+    <label>Name:</label>
+    <div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label>
+    <div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <div class="goal-box">
+    <h2>What You Will Build Today</h2>
+    <p>By the end of this workshop, you will have a fully organized, professional Gmail account. Here is what you will accomplish:</p>
+    <ul class="build-list">
+      <li>An organized inbox with 5 color-coded labels</li>
+      <li>A professional email signature with your name and contact info</li>
+      <li>Three properly formatted emails (sent!)</li>
+      <li>The ability to spot phishing scams and search like a pro</li>
+    </ul>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="part-header">
+    <h2>Part 1: Inbox Organization Sprint</h2>
+    <div>
+      <span class="part-timing">~15 minutes</span>
+      <span class="part-type">GUIDED</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <p style="font-size: 0.95rem; margin-bottom: 1rem;">
+      Follow along with your instructor. We will create labels and color-code them together, one step at a time.
+    </p>
+
+    <div class="section">
+      <h3 class="section-title">Step 1: Create Your Labels</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">You will create 5 labels to organize your email. Follow these steps for each one:</p>
+
+      <div class="step-group">
+        <div class="step-label">How to create a label:</div>
+        <div class="step-path">Left sidebar → scroll down → "More" → "Create new label"</div>
+      </div>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Create label: "VA"</strong>
+            <span class="detail">For anything related to VA benefits, appointments, or correspondence</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Create label: "Medical"</strong>
+            <span class="detail">For doctor appointments, prescriptions, and health information</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Create label: "Financial"</strong>
+            <span class="detail">For bank statements, bills, and money-related emails</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Create label: "Personal"</strong>
+            <span class="detail">For family, friends, and personal messages</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Create label: "Important"</strong>
+            <span class="detail">For anything that needs urgent attention or follow-up</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Step 2: Color-Code Your Labels</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Colors help you spot categories instantly. Follow your instructor:</p>
+
+      <div class="step-group">
+        <div class="step-label">How to add a color:</div>
+        <div class="step-path">Hover over label name → Click the 3 dots (⋮) → "Label color" → Pick a color</div>
+      </div>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> Use colors that make sense to you. For example, red for Important, blue for VA, green for Financial.
+      </div>
+
+      <div class="fill-section">
+        <h3>Write down the colors you chose:</h3>
+        <div class="fill-line"><span class="label">VA:</span><div class="blank"></div></div>
+        <div class="fill-line"><span class="label">Medical:</span><div class="blank"></div></div>
+        <div class="fill-line"><span class="label">Financial:</span><div class="blank"></div></div>
+        <div class="fill-line"><span class="label">Personal:</span><div class="blank"></div></div>
+        <div class="fill-line"><span class="label">Important:</span><div class="blank"></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Step 3: Apply Labels to Existing Emails</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Now let's practice using your new labels on real emails in your inbox:</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Open any email in your inbox</strong>
+            <span class="detail">Click on one email to open it</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click the Labels icon (tag icon) at the top</strong>
+            <span class="detail">It looks like a small tag or bookmark. Select the correct label for this email.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Label at least 3 emails</strong>
+            <span class="detail">Go back to your inbox and label 2 more emails with the appropriate categories</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="fill-section">
+        <h3>Which emails did you label?</h3>
+        <div class="fill-line"><span class="label">Email 1:</span><div class="blank"></div><span class="label" style="min-width: 80px; margin-left: 0.5rem;">Label:</span><div class="blank" style="max-width: 100px;"></div></div>
+        <div class="fill-line"><span class="label">Email 2:</span><div class="blank"></div><span class="label" style="min-width: 80px; margin-left: 0.5rem;">Label:</span><div class="blank" style="max-width: 100px;"></div></div>
+        <div class="fill-line"><span class="label">Email 3:</span><div class="blank"></div><span class="label" style="min-width: 80px; margin-left: 0.5rem;">Label:</span><div class="blank" style="max-width: 100px;"></div></div>
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <div class="icon">✋</div>
+      <div class="text">
+        Checkpoint: Raise your hand when done
+        <span>Your instructor will verify you have 5 colored labels visible in your sidebar and 3 emails labeled.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="part-header">
+    <h2>Part 2: Professional Signature Studio</h2>
+    <div>
+      <span class="part-timing">~10 minutes</span>
+      <span class="part-type">GUIDED</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <p style="font-size: 0.95rem; margin-bottom: 1rem;">
+      A professional signature is added to the bottom of every email you send automatically. Let's create yours.
+    </p>
+
+    <div class="section">
+      <h3 class="section-title">Step 1: Plan Your Signature</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Before typing it in Gmail, draft your signature here on paper:</p>
+
+      <div class="example-box">
+        <strong>Example signature:</strong><br>
+        Best regards,<br>
+        John Smith<br>
+        U.S. Army Veteran<br>
+        (304) 555-0123<br>
+        john.smith@gmail.com
+      </div>
+
+      <p style="font-size: 0.9rem; margin: 0.75rem 0 0.5rem;">Write YOUR signature here:</p>
+      <div class="signature-box">
+        <p>Closing (e.g., "Best regards," or "Respectfully,"):</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Step 2: Add It to Gmail</h3>
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Open Gmail Settings</strong>
+            <span class="detail">Click the gear icon (⚙) in the top right → "See all settings"</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Scroll down to "Signature" section</strong>
+            <span class="detail">It is about halfway down the page. Keep scrolling until you see it.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click "Create new"</strong>
+            <span class="detail">A small box will pop up. Name it "Main" and click Create.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Type your signature from above</strong>
+            <span class="detail">Type it in the text box on the right. Press Enter after each line.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Scroll down and click "Save Changes"</strong>
+            <span class="detail">This is at the very bottom of the settings page. Do not skip this step!</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="warning-box">
+        <strong>Important:</strong> If you do not click "Save Changes" at the bottom, your signature will not be saved!
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Step 3: Test Your Signature</h3>
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click "Compose" to start a new email</strong>
+            <span class="detail">Your signature should appear automatically at the bottom of the new email.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Verify your signature looks correct</strong>
+            <span class="detail">Does it have your name, branch, phone, and email? If not, go back to Settings to fix it.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="checkpoint-box">
+      <div class="icon">✋</div>
+      <div class="text">
+        Checkpoint: Show your instructor
+        <span>Open a Compose window and show your instructor that your signature appears automatically.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="part-header">
+    <h2>Part 3: Email Composition Challenge</h2>
+    <div>
+      <span class="part-timing">~20 minutes</span>
+      <span class="part-type">INDEPENDENT</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <p style="font-size: 0.95rem; margin-bottom: 1rem;">
+      Now it is your turn! Write and send 3 real emails using proper formatting. Draft each one on paper first, then type and send it in Gmail.
+    </p>
+
+    <div class="section">
+      <h3 class="section-title">Email 1: Request Medical Records</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+        <strong>Scenario:</strong> You need to request a copy of your recent lab results from your doctor's office. Write a polite, clear email.
+      </p>
+
+      <div class="tip-box">
+        <strong>Remember:</strong> A good email has a clear subject line, a greeting, states the purpose, and has a professional closing.
+      </div>
+
+      <div class="email-box">
+        <div class="field"><strong>To:</strong> <div class="blank"></div></div>
+        <div class="field"><strong>Subject:</strong> <div class="blank"></div></div>
+        <div class="body-area"></div>
+      </div>
+
+      <div class="email-rubric">
+        <span class="criteria">Clear subject line?</span><span class="check-col">☐</span>
+        <span class="criteria">Greeting (Dear, Hello)?</span><span class="check-col">☐</span>
+        <span class="criteria">Purpose stated clearly?</span><span class="check-col">☐</span>
+        <span class="criteria">Professional closing?</span><span class="check-col">☐</span>
+        <span class="criteria">Signature appears?</span><span class="check-col">☐</span>
+      </div>
+
+      <ul class="checklist" style="margin-top: 0.75rem;">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text"><strong>I typed and sent this email in Gmail</strong></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Email 2: Reply to a Family Member</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+        <strong>Scenario:</strong> Your cousin sent you an email about a family reunion on July 4th in Charleston, WV. Reply to confirm you will attend and ask what you should bring.
+      </p>
+
+      <div class="example-box">
+        <strong>Hint:</strong> When replying, the subject line is already filled in. Focus on writing a warm but clear response.
+      </div>
+
+      <div class="email-box">
+        <div class="field"><strong>To:</strong> <div class="blank"></div></div>
+        <div class="field"><strong>Subject:</strong> <div class="blank"></div></div>
+        <div class="body-area"></div>
+      </div>
+
+      <div class="email-rubric">
+        <span class="criteria">Answers the question?</span><span class="check-col">☐</span>
+        <span class="criteria">Asks a follow-up question?</span><span class="check-col">☐</span>
+        <span class="criteria">Friendly but clear tone?</span><span class="check-col">☐</span>
+        <span class="criteria">Signature appears?</span><span class="check-col">☐</span>
+      </div>
+
+      <ul class="checklist" style="margin-top: 0.75rem;">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text"><strong>I typed and sent this email in Gmail</strong></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Email 3: Send an Attachment</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+        <strong>Scenario:</strong> Send an email to a classmate with a file attached. You can attach any file from your Desktop or Documents folder (a photo, a document, anything).
+      </p>
+
+      <div class="step-group">
+        <div class="step-label">How to attach a file:</div>
+        <div class="step-detail">1. Click Compose to start a new email</div>
+        <div class="step-detail">2. Click the paperclip icon (📎) at the bottom of the compose window</div>
+        <div class="step-detail">3. Find and select a file from your computer</div>
+        <div class="step-detail">4. Wait for the file to finish uploading (you will see it appear in the email)</div>
+        <div class="step-detail">5. Write your message and click Send</div>
+      </div>
+
+      <div class="email-box">
+        <div class="field"><strong>To:</strong> <div class="blank"></div></div>
+        <div class="field"><strong>Subject:</strong> <div class="blank"></div></div>
+        <div class="field"><strong>Attached file:</strong> <div class="blank"></div></div>
+        <div class="body-area"></div>
+      </div>
+
+      <div class="email-rubric">
+        <span class="criteria">File successfully attached?</span><span class="check-col">☐</span>
+        <span class="criteria">Mentioned the attachment in the email body?</span><span class="check-col">☐</span>
+        <span class="criteria">Professional format?</span><span class="check-col">☐</span>
+        <span class="criteria">Signature appears?</span><span class="check-col">☐</span>
+      </div>
+
+      <ul class="checklist" style="margin-top: 0.75rem;">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text"><strong>I typed and sent this email with an attachment in Gmail</strong></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tip-box">
+      <strong>Done early?</strong> Go back and apply labels to the emails you just sent. Check your "Sent" folder to find them.
+    </div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="part-header">
+    <h2>Part 4: Security and Search Power-Ups</h2>
+    <div>
+      <span class="part-timing">~15 minutes</span>
+      <span class="part-type">INDEPENDENT</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <p style="font-size: 0.95rem; margin-bottom: 1rem;">
+      Protecting yourself from scams and finding emails quickly are essential skills. Let's practice both.
+    </p>
+
+    <div class="section">
+      <h3 class="section-title">Exercise A: Spot the Phishing Scam</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+        This is a <strong>fake email</strong> designed to trick you. Read it carefully, then identify at least 3 red flags that tell you this is a scam.
+      </p>
+
+      <div class="phishing-card">
+        <div class="from-line"><strong>From:</strong> va-benefits-dept@secure-va-gov.net</div>
+        <div class="subject-line">Subject: URGENT: Your VA Benefits Will Be Suspended!!</div>
+        <div class="body-text">
+          Dear Valued Veteran,<br><br>
+          We have detected unusual activity on your VA account. Your benefits will be SUSPENDED in 24 hours unless you verify your identity immediately.<br><br>
+          Click here to verify: <span style="color: blue; text-decoration: underline;">http://va-verify-now.com/secure-login</span><br><br>
+          You must provide your Social Security Number and bank account information to continue receiving your benefits.<br><br>
+          Sincerely,<br>
+          Department of Veterans Affairs<br>
+          Benefits Security Division
+        </div>
+      </div>
+
+      <p style="font-size: 0.9rem; margin: 0.75rem 0 0.5rem; font-weight: 600; color: var(--primary);">
+        Find at least 3 red flags. Write them below:
+      </p>
+      <ul class="red-flags-list">
+        <li><span class="flag-num">1</span><div class="blank"></div></li>
+        <li><span class="flag-num">2</span><div class="blank"></div></li>
+        <li><span class="flag-num">3</span><div class="blank"></div></li>
+        <li><span class="flag-num">4</span><div class="blank"></div></li>
+      </ul>
+
+      <div class="warning-box" style="margin-top: 1rem;">
+        <strong>Remember:</strong> The VA will NEVER ask for your Social Security Number or bank account information by email. When in doubt, call the VA directly at 1-800-827-1000.
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Exercise B: Gmail Search Power-Ups</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+        Gmail's search bar is more powerful than you think. Try each search below and write down how many results you get.
+      </p>
+
+      <table class="search-table">
+        <thead>
+          <tr>
+            <th>What to Search</th>
+            <th>Type This in Search Bar</th>
+            <th>Results Found</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Emails from a specific person</td>
+            <td><span class="mono">from:john@example.com</span><br><span style="font-size: 0.8rem; color: var(--gray);">(use a real email address you know)</span></td>
+            <td style="min-width: 80px; border-bottom: 1px solid var(--gray);"></td>
+          </tr>
+          <tr>
+            <td>Emails with attachments</td>
+            <td><span class="mono">has:attachment</span></td>
+            <td style="border-bottom: 1px solid var(--gray);"></td>
+          </tr>
+          <tr>
+            <td>Emails from the last week</td>
+            <td><span class="mono">newer_than:7d</span></td>
+            <td style="border-bottom: 1px solid var(--gray);"></td>
+          </tr>
+          <tr>
+            <td>Emails with a specific word</td>
+            <td><span class="mono">subject:appointment</span><br><span style="font-size: 0.8rem; color: var(--gray);">(or try another word)</span></td>
+            <td style="border-bottom: 1px solid var(--gray);"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ul class="checklist" style="margin-top: 1rem;">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>I tried all 4 search operators</strong>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Bonus: Create an Automatic Filter</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+        Filters automatically label incoming emails so you do not have to do it manually. Try creating one:
+      </p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click the search options icon</strong>
+            <span class="detail">In the Gmail search bar, click the small icon on the right side (looks like sliders)</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Type an email address in the "From" field</strong>
+            <span class="detail">Use any address you get email from regularly</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click "Create filter"</strong>
+            <span class="detail">At the bottom of the search options</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Check "Apply the label" and choose one of your labels</strong>
+            <span class="detail">Then click "Create filter" to save it</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="fill-section">
+        <h3>My filter:</h3>
+        <div class="fill-line"><span class="label">Emails from:</span><div class="blank"></div></div>
+        <div class="fill-line"><span class="label">Auto-labeled as:</span><div class="blank"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-box">
+    <h3>Workshop Complete!</h3>
+    <p>Outstanding work! You now have a professional, organized Gmail setup. Here is what you accomplished today:</p>
+    <ul class="skills-earned">
+      <li>Created and color-coded 5 email labels</li>
+      <li>Built a professional email signature</li>
+      <li>Wrote and sent 3 properly formatted emails (including one with an attachment)</li>
+      <li>Identified phishing scam red flags</li>
+      <li>Learned 4 powerful search operators</li>
+    </ul>
+    <p style="margin-top: 0.75rem; font-weight: 600; color: var(--primary);">
+      This Week's Challenge: Organize at least 10 more emails in your inbox using your new labels. Try writing an email to request your VA medical records!
+    </p>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 3: Email Productivity</p>
+  </footer>
+</body>
+</html>

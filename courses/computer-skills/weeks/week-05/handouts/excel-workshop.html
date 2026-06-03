@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Budget Workshop | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --excel-green: #217346;
+      --excel-green-dark: #1a5c38;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --info: #17A2B8;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, #217346 0%, #1a5c38 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-top: 0.15rem;
+    }
+    .header-meta {
+      font-size: 0.8rem;
+      opacity: 0.75;
+      margin-top: 0.25rem;
+    }
+    .header-badge {
+      background: var(--accent);
+      color: var(--excel-green);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .header-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .header-time {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-top: 0.5rem;
+    }
+    .name-field {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    .name-field label {
+      font-weight: 600;
+      color: var(--excel-green);
+    }
+    .name-field .line {
+      flex: 1;
+      border-bottom: 2px dashed var(--gray);
+      max-width: 300px;
+    }
+    .goal-box {
+      background: linear-gradient(135deg, var(--off-white) 0%, #EDF2F7 100%);
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .goal-box h2 {
+      color: var(--excel-green);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .goal-box p {
+      font-size: 0.95rem;
+      color: var(--gray);
+    }
+    .goal-box .build-list {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+    .goal-box .build-list li {
+      font-size: 0.95rem;
+      padding: 0.25rem 0;
+      color: #333;
+    }
+    .goal-box .build-list li::before {
+      content: "\2713  ";
+      color: var(--success);
+      font-weight: 700;
+    }
+    .part-header {
+      background: var(--excel-green);
+      color: var(--light);
+      padding: 0.75rem 1rem;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    .part-header h2 { font-size: 1.15rem; margin: 0; }
+    .part-timing {
+      background: var(--accent);
+      color: var(--excel-green);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .part-type {
+      background: rgba(255,255,255,0.2);
+      color: var(--light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    .part-content {
+      border: 1px solid #E2E8F0;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .part-goal {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--off-white);
+      border-radius: 6px;
+      border-left: 4px solid var(--accent);
+    }
+    .part-goal strong { color: var(--excel-green); }
+    .section { margin-bottom: 1.25rem; }
+    .section-title {
+      background: var(--off-white);
+      color: var(--excel-green);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--accent);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .step-group { margin-bottom: 1rem; }
+    .step-label {
+      font-weight: 700;
+      color: var(--excel-green);
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+    .step-detail {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.25rem;
+      padding-left: 0.5rem;
+    }
+    .step-path {
+      font-family: Consolas, 'Courier New', monospace;
+      background: #EDF2F7;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--excel-green);
+      display: inline-block;
+      margin: 0.25rem 0;
+    }
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--off-white);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--excel-green);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--excel-green); }
+    .checklist-text .detail {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+    .fill-section {
+      background: var(--off-white);
+      padding: 1.25rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .fill-section h3 {
+      color: var(--excel-green);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .fill-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .fill-line .label {
+      min-width: 140px;
+      color: var(--gray);
+    }
+    .fill-line .blank {
+      flex: 1;
+      border-bottom: 1px dashed var(--gray);
+      min-height: 1.5rem;
+    }
+    .tip-box {
+      background: #E8F5E9;
+      border-left: 4px solid var(--success);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .tip-box strong { color: #2E7D32; }
+    .warning-box {
+      background: #FFF3F3;
+      border-left: 4px solid var(--danger);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .warning-box strong { color: var(--danger); }
+    .example-box {
+      background: #FFF8E1;
+      border-left: 4px solid var(--warning);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .example-box strong { color: #856404; }
+    .checkpoint-box {
+      background: linear-gradient(135deg, rgba(201, 162, 39, 0.12) 0%, rgba(201, 162, 39, 0.05) 100%);
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1.25rem 0;
+    }
+    .checkpoint-box h4 {
+      color: var(--excel-green);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .checkpoint-box .check-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .checkpoint-box .check-items li {
+      font-size: 0.9rem;
+      color: #333;
+      padding: 0.2rem 0;
+    }
+    .table-preview {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 0.75rem 0;
+    }
+    .table-preview th {
+      background: var(--excel-green);
+      color: var(--light);
+      padding: 0.5rem;
+      text-align: left;
+      font-weight: 600;
+    }
+    .table-preview td {
+      padding: 0.5rem;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .table-preview tr:nth-child(even) { background: var(--off-white); }
+    .bonus-box {
+      background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.03) 100%);
+      border: 2px dashed var(--accent);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .bonus-box h4 {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .bonus-box ul {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .bonus-box ul li {
+      padding: 0.2rem 0;
+    }
+    .keyboard-shortcut {
+      font-family: Consolas, 'Courier New', monospace;
+      background: #EDF2F7;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      color: var(--excel-green);
+      border: 1px solid #D1D9E6;
+    }
+    .success-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-top: 2rem;
+    }
+    .success-box h3 {
+      color: var(--success);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .success-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+    .success-box .skills-earned {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+    .success-box .skills-earned li {
+      font-size: 0.9rem;
+      padding: 0.2rem 0;
+    }
+    .success-box .skills-earned li::before {
+      content: "\2B50  ";
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0.25in; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .checkbox { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .checkpoint-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .table-preview th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { page-break-before: auto; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <span class="header-badge">WORKSHOP</span>
+      <h1 style="margin-top: 0.35rem;">Excel Budget Workshop</h1>
+      <div class="header-subtitle">Building a Personal Budget Tracker from Scratch</div>
+      <div class="header-meta">Week 5 | VUB Intermediate Computer Skills</div>
+    </div>
+    <div class="header-right">
+      <div class="header-time">~60 minutes</div>
+      <div class="header-time">4 parts</div>
+    </div>
+  </header>
+
+  <!-- NAME FIELD -->
+  <div class="name-field">
+    <label>Name:</label>
+    <div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label>
+    <div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <!-- GOAL BOX -->
+  <div class="goal-box">
+    <h2>What You Will Build Today</h2>
+    <p>By the end of this workshop, you will have created a complete personal budget spreadsheet in Microsoft Excel with formulas, sorting, filtering, a chart, and your own real spending data.</p>
+    <ul class="build-list">
+      <li>A budget spreadsheet with 8 expense categories formatted as currency</li>
+      <li>Formulas that automatically calculate totals, averages, highest, and lowest</li>
+      <li>Sorted and filtered data to find spending patterns</li>
+      <li>A bar chart visualizing your budget at a glance</li>
+    </ul>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 1: DATA ENTRY FOUNDATION                -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 1: Data Entry Foundation</h2>
+    <div>
+      <span class="part-timing">~10 min</span>
+      <span class="part-type">GUIDED</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Set up a budget spreadsheet with 8 categories and format amounts as currency.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Build Your Budget Spreadsheet</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Follow along with your instructor to create the foundation of your personal budget tracker.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Open Microsoft Excel and create a new blank workbook</strong>
+            <span class="detail">Start menu &rarr; type "Excel" &rarr; click "Blank workbook"</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>In cell A1, type "Category" &mdash; in cell B1, type "Budgeted" &mdash; in cell C1, type "Actual"</strong>
+            <span class="detail">Click cell A1, type "Category", press Tab to move to B1, type "Budgeted", Tab to C1, type "Actual"</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Bold the header row: select A1:C1 &rarr; press <span class="keyboard-shortcut">Ctrl+B</span></strong>
+            <span class="detail">Click A1, hold Shift, click C1, then press Ctrl+B to bold</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Enter 8 expense categories in column A (rows 2&ndash;9)</strong>
+            <span class="detail">Type each category in its own row: Rent/Mortgage, Groceries, Utilities, Transportation, Insurance, Phone, Medical/Copays, Entertainment</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="example-box">
+        <strong>Sample budget data &mdash; enter these values to follow along:</strong>
+        <table class="table-preview" style="margin-top: 0.5rem;">
+          <thead>
+            <tr><th>Category</th><th>Budgeted</th><th>Actual</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Rent/Mortgage</td><td>$850</td><td>$850</td></tr>
+            <tr><td>Groceries</td><td>$300</td><td>$335</td></tr>
+            <tr><td>Utilities</td><td>$150</td><td>$142</td></tr>
+            <tr><td>Transportation</td><td>$120</td><td>$98</td></tr>
+            <tr><td>Insurance</td><td>$200</td><td>$200</td></tr>
+            <tr><td>Phone</td><td>$65</td><td>$65</td></tr>
+            <tr><td>Medical/Copays</td><td>$80</td><td>$45</td></tr>
+            <tr><td>Entertainment</td><td>$100</td><td>$127</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Select all dollar amounts (B2:C9) &rarr; right-click &rarr; Format Cells &rarr; Number tab &rarr; Currency &rarr; OK</strong>
+            <span class="detail">This adds dollar signs and two decimal places automatically</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Widen columns if needed: double-click the column border between A and B to auto-fit</strong>
+            <span class="detail">Hover your mouse on the line between column letters A and B until you see a double arrow, then double-click</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> Formatting cells as Currency before entering data means every number you type will automatically show with a dollar sign. You only need to do this once!
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; Header row (A1:C1) is bold</li>
+        <li>&#9744; 8 expense categories listed in column A</li>
+        <li>&#9744; All amounts show as currency ($0.00 format)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 2: FORMULA POWER                        -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 2: Formula Power</h2>
+    <div>
+      <span class="part-timing">~15 min</span>
+      <span class="part-type">GUIDED</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Use SUM, AVERAGE, MAX, and MIN formulas to analyze your budget data.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Add Formulas to Analyze Your Budget</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Formulas are what make Excel powerful. They automatically calculate results from your data.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>In cell A10, type "TOTAL" and bold it</strong>
+            <span class="detail">Click cell A10, type "TOTAL", then press <span class="keyboard-shortcut">Ctrl+B</span> to bold</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click cell B10, type <span class="step-path">=SUM(B2:B9)</span> and press Enter</strong>
+            <span class="detail">This adds up all your budgeted amounts. You should see $1,865.00</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click cell C10, type <span class="step-path">=SUM(C2:C9)</span> and press Enter</strong>
+            <span class="detail">This adds up all your actual spending. You should see $1,862.00</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>In cell A12, type "AVERAGE" &mdash; in B12, type <span class="step-path">=AVERAGE(B2:B9)</span> &mdash; in C12, type <span class="step-path">=AVERAGE(C2:C9)</span></strong>
+            <span class="detail">AVERAGE divides the total by the number of items &mdash; your average budgeted expense</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>In cell A13, type "HIGHEST" &mdash; in B13, type <span class="step-path">=MAX(B2:B9)</span> &mdash; in C13, type <span class="step-path">=MAX(C2:C9)</span></strong>
+            <span class="detail">MAX finds the largest number &mdash; your biggest expense category</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>In cell A14, type "LOWEST" &mdash; in B14, type <span class="step-path">=MIN(B2:B9)</span> &mdash; in C14, type <span class="step-path">=MIN(C2:C9)</span></strong>
+            <span class="detail">MIN finds the smallest number &mdash; your least expensive category</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Try the Fill Handle: click cell B10, notice the small square in the bottom-right corner, drag it right to C10</strong>
+            <span class="detail">The fill handle copies formulas to adjacent cells, adjusting the column automatically!</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Add a Difference column: In D1 type "Difference", bold it. In D2 type <span class="step-path">=C2-B2</span>, press Enter. Use the fill handle to drag D2 down to D9.</strong>
+            <span class="detail">Negative numbers mean you are under budget (good!). Positive numbers mean you went over.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> The #1 mistake is forgetting to start formulas with the equals sign (=). If your formula shows as text instead of a number, check that it starts with =.
+      </div>
+
+      <div class="warning-box">
+        <strong>Common Error:</strong> If you see #VALUE! or #REF! errors, do not panic! Click the cell and check the formula bar &mdash; usually it is a typo in the cell range. Try retyping the formula.
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; SUM formulas calculate totals in row 10</li>
+        <li>&#9744; AVERAGE, MAX, and MIN formulas in rows 12&ndash;14</li>
+        <li>&#9744; Difference column (D) shows over/under for each category</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 3: SORT, FILTER & VISUALIZE             -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 3: Sort, Filter &amp; Visualize</h2>
+    <div>
+      <span class="part-timing">~15 min</span>
+      <span class="part-type">INDEPENDENT</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Sort your data, apply filters, and create a bar chart.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Sort and Filter Your Data</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Sorting and filtering help you find patterns in your spending without changing your data permanently.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click anywhere in your data (A1:D9) &rarr; Data tab &rarr; Sort &rarr; Sort by "Actual" &rarr; Largest to Smallest &rarr; OK</strong>
+            <span class="detail">Your expenses are now ordered from highest to lowest actual spending</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>To undo the sort and restore original order: press <span class="keyboard-shortcut">Ctrl+Z</span></strong>
+            <span class="detail">Undo puts your rows back in the original order</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>With your data selected, go to Data tab &rarr; click Filter</strong>
+            <span class="detail">Small dropdown arrows appear on each header cell</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click the dropdown arrow on column B ("Budgeted") &rarr; Number Filters &rarr; Greater Than &rarr; type 100 &rarr; OK</strong>
+            <span class="detail">Only expenses over $100 are shown. The hidden rows are NOT deleted &mdash; just hidden temporarily.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Remove the filter: Data tab &rarr; click "Clear" (or click the dropdown &rarr; Clear Filter)</strong>
+            <span class="detail">All your rows reappear &mdash; nothing was deleted</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Create a Bar Chart</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Charts turn numbers into visual pictures that make your budget easy to understand at a glance.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Select your data A1:B9 (Category and Budgeted columns) &rarr; Insert tab &rarr; Bar Chart &rarr; Clustered Bar</strong>
+            <span class="detail">Excel creates a chart showing each category's budgeted amount as a horizontal bar</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Click the chart title and rename it to "Monthly Budget Overview"</strong>
+            <span class="detail">Click directly on the chart title text, select it, and type the new name</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Resize the chart by dragging a corner handle &mdash; make it large enough to read easily</strong>
+            <span class="detail">Click the chart border to select it, then drag one of the corner squares to resize</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Try adding Actual data: right-click the chart &rarr; Select Data &rarr; Add &rarr; Series name: click C1, Series values: select C2:C9 &rarr; OK</strong>
+            <span class="detail">Now your chart shows budgeted vs actual side-by-side for each category!</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> Keyboard shortcut: Select your data and press <span class="keyboard-shortcut">Alt+F1</span> to instantly create a chart on the same sheet!
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; You sorted data by Actual amount (then undid it)</li>
+        <li>&#9744; You filtered to show only expenses over $100 (then cleared it)</li>
+        <li>&#9744; A bar chart displays your budget data with a custom title</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 4: PERSONALIZE YOUR BUDGET              -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 4: Personalize Your Budget</h2>
+    <div>
+      <span class="part-timing">~20 min</span>
+      <span class="part-type">INDEPENDENT</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Replace sample data with your real spending, add categories, and apply conditional formatting.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Make It Your Own</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Now it is time to turn this sample spreadsheet into your real personal budget.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Replace the sample amounts with your real monthly spending</strong>
+            <span class="detail">Click each cell in the Budgeted and Actual columns and type your real numbers. The formulas update automatically!</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Add more categories if needed: insert a row (right-click row number &rarr; Insert) and add your category</strong>
+            <span class="detail">After adding rows, UPDATE your formulas! Change =SUM(B2:B9) to include the new rows (e.g., =SUM(B2:B11))</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="warning-box">
+        <strong>Important:</strong> When you add new rows, your formulas may not automatically include the new data. Always double-check that your SUM, AVERAGE, MAX, and MIN ranges cover all your expense rows.
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Apply Conditional Formatting</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Conditional formatting adds automatic color coding so you can see your budget status at a glance.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Select D2:D9 &rarr; Home tab &rarr; Conditional Formatting &rarr; Highlight Cells Rules &rarr; Less Than &rarr; type 0 &rarr; select "Green Fill with Dark Green Text" &rarr; OK</strong>
+            <span class="detail">This highlights under-budget categories in green so you can see at a glance where you are saving money</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Apply another rule: Conditional Formatting &rarr; Highlight Cells Rules &rarr; Greater Than &rarr; type 0 &rarr; select "Light Red Fill with Dark Red Text" &rarr; OK</strong>
+            <span class="detail">Over-budget categories now show in red &mdash; a visual warning to watch your spending</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Review and Save</h3>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Review your chart &mdash; it should have updated with your real data</strong>
+            <span class="detail">Click on the chart to verify the bars reflect your actual spending amounts</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Save your workbook: press <span class="keyboard-shortcut">Ctrl+S</span> &rarr; name it "Budget_YourName.xlsx" &rarr; save to Desktop or Documents</strong>
+            <span class="detail">Example: Budget_Smith.xlsx &mdash; use your own last name</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="bonus-box">
+      <h4>Bonus Challenges (Done Early? Try These!)</h4>
+      <ul>
+        <li>Add a "Savings Goal" row at the bottom: type your target monthly savings, then create a formula: =Income - Total Spending (this shows how much money is left over — positive means you have savings!)</li>
+        <li>Create a Pie Chart of your actual spending to see budget breakdown percentages</li>
+        <li>Add a second sheet tab (click "+" at the bottom) for next month's budget</li>
+      </ul>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Final Checkpoint &mdash; Review your work:</h4>
+      <ul class="check-items">
+        <li>&#9744; Sample data replaced with your real spending amounts</li>
+        <li>&#9744; Conditional formatting shows green (under budget) and red (over budget)</li>
+        <li>&#9744; Formulas still calculate correctly with your real data</li>
+        <li>&#9744; Workbook saved as "Budget_YourName.xlsx"</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SUCCESS BOX                                  -->
+  <!-- ============================================ -->
+  <div class="success-box">
+    <h3>Workshop Complete!</h3>
+    <p>Outstanding work! You have built a complete personal budget tracker in Excel. Here is what you accomplished today:</p>
+    <ul class="skills-earned">
+      <li>Created a budget spreadsheet with 8 categories and currency formatting</li>
+      <li>Used SUM, AVERAGE, MAX, and MIN formulas to analyze spending</li>
+      <li>Sorted and filtered data to find patterns in your expenses</li>
+      <li>Built a bar chart comparing budgeted vs actual spending</li>
+      <li>Applied conditional formatting for visual over/under-budget alerts</li>
+      <li>Personalized the budget with your own real spending data</li>
+    </ul>
+    <p style="margin-top: 0.75rem; font-weight: 600; color: var(--excel-green);">
+      This Week's Challenge: Track your real spending every day this week. Update your budget spreadsheet daily. Bring your completed budget to Week 6 &mdash; we will save it to Google Drive so you can access it anywhere!
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound &mdash; West Virginia</strong> | Week 5: Microsoft Excel Intermediate</p>
+    <p style="margin-top: 0.25rem;">Keep this handout! Use it as a reference when building spreadsheets at home.</p>
+  </footer>
+
+</body>
+</html>

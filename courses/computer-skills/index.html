@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intermediate Computer Skills | VUB Learning Dashboard</title>
+  <style>
+    :root {
+      --navy: #22384f;
+      --navy-dark: #172636;
+      --red: #8f3845;
+      --gold: #b59a5b;
+      --ink: #1f2d3a;
+      --muted: #63717d;
+      --line: #ddd7ca;
+      --paper: #ffffff;
+      --wash: #f5f3ee;
+      --focus: #f5c84c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.38), rgba(255,255,255,0)),
+        var(--wash);
+      color: var(--ink);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    a:focus-visible {
+      outline: 4px solid var(--focus);
+      outline-offset: 4px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem clamp(1rem, 3vw, 2.25rem);
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 1px 0 rgba(34, 56, 79, 0.04);
+    }
+
+    .brand,
+    .topbar a {
+      color: var(--navy);
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(34, 56, 79, 0.16);
+    }
+
+    .top-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0.55rem 0.85rem;
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      background:
+        linear-gradient(115deg, rgba(23, 38, 54, 0.97), rgba(47, 70, 93, 0.94)),
+        repeating-linear-gradient(90deg, rgba(210,196,160,0.08) 0 1px, transparent 1px 88px);
+      color: #fff;
+      padding: clamp(2.5rem, 7vw, 5rem) clamp(1rem, 4vw, 3rem);
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 0.35rem 0.7rem;
+      background: #d2c4a0;
+      color: var(--navy-dark);
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 1rem 0 0.85rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.3rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 780px;
+      margin: 0;
+      color: #e7edf5;
+      font-size: clamp(1.15rem, 2vw, 1.35rem);
+    }
+
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 2rem clamp(1rem, 3vw, 2rem) 4rem;
+    }
+
+    .resource-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .resource-card {
+      display: block;
+      position: relative;
+      min-height: 128px;
+      padding: 1rem;
+      background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(246,244,238,0.94));
+      border: 1px solid var(--line);
+      border-left: 7px solid var(--red);
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 10px 32px rgba(13, 27, 42, 0.08);
+      overflow: hidden;
+    }
+
+    .resource-card::after {
+      content: "";
+      position: absolute;
+      right: -28px;
+      bottom: -38px;
+      width: 116px;
+      height: 116px;
+      border: 16px solid rgba(181, 154, 91, 0.12);
+      transform: rotate(18deg);
+    }
+
+    .resource-card strong {
+      display: block;
+      color: var(--navy);
+      font-size: 1.1rem;
+    }
+
+    .resource-card span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .lesson-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.15rem;
+    }
+
+    .lesson-card {
+      --theme: #425b70;
+      --theme-dark: #22384f;
+      --theme-soft: #eef1f0;
+      display: flex;
+      position: relative;
+      min-height: 390px;
+      flex-direction: column;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 16px 48px rgba(13, 27, 42, 0.11);
+      overflow: hidden;
+    }
+
+    .lesson-card[data-theme="va"] { --theme: #516b5f; --theme-dark: #1f3b33; --theme-soft: #edf2ed; }
+    .lesson-card[data-theme="windows"] { --theme: #4f7189; --theme-dark: #20384b; --theme-soft: #ecf2f5; }
+    .lesson-card[data-theme="email"] { --theme: #8f6f3b; --theme-dark: #4e3b20; --theme-soft: #f5f0e4; }
+    .lesson-card[data-theme="word"] { --theme: #334f74; --theme-dark: #1c2d46; --theme-soft: #eef2f7; }
+    .lesson-card[data-theme="excel"] { --theme: #4f714d; --theme-dark: #283f2b; --theme-soft: #edf4eb; }
+    .lesson-card[data-theme="cloud"] { --theme: #5c7580; --theme-dark: #2f4853; --theme-soft: #edf3f5; }
+    .lesson-card[data-theme="ai"] { --theme: #6a5f82; --theme-dark: #37304f; --theme-soft: #f0eef5; }
+    .lesson-card[data-theme="mobile"] { --theme: #8f3845; --theme-dark: #4d1e28; --theme-soft: #f6ecee; }
+
+    .lesson-art {
+      position: relative;
+      height: 128px;
+      background:
+        linear-gradient(120deg, var(--theme-dark), var(--theme)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.14) 0 1px, transparent 1px 32px);
+      overflow: hidden;
+    }
+
+    .lesson-art::before {
+      content: attr(data-code);
+      position: absolute;
+      left: 1rem;
+      top: 0.85rem;
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      padding: 0.25rem 0.6rem;
+      background: rgba(255,255,255,0.9);
+      color: var(--theme-dark);
+      border-radius: 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 900;
+      box-shadow: 0 12px 26px rgba(0,0,0,0.16);
+    }
+
+    .lesson-art::after {
+      content: "";
+      position: absolute;
+      right: 1.1rem;
+      bottom: 1rem;
+      width: 110px;
+      height: 58px;
+      border-top: 13px solid rgba(210, 196, 160, 0.78);
+      border-bottom: 13px solid rgba(255, 255, 255, 0.28);
+      transform: skewX(-20deg);
+    }
+
+    .lesson-card[data-theme="windows"] .lesson-art::after {
+      width: 78px;
+      height: 78px;
+      border: 0;
+      background:
+        linear-gradient(90deg, transparent 47%, rgba(255,255,255,0.55) 48% 52%, transparent 53%),
+        linear-gradient(0deg, transparent 47%, rgba(255,255,255,0.55) 48% 52%, transparent 53%),
+        rgba(210,196,160,0.45);
+      transform: perspective(120px) rotateY(-18deg);
+    }
+
+    .lesson-card[data-theme="email"] .lesson-art::after {
+      width: 98px;
+      height: 62px;
+      border: 3px solid rgba(255,255,255,0.58);
+      background:
+        linear-gradient(145deg, transparent 48%, rgba(255,255,255,0.58) 49% 51%, transparent 52%),
+        linear-gradient(35deg, transparent 48%, rgba(255,255,255,0.58) 49% 51%, transparent 52%);
+      transform: none;
+    }
+
+    .lesson-card[data-theme="cloud"] .lesson-art::after,
+    .lesson-card[data-theme="ai"] .lesson-art::after {
+      width: 92px;
+      height: 92px;
+      border: 2px solid rgba(255,255,255,0.44);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(210,196,160,0.42) 0 28%, transparent 29%);
+      transform: none;
+    }
+
+    .lesson-body {
+      flex: 1;
+      padding: 1.1rem;
+      background: linear-gradient(180deg, var(--theme-soft), rgba(255,255,255,0.96) 42%);
+    }
+
+    .lesson-kicker {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.7rem;
+      color: var(--theme-dark);
+      font-size: 0.86rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .lesson-card h2 {
+      margin: 0 0 0.55rem;
+      color: var(--navy);
+      font-size: 1.35rem;
+      line-height: 1.25;
+    }
+
+    .lesson-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 1rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .skill-tags li {
+      padding: 0.25rem 0.5rem;
+      color: var(--theme-dark);
+      background: rgba(255,255,255,0.74);
+      border: 1px solid rgba(99, 113, 125, 0.24);
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 750;
+    }
+
+    .lesson-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+      padding: 1.1rem;
+      background: #fff;
+    }
+
+    .lesson-actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0.6rem 0.7rem;
+      background: var(--theme-dark);
+      color: #fff;
+      border: 2px solid var(--theme-dark);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 850;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .lesson-actions a.secondary {
+      background: #fff;
+      color: var(--theme-dark);
+      border-color: var(--line);
+    }
+
+    @media (max-width: 680px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .top-link {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 520px) {
+      body { font-size: 17px; }
+      .lesson-actions { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Progress banner ──────────────────────────────────── */
+    .progress-banner {
+      max-width: 1200px;
+      margin: 0 auto 1.5rem;
+      padding: 1.25rem clamp(1rem, 3vw, 2rem);
+      background: linear-gradient(180deg, #fff, #fbf8f1);
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--gold);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(34, 56, 79, 0.05);
+    }
+    .progress-banner[hidden] { display: none; }
+    .progress-banner-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--red);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .progress-banner-headline {
+      font-size: 1.25rem;
+      font-weight: 850;
+      color: var(--navy);
+      margin: 0 0 0.75rem;
+      line-height: 1.3;
+    }
+    .progress-banner-bar {
+      width: 100%;
+      height: 10px;
+      background: var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 0.5rem 0 0.85rem;
+    }
+    .progress-banner-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), #d9b760);
+      width: 0%;
+      transition: width 0.6s ease;
+    }
+    .progress-banner-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .progress-banner-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 44px;
+      padding: 0.55rem 1rem;
+      background: var(--navy);
+      color: #fff;
+      border: 2px solid var(--navy);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 850;
+      text-decoration: none;
+    }
+    .progress-banner-cta:hover { background: var(--navy-dark); border-color: var(--navy-dark); }
+    .progress-banner-meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* ─── Per-card progress badge ─────────────────────────── */
+    .lesson-card { position: relative; }
+    .lesson-progress {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.6rem;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+      z-index: 2;
+    }
+    .lesson-progress[data-state="complete"] {
+      background: var(--gold);
+      color: #2a2410;
+      border-color: var(--gold);
+    }
+    .lesson-progress[data-state="in-progress"] {
+      background: #fffbf0;
+      border-color: var(--gold);
+    }
+    .lesson-progress[hidden] { display: none; }
+    .lesson-progress-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* ─── Footer / reset ──────────────────────────────────── */
+    .dashboard-footer {
+      max-width: 1200px;
+      margin: 2.5rem auto 1.5rem;
+      padding: 0 clamp(1rem, 3vw, 2rem);
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .dashboard-footer button {
+      background: none;
+      border: none;
+      color: var(--muted);
+      text-decoration: underline;
+      font: inherit;
+      cursor: pointer;
+      padding: 0.5rem;
+      min-height: 44px;
+    }
+    .dashboard-footer button:hover { color: var(--red); }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="VUB Learning Dashboard home">
+      <img class="brand-logo" src="assets/vub-logo.svg" alt="" width="44" height="44">
+      <span>Learning Dashboard</span>
+    </a>
+    <a class="top-link" href="index.html">Back to Courses</a>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Intermediate Computer Skills</span>
+      <h1>Select the weekly slideshow.</h1>
+      <p>Each week has its own visual identity. Open the presentation for the lesson you are teaching or attending, with syllabi and workshop handouts close by.</p>
+    </div>
+  </section>
+
+  <main>
+    <section class="progress-banner" id="progressBanner" hidden aria-live="polite">
+      <p class="progress-banner-title">Your Progress</p>
+      <h2 class="progress-banner-headline" id="progressHeadline">Welcome back.</h2>
+      <div class="progress-banner-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+        <div class="progress-banner-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-banner-actions">
+        <a class="progress-banner-cta" id="progressResumeBtn" href="#">Resume</a>
+        <span class="progress-banner-meta" id="progressMeta"></span>
+      </div>
+    </section>
+
+    <section class="resource-strip" aria-label="Course resources">
+      <a class="resource-card" href="intermediate-computer-skills/syllabus-overview.html">
+        <strong>Course Overview</strong>
+        <span>View the full eight-week course outline.</span>
+      </a>
+      <a class="resource-card" href="intermediate-computer-skills/weeks/week-01/pre-test.html">
+        <strong>Pre-Test</strong>
+        <span>Open the baseline assessment.</span>
+      </a>
+      <a class="resource-card" href="intermediate-computer-skills/weeks/week-08/post-test.html">
+        <strong>Post-Test</strong>
+        <span>Open the final assessment.</span>
+      </a>
+    </section>
+
+    <section class="lesson-grid" aria-label="Weekly lessons">
+      <article class="lesson-card" data-theme="va">
+        <div class="lesson-art" data-code="W01"></div>
+        <div class="lesson-body">
+          <div class="lesson-kicker"><span>VA Services</span><span>Week 1 of 8</span></div>
+          <h2>VA Online Services and Pre-Test</h2>
+          <p>VA.gov, MyHealtheVet, eBenefits, account access, and baseline assessment.</p>
+          <ul class="skill-tags"><li>VA.gov</li><li>MyHealtheVet</li><li>Pre-test</li></ul>
+        </div>
+        <div class="lesson-actions">
+          <a href="intermediate-computer-skills/weeks/week-01/presentation.html">Open Slideshow</a>
+          <a class="secondary" href="intermediate-computer-skills/weeks/week-01/syllabus.html">Syllabus</a>
+        </div>
+      </article>
+
+      <article class="lesson-card" data-theme="windows">
+        <div class="lesson-art" data-code="W02"></div>
+        <div class="lesson-body">
+          <div class="lesson-kicker"><span>Productivity</span><span>Week 2 of 8</span></div>
+          <h2>Windows Tips and Productivity</h2>
+          <p>Keyboard shortcuts, window management, screenshots, and accessibility settings.</p>
+          <ul class="skill-tags"><li>Shortcuts</li><li>Snapping</li><li>Screenshots</li></ul>
+        </div>
+        <div class="lesson-actions">
+          <a href="intermediate-computer-skills/weeks/week-02/presentation.html">Open Slideshow</a>
+          <a class="secondary" href="intermediate-computer-skills/weeks/week-02/handouts/windows-workshop.html">Workshop</a>
+        </div>
+      </article>
+
+      <article class="lesson-card" data-theme="email">
+        <div class="lesson-art" data-code="W03"></div>
+        <div class="lesson-body">
+          <div class="lesson-kicker"><span>Communication</span><span>Week 3 of 8</span></div>
+          <h2>Email Productivity</h2>
+          <p>Gmail organization, searching, attachments, labels, and professional email habits.</p>
+          <ul class="skill-tags"><li>Gmail</li><li>Labels</li><li>Attachments</li></ul>
+        </div>
+        <div class="lesson-actions">
+          <a href="intermediate-computer-skills/weeks/week-03/presentation.html">Open Slideshow</a>
+          <a class="secondary" href="intermediate-computer-skills/weeks/week-03/handouts/gmail-workshop.html">Workshop</a>
+        </div>
+      </article>
+
+      <article class="lesson-card" data-theme="word">
+        <div class="lesson-art" data-code="W04"></div>
+        <div class="lesson-body">
+          <div class="lesson-kicker"><span>Documents</span><span>Week 4 of 8</span></div>
+          <h2>Microsoft Word Intermediate</h2>
+          <p>Formatting, styles, lists, tables, page layout, and clean document preparation.</p>
+          <ul class="skill-tags"><li>Styles</li><li>Tables</li><li>Layout</li></ul>
+        </div>
+        <div class="lesson-actions">
+          <a href="intermediate-computer-skills/weeks/week-04/presentation.html">Open Slideshow</a>
+          <a class="secondary" href="intermediate-computer-skills/weeks/week-04/handouts/word-workshop.html">Workshop</a>
+        </div>
+      </article>
+
+      <article class="lesson-card" data-theme="excel">
+        <div class="lesson-art" data-code="W05"></div>
+        <div class="lesson-body">
+          <div class="lesson-kicker"><span>Spreadsheets</span><span>Week 5 of 8</span></div>
+          <h2>Microsoft Excel Intermediate</h2>
+          <p>Formulas, formatting, budgets, charts, sorting, and practical spreadsheet review.</p>
+          <ul class="skill-tags"><li>Formulas</li><li>Budgets</li><li>Charts</li></ul>
+        </div>
+        <div class="lesson-actions">
+          <a href="intermediate-computer-skills/weeks/week-05/presentation.html">Open Slideshow</a>
+          <a class="secondary" href="intermediate-computer-skills/weeks/week-05/handouts/excel-workshop.html">Workshop</a>
+        </div>
+      </article>
+
+      <article class="lesson-card" data-theme="cloud">
+        <div class="lesson-art" data-code="W06"></div>
+        <div class="lesson-body">
+          <div class="lesson-kicker"><span>Cloud Storage</span><span>Week 6 of 8</span></div>
+          <h2>Cloud Computing and Google Drive</h2>
+          <p>Cloud storage, folders, sharing, collaboration, and file safety basics.</p>
+          <ul class="skill-tags"><li>Drive</li><li>Sharing</li><li>Folders</li></ul>
+        </div>
+        <div class="lesson-actions">
+          <a href="intermediate-computer-skills/weeks/week-06/presentation.html">Open Slideshow</a>
+          <a class="secondary" href="intermediate-computer-skills/weeks/week-06/handouts/cloud-workshop.html">Workshop</a>
+        </div>
+      </article>
+
+      <article class="lesson-card" data-theme="ai">
+        <div class="lesson-art" data-code="W07"></div>
+        <div class="lesson-body">
+          <div class="lesson-kicker"><span>AI Tools</span><span>Week 7 of 8</span></div>
+          <h2>Introduction to AI Tools</h2>
+          <p>Prompt basics, responsible use, fact checking, and practical ChatGPT activities.</p>
+          <ul class="skill-tags"><li>Prompts</li><li>Review</li><li>Fact check</li></ul>
+        </div>
+        <div class="lesson-actions">
+          <a href="intermediate-computer-skills/weeks/week-07/presentation.html">Open Slideshow</a>
+          <a class="secondary" href="intermediate-computer-skills/weeks/week-07/handouts/ai-workshop.html">Workshop</a>
+        </div>
+      </article>
+
+      <article class="lesson-card" data-theme="mobile">
+        <div class="lesson-art" data-code="W08"></div>
+        <div class="lesson-body">
+          <div class="lesson-kicker"><span>Review</span><span>Week 8 of 8</span></div>
+          <h2>Mobile Integration and Post-Test</h2>
+          <p>Mobile account access, review activities, final assessment, and next steps.</p>
+          <ul class="skill-tags"><li>Mobile</li><li>Review</li><li>Post-test</li></ul>
+        </div>
+        <div class="lesson-actions">
+          <a href="intermediate-computer-skills/weeks/week-08/presentation.html">Open Slideshow</a>
+          <a class="secondary" href="intermediate-computer-skills/weeks/week-08/post-test.html">Post-Test</a>
+        </div>
+      </article>
+    </section>
+
+    <div class="dashboard-footer">
+      Progress is saved on this computer only. Using a shared lab machine?
+      <button type="button" id="resetProgressBtn">Reset my progress</button>
+    </div>
+  </main>
+
+  <script src="shared/progress.js"></script>
+  <script>
+    (function () {
+      if (!window.VubProgress) return;
+
+      const WEEK_TITLES = {
+        1: 'VA Online Services & Pre-Test',
+        2: 'Windows Tips & Productivity',
+        3: 'Email Productivity',
+        4: 'Microsoft Word',
+        5: 'Microsoft Excel',
+        6: 'Cloud Computing & Google Drive',
+        7: 'Introduction to AI Tools',
+        8: 'Mobile Integration & Post-Test'
+      };
+      const TOTAL_WEEKS = 8;
+
+      // Decorate each lesson card with a progress badge + resume button.
+      document.querySelectorAll('.lesson-card').forEach(function (card) {
+        const link = card.querySelector('.lesson-actions a');
+        if (!link) return;
+        const match = link.getAttribute('href').match(/week-0?(\d+)/);
+        if (!match) return;
+        const weekNum = parseInt(match[1], 10);
+        const entry = VubProgress.get('ics', weekNum);
+
+        // Add a progress badge to the card corner.
+        const badge = document.createElement('span');
+        badge.className = 'lesson-progress';
+
+        if (!entry || typeof entry.slide !== 'number') {
+          badge.hidden = true;
+        } else if (entry.completed) {
+          badge.dataset.state = 'complete';
+          badge.innerHTML = '<span class="lesson-progress-dot"></span>Complete';
+          link.textContent = 'Review Slideshow';
+        } else {
+          badge.dataset.state = 'in-progress';
+          const total = entry.total || '?';
+          badge.innerHTML = '<span class="lesson-progress-dot"></span>' + (entry.percent || 0) + '%';
+          link.textContent = 'Resume — Slide ' + (entry.slide + 1) + ' of ' + total;
+        }
+        card.appendChild(badge);
+      });
+
+      // Populate the top progress banner if there's a recent week.
+      const summary = VubProgress.getCourseSummary('ics');
+      if (summary.lastWeek) {
+        const weekNum = parseInt(summary.lastWeek, 10);
+        const entry = VubProgress.get('ics', weekNum);
+        const banner = document.getElementById('progressBanner');
+        const headline = document.getElementById('progressHeadline');
+        const fill = document.getElementById('progressFill');
+        const bar = document.getElementById('progressBar');
+        const cta = document.getElementById('progressResumeBtn');
+        const meta = document.getElementById('progressMeta');
+
+        // Course-level progress: fraction of weeks started/completed.
+        const coursePercent = Math.round(((summary.completed + (summary.started - summary.completed) * 0.5) / TOTAL_WEEKS) * 100);
+        fill.style.width = coursePercent + '%';
+        bar.setAttribute('aria-valuenow', String(coursePercent));
+
+        if (entry && entry.completed) {
+          headline.textContent = 'Week ' + weekNum + ' complete — keep going!';
+          cta.textContent = 'Open Week ' + weekNum + ' to review';
+        } else if (entry) {
+          headline.textContent = 'Resume Week ' + weekNum + ': ' + (WEEK_TITLES[weekNum] || '');
+          cta.textContent = 'Resume — Slide ' + (entry.slide + 1) + ' of ' + (entry.total || '?');
+        } else {
+          headline.textContent = 'Welcome back.';
+          cta.textContent = 'Open Week ' + weekNum;
+        }
+        cta.href = 'intermediate-computer-skills/weeks/week-0' + weekNum + '/presentation.html';
+        meta.textContent = summary.completed + ' of ' + TOTAL_WEEKS + ' weeks complete · ' + summary.started + ' started';
+        banner.hidden = false;
+      }
+
+      // Reset progress affordance.
+      document.getElementById('resetProgressBtn').addEventListener('click', function () {
+        if (confirm('Clear all your saved progress for the Computer Skills course on this computer?')) {
+          VubProgress.reset('ics');
+          location.reload();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

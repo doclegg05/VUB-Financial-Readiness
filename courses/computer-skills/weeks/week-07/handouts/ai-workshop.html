@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Tools Workshop | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --ai-purple: #7C3AED;
+      --ai-purple-dark: #5B21B6;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --info: #17A2B8;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-top: 0.15rem;
+    }
+    .header-meta {
+      font-size: 0.8rem;
+      opacity: 0.75;
+      margin-top: 0.25rem;
+    }
+    .header-badge {
+      background: var(--accent);
+      color: var(--ai-purple-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .header-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .header-time {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-top: 0.5rem;
+    }
+    .name-field {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    .name-field label {
+      font-weight: 600;
+      color: var(--ai-purple);
+    }
+    .name-field .line {
+      flex: 1;
+      border-bottom: 2px dashed var(--gray);
+      max-width: 300px;
+    }
+    .goal-box {
+      background: linear-gradient(135deg, var(--off-white) 0%, #EDF2F7 100%);
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .goal-box h2 {
+      color: var(--ai-purple);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .goal-box p {
+      font-size: 0.95rem;
+      color: var(--gray);
+    }
+    .goal-box .build-list {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+    .goal-box .build-list li {
+      font-size: 0.95rem;
+      padding: 0.25rem 0;
+      color: #333;
+    }
+    .goal-box .build-list li::before {
+      content: "\2713  ";
+      color: var(--success);
+      font-weight: 700;
+    }
+    .part-header {
+      background: var(--ai-purple);
+      color: var(--light);
+      padding: 0.75rem 1rem;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    .part-header h2 { font-size: 1.15rem; margin: 0; }
+    .part-timing {
+      background: var(--accent);
+      color: var(--ai-purple-dark);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .part-type {
+      background: rgba(255,255,255,0.2);
+      color: var(--light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    .part-content {
+      border: 1px solid #E2E8F0;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .part-goal {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--off-white);
+      border-radius: 6px;
+      border-left: 4px solid var(--accent);
+    }
+    .part-goal strong { color: var(--ai-purple); }
+    .section { margin-bottom: 1.25rem; }
+    .section-title {
+      background: var(--off-white);
+      color: var(--ai-purple);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--ai-purple);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .step-group { margin-bottom: 1rem; }
+    .step-label {
+      font-weight: 700;
+      color: var(--ai-purple);
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+    .step-detail {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.25rem;
+      padding-left: 0.5rem;
+    }
+    .step-path {
+      font-family: Consolas, 'Courier New', monospace;
+      background: #EDF2F7;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--ai-purple);
+      display: inline-block;
+      margin: 0.25rem 0;
+    }
+    .prompt-text {
+      font-family: Consolas, 'Courier New', monospace;
+      background: #F3E8FF;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: var(--ai-purple-dark);
+      display: block;
+      margin: 0.35rem 0;
+      border-left: 3px solid var(--ai-purple);
+      line-height: 1.5;
+    }
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--off-white);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--ai-purple);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--ai-purple); }
+    .checklist-text .detail {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+    .fill-section {
+      background: var(--off-white);
+      padding: 1.25rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .fill-section h3 {
+      color: var(--ai-purple);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .fill-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .fill-line .label {
+      min-width: 140px;
+      color: var(--gray);
+    }
+    .fill-line .blank {
+      flex: 1;
+      border-bottom: 1px dashed var(--gray);
+      min-height: 1.5rem;
+    }
+    .fill-line-wide {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .fill-line-wide .label {
+      color: var(--gray);
+    }
+    .fill-line-wide .blank {
+      border-bottom: 1px dashed var(--gray);
+      min-height: 1.5rem;
+      width: 100%;
+    }
+    .tip-box {
+      background: #E8F5E9;
+      border-left: 4px solid var(--success);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .tip-box strong { color: #2E7D32; }
+    .warning-box {
+      background: #FFF3F3;
+      border-left: 4px solid var(--danger);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .warning-box strong { color: var(--danger); }
+    .example-box {
+      background: #FFF8E1;
+      border-left: 4px solid var(--warning);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+    .example-box strong { color: #856404; }
+    .checkpoint-box {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.12) 0%, rgba(124, 58, 237, 0.05) 100%);
+      border: 2px solid var(--ai-purple);
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1.25rem 0;
+    }
+    .checkpoint-box h4 {
+      color: var(--ai-purple);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .checkpoint-box .check-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .checkpoint-box .check-items li {
+      font-size: 0.9rem;
+      color: #333;
+      padding: 0.2rem 0;
+    }
+    .task-box {
+      background: #F3E8FF;
+      border: 1px solid #DDD6FE;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .task-box h4 {
+      color: var(--ai-purple);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .task-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.35rem;
+    }
+    .keyboard-shortcut {
+      font-family: Consolas, 'Courier New', monospace;
+      background: #EDF2F7;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      color: var(--ai-purple);
+      border: 1px solid #D1D9E6;
+    }
+    .success-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-top: 2rem;
+    }
+    .success-box h3 {
+      color: var(--success);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .success-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+    .success-box .skills-earned {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+    .success-box .skills-earned li {
+      font-size: 0.9rem;
+      padding: 0.2rem 0;
+    }
+    .success-box .skills-earned li::before {
+      content: "\2B50  ";
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    .fact-check-block {
+      background: var(--off-white);
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .fact-check-block h4 {
+      color: var(--ai-purple);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+    @media print {
+      body { padding: 0.25in; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .checkbox { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .checkpoint-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { page-break-before: auto; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <span class="header-badge">WORKSHOP</span>
+      <h1 style="margin-top: 0.35rem;">AI Tools Workshop</h1>
+      <div class="header-subtitle">Your First Conversations with ChatGPT</div>
+      <div class="header-meta">Week 7 | VUB Intermediate Computer Skills</div>
+    </div>
+    <div class="header-right">
+      <div class="header-time">~60 minutes</div>
+      <div class="header-time">4 parts</div>
+    </div>
+  </header>
+
+  <!-- NAME FIELD -->
+  <div class="name-field">
+    <label>Name:</label>
+    <div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label>
+    <div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <!-- GOAL BOX -->
+  <div class="goal-box">
+    <h2>What You Will Learn Today</h2>
+    <p>By the end of this workshop, you will have had real conversations with ChatGPT, learned to write effective prompts, completed practical AI tasks, and tested AI's accuracy.</p>
+    <ul class="build-list">
+      <li>Your first conversation with an AI &mdash; asking questions and getting answers</li>
+      <li>The skill of writing strong prompts that get useful responses</li>
+      <li>Real-world tasks completed with AI help (letters, meal plans, emails)</li>
+      <li>Knowledge of AI's limitations by testing what it gets right and wrong</li>
+    </ul>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 1: FIRST CONVERSATION                   -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 1: First Conversation</h2>
+    <div>
+      <span class="part-timing">~10 min</span>
+      <span class="part-type">GUIDED</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Send your first prompt to ChatGPT and observe how follow-up context works.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Your First AI Conversation</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Follow along with your instructor to send your first message to ChatGPT and see how the conversation builds.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Open Chrome and go to chat.openai.com &mdash; sign in with the account you created</strong>
+            <span class="detail">If you haven't created an account yet, follow the instructor's steps on the projector</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Find the text box at the bottom of the screen &mdash; this is where you type your messages</strong>
+            <span class="detail">It looks similar to a search bar. This is where you talk to the AI.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Type this exactly:</strong>
+            <span class="prompt-text">Hello! I am a veteran learning to use AI tools for the first time. What can you help me with?</span>
+            <span class="detail">Press Enter or click the send arrow</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Read ChatGPT's response &mdash; notice how much it writes!</strong>
+            <span class="detail">Take a moment to read through the full response. AI tends to give long answers.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Now ask a follow-up:</strong>
+            <span class="prompt-text">Can you give me just 5 examples, in a numbered list?</span>
+            <span class="detail">Notice: ChatGPT remembers your first message and adjusts its answer</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Ask one more follow-up:</strong>
+            <span class="prompt-text">Tell me more about number 3</span>
+            <span class="detail">This shows how AI conversations build on previous messages</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> ChatGPT remembers everything you say in one conversation. You can refer back to earlier messages. Starting a "New Chat" erases this memory and starts fresh.
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; Sent first message to ChatGPT</li>
+        <li>&#9744; Received a response from the AI</li>
+        <li>&#9744; Asked a follow-up question that built on the first response</li>
+        <li>&#9744; Understand that ChatGPT remembers context within a conversation</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 2: PROMPTING CHALLENGE                   -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 2: Prompting Challenge</h2>
+    <div>
+      <span class="part-timing">~15 min</span>
+      <span class="part-type">GUIDED</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Learn the difference between weak and strong prompts, then improve 3 prompts.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Weak vs. Strong Prompts</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Not all prompts are created equal. A vague question gets a vague answer. Let's see the difference.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Start a New Chat (click "+ New Chat" in the left sidebar)</strong>
+            <span class="detail">This gives you a fresh conversation with no previous context</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Type this WEAK prompt:</strong>
+            <span class="prompt-text">Write a letter</span>
+            <span class="detail">Read the response &mdash; is it useful? Probably not very specific.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Now type this STRONG prompt:</strong>
+            <span class="prompt-text">Help me write a formal letter to the VA requesting a copy of my DD-214 discharge papers. Keep it under 200 words and professional.</span>
+            <span class="detail">Compare the two responses &mdash; which is more useful?</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Notice what made the strong prompt better:</strong>
+            <span class="detail"><strong>WHO</strong> (VA), <strong>WHAT</strong> (letter requesting DD-214), <strong>HOW</strong> (formal, under 200 words)</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="example-box">
+        <strong>The Prompt Formula:</strong><br>
+        <span style="font-size: 1rem; font-weight: 700; color: var(--ai-purple-dark);">Strong Prompt = WHAT you want + WHO it's for + HOW you want it (tone, length, format)</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Your Turn &mdash; Fix These Prompts</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Read each weak prompt below, then rewrite it to be specific and useful.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Weak Prompt #1: "Help me cook dinner"</strong>
+            <span class="detail">Hint: What meal? What budget? Any dietary needs? How many people?</span>
+          </div>
+        </li>
+      </ul>
+      <div class="fill-line-wide" style="margin-left: 0.5rem; margin-right: 0.5rem;">
+        <span class="label">Your improved prompt:</span>
+        <div class="blank"></div>
+        <div class="blank" style="margin-top: 0.25rem;"></div>
+      </div>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Weak Prompt #2: "Tell me about health"</strong>
+            <span class="detail">Hint: What aspect of health? For whom? How detailed?</span>
+          </div>
+        </li>
+      </ul>
+      <div class="fill-line-wide" style="margin-left: 0.5rem; margin-right: 0.5rem;">
+        <span class="label">Your improved prompt:</span>
+        <div class="blank"></div>
+        <div class="blank" style="margin-top: 0.25rem;"></div>
+      </div>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Weak Prompt #3: "Write something for my family"</strong>
+            <span class="detail">Hint: What type of writing? Which family member? What occasion?</span>
+          </div>
+        </li>
+      </ul>
+      <div class="fill-line-wide" style="margin-left: 0.5rem; margin-right: 0.5rem;">
+        <span class="label">Your improved prompt:</span>
+        <div class="blank"></div>
+        <div class="blank" style="margin-top: 0.25rem;"></div>
+      </div>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Type your best improved prompt into ChatGPT and see the result!</strong>
+            <span class="detail">Pick whichever rewritten prompt you are most proud of and try it out</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> You can always ask ChatGPT to revise: "Make it shorter," "Use simpler words," "Make it more formal." Think of it as a back-and-forth conversation, not a single question.
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; Compared a weak prompt vs a strong prompt</li>
+        <li>&#9744; Improved at least 2 of the 3 weak prompts</li>
+        <li>&#9744; Typed your improved prompt into ChatGPT and got a useful response</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 3: REAL-WORLD AI TASKS                   -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 3: Real-World AI Tasks</h2>
+    <div>
+      <span class="part-timing">~20 min</span>
+      <span class="part-type">INDEPENDENT</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Complete 4 practical tasks using ChatGPT &mdash; real things you might use AI for at home.
+    </div>
+
+    <div class="section">
+      <div class="task-box">
+        <h4>Task 1: Write a VA Letter (5 min)</h4>
+        <p><strong>Prompt to try:</strong></p>
+        <span class="prompt-text">Help me write a short, professional letter to the VA asking about the status of my disability claim. Include my name [your first name] and mention I filed the claim 3 months ago.</span>
+        <p style="margin-top: 0.5rem;">Read the result. Edit anything you would change.</p>
+        <ul class="checklist" style="margin-top: 0.5rem;">
+          <li>
+            <div class="checkbox"></div>
+            <div class="checklist-text">
+              <strong>VA letter drafted with AI assistance</strong>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="task-box">
+        <h4>Task 2: Meal Plan on a Budget (5 min)</h4>
+        <p><strong>Prompt to try:</strong></p>
+        <span class="prompt-text">Create a 3-day dinner meal plan for one person on a $50 weekly grocery budget. Keep recipes simple with 5 ingredients or fewer.</span>
+        <p style="margin-top: 0.5rem;">Read the result. Would you actually cook any of these?</p>
+        <ul class="checklist" style="margin-top: 0.5rem;">
+          <li>
+            <div class="checkbox"></div>
+            <div class="checklist-text">
+              <strong>Meal plan generated</strong>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="task-box">
+        <h4>Task 3: Learn Something New (5 min)</h4>
+        <p>Pick any topic you are curious about and ask ChatGPT to explain it simply.</p>
+        <p><strong>Example prompts:</strong></p>
+        <span class="prompt-text">Explain how solar panels work in simple terms</span>
+        <span class="prompt-text" style="margin-top: 0.25rem;">What are the best exercises for knee pain?</span>
+        <span class="prompt-text" style="margin-top: 0.25rem;">How does Medicare Advantage work?</span>
+        <ul class="checklist" style="margin-top: 0.5rem;">
+          <li>
+            <div class="checkbox"></div>
+            <div class="checklist-text">
+              <strong>Asked about a topic and got a clear explanation</strong>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="task-box">
+        <h4>Task 4: Draft an Email (5 min)</h4>
+        <p><strong>Prompt to try:</strong></p>
+        <span class="prompt-text">Help me write a polite email to reschedule my doctor's appointment from Monday to Wednesday. Keep it brief and friendly.</span>
+        <ul class="checklist" style="margin-top: 0.5rem;">
+          <li>
+            <div class="checkbox"></div>
+            <div class="checklist-text">
+              <strong>Email drafted with AI help</strong>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> You can copy text from ChatGPT! Highlight the text, press <span class="keyboard-shortcut">Ctrl+C</span> to copy, then paste it into an email or document with <span class="keyboard-shortcut">Ctrl+V</span>.
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Review your progress:</h4>
+      <ul class="check-items">
+        <li>&#9744; Completed at least 3 of the 4 real-world tasks</li>
+        <li>&#9744; Copied at least one AI response to use later</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 4: FACT OR FICTION?                       -->
+  <!-- ============================================ -->
+  <div class="part-header">
+    <h2>Part 4: Fact or Fiction?</h2>
+    <div>
+      <span class="part-timing">~15 min</span>
+      <span class="part-type">INDEPENDENT</span>
+    </div>
+  </div>
+  <div class="part-content">
+    <div class="part-goal">
+      <strong>Goal:</strong> Test AI's accuracy by asking questions you already know the answer to.
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Testing What You Know</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">The best way to understand AI's limits is to test it on things you are already an expert on.</p>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Think of 3 things you know well</strong>
+            <span class="detail">Your hometown, your military branch history, a hobby, or a well-known fact</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Ask ChatGPT about each one. For example:</strong>
+            <span class="prompt-text">What year was [your hometown] founded?</span>
+            <span class="prompt-text" style="margin-top: 0.25rem;">Tell me about the history of [your military unit or base]</span>
+            <span class="prompt-text" style="margin-top: 0.25rem;">What are the rules of [a game or hobby you know well]?</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Read each response carefully &mdash; is it accurate?</strong>
+            <span class="detail">Did ChatGPT get anything wrong? Compare what it says to what you know.</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Write down what it got RIGHT and what it got WRONG</strong>
+            <span class="detail">Use the fact check section below to record your findings</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="fill-section">
+      <h3>My Fact Check Results</h3>
+
+      <div class="fact-check-block">
+        <h4>Question 1</h4>
+        <div class="fill-line">
+          <span class="label">Question I asked:</span>
+          <div class="blank"></div>
+        </div>
+        <div class="fill-line">
+          <span class="label">Was it accurate?</span>
+          <span style="font-size: 0.9rem; color: #333;">&nbsp; Yes &nbsp;/&nbsp; No &nbsp;/&nbsp; Partially</span>
+        </div>
+        <div class="fill-line">
+          <span class="label">What was wrong:</span>
+          <div class="blank"></div>
+        </div>
+      </div>
+
+      <div class="fact-check-block">
+        <h4>Question 2</h4>
+        <div class="fill-line">
+          <span class="label">Question I asked:</span>
+          <div class="blank"></div>
+        </div>
+        <div class="fill-line">
+          <span class="label">Was it accurate?</span>
+          <span style="font-size: 0.9rem; color: #333;">&nbsp; Yes &nbsp;/&nbsp; No &nbsp;/&nbsp; Partially</span>
+        </div>
+        <div class="fill-line">
+          <span class="label">What was wrong:</span>
+          <div class="blank"></div>
+        </div>
+      </div>
+
+      <div class="fact-check-block">
+        <h4>Question 3</h4>
+        <div class="fill-line">
+          <span class="label">Question I asked:</span>
+          <div class="blank"></div>
+        </div>
+        <div class="fill-line">
+          <span class="label">Was it accurate?</span>
+          <span style="font-size: 0.9rem; color: #333;">&nbsp; Yes &nbsp;/&nbsp; No &nbsp;/&nbsp; Partially</span>
+        </div>
+        <div class="fill-line">
+          <span class="label">What was wrong:</span>
+          <div class="blank"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="margin-top: 1.25rem;">
+      <h3 class="section-title">Reflection</h3>
+
+      <ul class="checklist">
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Ask ChatGPT a question about very recent news (last week)</strong>
+            <span class="detail">Notice it may not know current events &mdash; AI models have a knowledge cutoff date</span>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox"></div>
+          <div class="checklist-text">
+            <strong>Ask: "What is today's date?"</strong>
+            <span class="detail">ChatGPT often gets this wrong! It does not always know the current date.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="warning-box">
+        <strong>Warning &mdash; AI "Hallucinations":</strong> AI "hallucinations" are when ChatGPT confidently states something that is WRONG. This is why you should NEVER rely on AI for medical advice, legal decisions, or financial information without checking with a real professional.
+      </div>
+
+      <div class="fill-line-wide" style="margin-top: 1rem;">
+        <span class="label" style="font-weight: 600; color: var(--ai-purple);">One thing I will ALWAYS double-check after using AI:</span>
+        <div class="blank"></div>
+      </div>
+    </div>
+
+    <div class="checkpoint-box">
+      <h4>Final Checkpoint &mdash; Review your work:</h4>
+      <ul class="check-items">
+        <li>&#9744; Asked at least 3 questions you knew the answers to</li>
+        <li>&#9744; Found at least one thing ChatGPT got wrong or incomplete</li>
+        <li>&#9744; Understand why verifying AI information is important</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SUCCESS BOX                                  -->
+  <!-- ============================================ -->
+  <div class="success-box">
+    <h3>Workshop Complete!</h3>
+    <p>Outstanding work! You have had your first real conversations with AI and learned how to use it wisely. Here is what you accomplished today:</p>
+    <ul class="skills-earned">
+      <li>Had your first multi-turn conversation with ChatGPT</li>
+      <li>Learned the difference between weak and strong prompts</li>
+      <li>Completed real-world tasks: VA letter, meal plan, learning, and email drafting</li>
+      <li>Tested AI accuracy and discovered its limitations firsthand</li>
+      <li>Practiced the golden rule: always verify important AI-generated information</li>
+    </ul>
+    <p style="margin-top: 0.75rem; font-weight: 600; color: var(--ai-purple);">
+      This Week's Challenge: Try 3 AI tasks at home this week &mdash; write a letter, plan a trip, or get a recipe. For each one, check whether the information is accurate. Remember: AI is a helpful starting point, not the final answer!
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound &mdash; West Virginia</strong> | Week 7: Introduction to AI Tools</p>
+    <p style="margin-top: 0.25rem;">Keep this handout! Use it as a reference when using ChatGPT at home.</p>
+  </footer>
+
+</body>
+</html>

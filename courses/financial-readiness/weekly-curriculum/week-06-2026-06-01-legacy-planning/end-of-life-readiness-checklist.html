@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5 End-of-Life Readiness Checklist</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1e3a8a;
+            --navy-dark: #0f172a;
+            --blue: #2563eb;
+            --gold: #fbbf24;
+            --gold-dark: #b45309;
+            --green: #15803d;
+            --red: #b91c1c;
+            --ink: #1e293b;
+            --muted: #475569;
+            --line: #cbd5e1;
+            --paper: #ffffff;
+            --shade: #f8fafc;
+            --soft-blue: #eff6ff;
+            --soft-gold: #fffbeb;
+            --soft-green: #f0fdf4;
+            --soft-red: #fef2f2;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.42in 0.5in;
+        }
+
+        body {
+            margin: 0 auto;
+            max-width: 7.5in;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 8.5pt;
+            line-height: 1.28;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        h1, h2, h3, p {
+            margin: 0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+            color: #ffffff;
+            border-radius: 8px;
+            padding: 13px 16px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 18.5pt;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            color: #dbeafe;
+            font-size: 8.7pt;
+        }
+
+        .badge {
+            background: var(--gold);
+            color: var(--navy-dark);
+            border-radius: 4px;
+            padding: 6px 9px;
+            font-size: 7pt;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .callout {
+            background: var(--soft-gold);
+            border-left: 4px solid var(--gold-dark);
+            border-radius: 0 6px 6px 0;
+            padding: 7px 9px;
+            margin-bottom: 7px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
+            margin-bottom: 7px;
+        }
+
+        .panel {
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            padding: 8px 9px;
+            background: var(--shade);
+            break-inside: avoid;
+        }
+
+        .panel h2 {
+            color: var(--navy);
+            font-size: 9.5pt;
+            margin-bottom: 5px;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 3px;
+        }
+
+        .check-row {
+            display: grid;
+            grid-template-columns: 14px 1fr;
+            gap: 5px;
+            margin-bottom: 3.7px;
+        }
+
+        .box {
+            width: 12px;
+            height: 12px;
+            border: 1px solid var(--muted);
+            background: #ffffff;
+            margin-top: 1px;
+        }
+
+        .first-week {
+            border: 1px solid var(--green);
+            border-left: 4px solid var(--green);
+            border-radius: 0 6px 6px 0;
+            background: var(--soft-green);
+            padding: 7px 9px;
+            margin-bottom: 7px;
+            break-inside: avoid;
+        }
+
+        .first-week h2,
+        .guidance h2 {
+            color: var(--navy);
+            font-size: 9.5pt;
+            margin-bottom: 4px;
+        }
+
+        .columns {
+            columns: 2;
+            column-gap: 18px;
+            margin: 0;
+            padding-left: 17px;
+        }
+
+        .columns li {
+            break-inside: avoid;
+            margin-bottom: 3px;
+        }
+
+        .guidance {
+            border: 1px solid var(--blue);
+            border-left: 4px solid var(--blue);
+            border-radius: 0 6px 6px 0;
+            background: var(--soft-blue);
+            padding: 7px 9px;
+            margin-bottom: 7px;
+            break-inside: avoid;
+        }
+
+        .sources {
+            border-top: 1px solid var(--line);
+            padding-top: 5px;
+            color: var(--muted);
+            font-size: 6.8pt;
+        }
+
+        .footer {
+            color: var(--muted);
+            font-size: 7pt;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div>
+            <h1>End-of-Life Readiness Checklist</h1>
+            <p>Module 5 planning tool for care wishes, legal authority, family instructions, and first steps after death.</p>
+        </div>
+        <div class="badge">Student Handout</div>
+    </header>
+
+    <div class="callout">
+        <strong>If the money is already set, the work becomes clarity.</strong> Your family needs to know who can act, what care you want, where documents are stored, and what to do during the first week.
+    </div>
+
+    <div class="grid">
+        <section class="panel">
+            <h2>1. Legal Authority</h2>
+            <div class="check-row"><span class="box"></span><span>Last will and testament reviewed by a qualified attorney.</span></div>
+            <div class="check-row"><span class="box"></span><span>Executor named, with a backup who has agreed to serve.</span></div>
+            <div class="check-row"><span class="box"></span><span>Durable financial power of attorney signed and stored.</span></div>
+            <div class="check-row"><span class="box"></span><span>Healthcare power of attorney or health care agent named.</span></div>
+            <div class="check-row"><span class="box"></span><span>Advance directive / living will completed for care wishes.</span></div>
+            <div class="check-row"><span class="box"></span><span>HIPAA or medical release process understood by the family.</span></div>
+        </section>
+
+        <section class="panel">
+            <h2>2. End-of-Life Care</h2>
+            <div class="check-row"><span class="box"></span><span>Agent knows your values, not just your signature.</span></div>
+            <div class="check-row"><span class="box"></span><span>Preferences discussed for CPR, ventilator, feeding tube, dialysis, antibiotics, and comfort care.</span></div>
+            <div class="check-row"><span class="box"></span><span>Hospice and palliative care preferences discussed with doctor or VA care team.</span></div>
+            <div class="check-row"><span class="box"></span><span>Preferred hospital, VA facility, or care setting documented.</span></div>
+            <div class="check-row"><span class="box"></span><span>Religious, spiritual, cultural, organ donation, or body donation wishes documented.</span></div>
+        </section>
+
+        <section class="panel">
+            <h2>3. Financial Access</h2>
+            <div class="check-row"><span class="box"></span><span>Account list prepared with institution names and phone numbers.</span></div>
+            <div class="check-row"><span class="box"></span><span>Recurring bills, mortgage/rent, utilities, insurance, and debts listed.</span></div>
+            <div class="check-row"><span class="box"></span><span>Trusted contact added at bank, brokerage, and retirement custodians where available.</span></div>
+            <div class="check-row"><span class="box"></span><span>Password manager, sealed instructions, or attorney-held instructions identified.</span></div>
+            <div class="check-row"><span class="box"></span><span>Tax preparer, financial advisor, attorney, Veterans Service Organization (VSO), and funeral home contacts listed.</span></div>
+        </section>
+
+        <section class="panel">
+            <h2>4. Military, VA, and Burial</h2>
+            <div class="check-row"><span class="box"></span><span>DD214 and VA records stored where family can find them.</span></div>
+            <div class="check-row"><span class="box"></span><span>VA pre-need burial eligibility considered using VA Form 40-10007.</span></div>
+            <div class="check-row"><span class="box"></span><span>Cemetery, funeral, cremation, or memorial preferences written down.</span></div>
+            <div class="check-row"><span class="box"></span><span>Family knows about possible burial flag, headstone/marker, Presidential Memorial Certificate, and burial allowance.</span></div>
+            <div class="check-row"><span class="box"></span><span>Survivor knows which Veterans Service Organization or VA contact to call for Dependency &amp; Indemnity Compensation (DIC) and other survivor benefits.</span></div>
+        </section>
+    </div>
+
+    <section class="first-week">
+        <h2>5. First Week / First 30 Days Instructions</h2>
+        <ul class="columns">
+            <li>Order multiple certified death certificates.</li>
+            <li>Call the funeral home and confirm burial or memorial wishes.</li>
+            <li>Notify DFAS, VA/VSO, Social Security, pension providers, life insurers, banks, and retirement custodians.</li>
+            <li>Secure the home, mail, phone, vehicle, wallet, and important papers.</li>
+            <li>Do not rush to pay unknown bills or claims; ask the executor, attorney, or advisor first.</li>
+            <li>Keep a notebook of calls, dates, names, claim numbers, and next steps.</li>
+        </ul>
+    </section>
+
+    <div class="guidance">
+        <h2>Facilitator guidance</h2>
+        <p>No student should share personal details in class. A complete response identifies one legal document, one care preference, one financial access item, one family communication step, and one professional or agency contact to verify the plan.</p>
+    </div>
+
+    <section class="sources">
+        Sources checked for Spring 2026 delivery: VA Advance Directive / VA Form 10-0137 guidance; Medicare hospice coverage guidance; VA pre-need burial eligibility and VA Form 40-10007 guidance; DFAS, VA, SSA, FINRA trusted contact, and SEC/FINRA/NASAA investor protection guidance. Education only.
+    </section>
+
+    <footer class="footer">
+        <span>Do not write account passwords or private account numbers on this handout.</span>
+        <span>VUB Financial Readiness Course</span>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 3: Email Productivity (Gmail) | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --danger: #DC3545;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background: var(--primary);
+      color: var(--light);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .sidebar-header h1 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: var(--accent);
+    }
+
+    .sidebar-header p {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    .chapter {
+      margin-bottom: 0.75rem;
+    }
+
+    .chapter-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .chapter-slides {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .slide-link {
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slide-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .slide-link.active {
+      background: var(--accent);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .slide-link.completed::before {
+      content: "\2713";
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource-link::before {
+      content: "\2193 ";
+      opacity: 0.6;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .progress-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .slide-container {
+      width: 100%;
+      max-width: 1000px;
+      background: var(--light);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      display: none;
+      padding: 2.5rem;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    .slide-header {
+      margin-bottom: 2rem;
+    }
+
+    .slide-header h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-header .subtitle {
+      color: var(--gray);
+      font-size: 1.1rem;
+    }
+
+    .slide-content {
+      flex: 1;
+      font-size: 1.25rem;
+      line-height: 1.8;
+    }
+
+    .slide-content h3 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .slide-content h3:first-child {
+      margin-top: 0;
+    }
+
+    .slide-content ul, .slide-content ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .slide-content li {
+      margin-bottom: 0.75rem;
+    }
+
+    .slide-content p {
+      margin-bottom: 1rem;
+    }
+
+    /* Title Slide */
+    .title-slide {
+      text-align: center;
+      justify-content: center;
+    }
+
+    .title-slide h2 {
+      font-size: 2.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .title-slide .week-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-slide .subtitle {
+      font-size: 1.5rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .meta {
+      font-size: 1rem;
+      color: var(--gray);
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: rgba(201, 162, 39, 0.15);
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+    }
+
+    .highlight-box.tip {
+      background: rgba(40, 167, 69, 0.1);
+      border-color: var(--success);
+    }
+
+    .highlight-box.warning {
+      background: rgba(220, 53, 69, 0.1);
+      border-color: var(--danger);
+    }
+
+    .highlight-box h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 1rem 0;
+    }
+
+    .column {
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .column h4 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    /* Keyboard Key Style */
+    kbd {
+      display: inline-block;
+      background: linear-gradient(180deg, #f5f5f5 0%, #e0e0e0 100%);
+      color: #333;
+      padding: 0.25rem 0.6rem;
+      border-radius: 5px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.9em;
+      font-weight: 600;
+      border: 1px solid #ccc;
+      border-bottom: 3px solid #aaa;
+    }
+
+    /* Step List */
+    .step-list {
+      counter-reset: step;
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .step-list li {
+      counter-increment: step;
+      padding-left: 3rem;
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .step-list li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+      background: var(--primary);
+      color: var(--light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Email Example Box */
+    .email-example {
+      background: var(--light);
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .email-example .email-header {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .email-example .email-field {
+      display: flex;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .email-example .email-field strong {
+      width: 80px;
+      color: var(--gray);
+    }
+
+    .email-example .email-body {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Icon Grid */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .icon-item {
+      background: var(--off-white);
+      padding: 1.25rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .icon-item .icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .icon-item h5 {
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .icon-item p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin: 0;
+    }
+
+    /* Navigation */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2.5rem;
+      border-top: 1px solid #eee;
+    }
+
+    .nav-btn {
+      background: var(--primary);
+      color: var(--light);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+    }
+
+    .nav-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .nav-btn.secondary {
+      background: var(--off-white);
+      color: var(--primary);
+    }
+
+    .nav-btn.secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .slide-counter {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* Celebration Overlay */
+    .celebration {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(27, 54, 93, 0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: var(--light);
+      text-align: center;
+    }
+
+    .celebration.active {
+      display: flex;
+    }
+
+    .celebration h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .celebration p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti-fall 3s linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <h1>VUB Intermediate Computer Skills</h1>
+      <p>Week 3: Email Productivity</p>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Warm-Up</div>
+      <div class="chapter-slides">
+        <div class="slide-link active" data-slide="0">Welcome & Overview</div>
+        <div class="slide-link" data-slide="1">Inbox Challenge</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Introduction</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="2">Today's Roadmap</div>
+        <div class="slide-link" data-slide="3">Why Email Matters</div>
+        <div class="slide-link" data-slide="4">Gmail Interface Tour</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Organizing Your Inbox</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="5">Understanding Labels</div>
+        <div class="slide-link" data-slide="6">Creating Labels</div>
+        <div class="slide-link" data-slide="7">Labels in Action</div>
+        <div class="slide-link" data-slide="8">Searching Your Email</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Composing & Sending</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="9">Writing Effective Emails</div>
+        <div class="slide-link" data-slide="10">Email Etiquette</div>
+        <div class="slide-link" data-slide="11">CC, BCC & Reply All</div>
+        <div class="slide-link" data-slide="12">Adding Attachments</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Advanced Features</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="13">Managing Contacts</div>
+        <div class="slide-link" data-slide="14">Creating a Signature</div>
+        <div class="slide-link" data-slide="15">Spam & Security</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Practice</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="16">Workshop Time!</div>
+        <div class="slide-link" data-slide="17">Break</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Evaluation</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="18">Knowledge Check</div>
+        <div class="slide-link" data-slide="19">Show & Share</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Application</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="20">Your Email Challenge</div>
+        <div class="slide-link" data-slide="21">Next Week Preview</div>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <div class="resources-title">Resources</div>
+      <a class="resource-link" href="handouts/email-etiquette-guide.html" target="_blank">Email Etiquette Guide</a>
+      <a class="resource-link" href="handouts/gmail-quick-reference.html" target="_blank">Gmail Quick Reference</a>
+      <a class="resource-link" href="handouts/gmail-setup-activity.html" target="_blank">Gmail Setup Activity</a>
+      <a class="resource-link" href="handouts/gmail-workshop.html" target="_blank">Gmail Workshop</a>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 5%;"></div>
+      </div>
+      <div class="progress-text"><span id="progressText">1</span> of 22 slides</div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="slide-container">
+      <!-- Slide 0: Title -->
+      <div class="slide active title-slide" data-index="0">
+        <span class="week-badge">Week 3</span>
+        <h2>Email Productivity</h2>
+        <p class="subtitle">Mastering Gmail for Personal & Professional Use</p>
+        <p class="meta">VUB Intermediate Computer Skills<br>Week 3 of 8</p>
+      </div>
+
+      <!-- Slide 1: Inbox Challenge (Warm-Up) -->
+      <div class="slide" data-index="1">
+        <div class="slide-header">
+          <h2>Inbox Challenge</h2>
+          <p class="subtitle">Warm-Up Activity (8 minutes)</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Let's Talk About Email!</h4>
+            <p>Take a moment to check your inbox on your computer. Then share with the class:</p>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Discussion Questions</h4>
+              <ul>
+                <li>How many <strong>unread emails</strong> do you have right now?</li>
+                <li>Can you find a specific email from <strong>last week</strong>?</li>
+                <li>What's the most <strong>important email</strong> you received this month?</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Common Frustrations</h4>
+              <ul>
+                <li>"I can never find the email I need"</li>
+                <li>"I get too much junk mail"</li>
+                <li>"I'm not sure if an email is safe"</li>
+                <li>"My inbox is overwhelming"</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Good News!</h4>
+            <p>By the end of today, you'll have the skills to tackle all of these problems. Let's get started!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Today's Roadmap (Introduction) -->
+      <div class="slide" data-index="2">
+        <div class="slide-header">
+          <h2>Today's Roadmap</h2>
+          <p class="subtitle">What we'll accomplish in the next 2 hours</p>
+        </div>
+        <div class="slide-content">
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">📋</div>
+              <h5>Learn (20 min)</h5>
+              <p>Gmail layout, labels, composing, attachments, signatures, security</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🔨</div>
+              <h5>Guided Practice (25 min)</h5>
+              <p>Follow along: organize inbox & create signature</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">☕</div>
+              <h5>Break (10 min)</h5>
+              <p>Save your work, stretch, recharge</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🚀</div>
+              <h5>Independent Practice (35 min)</h5>
+              <p>Email composition challenge & security power-ups</p>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>What You'll Build Today</h4>
+            <ul>
+              <li>An <strong>organized inbox</strong> with 5 color-coded labels</li>
+              <li>A <strong>professional email signature</strong></li>
+              <li>Three <strong>scenario-based emails</strong> with proper etiquette</li>
+              <li>Skills to <strong>spot phishing</strong> and use <strong>search operators</strong></li>
+            </ul>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Workshop Handout</h4>
+            <p>You'll receive a <strong>Gmail Mastery Workshop</strong> handout with step-by-step instructions for all activities. Keep it as a reference!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Why Email Matters -->
+      <div class="slide" data-index="3">
+        <div class="slide-header">
+          <h2>Why Email Matters</h2>
+          <p class="subtitle">Email is still the #1 way to communicate officially</p>
+        </div>
+        <div class="slide-content">
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">🏥</div>
+              <h5>Healthcare</h5>
+              <p>VA appointment confirmations, MyHealtheVet messages</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">💼</div>
+              <h5>Employment</h5>
+              <p>Job applications, interview scheduling, work communication</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🏦</div>
+              <h5>Financial</h5>
+              <p>Bank alerts, bill notifications, tax documents</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">👨‍👩‍👧‍👦</div>
+              <h5>Family</h5>
+              <p>Staying connected with loved ones, sharing photos</p>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Today's Goals</h4>
+            <ul>
+              <li>Organize your inbox so important emails don't get lost</li>
+              <li>Compose professional emails with proper etiquette</li>
+              <li>Use advanced features: attachments, contacts, signatures</li>
+              <li>Stay safe from email scams (building on Week 2!)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Gmail Interface Tour -->
+      <div class="slide" data-index="4">
+        <div class="slide-header">
+          <h2>Gmail Interface Tour</h2>
+          <p class="subtitle">Getting familiar with Gmail's layout</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h4>Left Sidebar</h4>
+              <ul>
+                <li><strong>Compose</strong> - Start a new email</li>
+                <li><strong>Inbox</strong> - Your main mailbox</li>
+                <li><strong>Starred</strong> - Important emails you've marked</li>
+                <li><strong>Sent</strong> - Emails you've sent</li>
+                <li><strong>Drafts</strong> - Emails you started but didn't send</li>
+                <li><strong>More</strong> - Trash, Spam, Labels</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Top Bar</h4>
+              <ul>
+                <li><strong>Search</strong> - Find any email quickly</li>
+                <li><strong>Settings</strong> - Gear icon (customize Gmail)</li>
+                <li><strong>Profile</strong> - Your account (top right)</li>
+              </ul>
+              <h4 style="margin-top: 1rem;">Main Area</h4>
+              <ul>
+                <li>List of emails</li>
+                <li>Checkboxes to select multiple</li>
+                <li>Star icons to mark important</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Quick Tip: Keyboard Shortcut</h4>
+            <p>Press <kbd>C</kbd> to compose a new email instantly (when keyboard shortcuts are enabled)!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Understanding Labels -->
+      <div class="slide" data-index="5">
+        <div class="slide-header">
+          <h2>Understanding Labels</h2>
+          <p class="subtitle">Gmail's way of organizing your emails</p>
+        </div>
+        <div class="slide-content">
+          <p>In Gmail, <strong>labels</strong> work like colored tags or stickers you put on emails. Unlike traditional folders, one email can have <strong>multiple labels</strong>!</p>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Traditional Folders</h4>
+              <ul>
+                <li>Email lives in ONE folder only</li>
+                <li>Have to choose where it goes</li>
+                <li>Like putting a letter in one filing cabinet drawer</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Gmail Labels</h4>
+              <ul>
+                <li>Email can have MANY labels</li>
+                <li>Same email appears in multiple views</li>
+                <li>Like putting multiple colored stickers on one document</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Example</h4>
+            <p>An email about your VA healthcare appointment could have BOTH the "VA" label AND the "Medical" label. You'll see it when you click either label!</p>
+          </div>
+
+          <h3>Suggested Labels for Veterans</h3>
+          <ul>
+            <li><strong>VA</strong> - All VA-related correspondence</li>
+            <li><strong>Medical</strong> - Healthcare and appointment info</li>
+            <li><strong>Financial</strong> - Bank statements, bills, benefits</li>
+            <li><strong>Family</strong> - Personal correspondence</li>
+            <li><strong>Important</strong> - Things that need action</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Slide 6: Creating Labels -->
+      <div class="slide" data-index="6">
+        <div class="slide-header">
+          <h2>Creating Labels</h2>
+          <p class="subtitle">Step-by-step guide to organizing your inbox</p>
+        </div>
+        <div class="slide-content">
+          <ol class="step-list">
+            <li>In Gmail, scroll down on the left sidebar and click <strong>"More"</strong></li>
+            <li>Click <strong>"Create new label"</strong> at the bottom</li>
+            <li>Type a name for your label (e.g., "VA Documents")</li>
+            <li>Click <strong>"Create"</strong></li>
+          </ol>
+
+          <div class="highlight-box tip">
+            <h4>To Apply a Label to an Email:</h4>
+            <ol>
+              <li>Open the email (or check its checkbox)</li>
+              <li>Click the <strong>label icon</strong> (looks like a tag) in the toolbar</li>
+              <li>Check the labels you want to apply</li>
+              <li>Click <strong>"Apply"</strong></li>
+            </ol>
+          </div>
+
+          <h3>Color-Code Your Labels</h3>
+          <p>Make labels easier to spot at a glance:</p>
+          <ol>
+            <li>Hover over a label name in the sidebar</li>
+            <li>Click the <strong>three dots</strong> that appear</li>
+            <li>Select <strong>"Label color"</strong></li>
+            <li>Choose a color (e.g., red for urgent, blue for VA)</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Slide 7: Labels in Action -->
+      <div class="slide" data-index="7">
+        <div class="slide-header">
+          <h2>Labels in Action</h2>
+          <p class="subtitle">Practical organization strategies</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h4>Quick Organization Tips</h4>
+              <ul>
+                <li><strong>Star</strong> emails that need action</li>
+                <li><strong>Archive</strong> emails you're done with (not delete!)</li>
+                <li>Use <strong>labels</strong> for categories</li>
+                <li>Check Spam folder weekly for legitimate emails</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Inbox Zero Strategy</h4>
+              <ul>
+                <li>Process each email once</li>
+                <li><strong>Act</strong> - If it takes 2 minutes, do it now</li>
+                <li><strong>Label</strong> - Organize for later</li>
+                <li><strong>Archive</strong> - Done? Archive it</li>
+                <li><strong>Delete</strong> - Junk? Delete it</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box warning">
+            <h4>Archive vs. Delete</h4>
+            <p><strong>Archive</strong> = Email is hidden from Inbox but still searchable. Use "All Mail" to find it.<br>
+            <strong>Delete</strong> = Moves to Trash, permanently deleted after 30 days.<br><br>
+            <em>When in doubt, archive! You might need that email later.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Searching Your Email -->
+      <div class="slide" data-index="8">
+        <div class="slide-header">
+          <h2>Searching Your Email</h2>
+          <p class="subtitle">Find any email in seconds</p>
+        </div>
+        <div class="slide-content">
+          <p>Gmail's search is incredibly powerful. Use the search bar at the top to find any email.</p>
+
+          <h3>Simple Searches</h3>
+          <ul>
+            <li>Type any word to search subjects and content</li>
+            <li>Type a person's name or email address</li>
+            <li>Example: <code>VA appointment</code> finds emails with those words</li>
+          </ul>
+
+          <h3>Advanced Search Tricks</h3>
+          <div class="two-column">
+            <div class="column">
+              <h4>Search Operators</h4>
+              <ul>
+                <li><code>from:va.gov</code> - Emails from VA</li>
+                <li><code>to:john@gmail.com</code> - Emails you sent to John</li>
+                <li><code>subject:appointment</code> - Subject contains "appointment"</li>
+                <li><code>has:attachment</code> - Has an attachment</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Date Filters</h4>
+              <ul>
+                <li><code>after:2025/01/01</code> - After January 1, 2025</li>
+                <li><code>before:YYYY/MM/DD</code> - Before a date you choose</li>
+                <li><code>older_than:1y</code> - Older than 1 year</li>
+                <li><code>newer_than:1m</code> - Newer than 1 month</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Quick Tip</h4>
+            <p>Click the small arrow in the search bar for a visual search builder - no need to memorize these!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: Writing Effective Emails -->
+      <div class="slide" data-index="9">
+        <div class="slide-header">
+          <h2>Writing Effective Emails</h2>
+          <p class="subtitle">Clear communication that gets results</p>
+        </div>
+        <div class="slide-content">
+          <div class="email-example">
+            <div class="email-header">
+              <div class="email-field"><strong>To:</strong> dr.smith@vahealth.gov</div>
+              <div class="email-field"><strong>Subject:</strong> Prescription Refill Request - John Smith</div>
+            </div>
+            <div class="email-body">
+              <p>Dear Dr. Smith,</p>
+              <p>I hope this email finds you well. I am writing to request a refill of my blood pressure medication (Lisinopril 10mg).</p>
+              <p>My current prescription will run out on March 5th. I would like to pick up the refill at the Clarksburg VA pharmacy.</p>
+              <p>Please let me know if you need any additional information.</p>
+              <p>Thank you for your time.</p>
+              <p>Best regards,<br>John Smith<br>Last 4 SSN: 1234<br>(304) 555-0123</p>
+            </div>
+          </div>
+
+          <h3>Key Elements</h3>
+          <ul>
+            <li><strong>Clear subject line</strong> - State your purpose and include your name</li>
+            <li><strong>Greeting</strong> - "Dear..." or "Hello..." (professional) or "Hi..." (casual)</li>
+            <li><strong>Purpose in first sentence</strong> - Get to the point</li>
+            <li><strong>Details</strong> - Provide necessary information</li>
+            <li><strong>Call to action</strong> - What do you need from them?</li>
+            <li><strong>Signature</strong> - Name, contact info, relevant ID numbers</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Slide 10: Email Etiquette -->
+      <div class="slide" data-index="10">
+        <div class="slide-header">
+          <h2>Email Etiquette</h2>
+          <p class="subtitle">Professional standards for written communication</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column" style="border-left: 4px solid var(--success); background: rgba(40,167,69,0.05);">
+              <h4 style="color: var(--success);">DO</h4>
+              <ul>
+                <li>Use a clear, specific subject line</li>
+                <li>Proofread before sending</li>
+                <li>Keep it brief and focused</li>
+                <li>Use a professional greeting</li>
+                <li>Respond within 24-48 hours</li>
+                <li>Use proper capitalization</li>
+              </ul>
+            </div>
+            <div class="column" style="border-left: 4px solid var(--danger); background: rgba(220,53,69,0.05);">
+              <h4 style="color: var(--danger);">DON'T</h4>
+              <ul>
+                <li>USE ALL CAPS (looks like shouting)</li>
+                <li>Use lots of exclamation points!!!</li>
+                <li>Write in text speak (u, ur, thx)</li>
+                <li>Send when angry - wait and reread</li>
+                <li>Forward chain emails or hoaxes</li>
+                <li>Share others' emails without permission</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box warning">
+            <h4>Remember: Email is PERMANENT</h4>
+            <p>Emails can be forwarded, printed, and saved forever. Never write anything in an email that you wouldn't want made public. When in doubt, pick up the phone instead.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: CC, BCC & Reply All -->
+      <div class="slide" data-index="11">
+        <div class="slide-header">
+          <h2>CC, BCC & Reply All</h2>
+          <p class="subtitle">Sending to multiple people correctly</p>
+        </div>
+        <div class="slide-content">
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">📧</div>
+              <h5>TO:</h5>
+              <p>The main recipient(s) who need to take action</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📋</div>
+              <h5>CC: (Carbon Copy)</h5>
+              <p>"For your information" - recipients can see each other</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🔒</div>
+              <h5>BCC: (Blind Carbon Copy)</h5>
+              <p>Hidden recipients - others can't see them</p>
+            </div>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>When to Use CC</h4>
+              <ul>
+                <li>Keeping your supervisor in the loop</li>
+                <li>Informing team members</li>
+                <li>Creating a paper trail</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>When to Use BCC</h4>
+              <ul>
+                <li>Sending to a large group (protects privacy)</li>
+                <li>Forwarding to someone discreetly</li>
+                <li>Preventing "Reply All" chaos</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box warning">
+            <h4>Reply All Warning</h4>
+            <p><strong>"Reply All"</strong> sends your response to EVERYONE on the email. Use it sparingly! Most replies should just go to the sender. Think before clicking!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: Adding Attachments -->
+      <div class="slide" data-index="12">
+        <div class="slide-header">
+          <h2>Adding Attachments</h2>
+          <p class="subtitle">Sending files with your emails</p>
+        </div>
+        <div class="slide-content">
+          <ol class="step-list">
+            <li>Click <strong>Compose</strong> to start a new email</li>
+            <li>Click the <strong>paperclip icon</strong> at the bottom of the compose window</li>
+            <li>Browse to find your file and double-click to select it</li>
+            <li>Wait for the upload to complete (you'll see the filename)</li>
+            <li>Write your message and click <strong>Send</strong></li>
+          </ol>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Common File Types</h4>
+              <ul>
+                <li><strong>.pdf</strong> - Documents (best for forms)</li>
+                <li><strong>.doc/.docx</strong> - Word documents</li>
+                <li><strong>.jpg/.png</strong> - Photos and images</li>
+                <li><strong>.xls/.xlsx</strong> - Excel spreadsheets</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Size Limits</h4>
+              <ul>
+                <li>Gmail limit: <strong>25 MB</strong> per email</li>
+                <li>Larger files? Use Google Drive</li>
+                <li>Multiple files? Zip them together</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Pro Tip: Drag and Drop</h4>
+            <p>You can also drag a file from your computer directly into the compose window. Much faster than clicking the paperclip!</p>
+          </div>
+
+          <div class="highlight-box warning">
+            <h4>Don't Forget the Attachment!</h4>
+            <p>Gmail will warn you if you mention "attached" or "attachment" in your email but forget to attach a file. Pay attention to that warning!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 13: Managing Contacts -->
+      <div class="slide" data-index="13">
+        <div class="slide-header">
+          <h2>Managing Contacts</h2>
+          <p class="subtitle">Keep your important contacts organized</p>
+        </div>
+        <div class="slide-content">
+          <p>Gmail automatically saves email addresses of people you correspond with. But you can organize them better!</p>
+
+          <h3>Accessing Google Contacts</h3>
+          <ol class="step-list">
+            <li>Click the <strong>Google Apps</strong> icon (9 dots) in the top right of Gmail</li>
+            <li>Click <strong>Contacts</strong></li>
+            <li>Or go directly to: <strong>contacts.google.com</strong></li>
+          </ol>
+
+          <h3>Adding a New Contact</h3>
+          <ol class="step-list">
+            <li>In Google Contacts, click <strong>+ Create contact</strong></li>
+            <li>Fill in: Name, Email, Phone number</li>
+            <li>Add notes if helpful (e.g., "VA case worker")</li>
+            <li>Click <strong>Save</strong></li>
+          </ol>
+
+          <div class="highlight-box tip">
+            <h4>Quick Add from an Email</h4>
+            <p>When viewing an email, hover over the sender's name and click <strong>"Add to contacts"</strong> to save them instantly!</p>
+          </div>
+
+          <h3>Contact Labels (Groups)</h3>
+          <p>Create labels in Contacts to group people: "Family," "Doctors," "VUB Class" - makes it easy to email everyone in a group at once.</p>
+        </div>
+      </div>
+
+      <!-- Slide 14: Creating a Signature -->
+      <div class="slide" data-index="14">
+        <div class="slide-header">
+          <h2>Creating an Email Signature</h2>
+          <p class="subtitle">Professional sign-off on every email</p>
+        </div>
+        <div class="slide-content">
+          <p>An email signature automatically appears at the bottom of every email you send.</p>
+
+          <div class="email-example">
+            <div class="email-body">
+              <p style="border-top: 1px solid #ccc; padding-top: 1rem; margin-top: 1rem;">
+                Best regards,<br><br>
+                <strong>John Smith</strong><br>
+                US Army Veteran<br>
+                (304) 555-0123<br>
+                john.smith@gmail.com
+              </p>
+            </div>
+          </div>
+
+          <h3>How to Create Your Signature</h3>
+          <ol class="step-list">
+            <li>Click the <strong>gear icon</strong> (Settings) in Gmail</li>
+            <li>Click <strong>"See all settings"</strong></li>
+            <li>Scroll down to the <strong>Signature</strong> section</li>
+            <li>Click <strong>"Create new"</strong> and name it</li>
+            <li>Type your signature in the text box</li>
+            <li>Scroll down and click <strong>"Save Changes"</strong></li>
+          </ol>
+
+          <div class="highlight-box">
+            <h4>Keep It Simple</h4>
+            <p>Good signatures include: Name, Phone, Email. Optional: Title, Organization. Avoid: Quotes, images, too many colors. Keep it under 5 lines.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 15: Spam & Security -->
+      <div class="slide" data-index="15">
+        <div class="slide-header">
+          <h2>Spam & Security</h2>
+          <p class="subtitle">Keeping your inbox safe (Review from Week 2)</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h4>Spam Folder</h4>
+              <ul>
+                <li>Gmail automatically filters suspicious emails</li>
+                <li>Check Spam weekly - real emails sometimes end up there</li>
+                <li>Click "Not spam" to rescue legitimate emails</li>
+                <li>Spam is deleted automatically after 30 days</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Report Phishing</h4>
+              <ul>
+                <li>Open the suspicious email</li>
+                <li>Click the three dots (More options)</li>
+                <li>Select "Report phishing"</li>
+                <li>This helps Gmail protect everyone</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box warning">
+            <h4>Red Flags Review (from Week 2)</h4>
+            <ul>
+              <li>Urgent language: "Act now!" "Your account will be closed!"</li>
+              <li>Requests for passwords or personal info</li>
+              <li>Suspicious sender addresses (va.gov vs va-gov.scam.com)</li>
+              <li>Links that don't match text (hover to check!)</li>
+              <li>Poor grammar and spelling</li>
+              <li>Unexpected attachments</li>
+            </ul>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>When in Doubt</h4>
+            <p>If you receive a suspicious email claiming to be from the VA, a bank, or any organization - <strong>don't click any links</strong>. Call them directly using a number from their official website.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 16: Workshop Time! (Practice) -->
+      <div class="slide" data-index="16">
+        <div class="slide-header">
+          <h2>Workshop Time!</h2>
+          <p class="subtitle">Gmail Mastery Workshop - Parts 1 & 2 (Guided, 25 min)</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box" style="background: rgba(27, 54, 93, 0.1); border-color: var(--primary);">
+            <h4>Open Your Workshop Handout</h4>
+            <p>Your instructor will hand out the <strong>Gmail Mastery Workshop</strong>. We'll work through the first two parts together.</p>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Part 1: Inbox Organization Sprint (15 min)</h4>
+              <ul>
+                <li>Create 5 color-coded labels</li>
+                <li>Apply labels to existing emails</li>
+                <li>Star important messages</li>
+                <li>Archive old emails</li>
+              </ul>
+              <p style="margin-top: 0.5rem;"><em>Follow along with the instructor step-by-step!</em></p>
+            </div>
+            <div class="column">
+              <h4>Part 2: Signature Studio (10 min)</h4>
+              <ul>
+                <li>Draft your signature on paper first</li>
+                <li>Navigate to Gmail Settings</li>
+                <li>Create and format your signature</li>
+                <li>Send a test email to verify</li>
+              </ul>
+              <p style="margin-top: 0.5rem;"><em>We'll do this one together!</em></p>
+            </div>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Need Help?</h4>
+            <p>Raise your hand anytime. Check off each step in your workshop handout as you complete it.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 17: Break -->
+      <div class="slide" data-index="17">
+        <div class="slide-header">
+          <h2>Break Time!</h2>
+          <p class="subtitle">10-Minute Break</p>
+        </div>
+        <div class="slide-content" style="text-align: center;">
+          <div style="font-size: 4rem; margin: 1rem 0;">☕</div>
+
+          <div class="highlight-box" style="text-align: left;">
+            <h4>Before You Step Away</h4>
+            <ul>
+              <li>Make sure your labels are <strong>saved</strong></li>
+              <li>Make sure your signature is <strong>saved</strong></li>
+              <li>Check off completed steps in your <strong>workshop handout</strong></li>
+            </ul>
+          </div>
+
+          <p style="margin-top: 1.5rem; font-size: 1.1rem;">When we return, you'll work on <strong>Parts 3 & 4</strong> of the workshop independently.</p>
+
+          <div class="highlight-box tip" style="text-align: left;">
+            <h4>Coming Up Next</h4>
+            <ul>
+              <li><strong>Part 3:</strong> Email Composition Challenge (3 scenario emails)</li>
+              <li><strong>Part 4:</strong> Security & Search Power-ups</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 18: Knowledge Check -->
+      <div class="slide" data-index="18">
+        <div class="slide-header">
+          <h2>Knowledge Check</h2>
+          <p class="subtitle">Let's review what we learned!</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Question 1</h4>
+            <p>What's the difference between CC and BCC?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>CC recipients can see each other; BCC recipients are hidden from everyone.</em></p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Question 2</h4>
+            <p>How is a Gmail label different from a traditional folder?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>One email can have multiple labels; folders only allow one location.</em></p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Question 3</h4>
+            <p>What should you do if you're unsure whether an email is legitimate?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>Don't click any links. Contact the organization directly using a known phone number.</em></p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Question 4</h4>
+            <p>What's the maximum attachment size in Gmail?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>25 MB - use Google Drive for larger files.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 19: Show & Share (Evaluation) -->
+      <div class="slide" data-index="19">
+        <div class="slide-header">
+          <h2>Show & Share</h2>
+          <p class="subtitle">Evaluation Activity (10 minutes)</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Partner Check</h4>
+            <p>Pair up with a neighbor and show each other what you built today:</p>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Show Your Partner</h4>
+              <ol>
+                <li>Your <strong>color-coded labels</strong> in the sidebar</li>
+                <li>Your <strong>email signature</strong> (send them a test email!)</li>
+                <li>One of your <strong>scenario emails</strong> from Part 3</li>
+              </ol>
+            </div>
+            <div class="column">
+              <h4>Check Each Other's Work</h4>
+              <ul>
+                <li>Are the labels clearly named?</li>
+                <li>Does the signature look professional?</li>
+                <li>Does the email have all key elements? (subject, greeting, purpose, closing)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Class Discussion</h4>
+            <p>Volunteers: What was the most useful thing you learned today? Any tips or tricks you discovered on your own?</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 20: Your Email Challenge This Week (Application) -->
+      <div class="slide" data-index="20">
+        <div class="slide-header">
+          <h2>Your Email Challenge This Week</h2>
+          <p class="subtitle">Put your new skills to work!</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>This Week's Mission</h4>
+            <p>Complete these tasks before the next class meeting:</p>
+          </div>
+
+          <ol class="step-list">
+            <li><strong>Organize 10 emails</strong> - Apply your new labels to 10 existing emails in your inbox</li>
+            <li><strong>Write a real email</strong> - Draft a VA records request or appointment follow-up using proper etiquette</li>
+            <li><strong>Search challenge</strong> - Use a search operator to find an email from more than 3 months ago</li>
+            <li><strong>Spot the scam</strong> - Check your Spam folder and identify one phishing red flag</li>
+          </ol>
+
+          <div class="highlight-box tip">
+            <h4>Keep Your Workshop Handout!</h4>
+            <p>Use it as a reference guide at home. The step-by-step instructions will help you remember how to do everything we practiced today.</p>
+          </div>
+
+          <div class="icon-grid" style="margin-top: 1rem;">
+            <div class="icon-item">
+              <div class="icon">🏷️</div>
+              <h5>Organize</h5>
+              <p>Labels & color coding</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">✍️</div>
+              <h5>Compose</h5>
+              <p>Professional emails</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🔍</div>
+              <h5>Search</h5>
+              <p>Find anything fast</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🔐</div>
+              <h5>Stay Safe</h5>
+              <p>Spot phishing</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 21: Next Week Preview -->
+      <div class="slide" data-index="21">
+        <div class="slide-header">
+          <h2>Next Week Preview</h2>
+          <p class="subtitle">Week 4: Microsoft Word Intermediate</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Coming Up: Week 4</h4>
+            <p>We'll build on your word processing skills with more advanced features!</p>
+          </div>
+
+          <h3>Topics We'll Cover:</h3>
+          <ul>
+            <li><strong>Styles</strong> - Format headings consistently</li>
+            <li><strong>Templates</strong> - Use pre-made document designs</li>
+            <li><strong>Tables</strong> - Organize information in rows and columns</li>
+            <li><strong>Headers & Footers</strong> - Page numbers and document titles</li>
+            <li><strong>Formatting Tips</strong> - Professional document appearance</li>
+          </ul>
+
+          <div class="highlight-box tip">
+            <h4>Before Next Week</h4>
+            <p>Make sure you can open Microsoft Word on your computer. If you don't have it, let your instructor know - we can help you access it or use a free alternative.</p>
+          </div>
+
+          <div style="text-align: center; margin-top: 2rem; padding: 2rem; background: var(--off-white); border-radius: 12px;">
+            <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Great work today!</h3>
+            <p style="color: var(--gray);">You're now an email power user. See you next class!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="nav-buttons">
+        <button class="nav-btn secondary" id="prevBtn" disabled>← Previous</button>
+        <span class="slide-counter">Slide <span id="currentSlide">1</span> of <span id="totalSlides">22</span></span>
+        <button class="nav-btn" id="nextBtn">Next →</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Celebration Overlay -->
+  <div class="celebration" id="celebration">
+    <h2>Congratulations!</h2>
+    <p>You've completed Week 3: Email Productivity</p>
+    <button class="nav-btn" onclick="closeCelebration()" style="margin-top: 1rem;">Continue</button>
+  </div>
+
+  <script src="../../../shared/progress.js"></script>
+  <script src="../../../shared/glossary.js" defer></script>
+  <script>
+    // Slide Navigation
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideLinks = document.querySelectorAll('.slide-link');
+
+    // Initialize
+    document.getElementById('totalSlides').textContent = totalSlides;
+    loadProgress();
+    updateSlide();
+
+    // Navigation buttons
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      } else {
+        showCelebration();
+      }
+    });
+
+    // Sidebar navigation
+    slideLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        currentSlide = parseInt(link.dataset.slide);
+        updateSlide();
+      });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        if (currentSlide < totalSlides - 1) {
+          currentSlide++;
+          updateSlide();
+        }
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        if (currentSlide > 0) {
+          currentSlide--;
+          updateSlide();
+        }
+      } else if (e.key === 'Home') {
+        currentSlide = 0;
+        updateSlide();
+      } else if (e.key === 'End') {
+        currentSlide = totalSlides - 1;
+        updateSlide();
+      }
+    });
+
+    function updateSlide() {
+      // Update slides
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      // Update sidebar
+      slideLinks.forEach((link, index) => {
+        link.classList.toggle('active', parseInt(link.dataset.slide) === currentSlide);
+        if (parseInt(link.dataset.slide) < currentSlide) {
+          link.classList.add('completed');
+        }
+      });
+
+      // Update navigation buttons
+      document.getElementById('prevBtn').disabled = currentSlide === 0;
+      document.getElementById('nextBtn').textContent = currentSlide === totalSlides - 1 ? 'Finish' : 'Next →';
+
+      // Update counter and progress
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+      const progress = ((currentSlide + 1) / totalSlides) * 100;
+      document.getElementById('progressFill').style.width = progress + '%';
+      document.getElementById('progressText').textContent = currentSlide + 1;
+
+      // Save progress
+      saveProgress();
+    }
+
+    function saveProgress() {
+      if (window.VubProgress) VubProgress.saveSlide('ics', 3, currentSlide, totalSlides);
+    }
+
+    function loadProgress() {
+      if (window.VubProgress) {
+        const entry = VubProgress.get('ics', 3);
+        if (entry && typeof entry.slide === 'number') currentSlide = entry.slide;
+      }
+    }
+
+    function showCelebration() {
+      document.getElementById('celebration').classList.add('active');
+      createConfetti();
+    }
+
+    function closeCelebration() {
+      document.getElementById('celebration').classList.remove('active');
+    }
+
+    function createConfetti() {
+      const celebration = document.getElementById('celebration');
+      const colors = ['#C9A227', '#1B365D', '#28A745', '#DC3545', '#FFFFFF'];
+
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        celebration.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    }
+  </script>
+</body>
+</html>

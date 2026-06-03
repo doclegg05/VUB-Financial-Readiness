@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 6: Cloud Computing & Google Drive | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --danger: #DC3545;
+      --google-blue: #4285F4;
+      --google-green: #34A853;
+      --google-yellow: #FBBC05;
+      --google-red: #EA4335;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: var(--primary);
+      color: var(--light);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .sidebar-header h1 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: var(--accent);
+    }
+
+    .sidebar-header p { font-size: 0.8rem; opacity: 0.9; }
+
+    .chapter { margin-bottom: 0.75rem; }
+
+    .chapter-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .chapter-slides { display: flex; flex-direction: column; gap: 0.25rem; }
+
+    .slide-link {
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .slide-link:hover { background: rgba(255,255,255,0.1); }
+
+    .slide-link.active {
+      background: var(--accent);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .slide-link.completed::before {
+      content: "\2713 ";
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource-link::before {
+      content: "\2193 ";
+      opacity: 0.6;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .progress-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .progress-text { font-size: 0.75rem; text-align: center; opacity: 0.9; }
+
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .slide-container {
+      width: 100%;
+      max-width: 1000px;
+      background: var(--light);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      display: none;
+      padding: 2.5rem;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .slide.active { display: flex; }
+
+    .slide-header { margin-bottom: 2rem; }
+
+    .slide-header h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .slide-header .subtitle { color: var(--gray); font-size: 1.1rem; }
+
+    .slide-content {
+      flex: 1;
+      font-size: 1.25rem;
+      line-height: 1.8;
+    }
+
+    .slide-content h3 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .slide-content h3:first-child { margin-top: 0; }
+
+    .slide-content ul, .slide-content ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .slide-content li { margin-bottom: 0.75rem; }
+    .slide-content p { margin-bottom: 1rem; }
+
+    .title-slide {
+      text-align: center;
+      justify-content: center;
+    }
+
+    .title-slide h2 { font-size: 2.75rem; margin-bottom: 0.5rem; }
+
+    .title-slide .week-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-slide .subtitle {
+      font-size: 1.5rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .meta { font-size: 1rem; color: var(--gray); }
+
+    .highlight-box {
+      background: rgba(201, 162, 39, 0.15);
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+    }
+
+    .highlight-box.tip {
+      background: rgba(40, 167, 69, 0.1);
+      border-color: var(--success);
+    }
+
+    .highlight-box.warning {
+      background: rgba(220, 53, 69, 0.1);
+      border-color: var(--danger);
+    }
+
+    .highlight-box.google {
+      background: rgba(66, 133, 244, 0.1);
+      border-color: var(--google-blue);
+    }
+
+    .highlight-box h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 1rem 0;
+    }
+
+    .column {
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .column h4 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .step-list {
+      counter-reset: step;
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .step-list li {
+      counter-increment: step;
+      padding-left: 3rem;
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .step-list li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+      background: var(--primary);
+      color: var(--light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .icon-item {
+      background: var(--off-white);
+      padding: 1.25rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .icon-item .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+    .icon-item h5 { color: var(--primary); margin-bottom: 0.25rem; }
+
+    .icon-item p { font-size: 0.9rem; color: var(--gray); margin: 0; }
+
+    /* Google colors */
+    .google-colors {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+
+    .google-colors span {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2.5rem;
+      border-top: 1px solid #eee;
+    }
+
+    .nav-btn {
+      background: var(--primary);
+      color: var(--light);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    .nav-btn:hover { background: var(--primary-light); }
+    .nav-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+    .nav-btn.secondary {
+      background: var(--off-white);
+      color: var(--primary);
+    }
+
+    .nav-btn.secondary:hover { background: #e0e0e0; }
+
+    .slide-counter { font-size: 0.9rem; color: var(--gray); }
+
+    .celebration {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(27, 54, 93, 0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: var(--light);
+      text-align: center;
+    }
+
+    .celebration.active { display: flex; }
+    .celebration h2 { font-size: 3rem; margin-bottom: 1rem; }
+    .celebration p { font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem; }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti-fall 3s linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 100%; height: auto; position: relative; }
+      .main-content { margin-left: 0; }
+      .two-column { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <h1>VUB Intermediate Computer Skills</h1>
+      <p>Week 6: Cloud Computing</p>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Warm-Up</div>
+      <div class="chapter-slides">
+        <div class="slide-link active" data-slide="0">Welcome & Overview</div>
+        <div class="slide-link" data-slide="1">Coffee Shop Disaster</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Introduction</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="2">What is the Cloud?</div>
+        <div class="slide-link" data-slide="3">Why Use Cloud Storage?</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Google Drive Basics</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="4">Google Drive Overview</div>
+        <div class="slide-link" data-slide="5">Navigating Drive</div>
+        <div class="slide-link" data-slide="6">Uploading Files</div>
+        <div class="slide-link" data-slide="7">Creating Folders</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Sharing & Google Docs</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="8">Sharing Files</div>
+        <div class="slide-link" data-slide="9">Share Settings</div>
+        <div class="slide-link" data-slide="10">Google Docs</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Practice</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="11">Workshop Time!</div>
+        <div class="slide-link" data-slide="12">Break</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Evaluation</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="13">Knowledge Check</div>
+        <div class="slide-link" data-slide="14">Show & Share</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Application</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="15">Your Cloud Challenge</div>
+        <div class="slide-link" data-slide="16">Next Week Preview</div>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <div class="resources-title">Resources</div>
+      <a class="resource-link" href="handouts/cloud-workshop.html" target="_blank">Cloud Workshop</a>
+      <a class="resource-link" href="handouts/google-drive-quick-reference.html" target="_blank">Google Drive Reference</a>
+      <a class="resource-link" href="handouts/cloud-activity.html" target="_blank">Cloud Activity</a>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 6%;"></div>
+      </div>
+      <div class="progress-text"><span id="progressText">1</span> of 17 slides</div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="slide-container">
+      <!-- Slide 0: Title -->
+      <div class="slide active title-slide" data-index="0">
+        <span class="week-badge">Week 6</span>
+        <h2>Cloud Computing & Google Drive</h2>
+        <p class="subtitle">Your Files, Accessible Anywhere</p>
+        <p class="meta">VUB Intermediate Computer Skills<br>Week 6 of 8</p>
+      </div>
+
+      <!-- Slide 1: Coffee Shop Disaster (NEW - Warm-Up) -->
+      <div class="slide" data-index="1">
+        <div class="slide-header">
+          <h2>Coffee Shop Disaster</h2>
+          <p class="subtitle">A story about why the cloud matters</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box warning">
+            <h4>Imagine This...</h4>
+            <p>You're at the VA office for an important benefits meeting. They ask for your DD-214. You say: <em>"It's on my computer at home... 30 minutes away."</em></p>
+          </div>
+          <div class="two-column">
+            <div class="column">
+              <h4>Without the Cloud</h4>
+              <ul>
+                <li>Drive home, get the file, drive back</li>
+                <li>Miss your appointment time slot</li>
+                <li>Reschedule for weeks later</li>
+                <li>Frustration and wasted time</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>With the Cloud</h4>
+              <ul>
+                <li>Pull out your phone</li>
+                <li>Open Google Drive</li>
+                <li>Show or print the file right there</li>
+                <li>Meeting stays on track!</li>
+              </ul>
+            </div>
+          </div>
+          <div class="highlight-box google">
+            <h4>Discussion</h4>
+            <p>Has something like this ever happened to you? What important documents would you want available anywhere, anytime?</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: What is the Cloud? -->
+      <div class="slide" data-index="2">
+        <div class="slide-header">
+          <h2>What is "The Cloud"?</h2>
+          <p class="subtitle">It's simpler than it sounds!</p>
+        </div>
+        <div class="slide-content">
+          <p>The "cloud" is just <strong>someone else's computer</strong> that stores your files over the internet. Instead of keeping files only on your computer, they're stored on powerful servers run by companies like Google, Microsoft, or Apple.</p>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Without the Cloud</h4>
+              <ul>
+                <li>Files only on YOUR computer</li>
+                <li>If computer breaks, files may be lost</li>
+                <li>Can only access from one device</li>
+                <li>Need USB drive to share files</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>With the Cloud</h4>
+              <ul>
+                <li>Files stored online (AND on your computer)</li>
+                <li>Files safe even if computer breaks</li>
+                <li>Access from any device with internet</li>
+                <li>Share files with a link</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Simple Analogy</h4>
+            <p>Think of the cloud like a <strong>safe deposit box at a bank</strong>. Your valuables are stored securely in a building you don't own, but you can access them whenever you need to. The cloud is like a digital safe deposit box for your files.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Why Use Cloud Storage? -->
+      <div class="slide" data-index="3">
+        <div class="slide-header">
+          <h2>Why Use Cloud Storage?</h2>
+          <p class="subtitle">Benefits for everyday life</p>
+        </div>
+        <div class="slide-content">
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">🔒</div>
+              <h5>Backup Protection</h5>
+              <p>Files safe if your computer crashes or is stolen</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🌍</div>
+              <h5>Access Anywhere</h5>
+              <p>Use any computer, tablet, or phone</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🤝</div>
+              <h5>Easy Sharing</h5>
+              <p>Send large files or photos with a link</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">💰</div>
+              <h5>Free Storage</h5>
+              <p>Google Drive gives you 15 GB free!</p>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Real-Life Example</h4>
+            <p>Imagine you're at the VA office and they ask for a document that's on your home computer. With cloud storage, you can pull up that document right from your phone - no need to go home and get it!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Google Drive Overview -->
+      <div class="slide" data-index="4">
+        <div class="slide-header">
+          <h2>Google Drive Overview</h2>
+          <p class="subtitle">Your free cloud storage from Google</p>
+        </div>
+        <div class="slide-content">
+          <p><strong>Google Drive</strong> is Google's free cloud storage service. If you have a Gmail account (which you created in Week 3!), you already have Google Drive!</p>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>What You Get Free</h4>
+              <ul>
+                <li><strong>15 GB</strong> of free storage</li>
+                <li>Access from any web browser</li>
+                <li>Mobile apps for phone/tablet</li>
+                <li>Google Docs, Sheets, Slides</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Access Google Drive</h4>
+              <ol>
+                <li>Go to <strong>drive.google.com</strong></li>
+                <li>Sign in with your Gmail</li>
+                <li>Or click the Google Apps icon in Gmail</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="highlight-box google">
+            <h4>What Can You Store?</h4>
+            <p>Photos, documents, spreadsheets, videos, PDFs, music - almost any type of file! Great for backing up important documents like VA letters, tax records, or family photos.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Navigating Drive -->
+      <div class="slide" data-index="5">
+        <div class="slide-header">
+          <h2>Navigating Google Drive</h2>
+          <p class="subtitle">Finding your way around</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h4>Left Sidebar</h4>
+              <ul>
+                <li><strong>My Drive</strong> - Your main storage area</li>
+                <li><strong>Shared with me</strong> - Files others shared</li>
+                <li><strong>Recent</strong> - Recently opened files</li>
+                <li><strong>Starred</strong> - Your favorites</li>
+                <li><strong>Trash</strong> - Deleted files (30 days)</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Main Area</h4>
+              <ul>
+                <li>Shows your files and folders</li>
+                <li>Click a file to open it</li>
+                <li>Right-click for more options</li>
+                <li>Drag to rearrange</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>View Options</h4>
+            <p>Click the icons in the top right to switch between <strong>List view</strong> (easy to read) and <strong>Grid view</strong> (shows thumbnails). List view is usually easier for documents!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Uploading Files -->
+      <div class="slide" data-index="6">
+        <div class="slide-header">
+          <h2>Uploading Files</h2>
+          <p class="subtitle">Moving files from your computer to the cloud</p>
+        </div>
+        <div class="slide-content">
+          <h3>Method 1: Drag and Drop</h3>
+          <ol class="step-list">
+            <li>Open Google Drive in your browser</li>
+            <li>Open File Explorer on your computer</li>
+            <li>Drag the file from File Explorer into the Drive window</li>
+            <li>Wait for upload to complete (you'll see progress)</li>
+          </ol>
+
+          <h3>Method 2: Upload Button</h3>
+          <ol class="step-list">
+            <li>In Google Drive, click <strong>+ New</strong> button (top left)</li>
+            <li>Select <strong>File upload</strong></li>
+            <li>Browse to find your file, select it</li>
+            <li>Click <strong>Open</strong></li>
+          </ol>
+
+          <div class="highlight-box tip">
+            <h4>Upload Multiple Files</h4>
+            <p>You can select multiple files at once! Hold <strong>Ctrl</strong> and click each file, or drag a whole folder to upload everything in it.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: Creating Folders -->
+      <div class="slide" data-index="7">
+        <div class="slide-header">
+          <h2>Creating Folders</h2>
+          <p class="subtitle">Organize your cloud storage</p>
+        </div>
+        <div class="slide-content">
+          <p>Just like on your computer, folders help keep your Google Drive organized!</p>
+
+          <ol class="step-list">
+            <li>Click the <strong>+ New</strong> button (top left)</li>
+            <li>Select <strong>New folder</strong></li>
+            <li>Type a name for your folder</li>
+            <li>Click <strong>Create</strong></li>
+          </ol>
+
+          <div class="highlight-box">
+            <h4>Suggested Folders for Veterans</h4>
+            <ul>
+              <li><strong>VA Documents</strong> - Benefits letters, claims, appointments</li>
+              <li><strong>Medical Records</strong> - Health information, prescriptions</li>
+              <li><strong>Financial</strong> - Tax documents, bank statements</li>
+              <li><strong>Family Photos</strong> - Memories to keep safe</li>
+              <li><strong>Important IDs</strong> - Scans of important cards/documents</li>
+            </ul>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Moving Files to Folders</h4>
+            <p>Drag and drop files into folders, or right-click a file and select <strong>Move to</strong> to choose a folder.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Sharing Files -->
+      <div class="slide" data-index="8">
+        <div class="slide-header">
+          <h2>Sharing Files</h2>
+          <p class="subtitle">Send files to family, doctors, or anyone</p>
+        </div>
+        <div class="slide-content">
+          <p>One of the best features of Google Drive is easy sharing. No more USB drives or email attachment limits!</p>
+
+          <ol class="step-list">
+            <li>Right-click on the file you want to share</li>
+            <li>Click <strong>Share</strong></li>
+            <li>Type the person's email address</li>
+            <li>Choose their permission level (Viewer, Editor)</li>
+            <li>Click <strong>Send</strong></li>
+          </ol>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Share with Email</h4>
+              <p>Type their email address and they'll get a notification with a link to the file.</p>
+            </div>
+            <div class="column">
+              <h4>Share with Link</h4>
+              <p>Click "Copy link" to get a URL you can paste into a message, text, or email.</p>
+            </div>
+          </div>
+
+          <div class="highlight-box warning">
+            <h4>Be Careful What You Share!</h4>
+            <p>Double-check you're sharing the right file. Once someone has access, they can view (or edit) until you remove their access.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: Share Settings -->
+      <div class="slide" data-index="9">
+        <div class="slide-header">
+          <h2>Share Settings</h2>
+          <p class="subtitle">Control who can do what</p>
+        </div>
+        <div class="slide-content">
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">👁️</div>
+              <h5>Viewer</h5>
+              <p>Can look at the file but NOT change it</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">💬</div>
+              <h5>Commenter</h5>
+              <p>Can view and add comments</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">✏️</div>
+              <h5>Editor</h5>
+              <p>Can view AND make changes</p>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>When to Use Each</h4>
+            <ul>
+              <li><strong>Viewer:</strong> Sharing VA documents with family (they just need to see it)</li>
+              <li><strong>Commenter:</strong> Getting feedback on a letter you wrote</li>
+              <li><strong>Editor:</strong> Collaborating with someone on a shared list</li>
+            </ul>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Removing Access</h4>
+            <p>Changed your mind? Click Share → Click the person's name → Click <strong>Remove</strong> to take away their access.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 10: Google Docs (combined from old slides 9+10) -->
+      <div class="slide" data-index="10">
+        <div class="slide-header">
+          <h2>Google Docs</h2>
+          <p class="subtitle">Free word processing in your browser</p>
+        </div>
+        <div class="slide-content">
+          <p><strong>Google Docs</strong> is like Microsoft Word, but it's free, runs in your web browser, and saves automatically to Google Drive!</p>
+
+          <div class="two-column">
+            <div class="column">
+              <h4>Benefits of Google Docs</h4>
+              <ul>
+                <li>100% free</li>
+                <li>Saves automatically</li>
+                <li>Access from any device</li>
+                <li>Easy to share</li>
+                <li>Works offline too</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Creating a Google Doc</h4>
+              <ol>
+                <li>Click <strong>+ New</strong> in Drive</li>
+                <li>Select <strong>Google Docs</strong></li>
+                <li>Click "Untitled document" to name it</li>
+                <li>Start typing - it saves automatically!</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="highlight-box tip">
+            <h4>Auto-Save Magic</h4>
+            <p>Notice there's no Save button? Google Docs saves every few seconds automatically. You'll see "Saving..." then "Saved to Drive" at the top. No more losing work!</p>
+          </div>
+
+          <div class="highlight-box google">
+            <h4>Google's Other Free Apps</h4>
+            <p><strong>Google Sheets</strong> = Like Excel (spreadsheets)<br>
+            <strong>Google Slides</strong> = Like PowerPoint (presentations)<br>
+            All work the same way - free, auto-save, accessible anywhere!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: Workshop Time! (NEW - Practice) -->
+      <div class="slide" data-index="11">
+        <div class="slide-header">
+          <h2>Workshop Time!</h2>
+          <p class="subtitle">Build your cloud filing system</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Cloud & Google Drive Workshop — Parts 1 & 2 (Guided)</h4>
+            <p>Use the <strong>Cloud & Google Drive Workshop</strong> handout to follow along.</p>
+          </div>
+          <div class="two-column">
+            <div class="column">
+              <h4>Part 1: Organize (15 min)</h4>
+              <ul>
+                <li>Create 4 color-coded folders</li>
+                <li>VA, Medical, Financial, Personal</li>
+                <li>Assign different colors</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Part 2: Upload (15 min)</h4>
+              <ul>
+                <li>Upload 3 files from your computer</li>
+                <li>Rename with clear names</li>
+                <li>Move files into folders</li>
+                <li>Star your most important file</li>
+              </ul>
+            </div>
+          </div>
+          <div class="highlight-box tip">
+            <h4>Remember</h4>
+            <p>Your Gmail login from Week 3 is your key to Google Drive. Same email, same password!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: Break Time (NEW - Practice) -->
+      <div class="slide" data-index="12">
+        <div class="slide-header">
+          <h2>Break Time</h2>
+          <p class="subtitle">10 minutes — Your files are safe in the cloud!</p>
+        </div>
+        <div class="slide-content">
+          <div style="text-align: center; padding: 2rem 0;">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">☕</div>
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem;">10-Minute Break</h3>
+          </div>
+          <div class="highlight-box google">
+            <h4>No Need to Save!</h4>
+            <ul>
+              <li>Google Drive auto-saves everything</li>
+              <li>Your folders and files are safe in the cloud</li>
+              <li>You can even close the browser — everything stays!</li>
+            </ul>
+          </div>
+          <div class="highlight-box">
+            <h4>After Break: Independent Practice</h4>
+            <p>You'll create a shared Google Doc with a classmate and prove you can access your files from anywhere! Parts 3 & 4 of the workshop.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 13: Knowledge Check -->
+      <div class="slide" data-index="13">
+        <div class="slide-header">
+          <h2>Knowledge Check</h2>
+          <p class="subtitle">Let's review what we learned!</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Question 1</h4>
+            <p>What is "the cloud" in simple terms?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>Files stored on someone else's computers (servers) that you access over the internet.</em></p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Question 2</h4>
+            <p>How much free storage does Google Drive provide?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>15 GB (gigabytes)</em></p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Question 3</h4>
+            <p>What's the difference between a Viewer and an Editor when sharing?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>Viewer can only look at the file; Editor can make changes to it.</em></p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>Question 4</h4>
+            <p>Do you need to click "Save" in Google Docs?</p>
+            <p style="margin-top: 0.5rem; color: var(--gray);"><em>No - Google Docs saves automatically!</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 14: Show & Share (NEW - Evaluation) -->
+      <div class="slide" data-index="14">
+        <div class="slide-header">
+          <h2>Show & Share</h2>
+          <p class="subtitle">Prove the cloud works!</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Cross-Device Verification</h4>
+            <p>Can you access your files from a different device or browser?</p>
+          </div>
+          <ol class="step-list">
+            <li>Show your neighbor your 4 color-coded folders in Google Drive</li>
+            <li>Open the shared "Class Contact List" — can you both see each other's edits?</li>
+            <li>Open Drive in an incognito window — are all your files still there?</li>
+            <li>(Bonus) Check Drive on your phone — can you see your folders?</li>
+          </ol>
+          <div class="two-column">
+            <div class="column">
+              <h4>Check Your Work</h4>
+              <ul>
+                <li>4 folders with different colors?</li>
+                <li>Files uploaded and organized?</li>
+                <li>Shared doc accessible?</li>
+                <li>Files visible from other device?</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>Discussion</h4>
+              <ul>
+                <li>What surprised you about the cloud?</li>
+                <li>What will you upload first at home?</li>
+                <li>Any concerns about cloud storage?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 15: Your Cloud Challenge (NEW - Application) -->
+      <div class="slide" data-index="15">
+        <div class="slide-header">
+          <h2>Your Cloud Challenge</h2>
+          <p class="subtitle">Put your cloud skills to work this week!</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>This Week's Mission</h4>
+            <p>Upload <strong>5 important documents</strong> to Google Drive and create a <strong>Google Doc</strong> you can access from your phone.</p>
+          </div>
+          <ol class="step-list">
+            <li><strong>Upload 5 documents</strong> from your computer (VA letters, tax forms, recipes, anything!)</li>
+            <li><strong>Organize each</strong> into the right color-coded folder</li>
+            <li><strong>Create a Google Doc grocery list</strong> — check that you can see it on your phone</li>
+            <li><strong>Upload your Excel budget</strong> from Week 5 to your Financial folder</li>
+          </ol>
+          <div class="icon-grid">
+            <div class="icon-item">
+              <div class="icon">☁️</div>
+              <h5>Cloud Storage</h5>
+              <p>Files safe and backed up</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📁</div>
+              <h5>Organized</h5>
+              <p>Color-coded folders</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">🤝</div>
+              <h5>Sharing</h5>
+              <p>Collaborate with anyone</p>
+            </div>
+            <div class="icon-item">
+              <div class="icon">📱</div>
+              <h5>Anywhere</h5>
+              <p>Access from any device</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 16: Next Week Preview -->
+      <div class="slide" data-index="16">
+        <div class="slide-header">
+          <h2>Next Week Preview</h2>
+          <p class="subtitle">Week 7: Introduction to AI Tools</p>
+        </div>
+        <div class="slide-content">
+          <div class="highlight-box">
+            <h4>Coming Up: Week 7</h4>
+            <p>We'll explore artificial intelligence tools like ChatGPT and how they can help you!</p>
+          </div>
+
+          <h3>Topics We'll Cover:</h3>
+          <ul>
+            <li><strong>What is AI?</strong> - Understanding artificial intelligence</li>
+            <li><strong>ChatGPT Basics</strong> - How to use this helpful tool</li>
+            <li><strong>Practical Uses</strong> - Writing help, questions, planning</li>
+            <li><strong>Limitations</strong> - What AI can and can't do</li>
+          </ul>
+
+          <div class="highlight-box tip">
+            <h4>Before Next Week</h4>
+            <p>No special preparation needed! We'll create accounts together in class if you want to try the tools.</p>
+          </div>
+
+          <div style="text-align: center; margin-top: 2rem; padding: 2rem; background: var(--off-white); border-radius: 12px;">
+            <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Great work today!</h3>
+            <p style="color: var(--gray);">Your files are now safely backed up in the cloud. See you next class!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="nav-buttons">
+        <button class="nav-btn secondary" id="prevBtn" disabled>← Previous</button>
+        <span class="slide-counter">Slide <span id="currentSlide">1</span> of <span id="totalSlides">17</span></span>
+        <button class="nav-btn" id="nextBtn">Next →</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="celebration" id="celebration">
+    <h2>Congratulations!</h2>
+    <p>You've completed Week 6: Cloud Computing & Google Drive</p>
+    <button class="nav-btn" onclick="closeCelebration()" style="margin-top: 1rem;">Continue</button>
+  </div>
+
+  <script src="../../../shared/progress.js"></script>
+  <script src="../../../shared/glossary.js" defer></script>
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideLinks = document.querySelectorAll('.slide-link');
+
+    document.getElementById('totalSlides').textContent = totalSlides;
+    loadProgress();
+    updateSlide();
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (currentSlide > 0) { currentSlide--; updateSlide(); }
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (currentSlide < totalSlides - 1) { currentSlide++; updateSlide(); }
+      else { showCelebration(); }
+    });
+
+    slideLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        currentSlide = parseInt(link.dataset.slide);
+        updateSlide();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        if (currentSlide < totalSlides - 1) { currentSlide++; updateSlide(); }
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        if (currentSlide > 0) { currentSlide--; updateSlide(); }
+      } else if (e.key === 'Home') { currentSlide = 0; updateSlide(); }
+      else if (e.key === 'End') { currentSlide = totalSlides - 1; updateSlide(); }
+    });
+
+    function updateSlide() {
+      slides.forEach((slide, index) => slide.classList.toggle('active', index === currentSlide));
+      slideLinks.forEach(link => {
+        link.classList.toggle('active', parseInt(link.dataset.slide) === currentSlide);
+        if (parseInt(link.dataset.slide) < currentSlide) link.classList.add('completed');
+      });
+      document.getElementById('prevBtn').disabled = currentSlide === 0;
+      document.getElementById('nextBtn').textContent = currentSlide === totalSlides - 1 ? 'Finish' : 'Next →';
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+      const progress = ((currentSlide + 1) / totalSlides) * 100;
+      document.getElementById('progressFill').style.width = progress + '%';
+      document.getElementById('progressText').textContent = currentSlide + 1;
+      saveProgress();
+    }
+
+    function saveProgress() {
+      if (window.VubProgress) VubProgress.saveSlide('ics', 6, currentSlide, totalSlides);
+    }
+    function loadProgress() {
+      if (window.VubProgress) {
+        const entry = VubProgress.get('ics', 6);
+        if (entry && typeof entry.slide === 'number') currentSlide = entry.slide;
+      }
+    }
+
+    function showCelebration() {
+      document.getElementById('celebration').classList.add('active');
+      createConfetti();
+    }
+
+    function closeCelebration() { document.getElementById('celebration').classList.remove('active'); }
+
+    function createConfetti() {
+      const celebration = document.getElementById('celebration');
+      const colors = ['#C9A227', '#1B365D', '#4285F4', '#34A853', '#FBBC05'];
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        celebration.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    }
+  </script>
+</body>
+</html>

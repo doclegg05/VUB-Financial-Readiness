@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Document Activity | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --word-blue: #2B579A;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--word-blue) 0%, #1E4080 100%);
+      color: var(--light);
+      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .name-field {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    .name-field label {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .name-field .line {
+      flex: 1;
+      border-bottom: 2px solid var(--gray);
+      max-width: 300px;
+    }
+    .section { margin-bottom: 1.5rem; }
+    .section-title {
+      background: var(--off-white);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-left: 4px solid var(--word-blue);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--off-white);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--word-blue);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--primary); }
+    .checklist-text .detail {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+    .example-doc {
+      background: var(--light);
+      border: 2px solid #ddd;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      font-family: 'Calibri', sans-serif;
+    }
+    .example-doc .doc-header {
+      text-align: right;
+      font-size: 0.75rem;
+      color: var(--gray);
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .example-doc .doc-title {
+      font-size: 1.3rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .example-doc .doc-heading {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 0.75rem;
+    }
+    .example-doc table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.5rem 0;
+    }
+    .example-doc th, .example-doc td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+    .example-doc th {
+      background: var(--word-blue);
+      color: white;
+    }
+    .example-doc .doc-footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--gray);
+      border-top: 1px solid #eee;
+      padding-top: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .success-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+    }
+    .success-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .success-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    @media print {
+      body { padding: 0; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>📄 Word Document Activity</h1>
+      <p style="font-size: 0.9rem; opacity: 0.9;">VUB Intermediate Computer Skills - Week 4</p>
+    </div>
+    <span class="header-badge">ACTIVITY</span>
+  </header>
+
+  <div class="name-field">
+    <label>Name:</label>
+    <div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label>
+    <div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">🎯 Today's Goal</h2>
+    <p style="font-size: 0.95rem; padding: 0.5rem;">
+      Create a professional contact list document using styles, tables, headers, and page numbers.
+      Follow the steps below and check each task as you complete it. Time: 20 minutes.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">📋 Your Final Document Should Look Like This:</h2>
+    <div class="example-doc">
+      <div class="doc-header">Your Name | Today's Date</div>
+      <div class="doc-title">My Important Contacts</div>
+      <div class="doc-heading">Family</div>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Relationship</th>
+        </tr>
+        <tr>
+          <td>Jane Smith</td>
+          <td>(304) 555-1234</td>
+          <td>Wife</td>
+        </tr>
+        <tr>
+          <td>John Smith Jr.</td>
+          <td>(304) 555-5678</td>
+          <td>Son</td>
+        </tr>
+        <tr>
+          <td>Mary Johnson</td>
+          <td>(304) 555-9012</td>
+          <td>Sister</td>
+        </tr>
+      </table>
+      <div class="doc-footer">Page 1</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 1: Set Up Your Document</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Open Microsoft Word</strong>
+          <span class="detail">Start menu → Microsoft Word, or click Word icon</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Create a new blank document</strong>
+          <span class="detail">File → New → Blank document</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Save your document immediately</strong>
+          <span class="detail">Ctrl+S → Name it "Contacts_YourName" → Save to Documents</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 2: Add Title and Heading with Styles</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Type the title: "My Important Contacts"</strong>
+          <span class="detail">Just type the text, don't worry about formatting yet</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Apply the Title style</strong>
+          <span class="detail">Select the title text → Home tab → Click "Title" in Styles group</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Press Enter and type: "Family"</strong>
+          <span class="detail">This will be your first section heading</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Apply Heading 1 style to "Family"</strong>
+          <span class="detail">Select "Family" → Home tab → Click "Heading 1" in Styles</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 3: Create Your Table</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Click below your "Family" heading</strong>
+          <span class="detail">Press Enter to create a new line</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Insert a table: 3 columns x 4 rows</strong>
+          <span class="detail">Insert tab → Table → Drag to select 3x4 grid → Click</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Fill in the header row</strong>
+          <span class="detail">Type: Name | Phone Number | Relationship (use Tab to move between cells)</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Fill in at least 3 contacts</strong>
+          <span class="detail">Can be real or made up - your choice!</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Apply a Table Style</strong>
+          <span class="detail">Click in table → Table Design tab → Choose a style you like</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 4: Add Header and Page Number</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Add a header</strong>
+          <span class="detail">Insert tab → Header → Choose "Blank" or a simple design</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Type your name and today's date in the header</strong>
+          <span class="detail">Example: John Smith | Today's Date</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Close the header</strong>
+          <span class="detail">Click "Close Header and Footer" button, or double-click in document body</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Add page numbers</strong>
+          <span class="detail">Insert tab → Page Number → Bottom of Page → Plain Number 2 (centered)</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Part 5: Final Steps</h2>
+    <ul class="checklist">
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Run Spell Check</strong>
+          <span class="detail">Press F7 or Review tab → Spelling & Grammar</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Save your document</strong>
+          <span class="detail">Ctrl+S to save</span>
+        </div>
+      </li>
+      <li>
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <strong>Show your instructor!</strong>
+          <span class="detail">Raise your hand when you're done</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="success-box">
+    <h3>🎉 Bonus Challenges (If You Finish Early)</h3>
+    <ul style="margin-left: 1.25rem; font-size: 0.9rem;">
+      <li>Add another section called "Medical Contacts" with Heading 1 style and a new table</li>
+      <li>Change the color scheme of your table</li>
+      <li>Try the Navigation Pane (View → Navigation Pane) to see your headings</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Intermediate Computer Skills Course | Week 4: Microsoft Word</p>
+  </footer>
+</body>
+</html>

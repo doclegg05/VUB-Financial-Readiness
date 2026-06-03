@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 8: Mobile Integration & Course Review | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B365D;
+      --primary-dark: #0D1B2A;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --red: #B31942;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .logo {
+      text-align: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .logo h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .logo p {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .week-indicator {
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      color: var(--primary);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .week-indicator .week-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .week-indicator .week-title {
+      font-size: 0.85rem;
+    }
+
+    .chapter {
+      margin-bottom: 1rem;
+    }
+
+    .chapter-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .chapter-slides {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .slide-link {
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slide-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .slide-link.active {
+      background: var(--accent);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .slide-link.completed::before {
+      content: '\2713';
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource-link::before {
+      content: "\2193 ";
+      opacity: 0.6;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .progress-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Slides Container */
+    .slides-container {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .slide {
+      display: none;
+      background: var(--light);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 1000px;
+      min-height: 600px;
+      padding: 3rem;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Styles */
+    .slide-header {
+      margin-bottom: 2rem;
+    }
+
+    .slide-title {
+      font-size: 2.25rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray);
+    }
+
+    .slide-content {
+      font-size: 1.5rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .slide-content ul, .slide-content ol {
+      margin-left: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .slide-content li {
+      margin-bottom: 1rem;
+    }
+
+    /* Title Slide */
+    .title-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+    }
+
+    .title-slide .slide-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-slide .slide-title {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .title-slide .slide-subtitle {
+      font-size: 1.5rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .course-info {
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .final-week-badge {
+      background: linear-gradient(135deg, var(--red) 0%, #8B1432 100%);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Info Boxes */
+    .info-box {
+      background: var(--off-white);
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+    }
+
+    .info-box.success {
+      border-left-color: var(--success);
+      background: rgba(40, 167, 69, 0.1);
+    }
+
+    .info-box.celebration {
+      border-left-color: var(--accent);
+      background: rgba(201, 162, 39, 0.15);
+    }
+
+    .info-box-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .info-box-content {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Key Points */
+    .key-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--off-white);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .key-point-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .key-point-text {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .key-point-text strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .column {
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+
+    .column h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .column ul {
+      margin-left: 1.25rem;
+    }
+
+    .column li {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Steps List */
+    .steps-list {
+      list-style: none;
+      margin-left: 0 !important;
+      counter-reset: step-counter;
+    }
+
+    .steps-list li {
+      position: relative;
+      padding-left: 3.5rem;
+      margin-bottom: 1.5rem;
+      counter-increment: step-counter;
+    }
+
+    .steps-list li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--accent);
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    /* Review Card */
+    .review-card {
+      background: white;
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .review-card h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .review-card p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .review-card .week-badge {
+      background: var(--off-white);
+      color: var(--gray);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: normal;
+    }
+
+    /* Demo Box */
+    .demo-box {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .demo-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .demo-box p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* App Card */
+    .app-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--off-white);
+      padding: 1.25rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .app-icon {
+      font-size: 3rem;
+      flex-shrink: 0;
+    }
+
+    .app-info h4 {
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+      font-size: 1.2rem;
+    }
+
+    .app-info p {
+      font-size: 1rem;
+      color: var(--gray);
+    }
+
+    /* Navigation Footer */
+    .nav-footer {
+      background: var(--light);
+      border-top: 1px solid #eee;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.prev {
+      background: var(--off-white);
+      color: var(--primary);
+    }
+
+    .nav-btn.prev:hover {
+      background: #e8e8e8;
+    }
+
+    .nav-btn.next {
+      background: var(--accent);
+      color: var(--primary);
+    }
+
+    .nav-btn.next:hover {
+      background: var(--accent-light);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .slide-counter {
+      font-size: 0.9rem;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* Completion Slide */
+    .completion-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      border-radius: 16px;
+    }
+
+    .completion-badge {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .completion-badge span {
+      font-size: 4rem;
+    }
+
+    .completion-slide h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .completion-slide p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .completion-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .completion-message {
+      background: rgba(255,255,255,0.1);
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      margin-top: 2rem;
+      max-width: 500px;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      display: none;
+    }
+
+    .confetti.active {
+      display: block;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti-fall 3s ease-out forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Handout Prompt */
+    .handout-prompt {
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      color: var(--primary);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .handout-prompt-icon {
+      font-size: 2rem;
+    }
+
+    .handout-prompt-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* Assessment Link */
+    .assessment-link {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .assessment-link:hover {
+      background: #8B1432;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="logo">
+      <h2>VUB Computer Skills</h2>
+      <p>Intermediate Course</p>
+    </div>
+
+    <div class="week-indicator">
+      <div class="week-num">Week 8</div>
+      <div class="week-title">Final Week!</div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Warm-Up</div>
+      <div class="chapter-slides">
+        <div class="slide-link active" data-slide="0">Welcome & Celebration</div>
+        <div class="slide-link" data-slide="1">Our 8-Week Journey</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Introduction</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="2">Today's Agenda</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Mobile</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="3">Why Go Mobile?</div>
+        <div class="slide-link" data-slide="4">Gmail on Your Phone</div>
+        <div class="slide-link" data-slide="5">Drive Mobile</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Practice</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="6">Workshop Time!</div>
+        <div class="slide-link" data-slide="7">Break Time</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Assessment</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="8">Post-Test Info</div>
+        <div class="slide-link" data-slide="9">How Did You Do?</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Celebration</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="10">Your Achievements</div>
+        <div class="slide-link" data-slide="11">Next Steps</div>
+        <div class="slide-link" data-slide="12">Course Complete!</div>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <div class="resources-title">Resources</div>
+      <a class="resource-link" href="handouts/mobile-setup-guide.html" target="_blank">Mobile Setup Guide</a>
+      <a class="resource-link" href="handouts/review-workshop.html" target="_blank">Review Workshop</a>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="slides-container">
+      <!-- Slide 0: Title -->
+      <div class="slide active title-slide">
+        <div class="slide-icon">🎓</div>
+        <h1 class="slide-title">Mobile Integration & Course Review</h1>
+        <p class="slide-subtitle">Bringing it all together on the final day!</p>
+        <p class="course-info">Week 8 of 8</p>
+        <div class="final-week-badge">Final Week!</div>
+      </div>
+
+      <!-- Slide 1: Our 8-Week Journey (NEW Warm-up) -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Our 8-Week Journey</h1>
+          <p class="slide-subtitle">Look how far we've come!</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">1️⃣</div>
+            <div class="key-point-text">
+              <strong>Week 1:</strong> We learned to navigate VA.gov and MyHealtheVet
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">2️⃣</div>
+            <div class="key-point-text">
+              <strong>Week 2:</strong> We learned Windows shortcuts and productivity tips
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">3️⃣</div>
+            <div class="key-point-text">
+              <strong>Week 3:</strong> We organized Gmail with labels and signatures
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">4️⃣</div>
+            <div class="key-point-text">
+              <strong>Week 4:</strong> We created professional documents in Word
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">5️⃣</div>
+            <div class="key-point-text">
+              <strong>Week 5:</strong> We built budgets with Excel formulas
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">6️⃣</div>
+            <div class="key-point-text">
+              <strong>Week 6:</strong> We stored files safely in Google Drive
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">7️⃣</div>
+            <div class="key-point-text">
+              <strong>Week 7:</strong> We explored AI and wrote smart prompts
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">8️⃣</div>
+            <div class="key-point-text">
+              <strong>Week 8:</strong> Today we bring it ALL together!
+            </div>
+          </div>
+
+          <div class="info-box celebration">
+            <div class="info-box-title">Discussion</div>
+            <div class="info-box-content">Share with the class: What skill are you most proud of learning?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Today's Agenda -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Today's Agenda</h1>
+          <p class="slide-subtitle">Our final session together</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">📱</div>
+            <div class="key-point-text">
+              <strong>Mobile Apps</strong>
+              Access Gmail and Google Drive from your phone
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🛠️</div>
+            <div class="key-point-text">
+              <strong>Workshop</strong>
+              Mobile setup challenge and Skill Bingo review game
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📝</div>
+            <div class="key-point-text">
+              <strong>Post-Test</strong>
+              See how much you've learned!
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🎉</div>
+            <div class="key-point-text">
+              <strong>Celebration!</strong>
+              Recognize your achievements
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Why Go Mobile -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Why Go Mobile?</h1>
+          <p class="slide-subtitle">Your skills work everywhere</p>
+        </div>
+        <div class="slide-content">
+          <div class="info-box">
+            <div class="info-box-title">The Power of Mobile</div>
+            <div class="info-box-content">
+              Everything you learned on the computer works on your phone too!
+              Check email at the doctor's office, access files while traveling, stay connected anywhere.
+            </div>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h3>📱 Benefits</h3>
+              <ul>
+                <li>Access anywhere, anytime</li>
+                <li>Get notifications instantly</li>
+                <li>Share photos easily</li>
+                <li>Stay connected with family</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>🔗 Same Accounts</h3>
+              <ul>
+                <li>Your Gmail works on phone</li>
+                <li>Google Drive syncs everywhere</li>
+                <li>One login, all devices</li>
+                <li>Changes appear everywhere</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Gmail Mobile -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Gmail on Your Phone</h1>
+          <p class="slide-subtitle">Email in your pocket</p>
+        </div>
+        <div class="slide-content">
+          <div class="app-card">
+            <div class="app-icon">📧</div>
+            <div class="app-info">
+              <h4>Gmail App</h4>
+              <p>Free download from App Store (iPhone) or Play Store (Android)</p>
+            </div>
+          </div>
+
+          <ol class="steps-list">
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Download the Gmail app</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Search "Gmail" in your phone's app store</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Sign in with your Google account</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Use the same email and password from class</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Allow notifications</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Get alerts when new emails arrive</span>
+            </li>
+          </ol>
+
+          <div class="info-box success">
+            <div class="info-box-title">Everything Syncs!</div>
+            <div class="info-box-content">
+              Emails you read on your phone will show as read on your computer too.
+              Your labels and contacts are all there.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Google Drive Mobile -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Google Drive Mobile</h1>
+          <p class="slide-subtitle">Your files, everywhere</p>
+        </div>
+        <div class="slide-content">
+          <div class="app-card">
+            <div class="app-icon">📁</div>
+            <div class="app-info">
+              <h4>Google Drive App</h4>
+              <p>Access all your cloud files from your phone</p>
+            </div>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h3>📱 What You Can Do</h3>
+              <ul>
+                <li>View all your folders</li>
+                <li>Open documents and photos</li>
+                <li>Upload photos from your phone</li>
+                <li>Share files with family</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>📸 Photo Backup Tip</h3>
+              <ul>
+                <li>Turn on "Backup & Sync"</li>
+                <li>Photos auto-save to Drive</li>
+                <li>Never lose memories!</li>
+                <li>Access photos on computer</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Workshop Time! (NEW) -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Workshop Time!</h1>
+          <p class="slide-subtitle">Mobile Setup & Course Review</p>
+        </div>
+        <div class="slide-content">
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-text">Follow along with your Review Workshop handout</div>
+          </div>
+
+          <div class="key-point">
+            <div class="key-point-icon">📱</div>
+            <div class="key-point-text">
+              <strong>Part 1: Mobile Setup Challenge (15 min)</strong>
+              Set up Gmail and Drive on your phone
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🎯</div>
+            <div class="key-point-text">
+              <strong>Part 2: Skill Bingo (20 min)</strong>
+              Review game covering all 7 weeks
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-box-title">Getting Started</div>
+            <div class="info-box-content">Your instructor will hand out the Review Workshop</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: Break Time (NEW) -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Break Time</h1>
+          <p class="slide-subtitle">10 minutes — Save your work!</p>
+        </div>
+        <div class="slide-content">
+          <div class="demo-box">
+            <h3>☕ Take a Break</h3>
+            <p>Save any open files before stepping away. We'll start the Post-Test when you return!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Post-Test Info -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Post-Test Time!</h1>
+          <p class="slide-subtitle">Let's see how much you've learned</p>
+        </div>
+        <div class="slide-content">
+          <div class="info-box">
+            <div class="info-box-title">About the Post-Test</div>
+            <div class="info-box-content">
+              <ul style="margin-top: 0.5rem;">
+                <li>20 questions covering all 8 weeks</li>
+                <li>Same format as the pre-test from Week 1</li>
+                <li>Shows your improvement over the course</li>
+                <li>Not a pass/fail - just measures growth!</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="demo-box">
+            <h3>📝 Take Your Time</h3>
+            <p>Read each question carefully. There's no rush - this is about celebrating what you've learned!</p>
+          </div>
+
+          <div style="text-align: center;">
+            <a href="post-test.html" class="assessment-link">Start Post-Test →</a>
+          </div>
+
+          <div class="info-box success" style="margin-top: 2rem;">
+            <div class="info-box-title">After the Test</div>
+            <div class="info-box-content">
+              You'll receive a PDF report comparing your results to Week 1. Most students see significant improvement!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: How Did You Do? (NEW Show & Share) -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">How Did You Do?</h1>
+          <p class="slide-subtitle">Let's celebrate your growth!</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>📊 Compare Your Scores</h3>
+              <ul>
+                <li>Look at your pre-test vs post-test results</li>
+                <li>Every point of improvement is a WIN</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>🌟 Share a Highlight</h3>
+              <ul>
+                <li>What question did you answer differently?</li>
+                <li>What skill are you most confident about now?</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="info-box celebration">
+            <div class="info-box-title">Remember</div>
+            <div class="info-box-content">Remember: This test measures GROWTH, not perfection. Any improvement shows real learning!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 10: Your Achievements (UPDATED) -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Your Achievements</h1>
+          <p class="slide-subtitle">You should be proud!</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">✅</div>
+            <div class="key-point-text">
+              <strong>Completed 8 Weeks of Training</strong>
+              16 hours of lessons and hands-on workshops
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">✅</div>
+            <div class="key-point-text">
+              <strong>Mastered Essential Computer Skills</strong>
+              VA services, Windows productivity, email, Office apps
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">✅</div>
+            <div class="key-point-text">
+              <strong>Embraced New Technology</strong>
+              Cloud computing and AI tools
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">✅</div>
+            <div class="key-point-text">
+              <strong>Connected Across Devices</strong>
+              Skills that work on computers and phones
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: Next Steps -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">What's Next?</h1>
+          <p class="slide-subtitle">Keep learning and growing</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>📚 Continue Learning</h3>
+              <ul>
+                <li>Practice skills at home</li>
+                <li>Explore new features</li>
+                <li>Help friends and family</li>
+                <li>Consider advanced courses</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>🎯 Use Your Skills</h3>
+              <ul>
+                <li>Manage VA benefits online</li>
+                <li>Stay connected with family</li>
+                <li>Handle finances digitally</li>
+                <li>Explore new opportunities</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="info-box celebration">
+            <div class="info-box-title">VUB Resources</div>
+            <div class="info-box-content">
+              Veterans Upward Bound offers additional programs and services. Ask your instructor about other opportunities!
+            </div>
+          </div>
+
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-text">Keep your handouts as reference guides for practicing at home!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: Course Complete -->
+      <div class="slide completion-slide">
+        <div class="completion-badge">
+          <span>🎓</span>
+        </div>
+        <h2>Congratulations!</h2>
+        <p>You have successfully completed the VUB Intermediate Computer Skills Course!</p>
+        <div class="completion-stats">
+          <div class="stat">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Weeks Completed</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">16</div>
+            <div class="stat-label">Hours of Training</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">∞</div>
+            <div class="stat-label">Possibilities Ahead</div>
+          </div>
+        </div>
+        <div class="completion-message">
+          <strong>Thank you for your service to our country, and for your dedication to learning!</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div class="nav-footer">
+      <button class="nav-btn prev" id="prevBtn" disabled>
+        ← Previous
+      </button>
+      <span class="slide-counter">
+        Slide <span id="currentSlide">1</span> of <span id="totalSlides">13</span>
+      </span>
+      <button class="nav-btn next" id="nextBtn">
+        Next →
+      </button>
+    </div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div class="confetti" id="confetti"></div>
+
+  <script src="../../../shared/progress.js"></script>
+  <script src="../../../shared/glossary.js" defer></script>
+  <script>
+    // Presentation State
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideLinks = document.querySelectorAll('.slide-link');
+
+    // DOM Elements
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSlideSpan = document.getElementById('currentSlide');
+    const totalSlidesSpan = document.getElementById('totalSlides');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const confettiContainer = document.getElementById('confetti');
+
+    // Initialize
+    totalSlidesSpan.textContent = totalSlides;
+    loadProgress();
+    updateSlide();
+
+    // Navigation Functions
+    function updateSlide() {
+      // Update slides
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      // Update sidebar links
+      slideLinks.forEach((link, index) => {
+        link.classList.toggle('active', index === currentSlide);
+        if (index < currentSlide) {
+          link.classList.add('completed');
+        }
+      });
+
+      // Update navigation buttons
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.textContent = currentSlide === totalSlides - 1 ? 'Finish ✓' : 'Next →';
+
+      // Update counter
+      currentSlideSpan.textContent = currentSlide + 1;
+
+      // Update progress
+      const progress = Math.round((currentSlide / (totalSlides - 1)) * 100);
+      progressFill.style.width = progress + '%';
+      progressText.textContent = progress;
+
+      // Save progress
+      saveProgress();
+
+      // Trigger confetti on completion
+      if (currentSlide === totalSlides - 1) {
+        setTimeout(triggerConfetti, 500);
+      }
+
+      // Scroll slide into view in sidebar
+      const activeLink = document.querySelector('.slide-link.active');
+      if (activeLink) {
+        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlide();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    // Event Listeners
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    slideLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const slideIndex = parseInt(link.dataset.slide);
+        goToSlide(slideIndex);
+      });
+    });
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'PageUp':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          goToSlide(totalSlides - 1);
+          break;
+      }
+    });
+
+    // Progress Persistence (via shared VubProgress library)
+    function saveProgress() {
+      if (window.VubProgress) VubProgress.saveSlide('ics', 8, currentSlide, totalSlides);
+    }
+
+    function loadProgress() {
+      if (window.VubProgress) {
+        const entry = VubProgress.get('ics', 8);
+        if (entry && typeof entry.slide === 'number') currentSlide = entry.slide;
+      }
+    }
+
+    // Confetti Animation
+    function triggerConfetti() {
+      confettiContainer.classList.add('active');
+      confettiContainer.innerHTML = '';
+
+      const colors = ['#C9A227', '#1B365D', '#B31942', '#28A745', '#E6C65C', '#FFFFFF'];
+
+      for (let i = 0; i < 150; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 2 + 's';
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confettiContainer.appendChild(piece);
+      }
+
+      setTimeout(() => {
+        confettiContainer.classList.remove('active');
+      }, 5000);
+    }
+
+    // Touch/Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+  </script>
+</body>
+</html>

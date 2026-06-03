@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assessment Report Template</title>
+  <style>
+    :root {
+      --navy: #1b365d;
+      --navy-dark: #0d1b2a;
+      --red: #b31942;
+      --gold: #c9a227;
+      --off-white: #f5f7fa;
+      --gray: #5a6a7a;
+      --border: #d8dee6;
+      --success: #247a3d;
+      --danger: #b42318;
+      --white: #ffffff;
+      --text: #1f2933;
+      --focus: #f6c945;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    .answer-option:focus-visible {
+      outline: 4px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .app-header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 1.25rem;
+      border-bottom: 6px solid var(--gold);
+    }
+
+    .app-header-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .program-name {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .app-title {
+      margin: 0.25rem 0 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+    }
+
+    .app-subtitle {
+      margin: 0.5rem 0 0;
+      font-size: 1.25rem;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 18px rgba(13, 27, 42, 0.08);
+    }
+
+    .section-title {
+      margin: 0 0 0.75rem;
+      color: var(--navy);
+      font-size: 1.75rem;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .field label {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .field input {
+      min-height: 48px;
+      padding: 0.65rem 0.8rem;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      background: var(--white);
+      color: var(--text);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      min-height: 48px;
+      border: 0;
+      border-radius: 6px;
+      padding: 0.7rem 1.1rem;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .btn-secondary {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .btn-light {
+      background: var(--white);
+      border: 2px solid var(--navy);
+      color: var(--navy);
+    }
+
+    .btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .progress-area {
+      margin-bottom: 1rem;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--navy);
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .progress-track {
+      height: 14px;
+      background: #e6ebf1;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--gold);
+      transition: width 0.2s ease;
+    }
+
+    .question-card {
+      display: none;
+    }
+
+    .question-card.active {
+      display: block;
+    }
+
+    .question-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      color: var(--gray);
+      font-weight: 700;
+    }
+
+    .category-pill {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--navy);
+      padding: 0.25rem 0.75rem;
+    }
+
+    .question-text {
+      margin: 0 0 1.25rem;
+      color: var(--navy-dark);
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .answers {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .answer-option {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      min-height: 64px;
+      padding: 0.75rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--white);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .answer-option.selected {
+      border-color: var(--navy);
+      background: #eef3f9;
+    }
+
+    .answer-letter {
+      display: inline-flex;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 800;
+    }
+
+    .question-dots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin: 1rem 0;
+    }
+
+    .question-dot {
+      width: 34px;
+      height: 34px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--navy);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .question-dot.current {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .question-dot.answered:not(.current) {
+      border-color: var(--success);
+      background: #e8f5ec;
+    }
+
+    .score-hero {
+      display: grid;
+      grid-template-columns: minmax(180px, 260px) 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      margin: 1.25rem 0;
+    }
+
+    .score-box {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .score-number {
+      color: var(--gold);
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .category-card {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.8rem;
+    }
+
+    .category-name {
+      color: var(--gray);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .category-score {
+      color: var(--navy);
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .notice {
+      background: #fff8dc;
+      border-left: 6px solid var(--gold);
+      padding: 0.8rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .print-report {
+      display: none;
+    }
+
+    @media (max-width: 760px) {
+      .field-grid,
+      .score-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+    }
+
+    @media print {
+      @page {
+        size: letter;
+        margin: 0.5in;
+      }
+
+      body * {
+        visibility: hidden;
+      }
+
+      .print-report,
+      .print-report * {
+        visibility: visible;
+      }
+
+      .print-report {
+        display: block !important;
+        position: absolute;
+        inset: 0 auto auto 0;
+        width: 100%;
+        background: var(--white);
+        color: #111827;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 10pt;
+        line-height: 1.35;
+      }
+
+      .report-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        border-bottom: 3px solid var(--navy);
+        padding-bottom: 0.7rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .report-header h1 {
+        margin: 0;
+        color: var(--navy);
+        font-size: 18pt;
+      }
+
+      .report-header h2 {
+        margin: 0.15rem 0 0;
+        color: var(--gray);
+        font-size: 10pt;
+        font-weight: 500;
+      }
+
+      .report-pill {
+        align-self: flex-start;
+        background: var(--navy);
+        color: var(--white);
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        font-weight: 800;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .report-info {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.4rem;
+        background: var(--off-white);
+        border: 1px solid var(--border);
+        padding: 0.5rem;
+        margin-bottom: 0.75rem;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .report-label {
+        color: var(--gray);
+        font-size: 7pt;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .report-value {
+        color: var(--navy);
+        font-size: 10pt;
+        font-weight: 800;
+      }
+
+      .report-score {
+        background: var(--navy);
+        color: var(--white);
+        padding: 0.75rem;
+        text-align: center;
+        margin-bottom: 0.75rem;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .report-score-number {
+        color: var(--gold);
+        font-size: 30pt;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .report-section-title {
+        margin: 0.8rem 0 0.35rem;
+        color: var(--navy);
+        font-size: 10pt;
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.2rem;
+      }
+
+      .report-comparison {
+        background: var(--off-white);
+        border: 1px solid var(--border);
+        padding: 0.5rem;
+        margin-bottom: 0.75rem;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .comparison-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        text-align: center;
+      }
+
+      .comparison-number {
+        color: var(--navy);
+        font-size: 15pt;
+        font-weight: 900;
+      }
+
+      .report-categories {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.35rem;
+      }
+
+      .report-category {
+        border: 1px solid var(--border);
+        background: var(--off-white);
+        padding: 0.35rem;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .report-category-name {
+        color: var(--gray);
+        font-size: 7pt;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .report-category-score {
+        color: var(--navy);
+        font-size: 10pt;
+        font-weight: 900;
+      }
+
+      .report-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8pt;
+      }
+
+      .report-table th {
+        background: var(--navy);
+        color: var(--white);
+        padding: 0.28rem;
+        text-align: left;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .report-table td {
+        border-bottom: 1px solid var(--border);
+        padding: 0.28rem;
+        vertical-align: top;
+      }
+
+      .report-table tr {
+        page-break-inside: avoid;
+      }
+
+      .report-footer {
+        margin-top: 0.8rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--border);
+        color: var(--gray);
+        font-size: 8pt;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <p class="program-name" id="programName">Program Name</p>
+      <h1 class="app-title" id="assessmentTitle">Assessment Title</h1>
+      <p class="app-subtitle" id="courseName">Course Name</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="screen active" id="startScreen">
+      <div class="panel">
+        <h2 class="section-title">Begin Assessment</h2>
+        <p id="introText">Enter the report information below before starting. This information appears on the printed PDF report.</p>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="studentName">Student Name</label>
+            <input id="studentName" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="studentId">Student ID or Anonymous ID</label>
+            <input id="studentId">
+          </div>
+          <div class="field">
+            <label for="instructorName">Instructor Name</label>
+            <input id="instructorName">
+          </div>
+          <div class="field">
+            <label for="siteName">Site or Location</label>
+            <input id="siteName">
+          </div>
+          <div class="field">
+            <label for="cohortName">Cohort or Class</label>
+            <input id="cohortName">
+          </div>
+          <div class="field">
+            <label for="assessmentDate">Assessment Date</label>
+            <input id="assessmentDate" type="date">
+          </div>
+        </div>
+
+        <div class="notice" id="pretestNotice" hidden></div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" type="button" onclick="startAssessment()">Start Assessment</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="quizScreen">
+      <div class="panel">
+        <div class="progress-area">
+          <div class="progress-label">
+            <span id="questionCounter">Question 1 of 1</span>
+            <span id="answeredCounter">0 answered</span>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <div id="questionContainer"></div>
+        <div class="question-dots" id="questionDots" aria-label="Question navigation"></div>
+
+        <div class="button-row">
+          <button class="btn btn-light" type="button" id="prevButton" onclick="previousQuestion()">Previous</button>
+          <button class="btn btn-secondary" type="button" id="nextButton" onclick="nextQuestion()">Next</button>
+          <button class="btn btn-primary" type="button" id="submitButton" onclick="submitAssessment()">Submit Assessment</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="resultsScreen">
+      <div class="panel">
+        <h2 class="section-title">Assessment Complete</h2>
+        <p id="resultsSummary">The assessment has been scored. Print or save the report for program records.</p>
+
+        <div class="score-hero">
+          <div class="score-box">
+            <div class="score-number" id="screenScore">0%</div>
+            <div id="screenScoreDetail">0 of 0 correct</div>
+          </div>
+          <div>
+            <h3 class="section-title" style="font-size: 1.4rem;">Score By Category</h3>
+            <div class="category-grid" id="screenCategories"></div>
+          </div>
+        </div>
+
+        <div class="notice" id="comparisonNotice" hidden></div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" type="button" onclick="generateReport()">Print PDF Report</button>
+          <button class="btn btn-light" type="button" onclick="restartAssessment()">Start Over</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="print-report" id="printReport" aria-hidden="true">
+    <div class="report-header">
+      <div>
+        <h1 id="reportTitle">Assessment Report</h1>
+        <h2 id="reportSubtitle">Course Name</h2>
+      </div>
+      <div class="report-pill" id="reportType">PRE-TEST</div>
+    </div>
+
+    <div class="report-info" id="reportInfo"></div>
+
+    <div class="report-score">
+      <div class="report-score-number" id="reportScore">0%</div>
+      <div id="reportScoreDetail">0 of 0 correct</div>
+    </div>
+
+    <div class="report-comparison" id="reportComparison" hidden></div>
+
+    <h3 class="report-section-title">Score By Category</h3>
+    <div class="report-categories" id="reportCategories"></div>
+
+    <h3 class="report-section-title">Detailed Results</h3>
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th style="width: 28px;">#</th>
+          <th>Question</th>
+          <th style="width: 80px;">Category</th>
+          <th style="width: 100px;">Student Answer</th>
+          <th style="width: 100px;">Correct Answer</th>
+          <th style="width: 72px;">Result</th>
+        </tr>
+      </thead>
+      <tbody id="reportRows"></tbody>
+    </table>
+
+    <div class="report-footer" id="reportFooter"></div>
+  </section>
+
+  <script>
+    const CONFIG = {
+      programName: "Veterans Upward Bound",
+      courseName: "Sample Course Name",
+      assessmentTitle: "Sample Pre-Test",
+      assessmentType: "pre",
+      reportSubtitle: "Sample Course Assessment",
+      storageKey: "sample-course-2026",
+      reportFooter: "This report documents assessment results for program records. Retain according to local VUB record policy.",
+      showCorrectAnswersInReport: true,
+      questions: [
+        {
+          id: 1,
+          category: "Program Knowledge",
+          prompt: "Which option best describes the purpose of a pre-test?",
+          options: {
+            A: "To punish students for what they do not know",
+            B: "To measure starting knowledge before instruction begins",
+            C: "To replace all class activities",
+            D: "To decide whether students are allowed to attend"
+          },
+          correct: "B"
+        },
+        {
+          id: 2,
+          category: "Program Knowledge",
+          prompt: "Why is a clean assessment report useful for program records?",
+          options: {
+            A: "It documents student progress in a consistent format",
+            B: "It removes the need for instruction",
+            C: "It guarantees every student earns a perfect score",
+            D: "It replaces all grant requirements"
+          },
+          correct: "A"
+        }
+      ]
+    };
+
+    const state = {
+      currentQuestionIndex: 0,
+      answers: {},
+      participant: {},
+      results: null,
+      matchingPreTest: null
+    };
+
+    const startScreen = document.getElementById("startScreen");
+    const quizScreen = document.getElementById("quizScreen");
+    const resultsScreen = document.getElementById("resultsScreen");
+    const questionContainer = document.getElementById("questionContainer");
+    const questionDots = document.getElementById("questionDots");
+    const progressFill = document.getElementById("progressFill");
+    const questionCounter = document.getElementById("questionCounter");
+    const answeredCounter = document.getElementById("answeredCounter");
+    const prevButton = document.getElementById("prevButton");
+    const nextButton = document.getElementById("nextButton");
+    const submitButton = document.getElementById("submitButton");
+
+    function init() {
+      document.title = `${CONFIG.programName} - ${CONFIG.assessmentTitle}`;
+      document.getElementById("programName").textContent = CONFIG.programName;
+      document.getElementById("assessmentTitle").textContent = CONFIG.assessmentTitle;
+      document.getElementById("courseName").textContent = CONFIG.courseName;
+      document.getElementById("introText").textContent =
+        `${CONFIG.assessmentTitle} includes ${CONFIG.questions.length} questions. Complete all questions before printing the report.`;
+
+      document.getElementById("assessmentDate").valueAsDate = new Date();
+      renderQuestions();
+      renderDots();
+      updateNavigation();
+
+      document.addEventListener("keydown", (event) => {
+        if (!quizScreen.classList.contains("active")) return;
+        if (event.key === "ArrowRight") nextQuestion();
+        if (event.key === "ArrowLeft") previousQuestion();
+      });
+    }
+
+    function showScreen(screen) {
+      [startScreen, quizScreen, resultsScreen].forEach((item) => item.classList.remove("active"));
+      screen.classList.add("active");
+    }
+
+    function startAssessment() {
+      const studentName = document.getElementById("studentName").value.trim();
+      if (!studentName) {
+        alert("Please enter the student name before starting.");
+        document.getElementById("studentName").focus();
+        return;
+      }
+
+      state.participant = {
+        studentName,
+        studentId: document.getElementById("studentId").value.trim(),
+        instructorName: document.getElementById("instructorName").value.trim(),
+        siteName: document.getElementById("siteName").value.trim(),
+        cohortName: document.getElementById("cohortName").value.trim(),
+        assessmentDate: document.getElementById("assessmentDate").value || new Date().toISOString().slice(0, 10)
+      };
+
+      if (CONFIG.assessmentType === "post") {
+        state.matchingPreTest = loadPreTestResult();
+      }
+
+      showScreen(quizScreen);
+      updateNavigation();
+    }
+
+    function renderQuestions() {
+      questionContainer.innerHTML = CONFIG.questions.map((question, index) => {
+        const options = Object.entries(question.options).map(([letter, text]) => `
+          <button class="answer-option" type="button" data-question-id="${question.id}" data-letter="${letter}" onclick="selectAnswer(${question.id}, '${letter}')">
+            <span class="answer-letter">${letter}</span>
+            <span>${escapeHtml(text)}</span>
+          </button>
+        `).join("");
+
+        return `
+          <article class="question-card ${index === 0 ? "active" : ""}" data-index="${index}">
+            <div class="question-meta">
+              <span>Question ${index + 1} of ${CONFIG.questions.length}</span>
+              <span class="category-pill">${escapeHtml(question.category)}</span>
+            </div>
+            <p class="question-text">${escapeHtml(question.prompt)}</p>
+            <div class="answers">${options}</div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderDots() {
+      questionDots.innerHTML = CONFIG.questions.map((question, index) => `
+        <button class="question-dot ${index === 0 ? "current" : ""}" type="button" onclick="goToQuestion(${index})" aria-label="Go to question ${index + 1}">
+          ${index + 1}
+        </button>
+      `).join("");
+    }
+
+    function selectAnswer(questionId, letter) {
+      state.answers[questionId] = letter;
+
+      document.querySelectorAll(`[data-question-id="${questionId}"]`).forEach((button) => {
+        button.classList.toggle("selected", button.dataset.letter === letter);
+      });
+
+      updateNavigation();
+    }
+
+    function goToQuestion(index) {
+      if (index < 0 || index >= CONFIG.questions.length) return;
+      state.currentQuestionIndex = index;
+      document.querySelectorAll(".question-card").forEach((card, cardIndex) => {
+        card.classList.toggle("active", cardIndex === index);
+      });
+      updateNavigation();
+    }
+
+    function previousQuestion() {
+      goToQuestion(state.currentQuestionIndex - 1);
+    }
+
+    function nextQuestion() {
+      goToQuestion(state.currentQuestionIndex + 1);
+    }
+
+    function updateNavigation() {
+      const answeredCount = Object.keys(state.answers).length;
+      const total = CONFIG.questions.length;
+      const current = state.currentQuestionIndex;
+
+      questionCounter.textContent = `Question ${current + 1} of ${total}`;
+      answeredCounter.textContent = `${answeredCount} answered`;
+      progressFill.style.width = `${Math.round((answeredCount / total) * 100)}%`;
+
+      prevButton.disabled = current === 0;
+      nextButton.hidden = current === total - 1;
+      submitButton.hidden = current !== total - 1;
+
+      document.querySelectorAll(".question-dot").forEach((dot, index) => {
+        const questionId = CONFIG.questions[index].id;
+        dot.classList.toggle("current", index === current);
+        dot.classList.toggle("answered", Boolean(state.answers[questionId]));
+      });
+    }
+
+    function submitAssessment() {
+      if (Object.keys(state.answers).length < CONFIG.questions.length) {
+        alert("Please answer all questions before submitting.");
+        return;
+      }
+
+      state.results = calculateResults();
+      saveResult(state.results);
+      renderScreenResults(state.results);
+      showScreen(resultsScreen);
+    }
+
+    function calculateResults() {
+      let totalCorrect = 0;
+      const categories = {};
+
+      CONFIG.questions.forEach((question) => {
+        if (!categories[question.category]) {
+          categories[question.category] = { correct: 0, total: 0 };
+        }
+
+        const isCorrect = state.answers[question.id] === question.correct;
+        categories[question.category].total += 1;
+        if (isCorrect) {
+          categories[question.category].correct += 1;
+          totalCorrect += 1;
+        }
+      });
+
+      return {
+        programName: CONFIG.programName,
+        courseName: CONFIG.courseName,
+        assessmentTitle: CONFIG.assessmentTitle,
+        assessmentType: CONFIG.assessmentType,
+        storageKey: CONFIG.storageKey,
+        participant: state.participant,
+        answers: { ...state.answers },
+        categories,
+        totalCorrect,
+        totalQuestions: CONFIG.questions.length,
+        percentage: Math.round((totalCorrect / CONFIG.questions.length) * 100),
+        completedAt: new Date().toISOString(),
+        matchingPreTest: state.matchingPreTest
+      };
+    }
+
+    function renderScreenResults(results) {
+      document.getElementById("screenScore").textContent = `${results.percentage}%`;
+      document.getElementById("screenScoreDetail").textContent =
+        `${results.totalCorrect} of ${results.totalQuestions} correct`;
+      document.getElementById("screenCategories").innerHTML = categoryCards(results.categories);
+
+      const comparisonNotice = document.getElementById("comparisonNotice");
+      if (CONFIG.assessmentType === "post" && results.matchingPreTest) {
+        const change = results.percentage - results.matchingPreTest.percentage;
+        comparisonNotice.hidden = false;
+        comparisonNotice.textContent =
+          `Matched pre-test score: ${results.matchingPreTest.percentage}%. Post-test change: ${formatChange(change)}.`;
+      } else if (CONFIG.assessmentType === "post") {
+        comparisonNotice.hidden = false;
+        comparisonNotice.textContent =
+          "No matching pre-test was found on this computer. The post-test report will still print without the comparison section.";
+      } else {
+        comparisonNotice.hidden = true;
+      }
+    }
+
+    function categoryCards(categories) {
+      return Object.entries(categories).map(([name, data]) => {
+        const percent = Math.round((data.correct / data.total) * 100);
+        return `
+          <div class="category-card">
+            <div class="category-name">${escapeHtml(name)}</div>
+            <div class="category-score">${data.correct}/${data.total} (${percent}%)</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function generateReport() {
+      if (!state.results) {
+        alert("No results are available yet.");
+        return;
+      }
+
+      const results = state.results;
+      const typeLabel = CONFIG.assessmentType === "post" ? "POST-TEST" : "PRE-TEST";
+
+      document.getElementById("reportTitle").textContent = `${CONFIG.programName} Assessment Report`;
+      document.getElementById("reportSubtitle").textContent = CONFIG.reportSubtitle || CONFIG.courseName;
+      document.getElementById("reportType").textContent = typeLabel;
+      document.getElementById("reportScore").textContent = `${results.percentage}%`;
+      document.getElementById("reportScoreDetail").textContent =
+        `${results.totalCorrect} of ${results.totalQuestions} correct`;
+
+      document.getElementById("reportInfo").innerHTML = reportInfoRows(results);
+      document.getElementById("reportCategories").innerHTML = reportCategoryRows(results.categories);
+      document.getElementById("reportRows").innerHTML = reportDetailRows(results);
+      document.getElementById("reportFooter").innerHTML =
+        `${escapeHtml(CONFIG.reportFooter)}<br>Generated: ${formatDateTime(results.completedAt)}`;
+
+      renderReportComparison(results);
+      window.print();
+    }
+
+    function reportInfoRows(results) {
+      const fields = [
+        ["Student", results.participant.studentName],
+        ["Student ID", results.participant.studentId || "Not provided"],
+        ["Instructor", results.participant.instructorName || "Not provided"],
+        ["Site", results.participant.siteName || "Not provided"],
+        ["Cohort", results.participant.cohortName || "Not provided"],
+        ["Date", formatDate(results.participant.assessmentDate)],
+        ["Course", CONFIG.courseName],
+        ["Assessment", CONFIG.assessmentTitle]
+      ];
+
+      return fields.map(([label, value]) => `
+        <div>
+          <div class="report-label">${escapeHtml(label)}</div>
+          <div class="report-value">${escapeHtml(value)}</div>
+        </div>
+      `).join("");
+    }
+
+    function reportCategoryRows(categories) {
+      return Object.entries(categories).map(([name, data]) => {
+        const percent = Math.round((data.correct / data.total) * 100);
+        return `
+          <div class="report-category">
+            <div class="report-category-name">${escapeHtml(name)}</div>
+            <div class="report-category-score">${data.correct}/${data.total} (${percent}%)</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function reportDetailRows(results) {
+      return CONFIG.questions.map((question, index) => {
+        const studentAnswer = results.answers[question.id];
+        const isCorrect = studentAnswer === question.correct;
+        const studentText = `${studentAnswer}. ${getOptionText(question, studentAnswer)}`;
+        const correctText = CONFIG.showCorrectAnswersInReport
+          ? `${question.correct}. ${getOptionText(question, question.correct)}`
+          : "Hidden";
+
+        return `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${escapeHtml(question.prompt)}</td>
+            <td>${escapeHtml(question.category)}</td>
+            <td>${escapeHtml(studentText)}</td>
+            <td>${escapeHtml(correctText)}</td>
+            <td>${isCorrect ? "Correct" : "Review"}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function renderReportComparison(results) {
+      const box = document.getElementById("reportComparison");
+      if (CONFIG.assessmentType !== "post" || !results.matchingPreTest) {
+        box.hidden = true;
+        box.innerHTML = "";
+        return;
+      }
+
+      const preScore = results.matchingPreTest.percentage;
+      const change = results.percentage - preScore;
+      box.hidden = false;
+      box.innerHTML = `
+        <h3 class="report-section-title" style="margin-top: 0;">Pre/Post Comparison</h3>
+        <div class="comparison-row">
+          <div>
+            <div class="report-label">Pre-Test</div>
+            <div class="comparison-number">${preScore}%</div>
+          </div>
+          <div>
+            <div class="report-label">Post-Test</div>
+            <div class="comparison-number">${results.percentage}%</div>
+          </div>
+          <div>
+            <div class="report-label">Change</div>
+            <div class="comparison-number">${formatChange(change)}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function saveResult(results) {
+      try {
+        localStorage.setItem(storageName(CONFIG.assessmentType), JSON.stringify(results));
+      } catch (error) {
+        console.warn("Result could not be saved locally.", error);
+      }
+    }
+
+    function loadPreTestResult() {
+      try {
+        const saved = localStorage.getItem(storageName("pre"));
+        return saved ? JSON.parse(saved) : null;
+      } catch (error) {
+        console.warn("Pre-test result could not be loaded.", error);
+        return null;
+      }
+    }
+
+    function storageName(type) {
+      const participantKey = (state.participant.studentId || state.participant.studentName || "student")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+      return `vub-assessment:${CONFIG.storageKey}:${participantKey}:${type}`;
+    }
+
+    function restartAssessment() {
+      state.currentQuestionIndex = 0;
+      state.answers = {};
+      state.results = null;
+      state.matchingPreTest = null;
+      document.querySelectorAll(".answer-option").forEach((button) => button.classList.remove("selected"));
+      goToQuestion(0);
+      showScreen(startScreen);
+    }
+
+    function getOptionText(question, letter) {
+      if (!letter || !question.options[letter]) return "No answer";
+      return question.options[letter];
+    }
+
+    function formatDate(value) {
+      if (!value) return "Not provided";
+      const date = new Date(`${value}T00:00:00`);
+      return date.toLocaleDateString();
+    }
+
+    function formatDateTime(value) {
+      return new Date(value).toLocaleString();
+    }
+
+    function formatChange(value) {
+      return value > 0 ? `+${value}%` : `${value}%`;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    init();
+  </script>
+</body>
+</html>

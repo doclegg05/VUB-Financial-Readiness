@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5 Tough Questions &amp; Confident Answers — Instructor Resource</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --navy: #1e3a8a;
+            --navy-dark: #0f172a;
+            --blue: #2563eb;
+            --gold: #fbbf24;
+            --gold-dark: #b45309;
+            --green: #15803d;
+            --red: #b91c1c;
+            --ink: #1f2937;
+            --muted: #475569;
+            --line: #cbd5e1;
+            --paper: #ffffff;
+            --shade: #f8fafc;
+            --soft-blue: #eff6ff;
+            --soft-gold: #fffbeb;
+            --soft-green: #f0fdf4;
+        }
+
+        @page { size: letter; margin: 0.55in 0.62in; }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 10.4pt;
+            line-height: 1.45;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        h1, h2, h3, h4, .eyebrow, .badge, table { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; }
+
+        h1 { font-size: 27pt; line-height: 1.05; color: #ffffff; margin: 0 0 8pt 0; }
+
+        h2 {
+            font-size: 16pt;
+            color: var(--navy);
+            margin: 18pt 0 8pt 0;
+            padding-bottom: 4pt;
+            border-bottom: 2pt solid var(--gold);
+        }
+
+        h3 { font-size: 12.5pt; color: var(--navy); margin: 0 0 6pt 0; }
+        h4 {
+            font-size: 9pt;
+            color: var(--navy-dark);
+            margin: 8pt 0 2pt 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        p { margin: 0 0 7pt 0; }
+        ol, ul { margin: 4pt 0 8pt 18pt; padding: 0; }
+        li { margin-bottom: 3pt; }
+
+        .cover {
+            min-height: 9.1in;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 58%, #315ba8 100%);
+            color: #ffffff;
+            border-radius: 10pt;
+            padding: 42pt 40pt;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 10pt;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 10pt;
+        }
+
+        .subtitle {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14pt;
+            line-height: 1.45;
+            max-width: 6.5in;
+            color: #dbeafe;
+        }
+
+        .cover-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12pt;
+            margin-top: 28pt;
+        }
+
+        .cover-card {
+            border: 1pt solid rgba(255,255,255,0.28);
+            background: rgba(255,255,255,0.08);
+            border-radius: 7pt;
+            padding: 12pt;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 9.5pt;
+            color: #f8fafc;
+        }
+
+        .cover-card strong { color: #ffffff; }
+
+        .small-meta {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 9pt;
+            color: #dbeafe;
+        }
+
+        .page-break { page-break-before: always; }
+
+        .callout {
+            border-left: 4pt solid var(--blue);
+            background: var(--soft-blue);
+            border-radius: 0 6pt 6pt 0;
+            padding: 9pt 12pt;
+            margin: 8pt 0 12pt 0;
+            page-break-inside: avoid;
+        }
+
+        .callout.gold { border-left-color: var(--gold-dark); background: var(--soft-gold); }
+
+        .steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10pt;
+            margin: 8pt 0 12pt 0;
+        }
+
+        .step {
+            border: 1pt solid var(--line);
+            border-radius: 7pt;
+            padding: 9pt 10pt;
+            background: var(--shade);
+        }
+
+        .step .num {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 8pt;
+            font-weight: 800;
+            color: var(--gold-dark);
+            letter-spacing: 0.06em;
+        }
+
+        .step h4 { margin-top: 2pt; }
+
+        .qa {
+            page-break-inside: avoid;
+            border: 1pt solid var(--line);
+            border-radius: 7pt;
+            padding: 11pt 13pt;
+            margin-bottom: 11pt;
+            background: #ffffff;
+        }
+
+        .qa-header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 9pt;
+            align-items: start;
+            margin-bottom: 6pt;
+        }
+
+        .badge {
+            background: var(--navy);
+            color: #ffffff;
+            border-radius: 4pt;
+            padding: 4pt 8pt;
+            font-size: 9pt;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .qa h3 { margin-top: 1pt; font-style: italic; }
+
+        .say-label {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 8pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--navy);
+        }
+
+        .anchor {
+            border-left: 3pt solid var(--gold);
+            background: var(--soft-gold);
+            padding: 5pt 9pt;
+            margin-top: 6pt;
+            font-size: 9.4pt;
+        }
+
+        .anchor strong { color: var(--gold-dark); }
+
+        .footer-note {
+            border-top: 1pt solid var(--line);
+            margin-top: 14pt;
+            padding-top: 7pt;
+            font-size: 8.5pt;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        @media print {
+            .qa, .callout, .step { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="cover">
+        <div>
+            <div class="eyebrow">Veterans Upward Bound Financial Readiness Course</div>
+            <h1>Module 5 &mdash; Tough Questions &amp; Confident Answers</h1>
+            <p class="subtitle">An instructor quick-reference for the hardest questions veterans ask about the Survivor Benefit Plan (SBP), Dependency &amp; Indemnity Compensation (DIC), beneficiaries, and end-of-life planning. Use it to answer with confidence &mdash; and to know when <em>not</em> to answer.</p>
+            <div class="cover-grid">
+                <div class="cover-card"><strong>Designed for:</strong><br>Live classroom delivery and instructor preparation.</div>
+                <div class="cover-card"><strong>Use during:</strong><br>The Module 5 discussion slides and the question-and-answer period.</div>
+                <div class="cover-card"><strong>Pairs with:</strong><br>The Module 5 Teacher's Guide and Practical Scenarios.</div>
+                <div class="cover-card"><strong>Boundary:</strong><br>Education only. Refer every personal tax, legal, investment, or benefits decision to a qualified professional.</div>
+            </div>
+        </div>
+        <div class="small-meta">Prepared for Spring 2026 classroom delivery. Verify dollar amounts and benefit rules before future cohorts.</div>
+    </section>
+
+    <section class="page-break">
+        <h2>How to Use This Sheet</h2>
+        <div class="callout">
+            <p>Module 5 is the most personal class in the course. Veterans will ask questions that sound like requests for advice &mdash; "Should I&hellip;?", "Was that a mistake?" You are an <strong>educator, not a financial advisor or attorney.</strong> Your job is to explain the rule, surface the trade-offs, and point them to the right professional. The structure below keeps you firmly in that lane.</p>
+        </div>
+
+        <h3>The three-beat answer</h3>
+        <p>Every answer in this sheet follows the same shape. Learn the shape and you can handle a question you have never heard before.</p>
+        <div class="steps">
+            <div class="step">
+                <div class="num">Beat 1</div>
+                <h4>State the Rule</h4>
+                <p>Say what you <em>do</em> know &mdash; the plain, current fact.</p>
+            </div>
+            <div class="step">
+                <div class="num">Beat 2</div>
+                <h4>Name the Nuance</h4>
+                <p>Flag what depends on the veteran's own situation.</p>
+            </div>
+            <div class="step">
+                <div class="num">Beat 3</div>
+                <h4>Refer It Out</h4>
+                <p>Name the professional or agency who decides the personal call.</p>
+            </div>
+        </div>
+        <div class="callout gold">
+            <p><strong>The protective habit:</strong> When a question asks you to make a personal decision, saying "I can't answer that for you" is not a weakness &mdash; it is the correct, professional answer. It keeps you in the educator role and protects both you and the student.</p>
+        </div>
+    </section>
+
+    <section class="page-break">
+        <h2>The Questions</h2>
+
+        <article class="qa">
+            <div class="qa-header">
+                <span class="badge">Q1</span>
+                <h3>"I declined the Survivor Benefit Plan 20 years ago. Was that a mistake?"</h3>
+            </div>
+            <p class="say-label">Say this</p>
+            <p>"I can't tell you that &mdash; and anyone who claims they can without knowing your whole picture is guessing. It depends on your spouse's other resources, what you did with the premium money instead, and who outlives whom. What I <em>can</em> tell you: the Survivor Benefit Plan is guaranteed, inflation-protected, and government-subsidized &mdash; nothing private fully replaces all three. Watch for the next Congressional Open Season."</p>
+            <div class="anchor"><strong>Anchor fact:</strong> The election is generally irrevocable. The main second chances are a Congressional Open Season or a one-year window after a marriage that occurs after retirement.</div>
+        </article>
+
+        <article class="qa">
+            <div class="qa-header">
+                <span class="badge">Q2</span>
+                <h3>"I have the Survivor Benefit Plan and a large life insurance policy. Should I drop the plan to save the premium?"</h3>
+            </div>
+            <p class="say-label">Say this</p>
+            <p>"First &mdash; you generally cannot drop it outside a Congressional Open Season anyway. But even if you could, it usually would not make sense. Life insurance pays once, as a lump sum. The Survivor Benefit Plan pays your spouse every month for life, with annual inflation raises. They do different jobs &mdash; they are partners, not substitutes."</p>
+            <div class="anchor"><strong>Anchor fact:</strong> The Survivor Benefit Plan is a lifetime, Cost-of-Living-Adjusted annuity. Life insurance is a one-time death benefit. Comparing them dollar-for-dollar misses the point.</div>
+        </article>
+
+        <article class="qa">
+            <div class="qa-header">
+                <span class="badge">Q3</span>
+                <h3>"If my wife remarries after I am gone, does she lose the Survivor Benefit Plan?"</h3>
+            </div>
+            <p class="say-label">Say this</p>
+            <p>"Only if she remarries <strong>before age 55</strong>. At 55 or older, remarriage changes nothing. And even if she remarries before 55, the benefit only <em>suspends</em> &mdash; if that later marriage ends through divorce, annulment, or death, the Survivor Benefit Plan resumes."</p>
+            <div class="anchor"><strong>Anchor fact:</strong> Age 55 is the line. Remarriage at or after 55 never terminates the benefit.</div>
+        </article>
+
+        <article class="qa">
+            <div class="qa-header">
+                <span class="badge">Q4</span>
+                <h3>"I am rated 70%. If I die of natural causes, would my wife qualify for Dependency &amp; Indemnity Compensation?"</h3>
+            </div>
+            <p class="say-label">Say this</p>
+            <p>"Maybe not &mdash; and this is important. Dependency &amp; Indemnity Compensation is paid when the death is service-connected, <em>or</em> when the veteran was rated 100% disabled for at least 10 years before death. A 70% rating with an unrelated cause of death generally does not trigger it. That is one reason keeping your disability rating accurate matters &mdash; even decades after retirement."</p>
+            <div class="anchor"><strong>Anchor fact:</strong> Dependency &amp; Indemnity Compensation requires a service-connected death, a 100%-for-10-years rating, or other specific pathways &mdash; not simply being a rated veteran.</div>
+        </article>
+
+        <article class="qa">
+            <div class="qa-header">
+                <span class="badge">Q5</span>
+                <h3>"Will my wife really receive Social Security AND Dependency &amp; Indemnity Compensation AND the Survivor Benefit Plan, all at once?"</h3>
+            </div>
+            <p class="say-label">Say this</p>
+            <p>"Yes &mdash; if she qualifies for each. Three different agencies handle them: Social Security from the Social Security Administration, the Survivor Benefit Plan from the Defense Department, and Dependency &amp; Indemnity Compensation from the VA. Three applications, three deposits. Since January 1, 2023, there is no offset between the Survivor Benefit Plan and Dependency &amp; Indemnity Compensation &mdash; they stack in full."</p>
+            <div class="anchor"><strong>Anchor fact:</strong> The 2023 offset elimination is the headline change. Before 2023, Dependency &amp; Indemnity Compensation was subtracted from the Survivor Benefit Plan &mdash; the so-called "widow's tax." That is gone.</div>
+        </article>
+
+        <article class="qa">
+            <div class="qa-header">
+                <span class="badge">Q6</span>
+                <h3>"My memory has been slipping. What should I do right now?"</h3>
+            </div>
+            <p class="say-label">Say this</p>
+            <p>"Three things this week, before any diagnosis. One &mdash; make sure your power of attorney is <strong>durable</strong>; check that the word 'durable' actually appears in the document, because a regular power of attorney stops working exactly when it is needed. Two &mdash; call each of your banks and add a trusted contact; it is free and takes five minutes. Three &mdash; write your accounts and document locations on one page and give it to someone you trust."</p>
+            <div class="anchor"><strong>Anchor fact:</strong> A "durable" power of attorney stays in effect through incapacity; an ordinary one does not. The word matters.</div>
+        </article>
+
+        <article class="qa">
+            <div class="qa-header">
+                <span class="badge">Q7</span>
+                <h3>"Is a will enough, or do I need a trust?"</h3>
+            </div>
+            <p class="say-label">Say this</p>
+            <p>"I can't make that call &mdash; it depends on your assets, your family situation, and your state's law. Here is the difference: a will directs your property but goes through a public court process called probate. A revocable living trust can avoid probate and add privacy, but it costs more to set up and the accounts must be retitled correctly. That is a conversation for a VA-accredited estate attorney."</p>
+            <div class="anchor"><strong>Anchor fact:</strong> "The forms are easy &mdash; the strategy is what an attorney is paid to think through." Do not steer veterans with blended families or property in multiple states toward online form services.</div>
+        </article>
+
+        <article class="qa">
+            <div class="qa-header">
+                <span class="badge">Q8</span>
+                <h3>"Someone offered me a private annuity that is 'just as good as the Survivor Benefit Plan.' Should I buy it?"</h3>
+            </div>
+            <p class="say-label">Say this</p>
+            <p>"Be very careful. Almost no private product has a true annual inflation adjustment, none is government-subsidized, and none has the same tax structure. If someone tells you their product is as good as the Survivor Benefit Plan, they are very likely earning a commission to convince you of that. Bring that paperwork to a fee-only advisor &mdash; one who does not sell products &mdash; before you sign anything."</p>
+            <div class="anchor"><strong>Anchor fact:</strong> "Survivor Benefit Plan replacement annuities" are a known sales pitch aimed at veterans. They are not equivalent.</div>
+        </article>
+
+        <div class="footer-note">
+            VUB Financial Readiness Course &bull; Module 5 Tough Questions &amp; Confident Answers &bull; Education only &mdash; not tax, legal, investment, medical, or benefits advice for any individual.
+        </div>
+    </section>
+
+</body>
+</html>

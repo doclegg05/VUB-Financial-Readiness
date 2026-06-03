@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4 Practical Scenarios - Instructor Resource</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1e3a8a;
+            --navy-dark: #0f172a;
+            --blue: #2563eb;
+            --gold: #fbbf24;
+            --gold-dark: #b45309;
+            --green: #15803d;
+            --red: #b91c1c;
+            --ink: #1f2937;
+            --muted: #475569;
+            --line: #cbd5e1;
+            --paper: #ffffff;
+            --shade: #f8fafc;
+            --soft-blue: #eff6ff;
+            --soft-gold: #fffbeb;
+            --soft-green: #f0fdf4;
+            --soft-red: #fef2f2;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.55in 0.62in;
+        }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 10.2pt;
+            line-height: 1.42;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        h1, h2, h3, h4, .eyebrow, .badge, table {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            font-size: 27pt;
+            line-height: 1.05;
+            color: #ffffff;
+            margin: 0 0 8pt 0;
+        }
+
+        h2 {
+            font-size: 16.5pt;
+            color: var(--navy);
+            margin: 18pt 0 8pt 0;
+            padding-bottom: 4pt;
+            border-bottom: 2pt solid var(--gold);
+        }
+
+        h3 {
+            font-size: 13pt;
+            color: var(--navy);
+            margin: 0 0 6pt 0;
+        }
+
+        h4 {
+            font-size: 9.3pt;
+            color: var(--navy-dark);
+            margin: 7pt 0 3pt 0;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        p {
+            margin: 0 0 7pt 0;
+        }
+
+        ul, ol {
+            margin: 4pt 0 8pt 18pt;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 3pt;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.8pt;
+            line-height: 1.3;
+            margin: 6pt 0 10pt 0;
+        }
+
+        th {
+            background: var(--navy);
+            color: #ffffff;
+            text-align: left;
+            padding: 5pt;
+        }
+
+        td {
+            border: 0.7pt solid var(--line);
+            padding: 5pt;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) td {
+            background: var(--shade);
+        }
+
+        .cover {
+            min-height: 9.1in;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 58%, #315ba8 100%);
+            color: #ffffff;
+            border-radius: 10pt;
+            padding: 42pt 40pt;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 10pt;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 10pt;
+        }
+
+        .subtitle {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14pt;
+            line-height: 1.45;
+            max-width: 6.5in;
+            color: #dbeafe;
+        }
+
+        .cover-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12pt;
+            margin-top: 28pt;
+        }
+
+        .cover-card {
+            border: 1pt solid rgba(255,255,255,0.28);
+            background: rgba(255,255,255,0.08);
+            border-radius: 7pt;
+            padding: 12pt;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 9.5pt;
+            color: #f8fafc;
+        }
+
+        .cover-card strong {
+            color: #ffffff;
+        }
+
+        .small-meta {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 9pt;
+            color: #dbeafe;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        .callout {
+            border-left: 4pt solid var(--blue);
+            background: var(--soft-blue);
+            border-radius: 0 6pt 6pt 0;
+            padding: 8pt 10pt;
+            margin: 8pt 0 10pt 0;
+            page-break-inside: avoid;
+        }
+
+        .callout.warning {
+            border-left-color: var(--red);
+            background: var(--soft-red);
+        }
+
+        .callout.gold {
+            border-left-color: var(--gold-dark);
+            background: var(--soft-gold);
+        }
+
+        .scenario {
+            page-break-inside: avoid;
+            border: 1pt solid var(--line);
+            border-radius: 7pt;
+            padding: 11pt 12pt;
+            margin-bottom: 12pt;
+            background: #ffffff;
+        }
+
+        .scenario-header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8pt;
+            align-items: start;
+            margin-bottom: 7pt;
+        }
+
+        .badge {
+            background: var(--navy);
+            color: #ffffff;
+            border-radius: 4pt;
+            padding: 4pt 7pt;
+            font-size: 8.4pt;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .scenario h3 {
+            margin-top: 0;
+        }
+
+        .facts {
+            border: 1pt solid var(--line);
+            border-radius: 6pt;
+            background: var(--shade);
+            padding: 7pt 8pt;
+            margin: 7pt 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8pt;
+        }
+
+        .mini {
+            border: 0.7pt solid var(--line);
+            border-radius: 6pt;
+            padding: 7pt 8pt;
+            background: var(--shade);
+        }
+
+        .mini h4 {
+            margin-top: 0;
+        }
+
+        .board {
+            border: 1.5pt solid var(--navy);
+            border-radius: 7pt;
+            padding: 8pt 10pt;
+            background: #ffffff;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 9pt;
+            margin: 7pt 0;
+        }
+
+        .answer-key-intro {
+            border: 1pt solid var(--line);
+            border-radius: 7pt;
+            padding: 8pt 10pt;
+            background: var(--shade);
+            margin-bottom: 10pt;
+        }
+
+        .answer-item {
+            border-left: 3pt solid var(--gold);
+            background: #ffffff;
+            padding: 8pt 10pt;
+            margin: 8pt 0;
+            border-radius: 0 6pt 6pt 0;
+        }
+
+        .answer-item h3 {
+            font-size: 11pt;
+            margin: 0 0 4pt;
+            color: var(--navy);
+        }
+
+        .answer-label {
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .source-list {
+            font-size: 8.5pt;
+            color: var(--muted);
+            word-break: break-word;
+        }
+
+        .footer-note {
+            border-top: 1pt solid var(--line);
+            margin-top: 12pt;
+            padding-top: 7pt;
+            font-size: 8.5pt;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        @media print {
+            .scenario, .callout, .mini, .answer-item {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="cover">
+        <div>
+            <div class="eyebrow">Veterans Upward Bound Financial Readiness Course</div>
+            <h1>Module 4 Practical Scenarios</h1>
+            <p class="subtitle">Instructor-ready cases for helping students apply Module 4 to real veteran retirement decisions: withdrawals, taxes, Medicare premiums, CRDP/CRSC, RMDs, relocation, debt, inflation, and year-end planning.</p>
+            <div class="cover-grid">
+                <div class="cover-card"><strong>Designed for:</strong><br>Discussion, small groups, board work, and instructor examples.</div>
+                <div class="cover-card"><strong>Use after:</strong><br>The Income Systems Map and Tax Domino Effect slides.</div>
+                <div class="cover-card"><strong>Includes:</strong><br>10 practical scenarios with prompts, analysis, and teaching cautions.</div>
+                <div class="cover-card"><strong>Boundary:</strong><br>Education only. Do not give personal tax, investment, legal, or benefits advice.</div>
+            </div>
+        </div>
+        <div class="small-meta">Prepared for Spring 2026 delivery. Verify thresholds, state rules, and program details before future cohorts.</div>
+    </section>
+
+    <section class="page-break">
+        <h2>How to Teach These Scenarios</h2>
+        <div class="callout">
+            <p><strong>Recommended method:</strong> Give each table one case. Ask them to identify the payment systems, measurement systems, decision points, and the safest next step. Then bring the class back together and compare answers.</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Instructor Question</th>
+                    <th>What You Want Students to Notice</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Who sends the money?</td>
+                    <td>DFAS, VA, SSA, TSP/IRA custodian, employer, bank, or lender.</td>
+                </tr>
+                <tr>
+                    <td>Who measures the income?</td>
+                    <td>IRS, Medicare/SSA, state tax agency, lender, or a means-tested benefit program.</td>
+                </tr>
+                <tr>
+                    <td>What changes if the timing changes?</td>
+                    <td>AGI, taxable Social Security, IRMAA exposure, RMD year, withholding, state tax, or debt payments.</td>
+                </tr>
+                <tr>
+                    <td>What should the veteran verify before acting?</td>
+                    <td>Tax projection, plan rules, state rules, Medicare lookback, interest rates, or professional advice.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="page-break">
+        <h2>Scenario Set</h2>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 1</span>
+                <h3>The Roof Repair Withdrawal</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> Mr. Lewis receives military retired pay, VA disability compensation, and Social Security. His roof needs a $22,000 repair. He wants to take the full amount from a traditional TSP account in December.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>TSP custodian and Form 1099-R</li>
+                        <li>IRS AGI and taxable Social Security</li>
+                        <li>Medicare IRMAA lookback if income is high enough</li>
+                        <li>State tax treatment of retirement-account withdrawals</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>The repair may be necessary, but the funding source matters. A traditional withdrawal is not just cash; it is taxable income that can trigger other calculations.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "What alternatives should he compare before withdrawing from traditional TSP: savings, staged repair, Roth source, payment plan, smaller withdrawal, or tax withholding adjustment?"</div>
+            <p><strong>Instructor caution:</strong> Do not tell him which source to use. Teach that he should run a tax projection before year-end.</p>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 2</span>
+                <h3>CRDP vs. CRSC: More Gross or More After-Tax?</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> MSG Carter receives military retired pay and VA disability compensation. He is eligible for CRDP and may also qualify for CRSC because one condition is combat-related. He asks which is "better."</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>DFAS retired pay and CRDP/CRSC processing</li>
+                        <li>VA disability rating and combat-related documentation</li>
+                        <li>Federal tax treatment: CRDP taxable, CRSC non-taxable</li>
+                        <li>Annual election and branch application rules</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>The right comparison is not only gross monthly amount. Compare after-tax income, eligibility, documentation, and whether the combat-related portion is smaller than the CRDP amount.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "If one option pays more gross but is taxable, and the other pays less but is tax-free, what number should the veteran compare?"</div>
+            <p><strong>Instructor caution:</strong> Refer the individual calculation to DFAS, the service branch CRSC office, a VSO, or a qualified tax professional.</p>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 3</span>
+                <h3>The First RMD Delay</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> Ms. Nguyen turns 73 this year and has a traditional IRA. She hears that she can delay her first RMD until April 1 of next year. She wants to know if delaying is always smart.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>IRA custodian and RMD calculation</li>
+                        <li>IRS RMD deadline and excise tax rules</li>
+                        <li>Federal tax bracket and Social Security taxation</li>
+                        <li>Medicare IRMAA if income spikes</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>Delaying a first RMD may create two RMDs in one tax year. That can raise taxable income more than taking the first RMD during the original year.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "What happens next year if she takes the delayed first RMD by April 1 and the second RMD by December 31?"</div>
+            <p><strong>Instructor caution:</strong> RMD penalties are serious: missed amounts may face a 25% excise tax, reduced to 10% if timely corrected.</p>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 4</span>
+                <h3>Moving for Taxes</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> SFC Rivera lives in West Virginia and is considering Florida or Texas because they have no state income tax. His income is mostly military retired pay, VA disability compensation, Social Security, and occasional IRA withdrawals.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>State tax agency rules</li>
+                        <li>Military retired pay exemptions</li>
+                        <li>Property tax, insurance, housing, and sales tax</li>
+                        <li>VA healthcare access and family support</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>Relocation is not only a state income tax decision. West Virginia already exempts military retired pay and fully exempts Social Security beginning in tax year 2026, so the real comparison may be IRA withdrawals, property tax, insurance, housing, and healthcare access.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "Which costs might rise in a no-income-tax state even if income tax falls?"</div>
+            <p><strong>Instructor caution:</strong> Avoid recommending a state. Teach a full cost-of-living comparison.</p>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 5</span>
+                <h3>Credit Card Debt and the TSP Temptation</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> Mr. Brooks has $14,000 in credit card debt at a high interest rate. He wants to withdraw $14,000 from a traditional IRA to wipe it out immediately.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>Credit card APR and monthly cash flow</li>
+                        <li>Traditional IRA taxation</li>
+                        <li>Social Security taxation if AGI rises</li>
+                        <li>Possible Medicare and state-tax consequences</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>Paying off high-interest debt can improve cash flow, but a taxable withdrawal may make the payoff cost more than the balance itself. The decision needs after-tax math.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "What is the true cost of a $14,000 payoff if he must withdraw more than $14,000 to cover taxes?"</div>
+            <p><strong>Instructor caution:</strong> Do not tell students to drain retirement funds for debt. Teach them to compare interest, tax, and cash-flow consequences.</p>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 6</span>
+                <h3>The Part-Time Job Surprise</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> Mrs. Allen receives Social Security and a small survivor pension. She starts part-time work at the campus bookstore and also withdraws $8,000 from a traditional IRA for a vehicle down payment.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>W-2 wages</li>
+                        <li>Traditional IRA withdrawal</li>
+                        <li>SSA-1099 and combined income</li>
+                        <li>Tax withholding from wages or Social Security</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>Small income sources can stack. Wages plus a traditional withdrawal can make more Social Security taxable, even if each item feels modest by itself.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "Which pieces go into combined income for Social Security taxation?"</div>
+            <p><strong>Instructor caution:</strong> Focus on awareness and withholding, not whether the job is worth taking.</p>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 7</span>
+                <h3>Roth Conversion Before RMD Age</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> COL Adams is age 68 and retired. He has a large traditional TSP balance and has not started RMDs. A friend says he should convert some money to Roth before age 73.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>TSP or IRA rollover/conversion rules</li>
+                        <li>Current-year taxable income</li>
+                        <li>Future RMD pressure</li>
+                        <li>Medicare IRMAA two-year lookback</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>A Roth conversion can reduce future tax-deferred balances, but it creates taxable income now. The question is not "Roth good or bad"; the question is which tax year can absorb the income.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "What would you want a CPA or planner to model before converting?"</div>
+            <p><strong>Instructor caution:</strong> Roth conversions are personal tax decisions. Do not recommend a conversion amount.</p>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 8</span>
+                <h3>The Medicare Premium Letter</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> Mr. and Mrs. Daniels get a notice that their Medicare Part B and Part D premiums are higher than expected. Two years earlier, they sold an investment property and took a large traditional IRA withdrawal to remodel their home.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>IRS tax return from two years prior</li>
+                        <li>Medicare/SSA IRMAA determination</li>
+                        <li>Capital gains and traditional IRA income</li>
+                        <li>Appeal options if a qualifying life-changing event applies</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>Medicare premiums can react later to income decisions made earlier. The two-year lookback is why year-end planning matters before large income events.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "Why did a decision from two years ago affect this year's Medicare premiums?"</div>
+            <p><strong>Instructor caution:</strong> Do not promise an appeal will work. Refer to SSA/Medicare rules and Form SSA-44 when appropriate.</p>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 9</span>
+                <h3>Charitable Giving and the IRA QCD</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> Ms. Patel is over age 70 1/2, gives to her church every year, and has a traditional IRA. She is also near the age when RMDs will begin. She asks if charitable giving can help manage taxable income.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>IRA custodian</li>
+                        <li>Qualified charitable distribution rules</li>
+                        <li>AGI and taxable income</li>
+                        <li>RMD satisfaction if applicable</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>A QCD can let eligible IRA owners send money directly to charity and keep that amount out of taxable income. This is different from taking a withdrawal personally and then writing a check.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "What makes a direct IRA-to-charity transfer different from a normal cash gift?"</div>
+            <p><strong>Instructor caution:</strong> QCDs have specific rules and generally apply to IRAs, not direct TSP gifts. Students should work with the IRA custodian and tax professional.</p>
+        </article>
+
+        <article class="scenario">
+            <div class="scenario-header">
+                <span class="badge">Scenario 10</span>
+                <h3>Inflation and the Flat Pension</h3>
+            </div>
+            <div class="facts">
+                <p><strong>Situation:</strong> Mrs. Walker has Social Security, VA disability compensation, a small private pension with no COLA, and cash savings. She says she is comfortable today but worries about 15 years from now.</p>
+            </div>
+            <div class="grid">
+                <div class="mini">
+                    <h4>Systems involved</h4>
+                    <ul>
+                        <li>COLA-adjusted income sources</li>
+                        <li>Flat private pension or annuity</li>
+                        <li>Cash savings interest rates</li>
+                        <li>Healthcare, insurance, and housing inflation</li>
+                    </ul>
+                </div>
+                <div class="mini">
+                    <h4>Teaching takeaway</h4>
+                    <p>Income that adjusts with inflation is more valuable than it first appears. Flat income sources lose buying power over a long retirement.</p>
+                </div>
+            </div>
+            <div class="board">Board prompt: "Which income sources keep up automatically, and which require a plan?"</div>
+            <p><strong>Instructor caution:</strong> Do not recommend specific investments. Teach the buying-power problem and the need for a long-term plan.</p>
+        </article>
+    </section>
+
+    <section class="page-break">
+        <h2>Answer Key: Instructor Guidance</h2>
+        <div class="answer-key-intro">
+            <p><strong>How to use this section:</strong> These are the expected teaching points for each board prompt. Many Module 4 questions do not have one universal right answer because tax status, benefits, state rules, and household facts change the result. Use these notes to guide discussion, name the red flags, and keep the class inside the education-only boundary.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 1: Roof Repair Withdrawal</h3>
+            <p><span class="answer-label">Expected answer:</span> He should compare emergency savings, a staged repair, a payment plan or short-term financing, a smaller taxable withdrawal, possible Roth sources if qualified, and withholding adjustments before taking a large traditional TSP withdrawal.</p>
+            <p><span class="answer-label">Instructor notes:</span> The key lesson is the tax domino effect. A traditional TSP withdrawal can raise AGI, increase the taxable portion of Social Security, affect Medicare IRMAA later, and trigger state tax or withholding surprises.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 2: More Gross or More After-Tax?</h3>
+            <p><span class="answer-label">Expected answer:</span> Students should compare after-tax income, not the largest gross payment. CRDP is generally taxable retired pay restoration, while CRSC is generally tax-free compensation for approved combat-related disability.</p>
+            <p><span class="answer-label">Instructor notes:</span> The right choice depends on the veteran's award, tax bracket, and household situation. Emphasize annual election review and referral to DFAS, the service CRSC office, and a tax professional for personal decisions.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 3: First RMD Delay</h3>
+            <p><span class="answer-label">Expected answer:</span> If she delays the first RMD until April 1, she may need to take two RMDs in the same tax year: the delayed first RMD by April 1 and the second RMD by December 31.</p>
+            <p><span class="answer-label">Instructor notes:</span> Two RMDs in one year can raise AGI, make more Social Security taxable, affect Medicare premiums, and reduce flexibility for other income decisions. The teaching point is calendar control before year-end.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 4: Moving for Taxes</h3>
+            <p><span class="answer-label">Expected answer:</span> Students should name costs that may rise even when income tax falls: property tax, homeowners insurance, rent or housing prices, sales tax, transportation, healthcare access, travel back to family, and long-term care options.</p>
+            <p><span class="answer-label">Instructor notes:</span> A no-income-tax state is not automatically cheaper. Compare total cost of living and benefit access. For West Virginia in 2026, remind students that military retired pay and Social Security treatment may already be favorable, so IRA withdrawals and total household costs matter.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 5: Credit Card Debt</h3>
+            <p><span class="answer-label">Expected answer:</span> The true cost is more than the credit card balance if the payoff comes from a taxable traditional IRA or TSP withdrawal. He may need to withdraw extra to cover taxes, and the income may affect Social Security taxation, Medicare premiums, and state tax.</p>
+            <p><span class="answer-label">Instructor notes:</span> Students should compare the card APR, monthly cash-flow relief, tax cost, emergency reserve impact, and other debt options. Avoid telling the student to withdraw or not withdraw; teach the comparison.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 6: Part-Time Job Surprise</h3>
+            <p><span class="answer-label">Expected answer:</span> Combined income for Social Security tax purposes generally includes AGI, nontaxable interest, and one-half of Social Security benefits. Wages and IRA withdrawals can both increase AGI.</p>
+            <p><span class="answer-label">Instructor notes:</span> The practical fix is planning before the extra income arrives: estimate taxes, adjust withholding or estimated payments, and avoid assuming Social Security is always tax-free.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 7: Roth Conversion</h3>
+            <p><span class="answer-label">Expected answer:</span> A CPA or planner should model current tax bracket, conversion size, future RMDs, Social Security taxation, Medicare IRMAA, state tax, cash available to pay conversion taxes, spouse or survivor impact, and beneficiary goals.</p>
+            <p><span class="answer-label">Instructor notes:</span> There is no blanket correct conversion amount. The teaching point is controlled taxable income: a Roth conversion can be useful, but only when the tax cost and timing are understood.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 8: Medicare Premium Letter</h3>
+            <p><span class="answer-label">Expected answer:</span> The premium increase likely came from Medicare IRMAA, which uses modified adjusted gross income from two years prior. A home sale gain and IRA withdrawal can raise MAGI enough to affect future Medicare premiums.</p>
+            <p><span class="answer-label">Instructor notes:</span> Students should understand the two-year lookback. An appeal may be possible only when a qualifying life-changing event applies, usually through SSA Form SSA-44. The prevention lesson is to plan large income events before they happen.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 9: IRA QCD</h3>
+            <p><span class="answer-label">Expected answer:</span> A qualified charitable distribution is different because the money goes directly from the IRA custodian to the qualified charity. For an eligible IRA owner, it can keep that amount out of taxable income and may count toward the RMD.</p>
+            <p><span class="answer-label">Instructor notes:</span> The student should not take the money personally first if the goal is QCD treatment. Also remind the class that QCD rules generally apply to IRAs, not direct TSP distributions, so custodian and tax guidance matter.</p>
+        </div>
+
+        <div class="answer-item">
+            <h3>Scenario 10: Inflation and the Flat Pension</h3>
+            <p><span class="answer-label">Expected answer:</span> Social Security, VA disability compensation, and military retired pay may receive cost-of-living adjustments. A private pension, annuity, or cash savings may not keep pace unless the contract or account strategy provides for growth.</p>
+            <p><span class="answer-label">Instructor notes:</span> The main answer is buying power. Students should identify which income streams adjust automatically, which stay flat, and where they need a long-term plan for healthcare, insurance, housing, and emergency costs. Do not recommend specific investments.</p>
+        </div>
+    </section>
+
+    <section class="page-break">
+        <h2>Quick-Pick Scenario Menu</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>If the class is asking about...</th>
+                    <th>Use this scenario</th>
+                    <th>Module 4 concept</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Large withdrawals</td>
+                    <td>Scenario 1: Roof Repair Withdrawal</td>
+                    <td>Tax domino effect</td>
+                </tr>
+                <tr>
+                    <td>CRDP / CRSC</td>
+                    <td>Scenario 2: More Gross or More After-Tax?</td>
+                    <td>Taxable vs. tax-free income</td>
+                </tr>
+                <tr>
+                    <td>RMD deadlines</td>
+                    <td>Scenario 3: First RMD Delay</td>
+                    <td>Year-end control calendar</td>
+                </tr>
+                <tr>
+                    <td>Relocation</td>
+                    <td>Scenario 4: Moving for Taxes</td>
+                    <td>State tax and total cost of living</td>
+                </tr>
+                <tr>
+                    <td>Debt</td>
+                    <td>Scenario 5: Credit Card Debt</td>
+                    <td>Debt pressure and taxable withdrawals</td>
+                </tr>
+                <tr>
+                    <td>Social Security taxation</td>
+                    <td>Scenario 6: Part-Time Job Surprise</td>
+                    <td>Combined income</td>
+                </tr>
+                <tr>
+                    <td>Roth planning</td>
+                    <td>Scenario 7: Roth Conversion</td>
+                    <td>Timing taxable income</td>
+                </tr>
+                <tr>
+                    <td>Medicare premiums</td>
+                    <td>Scenario 8: Medicare Premium Letter</td>
+                    <td>IRMAA two-year lookback</td>
+                </tr>
+                <tr>
+                    <td>Charitable giving</td>
+                    <td>Scenario 9: IRA QCD</td>
+                    <td>AGI management and RMDs</td>
+                </tr>
+                <tr>
+                    <td>Inflation</td>
+                    <td>Scenario 10: Flat Pension</td>
+                    <td>Buying power and COLA</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Source Notes</h2>
+        <div class="source-list">
+            <ul>
+                <li>IRS, Retirement plan and IRA required minimum distributions FAQs: https://www.irs.gov/retirement-plans/retirement-plan-and-ira-required-minimum-distributions-faqs</li>
+                <li>IRS, Retirement topics - Required minimum distributions: https://www.irs.gov/rmd</li>
+                <li>IRS, Veterans tax information and services: https://www.irs.gov/individuals/information-for-veterans</li>
+                <li>SSA, Must I pay taxes on Social Security benefits?: https://www.ssa.gov/faqs/en/questions/KA-02471.html</li>
+                <li>Medicare, 2026 Medicare costs and income-related premium notes: https://www.medicare.gov/basics/costs/medicare-costs</li>
+                <li>DFAS, CRDP/CRSC payment guidance: https://www.dfas.mil/RetiredMilitary/disability/payment/</li>
+                <li>VA, Disability compensation: https://www.va.gov/disability/</li>
+                <li>Soldier for Life/MyArmyBenefits, state tax update: https://soldierforlife.army.mil/Army-Retirement/Retirement-Planning/Change-of-Mission-Newsletter/2026-01-Check-State-Taxes-Before-Moving</li>
+            </ul>
+        </div>
+        <div class="footer-note">This scenario packet supports classroom instruction only. It is not tax, investment, legal, or benefits advice for an individual student.</div>
+    </section>
+</body>
+</html>

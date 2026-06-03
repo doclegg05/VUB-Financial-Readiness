@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 1: Course Introduction & VA Online Services | VUB Intermediate Computer Skills</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B365D;
+      --primary-dark: #0D1B2A;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --red: #B31942;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .logo {
+      text-align: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .logo h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .logo p {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .week-indicator {
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .week-indicator .week-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .week-indicator .week-title {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .chapter {
+      margin-bottom: 1rem;
+    }
+
+    .chapter-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .chapter-slides {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .slide-link {
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slide-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .slide-link.active {
+      background: var(--va-blue);
+      font-weight: 600;
+    }
+
+    .slide-link.completed::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource-link::before {
+      content: "\2193 ";
+      opacity: 0.6;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .progress-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--va-blue) 0%, var(--accent) 100%);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Slides Container */
+    .slides-container {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .slide {
+      display: none;
+      background: var(--light);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 1000px;
+      min-height: 600px;
+      padding: 3rem;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Styles */
+    .slide-header {
+      margin-bottom: 2rem;
+    }
+
+    .slide-title {
+      font-size: 2.25rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray);
+    }
+
+    .slide-content {
+      font-size: 1.5rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .slide-content ul, .slide-content ol {
+      margin-left: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .slide-content li {
+      margin-bottom: 1rem;
+    }
+
+    /* Title Slide */
+    .title-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--light);
+      border-radius: 16px;
+    }
+
+    .title-slide .slide-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-slide .slide-title {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+      color: var(--light);
+    }
+
+    .title-slide .slide-subtitle {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .course-info {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* Info Boxes */
+    .info-box {
+      background: var(--off-white);
+      border-left: 4px solid var(--va-blue);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+    }
+
+    .info-box.success {
+      border-left-color: var(--success);
+      background: rgba(40, 167, 69, 0.1);
+    }
+
+    .info-box.warning {
+      border-left-color: var(--va-red);
+      background: rgba(196, 38, 46, 0.1);
+    }
+
+    .info-box-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .info-box-content {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Key Points */
+    .key-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--off-white);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .key-point-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .key-point-text {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .key-point-text strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .column {
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+
+    .column h3 {
+      color: var(--va-blue);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .column ul {
+      margin-left: 1.25rem;
+    }
+
+    .column li {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Steps List */
+    .steps-list {
+      list-style: none;
+      margin-left: 0 !important;
+      counter-reset: step-counter;
+    }
+
+    .steps-list li {
+      position: relative;
+      padding-left: 3.5rem;
+      margin-bottom: 1.5rem;
+      counter-increment: step-counter;
+    }
+
+    .steps-list li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--va-blue);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    /* Portal Card */
+    .portal-card {
+      background: white;
+      border: 2px solid var(--va-blue);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .portal-card-icon {
+      font-size: 3rem;
+      flex-shrink: 0;
+    }
+
+    .portal-card h4 {
+      color: var(--va-blue);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .portal-card p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .portal-card .url {
+      font-family: monospace;
+      background: var(--off-white);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: var(--va-blue);
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    /* Demo Box */
+    .demo-box {
+      background: linear-gradient(135deg, var(--va-blue) 0%, #002F5A 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .demo-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .demo-box p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Navigation Footer */
+    .nav-footer {
+      background: var(--light);
+      border-top: 1px solid #eee;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.prev {
+      background: var(--off-white);
+      color: var(--primary);
+    }
+
+    .nav-btn.prev:hover {
+      background: #e8e8e8;
+    }
+
+    .nav-btn.next {
+      background: var(--va-blue);
+      color: white;
+    }
+
+    .nav-btn.next:hover {
+      background: #002F5A;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .slide-counter {
+      font-size: 0.9rem;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* Completion Slide */
+    .completion-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+    }
+
+    .completion-badge {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, var(--va-blue) 0%, #002F5A 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 63, 114, 0.3);
+    }
+
+    .completion-badge span {
+      font-size: 4rem;
+    }
+
+    .completion-slide h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .completion-slide p {
+      font-size: 1.25rem;
+      color: var(--gray);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* Handout Prompt */
+    .handout-prompt {
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      color: var(--primary);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .handout-prompt-icon {
+      font-size: 2rem;
+    }
+
+    .handout-prompt-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* Pre-test Link */
+    .pretest-link {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .pretest-link:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      display: none;
+    }
+
+    .confetti.active {
+      display: block;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti-fall 3s ease-out forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar { width: 240px; }
+      .main-content { margin-left: 240px; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; }
+      .two-column { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="logo">
+      <h2>VUB Computer Skills</h2>
+      <p>Intermediate Course</p>
+    </div>
+
+    <div class="week-indicator">
+      <div class="week-num">Week 1</div>
+      <div class="week-title">VA Online Services</div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Introduction</div>
+      <div class="chapter-slides">
+        <div class="slide-link active" data-slide="0">Welcome & Overview</div>
+        <div class="slide-link" data-slide="1">Learning Objectives</div>
+        <div class="slide-link" data-slide="2">Why VA Online Services?</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">VA.gov</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="3">What is VA.gov?</div>
+        <div class="slide-link" data-slide="4">Creating Your Account</div>
+        <div class="slide-link" data-slide="5">ID.me Verification</div>
+        <div class="slide-link" data-slide="6">Navigating VA.gov</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">MyHealtheVet</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="7">What is MyHealtheVet?</div>
+        <div class="slide-link" data-slide="8">Secure Messaging</div>
+        <div class="slide-link" data-slide="9">Prescriptions & Refills</div>
+        <div class="slide-link" data-slide="10">Health Records</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">eBenefits</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="11">What is eBenefits?</div>
+        <div class="slide-link" data-slide="12">Key Features</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Safety & Wrap Up</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="13">Avoiding Fake VA Sites</div>
+        <div class="slide-link" data-slide="14">Key Takeaways</div>
+        <div class="slide-link" data-slide="15">Pre-Test Time</div>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <div class="resources-title">Resources</div>
+      <a class="resource-link" href="handouts/va-portals-quick-reference.html" target="_blank">VA Portals Quick Reference</a>
+      <a class="resource-link" href="handouts/va-login-checklist.html" target="_blank">VA Login Checklist</a>
+      <a class="resource-link" href="handouts/myhealthevet-guide.html" target="_blank">MyHealtheVet Guide</a>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="slides-container">
+      <!-- Slide 0: Title -->
+      <div class="slide active title-slide">
+        <div class="slide-icon">🏛️</div>
+        <h1 class="slide-title">VA Online Services</h1>
+        <p class="slide-subtitle">Navigate VA.gov, MyHealtheVet & eBenefits with confidence</p>
+        <p class="course-info">Week 1 of 8 • VUB Intermediate Computer Skills</p>
+        <p class="course-info" style="margin-top: 0.5rem;">Week 1 of 8</p>
+      </div>
+
+      <!-- Slide 1: Learning Objectives -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Today's Learning Objectives</h1>
+          <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🎯</div>
+            <div class="key-point-text">
+              <strong>Navigate VA.gov</strong>
+              Find benefits information, check claim status, access your records
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">💬</div>
+            <div class="key-point-text">
+              <strong>Use MyHealtheVet</strong>
+              Message your doctor, refill prescriptions, view lab results
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📄</div>
+            <div class="key-point-text">
+              <strong>Access eBenefits</strong>
+              Download documents, manage disability ratings, update records
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🔒</div>
+            <div class="key-point-text">
+              <strong>Stay Safe Online</strong>
+              Recognize real VA sites from scams and phishing attempts
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Why VA Online Services? -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Why Learn VA Online Services?</h1>
+          <p class="slide-subtitle">Save time and take control of your benefits</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>⏰ Save Time</h3>
+              <ul>
+                <li>Skip phone hold times</li>
+                <li>24/7 access to information</li>
+                <li>Refill prescriptions in minutes</li>
+                <li>Check claim status instantly</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>💪 Take Control</h3>
+              <ul>
+                <li>Direct message your doctor</li>
+                <li>Download official documents</li>
+                <li>Track appointments</li>
+                <li>Manage your own healthcare</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">Did You Know?</div>
+            <div class="info-box-content">
+              Over 6 million veterans use VA online services every month. You'll join a community of connected veterans!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: What is VA.gov? -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">What is VA.gov?</h1>
+          <p class="slide-subtitle">The main portal for all veteran services</p>
+        </div>
+        <div class="slide-content">
+          <div class="portal-card">
+            <div class="portal-card-icon">🏛️</div>
+            <div>
+              <h4>VA.gov - Your Starting Point</h4>
+              <p>The official website of the U.S. Department of Veterans Affairs. This is the central hub for ALL veteran benefits and services.</p>
+              <span class="url">www.va.gov</span>
+            </div>
+          </div>
+
+          <div class="two-column">
+            <div class="column">
+              <h3>What You Can Do</h3>
+              <ul>
+                <li>Apply for benefits</li>
+                <li>Check claim status</li>
+                <li>Schedule appointments</li>
+                <li>Access health records</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>What You'll Find</h3>
+              <ul>
+                <li>Healthcare information</li>
+                <li>Education benefits (GI Bill)</li>
+                <li>Disability compensation</li>
+                <li>Pension and housing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Creating Your Account -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Creating Your VA.gov Account</h1>
+          <p class="slide-subtitle">Three ways to sign in</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">1️⃣</div>
+            <div class="key-point-text">
+              <strong>Login.gov (Recommended)</strong>
+              Government-wide secure login. Works for VA and other federal sites.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">2️⃣</div>
+            <div class="key-point-text">
+              <strong>ID.me</strong>
+              Private company that verifies your identity. Most common option.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">3️⃣</div>
+            <div class="key-point-text">
+              <strong>DS Logon (Legacy)</strong>
+              Older system, still works but being phased out. Already have one? It still works!
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-box-title">💡 Which Should You Use?</div>
+            <div class="info-box-content">
+              If you're starting fresh, <strong>Login.gov</strong> is recommended. If you already have ID.me or DS Logon, those still work fine!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: ID.me Verification -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">ID.me Verification Process</h1>
+          <p class="slide-subtitle">Proving you are who you say you are</p>
+        </div>
+        <div class="slide-content">
+          <ol class="steps-list">
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Create an ID.me account</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Use your email address and create a password</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Enter your personal information</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Full name, date of birth, Social Security Number</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Upload a photo ID</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Driver's license, state ID, or passport</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Take a selfie</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">ID.me compares your face to your photo ID</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">You're verified!</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Now you can access all VA online services</span>
+            </li>
+          </ol>
+
+          <div class="info-box warning">
+            <div class="info-box-title">⚠️ Need Help?</div>
+            <div class="info-box-content">
+              Having trouble verifying? You can do a video call with an ID.me agent who will help you complete the process.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Navigating VA.gov -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Navigating VA.gov</h1>
+          <p class="slide-subtitle">Finding what you need</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🔍</div>
+            <div class="key-point-text">
+              <strong>Search Bar</strong>
+              Type what you're looking for at the top of any page
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📋</div>
+            <div class="key-point-text">
+              <strong>Main Menu</strong>
+              Categories: Healthcare, Disability, Education, Records, Pension
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">👤</div>
+            <div class="key-point-text">
+              <strong>My VA Dashboard</strong>
+              After signing in, your personalized homepage with your information
+            </div>
+          </div>
+
+          <div class="demo-box">
+            <h3>🖥️ Live Demo</h3>
+            <p>Let's explore VA.gov together and find the My VA dashboard</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: What is MyHealtheVet? -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">What is MyHealtheVet?</h1>
+          <p class="slide-subtitle">Your VA healthcare in the palm of your hand</p>
+        </div>
+        <div class="slide-content">
+          <div class="portal-card">
+            <div class="portal-card-icon">🏥</div>
+            <div>
+              <h4>MyHealtheVet - Health Management Portal</h4>
+              <p>The official health portal for VA patients. Manage prescriptions, message doctors, view test results, and more.</p>
+              <span class="url">www.myhealth.va.gov</span>
+            </div>
+          </div>
+
+          <div class="info-box success">
+            <div class="info-box-title">Requirements</div>
+            <div class="info-box-content">
+              You must be enrolled in VA healthcare to use MyHealtheVet. If you're not enrolled yet, you can apply at VA.gov.
+            </div>
+          </div>
+
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-text">Refer to your "MyHealtheVet Guide" handout for step-by-step instructions</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Secure Messaging -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Secure Messaging</h1>
+          <p class="slide-subtitle">Communicate directly with your healthcare team</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>✅ Good For</h3>
+              <ul>
+                <li>Non-urgent questions</li>
+                <li>Medication refill requests</li>
+                <li>Appointment follow-ups</li>
+                <li>Test result questions</li>
+                <li>General health concerns</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>❌ NOT For</h3>
+              <ul>
+                <li>Emergencies (call 911)</li>
+                <li>Urgent symptoms</li>
+                <li>Same-day needs</li>
+                <li>Mental health crisis</li>
+                <li>Chest pain, difficulty breathing</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-box-title">Response Time</div>
+            <div class="info-box-content">
+              Expect a response within 3 business days. For urgent issues, call your VA clinic or the VA Health Connect line: 1-800-MyVA411
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: Prescriptions & Refills -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Prescriptions & Refills</h1>
+          <p class="slide-subtitle">Never run out of your medications</p>
+        </div>
+        <div class="slide-content">
+          <ol class="steps-list">
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Sign in to MyHealtheVet</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Use Login.gov, ID.me, or DS Logon</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Go to "Pharmacy"</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Click "Medications" in the menu</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Find your medication</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Look for medications with refills available</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Click "Refill"</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Confirm and submit your refill request</span>
+            </li>
+          </ol>
+
+          <div class="info-box success">
+            <div class="info-box-title">💡 Pro Tip</div>
+            <div class="info-box-content">
+              You can track your prescription shipment right from MyHealtheVet. Most VA prescriptions ship via USPS and arrive in 3-5 days.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 10: Health Records -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Viewing Health Records</h1>
+          <p class="slide-subtitle">Your complete VA health history</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🔬</div>
+            <div class="key-point-text">
+              <strong>Lab Results</strong>
+              View blood work, imaging results, and other test results
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📅</div>
+            <div class="key-point-text">
+              <strong>Appointments</strong>
+              See upcoming and past appointments
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">💊</div>
+            <div class="key-point-text">
+              <strong>Medication History</strong>
+              All medications you've been prescribed through the VA
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📥</div>
+            <div class="key-point-text">
+              <strong>Blue Button Report</strong>
+              Download your complete health record as a PDF
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: What is eBenefits? -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">What is eBenefits?</h1>
+          <p class="slide-subtitle">Managing your VA benefits and documents</p>
+        </div>
+        <div class="slide-content">
+          <div class="portal-card">
+            <div class="portal-card-icon">📄</div>
+            <div>
+              <h4>eBenefits - Benefits Portal</h4>
+              <p>Access and manage your disability compensation, download official letters, and update your records.</p>
+              <span class="url">www.ebenefits.va.gov</span>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-box-title">eBenefits is Merging with VA.gov</div>
+            <div class="info-box-content">
+              Many eBenefits features are moving to VA.gov. Both sites still work, and your login works on both!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: eBenefits Key Features -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">eBenefits Key Features</h1>
+          <p class="slide-subtitle">What you can do on eBenefits</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">📜</div>
+            <div class="key-point-text">
+              <strong>Download Official Letters</strong>
+              Benefit Verification Letter, Civil Service Preference Letter, Commissary Letter
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📊</div>
+            <div class="key-point-text">
+              <strong>View Disability Rating</strong>
+              See your combined disability rating and individual conditions
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🏠</div>
+            <div class="key-point-text">
+              <strong>Apply for Benefits</strong>
+              VA home loan Certificate of Eligibility, vocational rehab, and more
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">👥</div>
+            <div class="key-point-text">
+              <strong>Update Dependents</strong>
+              Add or remove dependents from your benefits
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 13: Avoiding Fake VA Sites -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Avoiding Fake VA Sites</h1>
+          <p class="slide-subtitle">Protect yourself from scams</p>
+        </div>
+        <div class="slide-content">
+          <div class="info-box warning">
+            <div class="info-box-title">⚠️ Warning Signs of Fake Sites</div>
+            <div class="info-box-content">
+              <ul style="margin-top: 0.5rem;">
+                <li>URL doesn't end in .gov (e.g., va-benefits.com is FAKE)</li>
+                <li>Asks for payment or credit card info</li>
+                <li>Arrived via unsolicited email or text</li>
+                <li>Poor spelling or grammar</li>
+                <li>Promises guaranteed benefits</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="info-box success">
+            <div class="info-box-title">✅ Official VA Websites</div>
+            <div class="info-box-content">
+              <ul style="margin-top: 0.5rem;">
+                <li><strong>va.gov</strong> - Main VA website</li>
+                <li><strong>myhealth.va.gov</strong> - Health portal</li>
+                <li><strong>ebenefits.va.gov</strong> - Benefits portal</li>
+              </ul>
+              Always type these directly into your browser!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 14: Key Takeaways -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Key Takeaways</h1>
+          <p class="slide-subtitle">What to remember from today</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🏛️</div>
+            <div class="key-point-text">
+              <strong>VA.gov is Your Hub</strong>
+              Start here for all VA services - healthcare, benefits, education
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🏥</div>
+            <div class="key-point-text">
+              <strong>MyHealtheVet for Health</strong>
+              Message doctors, refill prescriptions, view test results
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📄</div>
+            <div class="key-point-text">
+              <strong>eBenefits for Documents</strong>
+              Download letters, check disability rating, manage benefits
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🔒</div>
+            <div class="key-point-text">
+              <strong>Only Use .gov Sites</strong>
+              Type URLs directly - never click links in suspicious emails
+            </div>
+          </div>
+
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-text">Take your handouts home! They have step-by-step instructions for everything we covered.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 15: Pre-Test Time -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Pre-Test Assessment</h1>
+          <p class="slide-subtitle">Let's see where you're starting</p>
+        </div>
+        <div class="slide-content">
+          <div class="info-box">
+            <div class="info-box-title">About the Pre-Test</div>
+            <div class="info-box-content">
+              <ul style="margin-top: 0.5rem;">
+                <li><strong>20 questions</strong> covering all 8 weeks of the course</li>
+                <li><strong>No time limit</strong> - take your time</li>
+                <li><strong>Not pass/fail</strong> - measures your starting point</li>
+                <li>You'll take a similar test in Week 8 to see your improvement!</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="demo-box">
+            <h3>📝 Purpose of the Pre-Test</h3>
+            <p>Don't worry if you don't know all the answers! The point is to measure where you're starting so we can celebrate your growth at the end.</p>
+          </div>
+
+          <div style="text-align: center;">
+            <a href="pre-test.html" class="pretest-link">Start Pre-Test →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div class="nav-footer">
+      <button class="nav-btn prev" id="prevBtn" disabled>
+        ← Previous
+      </button>
+      <span class="slide-counter">
+        Slide <span id="currentSlide">1</span> of <span id="totalSlides">16</span>
+      </span>
+      <button class="nav-btn next" id="nextBtn">
+        Next →
+      </button>
+    </div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div class="confetti" id="confetti"></div>
+
+  <script src="../../../shared/progress.js"></script>
+  <script src="../../../shared/glossary.js" defer></script>
+  <script>
+    // Presentation State
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideLinks = document.querySelectorAll('.slide-link');
+
+    // DOM Elements
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSlideSpan = document.getElementById('currentSlide');
+    const totalSlidesSpan = document.getElementById('totalSlides');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const confettiContainer = document.getElementById('confetti');
+
+    // Initialize
+    totalSlidesSpan.textContent = totalSlides;
+    loadProgress();
+    updateSlide();
+
+    // Navigation Functions
+    function updateSlide() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      slideLinks.forEach((link, index) => {
+        link.classList.toggle('active', index === currentSlide);
+        if (index < currentSlide) {
+          link.classList.add('completed');
+        }
+      });
+
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.textContent = currentSlide === totalSlides - 1 ? 'Finish ✓' : 'Next →';
+
+      currentSlideSpan.textContent = currentSlide + 1;
+
+      const progress = Math.round((currentSlide / (totalSlides - 1)) * 100);
+      progressFill.style.width = progress + '%';
+      progressText.textContent = progress;
+
+      saveProgress();
+
+      if (currentSlide === totalSlides - 1) {
+        setTimeout(triggerConfetti, 500);
+      }
+
+      const activeLink = document.querySelector('.slide-link.active');
+      if (activeLink) {
+        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlide();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    // Event Listeners
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    slideLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const slideIndex = parseInt(link.dataset.slide);
+        goToSlide(slideIndex);
+      });
+    });
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'PageUp':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          goToSlide(totalSlides - 1);
+          break;
+      }
+    });
+
+    // Progress Persistence (via shared VubProgress library)
+    function saveProgress() {
+      if (window.VubProgress) {
+        VubProgress.saveSlide('ics', 1, currentSlide, totalSlides);
+      }
+    }
+
+    function loadProgress() {
+      if (window.VubProgress) {
+        const entry = VubProgress.get('ics', 1);
+        if (entry && typeof entry.slide === 'number') {
+          currentSlide = entry.slide;
+        }
+      }
+    }
+
+    // Confetti Animation
+    function triggerConfetti() {
+      confettiContainer.classList.add('active');
+      confettiContainer.innerHTML = '';
+
+      const colors = ['#003F72', '#C9A227', '#1B365D', '#C4262E', '#28A745'];
+
+      for (let i = 0; i < 100; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 2 + 's';
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confettiContainer.appendChild(piece);
+      }
+
+      setTimeout(() => {
+        confettiContainer.classList.remove('active');
+      }, 5000);
+    }
+
+    // Touch/Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+  </script>
+</body>
+</html>

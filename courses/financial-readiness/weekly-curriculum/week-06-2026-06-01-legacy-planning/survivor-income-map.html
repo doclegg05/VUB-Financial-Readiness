@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5 Survivor Income Map</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1e3a8a;
+            --navy-dark: #0f172a;
+            --blue: #2563eb;
+            --gold: #fbbf24;
+            --gold-dark: #b45309;
+            --green: #15803d;
+            --red: #b91c1c;
+            --ink: #1e293b;
+            --muted: #475569;
+            --line: #cbd5e1;
+            --paper: #ffffff;
+            --shade: #f8fafc;
+            --soft-blue: #eff6ff;
+            --soft-gold: #fffbeb;
+            --soft-green: #f0fdf4;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.42in 0.5in;
+        }
+
+        body {
+            margin: 0 auto;
+            max-width: 7.5in;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 8.9pt;
+            line-height: 1.28;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        h1, h2, h3, p {
+            margin: 0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+            color: #ffffff;
+            border-radius: 8px;
+            padding: 13px 16px;
+            margin-bottom: 9px;
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 19pt;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            color: #dbeafe;
+            font-size: 8.8pt;
+        }
+
+        .badge {
+            background: var(--gold);
+            color: var(--navy-dark);
+            border-radius: 4px;
+            padding: 6px 9px;
+            font-size: 7pt;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .callout {
+            background: var(--soft-gold);
+            border-left: 4px solid var(--gold-dark);
+            border-radius: 0 6px 6px 0;
+            padding: 7px 9px;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            color: var(--navy);
+            font-size: 11pt;
+            font-weight: 800;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 3px;
+            margin-bottom: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            font-size: 7.7pt;
+            margin-bottom: 8px;
+        }
+
+        th {
+            background: var(--navy);
+            color: #ffffff;
+            text-align: left;
+            padding: 5px 6px;
+            font-weight: 700;
+        }
+
+        td {
+            border: 1px solid var(--line);
+            padding: 5px 6px;
+            vertical-align: top;
+            min-height: 28px;
+        }
+
+        .hint {
+            display: block;
+            color: var(--muted);
+            font-size: 7pt;
+            margin-top: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .panel {
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            padding: 8px 9px;
+            background: var(--shade);
+            break-inside: avoid;
+        }
+
+        .panel h2 {
+            color: var(--navy);
+            font-size: 10pt;
+            margin-bottom: 5px;
+        }
+
+        .line-row {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 6px;
+            align-items: end;
+            margin-bottom: 5px;
+        }
+
+        .line {
+            border-bottom: 1px solid var(--muted);
+            min-height: 15px;
+        }
+
+        .guidance {
+            border: 1px solid var(--blue);
+            border-left: 4px solid var(--blue);
+            border-radius: 0 6px 6px 0;
+            background: var(--soft-blue);
+            padding: 7px 9px;
+            margin-bottom: 7px;
+            break-inside: avoid;
+        }
+
+        .guidance h2 {
+            color: var(--navy);
+            font-size: 9.5pt;
+            margin-bottom: 4px;
+        }
+
+        .sources {
+            border-top: 1px solid var(--line);
+            padding-top: 5px;
+            color: var(--muted);
+            font-size: 6.8pt;
+        }
+
+        .footer {
+            color: var(--muted);
+            font-size: 7pt;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div>
+            <h1>Survivor Income Map</h1>
+            <p>Module 5 planning tool: what income stops, what continues, and who must be contacted.</p>
+        </div>
+        <div class="badge">Student Handout</div>
+    </header>
+
+    <div class="callout">
+        <strong>Course rule:</strong> A retirement income plan is not complete until the survivor knows which payments continue, which stop, and which accounts need action.
+    </div>
+
+    <section>
+        <h2 class="section-title">1. Map the Survivor Income Sources</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 24%;">Income or account</th>
+                    <th style="width: 19%;">Who pays or holds it?</th>
+                    <th style="width: 19%;">What happens at death?</th>
+                    <th style="width: 20%;">Action needed</th>
+                    <th style="width: 18%;">Notes for family</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Military retired pay</td>
+                    <td>DFAS</td>
+                    <td>Retiree pay stops at death</td>
+                    <td>Report death; ask about final pay and the Survivor Benefit Plan (SBP)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Survivor Benefit Plan annuity</td>
+                    <td>DFAS</td>
+                    <td>May pay eligible beneficiary if elected</td>
+                    <td>Confirm election, base amount, beneficiary</td>
+                    <td>Generally taxable to survivor</td>
+                </tr>
+                <tr>
+                    <td>Dependency &amp; Indemnity Compensation (DIC)</td>
+                    <td>VA</td>
+                    <td>May pay if death is service-connected</td>
+                    <td>Contact VSO or VA; gather records</td>
+                    <td>Tax-free VA benefit</td>
+                </tr>
+                <tr>
+                    <td>Social Security survivor benefit</td>
+                    <td>SSA</td>
+                    <td>May replace or exceed current benefit</td>
+                    <td>Call SSA; compare survivor vs. own benefit</td>
+                    <td>Eligibility and timing matter</td>
+                </tr>
+                <tr>
+                    <td>Thrift Savings Plan / IRA / 401(k)</td>
+                    <td>Custodian</td>
+                    <td>Goes by beneficiary designation</td>
+                    <td>Confirm primary and contingent beneficiaries</td>
+                    <td>Beneficiary form can override will</td>
+                </tr>
+                <tr>
+                    <td>Life insurance</td>
+                    <td>Insurer</td>
+                    <td>Death benefit to named beneficiary</td>
+                    <td>Locate policy and claim form</td>
+                    <td>Check SGLI, VGLI, VA Life, private policies</td>
+                </tr>
+                <tr>
+                    <td>Bank / brokerage accounts</td>
+                    <td>Financial institution</td>
+                    <td>Depends on joint ownership, POD, TOD, trust</td>
+                    <td>Confirm titles, beneficiaries, trusted contact</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Civilian pension / annuity</td>
+                    <td>Employer or insurer</td>
+                    <td>Depends on survivor election</td>
+                    <td>Find pension election paperwork</td>
+                    <td>Some payments stop at death</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="grid">
+        <section class="panel">
+            <h2>2. Three Numbers My Survivor Should Know</h2>
+            <div class="line-row"><span>Current monthly household income</span><span class="line"></span></div>
+            <div class="line-row"><span>Estimated survivor monthly income</span><span class="line"></span></div>
+            <div class="line-row"><span>Monthly bills that continue</span><span class="line"></span></div>
+            <span class="hint">Use estimates for class. Verify later with DFAS, VA, SSA, custodians, and a qualified advisor.</span>
+        </section>
+
+        <section class="panel">
+            <h2>3. First Calls After Death</h2>
+            <div class="line-row"><span>DFAS / retired pay</span><span class="line"></span></div>
+            <div class="line-row"><span>VA / VSO</span><span class="line"></span></div>
+            <div class="line-row"><span>SSA</span><span class="line"></span></div>
+            <div class="line-row"><span>Financial advisor / attorney</span><span class="line"></span></div>
+        </section>
+    </div>
+
+    <div class="guidance">
+        <h2>Facilitator guidance</h2>
+        <p>No single answer is expected. A complete student response should identify at least one payment that stops, one possible survivor payment, one account controlled by beneficiary form, and one agency or professional the family should contact before making decisions.</p>
+    </div>
+
+    <section class="sources">
+        Sources checked for Spring 2026 delivery: DFAS Survivor Benefit Plan and Arrears of Pay guidance; VA 2026 DIC rates; SSA survivor benefits; OPM/TSP order-of-precedence guidance. Education only.
+    </section>
+
+    <footer class="footer">
+        <span>Consult DFAS, VA, SSA, plan custodians, an attorney, or a qualified advisor for personal decisions.</span>
+        <span>VUB Financial Readiness Course</span>
+    </footer>
+</body>
+</html>
