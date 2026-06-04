@@ -32,3 +32,9 @@ design.md/
 # Legacy course subrepos (archived in M3-D; tracked by their own git)
 /VUB Financial Readiness Course/
 /VUB Intermediate Computer Course/
+
+# --- M3-D archive (retired copies live on disk for provenance; payload NOT tracked) ---
+# Embedded repos carry their own .git; archive holds a 1.88 MB logo + HTML already
+# committed canonically. Recovery = on-disk archive + freeze tag + git history.
+/_archive/*
+!/_archive/README.md
