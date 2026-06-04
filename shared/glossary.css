@@ -1,0 +1,269 @@
+/* ─── Floating "?" help button ─────────────────────────── */
+.vub-help-fab {
+  position: fixed;
+  top: var(--vub-help-fab-top, 1rem);
+  right: var(--vub-help-fab-right, 1rem);
+  z-index: 9000;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 52px;
+  padding: 0.7rem 1.1rem 0.7rem 0.9rem;
+  background: #0C1A35;
+  color: #fff;
+  border: 2px solid #C9A227;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(12, 26, 53, 0.35);
+  font-family: 'Source Sans 3', 'Segoe UI', Tahoma, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.vub-dashboard {
+  --vub-help-fab-top: calc(68px + 0.75rem);
+}
+
+.vub-help-fab:hover {
+  background: #142240;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(12, 26, 53, 0.45);
+}
+.vub-help-fab:focus-visible {
+  outline: 4px solid #F5C84C;
+  outline-offset: 3px;
+}
+.vub-help-fab-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: #C9A227;
+  color: #0C1A35;
+  border-radius: 50%;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  font-style: italic;
+}
+
+/* ─── Modal overlay ────────────────────────────────────── */
+.vub-help-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9001;
+  background: rgba(12, 26, 53, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: vubHelpFadeIn 0.2s ease;
+}
+.vub-help-overlay[hidden] { display: none; }
+
+@keyframes vubHelpFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Modal panel ──────────────────────────────────────── */
+.vub-help-modal {
+  width: 100%;
+  max-width: 640px;
+  max-height: min(85vh, 720px);
+  display: flex;
+  flex-direction: column;
+  background: #FDF9F4;
+  border: 1px solid rgba(12, 26, 53, 0.15);
+  border-top: 6px solid #C9A227;
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(12, 26, 53, 0.4);
+  font-family: 'Source Sans 3', 'Segoe UI', Tahoma, sans-serif;
+  color: #1A2B3C;
+  overflow: hidden;
+  animation: vubHelpSlideIn 0.25s ease;
+}
+
+@keyframes vubHelpSlideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.vub-help-header {
+  flex-shrink: 0;
+  padding: 1.25rem 1.5rem 0.85rem;
+  border-bottom: 1px solid rgba(12, 26, 53, 0.1);
+  background: #fff;
+}
+.vub-help-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #B31942;
+  margin-bottom: 0.25rem;
+}
+.vub-help-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0C1A35;
+  margin: 0 0 0.85rem;
+  line-height: 1.2;
+}
+.vub-help-search {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #1A2B3C;
+  background: #FDF9F4;
+  border: 2px solid rgba(12, 26, 53, 0.15);
+  border-radius: 8px;
+  transition: border-color 0.15s ease;
+}
+.vub-help-search:focus {
+  outline: none;
+  border-color: #C9A227;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2);
+}
+
+.vub-help-close {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #5A6A7A;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.vub-help-close:hover {
+  background: rgba(12, 26, 53, 0.08);
+  color: #0C1A35;
+}
+.vub-help-close:focus-visible {
+  outline: 3px solid #F5C84C;
+  outline-offset: 2px;
+}
+
+/* ─── Term list ────────────────────────────────────────── */
+.vub-help-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 1.5rem 1.25rem;
+}
+
+.vub-help-category {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5A6A7A;
+  margin: 1.1rem 0 0.4rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(12, 26, 53, 0.08);
+}
+.vub-help-category:first-child { margin-top: 0.5rem; }
+
+.vub-help-term {
+  padding: 0.65rem 0;
+  border-bottom: 1px dashed rgba(12, 26, 53, 0.08);
+}
+.vub-help-term:last-child { border-bottom: none; }
+.vub-help-term[hidden] { display: none; }
+
+.vub-help-term-name {
+  font-weight: 800;
+  color: #0C1A35;
+  font-size: 1.02rem;
+  margin-bottom: 0.15rem;
+}
+.vub-help-term-def {
+  color: #1A2B3C;
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+.vub-help-term-aliases {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.82rem;
+  color: #5A6A7A;
+  font-style: italic;
+}
+
+.vub-help-empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #5A6A7A;
+  font-size: 0.95rem;
+}
+.vub-help-empty strong { color: #0C1A35; }
+
+/* ─── Footer ───────────────────────────────────────────── */
+.vub-help-footer {
+  flex-shrink: 0;
+  padding: 0.75rem 1.5rem;
+  background: #fff;
+  border-top: 1px solid rgba(12, 26, 53, 0.08);
+  font-size: 0.83rem;
+  color: #5A6A7A;
+  text-align: center;
+}
+.vub-help-footer kbd {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #1A2B3C;
+  background: #FDF9F4;
+  border: 1px solid rgba(12, 26, 53, 0.2);
+  border-radius: 4px;
+}
+
+/* ─── Responsive ───────────────────────────────────────── */
+@media (max-width: 520px) {
+  .vub-help-fab {
+    top: var(--vub-help-fab-top, 0.6rem);
+    right: var(--vub-help-fab-right, 0.6rem);
+    padding: 0.55rem 0.85rem 0.55rem 0.65rem;
+    font-size: 0.88rem;
+    min-height: 44px;
+  }
+  .vub-dashboard {
+    --vub-help-fab-top: calc(68px + 0.6rem);
+  }
+  .vub-help-fab span:not(.vub-help-fab-icon) {
+    display: none; /* show icon only on small screens */
+  }
+  .vub-help-modal { max-height: 92vh; }
+  .vub-help-header { padding: 1rem 1rem 0.75rem; }
+  .vub-help-body { padding: 0.4rem 1rem 1rem; }
+  .vub-help-title { font-size: 1.25rem; }
+}
+
+/* ─── Print: hide the help affordances ──────────────── */
+@media print {
+  .vub-help-fab,
+  .vub-help-overlay { display: none !important; }
+}
+
+/* ─── Reduced motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .vub-help-overlay,
+  .vub-help-modal { animation: none; }
+  .vub-help-fab { transition: none; }
+}

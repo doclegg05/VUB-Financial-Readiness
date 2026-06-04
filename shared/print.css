@@ -1,0 +1,221 @@
+/**
+ * VUB Lessons — unified print stylesheet.
+ *
+ * Loaded with media="print" so it only applies when printing/PDF-saving.
+ * Goal: turn any presentation or dashboard into a clean printable handout.
+ */
+@media print {
+  /* ─── Page setup ─────────────────────────────────────── */
+  @page {
+    size: letter;
+    margin: 0.6in 0.55in;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt !important;
+    line-height: 1.45 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body {
+    display: block !important;
+    min-height: 0 !important;
+    width: 100% !important;
+  }
+
+  /* ─── Hide UI chrome ─────────────────────────────────── */
+  .sidebar,
+  .nav,
+  .topbar,
+  .nav-footer,
+  .progress-banner,
+  .progress-bar,
+  .progress-banner-bar,
+  .progress-fill,
+  .pres-progress-bar,
+  .pres-prev,
+  .pres-next,
+  .pres-back-btn,
+  .pres-theme-toggle,
+  .pres-sidebar,
+  .pres-bottom-bar,
+  .confetti,
+  #confetti-container,
+  .resource-strip,
+  .dashboard-footer,
+  .vub-help-fab,
+  .vub-help-overlay,
+  .hero-actions,
+  .hero-stars,
+  #resumeBanner,
+  #theme-toggle,
+  #hamburger,
+  .sidebar-overlay,
+  .module-pill,
+  .reveal-delay-1,
+  .footer-stars,
+  button.nav-btn,
+  .nav-btn {
+    display: none !important;
+  }
+
+  /* But keep links to handouts/printables visible — they're useful in print */
+
+  /* ─── Show ALL slides in flow ────────────────────────── */
+  .slide,
+  .pres-slide {
+    display: block !important;
+    position: static !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 0 1rem 0 !important;
+    margin: 0 0 1.5rem 0 !important;
+    page-break-inside: avoid;
+    page-break-after: always;
+    border-bottom: 1px solid #ccc;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .slide:last-child,
+  .pres-slide:last-child {
+    page-break-after: auto;
+    border-bottom: none;
+  }
+
+  .slides-container,
+  .pres-slide-area,
+  main,
+  .content-area {
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  /* ─── Typography ─────────────────────────────────────── */
+  h1, h2, h3, h4, h5, h6 {
+    color: #000 !important;
+    page-break-after: avoid;
+    background: none !important;
+  }
+
+  h1 { font-size: 22pt !important; }
+  h2 { font-size: 17pt !important; }
+  h3 { font-size: 14pt !important; }
+  h4 { font-size: 12pt !important; }
+
+  p, li, td, th, dd, dt {
+    color: #000 !important;
+    background: none !important;
+  }
+
+  /* ─── Show URLs after links (so paper readers can follow) ── */
+  a, a:link, a:visited {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+  a[href^="http"]::after,
+  a[href^="//"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    font-weight: normal;
+    word-break: break-all;
+  }
+  /* Don't show URL for in-page anchors or local hash links */
+  a[href^="#"]::after,
+  a[href^="javascript"]::after { content: ""; }
+
+  /* ─── Strip backgrounds, force readable colors ───────── */
+  * {
+    background-image: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    color: #000 !important;
+  }
+
+  /* Allow strong/em styling */
+  strong, b { font-weight: 700 !important; }
+  em, i    { font-style: italic !important; }
+
+  /* ─── Tables ─────────────────────────────────────────── */
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    page-break-inside: avoid;
+  }
+  th, td {
+    border: 1px solid #888 !important;
+    padding: 0.3em 0.5em !important;
+  }
+  th { background: #eee !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* ─── Images ─────────────────────────────────────────── */
+  img, svg {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+  }
+
+  /* ─── Print-only header on each page ─────────────────── */
+  .slide-header,
+  .pres-slide-header {
+    border-bottom: 1px solid #444 !important;
+    margin-bottom: 0.6rem !important;
+    padding-bottom: 0.3rem !important;
+  }
+
+  /* ─── Course dashboard cards print as a list ─────────── */
+  .lesson-grid {
+    display: block !important;
+  }
+  .lesson-card,
+  .course-card {
+    display: block !important;
+    page-break-inside: avoid;
+    margin: 0 0 0.85rem 0 !important;
+    padding: 0.5rem 0 !important;
+    border: none !important;
+    border-bottom: 1px solid #ccc !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  .lesson-art,
+  .course-banner {
+    display: none !important;
+  }
+  .lesson-actions a,
+  .course-footer a {
+    display: inline !important;
+    background: none !important;
+    color: #000 !important;
+    padding: 0 !important;
+    text-decoration: underline;
+    font-weight: normal !important;
+  }
+  .lesson-progress {
+    display: inline-block !important;
+    background: none !important;
+    border: 1px solid #888 !important;
+    color: #000 !important;
+    padding: 0.05rem 0.4rem !important;
+    font-size: 0.85em !important;
+  }
+
+  /* ─── Page-break helpers (use in markup if needed) ───── */
+  .print-break-before { page-break-before: always; }
+  .print-break-avoid  { page-break-inside: avoid; }
+  .print-only         { display: block !important; }
+  .screen-only        { display: none !important; }
+}
