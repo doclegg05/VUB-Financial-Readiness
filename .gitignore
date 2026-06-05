@@ -27,6 +27,7 @@ dist/
 # Vendored / scratch / legacy
 design.md/
 .playwright-mcp/
+.superpowers/
 # Source logo lives in assets/; ignore the root working copy
 /VUB Logo.png
 # Legacy course subrepos (archived in M3-D; tracked by their own git)
