@@ -47,6 +47,17 @@ rmrf(SITE_ROOT);
 fs.mkdirSync(SITE_ROOT, { recursive: true });
 for (const item of PUBLISH) copyRecursive(path.join(ROOT, item), path.join(SITE_ROOT, item));
 
+// Critical files that must survive the copy — fail loudly if a refactor ever drops them.
+const REQUIRED_FILES = [
+  "index.html", "courses.json",
+  "shared/brand.css", "shared/shell.css", "shared/shell.js",
+  "shared/progress.js", "shared/glossary.js",
+  "assets/vub-usflag.svg", "assets/vub-seal-white.png",
+  "assets/fonts/source-sans-3-latin-400-normal.woff2",
+];
+const missingBuilt = REQUIRED_FILES.filter((f) => !fs.existsSync(path.join(SITE_ROOT, f)));
+if (missingBuilt.length) throw new Error(`Build incomplete. Missing in dist/site: ${missingBuilt.join(", ")}`);
+
 // Safety net: strip large media (videos/podcasts are externally hosted on YouTube).
 let stripped = 0;
 for (const f of walk(SITE_ROOT)) {
