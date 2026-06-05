@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1235 650" preserveAspectRatio="xMidYMid slice">
+<defs>
+<filter id="flagwave" x="-12%" y="-12%" width="124%" height="124%">
+<feTurbulence type="fractalNoise" baseFrequency="0.006 0.018" numOctaves="2" seed="6" result="n">
+<animate attributeName="baseFrequency" dur="18s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" values="0.006 0.016;0.010 0.024;0.006 0.016" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"/>
+</feTurbulence>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+<polygon id="s" points="0.00,-18.00 4.04,-5.56 17.12,-5.56 6.54,2.12 10.58,14.56 0.00,6.88 -10.58,14.56 -6.54,2.12 -17.12,-5.56 -4.04,-5.56" fill="#fff"/>
+</defs>
+<g filter="url(#flagwave)">
+<rect x="0" y="0.000" width="1235" height="50.000" fill="#B31942"/>
+<rect x="0" y="50.000" width="1235" height="50.000" fill="#ffffff"/>
+<rect x="0" y="100.000" width="1235" height="50.000" fill="#B31942"/>
+<rect x="0" y="150.000" width="1235" height="50.000" fill="#ffffff"/>
+<rect x="0" y="200.000" width="1235" height="50.000" fill="#B31942"/>
+<rect x="0" y="250.000" width="1235" height="50.000" fill="#ffffff"/>
+<rect x="0" y="300.000" width="1235" height="50.000" fill="#B31942"/>
+<rect x="0" y="350.000" width="1235" height="50.000" fill="#ffffff"/>
+<rect x="0" y="400.000" width="1235" height="50.000" fill="#B31942"/>
+<rect x="0" y="450.000" width="1235" height="50.000" fill="#ffffff"/>
+<rect x="0" y="500.000" width="1235" height="50.000" fill="#B31942"/>
+<rect x="0" y="550.000" width="1235" height="50.000" fill="#ffffff"/>
+<rect x="0" y="600.000" width="1235" height="50.000" fill="#B31942"/>
+<rect x="0" y="0" width="494" height="350" fill="#0A3161"/>
+<use href="#s" x="41.17" y="35.00"/>
+<use href="#s" x="123.50" y="35.00"/>
+<use href="#s" x="205.83" y="35.00"/>
+<use href="#s" x="288.17" y="35.00"/>
+<use href="#s" x="370.50" y="35.00"/>
+<use href="#s" x="452.83" y="35.00"/>
+<use href="#s" x="82.33" y="70.00"/>
+<use href="#s" x="164.67" y="70.00"/>
+<use href="#s" x="247.00" y="70.00"/>
+<use href="#s" x="329.33" y="70.00"/>
+<use href="#s" x="411.67" y="70.00"/>
+<use href="#s" x="41.17" y="105.00"/>
+<use href="#s" x="123.50" y="105.00"/>
+<use href="#s" x="205.83" y="105.00"/>
+<use href="#s" x="288.17" y="105.00"/>
+<use href="#s" x="370.50" y="105.00"/>
+<use href="#s" x="452.83" y="105.00"/>
+<use href="#s" x="82.33" y="140.00"/>
+<use href="#s" x="164.67" y="140.00"/>
+<use href="#s" x="247.00" y="140.00"/>
+<use href="#s" x="329.33" y="140.00"/>
+<use href="#s" x="411.67" y="140.00"/>
+<use href="#s" x="41.17" y="175.00"/>
+<use href="#s" x="123.50" y="175.00"/>
+<use href="#s" x="205.83" y="175.00"/>
+<use href="#s" x="288.17" y="175.00"/>
+<use href="#s" x="370.50" y="175.00"/>
+<use href="#s" x="452.83" y="175.00"/>
+<use href="#s" x="82.33" y="210.00"/>
+<use href="#s" x="164.67" y="210.00"/>
+<use href="#s" x="247.00" y="210.00"/>
+<use href="#s" x="329.33" y="210.00"/>
+<use href="#s" x="411.67" y="210.00"/>
+<use href="#s" x="41.17" y="245.00"/>
+<use href="#s" x="123.50" y="245.00"/>
+<use href="#s" x="205.83" y="245.00"/>
+<use href="#s" x="288.17" y="245.00"/>
+<use href="#s" x="370.50" y="245.00"/>
+<use href="#s" x="452.83" y="245.00"/>
+<use href="#s" x="82.33" y="280.00"/>
+<use href="#s" x="164.67" y="280.00"/>
+<use href="#s" x="247.00" y="280.00"/>
+<use href="#s" x="329.33" y="280.00"/>
+<use href="#s" x="411.67" y="280.00"/>
+<use href="#s" x="41.17" y="315.00"/>
+<use href="#s" x="123.50" y="315.00"/>
+<use href="#s" x="205.83" y="315.00"/>
+<use href="#s" x="288.17" y="315.00"/>
+<use href="#s" x="370.50" y="315.00"/>
+<use href="#s" x="452.83" y="315.00"/>
+</g></svg>
