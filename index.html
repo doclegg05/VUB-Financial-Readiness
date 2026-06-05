@@ -253,9 +253,14 @@
           '<h3>' + esc(c.title) + '</h3>' +
           '<p class="meta">' + esc(c.subtitle) + '</p>' +
           '<div class="actions">' +
-            '<a class="btn" href="/' + c.entry + '">Open course <span class="arrow" aria-hidden="true">→</span></a>' +
-            '<span class="testlinks">Tests: <a href="/' + c.preTest + '">Pre-test</a><span class="sep">·</span><a href="/' + c.postTest + '">Post-test</a></span>' +
+            '<a class="btn">Open course <span class="arrow" aria-hidden="true">→</span></a>' +
+            '<span class="testlinks">Tests: <a class="t-pre">Pre-test</a><span class="sep">·</span><a class="t-post">Post-test</a></span>' +
           '</div></div>';
+        // URLs set as DOM properties (browser-parsed) — never interpolated into the HTML
+        // string, so course-path values can't inject attributes or javascript: URIs.
+        card.querySelector('a.btn').href = '/' + (c.entry || '');
+        card.querySelector('a.t-pre').href = '/' + (c.preTest || '');
+        card.querySelector('a.t-post').href = '/' + (c.postTest || '');
         wrap.appendChild(card);
       });
     })
