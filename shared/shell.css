@@ -1,0 +1,29 @@
+/* shared/shell.css — injected app bar / breadcrumb / footer. Theme via brand.css tokens. */
+.vub-appbar{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,#0C2E55,var(--navy-deep));border-bottom:2px solid var(--gold);box-shadow:0 2px 18px rgba(0,0,0,.35)}
+.vub-appbar .in{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:16px;height:70px}
+.vub-appbar a.home{display:flex;align-items:center;gap:12px;text-decoration:none}
+.vub-appbar img.seal{height:46px;width:auto;display:block;filter:drop-shadow(0 1px 3px rgba(0,0,0,.5))}
+.vub-appbar .bn{font-family:var(--font-display);font-weight:800;color:#fff;font-size:20px;line-height:1.05}
+.vub-appbar .bt{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-light)}
+.vub-appbar .sp{flex:1}
+.vub-controls{display:flex;align-items:center;gap:10px}
+.vub-textsize{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--navy-light);border-radius:10px;padding:5px 8px 5px 12px;color:#EAF0FA}
+.vub-textsize .lab{font-size:13px;font-weight:600}
+.vub-textsize button{all:unset;cursor:pointer;color:#fff;min-width:34px;min-height:38px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--navy-light);border-radius:8px;font-weight:700}
+.vub-textsize button.plus{font-size:19px}.vub-textsize button.minus{font-size:15px}
+.vub-help,.vub-instr{display:inline-flex;align-items:center;gap:7px;height:42px;padding:0 16px;border-radius:10px;font-size:14.5px;font-weight:700;text-decoration:none}
+.vub-help{border:1px solid var(--navy-light);color:#EAF0FA}.vub-help .i{color:var(--gold-light)}
+.vub-instr{background:var(--red);border:1px solid var(--red-dark);color:#fff;box-shadow:0 2px 10px rgba(179,25,66,.45)}
+.vub-help:hover{background:rgba(94,134,196,.28)}.vub-instr:hover{background:var(--red-dark)}
+/* breadcrumb (used by lessons in M5) */
+.vub-crumb{background:#F3EFE7;border-bottom:1px solid var(--border);font-size:14px;color:var(--muted)}
+.vub-crumb .in{max-width:1080px;margin:0 auto;padding:8px 24px}
+.vub-crumb b{color:var(--navy)} .vub-crumb a{color:var(--navy-mid)}
+/* footer */
+.vub-footer{background:linear-gradient(180deg,#0C2E55,#05192F);color:#AEC0DA;border-top:2px solid var(--gold)}
+.vub-footer .in{max-width:1080px;margin:0 auto;padding:24px;display:flex;gap:14px;align-items:center;justify-content:center;text-align:center;font-size:.95rem}
+.vub-footer img{height:30px;width:auto}
+/* suppress glossary's own floating FAB when the shell provides Help */
+body.vub-has-shell .vub-help-fab{display:none!important}
+.vub-appbar :focus-visible,.vub-footer :focus-visible{outline:3px solid var(--gold-light);outline-offset:3px;border-radius:6px}
+@media (max-width:640px){.vub-appbar .bt{display:none}.vub-textsize .lab{display:none}}
