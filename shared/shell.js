@@ -10,6 +10,7 @@
   var SEAL = '/assets/vub-seal-white.png';
 
   function el(html) { var t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstChild; }
+  function safeTxt(s) { var d = document.createElement('span'); d.textContent = String(s); return d.innerHTML; }
 
   function applyTextSize(v) {
     if (v) document.documentElement.setAttribute('data-text-size', v);
@@ -35,7 +36,7 @@
           '<span class="vub-textsize"><span class="lab">Text Size</span>' +
             '<button type="button" class="minus" aria-label="Decrease text size">−</button>' +
             '<button type="button" class="plus" aria-label="Increase text size">+</button></span>' +
-          '<a class="vub-help" href="#" role="button"><span class="i" aria-hidden="true">?</span> Help</a>' +
+          '<a class="vub-help" href="#"><span class="i" aria-hidden="true">?</span> Help</a>' +
           '<a class="vub-instr" href="/instructors/">For Instructors <span aria-hidden="true">▸</span></a>' +
         '</nav>' +
       '</div></header>');
@@ -51,7 +52,7 @@
   function buildBreadcrumb() {
     var p = global.VUB_PAGE; if (!p || !p.course) return null;
     var html = '<div class="vub-crumb"><div class="in"><a href="/">Home</a> › <b>' +
-      p.course + '</b>' + (p.lesson ? ' › ' + p.lesson : '') + '</div></div>';
+      safeTxt(p.course) + '</b>' + (p.lesson ? ' › ' + safeTxt(p.lesson) : '') + '</div></div>';
     return el(html);
   }
 
@@ -62,6 +63,7 @@
   }
 
   function init() {
+    if (document.querySelector('.vub-appbar')) return;   // already initialized
     document.body.classList.add('vub-has-shell');     // hides glossary's duplicate FAB (see shell.css)
     applyTextSize(readSize());
     var bar = buildAppBar();
