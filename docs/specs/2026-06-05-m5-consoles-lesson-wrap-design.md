@@ -1,7 +1,7 @@
 # Milestone 5 — Course Consoles + Lesson Shell-Wrap + Platform-Wide Dark Mode + Full De-CDN + FR Assessment Port — Design
 
 - **Date:** 2026-06-05 · **Author:** brainstormed with Britt Legg (section-by-section approval; text-only). **Revised** same day to fold in a Codex full-build review.
-- **Status:** Design approved (open questions settled; Sections A–F approved). Awaiting final spec review → implementation plan. **One execution dependency is content-blocked — see §6 / §8.**
+- **Status:** Design approved (open questions settled; Sections A–F approved). Awaiting final spec review → implementation plan. **Revised 2026-06-05 (2nd Codex review): the FR assessment content is already local — F2 is no longer content-blocked; the sole open gate is the data-capture decision (§8).**
 - **Parent spec:** [2026-06-03-vub-platform-buildout-design.md](2026-06-03-vub-platform-buildout-design.md) §5.3 (Level 2 + Level 3), §5.4 (assessment — partially pulled in), §11 (SPA-parity risk).
 - **Predecessor:** M4 complete at `e1c5cce`. Baseline re-verified this session: `npm run build:site` → 123 pages, `npx playwright test` → 8/8.
 - **Review input:** Codex read-only review of the full build (commit `45d6bef`) found 3 High / 3 Medium items; all are reflected below (§2 “Review-driven changes”).
@@ -18,7 +18,7 @@ M5 makes the course/lesson pages adopt the shell + patriotic theme, adds lesson-
 - **Level 2 — Course Consoles (×2):** rebuild `courses/computer-skills/index.html`; create new `courses/financial-readiness/index.html`. Data-driven, uniform brand cards, ① Pre-Test → ② Lessons → ③ Post-Test guide, **no progress/resume UI**.
 - **Level 3 — Lesson surfaces (×9):** shell-wrap + **full re-skin to `brand.css`** of the 8 ICS week decks and the FR SPA; cross-lesson nav; FR SPA de-CDN.
 - **Full platform de-CDN:** remove **every** CDN *asset* link (Google Fonts, FontAwesome, etc.) from **every published page** — incl. `404.html`, all `instructors/*` (incl. `intake.html`), and assessment pages. Self-host fonts (via `brand.css`) + a FontAwesome subset.
-- **FR assessment port:** rebuild the FR pre/post tests from **Google-Form embeds** into **native local, client-side-scored forms with a print-to-PDF result** (no backend; FERPA-safe). *(ICS tests are already local HTML.)*
+- **FR assessment port:** adopt the **existing local FR pre/post tests** (`assessments/pre-test.html` / `post-test.html`, already client-side-scored) as the linked assessments — re-skinned + privacy-hardened — replacing the Google-Form embed wrappers (no backend; FERPA-safe). *(ICS tests are already local HTML too.)*
 - Extended Playwright coverage (dark mode, console data-binding, no-progress, cross-lesson nav, **global** no-CDN + broken-link, FR-console existence, FR local-form scoring).
 
 **Out of scope (deferred):**
@@ -47,8 +47,8 @@ M5 makes the course/lesson pages adopt the shell + patriotic theme, adds lesson-
 |---|---|---|
 | 6 | CDN beyond homepage (404/instructors/FR all use CDN; test only covers `/`) | **Full platform de-CDN now** + a **global** no-CDN test. |
 | 7 | Embedded Google Forms (FR assessments) | **Replace with local client-side-scored forms + print-to-PDF (no backend).** **This supersedes the earlier D4 "assessments out" decision.** |
-| 8 | FR test content source | **Inside the Google Forms — needs export.** F2 (below) is **content-blocked** until the questions + answer key are exported. |
-| 9 | FR scoring/response model | **Client-side score + print-to-PDF; no PII stored/transmitted.** |
+| 8 | FR test content source | **Already local** — `assessments/pre-test.html` / `post-test.html` carry all 20 items + answer key + scoring. Per `SETUP-GOOGLE-FORMS.md`, the Forms were *generated from* these → the Forms are a **parity reference, not the source**. F2 is **not content-blocked** (corrected by the 2nd Codex review). |
+| 9 | FR scoring/response model | **Client-side score + print-to-PDF; no PII stored/transmitted.** Guard: the ported forms must **not** persist student name/answers to `localStorage`/`sessionStorage` (the existing local tests do — fixed in §6-F2); CSV-download decision in §6-F2. |
 
 ### Spec refinements applied (from the review)
 - **FR progress vs "JS untouched":** FR keeps routing/calculators untouched **but its `VubProgress` resume calls are removed** (like the decks' C3a) — resolves the contradiction.
@@ -56,6 +56,14 @@ M5 makes the course/lesson pages adopt the shell + patriotic theme, adds lesson-
 - **Skip-link a11y:** each deck re-skin **wraps content in `<main id="vub-main">`** (some decks start with bare `<body>`; the shell only assigns the id when a `<main>` exists).
 - **Dark-mode wording:** "platform-wide" = every page that adopts `.vub-brand` tokens; a page not yet tokenized keeps its current styling until tokenized.
 - **Guards:** broaden tests + `REQUIRED_FILES` (see §7-E).
+
+### 2nd Codex review (of `f0841c7`) — folded in 2026-06-05
+All 5 findings verified against the repo and accepted (3 High / 2 Medium):
+1. **F3 "content-block" was a false premise** — FR content is already local (row 8 corrected; F2 buildable now).
+2. **No-CDN exception was unsafe** — `courses.json` linked the Google-embed `*-form.html` wrappers; the sweep is now strict with no exception (§7-E2).
+3. **"No PII" needs a guard** — the existing local tests write the student name to `localStorage` + CSV; explicit storage guard added (§6-F2 / §7-E2).
+4. **Hash-route existence check** — `lessons[].path` `#moduleN` needs section-activation testing, not just file existence (§7-E3).
+5. **FA subset coverage guard** — verify the self-hosted subset covers every published `fa-*` class (§7-E3).
 
 ---
 
@@ -125,8 +133,8 @@ Each Level-3 surface: `class="vub-brand"` on `<html>`; link `/shared/brand.css` 
 
 ### F. Full platform de-CDN + FR assessment port
 - **F1. De-CDN every published page** (Decision #6): remove all CDN *asset* links from `404.html`, `instructors/*` (incl. `intake.html`), assessment pages, and any deck/console still referencing one. Fonts → `brand.css`; icons → self-hosted FA subset. Enforced by the global no-CDN test (§7-E2).
-- **F2. Port FR assessments** (Decision #7/9): rebuild FR **pre/post** tests as native local HTML forms mirroring the existing ICS local-test / `assessment-template` pattern — **client-side auto-score → results screen → print-to-PDF**; **no backend, no PII stored or transmitted**. The console 3-step guide links to these new local pages (repoint `courses.json` `preTest`/`postTest` for FR once built).
-- **F3. ⛔ Dependency gate (content-blocked, Decision #8):** F2 needs the FR **question text, options, and correct-answer key exported from the live Google Forms**. Until delivered, **F2 is planned-but-not-built**; all other M5 work (A–E, D, F1) proceeds. **The milestone cannot fully close until this content arrives.**
+- **F2. Adopt + harden the existing local FR assessments** (Decision #7/9): the FR **pre/post** tests already exist as native local HTML (`assessments/pre-test.html` / `post-test.html`) with **client-side auto-score → results screen → print-to-PDF**. Work = (a) **re-skin** to `brand.css` tokens; (b) **privacy guard** — remove the `localStorage['vub_financial_*_results']` name/answer writes (`pre-test.html` ~L1493 + the post-test twin) so **no PII is stored**; (c) **decide CSV** — `downloadResults()` exports `student_name` + answers to a *user-initiated local* file (keep as the student's own download — no transmission — or cut); (d) **repoint `courses.json`** FR `preTest`/`postTest` from `pre-test-form.html`/`post-test-form.html` → the local `.html` tests; (e) **retire the Google-embed wrappers** (`*-form.html`, `submit-tests.html`) from the linked/published set — *unless §8's data-capture decision keeps a Forms capture path*. The console 3-step guide links the local pages.
+- **F3. Open gate = data-capture, NOT content (Decision #8, corrected):** the FR content is already local (§2 row 8) → **no content block; F2 builds in M5.** The remaining gate is a **stakeholder decision (§8):** the Google Forms capture every submission to a central **Sheet**; local-only forms capture nothing centrally. Confirm the program does **not** depend on that Sheet (TRIO/grant/CFDA reporting; pre→post evidence) before retiring the Forms. An optional one-time **parity reconcile** (diff the live Forms against the local items, in case a Form was hand-edited after generation) is a nicety, not a blocker.
 - **F4. Polish deferred:** the §5.4 richer report template, instructor-as-field, improvement block, and §5.5 certificate stay deferred — M5 = functional test + basic printable result.
 
 ---
@@ -140,12 +148,12 @@ Each Level-3 surface: `class="vub-brand"` on `<html>`; link `/shared/brand.css` 
 - Console data-driven (card count == `courses.json` `lessons[]`), **no** progress UI, 3-step guide links resolve.
 - **FR console exists; global broken-link check (no dead links anywhere).**
 - Deck shows breadcrumb + correct "Next" chip and **opens at slide 1**.
-- **Global no-CDN sweep across ALL published pages** (every page emits zero external asset requests) — replaces the homepage-only check. *(While F2 is content-blocked, the FR assessment pages still embed Google Forms + CDN; they're listed as the single known-open exception so the suite stays green, and the exception is removed when F2 lands — at which point the sweep is fully strict.)*
+- **Global no-CDN sweep across ALL published pages** (every page emits zero external asset requests) — replaces the homepage-only check, **strict from the start with no exceptions.** Every page reachable from a learner/instructor route must emit zero external asset/iframe requests; the Google-embed wrappers (`*-form.html`, `submit-tests.html`) are removed from the linked/published set in F2 (the local `.html` tests replace them). If §8's data-capture decision keeps a Forms path, it is an explicit instructor-only, documented out-of-band link — never a learner asset request.
 - FR SPA hash routing still works (smoke).
-- **FR local forms: known answers → expected score; print-to-PDF result renders.** *(Runs once F2 is unblocked.)*
+- **FR local forms: known answers → expected score; print-to-PDF result renders; scoring writes NO student name/answers to `localStorage`/`sessionStorage`** (PII guard, Finding 3).
 - M4 homepage + instructors still pass, incl. dark mode.
 
-**E3. Build:** `build-site.js` auto-publishes new pages. **Add self-hosted FontAwesome assets + FR local-form assets to `REQUIRED_FILES`;** add a build/test check that every `courses.json` target (`entry`/`preTest`/`postTest`/`lessons[].path`) exists. Gate: `npm run build:site` → `npx playwright test`.
+**E3. Build:** `build-site.js` auto-publishes new pages. **Add self-hosted FontAwesome assets + FR local-form assets to `REQUIRED_FILES`;** add a build/test check that every `courses.json` target (`entry`/`preTest`/`postTest`/`lessons[].path`) exists — **and for hash targets (`…#moduleN`) a data-driven Playwright check that the hash activates the intended FR SPA section** (file existence alone misses a renamed/removed module — Finding 4). **Font-Awesome coverage guard:** a build/test step extracts every published `fa-*` class and fails if the self-hosted subset (CSS + font) doesn't cover them (Finding 5). Gate: `npm run build:site` → `npx playwright test`.
 
 **E4. Execution sequence (single spec; plan orders safest-first):**
 1. **Shared layer** — `brand.css` dark tokens + `shell.js` (dark toggle, back-compat cross-lesson nav) + `courses.json` touches → re-verify M4 homepage/instructors in dark.
@@ -161,7 +169,7 @@ Feature branch `feat/m5-consoles-lesson-wrap`; one commit per logical layer; **s
 ---
 
 ## 8. Risks / watch-items
-- **⛔ FR assessment content-block (F3):** schedule dependency on the Google-Form export; F2 is isolated so it doesn't block steps 1–5.
+- **~~⛔ FR assessment content-block~~ (retired):** the 2nd Codex review confirmed the FR content is already local (§2 row 8) — there is no content-export dependency. F2 builds in M5; the only FR gate is the data-capture decision below.
 - **📋 Data-capture regression (raise with stakeholder):** FR Google Forms currently capture responses to a Google **Sheet** (a central record). Client-side-only scoring **captures nothing centrally** — if TRIO/grant/CFDA reporting or pre→post evidence relies on those records, this is lost, and a record-of-evidence backend is **deferred (§9)**. Confirm the program doesn't depend on the Sheet before retiring the Forms.
 - **FR layout reconcile (D3):** fixed sidebar vs injected app bar — verify mobile hamburger + offset in both themes.
 - **Dark-mode contrast:** every reused brand hue must clear AAA on dark surfaces.
@@ -172,4 +180,4 @@ Feature branch `feat/m5-consoles-lesson-wrap`; one commit per logical layer; **s
 Assessment report/certificate polish (§5.4/§5.5); central response-capture backend; GitHub repo + push; Netlify retarget; `vublessons.com` domain/TLS; archiving old repos. All gated behind explicit confirmation.
 
 ---
-*Design approved section-by-section 2026-06-05; revised same day to incorporate the Codex full-build review (de-CDN expansion + FR assessment port + 5 refinements). Next: final spec review → `writing-plans`.*
+*Design approved section-by-section 2026-06-05; revised same day for the 1st Codex full-build review (de-CDN expansion + FR assessment port + 5 refinements), then again for the 2nd Codex review (FR content confirmed local → F3 de-blocked; strict no-CDN sweep; PII guard; hash-route + FA-coverage guards). Next: final spec review → `writing-plans`.*
