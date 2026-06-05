@@ -10,6 +10,8 @@
     "test": "npx playwright test"
   },
   "devDependencies": {
+    "@fontsource/playfair-display": "^5.2.8",
+    "@fontsource/source-sans-3": "^5.2.9",
     "@playwright/test": "^1.58.2",
     "serve": "^14.2.6"
   }

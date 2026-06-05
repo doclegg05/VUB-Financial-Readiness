@@ -1,25 +1,35 @@
+/* ── Self-hosted fonts (offline; no CDN) ── */
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/playfair-display-latin-700-normal.woff2') format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:800;font-display:swap;src:url('/assets/fonts/playfair-display-latin-800-normal.woff2') format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:900;font-display:swap;src:url('/assets/fonts/playfair-display-latin-900-normal.woff2') format('woff2')}
+@font-face{font-family:'Source Sans 3';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/source-sans-3-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Source Sans 3';font-style:normal;font-weight:600;font-display:swap;src:url('/assets/fonts/source-sans-3-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Source Sans 3';font-style:normal;font-weight:700;font-display:swap;src:url('/assets/fonts/source-sans-3-latin-700-normal.woff2') format('woff2')}
+
 /* shared/brand.css — VUB design tokens (single source of truth).
-   Navy sampled from the official seal ink (#312C4C). Targets WCAG AAA for body text. */
+   Site chrome uses Old Glory Blue (#0A3161). Seal MARK keeps its own indigo. Targets WCAG AAA for body text. */
 :root {
-  /* Brand navy (from the seal) */
-  --navy:        #312C4C;   /* primary brand / body text on light (AAA on white & cream) */
-  --navy-deep:   #211D38;   /* hero / footer backgrounds */
-  --navy-mid:    #3D3760;
-  --navy-light:  #4A4470;   /* hover states on dark */
+  /* Brand blue — Old Glory Blue (site chrome). Seal MARK keeps its own indigo. */
+  --navy:        #0A3161;
+  --navy-deep:   #07223F;
+  --navy-mid:    #123E72;
+  --navy-light:  #2C5AA0;
+  --blue-soft:   #5E86C4;
+  /* Old Glory Red (CTA/accents) */
+  --red:         #B31942;
+  --red-bright:  #C61F4C;
+  --red-dark:    #8B1432;
   /* Gold accents — large text / accents ONLY, never small body */
   --gold:        #C9A227;
   --gold-light:  #E4C45A;
   --gold-pale:   #F5E9C0;
-  /* Patriotic accent */
-  --crimson:     #B31942;
-  --crimson-dark:#8B1432;
   /* Neutrals / surfaces */
   --white:       #FFFFFF;
   --cream:       #FDF9F4;   /* soft page bg (kinder to older eyes than stark white) */
   --off-white:   #F5F7FA;
-  --ink:         #1A2230;   /* default body text (AAA on cream) */
-  --muted:       #51606E;   /* secondary text — keep >=4.5:1 on cream */
-  --border:      #D8D0C0;
+  --ink:         #16243A;   /* default body text (AAA on cream) */
+  --muted:       #46566D;   /* secondary text — keep >=4.5:1 on cream */
+  --border:      #E2DECF;
   /* Status (icon + text always accompany color) */
   --success:#1E7F44; --danger:#C2283C; --warning:#B5840B; --info:#1A6E86;
   /* Focus */
@@ -64,3 +74,10 @@ html[data-text-size="xl"]  { --fs-base: 22px; --fs-slide: 32px; --lh: 1.85; }
 .vub-brand h1,.vub-brand h2,.vub-brand h3 { font-family: var(--font-display); color: var(--navy); line-height: 1.15; }
 
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* ── Shared patriotic motifs (reusable site-wide) ── */
+.vub-tricolor{height:8px;background:linear-gradient(90deg,var(--red) 0 33.3%,var(--white) 33.3% 66.6%,var(--navy) 66.6% 100%)}
+.vub-bunting{height:30px;background-repeat:repeat-x;background-position:center top;background-size:64px 64px;
+  background-image:radial-gradient(circle at 50% 0,var(--navy) 0 11px,var(--white) 11px 16px,var(--red) 16px 23px,var(--white) 23px 27px,var(--navy) 27px 31px,transparent 31px);
+  filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
+@media (prefers-reduced-motion:reduce){.vub-anim{animation:none!important}}
