@@ -14,8 +14,9 @@
   --navy-deep:   #07223F;
   --navy-mid:    #123E72;
   --navy-light:  #2C5AA0;
-  --blue-soft:   #5E86C4;
+  --blue-soft:   #5E86C4;   /* ~3.1:1 on cream — large text / accents ONLY, never small body */
   /* Old Glory Red (CTA/accents) */
+  /* --red replaces the former --crimson; legacy pages that still inline --crimson migrate to --red during their M4/M5/M7 re-skin. */
   --red:         #B31942;
   --red-bright:  #C61F4C;
   --red-dark:    #8B1432;
@@ -50,8 +51,8 @@
   --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem;
   --space-6:1.5rem; --space-8:2rem; --space-12:3rem;
   --radius: 12px; --radius-sm: 6px;
-  --shadow-card: 0 8px 40px rgba(33,29,56,.12), 0 2px 8px rgba(33,29,56,.06);
-  --shadow-hover:0 20px 60px rgba(33,29,56,.20), 0 4px 16px rgba(33,29,56,.10);
+  --shadow-card: 0 8px 40px rgba(10,49,97,.12), 0 2px 8px rgba(10,49,97,.06);
+  --shadow-hover:0 20px 60px rgba(10,49,97,.20), 0 4px 16px rgba(10,49,97,.10);
 
   /* Accessibility */
   --tap-min: 44px;    /* min interactive target */
@@ -80,4 +81,3 @@ html[data-text-size="xl"]  { --fs-base: 22px; --fs-slide: 32px; --lh: 1.85; }
 .vub-bunting{height:30px;background-repeat:repeat-x;background-position:center top;background-size:64px 64px;
   background-image:radial-gradient(circle at 50% 0,var(--navy) 0 11px,var(--white) 11px 16px,var(--red) 16px 23px,var(--white) 23px 27px,var(--navy) 27px 31px,transparent 31px);
   filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
-@media (prefers-reduced-motion:reduce){.vub-anim{animation:none!important}}
