@@ -66,8 +66,15 @@
     if (document.querySelector('.vub-appbar')) return;   // already initialized
     document.body.classList.add('vub-has-shell');     // hides glossary's duplicate FAB (see shell.css)
     applyTextSize(readSize());
+    // Skip-to-content link must be the very first body child for keyboard/screen-reader users
+    var skip = el('<a class="vub-skip" href="#vub-main">Skip to main content</a>');
+    document.body.insertBefore(skip, document.body.firstChild);
+    // App bar inserted right after the skip link
     var bar = buildAppBar();
-    document.body.insertBefore(bar, document.body.firstChild);
+    skip.insertAdjacentElement('afterend', bar);
+    // Ensure main element has the skip target id
+    var main = document.querySelector('main');
+    if (main && !main.id) main.id = 'vub-main';
     var crumb = buildBreadcrumb();
     if (crumb) bar.insertAdjacentElement('afterend', crumb);
     document.body.appendChild(buildFooter());

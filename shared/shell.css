@@ -1,4 +1,6 @@
 /* shared/shell.css — injected app bar / breadcrumb / footer. Theme via brand.css tokens. */
+.vub-skip{position:absolute;left:8px;top:-48px;z-index:60;background:var(--gold);color:var(--navy-deep);font-weight:700;padding:10px 16px;border-radius:8px;text-decoration:none;transition:top .15s}
+.vub-skip:focus{top:8px}
 .vub-appbar{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,#0C2E55,var(--navy-deep));border-bottom:2px solid var(--gold);box-shadow:0 2px 18px rgba(0,0,0,.35)}
 .vub-appbar .in{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:16px;height:70px}
 .vub-appbar a.home{display:flex;align-items:center;gap:12px;text-decoration:none}
