@@ -224,6 +224,14 @@
       display: block;
     }
 
+    /* Only the active slide shows. .title-slide/.completion-slide use display:flex,
+       which has equal specificity to .slide{display:none} and would otherwise win
+       (later in source) and stay visible on every slide. Hide non-active explicitly. */
+    .slide:not(.active) { display: none; }
+
+    .slide.active.title-slide,
+    .slide.active.completion-slide { display: flex; }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
