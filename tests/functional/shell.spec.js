@@ -10,10 +10,42 @@ test('app bar is injected with seal-home link and controls', async ({ page }) =>
 
 test('Text Size + persists across reload via data-text-size', async ({ page }) => {
   await page.goto('/');
+  const before = await page.locator('body').evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
   await page.locator('.vub-textsize button.plus').click();
   await expect(page.locator('html')).toHaveAttribute('data-text-size', 'lg');
+  const after = await page.locator('body').evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+  expect(after).toBeGreaterThan(before + 2);
+  await page.locator('.vub-textsize button.plus').click();
+  await expect(page.locator('html')).toHaveAttribute('data-text-size', 'xl');
   await page.reload();
-  await expect(page.locator('html')).toHaveAttribute('data-text-size', 'lg');
+  await expect(page.locator('html')).toHaveAttribute('data-text-size', 'xl');
+});
+
+test('Text Size is available on standalone course pages and visibly scales text', async ({ page }) => {
+  await page.goto('/courses/computer-skills/weeks/week-02/handouts/windows-workshop.html');
+  await expect(page.locator('.vub-textsize')).toBeVisible();
+  const target = page.locator('.goal-box li').first();
+  const before = await target.evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+  await page.locator('.vub-textsize button.plus').click();
+  const afterOne = await target.evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+  await page.locator('.vub-textsize button.plus').click();
+  const afterTwo = await target.evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+  expect(afterOne).toBeGreaterThan(before + 2);
+  expect(afterTwo).toBeGreaterThan(afterOne + 2);
+});
+
+test('computer skills dashboard links resolve from no-slash route', async ({ page }) => {
+  await page.goto('/courses/computer-skills');
+  const weekFour = page.locator('.lesson-card[data-theme="word"] .lesson-actions a').first();
+  await expect(weekFour).toHaveAttribute('href', '/courses/computer-skills/weeks/week-04/presentation.html');
+  const response = await page.request.get('/courses/computer-skills/weeks/week-04/presentation.html');
+  expect(response.status()).toBeLessThan(400);
+});
+
+test('legacy computer-skills week route redirects to canonical presentation', async ({ page }) => {
+  await page.goto('/courses/weeks/week-04/presentation');
+  await page.waitForURL('**/courses/computer-skills/weeks/week-04/presentation', { timeout: 5000 });
+  await expect(page.locator('body')).not.toContainText('Page Not Found');
 });
 
 test('Help opens the glossary modal and the duplicate FAB is hidden', async ({ page }) => {
