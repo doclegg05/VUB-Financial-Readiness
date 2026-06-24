@@ -5,6 +5,14 @@
 **Status:** Approved design → ready for implementation planning
 **Course id:** `digital-literacy-1` · **Progress key:** `dl1` · **Catalog category:** Digital Literacy
 
+**Revision history**
+- **v2 (2026-06-24):** revised per Codex design review — reframed knowledge-vs-proficiency (§1),
+  completed Week 4 sub-objective coverage (§5), hardened FERPA/localStorage for shared lab PCs (§7),
+  made the homepage `emphasis` data-driven across all three courses + genericized hero copy + made the
+  catalog test data-derived (§9, §11), reframed the intro video as optional offline-safe enrichment
+  (§6, §11, §12), and added the verbatim objective text as **Appendix A** (§3, §15).
+- **v1 (2026-06-24):** initial approved design.
+
 ---
 
 ## 1. Overview & framing
@@ -20,14 +28,19 @@ future course).
   seven IC3 GS6 Level 1 objective domains; **Week 5 is a Review & Testing day** (cumulative recap +
   Post-Test, no new content).
 - **Alignment, not certification claim:** content maps to the **official IC3 GS6 Level 1 objective
-  domains** (Certiport, released 2020-05-14). The public title is **"Digital Literacy — Level 1"** to
-  avoid implying official Certiport certification while preserving the IC3 progression.
-- **Knowledge-based cert, hands-on course:** the IC3 GS6 Level 1 exam is knowledge-based
-  ("Explain / Identify / Describe / Recognize"), not a hands-on software exam. This course keeps the
-  cert's knowledge objectives accurate **and adds guided hands-on labs** on the lab PCs to cement the
-  concepts (andragogy: experiential, problem-centered).
+  domains** (Certiport, released 2020-05-14; reproduced verbatim in Appendix A). The public title is
+  **"Digital Literacy — Level 1"** to avoid implying official Certiport certification while preserving
+  the IC3 progression.
+- **Objectives span knowledge *and* basic proficiency:** the IC3 GS6 Level 1 objectives mix
+  conceptual verbs ("Explain / Identify / Describe / Recognize") with **proficiency/implementation**
+  verbs — e.g. 4.1.1–4.1.2 "Display proficiency in creating basic documents/presentations",
+  4.2.4 "Implement appropriate online citations", 4.3.2 "Implement file management principles and naming
+  conventions", 5.2.1 "Implement digital interactions", 5.2.3 "Demonstrate the use of inclusive
+  language". The course therefore pairs concept slides with **guided hands-on labs that directly
+  exercise the proficiency objectives** (andragogy: experiential, problem-centered). The lab-to-
+  objective map is called out per week in §5.
 - **Additive & non-destructive:** the existing two courses, shared chrome, and build are not modified
-  except for small, surgical homepage-wiring edits (Section 9).
+  except for small, surgical homepage-wiring edits (§9).
 
 ### Relationship to the existing "Intermediate Computer Skills" course
 The user described this as a "condensed version of Intermediate Computer Skills." In practice, IC3 GS6
@@ -44,26 +57,33 @@ ladder.
 ### Goals
 1. A fully functional, accessible course matching the look, feel, and functionality of the existing
    courses (with quality improvements where reasonable).
-2. Complete, **provable** coverage of all 7 IC3 GS6 Level 1 objective domains (traceability in §3).
-3. Pre-Test (Week 1) and Post-Test (Week 5), each as interactive self-test + printable + optional
-   instructor-controlled capture.
-4. Per-week **guided hands-on labs** + printable quick-references + in-browser knowledge checks.
-5. One **Remotion** course-intro explainer video (~2–3 min), scaffolded for per-week videos later.
-6. The course appears as a third card on the homepage catalog, data-driven via `courses.json`.
+2. Complete, **provable** coverage of all 7 IC3 GS6 Level 1 objective domains down to the
+   sub-objective (traceability §3 + verbatim Appendix A).
+3. Pre-Test (Week 1) and Post-Test (Week 5), each as **anonymous** interactive self-test + printable +
+   optional instructor-controlled capture (§7).
+4. Per-week **guided hands-on labs** (exercising the proficiency objectives) + printable
+   quick-references + in-browser knowledge checks.
+5. One **Remotion** course-intro explainer video (~2–3 min) as **optional, offline-safe enrichment**,
+   scaffolded for per-week videos later.
+6. The course appears as a third card on the homepage catalog, data-driven via `courses.json`, without
+   breaking existing pages or tests.
 
 ### Non-goals (YAGNI)
 - No official Certiport certification, exam voucher, or proctoring integration.
 - No Level 2 / Level 3 content this pass (future courses).
 - No per-week videos this pass (scaffold only; one intro video produced).
 - No new shared-framework abstractions; reuse `/shared/*` and the established per-course patterns.
-- No student PII stored in the repository (see §7 FERPA note).
+- No student PII stored in the repository or persisted on shared lab machines (§7).
+- No retrofit of the existing two courses' localStorage/name behavior (flagged as an observation in
+  §7, but out of scope here — surgical/additive).
 
 ---
 
-## 3. IC3 GS6 Level 1 objective traceability (authoritative)
+## 3. IC3 GS6 Level 1 objective traceability
 
-Source: **IC3 GS6 Level 1 — Objective Domains, Certiport (A Pearson VUE business), released 2020-05-14.**
-Every numbered objective maps to exactly one content week (W5 is review of all).
+Source: **IC3 GS6 Level 1 — Objective Domains, Certiport (A Pearson VUE business), released 2020-05-14**
+(verbatim text in **Appendix A**). The table below maps each sub-area to its content week; the
+specific sub-objectives Codex flagged as easy-to-drop are called out explicitly in §5.
 
 | # | Objective domain / area | Week |
 |---|---|---|
@@ -77,26 +97,26 @@ Every numbered objective maps to exactly one content week (W5 is review of all).
 | **2. Digital Citizenship** | | |
 | 2.1 | Create & manage a digital identity (personal data, PII, privacy/security) | W4 |
 | 2.2 | Cultivate/manage/protect digital reputation (permanence, legal/ethical) | W4 |
-| 2.3 | Respond to inappropriate digital behavior/content (impact, validity of info, anonymity, nonresponse) | W4 |
+| 2.3 | Respond to inappropriate content (2.3.1 negative-comm impact, 2.3.2 validity, 2.3.3 anonymity, 2.3.4 nonresponse) | W4 |
 | **3. Information Management** | | |
 | 3.1 | Use & refine criteria for online searches (define need, relevant vs irrelevant, keep sources) | W2 |
 | 3.2 | Search within digital content (find in a file, find on a webpage — Ctrl+F) | W2 |
 | 3.3 | Copyright & licensing (public domain, Creative Commons) | W2 |
 | **4. Content Creation** | | |
-| 4.1 | Create basic documents & presentations | W3 |
-| 4.2 | Referencing & attribution (define, purpose, locate sources, cite in a document) | W3 |
-| 4.3 | Save & back up work (when/where to back up, file management & naming conventions) | W3 |
+| 4.1 | Create basic documents & presentations *(proficiency)* | W3 |
+| 4.2 | Referencing & attribution (define, purpose, locate sources, 4.2.4 implement citation *(proficiency)*) | W3 |
+| 4.3 | Save & back up work (when/where, 4.3.2 file management & naming *(proficiency)*) | W3 |
 | 4.4 | Fundamental printing concepts (orientation, double-sided, settings, methods) | W3 |
 | **5. Communication** | | |
 | 5.1 | Express yourself through digital means (where to post, platform guidelines, acceptable-use policies) | W3 |
-| 5.2 | Interact with others (digital interactions, effective vs ineffective, inclusive language, email response options) | W3 |
+| 5.2 | Interact with others (5.2.1 implement interactions, 5.2.2 effective vs ineffective, 5.2.3 inclusive language, 5.2.4 email response options) | W3 |
 | **6. Collaboration** | | |
 | 6.1 | Identify digital collaboration concepts (benefits, synchronous vs asynchronous, review/feedback) | W3 |
 | 6.2 | Digital etiquette standards (written, visual) | W3 |
 | **7. Safety & Security** | | |
 | 7.1 | Describe digital security threats | W4 |
 | 7.2 | Protect devices & content (secure passwords, reset password, lock device, clear browser settings) | W4 |
-| 7.3 | Data-collection technology (tracking, security concerns, private browsing) | W4 |
+| 7.3 | Data-collection technology (7.3.1–7.3.2 tracking, **7.3.3 stored-on-device risks**, 7.3.4 private browsing) | W4 |
 | 7.4 | Health risks (mental, physical/ergonomics) | W4 |
 
 ---
@@ -121,47 +141,55 @@ Domain 1 receives ~1.5 weeks (all of W1 + part of W2).
 
 Each content week = a 16–20 slide `presentation.html`, an instructor `syllabus.html` with a 2-hour
 timing breakdown, one guided `*-lab.html`, and one printable `*-quick-reference.html`. Each
-presentation ends with a knowledge-check and a handout-prompt slide.
+presentation ends with a knowledge-check and a handout-prompt slide. **Lab → objective** mappings are
+called out so proficiency objectives are demonstrably exercised.
 
 ### Week 1 — Inside the Computer *(Pre-Test)*
-- **Slides:** input/output devices & ports; cables & connectors; computing devices (desktop/laptop/
-  tablet/phone); memory vs storage; software (system vs application; proprietary vs open source;
-  installing from trusted sources); operating systems (Windows vs macOS vs mobile).
+- **Slides:** input/output devices & ports; cables & connectors (1.2); computing devices
+  (desktop/laptop/tablet/phone); memory vs storage (1.4); software — system vs application;
+  proprietary vs open source; installing from trusted sources (1.3); operating systems — Windows vs
+  macOS vs mobile (1.5).
 - **Lab — "Meet Your Computer":** identify ports & peripherals on the lab PC; open *This PC*/*Settings*
-  to read RAM & storage; list installed apps; identify the OS and version.
+  to read RAM & storage; list installed apps; identify the OS and version. *(Exercises 1.2, 1.4, 1.5.)*
 - **Quick-ref:** Parts of a computer + ports/connectors card.
 
 ### Week 2 — Getting Online
-- **Slides:** OS terms & the desktop; web browsers (address bar, tabs, bookmarks, history); accessing &
-  navigating digital environments; networking (wired/Wi-Fi/cellular; routers/modems/ISP; "is my device
-  connected?"; basic troubleshooting); effective searching (define your need, judge relevant vs
-  irrelevant results, keep source references); **Ctrl+F** find-in-page/file; copyright, public domain &
-  Creative Commons.
+- **Slides:** OS terms & the desktop; web browsers — address bar, tabs, bookmarks, history (1.1);
+  accessing & navigating digital environments; networking — wired/Wi-Fi/cellular; routers/modems/ISP;
+  "is my device connected?"; basic troubleshooting (1.6); effective searching — define your need,
+  judge relevant vs irrelevant results, keep source references (3.1); **Ctrl+F** find-in-page/file
+  (3.2); copyright, public domain & Creative Commons (3.3).
 - **Lab — "Search & Connect":** browser navigation drills; check Wi-Fi status & signal; a connectivity
   troubleshooting checklist; a guided web-search task with source capture; Ctrl+F practice.
+  *(Exercises 1.1, 1.6.5–1.6.6, 3.1.3, 3.2.)*
 - **Quick-ref:** Browser + Wi-Fi troubleshooting + smart-search card.
 
 ### Week 3 — Creating & Communicating
-- **Slides:** create a basic document & a basic presentation; referencing/attribution & citations; save
-  & back up (where/when, the 3-2-1 idea at a basic level); file management & naming conventions;
-  printing (portrait vs landscape, double-sided, common print settings, print methods); communication
-  (where/how to post, acceptable-use policies, inclusive language; **email response options** —
-  reply / reply-all / forward / Bcc); collaboration (benefits, synchronous vs asynchronous, giving
-  feedback, written & visual etiquette).
-- **Lab — "Make, Save & Share":** create + name + save a document with a good filename; set print
-  options (no printing required); practice email response options on a sample thread; a short
-  reply-all etiquette scenario.
+- **Slides:** create a basic document & a basic presentation (4.1); referencing/attribution &
+  citations (4.2); save & back up — where/when, the 3-2-1 idea at a basic level (4.3.1); file
+  management & naming conventions (4.3.2); printing — portrait vs landscape, double-sided, common
+  settings, print methods (4.4); communication — where/how to post, acceptable-use policies (5.1),
+  inclusive language (5.2.3); **email response options** — reply / reply-all / forward / Bcc (5.2.4);
+  effective vs ineffective interaction (5.2.2); collaboration — benefits, synchronous vs asynchronous,
+  giving feedback (6.1), written & visual etiquette (6.2).
+- **Lab — "Make, Save & Share":** create + name + save a document with a good filename; add a simple
+  citation; set print options (no printing required); practice email response options on a sample
+  thread; a short reply-all etiquette + inclusive-language scenario.
+  *(Exercises proficiency objectives 4.1.1, 4.2.4, 4.3.2, 5.2.1, 5.2.3, 5.2.4.)*
 - **Quick-ref:** File-naming + print-settings + email-etiquette card.
 
 ### Week 4 — Citizenship & Safety
-- **Slides:** digital identity (managing personal data, PII, privacy/security); reputation &
-  permanence; legal/ethical behavior; responding to inappropriate content; assessing the validity of
-  online information; security threats; **strong passwords/passphrases**, resetting a password, locking
-  a device, clearing browser data; data-collection & tracking, private-mode browsing; health risks
-  (mental wellbeing online; physical/ergonomics).
-- **Lab — "Lock It Down":** build a strong passphrase; set a screen lock; clear browser history/cookies;
-  open a private window; evaluate a source for validity; a privacy/identity self-audit checklist; a
-  desk ergonomics check.
+- **Slides:** digital identity — managing personal data, PII, privacy/security (2.1); reputation &
+  permanence; legal/ethical behavior (2.2); **responding to inappropriate content** — the impact of
+  negative digital communication (2.3.1), assessing the validity of online information (2.3.2), the
+  importance of online anonymity (2.3.3), and the value of nonresponse (2.3.4); security threats (7.1);
+  **strong passwords/passphrases**, resetting a password, locking a device, clearing browser data
+  (7.2); data-collection & tracking, **risks of information stored on a device** (7.3.3), private-mode
+  browsing (7.3.4); health risks — mental wellbeing online; physical/ergonomics (7.4).
+- **Lab — "Lock It Down":** build a strong passphrase; set a screen lock; clear browser history/cookies
+  (7.2.3–7.2.4); open a private window (7.3.4); evaluate a source for validity (2.3.2); a
+  privacy/identity self-audit checklist (2.1); a "what's stored on this shared PC?" check (7.3.3); a
+  desk ergonomics check (7.4.2). *(Covers the full 2.3 and 7.3 sub-objective sets.)*
 - **Quick-ref:** Password & security checklist + spot-fake-info + ergonomics card.
 
 ### Week 5 — Review & Testing Day *(Post-Test)*
@@ -171,53 +199,45 @@ presentation ends with a knowledge-check and a handout-prompt slide.
   preview).
 - **Cumulative study-guide handout:** one-page-per-domain summary for exam prep (complements
   `study-resources/`).
-- **Post-Test:** interactive + printable + optional capture wrapper.
+- **Post-Test:** anonymous interactive + printable + optional capture wrapper.
 
 ---
 
 ## 6. File architecture
 
-Mirrors the sibling `courses/computer-skills/` layout exactly for maintainability.
+A **deliberate hybrid** of the two existing courses (not an exact mirror of either):
+- **From `computer-skills`:** the per-week console (`index.html`), the `weeks/week-XX/` layout, and the
+  inline slide-engine + `/shared/progress.js` pattern.
+- **From `financial-readiness`:** the root **`assessments/`** folder (interactive + printable + form
+  wrappers) and the root **`study-resources/`** folder (flashcards + quiz).
 
 ```
 courses/digital-literacy-1/
-├── index.html                       # course console (progressKey "dl1")
+├── index.html                       # course console (progressKey "dl1") — ICS pattern
 ├── syllabus-overview.html           # 5-week outline + IC3 domain map
 ├── css/
 │   └── slides.css                   # course-owned slide styles (seeded from computer-skills)
-├── assessments/
-│   ├── pre-test.html                # interactive local self-test (~20 Q across 7 domains)
+├── assessments/                     # FR pattern
+│   ├── pre-test.html                # ANONYMOUS interactive self-test (~20 Q across 7 domains)
 │   ├── pre-test-printable.html
 │   ├── pre-test-form.html           # optional Google-Form embed wrapper (instructor-configured)
 │   ├── post-test.html
 │   ├── post-test-printable.html
 │   └── post-test-form.html
-├── study-resources/
+├── study-resources/                 # FR pattern
 │   ├── flashcards.html              # key terms across all 7 domains
 │   └── quiz.html                    # self-check practice quiz
-└── weeks/
-    ├── week-01/
-    │   ├── presentation.html
-    │   ├── syllabus.html
-    │   └── handouts/
-    │       ├── meet-your-computer-lab.html
-    │       └── computer-parts-quick-reference.html
-    ├── week-02/  (search-connect-lab.html, browser-wifi-quick-reference.html)
-    ├── week-03/  (make-save-share-lab.html, files-print-email-quick-reference.html)
-    ├── week-04/  (lock-it-down-lab.html, security-ergonomics-quick-reference.html)
-    └── week-05/
-        ├── presentation.html        # review-game recap
-        ├── syllabus.html
-        └── handouts/
-            └── level-1-study-guide.html
+└── weeks/                           # ICS pattern
+    ├── week-01/ (presentation.html, syllabus.html, handouts/meet-your-computer-lab.html, handouts/computer-parts-quick-reference.html)
+    ├── week-02/ (… search-connect-lab.html, browser-wifi-quick-reference.html)
+    ├── week-03/ (… make-save-share-lab.html, files-print-email-quick-reference.html)
+    ├── week-04/ (… lock-it-down-lab.html, security-ergonomics-quick-reference.html)
+    └── week-05/ (presentation.html [review game], syllabus.html, handouts/level-1-study-guide.html)
 
 video/digital-literacy-1/            # TOP-LEVEL Remotion source — NOT published by build
 ├── package.json
 ├── remotion.config.ts
-└── src/
-    ├── Root.tsx
-    ├── Intro.tsx                     # ~2–3 min Level 1 overview composition
-    └── components/
+└── src/ (Root.tsx, Intro.tsx ~2–3 min, components/)
 ```
 
 **Nesting note (accepted):** handouts sit 5 directory levels deep
@@ -229,29 +249,38 @@ course. This matches what ships and keeps the two courses consistent, at the cos
 `[index.html, 404.html, courses.json, courses, instructors, shared, assets]` and strips large media.
 The Remotion project therefore lives at top-level `video/` (not in the publish list), so its source and
 `node_modules` are never deployed. `node_modules/`, `*.mp4`, `*.mp3`, and `dist/` are already
-git-ignored.
+git-ignored. The rendered MP4 is **not** auto-embedded into any course page (see §6 video note below
+and §11) — it is optional enrichment delivered via a click-out link plus a local transcript.
 
 ---
 
-## 7. Assessment design
+## 7. Assessment design & FERPA (revised)
 
 **All three matched pieces** (per the Financial Readiness pattern), for each of Pre- and Post-Test:
 
-1. **Interactive local self-test** (`pre-test.html` / `post-test.html`): ~20 questions sampling all 7
-   domains; in-browser, immediate scoring/feedback; **no data transmitted** (localStorage only).
-2. **Printable version** (`*-printable.html`): clean print stylesheet for paper administration; an
-   instructor answer key is kept out of the student path (PDF alongside, like FR).
-3. **Optional capture wrapper** (`*-form.html`): a thin page embedding a **Google Form** (iframe) whose
-   URL the instructor pastes in. This is the only graded-capture path and it is instructor-owned.
+1. **Anonymous interactive self-test** (`pre-test.html` / `post-test.html`): ~20 questions sampling all
+   7 domains; in-browser, immediate scoring/feedback. **No name field**, no personally identifiable
+   input. Results are kept only for the on-screen comparison and stored in **`sessionStorage`** (cleared
+   when the tab closes) — not `localStorage`. A visible **"Clear my results"** control is always
+   present. **No `console.log` of answers/results.** Optional pre/post comparison uses a neutral,
+   non-identifying key.
+2. **Printable version** (`*-printable.html`): clean print stylesheet for paper administration; the
+   instructor answer key is a separate PDF kept out of the student path.
+3. **Optional capture wrapper** (`*-form.html`): a thin page embedding an instructor-owned **Google
+   Form** (iframe) whose URL the instructor pastes in. This is the only identified/graded-capture path,
+   and it is instructor-controlled with documented retention/access (see §14).
 
-**Question design:** items are written to the IC3 GS6 Level 1 objectives and reviewed for factual
-accuracy against the objective domains. Pre- and Post-Test use the same blueprint (parallel forms) so
-improvement is measurable. Distribution roughly proportional to domain size (Technology Basics weighted
-highest).
+**Why this differs from the two existing courses (intentional improvement):** the existing
+`computer-skills` and `financial-readiness` pre/post tests use a **required `participantName` field**
+and persist results (including the name) to **`localStorage`**
+(`courses/computer-skills/weeks/week-01/pre-test.html:1398,1641`;
+`courses/financial-readiness/assessments/pre-test.html:1011,1493`). On a **shared Windows lab machine**,
+that leaves student names + answers on disk after class. The new course avoids this by being anonymous
+and session-scoped. **This is observed, not fixed, for the existing courses** — retrofitting them is out
+of scope here and flagged as a follow-up (§13/§14).
 
-**FERPA / PII (hard constraint):** **no student PII is ever stored in the repository.** The interactive
-self-test is local-only; the printable leaves data on paper with the instructor; graded capture goes to
-an instructor-controlled Google Form, never to repo code or a tracked datastore. No cloud-LLM use on any
+**FERPA / PII (hard constraint):** no student PII in the repository **and** none persisted on shared
+machines. Identified grading exists only in the instructor-owned Google Form. No cloud-LLM use on any
 student data.
 
 ---
@@ -262,28 +291,29 @@ student data.
   domain, Creative Commons, PII, phishing, passphrase, private browsing, ergonomics, etc.), using the
   established flashcard pattern.
 - `quiz.html`: a self-check practice quiz (separate item pool from the graded tests) for exam prep,
-  usable on the Week 5 review day.
+  usable on the Week 5 review day. Anonymous; no PII.
 
 ---
 
-## 9. Homepage / platform wiring (surgical edits)
+## 9. Homepage / platform wiring (surgical edits, regression-safe)
 
 1. **`courses.json`** — add a `digital-literacy-1` entry: `id`, `title` ("Digital Literacy — Level 1"),
    `subtitle`, `type: "weeks"`, `progressKey: "dl1"`, `category: "Digital Literacy"`, `path`, `entry`,
-   `preTest`, `postTest`, a `lessons` array (5 entries), and a new **`emphasis`** field
-   (e.g. "Hands-on labs").
-2. **`index.html`** — three small changes:
+   `preTest`, `postTest`, a `lessons` array (5 entries), and an **`emphasis`** field
+   (e.g. "Hands-on labs"). **Also add an explicit `emphasis` to the two existing entries**
+   ("Hands-on labs" for computer-skills, "Planning tools" for financial-readiness) so the render is
+   fully data-driven and nothing regresses.
+2. **`index.html`** — four small changes:
    - Replace the hardcoded chip line
      `var emphasis = c.id === 'computer-skills' ? 'Hands-on labs' : 'Planning tools';`
-     with a **data-driven** read of `c.emphasis` (fallback to a sensible default). This removes a
-     two-course assumption and is required for the third card to render correctly.
+     with `var emphasis = c.emphasis || 'Self-paced';` (data-driven, safe fallback).
    - Add a distinct card accent for `data-course-card="digital-literacy-1"` (within the VUB
      navy/red/gold palette).
    - Update the hero proof chip **"2 course tracks" → "3 course tracks."**
-3. **`shell.js` / tests** — verify nothing else enumerates a fixed course list; update any
-   course-enumerating test fixtures (see §11).
-
-All edits are additive/parameterizing; no existing course behavior changes.
+   - Genericize the hero subhead currently reading *"Free, self-paced computer and financial-readiness
+     courses…"* (`index.html:236`) to a course-count-agnostic line (e.g. "Free, self-paced courses to
+     build digital and financial confidence — built to honor those who served.").
+3. **`shell.js` / other chrome** — verify nothing else enumerates a fixed course list; update if needed.
 
 ---
 
@@ -298,45 +328,58 @@ All edits are additive/parameterizing; no existing course behavior changes.
   `prefers-reduced-motion` respected.
 - Slide engine: inline `<script>` per `presentation.html` (nav, keyboard, touch/swipe, progress bar)
   plus `/shared/progress.js` (`VubProgress.saveSlide('dl1', week, slide, total)`); per-card and
-  course-level progress on the console, mirroring `computer-skills/index.html`.
+  course-level progress on the console, mirroring `computer-skills/index.html`. *(Course-progress
+  persistence is non-PII lesson position only — distinct from the assessment-results concern in §7.)*
 
 ---
 
 ## 11. Quality gates & testing
 
-- **Factual accuracy:** every concept traces to the IC3 GS6 Level 1 objective domains (cited §3);
+- **Factual accuracy:** every concept traces to the IC3 GS6 Level 1 objective domains (§3 + Appendix A);
   Windows/OS steps verified against current Windows behavior.
 - **Accessibility review:** run the `accessibility-reviewer` agent on built pages; fix CRITICAL/HIGH.
 - **Code review:** run the `code-reviewer` agent on new HTML/JS/wiring; fix CRITICAL/HIGH.
-- **Automated checks:** extend `tests/content` + `tests/functional` (Playwright) to cover the new
-  course (console route, slide nav, progress persistence, pre/post-test load, no-trailing-slash route);
-  run `npm run build:site`, `npm run links` (0 broken), `npm test` (all pass).
+- **Automated checks — including the catalog test that currently hardcodes two courses:**
+  - `tests/content/homepage-catalog.spec.js` currently asserts `toHaveCount(2)` and checks the two
+    course headings by name (`tests/content/homepage-catalog.spec.js:5`). **Update it to derive the
+    expected count from `courses.json`** (read the JSON, assert one `[data-course-card]` per entry)
+    rather than hardcoding a number, so the catalog stays self-validating as courses are added.
+  - Keep the existing **"zero external CDN dependencies (offline-capable)"** assertion green — the intro
+    video must NOT introduce an auto-loading external request on any tested page (§6, §12).
+  - Add coverage for the new course: console route (incl. no-trailing-slash), slide nav, `dl1` progress
+    persistence, pre/post-test load, anonymous/session-scoped results + "clear results".
+  - Run `npm run build:site`, `npm run links` (0 broken), `npm test` (all pass).
 - **Manual verification:** slide navigation (all input methods), progress save/resume, print preview of
-  printable test + quick-refs, homepage card + links resolve, mobile 390px no overflow.
+  printable test + quick-refs, homepage card + links resolve, mobile 390px no overflow, confirm no
+  student PII written to `localStorage`.
 - **Secret/PII gate:** secret scan (paths/key-names only) before each commit; confirm zero student PII
-  in the repo.
+  in the repo and zero name/PII persistence in the new assessments.
 
 ---
 
 ## 12. Build sequence (phased — verify each phase before the next)
 
-1. **Scaffold & wiring** — create `courses/digital-literacy-1/` skeleton, `css/slides.css`, add
-   `courses.json` entry, apply the three `index.html` edits → verify the third card renders and all
-   links resolve; build/links pass.
-2. **Assessments** — Pre/Post interactive + printable + form wrappers, with parallel-form blueprint →
-   verify scoring, print, no PII.
-3. **Content weeks 1–4** — presentations + syllabi → verify slide engine, progress key `dl1`,
-   knowledge checks.
-4. **Labs & quick-references** — per-week guided labs + printable cards → verify steps against Windows.
+1. **Scaffold & wiring** — create `courses/digital-literacy-1/` skeleton, `css/slides.css`, add the
+   `courses.json` entry **and `emphasis` on all three entries**, apply the four `index.html` edits,
+   and update the catalog test to be data-derived → verify the third card renders, links resolve,
+   build/links/tests pass (catalog + offline-CDN tests green).
+2. **Assessments** — Pre/Post anonymous interactive + printable + form wrappers, parallel-form
+   blueprint, sessionStorage + "clear results", no name field → verify scoring, print, no PII.
+3. **Content weeks 1–4** — presentations + syllabi → verify slide engine, `dl1` progress, knowledge
+   checks, and per-week sub-objective coverage against §3/Appendix A.
+4. **Labs & quick-references** — per-week guided labs (exercising the proficiency objectives) +
+   printable cards → verify steps against Windows.
 5. **Week 5 review day** — review-game presentation + syllabus + study guide.
-6. **Study resources** — flashcards + practice quiz.
-7. **Remotion intro video** — scaffold project, author `Intro.tsx`, render MP4 locally; wire a YouTube
-   embed with a placeholder ID (user uploads, then supplies the real ID).
+6. **Study resources** — flashcards + practice quiz (anonymous).
+7. **Remotion intro video (optional enrichment)** — scaffold project, author `Intro.tsx`, render MP4
+   locally. Deliver as: (a) a **local transcript/summary** handout (offline, core), and (b) an optional
+   **click-out "Watch the intro" link** to YouTube once the user uploads it (no auto-loading iframe on
+   tested pages). A failed render does not block the course.
 8. **Tests, reviews & docs** — extend Playwright, run a11y + code review, update `CLAUDE.md` course
    list + `MEMORY/state.json`; commit per logical layer with the secret gate.
 
-Commits follow the repo convention (one per logical layer; conventional-commit messages; secret scan
-before each).
+Commits follow the repo convention (one per logical layer; `type(scope): …` messages; secret scan
+before each; no co-author trailer, matching repo history).
 
 ---
 
@@ -344,21 +387,30 @@ before each).
 
 | Risk | Mitigation |
 |---|---|
-| Content drifts from real IC3 objectives | Traceability table (§3) bound to the official PDF; review each week's slides against it. |
-| Student PII leakage (FERPA) | Local-only interactive tests; capture only via instructor-owned Google Form; secret/PII gate before commits. |
-| Homepage third-card assumptions (`emphasis` binary) | Make `emphasis` data-driven; add explicit accent; update tests. |
-| Remotion render toolchain (npm install, headless Chromium/ffmpeg) heavy/fragile on Windows | Scaffold + composition are the committed deliverable; rendering attempted locally, but a failed render does not block the course; MP4 is git-ignored and YouTube-hosted regardless. |
+| Content drifts from real IC3 objectives | Traceability (§3) + verbatim Appendix A; review each week against it. |
+| Sub-objectives silently dropped (e.g. 2.3.1/2.3.3/2.3.4, 7.3.3) | Per-week sub-objective call-outs (§5); coverage check in Phase 3. |
+| Student PII left on shared lab PCs | New tests anonymous + sessionStorage + "clear results"; no name field; no console logging (§7). |
+| Existing two courses persist names to localStorage | Observed & flagged as follow-up (§14); not retrofitted here (surgical). |
+| Homepage third-card / `emphasis` regression | `emphasis` on all three entries + `c.emphasis \|\| default`; explicit accent; genericized hero copy (§9). |
+| Catalog test hardcodes 2 cards → breaks on add | Rewrite test to derive count from `courses.json` (§11). |
+| Intro video breaks offline-first / CDN test | Video is optional enrichment: local transcript + click-out link, never an auto-loading embed (§6, §11, §12). |
+| Remotion render toolchain heavy/fragile on Windows | Scaffold + composition are the committed deliverable; render attempted but non-blocking; MP4 git-ignored + external-hosted. |
 | Deep `handouts/` nesting vs 3-level guideline | Accepted for sibling-course consistency; documented (§6). |
 | Windows directory-move hazard (prior incident) | Create new dirs directly; avoid PowerShell `Move-Item` for directory moves. |
 
 ---
 
 ## 14. Open items for the user (post-spec)
-- **YouTube video ID** for the intro explainer (after you upload the rendered MP4).
-- **Google Form URLs** for the optional Pre/Post capture wrappers (instructor-configured; can ship with
-  a clear placeholder + instructions, like FR's `SETUP-GOOGLE-FORMS.md`).
-- **Class dates** (optional): the course can ship date-agnostic (instructor fills the schedule) or with
-  specific Monday dates if you provide a start date.
+- **YouTube video ID** for the intro explainer (after you upload the rendered MP4) — used only for the
+  optional click-out link.
+- **Google Form URLs** for the optional Pre/Post capture wrappers, and confirmation they live in an
+  **institution-owned account with documented retention/access** (FERPA). Can ship with a clear
+  placeholder + instructions, like FR's `assessments/SETUP-GOOGLE-FORMS.md`.
+- **Class dates** (optional): ship date-agnostic (instructor fills the schedule) or with specific Monday
+  dates if you provide a start date.
+- **Follow-up (separate task):** decide whether to retrofit the existing `computer-skills` /
+  `financial-readiness` interactive tests to drop the `localStorage` name persistence on shared lab
+  machines.
 
 ---
 
@@ -367,5 +419,122 @@ before each).
 IC3 GS6 Level 1 — Objective Domains, **Certiport / Pearson VUE**, released 2020-05-14. Retrieved from
 Prodigy Learning's published copy:
 `https://www.prodigylearning.com/wp-content/uploads/2022/05/IC3_GS6_Level_1_Exam_Domains.pdf`
-(cross-checked against certiport.pearsonvue.com and cteresource.org). The seven domains and their
-numbered objectives in §3 are transcribed verbatim from this document.
+(cross-checked against certiport.pearsonvue.com and cteresource.org). **Appendix A reproduces the
+official objective text verbatim.** The §3 table uses readable summaries of that text for planning;
+Appendix A is the authoritative reference for coverage audits.
+
+---
+
+## Appendix A — IC3 GS6 Level 1 objective domains (verbatim)
+
+> Source: Certiport, *IC3 GS6 Level 1 — Objective Domains*, © 2020 Certiport, Inc., released
+> 2020-05-14. Reproduced for curriculum-alignment auditing.
+
+**1. Technology Basics**
+- 1.1 Access and navigate between digital environments
+  - 1.1.1 Recognize operating system terms and concepts
+  - 1.1.2 Explain basic functions of web browsers
+  - 1.1.3 Explain processes and requirements for accessing digital environments
+  - 1.1.4 Explain methods of navigating between digital environments
+- 1.2 Identify digital devices and connections
+  - 1.2.1 Identify input devices
+  - 1.2.2 Identify output devices
+  - 1.2.3 Identify cables, connectors, and connections
+- 1.3 Explain fundamental software concepts
+  - 1.3.1 Explain basic software application concepts
+  - 1.3.2 Compare and contrast proprietary and open source software
+  - 1.3.3 Describe processes for installing software from online sources
+- 1.4 Explain fundamental hardware concepts
+  - 1.4.1 Describe concepts related to computing devices
+  - 1.4.2 Describe concepts related to memory
+  - 1.4.3 Describe concepts related to data storage
+- 1.5 Explain fundamental operating system concepts
+  - 1.5.1 Compare and contrast features of mobile device operating systems
+  - 1.5.2 Compare and contrast features of computer operating systems
+- 1.6 Explain fundamental networking concepts
+  - 1.6.1 Describe network connectivity concepts
+  - 1.6.2 Describe online connectivity concepts
+  - 1.6.3 Compare and contrast network and connection types
+  - 1.6.4 Describe networking infrastructure
+  - 1.6.5 Identify whether a device is connected
+  - 1.6.6 Describe basic network troubleshooting techniques
+
+**2. Digital Citizenship**
+- 2.1 Create and manage a digital identity
+  - 2.1.1 Explain how to manage personal data online
+  - 2.1.2 Explain how to manage personally identifiable information
+  - 2.1.3 Explain how to maintain digital privacy and security
+- 2.2 Cultivate, manage, and protect your digital reputation
+  - 2.2.1 Recognize the permanence of actions in the digital world
+  - 2.2.2 Recognize legal and ethical behavior when using technology
+- 2.3 Respond to inappropriate digital behavior and content
+  - 2.3.1 Explain the impact of negative digital communication
+  - 2.3.2 Assess the validity of online information
+  - 2.3.3 Explain the importance of online anonymity
+  - 2.3.4 Explain the value of nonresponse to negative communication
+
+**3. Information Management**
+- 3.1 Use and refine criteria for online searches
+  - 3.1.1 Define the information required to complete a given task
+  - 3.1.2 Distinguish between relevant and irrelevant search results
+  - 3.1.3 Collect and retain source reference information for search and research results
+- 3.2 Understand methods for searching within digital content
+  - 3.2.1 Explain features that enable you to locate information in a file
+  - 3.2.2 Explain features that enable you to locate information on a webpage
+- 3.3 Understand copyright and licensing restrictions for digital content
+  - 3.3.1 Explain the basics of public domain content
+  - 3.3.2 Explain the basics of Creative Commons content
+
+**4. Content Creation**
+- 4.1 Create basic documents and presentations
+  - 4.1.1 Display proficiency in creating basic documents
+  - 4.1.2 Display proficiency in creating basic presentations
+- 4.2 Understand accepted referencing and attribution practices
+  - 4.2.1 Define referencing and attribution
+  - 4.2.2 Explain the purpose of referencing and attribution
+  - 4.2.3 Locate online referencing and attribution sources
+  - 4.2.4 Implement appropriate online citations in a given document
+- 4.3 Save and back up work
+  - 4.3.1 Determine how, when and where to back up data in a typical digital work setting
+  - 4.3.2 Implement file management principles and naming conventions
+- 4.4 Understand fundamental printing concepts
+  - 4.4.1 Describe portrait vs landscape orientation
+  - 4.4.2 Describe double-sided printing
+  - 4.4.3 Explain common print settings
+  - 4.4.4 Explain printing methods
+
+**5. Communication**
+- 5.1 Express yourself through digital means
+  - 5.1.1 Know where you can post or share in the digital world
+  - 5.1.2 Be aware of platform-specific guidelines for posting and sharing
+  - 5.1.3 Understand and follow acceptable use policies for posting and sharing
+- 5.2 Interact with others in a digital environment
+  - 5.2.1 Implement digital interactions in a given digital technology
+  - 5.2.2 Differentiate between effective and ineffective digital interaction methods
+  - 5.2.3 Demonstrate the use of inclusive language
+  - 5.2.4 Differentiate among email response options
+
+**6. Collaboration**
+- 6.1 Identify digital collaboration concepts
+  - 6.1.1 Identify the benefits of digital collaboration
+  - 6.1.2 Define synchronous and asynchronous communications
+  - 6.1.3 Identify methods to review work and provide feedback to peers
+- 6.2 Identify digital etiquette standards for collaborative processes
+  - 6.2.1 For written digital collaboration
+  - 6.2.2 For visual digital collaboration
+
+**7. Safety and Security**
+- 7.1 Describe digital security threats
+- 7.2 Protect devices and digital content
+  - 7.2.1 Identify features of secure passwords
+  - 7.2.2 Identify when and how to reset a password
+  - 7.2.3 Identify when and how to lock a device
+  - 7.2.4 Explain how to clear saved browser settings
+- 7.3 Be aware of data-collection technology
+  - 7.3.1 Describe how navigation tracking works
+  - 7.3.2 Describe security concerns related to navigation tracking
+  - 7.3.3 Describe security concerns related to storing information on a device
+  - 7.3.4 Describe the benefits of private mode browsing
+- 7.4 Identify health risks associated with the use of digital technologies
+  - 7.4.1 Identify mental health risks associated with online technologies
+  - 7.4.2 Identify physical health threats associated with computer and device usage
