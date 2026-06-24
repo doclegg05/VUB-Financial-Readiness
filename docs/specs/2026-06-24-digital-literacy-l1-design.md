@@ -6,11 +6,14 @@
 **Course id:** `digital-literacy-1` · **Progress key:** `dl1` · **Catalog category:** Digital Literacy
 
 **Revision history**
-- **v2 (2026-06-24):** revised per Codex design review — reframed knowledge-vs-proficiency (§1),
-  completed Week 4 sub-objective coverage (§5), hardened FERPA/localStorage for shared lab PCs (§7),
-  made the homepage `emphasis` data-driven across all three courses + genericized hero copy + made the
-  catalog test data-derived (§9, §11), reframed the intro video as optional offline-safe enrichment
-  (§6, §11, §12), and added the verbatim objective text as **Appendix A** (§3, §15).
+- **v3 (2026-06-24):** removed FERPA framing — it is a rule from a different project and does **not**
+  apply here. Assessments now match the existing courses' pattern (participant name + `localStorage`
+  pre/post comparison) rather than the anonymized approach in v2. All non-FERPA Codex fixes retained
+  (the offline-video item stays on its own merit — the `AGENTS.md` "no internet for core viewing" rule).
+- **v2 (2026-06-24):** revised per Codex design review — knowledge-vs-proficiency framing (§1), Week 4
+  sub-objective coverage (§5), data-driven catalog wiring + genericized hero copy + data-derived catalog
+  test (§9, §11), offline-safe enrichment video (§6, §11, §12), verbatim **Appendix A** (§3, §15).
+  *(The v2 FERPA/anonymization change was reverted in v3.)*
 - **v1 (2026-06-24):** initial approved design.
 
 ---
@@ -59,8 +62,8 @@ ladder.
    courses (with quality improvements where reasonable).
 2. Complete, **provable** coverage of all 7 IC3 GS6 Level 1 objective domains down to the
    sub-objective (traceability §3 + verbatim Appendix A).
-3. Pre-Test (Week 1) and Post-Test (Week 5), each as **anonymous** interactive self-test + printable +
-   optional instructor-controlled capture (§7).
+3. Pre-Test (Week 1) and Post-Test (Week 5), each as interactive self-test + printable + optional
+   instructor-controlled capture (§7), matching the existing courses' behavior.
 4. Per-week **guided hands-on labs** (exercising the proficiency objectives) + printable
    quick-references + in-browser knowledge checks.
 5. One **Remotion** course-intro explainer video (~2–3 min) as **optional, offline-safe enrichment**,
@@ -73,9 +76,7 @@ ladder.
 - No Level 2 / Level 3 content this pass (future courses).
 - No per-week videos this pass (scaffold only; one intro video produced).
 - No new shared-framework abstractions; reuse `/shared/*` and the established per-course patterns.
-- No student PII stored in the repository or persisted on shared lab machines (§7).
-- No retrofit of the existing two courses' localStorage/name behavior (flagged as an observation in
-  §7, but out of scope here — surgical/additive).
+- No changes to the existing two courses (additive/surgical only).
 
 ---
 
@@ -188,7 +189,7 @@ called out so proficiency objectives are demonstrably exercised.
   browsing (7.3.4); health risks — mental wellbeing online; physical/ergonomics (7.4).
 - **Lab — "Lock It Down":** build a strong passphrase; set a screen lock; clear browser history/cookies
   (7.2.3–7.2.4); open a private window (7.3.4); evaluate a source for validity (2.3.2); a
-  privacy/identity self-audit checklist (2.1); a "what's stored on this shared PC?" check (7.3.3); a
+  privacy/identity self-audit checklist (2.1); a "what's stored on this PC?" check (7.3.3); a
   desk ergonomics check (7.4.2). *(Covers the full 2.3 and 7.3 sub-objective sets.)*
 - **Quick-ref:** Password & security checklist + spot-fake-info + ergonomics card.
 
@@ -199,7 +200,7 @@ called out so proficiency objectives are demonstrably exercised.
   preview).
 - **Cumulative study-guide handout:** one-page-per-domain summary for exam prep (complements
   `study-resources/`).
-- **Post-Test:** anonymous interactive + printable + optional capture wrapper.
+- **Post-Test:** interactive + printable + optional capture wrapper.
 
 ---
 
@@ -218,7 +219,7 @@ courses/digital-literacy-1/
 ├── css/
 │   └── slides.css                   # course-owned slide styles (seeded from computer-skills)
 ├── assessments/                     # FR pattern
-│   ├── pre-test.html                # ANONYMOUS interactive self-test (~20 Q across 7 domains)
+│   ├── pre-test.html                # interactive self-test (~20 Q across 7 domains)
 │   ├── pre-test-printable.html
 │   ├── pre-test-form.html           # optional Google-Form embed wrapper (instructor-configured)
 │   ├── post-test.html
@@ -249,39 +250,35 @@ course. This matches what ships and keeps the two courses consistent, at the cos
 `[index.html, 404.html, courses.json, courses, instructors, shared, assets]` and strips large media.
 The Remotion project therefore lives at top-level `video/` (not in the publish list), so its source and
 `node_modules` are never deployed. `node_modules/`, `*.mp4`, `*.mp3`, and `dist/` are already
-git-ignored. The rendered MP4 is **not** auto-embedded into any course page (see §6 video note below
-and §11) — it is optional enrichment delivered via a click-out link plus a local transcript.
+git-ignored. The rendered MP4 is **not** auto-embedded into any course page (offline-first rule, §11) —
+it is optional enrichment delivered via a click-out link plus a local transcript.
 
 ---
 
-## 7. Assessment design & FERPA (revised)
+## 7. Assessment design
 
 **All three matched pieces** (per the Financial Readiness pattern), for each of Pre- and Post-Test:
 
-1. **Anonymous interactive self-test** (`pre-test.html` / `post-test.html`): ~20 questions sampling all
-   7 domains; in-browser, immediate scoring/feedback. **No name field**, no personally identifiable
-   input. Results are kept only for the on-screen comparison and stored in **`sessionStorage`** (cleared
-   when the tab closes) — not `localStorage`. A visible **"Clear my results"** control is always
-   present. **No `console.log` of answers/results.** Optional pre/post comparison uses a neutral,
-   non-identifying key.
+1. **Interactive self-test** (`pre-test.html` / `post-test.html`): ~20 questions sampling all 7
+   domains; in-browser, immediate scoring/feedback. Follows the **existing courses' established
+   pattern** — a participant-name field plus results saved to `localStorage` so the Post-Test can show
+   a pre→post improvement comparison for the student (mirrors
+   `courses/computer-skills/weeks/week-01/pre-test.html` and
+   `courses/financial-readiness/assessments/pre-test.html`). Results stay on the local machine; nothing
+   is transmitted by the self-test itself.
 2. **Printable version** (`*-printable.html`): clean print stylesheet for paper administration; the
    instructor answer key is a separate PDF kept out of the student path.
 3. **Optional capture wrapper** (`*-form.html`): a thin page embedding an instructor-owned **Google
-   Form** (iframe) whose URL the instructor pastes in. This is the only identified/graded-capture path,
-   and it is instructor-controlled with documented retention/access (see §14).
+   Form** (iframe) whose URL the instructor pastes in — the graded-capture path, like FR's
+   `assessments/SETUP-GOOGLE-FORMS.md`.
 
-**Why this differs from the two existing courses (intentional improvement):** the existing
-`computer-skills` and `financial-readiness` pre/post tests use a **required `participantName` field**
-and persist results (including the name) to **`localStorage`**
-(`courses/computer-skills/weeks/week-01/pre-test.html:1398,1641`;
-`courses/financial-readiness/assessments/pre-test.html:1011,1493`). On a **shared Windows lab machine**,
-that leaves student names + answers on disk after class. The new course avoids this by being anonymous
-and session-scoped. **This is observed, not fixed, for the existing courses** — retrofitting them is out
-of scope here and flagged as a follow-up (§13/§14).
+**Question design:** items are written to the IC3 GS6 Level 1 objectives and reviewed for factual
+accuracy against Appendix A. Pre- and Post-Test use the same blueprint (parallel forms) so improvement
+is measurable. Distribution is roughly proportional to domain size (Technology Basics weighted
+highest).
 
-**FERPA / PII (hard constraint):** no student PII in the repository **and** none persisted on shared
-machines. Identified grading exists only in the instructor-owned Google Form. No cloud-LLM use on any
-student data.
+*(Note: FERPA / student-PII handling is **not** a constraint for this project — that rule belongs to a
+different project and was removed from this spec in v3.)*
 
 ---
 
@@ -291,7 +288,7 @@ student data.
   domain, Creative Commons, PII, phishing, passphrase, private browsing, ergonomics, etc.), using the
   established flashcard pattern.
 - `quiz.html`: a self-check practice quiz (separate item pool from the graded tests) for exam prep,
-  usable on the Week 5 review day. Anonymous; no PII.
+  usable on the Week 5 review day.
 
 ---
 
@@ -328,8 +325,7 @@ student data.
   `prefers-reduced-motion` respected.
 - Slide engine: inline `<script>` per `presentation.html` (nav, keyboard, touch/swipe, progress bar)
   plus `/shared/progress.js` (`VubProgress.saveSlide('dl1', week, slide, total)`); per-card and
-  course-level progress on the console, mirroring `computer-skills/index.html`. *(Course-progress
-  persistence is non-PII lesson position only — distinct from the assessment-results concern in §7.)*
+  course-level progress on the console, mirroring `computer-skills/index.html`.
 
 ---
 
@@ -347,13 +343,11 @@ student data.
   - Keep the existing **"zero external CDN dependencies (offline-capable)"** assertion green — the intro
     video must NOT introduce an auto-loading external request on any tested page (§6, §12).
   - Add coverage for the new course: console route (incl. no-trailing-slash), slide nav, `dl1` progress
-    persistence, pre/post-test load, anonymous/session-scoped results + "clear results".
+    persistence, pre/post-test load + scoring.
   - Run `npm run build:site`, `npm run links` (0 broken), `npm test` (all pass).
 - **Manual verification:** slide navigation (all input methods), progress save/resume, print preview of
-  printable test + quick-refs, homepage card + links resolve, mobile 390px no overflow, confirm no
-  student PII written to `localStorage`.
-- **Secret/PII gate:** secret scan (paths/key-names only) before each commit; confirm zero student PII
-  in the repo and zero name/PII persistence in the new assessments.
+  printable test + quick-refs, homepage card + links resolve, mobile 390px no overflow.
+- **Secret gate:** secret scan (paths/key-names only) before each commit.
 
 ---
 
@@ -363,14 +357,15 @@ student data.
    `courses.json` entry **and `emphasis` on all three entries**, apply the four `index.html` edits,
    and update the catalog test to be data-derived → verify the third card renders, links resolve,
    build/links/tests pass (catalog + offline-CDN tests green).
-2. **Assessments** — Pre/Post anonymous interactive + printable + form wrappers, parallel-form
-   blueprint, sessionStorage + "clear results", no name field → verify scoring, print, no PII.
+2. **Assessments** — Pre/Post interactive + printable + form wrappers, parallel-form blueprint,
+   matching the existing courses' name + `localStorage` pre/post comparison → verify scoring, print,
+   links.
 3. **Content weeks 1–4** — presentations + syllabi → verify slide engine, `dl1` progress, knowledge
    checks, and per-week sub-objective coverage against §3/Appendix A.
 4. **Labs & quick-references** — per-week guided labs (exercising the proficiency objectives) +
    printable cards → verify steps against Windows.
 5. **Week 5 review day** — review-game presentation + syllabus + study guide.
-6. **Study resources** — flashcards + practice quiz (anonymous).
+6. **Study resources** — flashcards + practice quiz.
 7. **Remotion intro video (optional enrichment)** — scaffold project, author `Intro.tsx`, render MP4
    locally. Deliver as: (a) a **local transcript/summary** handout (offline, core), and (b) an optional
    **click-out "Watch the intro" link** to YouTube once the user uploads it (no auto-loading iframe on
@@ -389,8 +384,6 @@ before each; no co-author trailer, matching repo history).
 |---|---|
 | Content drifts from real IC3 objectives | Traceability (§3) + verbatim Appendix A; review each week against it. |
 | Sub-objectives silently dropped (e.g. 2.3.1/2.3.3/2.3.4, 7.3.3) | Per-week sub-objective call-outs (§5); coverage check in Phase 3. |
-| Student PII left on shared lab PCs | New tests anonymous + sessionStorage + "clear results"; no name field; no console logging (§7). |
-| Existing two courses persist names to localStorage | Observed & flagged as follow-up (§14); not retrofitted here (surgical). |
 | Homepage third-card / `emphasis` regression | `emphasis` on all three entries + `c.emphasis \|\| default`; explicit accent; genericized hero copy (§9). |
 | Catalog test hardcodes 2 cards → breaks on add | Rewrite test to derive count from `courses.json` (§11). |
 | Intro video breaks offline-first / CDN test | Video is optional enrichment: local transcript + click-out link, never an auto-loading embed (§6, §11, §12). |
@@ -403,14 +396,10 @@ before each; no co-author trailer, matching repo history).
 ## 14. Open items for the user (post-spec)
 - **YouTube video ID** for the intro explainer (after you upload the rendered MP4) — used only for the
   optional click-out link.
-- **Google Form URLs** for the optional Pre/Post capture wrappers, and confirmation they live in an
-  **institution-owned account with documented retention/access** (FERPA). Can ship with a clear
-  placeholder + instructions, like FR's `assessments/SETUP-GOOGLE-FORMS.md`.
+- **Google Form URLs** for the optional Pre/Post capture wrappers (instructor-configured; can ship with
+  a placeholder + instructions like FR's `assessments/SETUP-GOOGLE-FORMS.md`).
 - **Class dates** (optional): ship date-agnostic (instructor fills the schedule) or with specific Monday
   dates if you provide a start date.
-- **Follow-up (separate task):** decide whether to retrofit the existing `computer-skills` /
-  `financial-readiness` interactive tests to drop the `localStorage` name persistence on shared lab
-  machines.
 
 ---
 
