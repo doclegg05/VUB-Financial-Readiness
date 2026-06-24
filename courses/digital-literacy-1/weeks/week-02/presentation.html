@@ -100,6 +100,7 @@
     }
 
     .slide-link {
+      font-family: inherit; background: none; border: none; text-align: left; width: 100%; color: inherit;
       padding: 0.6rem 0.75rem;
       border-radius: 6px;
       cursor: pointer;
@@ -656,6 +657,9 @@
 
     .answer-reveal[hidden] { display: none; }
 
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .slide-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
     /* Confetti */
     .confetti {
       position: fixed;
@@ -725,42 +729,42 @@
     <div class="chapter">
       <div class="chapter-title">Browsers &amp; Digital Environments</div>
       <div class="chapter-slides">
-        <div class="slide-link active" data-slide="0">Welcome &amp; Overview</div>
-        <div class="slide-link" data-slide="1">Learning Objectives</div>
-        <div class="slide-link" data-slide="2">The Desktop &amp; OS Terms</div>
-        <div class="slide-link" data-slide="3">What a Web Browser Does</div>
-        <div class="slide-link" data-slide="4">Tabs, Bookmarks &amp; History</div>
-        <div class="slide-link" data-slide="5">Moving Between Sites &amp; Apps</div>
+        <button type="button" class="slide-link active" data-slide="0">Welcome &amp; Overview</button>
+        <button type="button" class="slide-link" data-slide="1">Learning Objectives</button>
+        <button type="button" class="slide-link" data-slide="2">The Desktop &amp; OS Terms</button>
+        <button type="button" class="slide-link" data-slide="3">What a Web Browser Does</button>
+        <button type="button" class="slide-link" data-slide="4">Tabs, Bookmarks &amp; History</button>
+        <button type="button" class="slide-link" data-slide="5">Moving Between Sites &amp; Apps</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Networking</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="6">Wired, Wi-Fi &amp; Cellular</div>
-        <div class="slide-link" data-slide="7">Modem, Router &amp; ISP</div>
-        <div class="slide-link" data-slide="8">Am I Connected?</div>
-        <div class="slide-link" data-slide="9">Basic Troubleshooting</div>
+        <button type="button" class="slide-link" data-slide="6">Wired, Wi-Fi &amp; Cellular</button>
+        <button type="button" class="slide-link" data-slide="7">Modem, Router &amp; ISP</button>
+        <button type="button" class="slide-link" data-slide="8">Am I Connected?</button>
+        <button type="button" class="slide-link" data-slide="9">Basic Troubleshooting</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Searching &amp; Copyright</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="10">Define Your Search</div>
-        <div class="slide-link" data-slide="11">Relevant vs. Irrelevant</div>
-        <div class="slide-link" data-slide="12">Keep Your Sources</div>
-        <div class="slide-link" data-slide="13">Find on Page (Ctrl+F)</div>
-        <div class="slide-link" data-slide="14">Copyright &amp; Creative Commons</div>
+        <button type="button" class="slide-link" data-slide="10">Define Your Search</button>
+        <button type="button" class="slide-link" data-slide="11">Relevant vs. Irrelevant</button>
+        <button type="button" class="slide-link" data-slide="12">Keep Your Sources</button>
+        <button type="button" class="slide-link" data-slide="13">Find on Page (Ctrl+F)</button>
+        <button type="button" class="slide-link" data-slide="14">Copyright &amp; Creative Commons</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Wrap-Up</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="15">Knowledge Check</div>
-        <div class="slide-link" data-slide="16">Key Takeaways</div>
-        <div class="slide-link" data-slide="17">You Did It!</div>
+        <button type="button" class="slide-link" data-slide="15">Knowledge Check</button>
+        <button type="button" class="slide-link" data-slide="16">Key Takeaways</button>
+        <button type="button" class="slide-link" data-slide="17">You Did It!</button>
       </div>
     </div>
 
@@ -780,11 +784,12 @@
 
   <!-- Main Content -->
   <div class="main-content">
+    <h1 class="sr-only">Week 2: Getting Online — Browsers, Networks &amp; Searching</h1>
     <div class="slides-container">
       <!-- Slide 0: Title -->
       <div class="slide active title-slide">
         <div class="slide-icon">🌐</div>
-        <h1 class="slide-title">Getting Online</h1>
+        <h2 class="slide-title">Getting Online</h2>
         <p class="slide-subtitle">Browsers, Networks &amp; Smart Searching</p>
         <p class="course-info">Week 2 of 5 · VUB Digital Literacy — Level 1</p>
       </div>
@@ -792,7 +797,7 @@
       <!-- Slide 1: Learning Objectives -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Today's Learning Objectives</h1>
+          <h2 class="slide-title">Today's Learning Objectives</h2>
           <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
         </div>
         <div class="slide-content">
@@ -830,7 +835,7 @@
       <!-- Slide 2: The Desktop & OS Terms -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">The Desktop &amp; Operating System Terms</h1>
+          <h2 class="slide-title">The Desktop &amp; Operating System Terms</h2>
           <p class="slide-subtitle">The home base of your Windows computer</p>
         </div>
         <div class="slide-content">
@@ -867,7 +872,7 @@
       <!-- Slide 3: What a Web Browser Does -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">What a Web Browser Does</h1>
+          <h2 class="slide-title">What a Web Browser Does</h2>
           <p class="slide-subtitle">Your window to the internet</p>
         </div>
         <div class="slide-content">
@@ -897,7 +902,7 @@
       <!-- Slide 4: Tabs, Bookmarks & History -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Tabs, Bookmarks &amp; History</h1>
+          <h2 class="slide-title">Tabs, Bookmarks &amp; History</h2>
           <p class="slide-subtitle">Three tools that make browsing easier</p>
         </div>
         <div class="slide-content">
@@ -934,7 +939,7 @@
       <!-- Slide 5: Moving Between Sites & Apps -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Moving Between Sites &amp; Programs</h1>
+          <h2 class="slide-title">Moving Between Sites &amp; Programs</h2>
           <p class="slide-subtitle">Navigating your "digital environment"</p>
         </div>
         <div class="slide-content">
@@ -969,7 +974,7 @@
       <!-- Slide 6: Wired, Wi-Fi & Cellular -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Three Ways to Connect</h1>
+          <h2 class="slide-title">Three Ways to Connect</h2>
           <p class="slide-subtitle">Wired, Wi-Fi, and cellular</p>
         </div>
         <div class="slide-content">
@@ -1006,7 +1011,7 @@
       <!-- Slide 7: Modem, Router & ISP -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Modem, Router &amp; Internet Provider</h1>
+          <h2 class="slide-title">Modem, Router &amp; Internet Provider</h2>
           <p class="slide-subtitle">The gear that brings the internet to your home</p>
         </div>
         <div class="slide-content">
@@ -1036,7 +1041,7 @@
       <!-- Slide 8: Am I Connected? -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Am I Connected?</h1>
+          <h2 class="slide-title">Am I Connected?</h2>
           <p class="slide-subtitle">How to tell if your device is online</p>
         </div>
         <div class="slide-content">
@@ -1073,7 +1078,7 @@
       <!-- Slide 9: Basic Troubleshooting -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">When the Internet Stops Working</h1>
+          <h2 class="slide-title">When the Internet Stops Working</h2>
           <p class="slide-subtitle">Simple steps to try, in order</p>
         </div>
         <div class="slide-content">
@@ -1107,7 +1112,7 @@
       <!-- Slide 10: Define Your Search -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Search Smarter: Start With Your Need</h1>
+          <h2 class="slide-title">Search Smarter: Start With Your Need</h2>
           <p class="slide-subtitle">Good searches begin with a clear question</p>
         </div>
         <div class="slide-content">
@@ -1148,7 +1153,7 @@
       <!-- Slide 11: Relevant vs Irrelevant -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Good Results vs. Bad Results</h1>
+          <h2 class="slide-title">Good Results vs. Bad Results</h2>
           <p class="slide-subtitle">Not every result is worth your time</p>
         </div>
         <div class="slide-content">
@@ -1184,7 +1189,7 @@
       <!-- Slide 12: Keep Your Sources -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Keep Track of Where You Found It</h1>
+          <h2 class="slide-title">Keep Track of Where You Found It</h2>
           <p class="slide-subtitle">Saving your sources saves you time later</p>
         </div>
         <div class="slide-content">
@@ -1221,7 +1226,7 @@
       <!-- Slide 13: Find on Page (Ctrl+F) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Find a Word Fast: Ctrl + F</h1>
+          <h2 class="slide-title">Find a Word Fast: Ctrl + F</h2>
           <p class="slide-subtitle">Search inside a page or a document</p>
         </div>
         <div class="slide-content">
@@ -1251,7 +1256,7 @@
       <!-- Slide 14: Copyright & Creative Commons -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Copyright, Public Domain &amp; Creative Commons</h1>
+          <h2 class="slide-title">Copyright, Public Domain &amp; Creative Commons</h2>
           <p class="slide-subtitle">What you can and can't reuse</p>
         </div>
         <div class="slide-content">
@@ -1288,7 +1293,7 @@
       <!-- Slide 15: Knowledge Check -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Knowledge Check</h1>
+          <h2 class="slide-title">Knowledge Check</h2>
           <p class="slide-subtitle">Think it through, then reveal the answer</p>
         </div>
         <div class="slide-content">
@@ -1327,7 +1332,7 @@
       <!-- Slide 16: Key Takeaways -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Key Takeaways</h1>
+          <h2 class="slide-title">Key Takeaways</h2>
           <p class="slide-subtitle">What to remember from today</p>
         </div>
         <div class="slide-content">

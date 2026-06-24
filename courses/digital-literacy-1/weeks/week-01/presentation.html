@@ -100,6 +100,7 @@
     }
 
     .slide-link {
+      font-family: inherit; background: none; border: none; text-align: left; width: 100%; color: inherit;
       padding: 0.6rem 0.75rem;
       border-radius: 6px;
       cursor: pointer;
@@ -668,6 +669,8 @@
       outline-offset: 2px;
     }
 
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
     /* Confetti */
     .confetti {
       position: fixed;
@@ -735,41 +738,41 @@
     <div class="chapter">
       <div class="chapter-title">Introduction</div>
       <div class="chapter-slides">
-        <div class="slide-link active" data-slide="0">Welcome & Overview</div>
-        <div class="slide-link" data-slide="1">Learning Objectives</div>
+        <button type="button" class="slide-link active" data-slide="0">Welcome & Overview</button>
+        <button type="button" class="slide-link" data-slide="1">Learning Objectives</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Devices & Hardware</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="2">Input & Output Devices</div>
-        <div class="slide-link" data-slide="3">Ports, Cables & Connectors</div>
-        <div class="slide-link" data-slide="4">Types of Computing Devices</div>
-        <div class="slide-link" data-slide="5">Inside the Box</div>
-        <div class="slide-link" data-slide="6">Memory vs. Storage</div>
+        <button type="button" class="slide-link" data-slide="2">Input & Output Devices</button>
+        <button type="button" class="slide-link" data-slide="3">Ports, Cables & Connectors</button>
+        <button type="button" class="slide-link" data-slide="4">Types of Computing Devices</button>
+        <button type="button" class="slide-link" data-slide="5">Inside the Box</button>
+        <button type="button" class="slide-link" data-slide="6">Memory vs. Storage</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Software & OS</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="7">What Is Software?</div>
-        <div class="slide-link" data-slide="8">Paid vs. Free Software</div>
-        <div class="slide-link" data-slide="9">Installing Safely</div>
-        <div class="slide-link" data-slide="10">What Is an Operating System?</div>
-        <div class="slide-link" data-slide="11">Windows, Mac & Mobile</div>
+        <button type="button" class="slide-link" data-slide="7">What Is Software?</button>
+        <button type="button" class="slide-link" data-slide="8">Paid vs. Free Software</button>
+        <button type="button" class="slide-link" data-slide="9">Installing Safely</button>
+        <button type="button" class="slide-link" data-slide="10">What Is an Operating System?</button>
+        <button type="button" class="slide-link" data-slide="11">Windows, Mac & Mobile</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Wrap-Up & Pre-Test</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="12">Knowledge Check</div>
-        <div class="slide-link" data-slide="13">Your Hands-On Lab</div>
-        <div class="slide-link" data-slide="14">Key Takeaways</div>
-        <div class="slide-link" data-slide="15">You Did It!</div>
-        <div class="slide-link" data-slide="16">Pre-Test Time</div>
+        <button type="button" class="slide-link" data-slide="12">Knowledge Check</button>
+        <button type="button" class="slide-link" data-slide="13">Your Hands-On Lab</button>
+        <button type="button" class="slide-link" data-slide="14">Key Takeaways</button>
+        <button type="button" class="slide-link" data-slide="15">You Did It!</button>
+        <button type="button" class="slide-link" data-slide="16">Pre-Test Time</button>
       </div>
     </div>
 
@@ -789,11 +792,12 @@
 
   <!-- Main Content -->
   <div class="main-content">
+    <h1 class="sr-only">Week 1: Inside the Computer</h1>
     <div class="slides-container">
       <!-- Slide 0: Title -->
       <div class="slide active title-slide">
         <div class="slide-icon" aria-hidden="true">🖥️</div>
-        <h1 class="slide-title">Inside the Computer</h1>
+        <h2 class="slide-title">Inside the Computer</h2>
         <p class="slide-subtitle">Hardware, Devices, Software & Operating Systems</p>
         <p class="course-info">Week 1 of 5 · VUB Digital Literacy — Level 1</p>
       </div>
@@ -801,7 +805,7 @@
       <!-- Slide 1: Learning Objectives -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Today's Learning Objectives</h1>
+          <h2 class="slide-title">Today's Learning Objectives</h2>
           <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
         </div>
         <div class="slide-content">
@@ -847,7 +851,7 @@
       <!-- Slide 2: Input & Output Devices -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Input & Output Devices</h1>
+          <h2 class="slide-title">Input & Output Devices</h2>
           <p class="slide-subtitle">How you talk to the computer, and how it talks back</p>
         </div>
         <div class="slide-content">
@@ -885,7 +889,7 @@
       <!-- Slide 3: Ports, Cables & Connectors -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Ports, Cables & Connectors</h1>
+          <h2 class="slide-title">Ports, Cables & Connectors</h2>
           <p class="slide-subtitle">The plugs on the back and sides of your computer</p>
         </div>
         <div class="slide-content">
@@ -931,7 +935,7 @@
       <!-- Slide 4: Types of Computing Devices -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Types of Computing Devices</h1>
+          <h2 class="slide-title">Types of Computing Devices</h2>
           <p class="slide-subtitle">Same idea, different sizes</p>
         </div>
         <div class="slide-content">
@@ -977,7 +981,7 @@
       <!-- Slide 5: Inside the Box -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Inside the Box</h1>
+          <h2 class="slide-title">Inside the Box</h2>
           <p class="slide-subtitle">The main parts that do the work</p>
         </div>
         <div class="slide-content">
@@ -1015,7 +1019,7 @@
       <!-- Slide 6: Memory vs. Storage -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Memory vs. Storage</h1>
+          <h2 class="slide-title">Memory vs. Storage</h2>
           <p class="slide-subtitle">Two different things people often mix up</p>
         </div>
         <div class="slide-content">
@@ -1055,7 +1059,7 @@
       <!-- Slide 7: What Is Software? -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">What Is Software?</h1>
+          <h2 class="slide-title">What Is Software?</h2>
           <p class="slide-subtitle">Hardware is what you touch; software is what it runs</p>
         </div>
         <div class="slide-content">
@@ -1093,7 +1097,7 @@
       <!-- Slide 8: Paid vs. Free Software -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Paid vs. Free Software</h1>
+          <h2 class="slide-title">Paid vs. Free Software</h2>
           <p class="slide-subtitle">Proprietary and open-source — both are normal and safe</p>
         </div>
         <div class="slide-content">
@@ -1130,7 +1134,7 @@
       <!-- Slide 9: Installing Safely -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Installing Software Safely</h1>
+          <h2 class="slide-title">Installing Software Safely</h2>
           <p class="slide-subtitle">Where you get a program matters most</p>
         </div>
         <div class="slide-content">
@@ -1165,7 +1169,7 @@
       <!-- Slide 10: What Is an Operating System? -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">What Is an Operating System?</h1>
+          <h2 class="slide-title">What Is an Operating System?</h2>
           <p class="slide-subtitle">The master program that runs the whole computer</p>
         </div>
         <div class="slide-content">
@@ -1191,7 +1195,7 @@
       <!-- Slide 11: Windows, Mac & Mobile -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Windows, Mac & Mobile</h1>
+          <h2 class="slide-title">Windows, Mac & Mobile</h2>
           <p class="slide-subtitle">The operating systems you will meet most</p>
         </div>
         <div class="slide-content">
@@ -1232,7 +1236,7 @@
       <!-- Slide 12: Knowledge Check -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Knowledge Check</h1>
+          <h2 class="slide-title">Knowledge Check</h2>
           <p class="slide-subtitle">Read each question, think about your answer, then reveal it</p>
         </div>
         <div class="slide-content">
@@ -1270,7 +1274,7 @@
       <!-- Slide 13: Your Hands-On Lab -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Your Hands-On Lab</h1>
+          <h2 class="slide-title">Your Hands-On Lab</h2>
           <p class="slide-subtitle">Now let's explore the computer in front of you</p>
         </div>
         <div class="slide-content">
@@ -1294,7 +1298,7 @@
       <!-- Slide 14: Key Takeaways -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Key Takeaways</h1>
+          <h2 class="slide-title">Key Takeaways</h2>
           <p class="slide-subtitle">What to remember from today</p>
         </div>
         <div class="slide-content">
@@ -1345,7 +1349,7 @@
       <!-- Slide 16: Pre-Test Time -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Pre-Test Time</h1>
+          <h2 class="slide-title">Pre-Test Time</h2>
           <p class="slide-subtitle">Let's see where you're starting</p>
         </div>
         <div class="slide-content">

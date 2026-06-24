@@ -100,6 +100,7 @@
     }
 
     .slide-link {
+      font-family: inherit; background: none; border: none; text-align: left; width: 100%; color: inherit;
       padding: 0.6rem 0.75rem;
       border-radius: 6px;
       cursor: pointer;
@@ -654,6 +655,9 @@
 
     .kc-answer strong { color: var(--success); }
 
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .slide-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
     /* Confetti */
     .confetti {
       position: fixed;
@@ -723,49 +727,49 @@
     <div class="chapter">
       <div class="chapter-title">Documents &amp; Files</div>
       <div class="chapter-slides">
-        <div class="slide-link active" data-slide="0">Welcome &amp; Overview</div>
-        <div class="slide-link" data-slide="1">Learning Objectives</div>
-        <div class="slide-link" data-slide="2">Create a Document</div>
-        <div class="slide-link" data-slide="3">Create a Presentation</div>
-        <div class="slide-link" data-slide="4">Giving Credit (Referencing)</div>
-        <div class="slide-link" data-slide="5">Adding a Citation</div>
-        <div class="slide-link" data-slide="6">Save &amp; Back Up Your Work</div>
-        <div class="slide-link" data-slide="7">Naming &amp; Organizing Files</div>
+        <button type="button" class="slide-link active" data-slide="0">Welcome &amp; Overview</button>
+        <button type="button" class="slide-link" data-slide="1">Learning Objectives</button>
+        <button type="button" class="slide-link" data-slide="2">Create a Document</button>
+        <button type="button" class="slide-link" data-slide="3">Create a Presentation</button>
+        <button type="button" class="slide-link" data-slide="4">Giving Credit (Referencing)</button>
+        <button type="button" class="slide-link" data-slide="5">Adding a Citation</button>
+        <button type="button" class="slide-link" data-slide="6">Save &amp; Back Up Your Work</button>
+        <button type="button" class="slide-link" data-slide="7">Naming &amp; Organizing Files</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Printing</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="8">Orientation &amp; Double-Sided</div>
-        <div class="slide-link" data-slide="9">Print Settings &amp; Methods</div>
+        <button type="button" class="slide-link" data-slide="8">Orientation &amp; Double-Sided</button>
+        <button type="button" class="slide-link" data-slide="9">Print Settings &amp; Methods</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Communication</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="10">Where &amp; How to Post</div>
-        <div class="slide-link" data-slide="11">Using Inclusive Language</div>
-        <div class="slide-link" data-slide="12">Email: Reply, Reply All &amp; More</div>
-        <div class="slide-link" data-slide="13">Effective vs. Ineffective</div>
+        <button type="button" class="slide-link" data-slide="10">Where &amp; How to Post</button>
+        <button type="button" class="slide-link" data-slide="11">Using Inclusive Language</button>
+        <button type="button" class="slide-link" data-slide="12">Email: Reply, Reply All &amp; More</button>
+        <button type="button" class="slide-link" data-slide="13">Effective vs. Ineffective</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Collaboration</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="14">Working Together Online</div>
-        <div class="slide-link" data-slide="15">Digital Etiquette</div>
+        <button type="button" class="slide-link" data-slide="14">Working Together Online</button>
+        <button type="button" class="slide-link" data-slide="15">Digital Etiquette</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Wrap-Up</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="16">Knowledge Check</div>
-        <div class="slide-link" data-slide="17">Your Handouts &amp; Summary</div>
-        <div class="slide-link" data-slide="18">Great Work!</div>
+        <button type="button" class="slide-link" data-slide="16">Knowledge Check</button>
+        <button type="button" class="slide-link" data-slide="17">Your Handouts &amp; Summary</button>
+        <button type="button" class="slide-link" data-slide="18">Great Work!</button>
       </div>
     </div>
 
@@ -785,11 +789,12 @@
 
   <!-- Main Content -->
   <div class="main-content">
+    <h1 class="sr-only">Week 3: Creating &amp; Communicating</h1>
     <div class="slides-container">
       <!-- Slide 0: Title -->
       <div class="slide active title-slide">
         <div class="slide-icon" aria-hidden="true">✍️</div>
-        <h1 class="slide-title">Creating &amp; Communicating</h1>
+        <h2 class="slide-title">Creating &amp; Communicating</h2>
         <p class="slide-subtitle">Documents, files, printing, email &amp; teamwork</p>
         <p class="course-info">Week 3 of 5 · VUB Digital Literacy — Level 1</p>
       </div>
@@ -797,7 +802,7 @@
       <!-- Slide 1: Learning Objectives -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Today's Learning Objectives</h1>
+          <h2 class="slide-title">Today's Learning Objectives</h2>
           <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
         </div>
         <div class="slide-content">
@@ -835,7 +840,7 @@
       <!-- Slide 2: Create a Document (4.1.1) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Creating a Basic Document</h1>
+          <h2 class="slide-title">Creating a Basic Document</h2>
           <p class="slide-subtitle">Microsoft Word — the everyday writing tool</p>
         </div>
         <div class="slide-content">
@@ -864,7 +869,7 @@
       <!-- Slide 3: Create a Presentation (4.1.2) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Creating a Basic Presentation</h1>
+          <h2 class="slide-title">Creating a Basic Presentation</h2>
           <p class="slide-subtitle">Microsoft PowerPoint — one idea per slide</p>
         </div>
         <div class="slide-content">
@@ -895,7 +900,7 @@
       <!-- Slide 4: Referencing & Attribution (4.2.1-4.2.3) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Giving Credit to Your Sources</h1>
+          <h2 class="slide-title">Giving Credit to Your Sources</h2>
           <p class="slide-subtitle">Referencing and attribution</p>
         </div>
         <div class="slide-content">
@@ -924,7 +929,7 @@
       <!-- Slide 5: Citations (4.2.4) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Adding a Simple Citation</h1>
+          <h2 class="slide-title">Adding a Simple Citation</h2>
           <p class="slide-subtitle">A short note that credits the source</p>
         </div>
         <div class="slide-content">
@@ -948,7 +953,7 @@
       <!-- Slide 6: Save & Back Up (4.3.1) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Save &amp; Back Up Your Work</h1>
+          <h2 class="slide-title">Save &amp; Back Up Your Work</h2>
           <p class="slide-subtitle">Don't lose what you worked hard to make</p>
         </div>
         <div class="slide-content">
@@ -982,7 +987,7 @@
       <!-- Slide 7: File Management & Naming (4.3.2) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Naming &amp; Organizing Files</h1>
+          <h2 class="slide-title">Naming &amp; Organizing Files</h2>
           <p class="slide-subtitle">A good name today saves a search tomorrow</p>
         </div>
         <div class="slide-content">
@@ -1016,7 +1021,7 @@
       <!-- Slide 8: Printing — orientation & double-sided (4.4.1-4.4.2) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Printing: Orientation &amp; Sides</h1>
+          <h2 class="slide-title">Printing: Orientation &amp; Sides</h2>
           <p class="slide-subtitle">Two choices that change how your page looks</p>
         </div>
         <div class="slide-content">
@@ -1046,7 +1051,7 @@
       <!-- Slide 9: Print settings & methods (4.4.3-4.4.4) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Print Settings &amp; Methods</h1>
+          <h2 class="slide-title">Print Settings &amp; Methods</h2>
           <p class="slide-subtitle">Get exactly the pages you want</p>
         </div>
         <div class="slide-content">
@@ -1074,7 +1079,7 @@
       <!-- Slide 10: Where/how to post & AUP (5.1) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Where &amp; How to Post Online</h1>
+          <h2 class="slide-title">Where &amp; How to Post Online</h2>
           <p class="slide-subtitle">Choosing the right place — and following the rules</p>
         </div>
         <div class="slide-content">
@@ -1102,7 +1107,7 @@
       <!-- Slide 11: Inclusive language (5.2.3) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Using Inclusive Language</h1>
+          <h2 class="slide-title">Using Inclusive Language</h2>
           <p class="slide-subtitle">Words that welcome everyone</p>
         </div>
         <div class="slide-content">
@@ -1135,7 +1140,7 @@
       <!-- Slide 12: Email response options (5.2.4) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Email: Reply, Reply All &amp; More</h1>
+          <h2 class="slide-title">Email: Reply, Reply All &amp; More</h2>
           <p class="slide-subtitle">Four buttons that work very differently</p>
         </div>
         <div class="slide-content">
@@ -1173,7 +1178,7 @@
       <!-- Slide 13: Effective vs ineffective (5.2.2) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Effective vs. Ineffective Messages</h1>
+          <h2 class="slide-title">Effective vs. Ineffective Messages</h2>
           <p class="slide-subtitle">Small habits make a big difference</p>
         </div>
         <div class="slide-content">
@@ -1207,7 +1212,7 @@
       <!-- Slide 14: Collaboration (6.1) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Working Together Online</h1>
+          <h2 class="slide-title">Working Together Online</h2>
           <p class="slide-subtitle">Digital collaboration basics</p>
         </div>
         <div class="slide-content">
@@ -1246,7 +1251,7 @@
       <!-- Slide 15: Etiquette (6.2) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Digital Etiquette</h1>
+          <h2 class="slide-title">Digital Etiquette</h2>
           <p class="slide-subtitle">Good manners in writing and on screen</p>
         </div>
         <div class="slide-content">
@@ -1280,7 +1285,7 @@
       <!-- Slide 16: Knowledge Check -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Knowledge Check</h1>
+          <h2 class="slide-title">Knowledge Check</h2>
           <p class="slide-subtitle">Tap "Show answer" after you've had a think</p>
         </div>
         <div class="slide-content">
@@ -1319,7 +1324,7 @@
       <!-- Slide 17: Handout prompt + summary -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Your Handouts &amp; Summary</h1>
+          <h2 class="slide-title">Your Handouts &amp; Summary</h2>
           <p class="slide-subtitle">Take these home — they walk you through everything</p>
         </div>
         <div class="slide-content">

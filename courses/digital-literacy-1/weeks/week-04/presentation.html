@@ -100,6 +100,7 @@
     }
 
     .slide-link {
+      font-family: inherit; background: none; border: none; text-align: left; width: 100%; color: inherit;
       padding: 0.6rem 0.75rem;
       border-radius: 6px;
       cursor: pointer;
@@ -603,6 +604,9 @@
       transform: translateY(-2px);
     }
 
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .slide-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
     /* Confetti */
     .confetti {
       position: fixed;
@@ -727,50 +731,50 @@
     <div class="chapter">
       <div class="chapter-title">Digital Identity</div>
       <div class="chapter-slides">
-        <div class="slide-link active" data-slide="0">Welcome &amp; Overview</div>
-        <div class="slide-link" data-slide="1">Learning Objectives</div>
-        <div class="slide-link" data-slide="2">Your Digital Identity</div>
-        <div class="slide-link" data-slide="3">Protecting Your PII</div>
-        <div class="slide-link" data-slide="4">Reputation &amp; Permanence</div>
-        <div class="slide-link" data-slide="5">Legal &amp; Ethical Behavior</div>
+        <button type="button" class="slide-link active" data-slide="0">Welcome &amp; Overview</button>
+        <button type="button" class="slide-link" data-slide="1">Learning Objectives</button>
+        <button type="button" class="slide-link" data-slide="2">Your Digital Identity</button>
+        <button type="button" class="slide-link" data-slide="3">Protecting Your PII</button>
+        <button type="button" class="slide-link" data-slide="4">Reputation &amp; Permanence</button>
+        <button type="button" class="slide-link" data-slide="5">Legal &amp; Ethical Behavior</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Responding to Bad Content</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="6">Impact of Negative Messages</div>
-        <div class="slide-link" data-slide="7">Is This Information True?</div>
-        <div class="slide-link" data-slide="8">Anonymity &amp; Nonresponse</div>
+        <button type="button" class="slide-link" data-slide="6">Impact of Negative Messages</button>
+        <button type="button" class="slide-link" data-slide="7">Is This Information True?</button>
+        <button type="button" class="slide-link" data-slide="8">Anonymity &amp; Nonresponse</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Security &amp; Passwords</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="9">Common Security Threats</div>
-        <div class="slide-link" data-slide="10">Strong Passphrases</div>
-        <div class="slide-link" data-slide="11">Reset &amp; Lock</div>
-        <div class="slide-link" data-slide="12">Clearing Browser Data</div>
+        <button type="button" class="slide-link" data-slide="9">Common Security Threats</button>
+        <button type="button" class="slide-link" data-slide="10">Strong Passphrases</button>
+        <button type="button" class="slide-link" data-slide="11">Reset &amp; Lock</button>
+        <button type="button" class="slide-link" data-slide="12">Clearing Browser Data</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Tracking &amp; Health</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="13">Tracking &amp; Stored Data</div>
-        <div class="slide-link" data-slide="14">Private Browsing</div>
-        <div class="slide-link" data-slide="15">Staying Healthy Online</div>
+        <button type="button" class="slide-link" data-slide="13">Tracking &amp; Stored Data</button>
+        <button type="button" class="slide-link" data-slide="14">Private Browsing</button>
+        <button type="button" class="slide-link" data-slide="15">Staying Healthy Online</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Wrap-Up</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="16">Knowledge Check</div>
-        <div class="slide-link" data-slide="17">Your Handouts</div>
-        <div class="slide-link" data-slide="18">Key Takeaways</div>
-        <div class="slide-link" data-slide="19">Great Work!</div>
+        <button type="button" class="slide-link" data-slide="16">Knowledge Check</button>
+        <button type="button" class="slide-link" data-slide="17">Your Handouts</button>
+        <button type="button" class="slide-link" data-slide="18">Key Takeaways</button>
+        <button type="button" class="slide-link" data-slide="19">Great Work!</button>
       </div>
     </div>
 
@@ -790,11 +794,12 @@
 
   <!-- Main Content -->
   <div class="main-content">
+    <h1 class="sr-only">Week 4: Citizenship &amp; Safety</h1>
     <div class="slides-container">
       <!-- Slide 0: Title -->
       <div class="slide active title-slide">
         <div class="slide-icon">🛡️</div>
-        <h1 class="slide-title">Citizenship &amp; Safety</h1>
+        <h2 class="slide-title">Citizenship &amp; Safety</h2>
         <p class="slide-subtitle">Your identity, privacy, and security online</p>
         <p class="course-info">Week 4 of 5 · VUB Digital Literacy — Level 1</p>
       </div>
@@ -802,7 +807,7 @@
       <!-- Slide 1: Learning Objectives -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Today's Learning Objectives</h1>
+          <h2 class="slide-title">Today's Learning Objectives</h2>
           <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
         </div>
         <div class="slide-content">
@@ -840,7 +845,7 @@
       <!-- Slide 2: Your Digital Identity -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Your Digital Identity</h1>
+          <h2 class="slide-title">Your Digital Identity</h2>
           <p class="slide-subtitle">Everything the internet knows about you</p>
         </div>
         <div class="slide-content">
@@ -877,7 +882,7 @@
       <!-- Slide 3: Protecting Your PII -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Protecting Your Personal Information</h1>
+          <h2 class="slide-title">Protecting Your Personal Information</h2>
           <p class="slide-subtitle">What is PII, and why guard it?</p>
         </div>
         <div class="slide-content">
@@ -915,7 +920,7 @@
       <!-- Slide 4: Reputation & Permanence -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Reputation &amp; Permanence</h1>
+          <h2 class="slide-title">Reputation &amp; Permanence</h2>
           <p class="slide-subtitle">The internet has a long memory</p>
         </div>
         <div class="slide-content">
@@ -952,7 +957,7 @@
       <!-- Slide 5: Legal & Ethical Behavior -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Legal &amp; Ethical Behavior</h1>
+          <h2 class="slide-title">Legal &amp; Ethical Behavior</h2>
           <p class="slide-subtitle">Doing the right thing online</p>
         </div>
         <div class="slide-content">
@@ -988,7 +993,7 @@
       <!-- Slide 6: Impact of Negative Messages -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">The Impact of Negative Messages</h1>
+          <h2 class="slide-title">The Impact of Negative Messages</h2>
           <p class="slide-subtitle">Words on a screen still carry weight</p>
         </div>
         <div class="slide-content">
@@ -1020,7 +1025,7 @@
       <!-- Slide 7: Is This Information True? -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Is This Information True?</h1>
+          <h2 class="slide-title">Is This Information True?</h2>
           <p class="slide-subtitle">Checking the validity of what you read online</p>
         </div>
         <div class="slide-content">
@@ -1057,7 +1062,7 @@
       <!-- Slide 8: Anonymity & Nonresponse -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Anonymity &amp; the Power of Nonresponse</h1>
+          <h2 class="slide-title">Anonymity &amp; the Power of Nonresponse</h2>
           <p class="slide-subtitle">Sometimes the best reply is no reply</p>
         </div>
         <div class="slide-content">
@@ -1092,7 +1097,7 @@
       <!-- Slide 9: Common Security Threats -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Common Security Threats</h1>
+          <h2 class="slide-title">Common Security Threats</h2>
           <p class="slide-subtitle">Know the dangers so you can avoid them</p>
         </div>
         <div class="slide-content">
@@ -1129,7 +1134,7 @@
       <!-- Slide 10: Strong Passphrases -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Building a Strong Passphrase</h1>
+          <h2 class="slide-title">Building a Strong Passphrase</h2>
           <p class="slide-subtitle">Longer is stronger</p>
         </div>
         <div class="slide-content">
@@ -1167,7 +1172,7 @@
       <!-- Slide 11: Reset & Lock -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Resetting a Password &amp; Locking Your Device</h1>
+          <h2 class="slide-title">Resetting a Password &amp; Locking Your Device</h2>
           <p class="slide-subtitle">Two skills everyone needs</p>
         </div>
         <div class="slide-content">
@@ -1203,7 +1208,7 @@
       <!-- Slide 12: Clearing Browser Data -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Clearing Your Browser Data</h1>
+          <h2 class="slide-title">Clearing Your Browser Data</h2>
           <p class="slide-subtitle">Cleaning up history, cookies, and saved info</p>
         </div>
         <div class="slide-content">
@@ -1238,7 +1243,7 @@
       <!-- Slide 13: Tracking & Stored Data -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Tracking &amp; Information Stored on Your Device</h1>
+          <h2 class="slide-title">Tracking &amp; Information Stored on Your Device</h2>
           <p class="slide-subtitle">Who is watching, and what is saved?</p>
         </div>
         <div class="slide-content">
@@ -1273,7 +1278,7 @@
       <!-- Slide 14: Private Browsing -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Private Browsing</h1>
+          <h2 class="slide-title">Private Browsing</h2>
           <p class="slide-subtitle">A handy tool — with limits</p>
         </div>
         <div class="slide-content">
@@ -1310,7 +1315,7 @@
       <!-- Slide 15: Staying Healthy Online -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Staying Healthy Online</h1>
+          <h2 class="slide-title">Staying Healthy Online</h2>
           <p class="slide-subtitle">Caring for your mind and body</p>
         </div>
         <div class="slide-content">
@@ -1346,7 +1351,7 @@
       <!-- Slide 16: Knowledge Check -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Knowledge Check</h1>
+          <h2 class="slide-title">Knowledge Check</h2>
           <p class="slide-subtitle">Try each question, then reveal the answer</p>
         </div>
         <div class="slide-content">
@@ -1388,7 +1393,7 @@
       <!-- Slide 17: Your Handouts -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Your Handouts &amp; Hands-On Lab</h1>
+          <h2 class="slide-title">Your Handouts &amp; Hands-On Lab</h2>
           <p class="slide-subtitle">Practice what we learned</p>
         </div>
         <div class="slide-content">
@@ -1410,7 +1415,7 @@
       <!-- Slide 18: Key Takeaways -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Key Takeaways</h1>
+          <h2 class="slide-title">Key Takeaways</h2>
           <p class="slide-subtitle">What to remember from today</p>
         </div>
         <div class="slide-content">

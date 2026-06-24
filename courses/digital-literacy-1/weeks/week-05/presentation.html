@@ -100,6 +100,7 @@
     }
 
     .slide-link {
+      font-family: inherit; background: none; border: none; text-align: left; width: 100%; color: inherit;
       padding: 0.6rem 0.75rem;
       border-radius: 6px;
       cursor: pointer;
@@ -603,6 +604,9 @@
       transform: translateY(-2px);
     }
 
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .slide-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
     /* Confetti */
     .confetti {
       position: fixed;
@@ -725,35 +729,35 @@
     <div class="chapter">
       <div class="chapter-title">Welcome &amp; How Today Works</div>
       <div class="chapter-slides">
-        <div class="slide-link active" data-slide="0">Welcome</div>
-        <div class="slide-link" data-slide="1">How Today Works</div>
-        <div class="slide-link" data-slide="2">Review Game Rules</div>
+        <button type="button" class="slide-link active" data-slide="0">Welcome</button>
+        <button type="button" class="slide-link" data-slide="1">How Today Works</button>
+        <button type="button" class="slide-link" data-slide="2">Review Game Rules</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Review Game by Domain</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="3">1 · Technology Basics</div>
-        <div class="slide-link" data-slide="4">1 · Technology Basics (cont.)</div>
-        <div class="slide-link" data-slide="5">2 · Digital Citizenship</div>
-        <div class="slide-link" data-slide="6">3 · Information Management</div>
-        <div class="slide-link" data-slide="7">4 · Content Creation</div>
-        <div class="slide-link" data-slide="8">4 · Content Creation (cont.)</div>
-        <div class="slide-link" data-slide="9">5 · Communication</div>
-        <div class="slide-link" data-slide="10">6 · Collaboration</div>
-        <div class="slide-link" data-slide="11">7 · Safety &amp; Security</div>
-        <div class="slide-link" data-slide="12">7 · Safety &amp; Security (cont.)</div>
+        <button type="button" class="slide-link" data-slide="3">1 · Technology Basics</button>
+        <button type="button" class="slide-link" data-slide="4">1 · Technology Basics (cont.)</button>
+        <button type="button" class="slide-link" data-slide="5">2 · Digital Citizenship</button>
+        <button type="button" class="slide-link" data-slide="6">3 · Information Management</button>
+        <button type="button" class="slide-link" data-slide="7">4 · Content Creation</button>
+        <button type="button" class="slide-link" data-slide="8">4 · Content Creation (cont.)</button>
+        <button type="button" class="slide-link" data-slide="9">5 · Communication</button>
+        <button type="button" class="slide-link" data-slide="10">6 · Collaboration</button>
+        <button type="button" class="slide-link" data-slide="11">7 · Safety &amp; Security</button>
+        <button type="button" class="slide-link" data-slide="12">7 · Safety &amp; Security (cont.)</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Wrap Up &amp; Post-Test</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="13">Lightning Round</div>
-        <div class="slide-link" data-slide="14">You Made It</div>
-        <div class="slide-link" data-slide="15">What's Next: Level 2</div>
-        <div class="slide-link" data-slide="16">Post-Test Time</div>
+        <button type="button" class="slide-link" data-slide="13">Lightning Round</button>
+        <button type="button" class="slide-link" data-slide="14">You Made It</button>
+        <button type="button" class="slide-link" data-slide="15">What's Next: Level 2</button>
+        <button type="button" class="slide-link" data-slide="16">Post-Test Time</button>
       </div>
     </div>
 
@@ -772,11 +776,12 @@
 
   <!-- Main Content -->
   <div class="main-content">
+    <h1 class="sr-only">Week 5: Review &amp; Testing Day</h1>
     <div class="slides-container">
       <!-- Slide 0: Title -->
       <div class="slide active title-slide">
         <div class="slide-icon">🎓</div>
-        <h1 class="slide-title">Review &amp; Testing Day</h1>
+        <h2 class="slide-title">Review &amp; Testing Day</h2>
         <p class="slide-subtitle">Everything you've learned — one celebration, one Post-Test</p>
         <p class="course-info">Week 5 of 5 · VUB Digital Literacy — Level 1</p>
       </div>
@@ -784,7 +789,7 @@
       <!-- Slide 1: How Today Works -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">How Today Works</h1>
+          <h2 class="slide-title">How Today Works</h2>
           <p class="slide-subtitle">No new material — today we review and measure your growth</p>
         </div>
         <div class="slide-content">
@@ -814,7 +819,7 @@
       <!-- Slide 2: Review Game Rules -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Review Game Rules</h1>
+          <h2 class="slide-title">Review Game Rules</h2>
           <p class="slide-subtitle">Seven categories — one for each topic we covered</p>
         </div>
         <div class="slide-content">
@@ -854,7 +859,7 @@
       <div class="slide">
         <div class="slide-header">
           <span class="review-category">Category 1 · Technology Basics</span>
-          <h1 class="slide-title">Parts, Devices &amp; Software</h1>
+          <h2 class="slide-title">Parts, Devices &amp; Software</h2>
         </div>
         <div class="slide-content">
           <div class="review-question">
@@ -880,7 +885,7 @@
       <div class="slide">
         <div class="slide-header">
           <span class="review-category">Category 1 · Technology Basics</span>
-          <h1 class="slide-title">Memory, Storage &amp; Operating Systems</h1>
+          <h2 class="slide-title">Memory, Storage &amp; Operating Systems</h2>
         </div>
         <div class="slide-content">
           <div class="review-question">
@@ -908,7 +913,7 @@
       <div class="slide">
         <div class="slide-header">
           <span class="review-category">Category 2 · Digital Citizenship</span>
-          <h1 class="slide-title">Your Identity &amp; Reputation Online</h1>
+          <h2 class="slide-title">Your Identity &amp; Reputation Online</h2>
         </div>
         <div class="slide-content">
           <div class="review-question">
@@ -935,7 +940,7 @@
       <div class="slide">
         <div class="slide-header">
           <span class="review-category">Category 3 · Information Management</span>
-          <h1 class="slide-title">Searching &amp; Using Content</h1>
+          <h2 class="slide-title">Searching &amp; Using Content</h2>
         </div>
         <div class="slide-content">
           <div class="review-question">
@@ -963,7 +968,7 @@
       <div class="slide">
         <div class="slide-header">
           <span class="review-category">Category 4 · Content Creation</span>
-          <h1 class="slide-title">Saving &amp; Naming Your Work</h1>
+          <h2 class="slide-title">Saving &amp; Naming Your Work</h2>
         </div>
         <div class="slide-content">
           <div class="review-question">
@@ -990,7 +995,7 @@
       <div class="slide">
         <div class="slide-header">
           <span class="review-category">Category 4 · Content Creation</span>
-          <h1 class="slide-title">Citations &amp; Printing</h1>
+          <h2 class="slide-title">Citations &amp; Printing</h2>
         </div>
         <div class="slide-content">
           <div class="review-question">
@@ -1017,7 +1022,7 @@
       <div class="slide">
         <div class="slide-header">
           <span class="review-category">Category 5 · Communication</span>
-          <h1 class="slide-title">Email &amp; Talking Online</h1>
+          <h2 class="slide-title">Email &amp; Talking Online</h2>
         </div>
         <div class="slide-content">
           <div class="review-question">
@@ -1044,7 +1049,7 @@
       <div class="slide">
         <div class="slide-header">
           <span class="review-category">Category 6 · Collaboration</span>
-          <h1 class="slide-title">Working Together Online</h1>
+          <h2 class="slide-title">Working Together Online</h2>
         </div>
         <div class="slide-content">
           <div class="review-question">
@@ -1071,7 +1076,7 @@
       <div class="slide">
         <div class="slide-header">
           <span class="review-category">Category 7 · Safety &amp; Security</span>
-          <h1 class="slide-title">Strong Passwords &amp; Locking Up</h1>
+          <h2 class="slide-title">Strong Passwords &amp; Locking Up</h2>
         </div>
         <div class="slide-content">
           <div class="review-question">
@@ -1098,7 +1103,7 @@
       <div class="slide">
         <div class="slide-header">
           <span class="review-category">Category 7 · Safety &amp; Security</span>
-          <h1 class="slide-title">Scams, Private Browsing &amp; Your Health</h1>
+          <h2 class="slide-title">Scams, Private Browsing &amp; Your Health</h2>
         </div>
         <div class="slide-content">
           <div class="review-question">
@@ -1125,7 +1130,7 @@
       <!-- Slide 13: Lightning Round -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Lightning Round</h1>
+          <h2 class="slide-title">Lightning Round</h2>
           <p class="slide-subtitle">Five quick ones — call them out as a group</p>
         </div>
         <div class="slide-content">
@@ -1151,7 +1156,7 @@
       <!-- Slide 14: You Made It (recap/summary) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">You Made It! 🎉</h1>
+          <h2 class="slide-title">You Made It! 🎉</h2>
           <p class="slide-subtitle">Look how much you can do now</p>
         </div>
         <div class="slide-content">
@@ -1193,7 +1198,7 @@
       <!-- Slide 15: What's Next - Level 2 -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">What's Next: Level 2</h1>
+          <h2 class="slide-title">What's Next: Level 2</h2>
           <p class="slide-subtitle">Your digital literacy journey keeps going</p>
         </div>
         <div class="slide-content">
@@ -1234,7 +1239,7 @@
       <!-- Slide 16: Post-Test Time -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Post-Test Time</h1>
+          <h2 class="slide-title">Post-Test Time</h2>
           <p class="slide-subtitle">The same kind of test as Week 1 — now let's measure your growth</p>
         </div>
         <div class="slide-content">
