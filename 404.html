@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page Not Found — VUB Learning</title>
+  <script>
+    (function () {
+      var match = location.pathname.match(/^\/courses\/weeks\/(week-\d{2})\/(.+)$/);
+      if (!match) return;
+      var rest = match[2].replace(/^\/+/, '');
+      if (rest && rest.indexOf('.') === -1) rest += '.html';
+      location.replace('/courses/computer-skills/weeks/' + match[1] + '/' + rest + location.search + location.hash);
+    })();
+  </script>
   <link rel="icon" href="/assets/favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/shared/brand.css">
@@ -25,5 +34,6 @@
     <p>We couldn't find that page. It may have moved, or the link may be out of date.</p>
     <a class="btn" href="/index.html">Return to VUB Learning Home</a>
   </div>
+  <script src="/shared/text-size.js" defer></script>
 </body>
 </html>
