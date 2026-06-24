@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 5 Instructor Guide | VUB Digital Literacy — Level 1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--va-blue) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+
+    .header-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Overview Box */
+    .overview-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .overview-box h2 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .objectives-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .objectives-list li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .objectives-list li::before {
+      content: "🎯";
+      position: absolute;
+      left: 0;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-header {
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px 8px 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline-body {
+      border: 2px solid var(--va-blue);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid var(--off-white);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-time {
+      background: var(--off-white);
+      padding: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timeline-content {
+      padding: 0.75rem 1rem;
+    }
+
+    .timeline-content h4 {
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-content p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin: 0;
+    }
+
+    /* Activity Badge */
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+
+    .activity-lecture {
+      background: rgba(27, 54, 93, 0.15);
+      color: var(--primary);
+    }
+
+    .activity-demo {
+      background: rgba(201, 162, 39, 0.2);
+      color: #8B7500;
+    }
+
+    .activity-practice {
+      background: rgba(40, 167, 69, 0.15);
+      color: var(--success);
+    }
+
+    .activity-assessment {
+      background: rgba(220, 53, 69, 0.15);
+      color: var(--danger);
+    }
+
+    .activity-warmup {
+      background: rgba(255, 152, 0, 0.15);
+      color: #E65100;
+    }
+
+    .activity-break {
+      background: rgba(156, 39, 176, 0.15);
+      color: #7B1FA2;
+    }
+
+    .activity-eval {
+      background: rgba(3, 169, 244, 0.15);
+      color: #0277BD;
+    }
+
+    .activity-apply {
+      background: rgba(76, 175, 80, 0.15);
+      color: #2E7D32;
+    }
+
+    /* Instructor Notes */
+    .notes-section {
+      background: rgba(201, 162, 39, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .notes-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .notes-section ul {
+      list-style: none;
+    }
+
+    .notes-section li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .notes-section li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Materials Checklist */
+    .materials-section {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .materials-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .material-category h4 {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .material-category ul {
+      list-style: none;
+    }
+
+    .material-category li {
+      padding: 0.25rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .material-category li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    /* Discussion Questions */
+    .discussion-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .discussion-section h3 {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .discussion-list {
+      list-style: none;
+    }
+
+    .discussion-list li {
+      background: var(--off-white);
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .discussion-list li strong {
+      display: block;
+      font-style: normal;
+      color: var(--primary);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Tips Box */
+    .tips-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tips-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tips-box ul {
+      list-style: none;
+    }
+
+    .tips-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .tips-box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    /* Assessment Info */
+    .assessment-box {
+      background: rgba(220, 53, 69, 0.08);
+      border: 2px solid var(--danger);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .assessment-box h3 {
+      color: var(--danger);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .assessment-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .timeline-header, .discussion-section h3 {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div>
+        <h1>Week 5: Review &amp; Testing Day</h1>
+        <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">VUB Digital Literacy — Level 1 (IC3 GS6 Aligned)</p>
+      </div>
+      <span class="header-badge">Instructor Guide</span>
+    </div>
+    <div class="header-meta">
+      <span>📅 Week 5 of 5</span>
+      <span>⏱️ 2 Hours</span>
+      <span>👥 Veterans Group</span>
+      <span>📍 Computer Lab</span>
+    </div>
+  </header>
+
+  <div class="overview-box">
+    <h2>🎯 Session Goals</h2>
+    <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--gray);">This is a review-and-testing day — <strong>no new content</strong>. By the end of the session, participants will have:</p>
+    <ul class="objectives-list">
+      <li>Reviewed all 7 IC3 GS6 Level 1 topics via a review game</li>
+      <li>Refreshed key terms and skills from Weeks 1–4</li>
+      <li>Completed the Post-Test independently</li>
+      <li>Seen their growth from the Week 1 Pre-Test</li>
+      <li>Received the Level 1 Study Guide to keep</li>
+      <li>Previewed what comes next in Level 2</li>
+    </ul>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-header">⏰ Session Timeline (2 Hours)</div>
+    <div class="timeline-body">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00-0:08</div>
+        <div class="timeline-content">
+          <h4>Welcome &amp; How Today Works <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <p>Welcome everyone to the final session. Explain the plan: a fun review game first, then the Post-Test, then a wrap-up. Reassure them the test is not graded. Hand out the Level 1 Study Guide so they can follow along.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:08-0:50</div>
+        <div class="timeline-content">
+          <h4>Review Game — All 7 Topics <span class="activity-type activity-practice">Review Game</span></h4>
+          <p>Project the Week 5 presentation. Work through the seven categories (Technology Basics → Safety &amp; Security). Read each question, let the group guess out loud, then click "Reveal answer." Keep it light and celebratory — this is recall practice, not a quiz. Finish with the Lightning Round.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:50-1:00</div>
+        <div class="timeline-content">
+          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <p>10-minute break. Encourage participants to stretch and get water before the Post-Test so they can focus.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:00-1:10</div>
+        <div class="timeline-content">
+          <h4>Post-Test Setup &amp; Instructions <span class="activity-type activity-demo">Setup</span></h4>
+          <p>Have each participant open the Post-Test (from the last presentation slide or the course page). Show how to enter their name and answer questions. Remind them: no time limit, work at your own pace, raise a hand if a question is unclear.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:10-1:40</div>
+        <div class="timeline-content">
+          <h4>Post-Test Administration <span class="activity-type activity-assessment">Assessment</span></h4>
+          <p>Participants complete the ~20-question Post-Test independently. Keep the room quiet and calm. Walk around to help with the computer (not the answers). Those who finish early can review their results or read the study guide.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:40-1:50</div>
+        <div class="timeline-content">
+          <h4>Results &amp; Celebrate Growth <span class="activity-type activity-eval">Evaluation</span></h4>
+          <p>Walk through how to read the score and the pre→post comparison. Celebrate improvement out loud — the point is growth, not perfection. Invite a few volunteers to share one thing they can do now that they couldn't five weeks ago.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:50-2:00</div>
+        <div class="timeline-content">
+          <h4>Wrap-Up &amp; Level 2 Preview <span class="activity-type activity-apply">Application</span></h4>
+          <p>Thank everyone for completing the course. Hand out any certificates of completion. Preview Digital Literacy — Level 2 and encourage them to keep their study guide and quick-reference cards. Final challenge: try one skill at home this week.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <h3>📝 Instructor Notes</h3>
+    <ul>
+      <li><strong>No new content today:</strong> Resist the urge to teach new material. The job today is to consolidate, reassure, and measure. Keep the energy positive.</li>
+      <li><strong>Run the game as a group:</strong> The review game works best projected on the big screen with the whole class guessing together. Reveal answers only after a guess — that pause is what cements recall.</li>
+      <li><strong>Test anxiety is real:</strong> Many older learners feel nervous about "tests." Repeat often that it's not graded and there's no time limit. Frame it as "showing yourself how much you've learned."</li>
+      <li><strong>Help with the computer, not the answers:</strong> During the Post-Test, assist with clicking, scrolling, and typing — but let the answers be theirs.</li>
+      <li><strong>Celebrate every gain:</strong> Even a small improvement over the Pre-Test is a win worth naming out loud.</li>
+      <li><strong>Have a paper backup:</strong> If a workstation has trouble, the printable Post-Test is a ready fallback.</li>
+    </ul>
+  </div>
+
+  <div class="materials-section">
+    <h3>📦 Materials Checklist</h3>
+    <div class="materials-grid">
+      <div class="material-category">
+        <h4>Handouts (Print)</h4>
+        <ul>
+          <li>Level 1 Study Guide (1 per learner)</li>
+          <li>Printable Post-Test (backup copies)</li>
+          <li>Certificates of completion (optional)</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Technology</h4>
+        <ul>
+          <li>Projector connected &amp; working</li>
+          <li>Week 5 presentation open on instructor PC</li>
+          <li>Each workstation powered on</li>
+          <li>Post-Test page loads on each screen</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Preparation</h4>
+        <ul>
+          <li>Click through the review game once beforehand</li>
+          <li>Confirm Post-Test scoring works</li>
+          <li>Know how to show the pre→post comparison</li>
+          <li>Have Level 2 details ready to preview</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="discussion-section">
+    <h3>💬 Discussion Prompts</h3>
+    <ul class="discussion-list">
+      <li>
+        <strong>Opener:</strong>
+        "We're at the finish line! Before we start the game — what's one thing from this course you've already used at home?"
+      </li>
+      <li>
+        <strong>During the review game:</strong>
+        "Anyone want to take a guess before we reveal it? There are no wrong guesses here."
+      </li>
+      <li>
+        <strong>Before the Post-Test:</strong>
+        "Think back to Week 1 — a lot of this was brand new then. Notice how much more sense it makes now."
+      </li>
+      <li>
+        <strong>After results:</strong>
+        "What's one skill you're most proud of learning over these five weeks?"
+      </li>
+      <li>
+        <strong>Wrap-up:</strong>
+        "What would you like to keep learning in Level 2?"
+      </li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>✅ Facilitation Tips</h3>
+    <ul>
+      <li>Keep the review game moving — about 3–4 minutes per category leaves time for the Lightning Round</li>
+      <li>Read questions and answers aloud for anyone who has trouble seeing the screen</li>
+      <li>Use the sitewide text-size control if learners need bigger print</li>
+      <li>Give a clear "5 minutes left" warning during the Post-Test</li>
+      <li>Frame the Post-Test as a personal milestone, never a competition</li>
+      <li>End on a high note — name the group's progress and thank them for showing up</li>
+    </ul>
+  </div>
+
+  <div class="assessment-box">
+    <h3>📊 Post-Test Notes</h3>
+    <p>
+      <strong>Purpose:</strong> Measure growth against the Week 1 Pre-Test (parallel forms, same blueprint).<br>
+      <strong>Duration:</strong> 30 minutes budgeted (no hard time limit — allow extra if needed)<br>
+      <strong>Format:</strong> ~20 multiple-choice questions sampling all 7 IC3 GS6 Level 1 topics<br>
+      <strong>Scoring:</strong> Automatic in-browser; results saved locally so the pre→post comparison can be shown<br>
+      <strong>Reassurance:</strong> Not pass/fail. The goal is to celebrate improvement, not to grade.
+    </p>
+  </div>
+
+  <div class="notes-section" style="background: rgba(23, 162, 184, 0.1); border-color: #17A2B8;">
+    <h3 style="color: #17A2B8;">🔮 Looking Ahead: Digital Literacy — Level 2</h3>
+    <ul>
+      <li><strong>Track:</strong> The next rung of the IC3-aligned ladder (Level 1 → Level 2 → Level 3)</li>
+      <li><strong>Builds on:</strong> Everything covered here — devices, getting online, creating, communicating, and staying safe</li>
+      <li><strong>Encourage:</strong> Keep the Study Guide and quick-reference cards; practice one new skill each week</li>
+      <li><strong>Connection:</strong> Confidence built in Level 1 is the foundation for deeper, hands-on application work in Level 2</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Digital Literacy — Level 1 | Instructor Guide - Week 5 (Review &amp; Testing Day)</p>
+    <p style="margin-top: 0.5rem; font-style: italic;">Questions? Contact: Britt Legg</p>
+  </footer>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

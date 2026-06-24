@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashcards — Digital Literacy: Level 1</title>
+<style>
+  :root {
+    --va-blue: #003F72;
+    --navy: #1B365D;
+    --navy-dark: #0D1B2A;
+    --navy-light: #2C4A7C;
+    --red: #B31942;
+    --gold: #C9A227;
+    --gold-light: #E6C65C;
+    --off-white: #F5F7FA;
+    --ink: #1a1a1a;
+    --line: #cdd7e2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--ink);
+    background: var(--off-white);
+    line-height: 1.6;
+    font-size: 1.125rem;
+  }
+  a { color: var(--va-blue); }
+
+  /* Header */
+  .topbar {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+    color: #fff;
+    padding: 1.25rem 1rem;
+  }
+  .topbar-inner { max-width: 960px; margin: 0 auto; }
+  .back-link {
+    display: inline-block; color: var(--gold-light); text-decoration: none;
+    font-weight: 700; font-size: 1rem; margin-bottom: 0.6rem;
+    padding: 0.35rem 0.1rem;
+  }
+  .back-link:hover, .back-link:focus { text-decoration: underline; }
+  .topbar h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 1.85rem; line-height: 1.25; }
+  .topbar .sub { font-size: 1rem; opacity: 0.92; margin-top: 0.35rem; }
+  .badge {
+    display: inline-block; background: rgba(255,255,255,0.18); color: #fff;
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 0.15rem 0.55rem; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; margin-top: 0.6rem;
+  }
+
+  main { max-width: 960px; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+
+  .how {
+    background: #fff; border: 1px solid var(--line); border-left: 6px solid var(--gold);
+    border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 1.25rem;
+  }
+  .how h2 { font-size: 1.1rem; color: var(--navy); margin-bottom: 0.3rem; }
+  .how p { font-size: 1rem; }
+  .how kbd {
+    font-family: 'Segoe UI', sans-serif; background: var(--off-white);
+    border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px;
+    padding: 0.05rem 0.4rem; font-weight: 700; font-size: 0.95rem;
+  }
+
+  /* Filter */
+  .filter { margin-bottom: 1.25rem; }
+  .filter h2 { font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem; }
+  .filter-group { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .chip {
+    font-family: inherit; font-size: 0.95rem; font-weight: 700;
+    background: #fff; color: var(--navy); border: 2px solid var(--navy-light);
+    border-radius: 999px; padding: 0.4rem 0.9rem; cursor: pointer;
+    min-height: 44px;
+  }
+  .chip:hover { background: var(--off-white); }
+  .chip[aria-pressed="true"] {
+    background: var(--navy); color: #fff; border-color: var(--navy);
+  }
+  .chip[aria-pressed="true"]::before { content: "\2713\00a0"; }
+  .chip:focus-visible, .nav-btn:focus-visible, .card:focus-visible, .back-link:focus-visible {
+    outline: 3px solid var(--gold); outline-offset: 2px;
+  }
+
+  .count { font-size: 1rem; color: #444; margin-bottom: 0.75rem; font-weight: 600; }
+  .count .term-domain { color: var(--va-blue); }
+
+  /* Card */
+  .stage { perspective: 1600px; margin-bottom: 1rem; }
+  .card {
+    position: relative; width: 100%; min-height: 340px;
+    cursor: pointer; background: transparent; border: none;
+    transition: transform 0.5s; transform-style: preserve-3d;
+    text-align: left; font-family: inherit;
+  }
+  .card.flipped { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0; -webkit-backface-visibility: hidden; backface-visibility: hidden;
+    border-radius: 14px; padding: 1.5rem 1.6rem;
+    display: flex; flex-direction: column; justify-content: center;
+    box-shadow: 0 6px 18px rgba(13,27,42,0.18);
+  }
+  .face-front { background: #fff; border: 2px solid var(--navy); }
+  .face-back { background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: #fff; transform: rotateY(180deg); }
+  .face .domain-tag {
+    align-self: flex-start; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.9rem;
+  }
+  .face-front .domain-tag { background: var(--off-white); color: var(--va-blue); border: 1px solid var(--line); }
+  .face-back .domain-tag { background: rgba(255,255,255,0.18); color: var(--gold-light); border: 1px solid rgba(255,255,255,0.3); }
+  .face .label {
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .face-front .label { color: var(--red); }
+  .face-back .label { color: var(--gold-light); }
+  .face .term { font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; line-height: 1.25; font-weight: 700; }
+  .face-front .term { color: var(--navy); }
+  .face .def { font-size: 1.2rem; line-height: 1.5; }
+  .face .flip-hint { margin-top: auto; padding-top: 1rem; font-size: 0.9rem; opacity: 0.85; }
+
+  /* Nav */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 0.75rem; flex-wrap: wrap;
+  }
+  .nav-btn {
+    font-family: inherit; font-size: 1.05rem; font-weight: 700;
+    background: var(--navy); color: #fff; border: 2px solid var(--navy);
+    border-radius: 8px; padding: 0.65rem 1.2rem; cursor: pointer;
+    min-height: 44px; min-width: 130px;
+  }
+  .nav-btn:hover:not(:disabled) { background: var(--navy-light); border-color: var(--navy-light); }
+  .nav-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .nav-btn.flip-btn { background: var(--gold); color: var(--navy-dark); border-color: var(--gold); }
+  .nav-btn.flip-btn:hover { background: var(--gold-light); border-color: var(--gold-light); }
+  .progress {
+    flex: 1 1 160px; text-align: center; font-size: 1.05rem; font-weight: 700; color: var(--navy);
+    min-width: 120px;
+  }
+  .empty { background:#fff; border:1px dashed var(--line); border-radius:10px; padding:2rem; text-align:center; color:#555; }
+
+  footer { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 2.5rem; text-align: center; color: #555; font-size: 0.9rem; }
+
+  @media (max-width: 540px) {
+    .topbar h1 { font-size: 1.5rem; }
+    .face .term { font-size: 1.55rem; }
+    .nav-btn { min-width: 0; flex: 1 1 auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none; }
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="back-link" href="/courses/digital-literacy-1/index.html">&larr; Back to course</a>
+    <h1>Flashcards</h1>
+    <div class="sub">Digital Literacy &mdash; Level 1 &nbsp;&middot;&nbsp; Key terms across all 7 IC3 areas</div>
+    <span class="badge">STUDY &amp; REVIEW</span>
+  </div>
+</header>
+
+<main>
+  <section class="how" aria-label="How to use these flashcards">
+    <h2>How to use these cards</h2>
+    <p>Read the term, think about what it means, then flip the card to check your answer.
+       Click a card (or press <kbd>Spacebar</kbd>) to flip it. Use <kbd>&larr;</kbd> and <kbd>&rarr;</kbd>
+       or the buttons to move between cards. Use the buttons below to study one topic area at a time.</p>
+  </section>
+
+  <section class="filter" aria-label="Choose a topic area">
+    <h2 id="filter-label">Show cards from:</h2>
+    <div class="filter-group" role="group" aria-labelledby="filter-label" id="filter-group"></div>
+  </section>
+
+  <p class="count" id="count" aria-live="polite"></p>
+
+  <div class="stage">
+    <button type="button" class="card" id="card" aria-live="polite"
+            aria-describedby="flip-instructions">
+      <div class="face face-front">
+        <span class="domain-tag" id="front-domain"></span>
+        <span class="label">Term</span>
+        <span class="term" id="front-term"></span>
+        <span class="flip-hint">Click or press Spacebar to see the meaning &rarr;</span>
+      </div>
+      <div class="face face-back">
+        <span class="domain-tag" id="back-domain"></span>
+        <span class="label">Plain-language meaning</span>
+        <span class="def" id="back-def"></span>
+        <span class="flip-hint">Click or press Spacebar to flip back</span>
+      </div>
+    </button>
+  </div>
+  <p id="flip-instructions" class="sr-only" style="position:absolute;left:-9999px;">Press Enter or Spacebar to flip this card between the term and its meaning.</p>
+
+  <nav class="nav" aria-label="Flashcard navigation">
+    <button type="button" class="nav-btn" id="prev-btn">&larr; Previous</button>
+    <span class="progress" id="progress" aria-live="polite"></span>
+    <button type="button" class="nav-btn flip-btn" id="flip-btn">Flip card</button>
+    <button type="button" class="nav-btn" id="next-btn">Next &rarr;</button>
+  </nav>
+</main>
+
+<footer>
+  Veterans Upward Bound &mdash; West Virginia &nbsp;|&nbsp; Digital Literacy: Level 1 &nbsp;|&nbsp; Aligned to IC3 GS6 Level 1
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // Domains correspond to the 7 IC3 GS6 Level 1 objective areas.
+  var DOMAINS = [
+    { id: "all",  label: "All areas" },
+    { id: "d1",   label: "1. Technology Basics" },
+    { id: "d2",   label: "2. Digital Citizenship" },
+    { id: "d3",   label: "3. Information Management" },
+    { id: "d4",   label: "4. Content Creation" },
+    { id: "d5",   label: "5. Communication" },
+    { id: "d6",   label: "6. Collaboration" },
+    { id: "d7",   label: "7. Safety & Security" }
+  ];
+
+  var CARDS = [
+    // 1. Technology Basics
+    { d: "d1", t: "Input device", b: "A part you use to put information INTO the computer — a keyboard, mouse, microphone, webcam, or scanner." },
+    { d: "d1", t: "Output device", b: "A part the computer uses to send information OUT to you — the monitor, speakers or headphones, and the printer." },
+    { d: "d1", t: "Port / connector", b: "A socket where you plug a cable in. Common ones are USB-A, USB-C, HDMI (picture + sound), and Ethernet (wired internet)." },
+    { d: "d1", t: "Hardware", b: "The physical parts you can touch — the screen, keyboard, and the box with the CPU, memory, and drive inside." },
+    { d: "d1", t: "Software", b: "The programs and instructions that tell the hardware what to do. You cannot touch software — it is the apps and the operating system." },
+    { d: "d1", t: "CPU (processor)", b: "The “brain” of the computer. It does the thinking and runs the instructions in your programs." },
+    { d: "d1", t: "RAM (memory)", b: "Short-term memory, like a desk. It holds whatever is open right now and empties when you shut down. More RAM lets you run more at once." },
+    { d: "d1", t: "Storage (the drive)", b: "Long-term storage, like a filing cabinet. It keeps your files, photos, and programs even when the computer is turned off." },
+    { d: "d1", t: "RAM vs. storage", b: "RAM is the temporary desk you work on (clears when you shut down). Storage is the cabinet that keeps your files for good. They are different jobs." },
+    { d: "d1", t: "Operating system (OS)", b: "The main software that runs the whole computer and lets you open programs. Windows, macOS, Android, and iOS are operating systems." },
+    { d: "d1", t: "Application (“app”)", b: "A program you open to do a task — a web browser, Microsoft Word, or a photo viewer. Apps run on top of the operating system." },
+    { d: "d1", t: "Open source software", b: "Software whose code is public and is usually free to use, like Firefox or VLC. Anyone is allowed to study or improve it." },
+    { d: "d1", t: "Proprietary software", b: "Software owned by a company, whose code is private. You usually pay for it or agree to a license, like Microsoft Office." },
+
+    // 2. Digital Citizenship
+    { d: "d2", t: "Digital identity", b: "Everything that represents you online — your accounts, profiles, posts, and the personal details you share. You choose how to manage it." },
+    { d: "d2", t: "PII (personally identifiable information)", b: "Details that can identify YOU, such as your full name, Social Security number, address, birth date, or bank account. Guard it carefully." },
+    { d: "d2", t: "Digital reputation", b: "The impression people form of you from what you post and do online. Employers and others may look you up, so keep it positive." },
+    { d: "d2", t: "Digital permanence", b: "The idea that things you post online can last forever and spread, even after you delete them. Think before you post." },
+    { d: "d2", t: "Online anonymity", b: "Not showing your real identity online. It can protect privacy, but it can also let people behave badly without being recognized." },
+    { d: "d2", t: "Nonresponse", b: "Choosing NOT to reply to rude or hurtful messages online. Often the safest response is to ignore, block, and report instead of arguing." },
+
+    // 3. Information Management
+    { d: "d3", t: "Search engine", b: "A website like Google or Bing that helps you find information across the internet by typing in words (a “search”)." },
+    { d: "d3", t: "Keywords", b: "The important words you type into a search. Choosing clear, specific keywords gives you better, more relevant results." },
+    { d: "d3", t: "Relevant vs. irrelevant results", b: "Relevant results actually answer your question; irrelevant ones do not. Part of searching is judging which results are worth your time." },
+    { d: "d3", t: "Source reference", b: "A note of WHERE you found information — the website name, author, and date — so you can find it again and show where it came from." },
+    { d: "d3", t: "Ctrl + F (Find)", b: "A keyboard shortcut that searches for a word ON the current page or in a file. Press Ctrl and F together, type a word, and jump to it." },
+    { d: "d3", t: "Public domain", b: "Content that is free for anyone to use because its copyright has expired or was never claimed. No permission is needed." },
+    { d: "d3", t: "Creative Commons", b: "A set of free licenses creators use to let others reuse their work under certain rules — often “give credit” or “no selling.”" },
+    { d: "d3", t: "Copyright", b: "The legal right that says who may copy or use a creative work. Most things online are copyrighted, so check before you reuse them." },
+
+    // 4. Content Creation
+    { d: "d4", t: "Document", b: "A file you create to hold text and pictures, such as a letter or report. Microsoft Word and Google Docs are programs for making documents." },
+    { d: "d4", t: "Presentation", b: "A file made of slides used to share ideas with a group, often built in PowerPoint or Google Slides." },
+    { d: "d4", t: "Citation", b: "A note that credits where you got information or a quote. Citing sources is honest and lets others check your facts." },
+    { d: "d4", t: "File-naming convention", b: "A consistent way of naming files so they are easy to find later, such as “VA-Letter-2026-02-09.” Clear names beat “document1.”" },
+    { d: "d4", t: "Save vs. Save As", b: "“Save” updates the current file. “Save As” makes a new copy with a new name or location, leaving the original unchanged." },
+    { d: "d4", t: "Backup", b: "A second copy of your files kept somewhere else — a flash drive or the cloud — so you do not lose them if the computer fails." },
+    { d: "d4", t: "Portrait vs. landscape", b: "Two page orientations for printing. Portrait is tall (like a letter); landscape is wide (good for charts or photos)." },
+
+    // 5. Communication
+    { d: "d5", t: "Acceptable use policy", b: "The rules for using a website, network, or workplace computer. Following them keeps your access and avoids trouble." },
+    { d: "d5", t: "Reply vs. Reply All", b: "“Reply” answers only the sender. “Reply All” answers everyone on the email. Use Reply All only when the whole group truly needs your message." },
+    { d: "d5", t: "Forward", b: "Sending an email you received on to someone new, along with its contents, so they can read it too." },
+    { d: "d5", t: "Bcc (blind carbon copy)", b: "A way to send an email to extra people without the other recipients seeing their addresses. Good for protecting privacy on group emails." },
+    { d: "d5", t: "Inclusive language", b: "Words that are respectful and welcoming to everyone, avoiding terms that leave people out or cause offense." },
+    { d: "d5", t: "Effective vs. ineffective interaction", b: "Effective messages are clear, polite, and on-topic. Ineffective ones are confusing, rude, or sent to the wrong people." },
+
+    // 6. Collaboration
+    { d: "d6", t: "Digital collaboration", b: "Working together on the same project online — sharing a document, leaving comments, or meeting by video instead of in one room." },
+    { d: "d6", t: "Synchronous communication", b: "Talking at the SAME time, live — a phone call, a video meeting, or a chat where you both reply right away." },
+    { d: "d6", t: "Asynchronous communication", b: "Communicating at DIFFERENT times — email or a shared document where you reply whenever you are able, not instantly." },
+    { d: "d6", t: "Digital etiquette (netiquette)", b: "Good manners online: be polite, avoid ALL CAPS (it reads as shouting), keep messages clear, and respect others’ time." },
+
+    // 7. Safety & Security
+    { d: "d7", t: "Phishing", b: "A fake email or message that pretends to be a trusted company to trick you into giving passwords or money. Do not click — verify first." },
+    { d: "d7", t: "Strong password / passphrase", b: "A login secret that is long and hard to guess. A passphrase is several random words strung together — longer is stronger." },
+    { d: "d7", t: "Two-factor authentication (2FA)", b: "A second check after your password — usually a code texted to your phone — so a stolen password alone cannot open your account." },
+    { d: "d7", t: "Locking your device", b: "Setting your computer or phone to need a password, PIN, or fingerprint when you step away, so others cannot use it." },
+    { d: "d7", t: "Clearing browser data", b: "Deleting saved history, cookies, and passwords from your web browser — useful on a shared or public computer." },
+    { d: "d7", t: "Private browsing", b: "A browser mode (such as InPrivate or Incognito) that does not save your history or sign-ins on that device. Helpful on shared computers." },
+    { d: "d7", t: "Tracking", b: "Technology that records what you do online — sites you visit and things you click — often to show you ads. Private browsing limits it." },
+    { d: "d7", t: "Ergonomics", b: "Setting up your desk, chair, and screen to protect your body — good posture, screen at eye level, and short breaks to rest your eyes." }
+  ];
+
+  // ---- State ----
+  var filter = "all";
+  var deck = CARDS.slice();
+  var index = 0;
+  var flipped = false;
+
+  // ---- Elements ----
+  var filterGroup = document.getElementById("filter-group");
+  var countEl = document.getElementById("count");
+  var card = document.getElementById("card");
+  var frontDomain = document.getElementById("front-domain");
+  var frontTerm = document.getElementById("front-term");
+  var backDomain = document.getElementById("back-domain");
+  var backDef = document.getElementById("back-def");
+  var prevBtn = document.getElementById("prev-btn");
+  var nextBtn = document.getElementById("next-btn");
+  var flipBtn = document.getElementById("flip-btn");
+  var progress = document.getElementById("progress");
+
+  function domainLabel(id) {
+    for (var i = 0; i < DOMAINS.length; i++) {
+      if (DOMAINS[i].id === id) { return DOMAINS[i].label; }
+    }
+    return "";
+  }
+
+  // ---- Build filter chips ----
+  DOMAINS.forEach(function (dom) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chip";
+    btn.textContent = dom.label;
+    btn.setAttribute("aria-pressed", dom.id === filter ? "true" : "false");
+    btn.addEventListener("click", function () { setFilter(dom.id); });
+    filterGroup.appendChild(btn);
+  });
+
+  function setFilter(id) {
+    filter = id;
+    deck = (id === "all") ? CARDS.slice() : CARDS.filter(function (c) { return c.d === id; });
+    index = 0;
+    flipped = false;
+    var chips = filterGroup.querySelectorAll(".chip");
+    for (var i = 0; i < chips.length; i++) {
+      chips[i].setAttribute("aria-pressed", DOMAINS[i].id === id ? "true" : "false");
+    }
+    render();
+  }
+
+  function render() {
+    var total = deck.length;
+    countEl.textContent = (filter === "all")
+      ? ("Showing all " + total + " key terms across the 7 areas.")
+      : ("Showing " + total + " term" + (total === 1 ? "" : "s") + " from ") ;
+    if (filter !== "all") {
+      var span = document.createElement("span");
+      span.className = "term-domain";
+      span.textContent = domainLabel(filter) + ".";
+      countEl.appendChild(span);
+    }
+
+    if (total === 0) {
+      card.style.display = "none";
+      progress.textContent = "";
+      prevBtn.disabled = true; nextBtn.disabled = true; flipBtn.disabled = true;
+      return;
+    }
+    card.style.display = "";
+    flipBtn.disabled = false;
+
+    var c = deck[index];
+    frontDomain.textContent = domainLabel(c.d);
+    frontTerm.textContent = c.t;
+    backDomain.textContent = domainLabel(c.d);
+    backDef.textContent = c.b;
+
+    card.classList.toggle("flipped", flipped);
+    card.setAttribute("aria-label",
+      "Card " + (index + 1) + " of " + total + ". " +
+      (flipped ? ("Meaning: " + c.b) : ("Term: " + c.t + ". Flip to see the meaning.")));
+
+    progress.textContent = "Card " + (index + 1) + " of " + total;
+    prevBtn.disabled = (index === 0);
+    nextBtn.disabled = (index === total - 1);
+  }
+
+  function flip() { flipped = !flipped; render(); }
+  function go(delta) {
+    var ni = index + delta;
+    if (ni < 0 || ni >= deck.length) { return; }
+    index = ni; flipped = false; render();
+  }
+
+  card.addEventListener("click", flip);
+  flipBtn.addEventListener("click", flip);
+  prevBtn.addEventListener("click", function () { go(-1); });
+  nextBtn.addEventListener("click", function () { go(1); });
+
+  document.addEventListener("keydown", function (e) {
+    var tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+    if (tag === "input" || tag === "textarea") { return; }
+    if (e.key === "ArrowRight") { go(1); e.preventDefault(); }
+    else if (e.key === "ArrowLeft") { go(-1); e.preventDefault(); }
+    // The card is a <button>, so Enter/Spacebar flips it natively.
+  });
+
+  render();
+})();
+</script>
+<script src="/shared/text-size.js" defer></script>
+</body>
+</html>

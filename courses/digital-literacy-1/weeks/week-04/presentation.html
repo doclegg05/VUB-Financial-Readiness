@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 4: Citizenship &amp; Safety | VUB Digital Literacy — Level 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B365D;
+      --primary-dark: #0D1B2A;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --red: #B31942;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .logo {
+      text-align: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .logo h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .logo p {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .week-indicator {
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .week-indicator .week-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .week-indicator .week-title {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .chapter {
+      margin-bottom: 1rem;
+    }
+
+    .chapter-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .chapter-slides {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .slide-link {
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slide-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .slide-link.active {
+      background: var(--va-blue);
+      font-weight: 600;
+    }
+
+    .slide-link.completed::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource-link::before {
+      content: "\2193 ";
+      opacity: 0.6;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .progress-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--va-blue) 0%, var(--accent) 100%);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Slides Container */
+    .slides-container {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .slide {
+      display: none;
+      background: var(--light);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 1000px;
+      min-height: 600px;
+      padding: 3rem;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Styles */
+    .slide-header {
+      margin-bottom: 2rem;
+    }
+
+    .slide-title {
+      font-size: 2.25rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray);
+    }
+
+    .slide-content {
+      font-size: 1.5rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .slide-content ul, .slide-content ol {
+      margin-left: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .slide-content li {
+      margin-bottom: 1rem;
+    }
+
+    /* Title Slide */
+    .title-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--light);
+      border-radius: 16px;
+    }
+
+    .title-slide .slide-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-slide .slide-title {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+      color: var(--light);
+    }
+
+    .title-slide .slide-subtitle {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .course-info {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* Info Boxes */
+    .info-box {
+      background: var(--off-white);
+      border-left: 4px solid var(--va-blue);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+    }
+
+    .info-box.success {
+      border-left-color: var(--success);
+      background: rgba(40, 167, 69, 0.1);
+    }
+
+    .info-box.warning {
+      border-left-color: var(--va-red);
+      background: rgba(196, 38, 46, 0.1);
+    }
+
+    .info-box-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .info-box-content {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Key Points */
+    .key-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--off-white);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .key-point-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .key-point-text {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .key-point-text strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .column {
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+
+    .column h3 {
+      color: var(--va-blue);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .column ul {
+      margin-left: 1.25rem;
+    }
+
+    .column li {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Steps List */
+    .steps-list {
+      list-style: none;
+      margin-left: 0 !important;
+      counter-reset: step-counter;
+    }
+
+    .steps-list li {
+      position: relative;
+      padding-left: 3.5rem;
+      margin-bottom: 1.5rem;
+      counter-increment: step-counter;
+    }
+
+    .steps-list li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--va-blue);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    /* Portal Card */
+    .portal-card {
+      background: white;
+      border: 2px solid var(--va-blue);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .portal-card-icon {
+      font-size: 3rem;
+      flex-shrink: 0;
+    }
+
+    .portal-card h4 {
+      color: var(--va-blue);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .portal-card p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .portal-card .url {
+      font-family: monospace;
+      background: var(--off-white);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: var(--va-blue);
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    /* Demo Box */
+    .demo-box {
+      background: linear-gradient(135deg, var(--va-blue) 0%, #002F5A 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .demo-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .demo-box p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Navigation Footer */
+    .nav-footer {
+      background: var(--light);
+      border-top: 1px solid #eee;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.prev {
+      background: var(--off-white);
+      color: var(--primary);
+    }
+
+    .nav-btn.prev:hover {
+      background: #e8e8e8;
+    }
+
+    .nav-btn.next {
+      background: var(--va-blue);
+      color: white;
+    }
+
+    .nav-btn.next:hover {
+      background: #002F5A;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .slide-counter {
+      font-size: 0.9rem;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* Completion Slide */
+    .completion-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+    }
+
+    .completion-badge {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, var(--va-blue) 0%, #002F5A 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 63, 114, 0.3);
+    }
+
+    .completion-badge span {
+      font-size: 4rem;
+    }
+
+    .completion-slide h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .completion-slide p {
+      font-size: 1.25rem;
+      color: var(--gray);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* Handout Prompt */
+    .handout-prompt {
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      color: var(--primary);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .handout-prompt-icon {
+      font-size: 2rem;
+    }
+
+    .handout-prompt-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* Pre-test Link */
+    .pretest-link {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .pretest-link:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      display: none;
+    }
+
+    .confetti.active {
+      display: block;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti-fall 3s ease-out forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar { width: 240px; }
+      .main-content { margin-left: 240px; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; }
+      .two-column { grid-template-columns: 1fr; }
+    }
+
+    /* Knowledge Check (accessible toggle answers) */
+    .kc-question {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .kc-question .kc-prompt {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .kc-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--va-blue);
+      color: var(--light);
+      border: 2px solid var(--va-blue);
+      border-radius: 8px;
+      padding: 0.6rem 1.25rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 44px;
+      transition: all 0.2s ease;
+    }
+
+    .kc-toggle:hover {
+      background: #002F5A;
+    }
+
+    .kc-toggle:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .kc-answer {
+      margin-top: 0.85rem;
+      padding: 1rem 1.25rem;
+      background: rgba(40, 167, 69, 0.1);
+      border-left: 4px solid var(--success);
+      border-radius: 0 8px 8px 0;
+      font-size: 1.1rem;
+      color: #2a2a2a;
+    }
+
+    .kc-answer[hidden] {
+      display: none;
+    }
+
+    .kc-answer .kc-label {
+      font-weight: 700;
+      color: var(--success);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="logo">
+      <h2>VUB Digital Literacy</h2>
+      <p>Level 1 · IC3 GS6 Aligned</p>
+    </div>
+
+    <div class="week-indicator">
+      <div class="week-num">Week 4</div>
+      <div class="week-title">Citizenship &amp; Safety</div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Digital Identity</div>
+      <div class="chapter-slides">
+        <div class="slide-link active" data-slide="0">Welcome &amp; Overview</div>
+        <div class="slide-link" data-slide="1">Learning Objectives</div>
+        <div class="slide-link" data-slide="2">Your Digital Identity</div>
+        <div class="slide-link" data-slide="3">Protecting Your PII</div>
+        <div class="slide-link" data-slide="4">Reputation &amp; Permanence</div>
+        <div class="slide-link" data-slide="5">Legal &amp; Ethical Behavior</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Responding to Bad Content</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="6">Impact of Negative Messages</div>
+        <div class="slide-link" data-slide="7">Is This Information True?</div>
+        <div class="slide-link" data-slide="8">Anonymity &amp; Nonresponse</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Security &amp; Passwords</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="9">Common Security Threats</div>
+        <div class="slide-link" data-slide="10">Strong Passphrases</div>
+        <div class="slide-link" data-slide="11">Reset &amp; Lock</div>
+        <div class="slide-link" data-slide="12">Clearing Browser Data</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Tracking &amp; Health</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="13">Tracking &amp; Stored Data</div>
+        <div class="slide-link" data-slide="14">Private Browsing</div>
+        <div class="slide-link" data-slide="15">Staying Healthy Online</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Wrap-Up</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="16">Knowledge Check</div>
+        <div class="slide-link" data-slide="17">Your Handouts</div>
+        <div class="slide-link" data-slide="18">Key Takeaways</div>
+        <div class="slide-link" data-slide="19">Great Work!</div>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <div class="resources-title">Resources</div>
+      <a class="resource-link" href="handouts/lock-it-down-lab.html" target="_blank">Lock It Down Lab</a>
+      <a class="resource-link" href="handouts/security-ergonomics-quick-reference.html" target="_blank">Security &amp; Ergonomics Quick Reference</a>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="slides-container">
+      <!-- Slide 0: Title -->
+      <div class="slide active title-slide">
+        <div class="slide-icon">🛡️</div>
+        <h1 class="slide-title">Citizenship &amp; Safety</h1>
+        <p class="slide-subtitle">Your identity, privacy, and security online</p>
+        <p class="course-info">Week 4 of 5 · VUB Digital Literacy — Level 1</p>
+      </div>
+
+      <!-- Slide 1: Learning Objectives -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Today's Learning Objectives</h1>
+          <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🪪</div>
+            <div class="key-point-text">
+              <strong>Manage Your Digital Identity</strong>
+              Protect your personal data and personal information, and guard your online reputation
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🧭</div>
+            <div class="key-point-text">
+              <strong>Respond Wisely to Bad Content</strong>
+              Judge whether information is true, and know when the best reply is no reply
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🔐</div>
+            <div class="key-point-text">
+              <strong>Protect Your Devices</strong>
+              Build strong passphrases, lock your screen, and clear your browser data
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">💚</div>
+            <div class="key-point-text">
+              <strong>Stay Healthy Online</strong>
+              Recognize tracking, browse privately, and set up a comfortable, safe workstation
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Your Digital Identity -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Your Digital Identity</h1>
+          <p class="slide-subtitle">Everything the internet knows about you</p>
+        </div>
+        <div class="slide-content">
+          <p>Your <strong>digital identity</strong> is the picture of you that builds up online — your accounts, your posts, your photos, and the details websites collect. You manage it every time you decide what to share.</p>
+          <div class="two-column">
+            <div class="column">
+              <h3>You Control This</h3>
+              <ul>
+                <li>What you post and share</li>
+                <li>Which accounts you create</li>
+                <li>Your privacy settings</li>
+                <li>Who you connect with</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>Smart Habits</h3>
+              <ul>
+                <li>Share less, not more</li>
+                <li>Review privacy settings yearly</li>
+                <li>Use a separate email for sign-ups</li>
+                <li>Think before you post</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">A Simple Rule</div>
+            <div class="info-box-content">
+              Before you share something online, ask: "Would I be comfortable if a stranger, my family, and a future employer all saw this?"
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Protecting Your PII -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Protecting Your Personal Information</h1>
+          <p class="slide-subtitle">What is PII, and why guard it?</p>
+        </div>
+        <div class="slide-content">
+          <p><strong>PII</strong> stands for <em>Personally Identifiable Information</em> — any detail that can be used to identify you. In the wrong hands, it can lead to identity theft or fraud.</p>
+          <div class="two-column">
+            <div class="column">
+              <h3>Examples of PII</h3>
+              <ul>
+                <li>Social Security number</li>
+                <li>Date of birth</li>
+                <li>Home address &amp; phone</li>
+                <li>Bank or VA account numbers</li>
+                <li>Driver's license number</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>How to Protect It</h3>
+              <ul>
+                <li>Never share it in email or text</li>
+                <li>Only enter it on trusted sites</li>
+                <li>Look for the lock icon (https)</li>
+                <li>Shred paper documents</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box warning">
+            <div class="info-box-title">⚠️ Remember</div>
+            <div class="info-box-content">
+              No legitimate company, bank, or the VA will ask for your full Social Security number or password in an unexpected email, text, or phone call.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Reputation & Permanence -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Reputation &amp; Permanence</h1>
+          <p class="slide-subtitle">The internet has a long memory</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">📌</div>
+            <div class="key-point-text">
+              <strong>Posts Can Last Forever</strong>
+              Even after you delete something, others may have saved it, shared it, or taken a screenshot
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🔎</div>
+            <div class="key-point-text">
+              <strong>People Look You Up</strong>
+              Employers, banks, and new acquaintances may search your name online
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🌟</div>
+            <div class="key-point-text">
+              <strong>You Build Your Reputation</strong>
+              Kind, helpful, and honest posts shape how people see you — in a good way
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">The Grandkid Test</div>
+            <div class="info-box-content">
+              If you would not want your grandchildren — or your old unit — to read it years from now, it is better not to post it.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Legal & Ethical Behavior -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Legal &amp; Ethical Behavior</h1>
+          <p class="slide-subtitle">Doing the right thing online</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>✅ Good Practice</h3>
+              <ul>
+                <li>Give credit for others' work</li>
+                <li>Respect copyright on photos &amp; music</li>
+                <li>Be honest and accurate</li>
+                <li>Treat people with respect</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>❌ Avoid</h3>
+              <ul>
+                <li>Copying work and calling it yours</li>
+                <li>Sharing others' private information</li>
+                <li>Posting harmful or untrue claims</li>
+                <li>Pretending to be someone else</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">Simple Test</div>
+            <div class="info-box-content">
+              The same values that guide you in person — honesty, respect, and fairness — apply online. If it would be wrong face-to-face, it is wrong on a screen.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Impact of Negative Messages -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">The Impact of Negative Messages</h1>
+          <p class="slide-subtitle">Words on a screen still carry weight</p>
+        </div>
+        <div class="slide-content">
+          <p>Online communication can turn hurtful fast — rude comments, harassment, rumors, or "trolling" (posting to provoke a reaction). It affects real people.</p>
+          <div class="key-point">
+            <div class="key-point-icon">😟</div>
+            <div class="key-point-text">
+              <strong>It Affects Wellbeing</strong>
+              Negative messages can cause stress, anxiety, anger, and hurt feelings — for the target and for bystanders
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">⚡</div>
+            <div class="key-point-text">
+              <strong>It Spreads Quickly</strong>
+              A harsh comment can be shared widely in minutes and is hard to take back
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🤝</div>
+            <div class="key-point-text">
+              <strong>You Set the Tone</strong>
+              Choosing to be calm and respectful — even in disagreement — makes online spaces better for everyone
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: Is This Information True? -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Is This Information True?</h1>
+          <p class="slide-subtitle">Checking the validity of what you read online</p>
+        </div>
+        <div class="slide-content">
+          <p>Not everything online is accurate. Scams, rumors, and "fake news" are common. Before you believe — or share — something, check it.</p>
+          <div class="two-column">
+            <div class="column">
+              <h3>Ask Yourself</h3>
+              <ul>
+                <li><strong>Who</strong> wrote it? Are they an expert?</li>
+                <li><strong>Where</strong> is it published?</li>
+                <li><strong>When</strong> — is it current?</li>
+                <li><strong>Why</strong> — to inform, or to sell/scare?</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>Red Flags</h3>
+              <ul>
+                <li>No author or source listed</li>
+                <li>Shocking headline, urgent tone</li>
+                <li>Spelling and grammar errors</li>
+                <li>Asks for money or PII</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">✅ Check With a Second Source</div>
+            <div class="info-box-content">
+              If a claim is true, you can usually confirm it on a trusted site — a major news outlet, a .gov site like va.gov, or a well-known organization. If only one place says it, be skeptical.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Anonymity & Nonresponse -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Anonymity &amp; the Power of Nonresponse</h1>
+          <p class="slide-subtitle">Sometimes the best reply is no reply</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🎭</div>
+            <div class="key-point-text">
+              <strong>Online Anonymity</strong>
+              People can hide their real identity online. This can protect privacy and free speech — but it also emboldens some to behave badly because they feel they will not be held responsible
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🤫</div>
+            <div class="key-point-text">
+              <strong>The Value of Nonresponse</strong>
+              Trolls and bullies want a reaction. Not replying — "do not feed the troll" — removes their reward and often makes them stop
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">Instead of Responding, You Can:</div>
+            <div class="info-box-content">
+              <ul style="margin-top: 0.5rem;">
+                <li><strong>Block</strong> the person so they cannot contact you</li>
+                <li><strong>Report</strong> the post to the platform</li>
+                <li><strong>Save</strong> a screenshot if it is serious or threatening</li>
+                <li><strong>Walk away</strong> — step back and protect your peace of mind</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: Common Security Threats -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Common Security Threats</h1>
+          <p class="slide-subtitle">Know the dangers so you can avoid them</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🎣</div>
+            <div class="key-point-text">
+              <strong>Phishing</strong>
+              Fake emails, texts, or calls that trick you into giving up passwords or PII. They often pretend to be your bank, the VA, or a delivery company
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🦠</div>
+            <div class="key-point-text">
+              <strong>Malware &amp; Viruses</strong>
+              Harmful programs that sneak onto your device through bad downloads or links and can steal information or lock your files
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">💸</div>
+            <div class="key-point-text">
+              <strong>Scams &amp; Identity Theft</strong>
+              Tricks to take your money or use your identity — fake prizes, "tech support" calls, or romance scams
+            </div>
+          </div>
+          <div class="info-box warning">
+            <div class="info-box-title">⚠️ The Golden Rule</div>
+            <div class="info-box-content">
+              Slow down. If a message creates urgency or fear ("act now!"), that is a warning sign. When in doubt, do not click — contact the company directly using a number you trust.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 10: Strong Passphrases -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Building a Strong Passphrase</h1>
+          <p class="slide-subtitle">Longer is stronger</p>
+        </div>
+        <div class="slide-content">
+          <p>Today's best advice: use a <strong>passphrase</strong> — several words strung together. It is long, hard to guess, and easy for you to remember.</p>
+          <div class="info-box success">
+            <div class="info-box-title">✅ A Good Passphrase</div>
+            <div class="info-box-content">
+              <code style="font-size: 1.2rem;">PurpleTrout-Coffee-Sunrise7</code><br>
+              Long (16+ characters), uses unrelated words, mixes in a capital letter and a number. Easy to picture, hard to crack.
+            </div>
+          </div>
+          <div class="two-column">
+            <div class="column">
+              <h3>Do</h3>
+              <ul>
+                <li>Make it 12+ characters (longer is better)</li>
+                <li>Use a different password for each account</li>
+                <li>Consider a password manager</li>
+                <li>Turn on two-factor authentication</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>Don't</h3>
+              <ul>
+                <li>Use names, birthdays, or "password123"</li>
+                <li>Reuse the same one everywhere</li>
+                <li>Write it on a sticky note on the monitor</li>
+                <li>Share it with anyone</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: Reset & Lock -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Resetting a Password &amp; Locking Your Device</h1>
+          <p class="slide-subtitle">Two skills everyone needs</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>🔑 Reset a Forgotten Password</h3>
+              <ul>
+                <li>On the sign-in page, click "Forgot password?"</li>
+                <li>Confirm your identity by email or text code</li>
+                <li>Create a new, strong passphrase</li>
+                <li>Reset right away if an account is hacked</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>🔒 Lock Your Screen</h3>
+              <ul>
+                <li>Press <strong>Windows + L</strong> to lock instantly</li>
+                <li>Lock it whenever you step away</li>
+                <li>Set it to lock automatically after a few minutes</li>
+                <li>Your password unlocks it again</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">Why Lock?</div>
+            <div class="info-box-content">
+              Locking your screen keeps others from seeing your email, health records, or files while you are away from your desk — at the lab, the library, or a clinic.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: Clearing Browser Data -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Clearing Your Browser Data</h1>
+          <p class="slide-subtitle">Cleaning up history, cookies, and saved info</p>
+        </div>
+        <div class="slide-content">
+          <p>Your browser remembers the sites you visit (history) and stores small files called <strong>cookies</strong>. On a shared or public computer, it is smart to clear them.</p>
+          <ol class="steps-list">
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Open your browser's menu</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Click the three dots (⋮) in the top-right corner</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Find "Clear browsing data"</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">It is usually under Settings, History, or Privacy. The shortcut Ctrl+Shift+Delete opens it directly</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Choose what to clear</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">History, cookies, and cached files. Pick a time range like "Last hour" or "All time"</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Click "Clear data"</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Done! Note: clearing cookies will sign you out of websites</span>
+            </li>
+          </ol>
+          <div class="info-box success">
+            <div class="info-box-title">💡 On Public Computers</div>
+            <div class="info-box-content">
+              Always sign out of your accounts and clear browsing data before leaving a library or shared lab computer.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 13: Tracking & Stored Data -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Tracking &amp; Information Stored on Your Device</h1>
+          <p class="slide-subtitle">Who is watching, and what is saved?</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">👣</div>
+            <div class="key-point-text">
+              <strong>Navigation Tracking</strong>
+              Websites and advertisers use cookies to follow what you do online — which is why an item you viewed seems to "follow" you in ads. It can feel convenient, but it is also a privacy trade-off
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">💾</div>
+            <div class="key-point-text">
+              <strong>Risks of Information Stored on a Device</strong>
+              Saved passwords, autofill details, downloaded files, and photos all live on your computer or phone. If the device is lost, stolen, or shared, that information could be exposed
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">Protect Stored Information</div>
+            <div class="info-box-content">
+              <ul style="margin-top: 0.5rem;">
+                <li>Lock your device with a password or PIN</li>
+                <li>Do not save passwords on shared computers</li>
+                <li>Sign out and clear data when you finish</li>
+                <li>Remove old files and downloads you no longer need</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 14: Private Browsing -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Private Browsing</h1>
+          <p class="slide-subtitle">A handy tool — with limits</p>
+        </div>
+        <div class="slide-content">
+          <p>Most browsers offer a <strong>private window</strong> — called <em>Incognito</em> in Chrome or <em>InPrivate</em> in Edge. Open one with <strong>Ctrl+Shift+N</strong> (Chrome) or <strong>Ctrl+Shift+P</strong> (Edge/Firefox).</p>
+          <div class="two-column">
+            <div class="column">
+              <h3>✅ What It Does</h3>
+              <ul>
+                <li>Does not save your history on that device</li>
+                <li>Does not keep cookies after you close it</li>
+                <li>Will not autofill or save logins</li>
+                <li>Great on shared computers</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>❌ What It Does NOT Do</h3>
+              <ul>
+                <li>It does not make you invisible</li>
+                <li>Your internet provider can still see sites</li>
+                <li>Websites you log into still know it is you</li>
+                <li>It is not full anonymity or protection</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box warning">
+            <div class="info-box-title">⚠️ Don't Be Fooled</div>
+            <div class="info-box-content">
+              Private mode keeps things tidy on your own device. It does not hide you from websites, your employer's network, or your internet provider.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 15: Staying Healthy Online -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Staying Healthy Online</h1>
+          <p class="slide-subtitle">Caring for your mind and body</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>🧠 Mental Wellbeing</h3>
+              <ul>
+                <li>Take breaks from screens and news</li>
+                <li>Limit doom-scrolling before bed</li>
+                <li>Unfollow accounts that stress you</li>
+                <li>Connect in person, too</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>💺 Physical &amp; Ergonomics</h3>
+              <ul>
+                <li>Screen at arm's length, top at eye level</li>
+                <li>Sit back in the chair, feet flat</li>
+                <li>Keep wrists straight while typing</li>
+                <li>20-20-20: every 20 min, look 20 feet away for 20 seconds</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">💚 Small Changes, Big Difference</div>
+            <div class="info-box-content">
+              Stand up and stretch every half hour. Adjusting your chair and screen can prevent neck, back, wrist, and eye strain over time.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 16: Knowledge Check -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Knowledge Check</h1>
+          <p class="slide-subtitle">Try each question, then reveal the answer</p>
+        </div>
+        <div class="slide-content">
+          <div class="kc-question">
+            <div class="kc-prompt">1. Which of these is the strongest password?</div>
+            <button class="kc-toggle" type="button" aria-expanded="false" aria-controls="kc-a1">
+              <span>Show answer</span>
+            </button>
+            <div class="kc-answer" id="kc-a1" hidden>
+              <span class="kc-label">Answer</span>
+              A long passphrase like <code>PurpleTrout-Coffee-Sunrise7</code>. Length and unrelated words make it far harder to guess than a short password or a birthday.
+            </div>
+          </div>
+
+          <div class="kc-question">
+            <div class="kc-prompt">2. A stranger posts a rude, insulting comment just to get a reaction. What is usually the best response?</div>
+            <button class="kc-toggle" type="button" aria-expanded="false" aria-controls="kc-a2">
+              <span>Show answer</span>
+            </button>
+            <div class="kc-answer" id="kc-a2" hidden>
+              <span class="kc-label">Answer</span>
+              Do not reply. Nonresponse removes the reaction the troll wants. Then block or report them, and save a screenshot if it is threatening.
+            </div>
+          </div>
+
+          <div class="kc-question">
+            <div class="kc-prompt">3. True or false: a private (Incognito) window makes you completely anonymous online.</div>
+            <button class="kc-toggle" type="button" aria-expanded="false" aria-controls="kc-a3">
+              <span>Show answer</span>
+            </button>
+            <div class="kc-answer" id="kc-a3" hidden>
+              <span class="kc-label">Answer</span>
+              False. Private mode just avoids saving history and cookies on that device. Your internet provider, the network, and sites you log into can still see you.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 17: Your Handouts -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Your Handouts &amp; Hands-On Lab</h1>
+          <p class="slide-subtitle">Practice what we learned</p>
+        </div>
+        <div class="slide-content">
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-text">Open the "Lock It Down Lab" — build a passphrase, lock your screen, clear browser data, open a private window, check a source, and review your desk setup.</div>
+          </div>
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon">🗂️</div>
+            <div class="handout-prompt-text">Keep the "Security &amp; Ergonomics Quick Reference" card at your desk for password rules, lock/clear-data steps, and ergonomics reminders.</div>
+          </div>
+          <div class="demo-box">
+            <h3>🖥️ Let's Do It Together</h3>
+            <p>We'll work through the lab step by step on your own computer. Raise your hand any time and I'll come help.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 18: Key Takeaways -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Key Takeaways</h1>
+          <p class="slide-subtitle">What to remember from today</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🪪</div>
+            <div class="key-point-text">
+              <strong>Guard Your Identity</strong>
+              Protect your PII, think before you post — the internet remembers
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🧭</div>
+            <div class="key-point-text">
+              <strong>Be a Smart Reader</strong>
+              Check that information is true, and do not feed the trolls — block, report, walk away
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🔐</div>
+            <div class="key-point-text">
+              <strong>Lock It Down</strong>
+              Long passphrases, lock your screen (Windows + L), and clear data on shared computers
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">💚</div>
+            <div class="key-point-text">
+              <strong>Take Care of Yourself</strong>
+              Browse privately when it helps, take screen breaks, and set up a comfortable desk
+            </div>
+          </div>
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-text">Take your handouts home! They have step-by-step instructions for everything we covered.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 19: Completion -->
+      <div class="slide completion-slide">
+        <div class="completion-badge"><span>🛡️</span></div>
+        <h2>Great Work!</h2>
+        <p>You can now manage your digital identity, respond wisely to bad content, protect your devices with strong passphrases, and stay healthy online. Next week is our Review &amp; Testing Day — you've got this!</p>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div class="nav-footer">
+      <button class="nav-btn prev" id="prevBtn" disabled>
+        ← Previous
+      </button>
+      <span class="slide-counter">
+        Slide <span id="currentSlide">1</span> of <span id="totalSlides">20</span>
+      </span>
+      <button class="nav-btn next" id="nextBtn">
+        Next →
+      </button>
+    </div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div class="confetti" id="confetti"></div>
+
+  <script src="../../../../shared/progress.js"></script>
+  <script src="../../../../shared/glossary.js" defer></script>
+  <script>
+    // Presentation State
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideLinks = document.querySelectorAll('.slide-link');
+
+    // DOM Elements
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSlideSpan = document.getElementById('currentSlide');
+    const totalSlidesSpan = document.getElementById('totalSlides');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const confettiContainer = document.getElementById('confetti');
+
+    // Initialize
+    totalSlidesSpan.textContent = totalSlides;
+    loadProgress();
+    updateSlide();
+
+    // Navigation Functions
+    function updateSlide() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      slideLinks.forEach((link, index) => {
+        link.classList.toggle('active', index === currentSlide);
+        if (index < currentSlide) {
+          link.classList.add('completed');
+        }
+      });
+
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.textContent = currentSlide === totalSlides - 1 ? 'Finish ✓' : 'Next →';
+
+      currentSlideSpan.textContent = currentSlide + 1;
+
+      const progress = Math.round((currentSlide / (totalSlides - 1)) * 100);
+      progressFill.style.width = progress + '%';
+      progressText.textContent = progress;
+
+      saveProgress();
+
+      if (currentSlide === totalSlides - 1) {
+        setTimeout(triggerConfetti, 500);
+      }
+
+      const activeLink = document.querySelector('.slide-link.active');
+      if (activeLink) {
+        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlide();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    // Event Listeners
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    slideLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const slideIndex = parseInt(link.dataset.slide);
+        goToSlide(slideIndex);
+      });
+    });
+
+    // Knowledge-check answer toggles (accessible)
+    document.querySelectorAll('.kc-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const answer = document.getElementById(btn.getAttribute('aria-controls'));
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        if (answer) { answer.hidden = isOpen; }
+        const label = btn.querySelector('span');
+        if (label) { label.textContent = isOpen ? 'Show answer' : 'Hide answer'; }
+      });
+    });
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'PageUp':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          goToSlide(totalSlides - 1);
+          break;
+      }
+    });
+
+    // Progress Persistence (via shared VubProgress library)
+    function saveProgress() {
+      if (window.VubProgress) {
+        VubProgress.saveSlide('dl1', 4, currentSlide, totalSlides);
+      }
+    }
+
+    function loadProgress() {
+      if (window.VubProgress) {
+        const entry = VubProgress.get('dl1', 4);
+        if (entry && typeof entry.slide === 'number') {
+          currentSlide = entry.slide;
+        }
+      }
+    }
+
+    // Confetti Animation
+    function triggerConfetti() {
+      confettiContainer.classList.add('active');
+      confettiContainer.innerHTML = '';
+
+      const colors = ['#003F72', '#C9A227', '#1B365D', '#C4262E', '#28A745'];
+
+      for (let i = 0; i < 100; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 2 + 's';
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confettiContainer.appendChild(piece);
+      }
+
+      setTimeout(() => {
+        confettiContainer.classList.remove('active');
+      }, 5000);
+    }
+
+    // Touch/Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+  </script>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

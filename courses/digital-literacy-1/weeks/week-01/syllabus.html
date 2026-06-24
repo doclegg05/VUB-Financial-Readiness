@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 1 Instructor Guide | VUB Digital Literacy — Level 1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--va-blue) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+
+    .header-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Overview Box */
+    .overview-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .overview-box h2 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .objectives-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .objectives-list li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .objectives-list li::before {
+      content: "🎯";
+      position: absolute;
+      left: 0;
+    }
+
+    .objectives-list li .objcode {
+      display: inline-block;
+      background: rgba(0, 63, 114, 0.12);
+      color: var(--va-blue);
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 0.05rem 0.4rem;
+      border-radius: 6px;
+      margin-left: 0.25rem;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-header {
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px 8px 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline-body {
+      border: 2px solid var(--va-blue);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid var(--off-white);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-time {
+      background: var(--off-white);
+      padding: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timeline-content {
+      padding: 0.75rem 1rem;
+    }
+
+    .timeline-content h4 {
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-content p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin: 0;
+    }
+
+    /* Activity Badge */
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+
+    .activity-lecture {
+      background: rgba(27, 54, 93, 0.15);
+      color: var(--primary);
+    }
+
+    .activity-demo {
+      background: rgba(201, 162, 39, 0.2);
+      color: #8B7500;
+    }
+
+    .activity-practice {
+      background: rgba(40, 167, 69, 0.15);
+      color: var(--success);
+    }
+
+    .activity-assessment {
+      background: rgba(220, 53, 69, 0.15);
+      color: var(--danger);
+    }
+
+    .activity-warmup {
+      background: rgba(255, 152, 0, 0.15);
+      color: #E65100;
+    }
+
+    .activity-break {
+      background: rgba(156, 39, 176, 0.15);
+      color: #7B1FA2;
+    }
+
+    .activity-eval {
+      background: rgba(3, 169, 244, 0.15);
+      color: #0277BD;
+    }
+
+    .activity-apply {
+      background: rgba(76, 175, 80, 0.15);
+      color: #2E7D32;
+    }
+
+    /* Instructor Notes */
+    .notes-section {
+      background: rgba(201, 162, 39, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .notes-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .notes-section ul {
+      list-style: none;
+    }
+
+    .notes-section li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .notes-section li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Materials Checklist */
+    .materials-section {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .materials-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .material-category h4 {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .material-category ul {
+      list-style: none;
+    }
+
+    .material-category li {
+      padding: 0.25rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .material-category li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    /* Discussion Questions */
+    .discussion-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .discussion-section h3 {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .discussion-list {
+      list-style: none;
+    }
+
+    .discussion-list li {
+      background: var(--off-white);
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .discussion-list li strong {
+      display: block;
+      font-style: normal;
+      color: var(--primary);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Tips Box */
+    .tips-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tips-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tips-box ul {
+      list-style: none;
+    }
+
+    .tips-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .tips-box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    /* Assessment Info */
+    .assessment-box {
+      background: rgba(220, 53, 69, 0.08);
+      border: 2px solid var(--danger);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .assessment-box h3 {
+      color: var(--danger);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .assessment-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* Objective Map Box */
+    .objmap-box {
+      background: rgba(0, 63, 114, 0.08);
+      border: 2px solid var(--va-blue);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .objmap-box h3 {
+      color: var(--va-blue);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .objmap-box ul {
+      list-style: none;
+    }
+
+    .objmap-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .objmap-box li::before {
+      content: "📘";
+      position: absolute;
+      left: 0;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .timeline-header, .discussion-section h3 {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div>
+        <h1>Week 1: Inside the Computer</h1>
+        <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">VUB Digital Literacy — Level 1 · IC3 GS6 Aligned</p>
+      </div>
+      <span class="header-badge">Instructor Guide</span>
+    </div>
+    <div class="header-meta">
+      <span>📅 Week 1 of 5</span>
+      <span>⏱️ 2 Hours</span>
+      <span>👥 Veterans Group</span>
+      <span>📍 Computer Lab (Windows)</span>
+    </div>
+  </header>
+
+  <div class="overview-box">
+    <h2>🎯 Learning Objectives</h2>
+    <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--gray);">By the end of this session, participants will be able to:</p>
+    <ul class="objectives-list">
+      <li>Identify common input and output devices <span class="objcode">1.2.1–1.2.2</span></li>
+      <li>Recognize cables, ports, and connectors (USB, HDMI, Ethernet) <span class="objcode">1.2.3</span></li>
+      <li>Describe desktop, laptop, tablet, and smartphone computing devices <span class="objcode">1.4.1</span></li>
+      <li>Explain the difference between memory (RAM) and storage <span class="objcode">1.4.2–1.4.3</span></li>
+      <li>Distinguish system software from application software <span class="objcode">1.3.1</span></li>
+      <li>Compare proprietary and open-source software <span class="objcode">1.3.2</span></li>
+      <li>Install software safely from a trusted source <span class="objcode">1.3.3</span></li>
+      <li>Compare Windows, macOS, and mobile operating systems <span class="objcode">1.5.1–1.5.2</span></li>
+    </ul>
+  </div>
+
+  <div class="objmap-box">
+    <h3>📘 IC3 GS6 Level 1 Objective Coverage</h3>
+    <ul>
+      <li><strong>1.2 Identify digital devices and connections</strong> — input devices (1.2.1), output devices (1.2.2), cables/connectors (1.2.3)</li>
+      <li><strong>1.3 Explain fundamental software concepts</strong> — software application concepts (1.3.1), proprietary vs. open source (1.3.2), installing from online sources (1.3.3)</li>
+      <li><strong>1.4 Explain fundamental hardware concepts</strong> — computing devices (1.4.1), memory (1.4.2), data storage (1.4.3)</li>
+      <li><strong>1.5 Explain fundamental operating system concepts</strong> — mobile OS (1.5.1), computer OS (1.5.2)</li>
+    </ul>
+    <p style="font-size: 0.8rem; color: var(--gray); margin-top: 0.5rem;">Source: IC3 GS6 Level 1 Objective Domains, Certiport / Pearson VUE (released 2020-05-14).</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-header">⏰ Session Timeline (2 Hours)</div>
+    <div class="timeline-body">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00–0:10</div>
+        <div class="timeline-content">
+          <h4>Welcome & Course Kickoff <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <p>Introduce yourself and the 5-week Digital Literacy course. Ask: "What is one thing about your computer you've always wondered about?" Distribute handouts while students settle in.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:10–0:30</div>
+        <div class="timeline-content">
+          <h4>Pre-Test Assessment <span class="activity-type activity-assessment">Assessment</span></h4>
+          <p>Have participants open and complete the ~20-question Pre-Test (slide 17 links to it). Reassure them it is a baseline, not a grade. Let them work at their own pace.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:30–0:40</div>
+        <div class="timeline-content">
+          <h4>Objectives & Why This Matters <span class="activity-type activity-lecture">Lecture</span></h4>
+          <p>Review today's objectives (slides 1–2). Frame the lesson: understanding the parts of a computer makes everything in Weeks 2–5 easier and removes the fear of "breaking something."</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:40–1:00</div>
+        <div class="timeline-content">
+          <h4>Devices, Ports & Hardware <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Slides 3–7: input/output devices, ports & connectors, device types, inside the box, memory vs. storage. Hold up a real USB and HDMI cable if available. Use the projector and point to ports on the demo PC.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:00–1:10</div>
+        <div class="timeline-content">
+          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <p>10-minute break. Encourage participants to stretch and use the restroom.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:10–1:30</div>
+        <div class="timeline-content">
+          <h4>Software & Operating Systems <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Slides 8–12: system vs. application software, proprietary vs. open source, installing safely, what an OS is, and Windows/macOS/mobile. Stress the "install only from trusted sources" safety point.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:30–1:38</div>
+        <div class="timeline-content">
+          <h4>Knowledge Check <span class="activity-type activity-eval">Evaluation</span></h4>
+          <p>Slide 13: work the three reveal questions together as a group. Let students answer aloud before you reveal each one. Clear up any confusion before the lab.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:38–1:55</div>
+        <div class="timeline-content">
+          <h4>Hands-On Lab — "Meet Your Computer" <span class="activity-type activity-practice">Practice</span></h4>
+          <p>Hand out the "Meet Your Computer Lab" sheet. Students find ports/peripherals, open <em>This PC</em> and <em>Settings</em> to read RAM &amp; storage, list installed apps, and identify the Windows version. Walk the room and assist. (Exercises 1.2, 1.4, 1.5.)</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:55–2:00</div>
+        <div class="timeline-content">
+          <h4>Wrap-Up & Take-Home Challenge <span class="activity-type activity-apply">Application</span></h4>
+          <p>Slides 14–16: recap key takeaways. Challenge: at home, find one device and name its ports. Preview Week 2 (Getting Online). Remind students to keep the quick-reference card.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <h3>📝 Instructor Notes</h3>
+    <ul>
+      <li><strong>Plain language first:</strong> Lead with the everyday word ("memory," "the drive") and add the technical term second. Avoid jargon overload.</li>
+      <li><strong>Use the room:</strong> The lab PCs are the best teaching aid. Point at real ports, the tower, and the Start button rather than only using slides.</li>
+      <li><strong>Memory vs. storage is the key concept:</strong> Veterans often conflate the two. The "desk vs. filing cabinet" analogy lands well — repeat it.</li>
+      <li><strong>Reassure on "breaking things":</strong> Many older learners fear damaging the computer. Emphasize that exploring menus and settings cannot break anything.</li>
+      <li><strong>Safety without fear:</strong> When covering installs, give the rule ("only from the Store or the maker's site") without scaring them away from installing useful apps.</li>
+      <li><strong>Pre-Test reassurance:</strong> Some will be anxious about a "test" on day one. Stress repeatedly that it is just a starting snapshot.</li>
+    </ul>
+  </div>
+
+  <div class="materials-section">
+    <h3>📦 Materials Checklist</h3>
+    <div class="materials-grid">
+      <div class="material-category">
+        <h4>Handouts (Print)</h4>
+        <ul>
+          <li>Meet Your Computer Lab</li>
+          <li>Computer Parts Quick Reference</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Technology</h4>
+        <ul>
+          <li>Projector connected & working</li>
+          <li>Each workstation powered on</li>
+          <li>Presentation URL on each screen</li>
+          <li>Pre-Test URL bookmarked</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Preparation</h4>
+        <ul>
+          <li>A spare USB and HDMI cable to show</li>
+          <li>Know where Settings → System → About is</li>
+          <li>Confirm This PC shows drive sizes</li>
+          <li>Review the three knowledge-check answers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="discussion-section">
+    <h3>💬 Discussion Questions</h3>
+    <ul class="discussion-list">
+      <li>
+        <strong>Opener:</strong>
+        "When you hear the word 'computer,' what comes to mind first? A desktop, a laptop, your phone?"
+      </li>
+      <li>
+        <strong>During Devices:</strong>
+        "What devices do you plug into your computer at home? Let's name what kind of plug each one uses."
+      </li>
+      <li>
+        <strong>Memory vs. Storage:</strong>
+        "Has anyone ever been told their computer is 'out of memory' or 'out of space'? What do you think the difference is?"
+      </li>
+      <li>
+        <strong>Software Safety:</strong>
+        "Have you ever seen a pop-up saying your computer has a virus? What should you do with it?"
+      </li>
+      <li>
+        <strong>Wrap-up:</strong>
+        "What's one part of the computer you understand better now than you did this morning?"
+      </li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>✅ Tips for Success</h3>
+    <ul>
+      <li>Walk around during the lab — many veterans hesitate to ask for help out loud</li>
+      <li>Show, don't just tell: open This PC and Settings on the projector before they try it</li>
+      <li>Celebrate small wins — finding their RAM number is a real accomplishment</li>
+      <li>Repeat the desk/filing-cabinet analogy until it sticks</li>
+      <li>Keep the pace gentle; it is fine to cover fewer slides well than all slides poorly</li>
+      <li>Validate that ports and acronyms are genuinely confusing at first — normalize the learning curve</li>
+    </ul>
+  </div>
+
+  <div class="assessment-box">
+    <h3>📊 Pre-Test Notes</h3>
+    <p>
+      <strong>Purpose:</strong> Establish baseline knowledge for comparison with the Post-Test in Week 5.<br>
+      <strong>Duration:</strong> 15–20 minutes (allow extra time if needed)<br>
+      <strong>Format:</strong> ~20 multiple-choice questions sampling all 7 IC3 GS6 Level 1 domains<br>
+      <strong>Scoring:</strong> Automatic — results saved locally for the pre/post comparison<br>
+      <strong>Reassurance:</strong> Emphasize this is NOT a grade — not knowing answers is exactly why they are here.
+    </p>
+  </div>
+
+  <div class="notes-section" style="background: rgba(23, 162, 184, 0.1); border-color: #17A2B8;">
+    <h3 style="color: #17A2B8;">🔮 Looking Ahead: Week 2</h3>
+    <ul>
+      <li><strong>Topic:</strong> Getting Online — Browsers, Networks & Searching</li>
+      <li><strong>Key Concepts:</strong> The desktop & OS terms, web browsers, Wi-Fi & networking, smart searching, Ctrl+F, copyright basics</li>
+      <li><strong>Prep Needed:</strong> Confirm each workstation has internet access and a working browser</li>
+      <li><strong>Connection:</strong> This week's hardware/OS foundation makes navigating the desktop and browser in Week 2 far easier</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound — West Virginia</strong></p>
+    <p>Digital Literacy — Level 1 | Instructor Guide - Week 1</p>
+    <p style="margin-top: 0.5rem; font-style: italic;">Questions? Contact: Britt Legg</p>
+  </footer>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

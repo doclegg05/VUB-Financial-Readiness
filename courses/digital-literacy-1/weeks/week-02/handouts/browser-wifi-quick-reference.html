@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Browser &amp; Wi-Fi — Quick Reference | VUB Digital Literacy — Level 1</title>
+<style>
+  :root { --windows-blue: #0078D4; --primary: #1B365D; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.95rem; color: #1a1a1a;
+    max-width: 8.5in; padding: 0.5in; margin: 0 auto; background: #fff; line-height: 1.3; }
+  .header { background: linear-gradient(135deg, #0078D4 0%, #005A9E 100%); color: #fff;
+    padding: 0.5rem 0.75rem; border-radius: 6px; margin-bottom: 0.4rem; display: flex;
+    justify-content: space-between; align-items: center; flex-wrap: wrap; }
+  .header h1 { font-size: 1.15rem; font-weight: 700; }
+  .badge { background: rgba(255,255,255,0.25); padding: 0.15rem 0.5rem; border-radius: 3px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; }
+  .header .subtitle { width: 100%; font-size: 0.75rem; opacity: 0.9; margin-top: 0.15rem; }
+  .key { display: inline-block; background: #f0f0f0; border: 2px solid #ccc;
+    border-bottom: 3px solid #aaa; border-radius: 4px; padding: 0.1rem 0.4rem;
+    font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9rem; font-weight: 600;
+    color: var(--primary); min-width: 1.5rem; text-align: center; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+  .section { break-inside: avoid; }
+  .section-header { padding: 0.2rem 0.5rem; border-radius: 3px; color: #fff;
+    font-weight: 700; font-size: 0.8rem; margin-bottom: 0.2rem; }
+  .sh-blue { background: var(--primary); }
+  .sh-light { background: #2E5A88; }
+  .sh-teal { background: #1a6b5a; }
+  .sh-purple { background: #4a3b6b; }
+  .essential { grid-column: 1 / -1; }
+  .essential table { font-size: 1rem; }
+  .essential .section-header { background: var(--windows-blue); font-size: 0.85rem; padding: 0.25rem 0.5rem; }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 0.15rem 0.3rem; border-bottom: 1px solid #e0e0e0; vertical-align: middle; }
+  td:first-child { white-space: nowrap; width: 42%; }
+  tr:last-child td { border-bottom: none; }
+  .steps { grid-column: 1 / -1; }
+  .steps ol { margin: 0.25rem 0 0 1.25rem; }
+  .steps li { font-size: 0.85rem; padding: 0.1rem 0; }
+  .steps li strong { color: var(--primary); }
+  .plus { margin: 0 0.1rem; font-weight: 600; color: #666; }
+  .footer { margin-top: 0.4rem; text-align: center; font-size: 0.7rem; color: #666;
+    border-top: 1px solid #ddd; padding-top: 0.25rem; }
+  .tip { background: #FFF8E1; border: 1px solid #FFD54F; border-radius: 4px;
+    padding: 0.25rem 0.5rem; margin-top: 0.35rem; font-size: 0.8rem; text-align: center; }
+  .tip strong { color: var(--primary); }
+  @media print {
+    body { padding: 0.25in; }
+    .header, .section-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Browser &amp; Wi-Fi &mdash; Quick Reference</h1>
+  <span class="badge">KEEP AT YOUR DESK</span>
+  <div class="subtitle">VUB Digital Literacy — Level 1 &mdash; Week 2: Getting Online</div>
+</div>
+
+<div class="section essential">
+  <div class="section-header">&#11088; Browser Shortcuts (use these first!)</div>
+  <table>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">T</span></td><td>Open a new tab</td></tr>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">F</span></td><td>Find a word on the page (or in a file)</td></tr>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">H</span></td><td>Open your browsing history</td></tr>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">D</span></td><td>Bookmark the current page</td></tr>
+    <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">C</span></td><td>Copy (use it to save a web address)</td></tr>
+    <tr><td><span class="key">Alt</span> <span class="plus">+</span> <span class="key">&larr;</span></td><td>Go back to the last page</td></tr>
+  </table>
+</div>
+
+<div class="grid">
+  <div class="section">
+    <div class="section-header sh-blue">Parts of the Browser</div>
+    <table>
+      <tr><td><strong>Address bar</strong></td><td>Type a website (URL) or a search</td></tr>
+      <tr><td><strong>Tabs</strong></td><td>Several pages in one window</td></tr>
+      <tr><td><strong>Star ⭐</strong></td><td>Bookmark / save a page</td></tr>
+      <tr><td><strong>History</strong></td><td>Pages you visited before</td></tr>
+      <tr><td><strong>Back ← / Forward →</strong></td><td>Move between pages</td></tr>
+      <tr><td><strong>Refresh ⟳</strong></td><td>Reload the current page</td></tr>
+      <tr><td><strong>Padlock 🔒</strong></td><td>Secure connection</td></tr>
+    </table>
+
+    <div class="section-header sh-light" style="margin-top:0.35rem">Reading a Web Address</div>
+    <table>
+      <tr><td><strong>.gov</strong></td><td>Official U.S. government site</td></tr>
+      <tr><td><strong>.edu</strong></td><td>School or university</td></tr>
+      <tr><td><strong>.org / .com</strong></td><td>Group or company (check who)</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-header sh-teal">Am I Connected?</div>
+    <table>
+      <tr><td><strong>📶 Bars</strong></td><td>Wi-Fi connected (more = stronger)</td></tr>
+      <tr><td><strong>🌐 Globe</strong></td><td>NOT connected to the internet</td></tr>
+      <tr><td><strong>Best test</strong></td><td>Open a trusted site — does it load?</td></tr>
+      <tr><td><strong>Click icon</strong></td><td>See networks; yours says "Connected"</td></tr>
+    </table>
+
+    <div class="section-header sh-purple" style="margin-top:0.35rem">Home Network Gear</div>
+    <table>
+      <tr><td><strong>ISP</strong></td><td>The company you pay for internet</td></tr>
+      <tr><td><strong>Modem</strong></td><td>Brings the signal into your home</td></tr>
+      <tr><td><strong>Router</strong></td><td>Shares it by Wi-Fi or cable</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="section steps" style="margin-top:0.4rem">
+  <div class="section-header sh-blue">&#128295; Wi-Fi Troubleshooting (try in order, stop when it works)</div>
+  <ol>
+    <li><strong>Check the network icon</strong> — Wi-Fi on? Right network? (Globe = not connected.)</li>
+    <li><strong>Try another website</strong> — if only one fails, that site is the problem.</li>
+    <li><strong>Restart the modem/router</strong> — unplug, wait 30 seconds, plug back in, wait 2 minutes. (Fixes most problems.)</li>
+    <li><strong>Restart your computer</strong> — clears small glitches.</li>
+    <li><strong>Call your internet provider</strong> — there may be an outage in your area.</li>
+  </ol>
+</div>
+
+<div class="section steps" style="margin-top:0.4rem">
+  <div class="section-header sh-teal">&#128269; Smart Search Tips</div>
+  <ol>
+    <li><strong>Start with your need</strong> — decide your question before you type.</li>
+    <li><strong>Use a few clear words</strong> — 3–4 specific words beat a full sentence.</li>
+    <li><strong>Skip the ads</strong> — results marked "Ad" or "Sponsored" come first; look past them.</li>
+    <li><strong>Trust good sources</strong> — prefer .gov / .edu and well-known organizations.</li>
+    <li><strong>Keep your source</strong> — bookmark it or copy the web address, and note the date.</li>
+    <li><strong>Respect copyright</strong> — most content belongs to someone; look for public domain or Creative Commons, or give credit.</li>
+  </ol>
+</div>
+
+<div class="tip"><strong>Pro tip:</strong> <span class="key">Ctrl</span>+<span class="key">F</span> finds any word on a page or in a document — the single most useful shortcut for getting answers fast!</div>
+<div class="footer">Veterans Upward Bound &mdash; West Virginia &nbsp;|&nbsp; Keep this card at your desk for quick reference!</div>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

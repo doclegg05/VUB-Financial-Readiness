@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practice Quiz — Digital Literacy: Level 1</title>
+<style>
+  :root {
+    --va-blue: #003F72;
+    --navy: #1B365D;
+    --navy-dark: #0D1B2A;
+    --navy-light: #2C4A7C;
+    --red: #B31942;
+    --gold: #C9A227;
+    --gold-light: #E6C65C;
+    --off-white: #F5F7FA;
+    --ink: #1a1a1a;
+    --line: #cdd7e2;
+    --success: #1d7a3a;
+    --success-bg: #e4f4ea;
+    --danger: #a51b2e;
+    --danger-bg: #fbe6e9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--ink); background: var(--off-white);
+    line-height: 1.6; font-size: 1.125rem;
+  }
+  a { color: var(--va-blue); }
+
+  .topbar { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%); color: #fff; padding: 1.25rem 1rem; }
+  .topbar-inner { max-width: 820px; margin: 0 auto; }
+  .back-link { display: inline-block; color: var(--gold-light); text-decoration: none; font-weight: 700; font-size: 1rem; margin-bottom: 0.6rem; padding: 0.35rem 0.1rem; }
+  .back-link:hover, .back-link:focus { text-decoration: underline; }
+  .topbar h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 1.85rem; line-height: 1.25; }
+  .topbar .sub { font-size: 1rem; opacity: 0.92; margin-top: 0.35rem; }
+  .badge { display: inline-block; background: rgba(255,255,255,0.18); color: #fff; border: 1px solid rgba(255,255,255,0.35); padding: 0.15rem 0.55rem; border-radius: 4px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; margin-top: 0.6rem; }
+
+  main { max-width: 820px; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+
+  .intro { background: #fff; border: 1px solid var(--line); border-left: 6px solid var(--gold); border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 1.25rem; }
+  .intro h2 { font-size: 1.1rem; color: var(--navy); margin-bottom: 0.3rem; }
+  .intro p { font-size: 1rem; }
+
+  .meter-wrap { margin-bottom: 1rem; }
+  .meter-label { display: flex; justify-content: space-between; font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
+  .meter { height: 12px; background: #e3e8ef; border-radius: 999px; overflow: hidden; }
+  .meter-fill { height: 100%; background: var(--gold); width: 0; transition: width 0.3s; }
+
+  .q-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem 1.3rem; box-shadow: 0 4px 14px rgba(13,27,42,0.08); }
+  .domain-tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--va-blue); background: var(--off-white); border: 1px solid var(--line); padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.8rem; }
+  .q-text { font-size: 1.3rem; line-height: 1.4; color: var(--navy); font-weight: 700; margin-bottom: 1.1rem; }
+
+  .options { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+  .opt-btn {
+    width: 100%; text-align: left; font-family: inherit; font-size: 1.1rem; line-height: 1.4;
+    background: #fff; color: var(--ink); border: 2px solid var(--navy-light);
+    border-radius: 10px; padding: 0.8rem 1rem; cursor: pointer;
+    display: flex; align-items: flex-start; gap: 0.6rem; min-height: 44px;
+  }
+  .opt-btn:hover:not(:disabled) { background: var(--off-white); }
+  .opt-btn:disabled { cursor: default; }
+  .opt-letter { flex: 0 0 auto; font-weight: 800; color: var(--navy); }
+  .opt-btn .opt-mark { flex: 0 0 auto; margin-left: auto; font-weight: 800; font-size: 1.2rem; }
+  .opt-btn.correct { border-color: var(--success); background: var(--success-bg); }
+  .opt-btn.correct .opt-mark::after { content: "\2714"; color: var(--success); }
+  .opt-btn.correct .opt-letter { color: var(--success); }
+  .opt-btn.incorrect { border-color: var(--danger); background: var(--danger-bg); }
+  .opt-btn.incorrect .opt-mark::after { content: "\2716"; color: var(--danger); }
+  .opt-btn.incorrect .opt-letter { color: var(--danger); }
+
+  .feedback { margin-top: 1.1rem; border-radius: 10px; padding: 0.9rem 1rem; font-size: 1.05rem; display: none; }
+  .feedback.show { display: block; }
+  .feedback .verdict { font-weight: 800; display: block; margin-bottom: 0.25rem; }
+  .feedback.right { background: var(--success-bg); border: 1px solid var(--success); }
+  .feedback.right .verdict { color: var(--success); }
+  .feedback.right .verdict::before { content: "\2714\00a0Correct \2014 "; }
+  .feedback.wrong { background: var(--danger-bg); border: 1px solid var(--danger); }
+  .feedback.wrong .verdict { color: var(--danger); }
+  .feedback.wrong .verdict::before { content: "\2716\00a0Not quite \2014 "; }
+
+  .controls { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin-top: 1.2rem; flex-wrap: wrap; }
+  .btn { font-family: inherit; font-size: 1.05rem; font-weight: 700; border-radius: 8px; padding: 0.7rem 1.4rem; cursor: pointer; min-height: 44px; border: 2px solid transparent; }
+  .btn-primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .btn-primary:hover:not(:disabled) { background: var(--navy-light); border-color: var(--navy-light); }
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn-ghost { background: #fff; color: var(--navy); border-color: var(--navy); }
+  .btn-ghost:hover { background: var(--off-white); }
+
+  .score-line { font-size: 1.05rem; font-weight: 700; color: var(--navy); }
+
+  /* Results */
+  .results { background: #fff; border: 1px solid var(--line); border-top: 8px solid var(--gold); border-radius: 12px; padding: 1.6rem 1.4rem; text-align: center; box-shadow: 0 4px 14px rgba(13,27,42,0.08); }
+  .results h2 { font-family: Georgia, serif; color: var(--navy); font-size: 1.7rem; margin-bottom: 0.5rem; }
+  .results .big-score { font-size: 3rem; font-weight: 800; color: var(--va-blue); line-height: 1.1; }
+  .results .pct { font-size: 1.15rem; color: #444; margin-bottom: 0.4rem; }
+  .results .msg { font-size: 1.1rem; margin: 0.75rem auto 1.2rem; max-width: 36rem; }
+  .results .actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+  .hidden { display: none; }
+  footer { max-width: 820px; margin: 0 auto; padding: 1.5rem 1rem 2.5rem; text-align: center; color: #555; font-size: 0.9rem; }
+
+  *:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  @media (max-width: 540px) {
+    .topbar h1 { font-size: 1.5rem; }
+    .q-text { font-size: 1.15rem; }
+    .btn { flex: 1 1 auto; }
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="back-link" href="/courses/digital-literacy-1/index.html">&larr; Back to course</a>
+    <h1>Practice Quiz</h1>
+    <div class="sub">Digital Literacy &mdash; Level 1 &nbsp;&middot;&nbsp; Self-check across all 7 IC3 areas</div>
+    <span class="badge">PRACTICE &mdash; NOT GRADED</span>
+  </div>
+</header>
+
+<main>
+  <section class="intro" aria-label="About this quiz">
+    <h2>Check what you know</h2>
+    <p>This is a practice quiz to help you study &mdash; it is <strong>not</strong> the Pre-Test or Post-Test
+       and no score is recorded. Pick an answer to see right away whether it is correct and why. Take it as
+       many times as you like. Great for the Week&nbsp;5 review day.</p>
+  </section>
+
+  <div class="meter-wrap" id="meter-wrap">
+    <div class="meter-label">
+      <span id="meter-text">Question 1</span>
+      <span id="score-text">Score: 0</span>
+    </div>
+    <div class="meter" aria-hidden="true"><div class="meter-fill" id="meter-fill"></div></div>
+  </div>
+
+  <section id="quiz-area" aria-live="polite">
+    <div class="q-card">
+      <span class="domain-tag" id="q-domain"></span>
+      <p class="q-text" id="q-text"></p>
+      <ul class="options" id="options"></ul>
+      <div class="feedback" id="feedback" role="status">
+        <span class="verdict" id="verdict"></span>
+        <span id="rationale"></span>
+      </div>
+      <div class="controls">
+        <span class="score-line" id="progress-line"></span>
+        <button type="button" class="btn btn-primary" id="next-btn" disabled>Next question &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="results-area" class="results hidden" aria-live="polite">
+    <h2>Practice complete!</h2>
+    <div class="big-score" id="final-score"></div>
+    <div class="pct" id="final-pct"></div>
+    <p class="msg" id="final-msg"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-primary" id="retry-btn">Try again</button>
+      <a class="btn btn-ghost" href="/courses/digital-literacy-1/index.html">Back to course</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Veterans Upward Bound &mdash; West Virginia &nbsp;|&nbsp; Digital Literacy: Level 1 &nbsp;|&nbsp; Aligned to IC3 GS6 Level 1
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // Practice item pool — written to the IC3 GS6 Level 1 objectives.
+  // Separate from the graded Pre/Post tests in ../assessments/.
+  var QUESTIONS = [
+    {
+      domain: "1. Technology Basics",
+      q: "Which of these is an input device?",
+      options: [
+        { t: "A keyboard", correct: true, why: "A keyboard puts information INTO the computer when you type, so it is an input device." },
+        { t: "A monitor", correct: false, why: "A monitor shows you a picture, so it is an output device — information coming OUT of the computer." },
+        { t: "A printer", correct: false, why: "A printer puts work on paper, which is information coming out of the computer — an output device." },
+        { t: "A speaker", correct: false, why: "Speakers play sound out of the computer, making them an output device, not input." }
+      ]
+    },
+    {
+      domain: "1. Technology Basics",
+      q: "What is the main difference between RAM and storage?",
+      options: [
+        { t: "RAM is short-term memory that clears when you shut down; storage keeps your files even when the computer is off", correct: true, why: "RAM is like a desk you work on (it empties at shutdown); storage is like a filing cabinet that keeps your files for good." },
+        { t: "RAM keeps files forever; storage clears every time", correct: false, why: "It is the other way around. Storage keeps files long-term; RAM is the temporary working memory." },
+        { t: "They are two words for the exact same thing", correct: false, why: "They do different jobs. RAM is temporary working memory; storage is long-term keeping of files." },
+        { t: "RAM is a type of printer", correct: false, why: "RAM is computer memory, not a printer. A printer is an output device." }
+      ]
+    },
+    {
+      domain: "1. Technology Basics",
+      q: "Which of these is an operating system?",
+      options: [
+        { t: "Windows", correct: true, why: "Windows is an operating system — the main software that runs the whole computer and lets you open programs." },
+        { t: "A web browser", correct: false, why: "A browser is an application you run on top of the operating system, not the operating system itself." },
+        { t: "A USB cable", correct: false, why: "A USB cable is hardware you plug in. An operating system is software." },
+        { t: "Microsoft Word", correct: false, why: "Word is an application (a program you open), not the operating system that runs the computer." }
+      ]
+    },
+    {
+      domain: "2. Digital Citizenship",
+      q: "Which of these counts as PII (personally identifiable information) you should protect?",
+      options: [
+        { t: "Your Social Security number", correct: true, why: "Your Social Security number can identify you and be used for fraud, so it is sensitive PII to guard carefully." },
+        { t: "Today's weather", correct: false, why: "The weather is public information that says nothing about who you are." },
+        { t: "The name of your favorite movie", correct: false, why: "A favorite movie does not identify you the way your name, address, or SSN would." },
+        { t: "A photo of a sunset with no people in it", correct: false, why: "A plain sunset photo contains nothing that identifies you personally." }
+      ]
+    },
+    {
+      domain: "2. Digital Citizenship",
+      q: "Someone posts a rude comment trying to start an argument with you online. What is usually the best response?",
+      options: [
+        { t: "Do not respond — block and report the person instead", correct: true, why: "Nonresponse is often the safest choice. Arguing rewards the behavior; blocking and reporting protects you." },
+        { t: "Reply with an even ruder comment", correct: false, why: "Responding with insults usually makes things worse and can hurt your own digital reputation." },
+        { t: "Share their comment widely so everyone can pile on", correct: false, why: "Spreading the conflict invites more negativity and can pull others into a harmful argument." },
+        { t: "Post their private information online", correct: false, why: "Posting someone's private details is harmful and can be illegal. Never do this." }
+      ]
+    },
+    {
+      domain: "3. Information Management",
+      q: "You want to find a single word on a long web page quickly. Which shortcut helps?",
+      options: [
+        { t: "Ctrl + F (Find)", correct: true, why: "Ctrl + F opens a Find box that jumps to your word on the current page or in a file." },
+        { t: "Ctrl + P (Print)", correct: false, why: "Ctrl + P opens the print dialog — useful for printing, not for finding a word." },
+        { t: "Ctrl + S (Save)", correct: false, why: "Ctrl + S saves a file. It does not search the page." },
+        { t: "Ctrl + Z (Undo)", correct: false, why: "Ctrl + Z undoes your last action. It does not find text." }
+      ]
+    },
+    {
+      domain: "3. Information Management",
+      q: "What does it mean if a photo is in the “public domain”?",
+      options: [
+        { t: "Anyone may use it freely without needing permission", correct: true, why: "Public domain content has no active copyright, so it is free for anyone to use." },
+        { t: "You must pay a fee every time you use it", correct: false, why: "Public domain content is free — no fee or permission is required." },
+        { t: "It can only be viewed by government employees", correct: false, why: "“Public domain” is about copyright, not about who is allowed to view it." },
+        { t: "It is illegal to look at it", correct: false, why: "Public domain means the opposite — it is openly available for everyone to use." }
+      ]
+    },
+    {
+      domain: "4. Content Creation",
+      q: "Which is the best file name for a letter you wrote to the VA on February 9, 2026?",
+      options: [
+        { t: "VA-Letter-2026-02-09", correct: true, why: "A clear, dated name makes the file easy to find and sort later — a good naming convention." },
+        { t: "document1", correct: false, why: "“document1” tells you nothing about the contents and is easy to lose among other files." },
+        { t: "asdf", correct: false, why: "Random letters give you no idea what the file is when you look for it later." },
+        { t: "Untitled (final) (final2) (real-final)", correct: false, why: "Messy, repeated names cause confusion. A clear, dated name is far easier to manage." }
+      ]
+    },
+    {
+      domain: "4. Content Creation",
+      q: "Why should you keep a backup of important files?",
+      options: [
+        { t: "So you still have a copy if the computer breaks or a file is lost", correct: true, why: "A backup is a second copy kept elsewhere (flash drive or cloud) so a crash or mistake does not lose your work." },
+        { t: "Backups make the computer run faster", correct: false, why: "Backups protect your files; they do not speed up the computer." },
+        { t: "Backups delete your old files to save space", correct: false, why: "A backup adds a safety copy — it does not delete your files." },
+        { t: "There is no reason to back up files", correct: false, why: "Files can be lost to crashes, theft, or mistakes, so a backup is well worth it." }
+      ]
+    },
+    {
+      domain: "5. Communication",
+      q: "You get an email sent to ten people. You only need to answer the person who sent it. What should you click?",
+      options: [
+        { t: "Reply (sends only to the sender)", correct: true, why: "“Reply” goes to just the sender — the right choice when only that one person needs your answer." },
+        { t: "Reply All (sends to everyone)", correct: false, why: "Reply All would email all ten people. Use it only when the whole group truly needs your message." },
+        { t: "Forward", correct: false, why: "Forward sends the email to someone new, not back to the sender." },
+        { t: "Delete", correct: false, why: "Deleting removes the email without answering the sender at all." }
+      ]
+    },
+    {
+      domain: "5. Communication",
+      q: "What is “acceptable use policy”?",
+      options: [
+        { t: "The rules for using a website, network, or workplace computer", correct: true, why: "An acceptable use policy lists what you may and may not do. Following it keeps your access and avoids trouble." },
+        { t: "A type of computer virus", correct: false, why: "It is a set of rules, not a virus." },
+        { t: "A button that prints the current page", correct: false, why: "It is a policy (rules), not a print button." },
+        { t: "The price you pay for internet service", correct: false, why: "That would be your internet bill. An acceptable use policy is about rules of use." }
+      ]
+    },
+    {
+      domain: "6. Collaboration",
+      q: "Which is an example of ASYNCHRONOUS communication (people respond at different times)?",
+      options: [
+        { t: "Sending an email and getting a reply hours later", correct: true, why: "Email is asynchronous — you reply whenever you are able, not instantly." },
+        { t: "A live video meeting", correct: false, why: "A live video meeting is synchronous — everyone is talking at the same time." },
+        { t: "A phone call happening right now", correct: false, why: "A live phone call is synchronous because both people are talking at the same time." },
+        { t: "A real-time chat where you both reply instantly", correct: false, why: "An instant back-and-forth chat is synchronous — it happens at the same time." }
+      ]
+    },
+    {
+      domain: "7. Safety & Security",
+      q: "An email says it is from your bank and asks you to click a link and “confirm your password right now.” What is this most likely?",
+      options: [
+        { t: "Phishing — a scam trying to steal your information", correct: true, why: "Pressure to click a link and enter your password is a classic phishing trick. Do not click; contact the bank directly." },
+        { t: "A normal, safe request you should follow quickly", correct: false, why: "Real banks do not ask you to confirm passwords through email links. The urgency is a warning sign." },
+        { t: "A software update", correct: false, why: "This is not an update — it is a message trying to trick you into giving up your password." },
+        { t: "A backup of your account", correct: false, why: "A backup is a copy of your files. This message is a scam asking for your password." }
+      ]
+    },
+    {
+      domain: "7. Safety & Security",
+      q: "Which makes the strongest, hardest-to-guess password?",
+      options: [
+        { t: "A long passphrase of several random words, like “BrightCanoeMapleRiver”", correct: true, why: "Length is what makes passwords strong. A long phrase of random words is hard to guess but easy to remember." },
+        { t: "Your first name", correct: false, why: "A name is short and easy to guess — weak protection." },
+        { t: "123456", correct: false, why: "Simple number runs are among the first things attackers try." },
+        { t: "The word “password”", correct: false, why: "“password” is one of the most common and easily guessed choices." }
+      ]
+    },
+    {
+      domain: "7. Safety & Security",
+      q: "You are using a shared library computer. What helps protect your privacy?",
+      options: [
+        { t: "Use private browsing and sign out when you finish", correct: true, why: "Private browsing avoids saving your history and sign-ins, and signing out keeps the next person out of your accounts." },
+        { t: "Save all your passwords in the browser for next time", correct: false, why: "On a shared computer, saved passwords let the next user into your accounts — the opposite of safe." },
+        { t: "Stay signed in to your email when you leave", correct: false, why: "Leaving yourself signed in lets the next person read and use your account." },
+        { t: "Turn the monitor brightness up", correct: false, why: "Screen brightness does nothing to protect your accounts or private information." }
+      ]
+    }
+  ];
+
+  var idx = 0;
+  var score = 0;
+  var answered = false;
+
+  var meterWrap = document.getElementById("meter-wrap");
+  var meterText = document.getElementById("meter-text");
+  var scoreText = document.getElementById("score-text");
+  var meterFill = document.getElementById("meter-fill");
+  var quizArea = document.getElementById("quiz-area");
+  var resultsArea = document.getElementById("results-area");
+  var qDomain = document.getElementById("q-domain");
+  var qText = document.getElementById("q-text");
+  var optionsEl = document.getElementById("options");
+  var feedback = document.getElementById("feedback");
+  var verdict = document.getElementById("verdict");
+  var rationale = document.getElementById("rationale");
+  var nextBtn = document.getElementById("next-btn");
+  var progressLine = document.getElementById("progress-line");
+  var LETTERS = ["A", "B", "C", "D", "E"];
+
+  function render() {
+    answered = false;
+    var item = QUESTIONS[idx];
+
+    meterText.textContent = "Question " + (idx + 1) + " of " + QUESTIONS.length;
+    scoreText.textContent = "Score: " + score;
+    meterFill.style.width = ((idx) / QUESTIONS.length * 100) + "%";
+
+    qDomain.textContent = item.domain;
+    qText.textContent = item.q;
+    progressLine.textContent = "Question " + (idx + 1) + " of " + QUESTIONS.length;
+
+    optionsEl.innerHTML = "";
+    feedback.className = "feedback";
+    feedback.classList.remove("show");
+    nextBtn.disabled = true;
+
+    item.options.forEach(function (opt, i) {
+      var li = document.createElement("li");
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "opt-btn";
+
+      var letter = document.createElement("span");
+      letter.className = "opt-letter";
+      letter.textContent = LETTERS[i] + ".";
+
+      var label = document.createElement("span");
+      label.className = "opt-label";
+      label.textContent = opt.t;
+
+      var mark = document.createElement("span");
+      mark.className = "opt-mark";
+      mark.setAttribute("aria-hidden", "true");
+
+      btn.appendChild(letter);
+      btn.appendChild(label);
+      btn.appendChild(mark);
+      btn.addEventListener("click", function () { choose(i, btn); });
+      li.appendChild(btn);
+      optionsEl.appendChild(li);
+    });
+  }
+
+  function choose(i, btn) {
+    if (answered) { return; }
+    answered = true;
+    var item = QUESTIONS[idx];
+    var opt = item.options[i];
+
+    var allBtns = optionsEl.querySelectorAll(".opt-btn");
+    for (var b = 0; b < allBtns.length; b++) {
+      allBtns[b].disabled = true;
+      if (item.options[b].correct) {
+        allBtns[b].classList.add("correct");
+        allBtns[b].setAttribute("aria-label", item.options[b].t + " — correct answer");
+      }
+    }
+    if (!opt.correct) {
+      btn.classList.add("incorrect");
+      btn.setAttribute("aria-label", opt.t + " — your answer, incorrect");
+    }
+
+    if (opt.correct) { score++; }
+    scoreText.textContent = "Score: " + score;
+
+    feedback.classList.add("show", opt.correct ? "right" : "wrong");
+    verdict.textContent = "";
+    rationale.textContent = opt.why;
+
+    nextBtn.disabled = false;
+    nextBtn.textContent = (idx === QUESTIONS.length - 1) ? "See results →" : "Next question →";
+    nextBtn.focus();
+  }
+
+  function next() {
+    if (!answered) { return; }
+    if (idx < QUESTIONS.length - 1) {
+      idx++;
+      render();
+    } else {
+      showResults();
+    }
+  }
+
+  function showResults() {
+    quizArea.classList.add("hidden");
+    meterWrap.classList.add("hidden");
+    resultsArea.classList.remove("hidden");
+
+    var pct = Math.round(score / QUESTIONS.length * 100);
+    document.getElementById("final-score").textContent = score + " / " + QUESTIONS.length;
+    document.getElementById("final-pct").textContent = pct + "% correct";
+
+    var msg;
+    if (pct >= 90) { msg = "Excellent work — you have a strong grasp of these basics. You're well prepared for the Post-Test."; }
+    else if (pct >= 70) { msg = "Good job. Review the few you missed and try again — you're nearly there."; }
+    else if (pct >= 50) { msg = "You're making progress. Look back over the flashcards and the weekly handouts, then take this quiz again."; }
+    else { msg = "Keep going — this is practice, not a grade. Review the flashcards and class materials, then come back and try again."; }
+    document.getElementById("final-msg").textContent = msg;
+    resultsArea.focus();
+  }
+
+  function restart() {
+    idx = 0; score = 0; answered = false;
+    resultsArea.classList.add("hidden");
+    quizArea.classList.remove("hidden");
+    meterWrap.classList.remove("hidden");
+    render();
+  }
+
+  nextBtn.addEventListener("click", next);
+  document.getElementById("retry-btn").addEventListener("click", restart);
+  resultsArea.setAttribute("tabindex", "-1");
+
+  render();
+})();
+</script>
+<script src="/shared/text-size.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make, Save &amp; Share Lab | VUB Digital Literacy — Level 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D; --primary-light: #2C4A7C;
+      --va-blue: #003F72; --va-blue-dark: #002F5A;
+      --accent: #C9A227; --accent-light: #E6C65C;
+      --light: #FFFFFF; --off-white: #F5F7FA; --gray: #5A6A7A;
+      --success: #28A745; --warning: #FFC107; --danger: #DC3545; --info: #17A2B8;
+    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); color: #333; line-height: 1.6; padding: 0.5in; max-width: 8.5in; margin: 0 auto; }
+    .header { background: linear-gradient(135deg, #003F72 0%, #1B365D 100%); color: var(--light); padding: 1.25rem 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-subtitle { font-size: 0.95rem; opacity: 0.9; margin-top: 0.15rem; }
+    .header-meta { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; }
+    .header-badge { background: var(--accent); color: var(--va-blue); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .header-right { text-align: right; flex-shrink: 0; }
+    .header-time { font-size: 0.8rem; opacity: 0.85; margin-top: 0.5rem; }
+    .name-field { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-size: 1rem; }
+    .name-field label { font-weight: 600; color: var(--va-blue); }
+    .name-field .line { flex: 1; border-bottom: 2px dashed var(--gray); max-width: 300px; }
+    .goal-box { background: linear-gradient(135deg, var(--off-white) 0%, #EDF2F7 100%); border: 2px solid var(--accent); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem; }
+    .goal-box h2 { color: var(--va-blue); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .goal-box .build-list { list-style: none; margin-top: 0.75rem; }
+    .goal-box .build-list li { font-size: 0.95rem; padding: 0.25rem 0; color: #333; }
+    .goal-box .build-list li::before { content: "\2713  "; color: var(--success); font-weight: 700; }
+    .part-header { background: var(--va-blue); color: var(--light); padding: 0.75rem 1rem; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+    .part-header h2 { font-size: 1.15rem; margin: 0; }
+    .part-timing { background: var(--accent); color: var(--va-blue); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
+    .part-type { background: rgba(255,255,255,0.2); color: var(--light); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.65rem; font-weight: 600; margin-left: 0.5rem; }
+    .part-content { border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 8px 8px; padding: 1.25rem; margin-bottom: 0.5rem; }
+    .section { margin-bottom: 1.25rem; }
+    .section-title { background: var(--off-white); color: var(--va-blue); padding: 0.5rem 1rem; border-left: 4px solid var(--accent); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .checklist { list-style: none; }
+    .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; margin-bottom: 0.5rem; background: var(--off-white); border-radius: 8px; font-size: 0.95rem; }
+    .checkbox { width: 22px; height: 22px; border: 2px solid var(--va-blue); border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--va-blue); }
+    .checklist-text .detail { display: block; font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem; }
+    .key { display: inline-block; background: var(--off-white); border: 2px solid #ccc; border-bottom: 3px solid #aaa; border-radius: 4px; padding: 0.1rem 0.4rem; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.85rem; font-weight: 600; color: var(--primary); min-width: 1.5rem; text-align: center; }
+    .tip-box { background: #FFF8E1; border-left: 4px solid var(--accent); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .tip-box strong { color: #856404; }
+    .warning-box { background: #FFF3F3; border-left: 4px solid var(--danger); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .warning-box strong { color: var(--danger); }
+    .table-preview { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 0.75rem 0; }
+    .table-preview th { background: var(--va-blue); color: var(--light); padding: 0.5rem; text-align: left; font-weight: 600; }
+    .table-preview td { padding: 0.5rem; border-bottom: 1px solid #E2E8F0; }
+    .table-preview tr:nth-child(even) { background: var(--off-white); }
+    .email-thread { border: 2px solid #E2E8F0; border-radius: 8px; padding: 0.75rem 1rem; margin: 0.75rem 0; background: #fff; font-size: 0.85rem; }
+    .email-thread .meta { color: var(--gray); font-size: 0.8rem; margin-bottom: 0.35rem; }
+    .email-thread .meta strong { color: var(--va-blue); }
+    .email-thread .body { color: #333; }
+    .checkpoint-box { background: linear-gradient(135deg, rgba(0,63,114,0.1) 0%, rgba(0,63,114,0.04) 100%); border: 2px solid var(--va-blue); border-radius: 10px; padding: 1rem; margin: 1.25rem 0; }
+    .checkpoint-box h4 { color: var(--va-blue); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .checkpoint-box .check-items { list-style: none; margin: 0; padding: 0; }
+    .checkpoint-box .check-items li { font-size: 0.9rem; color: #333; padding: 0.2rem 0; }
+    .fill-line { display: flex; align-items: center; gap: 0.5rem; margin: 0.75rem 0; font-size: 0.9rem; }
+    .fill-line .label { color: var(--gray); white-space: nowrap; }
+    .fill-line .blank { flex: 1; border-bottom: 1px dashed var(--gray); min-height: 1.5rem; }
+    .write-box { border: 1px dashed var(--gray); border-radius: 6px; min-height: 3rem; margin: 0.5rem 0; }
+    .success-box { background: rgba(40,167,69,0.1); border: 2px solid var(--success); border-radius: 10px; padding: 1.25rem; margin-top: 2rem; }
+    .success-box h3 { color: var(--success); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .success-box p { font-size: 0.9rem; color: var(--gray); margin-bottom: 0.5rem; }
+    .success-box .skills-earned { list-style: none; margin-top: 0.5rem; }
+    .success-box .skills-earned li { font-size: 0.9rem; padding: 0.2rem 0; }
+    .success-box .skills-earned li::before { content: "\2B50  "; }
+    .footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid var(--off-white); text-align: center; font-size: 0.8rem; color: var(--gray); }
+    @media print {
+      body { padding: 0.25in; }
+      .header, .part-header, .checkbox, .checkpoint-box, .table-preview th, .key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { page-break-before: auto; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div>
+      <span class="header-badge">LAB</span>
+      <h1 style="margin-top: 0.35rem;">Make, Save &amp; Share</h1>
+      <div class="header-subtitle">Create a document, name it, cite a source, print &amp; email it well</div>
+      <div class="header-meta">Week 3 | VUB Digital Literacy — Level 1 (IC3 GS6 Aligned)</div>
+    </div>
+    <div class="header-right">
+      <div class="header-time">~35 minutes</div>
+      <div class="header-time">5 parts</div>
+    </div>
+  </header>
+
+  <div class="name-field">
+    <label>Name:</label><div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label><div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <div class="goal-box">
+    <h2>Today You Will</h2>
+    <ul class="build-list">
+      <li>Create a document and save it with a clear file name</li>
+      <li>Add a simple citation to give credit to a source</li>
+      <li>Set print options the right way (no printing needed)</li>
+      <li>Practice email reply options on a sample message</li>
+      <li>Handle a reply-all and inclusive-language situation</li>
+    </ul>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="part-header">
+    <h2>Part 1: Create &amp; Name a Document</h2>
+    <div><span class="part-timing">~10 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Open Word</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Open Microsoft Word and start a blank document</strong>
+        <span class="detail">Press the <span class="key">Windows</span> key, type "Word," press <span class="key">Enter</span>. Click "Blank document." (No Word? Use Word on the web at office.com, or Google Docs — the steps are the same.)</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Type a Few Sentences</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Write a short note — a few sentences about a benefit or service you care about</strong>
+        <span class="detail">Example: "Notes about VA health care. I want to learn how to refill prescriptions online and message my doctor."</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 &mdash; Make It Look Good</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Add a title and make it bold</strong>
+        <span class="detail">Type a title on the first line. Select it, then on the <strong>Home</strong> tab click <strong>Bold</strong> (or press <span class="key">Ctrl</span> + <span class="key">B</span>).</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 4 &mdash; Save With a Good File Name</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Save your document with a clear, descriptive name</strong>
+        <span class="detail">Press <span class="key">Ctrl</span> + <span class="key">S</span>. Choose where to save (Desktop is fine). For the name, describe what it is and add the date, like <strong>VA-Notes-2026-06.docx</strong>.</span>
+      </div></li></ul>
+    </div>
+    <div class="tip-box">
+      <strong>Good name rule:</strong> Describe the file + add the date as YEAR-MONTH. Use hyphens instead of spaces. Avoid names like "Document1" — they're impossible to find later.
+    </div>
+    <div class="fill-line">
+      <span class="label">The file name I chose:</span><span class="blank"></span>
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items"><li>&#9744; I created a document and saved it with a clear, dated file name</li></ul>
+    </div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="part-header">
+    <h2>Part 2: Add a Simple Citation</h2>
+    <div><span class="part-timing">~5 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Pick a Source</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Choose a website you used or trust</strong>
+        <span class="detail">For example, the VA website at va.gov. A citation tells your reader where information came from.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Write the Citation Line</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>At the bottom of your document, type a citation</strong>
+        <span class="detail">Use this pattern: <em>Author. "Title of page." Website. Date you found it.</em></span>
+      </div></li></ul>
+      <div class="tip-box">
+        <strong>Example:</strong> U.S. Department of Veterans Affairs. "VA Health Care." va.gov. Accessed June 24, 2026.
+      </div>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 (Optional) &mdash; Let Word Do It</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Try the References tab</strong>
+        <span class="detail">Click the <strong>References</strong> tab &rarr; "Insert Citation" &rarr; "Add New Source." Fill in the boxes and Word formats it for you.</span>
+      </div></li></ul>
+    </div>
+    <div class="fill-line">
+      <span class="label">Write your citation here:</span>
+    </div>
+    <div class="write-box"></div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items"><li>&#9744; I added a citation that names my source</li></ul>
+    </div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="part-header">
+    <h2>Part 3: Set Print Options (No Printing!)</h2>
+    <div><span class="part-timing">~5 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Open the Print Screen</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Press <span class="key">Ctrl</span> + <span class="key">P</span></strong>
+        <span class="detail">This opens the print screen. The big preview on the right shows your page before it prints. <strong>Do NOT click Print</strong> — we are only exploring the options.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Try Each Setting</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Change the options and watch the preview</strong>
+        <span class="detail">Switch <strong>Orientation</strong> between Portrait (tall) and Landscape (wide). Find <strong>Print on Both Sides</strong> (double-sided). Look at <strong>Copies</strong> and <strong>Pages</strong>.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 &mdash; Save as PDF Instead of Paper</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Choose "Microsoft Print to PDF" as the printer</strong>
+        <span class="detail">In the printer list, pick <strong>Microsoft Print to PDF</strong>, then click Print/Save and give it a name. This makes a PDF file instead of using paper.</span>
+      </div></li></ul>
+    </div>
+    <table class="table-preview">
+      <thead><tr><th>Setting</th><th>What to pick</th></tr></thead>
+      <tbody>
+        <tr><td>Orientation</td><td>Portrait for letters, Landscape for wide tables</td></tr>
+        <tr><td>Sides</td><td>Double-sided to save paper</td></tr>
+        <tr><td>Copies</td><td>How many you need</td></tr>
+        <tr><td>Pages</td><td>"All" or a range like 1-3</td></tr>
+      </tbody>
+    </table>
+    <div class="fill-line">
+      <span class="label">Which orientation looked better for your note?</span><span class="blank"></span>
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; I changed orientation and saw it in the preview</li>
+        <li>&#9744; I found the double-sided option</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="part-header">
+    <h2>Part 4: Email Reply Options</h2>
+    <div><span class="part-timing">~8 min</span><span class="part-type">PRACTICE</span></div>
+  </div>
+  <div class="part-content">
+    <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Read the sample email below, then decide which button to use for each situation. Write your answer on the line.</p>
+    <div class="email-thread">
+      <div class="meta"><strong>From:</strong> Maria (VUB Coordinator)</div>
+      <div class="meta"><strong>To:</strong> You, plus 8 other students in the class</div>
+      <div class="meta"><strong>Subject:</strong> Class moved to Room 204 next Monday</div>
+      <div class="body">Hi everyone — quick heads-up that next Monday's class is in Room 204, not our usual room. Please reply to let me know you got this. Thanks! — Maria</div>
+    </div>
+    <div class="section">
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div class="checklist-text">
+          <strong>You just want to tell Maria "Got it, thanks"</strong>
+          <span class="detail">Which button? Write it below.</span>
+          <div class="fill-line" style="margin-top:0.5rem;"><span class="label">My answer:</span><span class="blank"></span></div>
+        </div></li>
+        <li><div class="checkbox"></div><div class="checklist-text">
+          <strong>You want to share Maria's message with your spouse who drives you to class</strong>
+          <span class="detail">Which button sends it to someone new?</span>
+          <div class="fill-line" style="margin-top:0.5rem;"><span class="label">My answer:</span><span class="blank"></span></div>
+        </div></li>
+        <li><div class="checkbox"></div><div class="checklist-text">
+          <strong>You email a group sign-up sheet and want to protect everyone's email address</strong>
+          <span class="detail">Which field hides addresses from each other?</span>
+          <div class="fill-line" style="margin-top:0.5rem;"><span class="label">My answer:</span><span class="blank"></span></div>
+        </div></li>
+      </ul>
+    </div>
+    <div class="tip-box">
+      <strong>Answers:</strong> 1) <strong>Reply</strong> — goes to Maria only. 2) <strong>Forward</strong> — sends it to a new person. 3) <strong>Bcc</strong> — hides each address from the others.
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items"><li>&#9744; I can tell Reply, Forward, and Bcc apart</li></ul>
+    </div>
+  </div>
+
+  <!-- PART 5 -->
+  <div class="part-header">
+    <h2>Part 5: Reply-All &amp; Inclusive Language</h2>
+    <div><span class="part-timing">~7 min</span><span class="part-type">SCENARIO</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Scenario A &mdash; The Reply-All Trap</h3>
+      <div class="email-thread">
+        <div class="meta"><strong>From:</strong> Maria (VUB Coordinator)</div>
+        <div class="meta"><strong>To:</strong> You + 8 other students</div>
+        <div class="body">"Reply to let me know you got this."</div>
+      </div>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>You hit "Reply All" and typed "Got it!" — who received your message?</strong>
+        <span class="detail">Think it through, then write who got it and what you should have pressed instead.</span>
+      </div></li></ul>
+      <div class="write-box"></div>
+      <div class="warning-box">
+        <strong>The lesson:</strong> "Reply All" sent "Got it!" to all 9 students <em>and</em> Maria — 9 inboxes that didn't need it. The right choice was <strong>Reply</strong> (Maria only). Always check the "To" line before you send.
+      </div>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Scenario B &mdash; Inclusive Language</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Rewrite this greeting to welcome everyone in the class</strong>
+        <span class="detail">Original opener to a mixed group: "Hey guys, here's the homework..."</span>
+      </div></li></ul>
+      <div class="fill-line"><span class="label">My rewrite:</span></div>
+      <div class="write-box"></div>
+      <div class="tip-box">
+        <strong>One good option:</strong> "Hi everyone, here's the homework..." Inclusive language welcomes the whole group and leaves no one out.
+      </div>
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; I understand when reply-all is the wrong choice</li>
+        <li>&#9744; I rewrote a greeting to be welcoming and inclusive</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-box">
+    <h3>Lab Complete!</h3>
+    <p>Congratulations! You created and saved real work and practiced communicating well online.</p>
+    <ul class="skills-earned">
+      <li>Create and name a document so you can find it later</li>
+      <li>Add a citation to give credit to your sources</li>
+      <li>Choose the right print settings (and save paper with PDF)</li>
+      <li>Use Reply, Reply All, Forward, and Bcc correctly</li>
+      <li>Write with inclusive, respectful language</li>
+    </ul>
+    <p style="margin-top: 0.75rem; font-weight: 600; color: var(--va-blue);">
+      Keep this lab! Try the same steps at home with a real document this week.
+    </p>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound &mdash; West Virginia</strong> | Week 3: Creating &amp; Communicating</p>
+    <p style="margin-top: 0.25rem;">Digital Literacy — Level 1 (IC3 GS6 Aligned)</p>
+  </footer>
+
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 2: Getting Online — Browsers, Networks & Searching | VUB Digital Literacy — Level 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B365D;
+      --primary-dark: #0D1B2A;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --red: #B31942;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .logo {
+      text-align: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .logo h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .logo p {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .week-indicator {
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .week-indicator .week-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .week-indicator .week-title {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .chapter {
+      margin-bottom: 1rem;
+    }
+
+    .chapter-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .chapter-slides {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .slide-link {
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slide-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .slide-link.active {
+      background: var(--va-blue);
+      font-weight: 600;
+    }
+
+    .slide-link.completed::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource-link::before {
+      content: "\2193 ";
+      opacity: 0.6;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .progress-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--va-blue) 0%, var(--accent) 100%);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Slides Container */
+    .slides-container {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .slide {
+      display: none;
+      background: var(--light);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 1000px;
+      min-height: 600px;
+      padding: 3rem;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Styles */
+    .slide-header {
+      margin-bottom: 2rem;
+    }
+
+    .slide-title {
+      font-size: 2.25rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray);
+    }
+
+    .slide-content {
+      font-size: 1.5rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .slide-content ul, .slide-content ol {
+      margin-left: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .slide-content li {
+      margin-bottom: 1rem;
+    }
+
+    /* Title Slide */
+    .title-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--light);
+      border-radius: 16px;
+    }
+
+    .title-slide .slide-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-slide .slide-title {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+      color: var(--light);
+    }
+
+    .title-slide .slide-subtitle {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .course-info {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* Info Boxes */
+    .info-box {
+      background: var(--off-white);
+      border-left: 4px solid var(--va-blue);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+    }
+
+    .info-box.success {
+      border-left-color: var(--success);
+      background: rgba(40, 167, 69, 0.1);
+    }
+
+    .info-box.warning {
+      border-left-color: var(--va-red);
+      background: rgba(196, 38, 46, 0.1);
+    }
+
+    .info-box-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .info-box-content {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Key Points */
+    .key-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--off-white);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .key-point-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .key-point-text {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .key-point-text strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .column {
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+
+    .column h3 {
+      color: var(--va-blue);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .column ul {
+      margin-left: 1.25rem;
+    }
+
+    .column li {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Steps List */
+    .steps-list {
+      list-style: none;
+      margin-left: 0 !important;
+      counter-reset: step-counter;
+    }
+
+    .steps-list li {
+      position: relative;
+      padding-left: 3.5rem;
+      margin-bottom: 1.5rem;
+      counter-increment: step-counter;
+    }
+
+    .steps-list li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--va-blue);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    /* Portal Card */
+    .portal-card {
+      background: white;
+      border: 2px solid var(--va-blue);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .portal-card-icon {
+      font-size: 3rem;
+      flex-shrink: 0;
+    }
+
+    .portal-card h4 {
+      color: var(--va-blue);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .portal-card p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .portal-card .url {
+      font-family: monospace;
+      background: var(--off-white);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: var(--va-blue);
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    /* Demo Box */
+    .demo-box {
+      background: linear-gradient(135deg, var(--va-blue) 0%, #002F5A 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .demo-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .demo-box p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Navigation Footer */
+    .nav-footer {
+      background: var(--light);
+      border-top: 1px solid #eee;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.prev {
+      background: var(--off-white);
+      color: var(--primary);
+    }
+
+    .nav-btn.prev:hover {
+      background: #e8e8e8;
+    }
+
+    .nav-btn.next {
+      background: var(--va-blue);
+      color: white;
+    }
+
+    .nav-btn.next:hover {
+      background: #002F5A;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .slide-counter {
+      font-size: 0.9rem;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* Completion Slide */
+    .completion-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+    }
+
+    .completion-badge {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, var(--va-blue) 0%, #002F5A 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 63, 114, 0.3);
+    }
+
+    .completion-badge span {
+      font-size: 4rem;
+    }
+
+    .completion-slide h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .completion-slide p {
+      font-size: 1.25rem;
+      color: var(--gray);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* Handout Prompt */
+    .handout-prompt {
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      color: var(--primary);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .handout-prompt-icon {
+      font-size: 2rem;
+    }
+
+    .handout-prompt-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* Pre-test Link */
+    .pretest-link {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .pretest-link:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+    }
+
+    /* Knowledge Check */
+    .knowledge-check {
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .knowledge-check .question {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .answer-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--va-blue);
+      color: var(--light);
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      min-height: 44px;
+      transition: background 0.2s ease;
+    }
+
+    .answer-toggle:hover { background: #002F5A; }
+
+    .answer-toggle:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .answer-toggle .toggle-mark { font-weight: 700; }
+
+    .answer-reveal {
+      margin-top: 1rem;
+      padding: 1rem 1.25rem;
+      background: rgba(40, 167, 69, 0.12);
+      border-left: 4px solid var(--success);
+      border-radius: 0 8px 8px 0;
+      font-size: 1.1rem;
+      color: #2c3e2c;
+    }
+
+    .answer-reveal[hidden] { display: none; }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      display: none;
+    }
+
+    .confetti.active {
+      display: block;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti-fall 3s ease-out forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide { animation: none; }
+      .confetti-piece { animation: none; }
+      .progress-fill { transition: none; }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar { width: 240px; }
+      .main-content { margin-left: 240px; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; }
+      .two-column { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="logo">
+      <h2>VUB Digital Literacy</h2>
+      <p>Level 1 · IC3 GS6 Aligned</p>
+    </div>
+
+    <div class="week-indicator">
+      <div class="week-num">Week 2</div>
+      <div class="week-title">Getting Online</div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Browsers &amp; Digital Environments</div>
+      <div class="chapter-slides">
+        <div class="slide-link active" data-slide="0">Welcome &amp; Overview</div>
+        <div class="slide-link" data-slide="1">Learning Objectives</div>
+        <div class="slide-link" data-slide="2">The Desktop &amp; OS Terms</div>
+        <div class="slide-link" data-slide="3">What a Web Browser Does</div>
+        <div class="slide-link" data-slide="4">Tabs, Bookmarks &amp; History</div>
+        <div class="slide-link" data-slide="5">Moving Between Sites &amp; Apps</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Networking</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="6">Wired, Wi-Fi &amp; Cellular</div>
+        <div class="slide-link" data-slide="7">Modem, Router &amp; ISP</div>
+        <div class="slide-link" data-slide="8">Am I Connected?</div>
+        <div class="slide-link" data-slide="9">Basic Troubleshooting</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Searching &amp; Copyright</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="10">Define Your Search</div>
+        <div class="slide-link" data-slide="11">Relevant vs. Irrelevant</div>
+        <div class="slide-link" data-slide="12">Keep Your Sources</div>
+        <div class="slide-link" data-slide="13">Find on Page (Ctrl+F)</div>
+        <div class="slide-link" data-slide="14">Copyright &amp; Creative Commons</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Wrap-Up</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="15">Knowledge Check</div>
+        <div class="slide-link" data-slide="16">Key Takeaways</div>
+        <div class="slide-link" data-slide="17">You Did It!</div>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <div class="resources-title">Resources</div>
+      <a class="resource-link" href="handouts/search-connect-lab.html" target="_blank">Search &amp; Connect Lab</a>
+      <a class="resource-link" href="handouts/browser-wifi-quick-reference.html" target="_blank">Browser &amp; Wi-Fi Quick Reference</a>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="slides-container">
+      <!-- Slide 0: Title -->
+      <div class="slide active title-slide">
+        <div class="slide-icon">🌐</div>
+        <h1 class="slide-title">Getting Online</h1>
+        <p class="slide-subtitle">Browsers, Networks &amp; Smart Searching</p>
+        <p class="course-info">Week 2 of 5 · VUB Digital Literacy — Level 1</p>
+      </div>
+
+      <!-- Slide 1: Learning Objectives -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Today's Learning Objectives</h1>
+          <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🧭</div>
+            <div class="key-point-text">
+              <strong>Navigate Your Computer &amp; the Web</strong>
+              Use the desktop, and move around web browsers with tabs, bookmarks, and history
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📶</div>
+            <div class="key-point-text">
+              <strong>Understand How You Connect</strong>
+              Know the difference between wired, Wi-Fi, and cellular — and check if you're connected
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🔧</div>
+            <div class="key-point-text">
+              <strong>Fix Common Connection Problems</strong>
+              Walk through simple steps when the internet stops working
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🔍</div>
+            <div class="key-point-text">
+              <strong>Search Smarter &amp; Use Content Fairly</strong>
+              Find good answers, keep your sources, and understand copyright basics
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: The Desktop & OS Terms -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">The Desktop &amp; Operating System Terms</h1>
+          <p class="slide-subtitle">The home base of your Windows computer</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🖥️</div>
+            <div class="key-point-text">
+              <strong>Desktop</strong>
+              The main screen you see after signing in. It holds icons, shortcuts, and your background
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📊</div>
+            <div class="key-point-text">
+              <strong>Taskbar</strong>
+              The bar along the bottom. It shows open programs and has the Start button and clock
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🪟</div>
+            <div class="key-point-text">
+              <strong>Start Menu &amp; Windows Key</strong>
+              Press the <strong style="display:inline;">Windows</strong> key (bottom-left of the keyboard) to open Start and find any program
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">Why "operating system"?</div>
+            <div class="info-box-content">
+              The operating system (Windows) is the master program that runs your computer and lets every other app work. The desktop and taskbar are part of it.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: What a Web Browser Does -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">What a Web Browser Does</h1>
+          <p class="slide-subtitle">Your window to the internet</p>
+        </div>
+        <div class="slide-content">
+          <div class="portal-card">
+            <div class="portal-card-icon">🌐</div>
+            <div>
+              <h4>A Web Browser</h4>
+              <p>A program that opens websites. Common browsers are Microsoft Edge, Google Chrome, and Mozilla Firefox. They all do the same basic job.</p>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📍</div>
+            <div class="key-point-text">
+              <strong>Address Bar</strong>
+              The box at the top where you type a website address (the URL), like <em>va.gov</em>. You can also type a question to search
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">Reading a web address</div>
+            <div class="info-box-content">
+              In <strong>www.va.gov</strong>, the <strong>.gov</strong> ending tells you it's an official U.S. government site. A small padlock 🔒 means the connection is secure.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Tabs, Bookmarks & History -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Tabs, Bookmarks &amp; History</h1>
+          <p class="slide-subtitle">Three tools that make browsing easier</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🗂️</div>
+            <div class="key-point-text">
+              <strong>Tabs</strong>
+              Open several pages in one window. Each tab is like a page in a folder — click between them at the top
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">⭐</div>
+            <div class="key-point-text">
+              <strong>Bookmarks (Favorites)</strong>
+              Save a website so you can return without retyping it. Click the star ⭐ in the address bar to bookmark a page
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🕘</div>
+            <div class="key-point-text">
+              <strong>History</strong>
+              A list of pages you've visited. Press <strong style="display:inline;">Ctrl + H</strong> to find a site you saw earlier but didn't bookmark
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">Tip</div>
+            <div class="info-box-content">
+              Bookmark the websites you use most — like va.gov or your email — so they're one click away every time.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Moving Between Sites & Apps -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Moving Between Sites &amp; Programs</h1>
+          <p class="slide-subtitle">Navigating your "digital environment"</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>Within the Browser</h3>
+              <ul>
+                <li><strong>Back ←</strong> returns to the last page</li>
+                <li><strong>Forward →</strong> goes ahead again</li>
+                <li><strong>Refresh ⟳</strong> reloads the page</li>
+                <li><strong>Home 🏠</strong> goes to your start page</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>Between Programs</h3>
+              <ul>
+                <li>Click an icon on the taskbar</li>
+                <li>Press <strong>Alt + Tab</strong> to switch windows</li>
+                <li>A browser and a document can be open at the same time</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">The big idea</div>
+            <div class="info-box-content">
+              A "digital environment" just means a place you work — a website, an app, or your desktop. The same skills move you around all of them.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Wired, Wi-Fi & Cellular -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Three Ways to Connect</h1>
+          <p class="slide-subtitle">Wired, Wi-Fi, and cellular</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🔌</div>
+            <div class="key-point-text">
+              <strong>Wired (Ethernet)</strong>
+              A cable plugs your computer directly into the router. Very fast and steady — common for desktop PCs
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📶</div>
+            <div class="key-point-text">
+              <strong>Wi-Fi</strong>
+              A wireless signal in your home or this lab. No cables — your device connects through the air to the router
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📱</div>
+            <div class="key-point-text">
+              <strong>Cellular (Mobile Data)</strong>
+              The same network that carries phone calls. Phones use it for internet when away from Wi-Fi
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">Which is best?</div>
+            <div class="info-box-content">
+              At home, Wi-Fi is the most common. A wired cable is steadiest. Cellular is for when you're out and about. They all get you to the same internet.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: Modem, Router & ISP -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Modem, Router &amp; Internet Provider</h1>
+          <p class="slide-subtitle">The gear that brings the internet to your home</p>
+        </div>
+        <div class="slide-content">
+          <ol class="steps-list">
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Internet Service Provider (ISP)</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">The company you pay for internet — such as a cable or phone company. They send the signal to your house.</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Modem</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">A box that brings the provider's signal into your home through a wall outlet.</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Router</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Shares that internet with your devices — by Wi-Fi or by cable. It creates your Wi-Fi network name.</span>
+            </li>
+          </ol>
+          <div class="info-box success">
+            <div class="info-box-title">Good to know</div>
+            <div class="info-box-content">
+              Many homes have one box that is a modem and router combined. If the internet goes out, this box is the first place to check.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Am I Connected? -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Am I Connected?</h1>
+          <p class="slide-subtitle">How to tell if your device is online</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">📶</div>
+            <div class="key-point-text">
+              <strong>Check the Wi-Fi Icon</strong>
+              Look at the bottom-right of the taskbar. Curved bars 📶 mean Wi-Fi is connected. More bars = stronger signal
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🌐</div>
+            <div class="key-point-text">
+              <strong>A Globe Icon Means Trouble</strong>
+              If you see a globe 🌐 instead of the Wi-Fi bars, you are not connected to the internet
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">✅</div>
+            <div class="key-point-text">
+              <strong>The Real Test</strong>
+              Open your browser and visit a website you trust. If it loads, you're online
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">Click to see your networks</div>
+            <div class="info-box-content">
+              Click the Wi-Fi icon on the taskbar to see available networks and which one you're on. Your network shows as "Connected."
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: Basic Troubleshooting -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">When the Internet Stops Working</h1>
+          <p class="slide-subtitle">Simple steps to try, in order</p>
+        </div>
+        <div class="slide-content">
+          <ol class="steps-list">
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Check the Wi-Fi icon</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Make sure Wi-Fi is turned on and you're connected to the right network.</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Try another website</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">If only one site fails, the problem is that site — not your connection.</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Restart your modem/router</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Unplug it, wait 30 seconds, plug it back in, and wait two minutes. This fixes most problems.</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Restart your computer</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">A simple restart clears many small glitches.</span>
+            </li>
+          </ol>
+          <div class="info-box warning">
+            <div class="info-box-title">Still not working?</div>
+            <div class="info-box-content">
+              If none of these help, the problem may be with your internet provider. Call them — an outage in your area is not something you can fix at home.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 10: Define Your Search -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Search Smarter: Start With Your Need</h1>
+          <p class="slide-subtitle">Good searches begin with a clear question</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">❓</div>
+            <div class="key-point-text">
+              <strong>Decide What You Actually Need</strong>
+              Before typing, ask: what am I trying to find out? The clearer your question, the better the results
+            </div>
+          </div>
+          <div class="two-column">
+            <div class="column">
+              <h3>Vague Search</h3>
+              <ul>
+                <li>"benefits"</li>
+                <li>"doctor"</li>
+                <li>"taxes"</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>Clear Search</h3>
+              <ul>
+                <li>"VA disability benefits eligibility"</li>
+                <li>"VA clinic near Charleston WV"</li>
+                <li>"free tax help for veterans"</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">Use a few specific words</div>
+            <div class="info-box-content">
+              You don't need full sentences. Three or four well-chosen words usually work best.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: Relevant vs Irrelevant -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Good Results vs. Bad Results</h1>
+          <p class="slide-subtitle">Not every result is worth your time</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>✅ Trust These More</h3>
+              <ul>
+                <li>Sites ending in <strong>.gov</strong> or <strong>.edu</strong></li>
+                <li>Well-known organizations</li>
+                <li>Recent dates on the page</li>
+                <li>Clear, plain information</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>⚠️ Be Careful With</h3>
+              <ul>
+                <li>Results marked "Ad" or "Sponsored"</li>
+                <li>Sites that ask for payment or personal info</li>
+                <li>Pages full of pop-ups</li>
+                <li>Promises that sound too good</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">Look before you click</div>
+            <div class="info-box-content">
+              Read the web address under each result. Ads usually appear first and are labeled "Ad." The most useful answer is often a little further down.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: Keep Your Sources -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Keep Track of Where You Found It</h1>
+          <p class="slide-subtitle">Saving your sources saves you time later</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">⭐</div>
+            <div class="key-point-text">
+              <strong>Bookmark the Page</strong>
+              Click the star ⭐ to save a useful page so you can find it again
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📋</div>
+            <div class="key-point-text">
+              <strong>Copy the Web Address</strong>
+              Click in the address bar, press <strong style="display:inline;">Ctrl + C</strong> to copy, and paste it into a note or document
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📝</div>
+            <div class="key-point-text">
+              <strong>Note the Basics</strong>
+              Write down the website name and the date you visited. That's enough to find it later or share it
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">Why bother?</div>
+            <div class="info-box-content">
+              If you ever need to prove where information came from — or just look it up again — your saved source is right there.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 13: Find on Page (Ctrl+F) -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Find a Word Fast: Ctrl + F</h1>
+          <p class="slide-subtitle">Search inside a page or a document</p>
+        </div>
+        <div class="slide-content">
+          <ol class="steps-list">
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Press Ctrl + F</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">A small search box appears, usually in the top-right corner. This works in web browsers and in programs like Word and Adobe Reader.</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Type the word you want</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">The page jumps to it and highlights every match.</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Use the arrows to move</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Click the up/down arrows (or press Enter) to jump to the next match.</span>
+            </li>
+          </ol>
+          <div class="info-box">
+            <div class="info-box-title">Why it's so useful</div>
+            <div class="info-box-content">
+              Instead of reading a long page to find one fact, Ctrl + F takes you straight to it. It works the same way almost everywhere.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 14: Copyright & Creative Commons -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Copyright, Public Domain &amp; Creative Commons</h1>
+          <p class="slide-subtitle">What you can and can't reuse</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">©️</div>
+            <div class="key-point-text">
+              <strong>Copyright</strong>
+              Most photos, music, and writing online belong to whoever made them. By default, you may not copy or reuse it without permission
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🆓</div>
+            <div class="key-point-text">
+              <strong>Public Domain</strong>
+              Work that is free for anyone to use — often because it's very old or made by the U.S. government. No permission needed
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🅭</div>
+            <div class="key-point-text">
+              <strong>Creative Commons</strong>
+              The creator gives permission to reuse their work, usually if you credit them. Look for a "CC" label
+            </div>
+          </div>
+          <div class="info-box warning">
+            <div class="info-box-title">Simple rule</div>
+            <div class="info-box-content">
+              When in doubt, give credit and link back to where you found it — or look for content clearly marked free to use.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 15: Knowledge Check -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Knowledge Check</h1>
+          <p class="slide-subtitle">Think it through, then reveal the answer</p>
+        </div>
+        <div class="slide-content">
+          <div class="knowledge-check">
+            <p class="question">1. You open the taskbar and see a globe icon instead of the Wi-Fi bars. What does that tell you?</p>
+            <button class="answer-toggle" type="button" aria-expanded="false" aria-controls="kc-answer-1">
+              <span class="toggle-mark" aria-hidden="true">+</span> Show answer
+            </button>
+            <div class="answer-reveal" id="kc-answer-1" hidden>
+              The globe icon means your device is <strong>not connected</strong> to the internet. Check that Wi-Fi is on and you've joined the correct network.
+            </div>
+          </div>
+
+          <div class="knowledge-check">
+            <p class="question">2. You want to find one specific word on a long webpage. What's the fastest way?</p>
+            <button class="answer-toggle" type="button" aria-expanded="false" aria-controls="kc-answer-2">
+              <span class="toggle-mark" aria-hidden="true">+</span> Show answer
+            </button>
+            <div class="answer-reveal" id="kc-answer-2" hidden>
+              Press <strong>Ctrl + F</strong>, type the word, and the page jumps to it and highlights every match.
+            </div>
+          </div>
+
+          <div class="knowledge-check">
+            <p class="question">3. A photo online has no special label. Can you assume it's free to copy and reuse?</p>
+            <button class="answer-toggle" type="button" aria-expanded="false" aria-controls="kc-answer-3">
+              <span class="toggle-mark" aria-hidden="true">+</span> Show answer
+            </button>
+            <div class="answer-reveal" id="kc-answer-3" hidden>
+              No. Most online content is protected by <strong>copyright</strong> by default. Only reuse it if it's clearly public domain, marked Creative Commons, or you have permission.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 16: Key Takeaways -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Key Takeaways</h1>
+          <p class="slide-subtitle">What to remember from today</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🧭</div>
+            <div class="key-point-text">
+              <strong>Browsers Have Three Helpers</strong>
+              Tabs, bookmarks, and history make moving around the web easy
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📶</div>
+            <div class="key-point-text">
+              <strong>Know How You Connect</strong>
+              Wired, Wi-Fi, or cellular — check the taskbar icon to see if you're online
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🔧</div>
+            <div class="key-point-text">
+              <strong>Restarting Fixes Most Problems</strong>
+              When the internet drops, restart the router, then the computer
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🔍</div>
+            <div class="key-point-text">
+              <strong>Search Clearly, Source Carefully</strong>
+              Use specific words, trust .gov/.edu, keep your sources, and respect copyright
+            </div>
+          </div>
+
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-text">Take your handouts home! The Search &amp; Connect Lab and the Browser &amp; Wi-Fi card have step-by-step reminders.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 17: Completion -->
+      <div class="slide completion-slide">
+        <div class="completion-badge">
+          <span>🎉</span>
+        </div>
+        <h2>You Did It!</h2>
+        <p>
+          You've learned how to get online, stay connected, and search the web with confidence.
+          Practice these skills this week — open a browser, bookmark a site, and try a Ctrl + F search.
+          Next week: creating documents and communicating online.
+        </p>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div class="nav-footer">
+      <button class="nav-btn prev" id="prevBtn" disabled>
+        ← Previous
+      </button>
+      <span class="slide-counter">
+        Slide <span id="currentSlide">1</span> of <span id="totalSlides">18</span>
+      </span>
+      <button class="nav-btn next" id="nextBtn">
+        Next →
+      </button>
+    </div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div class="confetti" id="confetti"></div>
+
+  <script src="../../../../shared/progress.js"></script>
+  <script src="../../../../shared/glossary.js" defer></script>
+  <script>
+    // Presentation State
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideLinks = document.querySelectorAll('.slide-link');
+
+    // DOM Elements
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSlideSpan = document.getElementById('currentSlide');
+    const totalSlidesSpan = document.getElementById('totalSlides');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const confettiContainer = document.getElementById('confetti');
+
+    // Initialize
+    totalSlidesSpan.textContent = totalSlides;
+    loadProgress();
+    updateSlide();
+
+    // Navigation Functions
+    function updateSlide() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      slideLinks.forEach((link, index) => {
+        link.classList.toggle('active', index === currentSlide);
+        if (index < currentSlide) {
+          link.classList.add('completed');
+        }
+      });
+
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.textContent = currentSlide === totalSlides - 1 ? 'Finish ✓' : 'Next →';
+
+      currentSlideSpan.textContent = currentSlide + 1;
+
+      const progress = Math.round((currentSlide / (totalSlides - 1)) * 100);
+      progressFill.style.width = progress + '%';
+      progressText.textContent = progress;
+
+      saveProgress();
+
+      if (currentSlide === totalSlides - 1) {
+        setTimeout(triggerConfetti, 500);
+      }
+
+      const activeLink = document.querySelector('.slide-link.active');
+      if (activeLink) {
+        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlide();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    // Event Listeners
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    slideLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const slideIndex = parseInt(link.dataset.slide);
+        goToSlide(slideIndex);
+      });
+    });
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'PageUp':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          goToSlide(totalSlides - 1);
+          break;
+      }
+    });
+
+    // Knowledge-check answer toggles (accessible reveal)
+    document.querySelectorAll('.answer-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const answerId = btn.getAttribute('aria-controls');
+        const answer = document.getElementById(answerId);
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        if (answer) answer.hidden = expanded;
+        const mark = btn.querySelector('.toggle-mark');
+        const label = btn.lastChild;
+        if (mark) mark.textContent = expanded ? '+' : '−';
+        if (label) label.textContent = expanded ? ' Show answer' : ' Hide answer';
+      });
+    });
+
+    // Progress Persistence (via shared VubProgress library)
+    function saveProgress() {
+      if (window.VubProgress) {
+        VubProgress.saveSlide('dl1', 2, currentSlide, totalSlides);
+      }
+    }
+
+    function loadProgress() {
+      if (window.VubProgress) {
+        const entry = VubProgress.get('dl1', 2);
+        if (entry && typeof entry.slide === 'number') {
+          currentSlide = entry.slide;
+        }
+      }
+    }
+
+    // Confetti Animation
+    function triggerConfetti() {
+      confettiContainer.classList.add('active');
+      confettiContainer.innerHTML = '';
+
+      const colors = ['#003F72', '#C9A227', '#1B365D', '#C4262E', '#28A745'];
+
+      for (let i = 0; i < 100; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 2 + 's';
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confettiContainer.appendChild(piece);
+      }
+
+      setTimeout(() => {
+        confettiContainer.classList.remove('active');
+      }, 5000);
+    }
+
+    // Touch/Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+  </script>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-Test | Digital Literacy — Level 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      /* VUB navy / patriotic palette */
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --primary-dark: #0D1B2A;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --red: #B31942;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --muted: #EEF4FA;
+      --gray: #5A6A7A;
+      --gray-light: #8A9AAA;
+      --success: #1E7E34;
+      --danger: #C0233B;
+      --info: #117A8B;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .quiz-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--light);
+      padding: 0.4rem 1.5rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .quiz-header h1 { font-size: 1rem; margin-bottom: 0; line-height: 1.25; }
+    .quiz-header p { color: var(--accent-light); font-size: 0.78rem; margin: 0; line-height: 1.25; }
+
+    .course-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary-dark);
+      padding: 0.1rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      margin-top: 0.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .progress-container {
+      background: rgba(255,255,255,0.1);
+      padding: 0.35rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .progress-bar { flex: 1; height: 8px; background: rgba(255,255,255,0.25); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%); border-radius: 4px; transition: width 0.4s ease; width: 0%; }
+    .progress-text { color: var(--light); font-size: 0.85rem; font-weight: 600; min-width: 78px; text-align: right; }
+
+    .quiz-container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+    .instructions {
+      background: var(--light);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-left: 5px solid var(--accent);
+    }
+    .instructions h2 { color: var(--primary); font-size: 1.3rem; margin-bottom: 1rem; }
+    .instructions ul { margin-left: 1.5rem; color: var(--gray); }
+    .instructions li { margin-bottom: 0.5rem; }
+    .instructions .important { background: rgba(201,162,39,0.12); padding: 1rem; border-radius: 8px; margin-top: 1rem; font-weight: 500; color: var(--primary); }
+
+    .question-card {
+      background: var(--light);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      display: none;
+    }
+    .question-card.active { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { .question-card.active { animation: none; } .progress-fill { transition: none; } }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--muted);
+    }
+    .question-number { background: var(--primary); color: var(--light); padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; font-size: 0.95rem; }
+    .question-category { background: var(--muted); color: var(--primary); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .question-text { font-size: 1.3rem; color: var(--primary-dark); margin-bottom: 1.5rem; line-height: 1.5; }
+
+    .answer-options { display: flex; flex-direction: column; gap: 0.75rem; }
+    .answer-option {
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--muted);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-size: 1.15rem;
+      min-height: 44px;
+    }
+    .answer-option:hover { border-color: var(--primary-light); background: var(--off-white); }
+    .answer-option.selected { border-color: var(--accent); background: rgba(201,162,39,0.12); }
+    .answer-option:focus-within { outline: 3px solid var(--primary-light); outline-offset: 2px; }
+    .answer-option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .answer-marker {
+      width: 30px; height: 30px;
+      border: 2px solid var(--gray-light);
+      border-radius: 50%;
+      margin-right: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: var(--gray);
+      transition: all 0.15s ease; flex-shrink: 0;
+    }
+    .answer-option.selected .answer-marker { background: var(--accent); border-color: var(--accent); color: var(--primary-dark); }
+    .answer-text { flex: 1; }
+
+    .quiz-navigation { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; gap: 0.5rem; }
+    .nav-btn {
+      padding: 0.875rem 2rem; font-size: 1rem; font-weight: 600;
+      border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; min-height: 44px;
+    }
+    .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .nav-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .btn-prev { background: var(--muted); color: var(--primary); }
+    .btn-prev:hover:not(:disabled) { background: var(--gray-light); color: var(--light); }
+    .btn-next { background: var(--primary); color: var(--light); }
+    .btn-next:hover:not(:disabled) { background: var(--primary-light); }
+    .btn-submit { background: var(--accent); color: var(--primary-dark); }
+    .btn-submit:hover:not(:disabled) { background: var(--accent-light); }
+
+    .question-dots { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+    .q-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--muted); cursor: pointer; transition: all 0.15s ease; border: 1px solid var(--gray-light); }
+    .q-dot.answered { background: var(--success); border-color: var(--success); }
+    .q-dot.current { background: var(--accent); border-color: var(--accent); transform: scale(1.3); }
+    .q-dot:focus-visible { outline: 3px solid var(--primary-light); outline-offset: 2px; }
+
+    .results-section { display: none; padding: 2rem 0; }
+    .results-section.active { display: block; animation: fadeIn 0.5s ease; }
+    .results-card { background: var(--light); border-radius: 16px; padding: 2.5rem; box-shadow: 0 8px 30px rgba(0,0,0,0.1); max-width: 760px; margin: 0 auto; text-align: center; }
+    .results-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .results-title { font-size: 1.75rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .results-subtitle { color: var(--gray); margin-bottom: 2rem; }
+
+    .score-display { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: var(--light); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; }
+    .score-number { font-size: 3.5rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .score-label { font-size: 1rem; opacity: 0.85; }
+
+    .score-breakdown { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .breakdown-item { background: var(--muted); padding: 1rem; border-radius: 8px; }
+    .breakdown-category { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem; }
+    .breakdown-score { font-size: 1.25rem; font-weight: 700; color: var(--primary); }
+
+    .results-message { padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; text-align: left; }
+    .results-message.excellent { background: rgba(30,126,52,0.1); border: 2px solid var(--success); color: #14532d; }
+    .results-message.good { background: rgba(17,122,139,0.1); border: 2px solid var(--info); color: #0c4a52; }
+    .results-message.building { background: rgba(201,162,39,0.12); border: 2px solid var(--accent); color: #6b4e08; }
+
+    /* Per-question review */
+    .review-list { text-align: left; margin-bottom: 2rem; }
+    .review-list h3 { color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; }
+    .review-item { border: 1px solid var(--muted); border-left: 5px solid var(--gray-light); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
+    .review-item.correct { border-left-color: var(--success); }
+    .review-item.incorrect { border-left-color: var(--danger); }
+    .review-q { font-weight: 600; color: var(--primary-dark); margin-bottom: 0.4rem; }
+    .review-verdict { font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.4rem; margin-bottom: 0.4rem; }
+    .review-verdict.correct { color: var(--success); }
+    .review-verdict.incorrect { color: var(--danger); }
+    .review-detail { font-size: 0.95rem; color: var(--gray); }
+    .review-detail .ans-correct { color: var(--success); font-weight: 600; }
+
+    .btn-print { background: var(--primary); color: #fff; padding: 1rem 2rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; margin: 0.25rem; }
+    .btn-print:hover { background: var(--primary-light); }
+    .btn-download { background: var(--success); color: #fff; padding: 1rem 2rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; margin: 0.25rem; }
+    .btn-download:hover { background: #155724; }
+    .btn-restart { background: var(--gray); color: #fff; padding: 1rem 2rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; margin: 0.25rem; }
+    .btn-restart:hover { background: var(--primary); }
+    .btn-continue { background: var(--accent); color: var(--primary-dark); padding: 1rem 2rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block; margin: 0.25rem; }
+    .btn-continue:hover { background: var(--accent-light); }
+
+    .start-section { padding: 2rem 0; }
+    .start-section.hidden { display: none; }
+    .start-card { background: var(--light); border-radius: 16px; padding: 2.5rem; box-shadow: 0 8px 30px rgba(0,0,0,0.1); max-width: 760px; margin: 0 auto; text-align: center; }
+    .start-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .start-title { font-size: 1.75rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .start-subtitle { color: var(--gray); margin-bottom: 2rem; font-size: 1.1rem; }
+
+    .test-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .info-item { background: var(--muted); padding: 1rem; border-radius: 10px; }
+    .info-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .info-label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-value { font-size: 1.25rem; font-weight: 700; color: var(--primary); }
+
+    .topic-list { text-align: left; background: var(--off-white); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; }
+    .topic-list h3 { font-size: 0.875rem; color: var(--primary); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .topic-list ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.5rem; }
+    .topic-list li { padding: 0.4rem 0; color: var(--gray); display: flex; align-items: center; gap: 0.5rem; }
+    .topic-list li::before { content: "\2714"; color: var(--success); font-weight: 700; }
+
+    .btn-start { background: var(--accent); color: var(--primary-dark); padding: 1.25rem 3rem; border: none; border-radius: 10px; font-size: 1.25rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; min-height: 44px; }
+    .btn-start:hover { background: var(--accent-light); transform: translateY(-2px); }
+    .btn-start:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+
+    .quiz-section { display: none; }
+    .quiz-section.active { display: block; }
+
+    .name-input-group { margin-bottom: 2rem; }
+    .name-input-group label { display: block; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem; }
+    .name-input-group input { width: 100%; max-width: 420px; padding: 1rem; font-size: 1.1rem; border: 2px solid var(--muted); border-radius: 8px; transition: all 0.15s ease; }
+    .name-input-group input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201,162,39,0.25); }
+
+    .back-bar { max-width: 900px; margin: 0 auto; padding: 0.75rem 2rem 0; }
+    .back-link { color: var(--primary); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
+    .back-link:hover { text-decoration: underline; }
+
+    .print-report { display: none; }
+
+    @media print {
+      body * { visibility: hidden; }
+      .print-report, .print-report * { visibility: visible; }
+      .print-report { display: block !important; position: absolute; left: 0; top: 0; width: 100%; background: white; padding: 0.5in; }
+      .report-header { border-bottom: 3px solid #1B365D; padding-bottom: 1rem; margin-bottom: 1.5rem; text-align: center; }
+      .report-header h1 { color: #1B365D; font-size: 1.5rem; margin: 0 0 0.25rem 0; }
+      .report-header h2 { color: #5A6A7A; font-size: 1rem; font-weight: normal; margin: 0 0 0.5rem 0; }
+      .report-header .test-type { background: #1B365D; color: white; padding: 0.25rem 1rem; display: inline-block; font-size: 0.875rem; font-weight: 600; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .report-info { display: flex; justify-content: space-between; background: #F5F7FA; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px; }
+      .report-info-label { font-size: 0.7rem; color: #5A6A7A; text-transform: uppercase; letter-spacing: 1px; }
+      .report-info-value { font-size: 1rem; font-weight: 600; color: #1B365D; }
+      .report-score-summary { text-align: center; padding: 1.5rem; background: #1B365D; color: white; margin-bottom: 1.5rem; border-radius: 4px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .report-score-number { font-size: 3rem; font-weight: 700; color: #C9A227; line-height: 1; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .report-score-detail { font-size: 1rem; opacity: 0.9; margin-top: 0.5rem; }
+      .report-section-title { font-size: 0.875rem; color: #1B365D; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #C9A227; padding-bottom: 0.5rem; margin-bottom: 1rem; }
+      .report-categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1.5rem; }
+      .report-category { background: #F5F7FA; padding: 0.6rem; text-align: center; border-radius: 4px; }
+      .report-category-name { font-size: 0.58rem; color: #5A6A7A; text-transform: uppercase; margin-bottom: 0.25rem; }
+      .report-category-score { font-size: 0.95rem; font-weight: 700; color: #1B365D; }
+      .report-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin-bottom: 1.5rem; page-break-inside: auto; }
+      .report-table th { background: #1B365D; color: white; padding: 0.5rem; text-align: left; font-weight: 600; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .report-table td { padding: 0.5rem; border-bottom: 1px solid #DEE2E6; vertical-align: top; }
+      .report-table tr { page-break-inside: avoid; }
+      .report-table tr:nth-child(even) { background: #F8F9FA; }
+      .report-table .col-num { width: 30px; text-align: center; font-weight: 600; }
+      .report-table .col-answer, .report-table .col-correct { width: 60px; text-align: center; }
+      .report-table .col-result { width: 60px; text-align: center; font-weight: 700; }
+      .result-correct { color: #1E7E34; }
+      .result-incorrect { color: #C0233B; }
+      .report-footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #DEE2E6; text-align: center; font-size: 0.75rem; color: #5A6A7A; }
+      .report-footer strong { color: #1B365D; }
+    }
+
+    @media (max-width: 768px) {
+      .quiz-container { padding: 1rem; }
+      .back-bar { padding: 0.75rem 1rem 0; }
+      .question-text { font-size: 1.15rem; }
+      .answer-option { font-size: 1.05rem; }
+      .test-info { grid-template-columns: repeat(2, 1fr); }
+      .nav-btn { padding: 0.75rem 1.25rem; font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="quiz-header">
+    <h1>&#x1F4DD; Pre-Test &mdash; Digital Literacy: Level 1</h1>
+    <p>Veterans Upward Bound &mdash; West Virginia</p>
+    <span class="course-badge">Baseline Knowledge Check</span>
+
+    <div class="progress-container" id="progressContainer" style="display: none;">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">0 of 20</div>
+    </div>
+  </header>
+
+  <div class="back-bar">
+    <a class="back-link" href="/courses/digital-literacy-1/index.html">&#x2190; Back to course</a>
+  </div>
+
+  <div class="quiz-container">
+    <!-- Start -->
+    <div class="start-section" id="startSection">
+      <div class="start-card">
+        <div class="start-icon">&#x1F3AF;</div>
+        <h2 class="start-title">Welcome to Your Pre-Test!</h2>
+        <p class="start-subtitle">
+          This short assessment shows what you already know about everyday digital skills, so we can
+          measure how much you learn during the course. There is no penalty for wrong answers &mdash; just do your best!
+        </p>
+
+        <div class="test-info">
+          <div class="info-item"><div class="info-icon">&#x2753;</div><div class="info-label">Questions</div><div class="info-value">20</div></div>
+          <div class="info-item"><div class="info-icon">&#x23F1;&#xFE0F;</div><div class="info-label">Time</div><div class="info-value">No Limit</div></div>
+          <div class="info-item"><div class="info-icon">&#x1F504;</div><div class="info-label">Can Change</div><div class="info-value">Yes</div></div>
+          <div class="info-item"><div class="info-icon">&#x1F4CA;</div><div class="info-label">Purpose</div><div class="info-value">Baseline</div></div>
+        </div>
+
+        <div class="topic-list">
+          <h3>Topics Covered (IC3 GS6 Level 1)</h3>
+          <ul>
+            <li>Technology Basics</li>
+            <li>Digital Citizenship</li>
+            <li>Information Management</li>
+            <li>Content Creation</li>
+            <li>Communication</li>
+            <li>Collaboration</li>
+            <li>Safety &amp; Security</li>
+          </ul>
+        </div>
+
+        <div class="name-input-group">
+          <label for="participantName">Please enter your name:</label>
+          <input type="text" id="participantName" placeholder="Your full name" autocomplete="name" required>
+        </div>
+
+        <button class="btn-start" id="btnStart">Begin Assessment &#x2192;</button>
+      </div>
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz-section" id="quizSection">
+      <div class="instructions">
+        <h2>&#x1F4CC; Instructions</h2>
+        <ul>
+          <li>Read each question carefully before selecting your answer</li>
+          <li>Click an answer choice (or press number keys 1&ndash;4) to select it</li>
+          <li>Use the navigation buttons, arrow keys, or question dots to move between questions</li>
+          <li>You can change your answers any time before submitting</li>
+        </ul>
+        <p class="important">
+          &#x2139;&#xFE0F; This is a baseline check &mdash; it is okay if you do not know every answer.
+          The goal is to see where you are starting so we can measure your progress.
+        </p>
+      </div>
+
+      <div class="question-dots" id="questionDots" role="group" aria-label="Question navigation"></div>
+      <div id="questionsContainer"></div>
+
+      <div class="quiz-navigation">
+        <button class="nav-btn btn-prev" id="btnPrev" disabled>&#x2190; Previous</button>
+        <button class="nav-btn btn-next" id="btnNext">Next &#x2192;</button>
+        <button class="nav-btn btn-submit" id="btnSubmit" style="display: none;">Submit Assessment &#x2713;</button>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="results-section" id="resultsSection">
+      <div class="results-card">
+        <div class="results-icon">&#x1F3C6;</div>
+        <h2 class="results-title">Assessment Complete!</h2>
+        <p class="results-subtitle" id="participantGreeting">Thank you for completing the pre-test.</p>
+
+        <div class="score-display">
+          <div class="score-number" id="finalScore">0%</div>
+          <div class="score-label">Overall Score</div>
+        </div>
+
+        <div class="score-breakdown" id="scoreBreakdown"></div>
+        <div class="results-message" id="resultsMessage"></div>
+        <div class="review-list" id="reviewList"></div>
+
+        <p style="color: var(--gray); margin-bottom: 1.5rem; font-size: 0.95rem;">
+          Your baseline score is saved on this computer. At the end of the course you will take a
+          similar Post-Test, and it will show how much you have improved!
+        </p>
+
+        <button class="btn-print" onclick="generateReport()">&#x1F5A8;&#xFE0F; Print Report (PDF)</button>
+        <button class="btn-download" onclick="downloadResults()">Download Results (CSV)</button>
+        <button class="btn-restart" onclick="location.reload()">Retake Assessment</button>
+        <a href="/courses/digital-literacy-1/index.html" class="btn-continue">Back to Course &#x2192;</a>
+      </div>
+    </div>
+
+    <!-- Print report -->
+    <div class="print-report" id="printReport">
+      <div class="report-header">
+        <h1>VETERANS UPWARD BOUND &mdash; WEST VIRGINIA</h1>
+        <h2>Digital Literacy &mdash; Level 1</h2>
+        <span class="test-type">PRE-TEST ASSESSMENT REPORT</span>
+      </div>
+      <div class="report-info">
+        <div class="report-info-item"><div class="report-info-label">Student Name</div><div class="report-info-value" id="reportName">&mdash;</div></div>
+        <div class="report-info-item"><div class="report-info-label">Test Date</div><div class="report-info-value" id="reportDate">&mdash;</div></div>
+        <div class="report-info-item"><div class="report-info-label">Instructor</div><div class="report-info-value">Britt Legg</div></div>
+      </div>
+      <div class="report-score-summary">
+        <div class="report-score-number" id="reportScore">0%</div>
+        <div class="report-score-detail" id="reportScoreDetail">0 of 20 correct</div>
+      </div>
+      <h3 class="report-section-title">Score by Domain</h3>
+      <div class="report-categories" id="reportCategories"></div>
+      <h3 class="report-section-title">Detailed Results</h3>
+      <table class="report-table">
+        <thead><tr><th class="col-num">#</th><th class="col-question">Question</th><th class="col-answer">Answer</th><th class="col-correct">Correct</th><th class="col-result">Result</th></tr></thead>
+        <tbody id="reportTableBody"></tbody>
+      </table>
+      <div class="report-footer">
+        <p><strong>Veterans Upward Bound &mdash; West Virginia</strong></p>
+        <p>Digital Literacy &mdash; Level 1 (IC3 GS6 Level 1 aligned) | Pre-Test Assessment</p>
+        <p>This report documents the student's baseline knowledge at the start of the course.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // All question data below is developer-authored content (not user input).
+    var questions = [
+      { id: 1, category: "Technology Basics", question: "Which of these is an input device?",
+        options: [
+          { letter: "A", text: "Monitor" },
+          { letter: "B", text: "Keyboard" },
+          { letter: "C", text: "Printer" },
+          { letter: "D", text: "Speakers" }
+        ], correct: "B" },
+      { id: 2, category: "Technology Basics", question: "What is the difference between RAM (memory) and storage (hard drive or SSD)?",
+        options: [
+          { letter: "A", text: "RAM holds work temporarily while the computer is on; storage keeps files even when it is off" },
+          { letter: "B", text: "RAM keeps files forever; storage is erased when you shut down" },
+          { letter: "C", text: "They are two names for the exact same thing" },
+          { letter: "D", text: "RAM is only used by printers" }
+        ], correct: "A" },
+      { id: 3, category: "Technology Basics", question: "Which best describes 'open source' software?",
+        options: [
+          { letter: "A", text: "Software you must always pay for before using" },
+          { letter: "B", text: "Software whose code is publicly available and often free to use and modify" },
+          { letter: "C", text: "Software that only runs on Apple computers" },
+          { letter: "D", text: "Software that cannot connect to the internet" }
+        ], correct: "B" },
+      { id: 4, category: "Technology Basics", question: "Which of these is an operating system?",
+        options: [
+          { letter: "A", text: "Microsoft Word" },
+          { letter: "B", text: "Google Chrome" },
+          { letter: "C", text: "Windows" },
+          { letter: "D", text: "Zoom" }
+        ], correct: "C" },
+      { id: 5, category: "Technology Basics", question: "In a web browser, what is the address bar used for?",
+        options: [
+          { letter: "A", text: "Typing in the website address (URL) you want to visit" },
+          { letter: "B", text: "Changing the brightness of the screen" },
+          { letter: "C", text: "Turning the computer off" },
+          { letter: "D", text: "Printing the current page" }
+        ], correct: "A" },
+      { id: 6, category: "Technology Basics", question: "Which option lets a laptop connect to the internet without any cables?",
+        options: [
+          { letter: "A", text: "An Ethernet cable" },
+          { letter: "B", text: "A USB flash drive" },
+          { letter: "C", text: "Wi-Fi" },
+          { letter: "D", text: "A printer cable" }
+        ], correct: "C" },
+      { id: 7, category: "Digital Citizenship", question: "Which of these is an example of personally identifiable information (PII) you should protect?",
+        options: [
+          { letter: "A", text: "Your favorite color" },
+          { letter: "B", text: "Your Social Security number" },
+          { letter: "C", text: "The weather today" },
+          { letter: "D", text: "The name of your city's sports team" }
+        ], correct: "B" },
+      { id: 8, category: "Digital Citizenship", question: "Why should you think carefully before posting something online?",
+        options: [
+          { letter: "A", text: "Posts always disappear after one hour" },
+          { letter: "B", text: "Online posts can be permanent and may be seen by many people later" },
+          { letter: "C", text: "Only you can ever see what you post" },
+          { letter: "D", text: "Posting online is free, so it does not matter" }
+        ], correct: "B" },
+      { id: 9, category: "Digital Citizenship", question: "What is usually the best response to a rude or upsetting comment from a stranger online?",
+        options: [
+          { letter: "A", text: "Argue back with insults of your own" },
+          { letter: "B", text: "Share their personal information publicly" },
+          { letter: "C", text: "Do not respond; block or report them if needed" },
+          { letter: "D", text: "Send the comment to all of your contacts" }
+        ], correct: "C" },
+      { id: 10, category: "Information Management", question: "When searching online, which approach gives the most useful results?",
+        options: [
+          { letter: "A", text: "Type one very broad word and hope for the best" },
+          { letter: "B", text: "Use specific keywords that describe exactly what you need" },
+          { letter: "C", text: "Always click the very first link no matter what" },
+          { letter: "D", text: "Search using random letters" }
+        ], correct: "B" },
+      { id: 11, category: "Information Management", question: "Which keyboard shortcut helps you find a specific word on a webpage or in a document?",
+        options: [
+          { letter: "A", text: "Ctrl + F" },
+          { letter: "B", text: "Ctrl + P" },
+          { letter: "C", text: "Ctrl + Z" },
+          { letter: "D", text: "Ctrl + B" }
+        ], correct: "A" },
+      { id: 12, category: "Content Creation", question: "In a word processor, what does the 'Save' command do?",
+        options: [
+          { letter: "A", text: "Deletes the document from your computer" },
+          { letter: "B", text: "Stores your document so you can open it again later" },
+          { letter: "C", text: "Emails the document to everyone" },
+          { letter: "D", text: "Changes the document to a different language" }
+        ], correct: "B" },
+      { id: 13, category: "Content Creation", question: "Why should you give credit (a citation) when you use someone else's words or work?",
+        options: [
+          { letter: "A", text: "To make the document longer" },
+          { letter: "B", text: "To honestly show where the information came from and avoid taking credit for others' work" },
+          { letter: "C", text: "Because citations are required to print a document" },
+          { letter: "D", text: "It hides who really wrote the material" }
+        ], correct: "B" },
+      { id: 14, category: "Content Creation", question: "Which is the best, clearly named file for a 2026 budget spreadsheet?",
+        options: [
+          { letter: "A", text: "document1.xlsx" },
+          { letter: "B", text: "asdf.xlsx" },
+          { letter: "C", text: "2026-household-budget.xlsx" },
+          { letter: "D", text: "final final REAL.xlsx" }
+        ], correct: "C" },
+      { id: 15, category: "Communication", question: "In email, what does 'Reply All' do?",
+        options: [
+          { letter: "A", text: "Sends your reply only to the original sender" },
+          { letter: "B", text: "Sends your reply to the sender and everyone else who received the message" },
+          { letter: "C", text: "Deletes the email for everyone" },
+          { letter: "D", text: "Forwards the email to a brand-new person you type in" }
+        ], correct: "B" },
+      { id: 16, category: "Communication", question: "Which message uses inclusive, respectful language?",
+        options: [
+          { letter: "A", text: "Hey everyone, welcome to the team!" },
+          { letter: "B", text: "Listen up, you people, and pay attention." },
+          { letter: "C", text: "Only smart folks will understand this." },
+          { letter: "D", text: "This is obvious, so don't bother asking questions." }
+        ], correct: "A" },
+      { id: 17, category: "Collaboration", question: "Which is an example of ASYNCHRONOUS (not live, anytime) collaboration?",
+        options: [
+          { letter: "A", text: "A live video meeting on Zoom" },
+          { letter: "B", text: "A phone call happening right now" },
+          { letter: "C", text: "Leaving a comment on a shared document for a coworker to read later" },
+          { letter: "D", text: "A real-time chat where both people type at the same time" }
+        ], correct: "C" },
+      { id: 18, category: "Safety & Security", question: "Which of these is the STRONGEST password?",
+        options: [
+          { letter: "A", text: "password" },
+          { letter: "B", text: "123456" },
+          { letter: "C", text: "Blue-Coffee-Mountain-72!" },
+          { letter: "D", text: "your first name" }
+        ], correct: "C" },
+      { id: 19, category: "Safety & Security", question: "What is the main benefit of using a browser's private (incognito) mode?",
+        options: [
+          { letter: "A", text: "It makes your internet connection much faster" },
+          { letter: "B", text: "It does not save your browsing history or sign-ins on that device after you close it" },
+          { letter: "C", text: "It blocks all viruses automatically" },
+          { letter: "D", text: "It gives you free Wi-Fi anywhere" }
+        ], correct: "B" },
+      { id: 20, category: "Safety & Security", question: "Which habit helps protect your physical health while using a computer for a long time?",
+        options: [
+          { letter: "A", text: "Never blink and stare closely at the screen" },
+          { letter: "B", text: "Take regular breaks, sit with good posture, and rest your eyes" },
+          { letter: "C", text: "Keep the screen as bright as possible at all times" },
+          { letter: "D", text: "Hold the keyboard above your head while typing" }
+        ], correct: "B" }
+    ];
+
+    var currentQuestion = 0;
+    var answers = {};
+    var participantName = "";
+
+    var startSection = document.getElementById('startSection');
+    var quizSection = document.getElementById('quizSection');
+    var resultsSection = document.getElementById('resultsSection');
+    var questionsContainer = document.getElementById('questionsContainer');
+    var questionDots = document.getElementById('questionDots');
+    var progressContainer = document.getElementById('progressContainer');
+    var progressFill = document.getElementById('progressFill');
+    var progressText = document.getElementById('progressText');
+    var btnPrev = document.getElementById('btnPrev');
+    var btnNext = document.getElementById('btnNext');
+    var btnSubmit = document.getElementById('btnSubmit');
+    var btnStart = document.getElementById('btnStart');
+    var participantInput = document.getElementById('participantName');
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function init() {
+      renderQuestions();
+      renderQuestionDots();
+      updateNavigation();
+
+      btnStart.addEventListener('click', startQuiz);
+      btnPrev.addEventListener('click', prevQuestion);
+      btnNext.addEventListener('click', nextQuestion);
+      btnSubmit.addEventListener('click', submitQuiz);
+
+      document.addEventListener('keydown', function(e) {
+        if (!quizSection.classList.contains('active')) return;
+        if (e.key === 'ArrowRight') {
+          if (currentQuestion < questions.length - 1) nextQuestion();
+        } else if (e.key === 'ArrowLeft') {
+          if (currentQuestion > 0) prevQuestion();
+        } else if (e.key >= '1' && e.key <= '4') {
+          var letters = ['A', 'B', 'C', 'D'];
+          selectAnswer(questions[currentQuestion].id, letters[parseInt(e.key, 10) - 1]);
+        }
+      });
+
+      participantInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') startQuiz();
+      });
+    }
+
+    function renderQuestions() {
+      questionsContainer.innerHTML = questions.map(function(q, index) {
+        return '<div class="question-card ' + (index === 0 ? 'active' : '') + '" data-question="' + index + '">' +
+          '<div class="question-header">' +
+            '<span class="question-number">Question ' + q.id + ' of ' + questions.length + '</span>' +
+            '<span class="question-category">' + escapeHtml(q.category) + '</span>' +
+          '</div>' +
+          '<p class="question-text">' + escapeHtml(q.question) + '</p>' +
+          '<div class="answer-options">' +
+            q.options.map(function(opt) {
+              return '<label class="answer-option" data-question-id="' + q.id + '" data-letter="' + opt.letter + '">' +
+                '<input type="radio" name="q' + q.id + '" value="' + opt.letter + '">' +
+                '<span class="answer-marker" aria-hidden="true">' + opt.letter + '</span>' +
+                '<span class="answer-text">' + escapeHtml(opt.text) + '</span>' +
+              '</label>';
+            }).join('') +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      document.querySelectorAll('.answer-option').forEach(function(option) {
+        option.addEventListener('click', function() {
+          selectAnswer(parseInt(option.dataset.questionId, 10), option.dataset.letter);
+        });
+      });
+    }
+
+    function renderQuestionDots() {
+      questionDots.innerHTML = questions.map(function(q, index) {
+        return '<button type="button" class="q-dot ' + (index === 0 ? 'current' : '') + '" data-index="' + index + '" aria-label="Go to question ' + (index + 1) + '"></button>';
+      }).join('');
+      document.querySelectorAll('.q-dot').forEach(function(dot) {
+        dot.addEventListener('click', function() { goToQuestion(parseInt(dot.dataset.index, 10)); });
+      });
+    }
+
+    function startQuiz() {
+      participantName = participantInput.value.trim();
+      if (!participantName) {
+        participantInput.focus();
+        participantInput.style.borderColor = 'var(--danger)';
+        return;
+      }
+      startSection.classList.add('hidden');
+      quizSection.classList.add('active');
+      progressContainer.style.display = 'flex';
+      updateProgress();
+    }
+
+    function selectAnswer(questionId, letter) {
+      answers[questionId] = letter;
+      var card = document.querySelector('[data-question-id="' + questionId + '"]').closest('.question-card');
+      card.querySelectorAll('.answer-option').forEach(function(opt) {
+        var match = opt.dataset.letter === letter;
+        opt.classList.toggle('selected', match);
+        var radio = opt.querySelector('input');
+        if (radio) radio.checked = match;
+      });
+      var idx = questions.findIndex(function(q) { return q.id === questionId; });
+      document.querySelectorAll('.q-dot')[idx].classList.add('answered');
+      updateProgress();
+      updateNavigation();
+    }
+
+    function nextQuestion() { if (currentQuestion < questions.length - 1) goToQuestion(currentQuestion + 1); }
+    function prevQuestion() { if (currentQuestion > 0) goToQuestion(currentQuestion - 1); }
+
+    function goToQuestion(index) {
+      document.querySelectorAll('.question-card').forEach(function(card, i) { card.classList.toggle('active', i === index); });
+      document.querySelectorAll('.q-dot').forEach(function(dot, i) { dot.classList.toggle('current', i === index); });
+      currentQuestion = index;
+      updateNavigation();
+    }
+
+    function updateNavigation() {
+      btnPrev.disabled = currentQuestion === 0;
+      var isLast = currentQuestion === questions.length - 1;
+      var allAnswered = Object.keys(answers).length === questions.length;
+      btnNext.style.display = isLast ? 'none' : 'inline-block';
+      btnSubmit.style.display = isLast ? 'inline-block' : 'none';
+      btnSubmit.disabled = !allAnswered;
+    }
+
+    function updateProgress() {
+      var answered = Object.keys(answers).length;
+      progressFill.style.width = (answered / questions.length) * 100 + '%';
+      progressText.textContent = answered + ' of ' + questions.length;
+    }
+
+    function submitQuiz() {
+      if (Object.keys(answers).length < questions.length) {
+        alert('Please answer all questions before submitting.');
+        return;
+      }
+
+      var categories = {};
+      var totalCorrect = 0;
+      questions.forEach(function(q) {
+        if (!categories[q.category]) categories[q.category] = { correct: 0, total: 0 };
+        categories[q.category].total++;
+        if (answers[q.id] === q.correct) { totalCorrect++; categories[q.category].correct++; }
+      });
+      var overallPercentage = Math.round((totalCorrect / questions.length) * 100);
+
+      quizSection.classList.remove('active');
+      progressContainer.style.display = 'none';
+      resultsSection.classList.add('active');
+
+      document.getElementById('participantGreeting').textContent =
+        'Great job, ' + participantName + '! Here is your baseline assessment.';
+      document.getElementById('finalScore').textContent = overallPercentage + '%';
+
+      document.getElementById('scoreBreakdown').innerHTML = Object.entries(categories).map(function(entry) {
+        var cat = entry[0], data = entry[1];
+        var catPercent = Math.round((data.correct / data.total) * 100);
+        return '<div class="breakdown-item"><div class="breakdown-category">' + escapeHtml(cat) + '</div>' +
+          '<div class="breakdown-score">' + data.correct + '/' + data.total + ' (' + catPercent + '%)</div></div>';
+      }).join('');
+
+      var messageClass, messageText;
+      if (overallPercentage >= 80) {
+        messageClass = 'excellent';
+        messageText = '\u{1F31F} Excellent foundation! You already know a lot about everyday digital skills. This course will sharpen those skills and fill in any gaps.';
+      } else if (overallPercentage >= 50) {
+        messageClass = 'good';
+        messageText = '\u{1F44D} Good starting point! You have solid basics to build on. This course will strengthen your confidence with computers and the internet.';
+      } else {
+        messageClass = 'building';
+        messageText = '\u{1F4C8} Great opportunity to grow! Do not worry about the score — that is exactly what a pre-test is for. You will see real improvement by the end of the course.';
+      }
+      var resultsMessage = document.getElementById('resultsMessage');
+      resultsMessage.className = 'results-message ' + messageClass;
+      resultsMessage.textContent = messageText;
+
+      // Per-question review (text + icon, never color alone)
+      document.getElementById('reviewList').innerHTML =
+        '<h3>Review Your Answers</h3>' +
+        questions.map(function(q) {
+          var studentLetter = answers[q.id];
+          var isCorrect = studentLetter === q.correct;
+          var studentText = q.options.filter(function(o) { return o.letter === studentLetter; })[0];
+          var correctText = q.options.filter(function(o) { return o.letter === q.correct; })[0];
+          var verdict = isCorrect
+            ? '<span class="review-verdict correct">✔ Correct</span>'
+            : '<span class="review-verdict incorrect">✖ Not quite</span>';
+          var detail = isCorrect
+            ? '<div class="review-detail">Your answer: ' + escapeHtml(studentLetter + '. ' + (studentText ? studentText.text : '')) + '</div>'
+            : '<div class="review-detail">Your answer: ' + escapeHtml(studentLetter + '. ' + (studentText ? studentText.text : '')) +
+              '<br>Correct answer: <span class="ans-correct">' + escapeHtml(q.correct + '. ' + (correctText ? correctText.text : '')) + '</span></div>';
+          return '<div class="review-item ' + (isCorrect ? 'correct' : 'incorrect') + '">' +
+            '<div class="review-q">Q' + q.id + '. ' + escapeHtml(q.question) + '</div>' + verdict + detail + '</div>';
+        }).join('');
+
+      var results = {
+        name: participantName,
+        date: new Date().toLocaleDateString(),
+        score: overallPercentage,
+        answers: answers,
+        categories: categories
+      };
+      try {
+        localStorage.setItem('vub_dl1_pretest_results', JSON.stringify(results));
+      } catch (e) {
+        console.log('Could not save to localStorage');
+      }
+
+      window.quizResults = {
+        testType: 'Pre-Test',
+        name: participantName,
+        date: new Date().toLocaleDateString(),
+        timestamp: new Date().toISOString(),
+        totalCorrect: totalCorrect,
+        totalQuestions: questions.length,
+        percentage: overallPercentage,
+        categories: categories,
+        answers: answers
+      };
+    }
+
+    function csvEscape(value) {
+      var text = value === null || value === undefined ? '' : String(value);
+      return '"' + text.replace(/"/g, '""') + '"';
+    }
+
+    function safeFileName(value) {
+      return String(value || 'student').trim().replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'student';
+    }
+
+    function downloadResults() {
+      var results = window.quizResults;
+      if (!results) { alert('No results to download. Please complete the assessment first.'); return; }
+      var rows = [['test_type', 'student_name', 'date', 'timestamp', 'score_percent', 'correct', 'total_questions', 'category', 'category_correct', 'category_total', 'category_percent', 'question_id', 'student_answer', 'correct_answer', 'is_correct']];
+      questions.forEach(function(q) {
+        var category = results.categories[q.category];
+        var categoryPercent = Math.round((category.correct / category.total) * 100);
+        var studentAnswer = results.answers[q.id] || '';
+        rows.push([results.testType, results.name, results.date, results.timestamp, results.percentage, results.totalCorrect, results.totalQuestions, q.category, category.correct, category.total, categoryPercent, q.id, studentAnswer, q.correct, studentAnswer === q.correct ? 'yes' : 'no']);
+      });
+      var csv = rows.map(function(row) { return row.map(csvEscape).join(','); }).join('\r\n');
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      var link = document.createElement('a');
+      var dateStamp = new Date().toISOString().slice(0, 10);
+      link.href = URL.createObjectURL(blob);
+      link.download = 'vub-dl1-pre-test-' + safeFileName(results.name) + '-' + dateStamp + '.csv';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+    }
+
+    function generateReport() {
+      var results = window.quizResults;
+      if (!results) { alert('No results to print. Please complete the assessment first.'); return; }
+      document.getElementById('reportName').textContent = results.name;
+      document.getElementById('reportDate').textContent = results.date;
+      document.getElementById('reportScore').textContent = results.percentage + '%';
+      document.getElementById('reportScoreDetail').textContent = results.totalCorrect + ' of ' + results.totalQuestions + ' correct';
+
+      document.getElementById('reportCategories').innerHTML = Object.entries(results.categories).map(function(entry) {
+        var cat = entry[0], data = entry[1];
+        var percent = Math.round((data.correct / data.total) * 100);
+        return '<div class="report-category"><div class="report-category-name">' + escapeHtml(cat) + '</div>' +
+          '<div class="report-category-score">' + data.correct + '/' + data.total + ' (' + percent + '%)</div></div>';
+      }).join('');
+
+      document.getElementById('reportTableBody').innerHTML = questions.map(function(q) {
+        var studentAnswer = results.answers[q.id] || '—';
+        var isCorrect = studentAnswer === q.correct;
+        return '<tr><td class="col-num">' + q.id + '</td><td class="col-question">' + escapeHtml(q.question) + '</td>' +
+          '<td class="col-answer">' + studentAnswer + '</td><td class="col-correct">' + q.correct + '</td>' +
+          '<td class="col-result ' + (isCorrect ? 'result-correct' : 'result-incorrect') + '">' + (isCorrect ? '✔ Correct' : '✖ Missed') + '</td></tr>';
+      }).join('');
+
+      window.print();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

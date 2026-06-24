@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search &amp; Connect Lab | VUB Digital Literacy — Level 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D; --primary-light: #2C4A7C;
+      --windows-blue: #0078D4; --windows-blue-dark: #005A9E;
+      --accent: #C9A227; --accent-light: #E6C65C;
+      --light: #FFFFFF; --off-white: #F5F7FA; --gray: #5A6A7A;
+      --success: #28A745; --warning: #FFC107; --danger: #DC3545; --info: #17A2B8;
+    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); color: #333; line-height: 1.6; padding: 0.5in; max-width: 8.5in; margin: 0 auto; }
+    .header { background: linear-gradient(135deg, #0078D4 0%, #005A9E 100%); color: var(--light); padding: 1.25rem 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-subtitle { font-size: 0.95rem; opacity: 0.9; margin-top: 0.15rem; }
+    .header-meta { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; }
+    .header-badge { background: var(--accent); color: var(--windows-blue); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .header-right { text-align: right; flex-shrink: 0; }
+    .header-time { font-size: 0.8rem; opacity: 0.85; margin-top: 0.5rem; }
+    .name-field { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-size: 1rem; }
+    .name-field label { font-weight: 600; color: var(--windows-blue); }
+    .name-field .line { flex: 1; border-bottom: 2px dashed var(--gray); max-width: 300px; }
+    .goal-box { background: linear-gradient(135deg, var(--off-white) 0%, #EDF2F7 100%); border: 2px solid var(--accent); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem; }
+    .goal-box h2 { color: var(--windows-blue); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .goal-box .build-list { list-style: none; margin-top: 0.75rem; }
+    .goal-box .build-list li { font-size: 0.95rem; padding: 0.25rem 0; color: #333; }
+    .goal-box .build-list li::before { content: "\2713  "; color: var(--success); font-weight: 700; }
+    .part-header { background: var(--windows-blue); color: var(--light); padding: 0.75rem 1rem; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+    .part-header h2 { font-size: 1.15rem; margin: 0; }
+    .part-timing { background: var(--accent); color: var(--windows-blue); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
+    .part-type { background: rgba(255,255,255,0.2); color: var(--light); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.65rem; font-weight: 600; margin-left: 0.5rem; }
+    .part-content { border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 8px 8px; padding: 1.25rem; margin-bottom: 0.5rem; }
+    .section { margin-bottom: 1.25rem; }
+    .section-title { background: var(--off-white); color: var(--windows-blue); padding: 0.5rem 1rem; border-left: 4px solid var(--accent); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .checklist { list-style: none; }
+    .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; margin-bottom: 0.5rem; background: var(--off-white); border-radius: 8px; font-size: 0.95rem; }
+    .checkbox { width: 22px; height: 22px; border: 2px solid var(--windows-blue); border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--windows-blue); }
+    .checklist-text .detail { display: block; font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem; }
+    .key { display: inline-block; background: var(--off-white); border: 2px solid #ccc; border-bottom: 3px solid #aaa; border-radius: 4px; padding: 0.1rem 0.4rem; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.85rem; font-weight: 600; color: var(--primary); min-width: 1.5rem; text-align: center; }
+    .tip-box { background: #FFF8E1; border-left: 4px solid var(--accent); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .tip-box strong { color: #856404; }
+    .warning-box { background: #FFF3F3; border-left: 4px solid var(--danger); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .warning-box strong { color: var(--danger); }
+    .table-preview { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 0.75rem 0; }
+    .table-preview th { background: var(--windows-blue); color: var(--light); padding: 0.5rem; text-align: left; font-weight: 600; }
+    .table-preview td { padding: 0.5rem; border-bottom: 1px solid #E2E8F0; }
+    .table-preview tr:nth-child(even) { background: var(--off-white); }
+    .checkpoint-box { background: linear-gradient(135deg, rgba(0,120,212,0.1) 0%, rgba(0,120,212,0.04) 100%); border: 2px solid var(--windows-blue); border-radius: 10px; padding: 1rem; margin: 1.25rem 0; }
+    .checkpoint-box h4 { color: var(--windows-blue); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .checkpoint-box .check-items { list-style: none; margin: 0; padding: 0; }
+    .checkpoint-box .check-items li { font-size: 0.9rem; color: #333; padding: 0.2rem 0; }
+    .fill-line { display: flex; align-items: center; gap: 0.5rem; margin: 0.75rem 0; font-size: 0.9rem; }
+    .fill-line .label { color: var(--gray); white-space: nowrap; }
+    .fill-line .blank { flex: 1; border-bottom: 1px dashed var(--gray); min-height: 1.5rem; }
+    .notes-box { border: 1px dashed var(--gray); border-radius: 8px; padding: 0.75rem 1rem; margin: 0.75rem 0; }
+    .notes-box .notes-label { font-size: 0.8rem; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    .notes-box .note-line { border-bottom: 1px dashed #ccc; min-height: 1.5rem; margin-bottom: 0.5rem; }
+    .success-box { background: rgba(40,167,69,0.1); border: 2px solid var(--success); border-radius: 10px; padding: 1.25rem; margin-top: 2rem; }
+    .success-box h3 { color: var(--success); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .success-box p { font-size: 0.9rem; color: var(--gray); margin-bottom: 0.5rem; }
+    .success-box .skills-earned { list-style: none; margin-top: 0.5rem; }
+    .success-box .skills-earned li { font-size: 0.9rem; padding: 0.2rem 0; }
+    .success-box .skills-earned li::before { content: "\2B50  "; }
+    .footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid var(--off-white); text-align: center; font-size: 0.8rem; color: var(--gray); }
+    @media print {
+      body { padding: 0.25in; }
+      .header, .part-header, .checkbox, .checkpoint-box, .table-preview th, .key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { page-break-before: auto; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div>
+      <span class="header-badge">GUIDED LAB</span>
+      <h1 style="margin-top: 0.35rem;">Search &amp; Connect Lab</h1>
+      <div class="header-subtitle">Browsers, Connectivity &amp; Smart Searching</div>
+      <div class="header-meta">Week 2 | VUB Digital Literacy — Level 1</div>
+    </div>
+    <div class="header-right">
+      <div class="header-time">~30 minutes</div>
+      <div class="header-time">5 parts</div>
+    </div>
+  </header>
+
+  <div class="name-field">
+    <label>Name:</label><div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label><div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <div class="goal-box">
+    <h2>Today You Will</h2>
+    <ul class="build-list">
+      <li>Move around a web browser with confidence</li>
+      <li>Check whether your computer is connected to the internet</li>
+      <li>Work through a connection-troubleshooting checklist</li>
+      <li>Run a real web search and save your source</li>
+      <li>Find any word on a page instantly with Ctrl+F</li>
+    </ul>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="part-header">
+    <h2>Part 1: Browser Navigation Drills</h2>
+    <div><span class="part-timing">~6 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Open Your Web Browser</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Open the browser on the taskbar</strong>
+        <span class="detail">Click the browser icon at the bottom of the screen (Microsoft Edge, Chrome, or Firefox). Or press the <span class="key">Windows</span> key, type the browser name, and press <span class="key">Enter</span>.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Use the Address Bar</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Type a website address and go</strong>
+        <span class="detail">Click in the address bar at the top. Type <strong>va.gov</strong> and press <span class="key">Enter</span>. The official VA website loads. Notice the <strong>.gov</strong> ending and the padlock 🔒.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 &mdash; Open a Second Tab</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Open a new tab</strong>
+        <span class="detail">Press <span class="key">Ctrl</span> + <span class="key">T</span> (or click the small <strong>+</strong> next to your tab). A blank tab opens. Type <strong>weather.gov</strong> and press <span class="key">Enter</span>. Click between the two tabs at the top.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 4 &mdash; Bookmark a Page</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Save va.gov as a bookmark</strong>
+        <span class="detail">Go back to the va.gov tab. Click the star ⭐ at the right end of the address bar. Click <strong>Done</strong> (or <strong>Save</strong>). Now va.gov is saved for next time.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 5 &mdash; Use Back, Forward &amp; History</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Move backward and forward</strong>
+        <span class="detail">Click the <strong>Back ←</strong> arrow (top-left) to return to the last page. Click <strong>Forward →</strong> to go ahead again. Then press <span class="key">Ctrl</span> + <span class="key">H</span> to open your history list.</span>
+      </div></li></ul>
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items"><li>&#9744; I can open tabs, bookmark a page, and use back/forward and history</li></ul>
+    </div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="part-header">
+    <h2>Part 2: Check Your Wi-Fi Status &amp; Signal</h2>
+    <div><span class="part-timing">~5 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Find the Network Icon</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Look at the bottom-right of the taskbar</strong>
+        <span class="detail">Find the network icon near the clock. Curved bars 📶 mean Wi-Fi is connected. A globe 🌐 means you are <strong>not</strong> connected to the internet.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Read the Signal Strength</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Count the bars</strong>
+        <span class="detail">More filled bars means a stronger Wi-Fi signal. Fewer bars can mean slower internet or dropped pages.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 &mdash; See Your Network Name</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Click the network icon</strong>
+        <span class="detail">A panel opens showing nearby Wi-Fi networks. The one you're using says <strong>Connected</strong> under its name.</span>
+      </div></li></ul>
+    </div>
+    <div class="fill-line">
+      <span class="label">My Wi-Fi network name is:</span><span class="blank"></span>
+    </div>
+    <div class="fill-line">
+      <span class="label">Number of signal bars I see:</span><span class="blank" style="max-width:120px;"></span>
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> The real test is always to open a website. If a trusted page loads, you are truly online &mdash; no matter what the icon shows.
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items"><li>&#9744; I found the network icon and know if I'm connected</li></ul>
+    </div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="part-header">
+    <h2>Part 3: Connection Troubleshooting Checklist</h2>
+    <div><span class="part-timing">~5 min</span><span class="part-type">REFERENCE</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <p style="font-size:0.95rem; color:#333; margin-bottom:0.75rem;">Keep this checklist for home. If the internet stops working, try these steps <strong>in order</strong> &mdash; stop as soon as it works again.</p>
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div class="checklist-text">
+          <strong>1. Check the network icon</strong>
+          <span class="detail">Is Wi-Fi turned on? Are you on the right network? A globe icon means you're not connected.</span>
+        </div></li>
+        <li><div class="checkbox"></div><div class="checklist-text">
+          <strong>2. Try a different website</strong>
+          <span class="detail">If only one site fails, the problem is that site &mdash; not your connection.</span>
+        </div></li>
+        <li><div class="checkbox"></div><div class="checklist-text">
+          <strong>3. Restart your modem/router</strong>
+          <span class="detail">Unplug the box, wait 30 seconds, plug it back in, and wait about two minutes for the lights to settle. This fixes most home internet problems.</span>
+        </div></li>
+        <li><div class="checkbox"></div><div class="checklist-text">
+          <strong>4. Restart your computer</strong>
+          <span class="detail">A simple restart clears many small glitches.</span>
+        </div></li>
+        <li><div class="checkbox"></div><div class="checklist-text">
+          <strong>5. Call your internet provider</strong>
+          <span class="detail">If nothing works, there may be an outage in your area. That's their job to fix, not yours.</span>
+        </div></li>
+      </ul>
+    </div>
+    <div class="warning-box">
+      <strong>Caution:</strong> You never need to change settings inside the router to fix a normal outage. Unplugging and plugging back in is safe and usually enough.
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items"><li>&#9744; I read the troubleshooting steps and know which one fixes most problems</li></ul>
+    </div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="part-header">
+    <h2>Part 4: Guided Web Search + Save Your Source</h2>
+    <div><span class="part-timing">~8 min</span><span class="part-type">INDEPENDENT</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Decide What You Need</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Pick a real question to answer</strong>
+        <span class="detail">Example: "What are the hours of my nearest VA clinic?" Write your own question below.</span>
+      </div></li></ul>
+      <div class="fill-line">
+        <span class="label">My question:</span><span class="blank"></span>
+      </div>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Search With Clear Words</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Type a few specific words</strong>
+        <span class="detail">In the address bar or a search engine, type three or four key words (for example: <em>VA clinic Charleston WV hours</em>). Press <span class="key">Enter</span>.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 &mdash; Pick a Good Result</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Skip the ads, choose a trusted site</strong>
+        <span class="detail">Results marked <strong>"Ad"</strong> or <strong>"Sponsored"</strong> appear first &mdash; look past them. Prefer <strong>.gov</strong> or <strong>.edu</strong> sites and well-known organizations. Click the best result.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 4 &mdash; Save Your Source</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Keep a record of where you found it</strong>
+        <span class="detail">Bookmark the page (star ⭐), OR click in the address bar and press <span class="key">Ctrl</span> + <span class="key">C</span> to copy the web address. Then fill in the source record below.</span>
+      </div></li></ul>
+      <div class="notes-box">
+        <div class="notes-label">My Source Record</div>
+        <div class="fill-line"><span class="label">Website name:</span><span class="blank"></span></div>
+        <div class="fill-line"><span class="label">Web address (URL):</span><span class="blank"></span></div>
+        <div class="fill-line"><span class="label">Date I visited:</span><span class="blank" style="max-width:160px;"></span></div>
+        <div class="fill-line"><span class="label">The answer I found:</span><span class="blank"></span></div>
+      </div>
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; I ran a search, picked a trusted result, and recorded my source</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PART 5 -->
+  <div class="part-header">
+    <h2>Part 5: Find on Page with Ctrl+F</h2>
+    <div><span class="part-timing">~6 min</span><span class="part-type">INDEPENDENT</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Open a Long Page</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Visit a page with lots of text</strong>
+        <span class="detail">Go to <strong>va.gov</strong> or any news article with several paragraphs.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Open Find</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Press Ctrl + F</strong>
+        <span class="detail">A small search box appears, usually in the top-right corner.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 &mdash; Search for a Word</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Type a word you expect on the page</strong>
+        <span class="detail">Try <em>benefits</em> or <em>health</em>. Every match lights up. The box shows how many were found (like "3 of 8").</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 4 &mdash; Jump Between Matches</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Use the arrows or Enter</strong>
+        <span class="detail">Press <span class="key">Enter</span> or click the up/down arrows to move to the next match. Press <span class="key">Esc</span> to close the Find box.</span>
+      </div></li></ul>
+    </div>
+    <div class="fill-line">
+      <span class="label">The word I searched for:</span><span class="blank"></span>
+    </div>
+    <div class="fill-line">
+      <span class="label">How many times it appeared:</span><span class="blank" style="max-width:120px;"></span>
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> <span class="key">Ctrl</span> + <span class="key">F</span> works the same way in web browsers <em>and</em> in documents like Word and Adobe Reader. One shortcut, everywhere.
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items"><li>&#9744; I used Ctrl+F to find a word and jump between matches</li></ul>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-box">
+    <h3>Lab Complete!</h3>
+    <p>Great work! You can now get online, check your connection, search the web wisely, and find information fast.</p>
+    <ul class="skills-earned">
+      <li>Navigate a browser with tabs, bookmarks, and history</li>
+      <li>Check Wi-Fi status and troubleshoot a lost connection</li>
+      <li>Search with clear words and save your sources</li>
+      <li>Use Ctrl+F to find anything on a page or in a file</li>
+    </ul>
+    <p style="margin-top: 0.75rem; font-weight: 600; color: var(--windows-blue);">
+      Keep practicing &mdash; bookmark one website and try one Ctrl+F search every day this week!
+    </p>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound &mdash; West Virginia</strong> | Week 2: Getting Online</p>
+    <p style="margin-top: 0.25rem;">Keep this handout! Use it as a reference when you're online at home.</p>
+  </footer>
+
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

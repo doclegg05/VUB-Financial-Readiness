@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meet Your Computer Lab | VUB Digital Literacy — Level 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D; --primary-light: #2C4A7C;
+      --va-blue: #003F72; --va-blue-dark: #002F5A;
+      --accent: #C9A227; --accent-light: #E6C65C;
+      --light: #FFFFFF; --off-white: #F5F7FA; --gray: #5A6A7A;
+      --success: #28A745; --warning: #FFC107; --danger: #DC3545; --info: #17A2B8;
+    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); color: #333; line-height: 1.6; padding: 0.5in; max-width: 8.5in; margin: 0 auto; }
+    .header { background: linear-gradient(135deg, var(--va-blue) 0%, var(--primary) 100%); color: var(--light); padding: 1.25rem 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-subtitle { font-size: 0.95rem; opacity: 0.9; margin-top: 0.15rem; }
+    .header-meta { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; }
+    .header-badge { background: var(--accent); color: var(--va-blue); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .header-right { text-align: right; flex-shrink: 0; }
+    .header-time { font-size: 0.8rem; opacity: 0.85; margin-top: 0.5rem; }
+    .name-field { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-size: 1rem; }
+    .name-field label { font-weight: 600; color: var(--va-blue); }
+    .name-field .line { flex: 1; border-bottom: 2px dashed var(--gray); max-width: 300px; }
+    .goal-box { background: linear-gradient(135deg, var(--off-white) 0%, #EDF2F7 100%); border: 2px solid var(--accent); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem; }
+    .goal-box h2 { color: var(--va-blue); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .goal-box .build-list { list-style: none; margin-top: 0.75rem; }
+    .goal-box .build-list li { font-size: 0.95rem; padding: 0.25rem 0; color: #333; }
+    .goal-box .build-list li::before { content: "\2713  "; color: var(--success); font-weight: 700; }
+    .part-header { background: var(--va-blue); color: var(--light); padding: 0.75rem 1rem; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+    .part-header h2 { font-size: 1.15rem; margin: 0; }
+    .part-timing { background: var(--accent); color: var(--va-blue); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
+    .part-type { background: rgba(255,255,255,0.2); color: var(--light); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.65rem; font-weight: 600; margin-left: 0.5rem; }
+    .part-content { border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 8px 8px; padding: 1.25rem; margin-bottom: 0.5rem; }
+    .section { margin-bottom: 1.25rem; }
+    .section-title { background: var(--off-white); color: var(--va-blue); padding: 0.5rem 1rem; border-left: 4px solid var(--accent); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .checklist { list-style: none; }
+    .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; margin-bottom: 0.5rem; background: var(--off-white); border-radius: 8px; font-size: 0.95rem; }
+    .checkbox { width: 22px; height: 22px; border: 2px solid var(--va-blue); border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--va-blue); }
+    .checklist-text .detail { display: block; font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem; }
+    .key { display: inline-block; background: var(--off-white); border: 2px solid #ccc; border-bottom: 3px solid #aaa; border-radius: 4px; padding: 0.1rem 0.4rem; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.85rem; font-weight: 600; color: var(--primary); min-width: 1.5rem; text-align: center; }
+    .tip-box { background: #FFF8E1; border-left: 4px solid var(--accent); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .tip-box strong { color: #856404; }
+    .warning-box { background: #FFF3F3; border-left: 4px solid var(--danger); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .warning-box strong { color: var(--danger); }
+    .checkpoint-box { background: linear-gradient(135deg, rgba(0,63,114,0.1) 0%, rgba(0,63,114,0.04) 100%); border: 2px solid var(--va-blue); border-radius: 10px; padding: 1rem; margin: 1.25rem 0; }
+    .checkpoint-box h4 { color: var(--va-blue); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .checkpoint-box .check-items { list-style: none; margin: 0; padding: 0; }
+    .checkpoint-box .check-items li { font-size: 0.9rem; color: #333; padding: 0.2rem 0; }
+    .fill-line { display: flex; align-items: center; gap: 0.5rem; margin: 0.75rem 0; font-size: 0.9rem; }
+    .fill-line .label { color: var(--gray); white-space: nowrap; }
+    .fill-line .blank { flex: 1; border-bottom: 1px dashed var(--gray); min-height: 1.5rem; }
+    .success-box { background: rgba(40,167,69,0.1); border: 2px solid var(--success); border-radius: 10px; padding: 1.25rem; margin-top: 2rem; }
+    .success-box h3 { color: var(--success); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .success-box p { font-size: 0.9rem; color: var(--gray); margin-bottom: 0.5rem; }
+    .success-box .skills-earned { list-style: none; margin-top: 0.5rem; }
+    .success-box .skills-earned li { font-size: 0.9rem; padding: 0.2rem 0; }
+    .success-box .skills-earned li::before { content: "\2B50  "; }
+    .footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid var(--off-white); text-align: center; font-size: 0.8rem; color: var(--gray); }
+    @media print {
+      body { padding: 0.25in; }
+      .header, .part-header, .checkbox, .checkpoint-box, .key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { page-break-before: auto; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div>
+      <span class="header-badge">HANDS-ON LAB</span>
+      <h1 style="margin-top: 0.35rem;">Meet Your Computer</h1>
+      <div class="header-subtitle">Explore the Real Computer at Your Workstation</div>
+      <div class="header-meta">Week 1 | VUB Digital Literacy — Level 1</div>
+    </div>
+    <div class="header-right">
+      <div class="header-time">~20 minutes</div>
+      <div class="header-time">4 parts</div>
+    </div>
+  </header>
+
+  <div class="name-field">
+    <label>Name:</label><div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label><div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <div class="goal-box">
+    <h2>Today You Will</h2>
+    <ul class="build-list">
+      <li>Find and name the ports and devices on your computer</li>
+      <li>Look up how much memory (RAM) and storage your computer has</li>
+      <li>See which programs (apps) are installed</li>
+      <li>Identify which version of Windows you are using</li>
+    </ul>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="part-header">
+    <h2>Part 1: Find the Ports & Devices</h2>
+    <div><span class="part-timing">~5 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Look at the Outside</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Find the ports on your computer or laptop</strong>
+        <span class="detail">Look at the back and sides. Ports are the small openings where cables plug in. Do not unplug anything &mdash; just look.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Identify Each Plug</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Find these common ports and check them off as you spot them</strong>
+        <span class="detail">
+          &#9744; A <strong>USB</strong> port (flat rectangle, or a small oval USB-C) &nbsp;
+          &#9744; The <strong>power</strong> connector &nbsp;
+          &#9744; An <strong>HDMI</strong> port (for the monitor) &nbsp;
+          &#9744; A round <strong>headphone</strong> jack
+        </span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 &mdash; Name Your Devices</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Point to each device and decide: input or output?</strong>
+        <span class="detail">Keyboard, mouse, monitor, speakers. Remember: input goes <em>in</em> to the computer; output comes <em>out</em> to you.</span>
+      </div></li></ul>
+    </div>
+    <div class="fill-line">
+      <span class="label">One INPUT device on my desk:</span><span class="blank"></span>
+    </div>
+    <div class="fill-line">
+      <span class="label">One OUTPUT device on my desk:</span><span class="blank"></span>
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items"><li>&#9744; I found at least one USB port and named one input and one output device</li></ul>
+    </div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="part-header">
+    <h2>Part 2: How Much Memory & Storage?</h2>
+    <div><span class="part-timing">~6 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Open Settings</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Open the Settings app</strong>
+        <span class="detail">Press the <span class="key">Windows</span> key, type "settings", and press <span class="key">Enter</span>. (Or click the Start button and choose the gear icon.)</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Find Your Memory (RAM)</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Go to System &rarr; About</strong>
+        <span class="detail">In Settings, click <strong>System</strong>, then scroll down and click <strong>About</strong>. Look for "Installed RAM" &mdash; this is your memory.</span>
+      </div></li></ul>
+    </div>
+    <div class="fill-line">
+      <span class="label">My computer has this much RAM (memory):</span><span class="blank"></span> <span class="label">GB</span>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 3 &mdash; Find Your Storage</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Open This PC to see your drive</strong>
+        <span class="detail">Press <span class="key">Windows</span> + <span class="key">E</span> to open File Explorer. Click <strong>This PC</strong> on the left. Find the bar under "Windows (C:)" &mdash; it shows free space and total size.</span>
+      </div></li></ul>
+    </div>
+    <div class="fill-line">
+      <span class="label">My (C:) drive total size is about:</span><span class="blank"></span> <span class="label">GB (or TB)</span>
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> Memory (RAM) is the desk you work on; storage (the drive) is the filing cabinet that keeps your files. They are two different numbers!
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items">
+        <li>&#9744; I wrote down my RAM amount</li>
+        <li>&#9744; I wrote down my storage (C: drive) size</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="part-header">
+    <h2>Part 3: Which Apps Are Installed?</h2>
+    <div><span class="part-timing">~5 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Open the Start Menu</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>See your list of programs</strong>
+        <span class="detail">Click the <strong>Start</strong> button (bottom-left). Click "All apps" if you see it. Scroll through the alphabetical list of installed programs.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Spot Familiar Programs</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Find and check off any apps you recognize</strong>
+        <span class="detail">
+          &#9744; A web browser (Edge or Chrome) &nbsp;
+          &#9744; A word processor (Word or WordPad) &nbsp;
+          &#9744; The Calculator &nbsp;
+          &#9744; The Microsoft Store
+        </span>
+      </div></li></ul>
+    </div>
+    <div class="fill-line">
+      <span class="label">Three apps installed on my computer: 1.</span><span class="blank"></span>
+    </div>
+    <div class="fill-line">
+      <span class="label">2.</span><span class="blank"></span><span class="label">3.</span><span class="blank"></span>
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> These programs are <em>application software</em> &mdash; the apps you open to get something done. They run on top of <em>Windows</em>, which is the system software.
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items"><li>&#9744; I listed three apps installed on my computer</li></ul>
+    </div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="part-header">
+    <h2>Part 4: Which Operating System?</h2>
+    <div><span class="part-timing">~4 min</span><span class="part-type">INDEPENDENT</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Go Back to Settings &rarr; About</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Find your Windows version</strong>
+        <span class="detail">In Settings &rarr; System &rarr; About, look at the "Windows specifications" section. Find the "Edition" line &mdash; it tells you which version of Windows you have.</span>
+      </div></li></ul>
+    </div>
+    <div class="fill-line">
+      <span class="label">My operating system is Windows:</span><span class="blank"></span> <span class="label">(for example, Windows 11 Home)</span>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Think About It</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Connect it to today's lesson</strong>
+        <span class="detail">Windows is the <em>operating system</em> &mdash; the master program that runs the whole computer. A Mac would say "macOS," and a phone would say "Android" or "iOS."</span>
+      </div></li></ul>
+    </div>
+    <div class="warning-box">
+      <strong>Caution:</strong> The About page just shows information &mdash; reading it cannot change or break anything. Explore it freely. Do not change any settings unless your instructor asks you to.
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; Raise your hand when done:</h4>
+      <ul class="check-items"><li>&#9744; I identified which version of Windows my computer is running</li></ul>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-box">
+    <h3>Lab Complete!</h3>
+    <p>Great work! You explored a real computer from the outside in &mdash; ports, memory, storage, apps, and the operating system.</p>
+    <ul class="skills-earned">
+      <li>Identify ports and input/output devices</li>
+      <li>Look up your computer's RAM and storage</li>
+      <li>Find the apps installed on your computer</li>
+      <li>Identify your Windows operating system version</li>
+    </ul>
+    <p style="margin-top: 0.75rem; font-weight: 600; color: var(--va-blue);">
+      Keep this sheet &mdash; you now know more about your computer than most people do!
+    </p>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound &mdash; West Virginia</strong> | Week 1: Inside the Computer</p>
+    <p style="margin-top: 0.25rem;">Keep this handout! Use it as a reference when working on your computer at home.</p>
+  </footer>
+
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

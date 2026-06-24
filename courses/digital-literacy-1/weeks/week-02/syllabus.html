@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 2 Instructor Guide | VUB Digital Literacy — Level 1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--va-blue) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+
+    .header-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Overview Box */
+    .overview-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .overview-box h2 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .objectives-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .objectives-list li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .objectives-list li::before {
+      content: "🎯";
+      position: absolute;
+      left: 0;
+    }
+
+    .obj-code {
+      display: inline-block;
+      background: rgba(0, 63, 114, 0.12);
+      color: var(--va-blue);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.05rem 0.4rem;
+      border-radius: 4px;
+      margin-left: 0.25rem;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-header {
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px 8px 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline-body {
+      border: 2px solid var(--va-blue);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid var(--off-white);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-time {
+      background: var(--off-white);
+      padding: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timeline-content {
+      padding: 0.75rem 1rem;
+    }
+
+    .timeline-content h4 {
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-content p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin: 0;
+    }
+
+    /* Activity Badge */
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+
+    .activity-lecture {
+      background: rgba(27, 54, 93, 0.15);
+      color: var(--primary);
+    }
+
+    .activity-demo {
+      background: rgba(201, 162, 39, 0.2);
+      color: #8B7500;
+    }
+
+    .activity-practice {
+      background: rgba(40, 167, 69, 0.15);
+      color: var(--success);
+    }
+
+    .activity-assessment {
+      background: rgba(220, 53, 69, 0.15);
+      color: var(--danger);
+    }
+
+    .activity-warmup {
+      background: rgba(255, 152, 0, 0.15);
+      color: #E65100;
+    }
+
+    .activity-break {
+      background: rgba(156, 39, 176, 0.15);
+      color: #7B1FA2;
+    }
+
+    .activity-eval {
+      background: rgba(3, 169, 244, 0.15);
+      color: #0277BD;
+    }
+
+    .activity-apply {
+      background: rgba(76, 175, 80, 0.15);
+      color: #2E7D32;
+    }
+
+    /* Instructor Notes */
+    .notes-section {
+      background: rgba(201, 162, 39, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .notes-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .notes-section ul {
+      list-style: none;
+    }
+
+    .notes-section li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .notes-section li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Materials Checklist */
+    .materials-section {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .materials-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .material-category h4 {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .material-category ul {
+      list-style: none;
+    }
+
+    .material-category li {
+      padding: 0.25rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .material-category li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    /* Discussion Questions */
+    .discussion-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .discussion-section h3 {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .discussion-list {
+      list-style: none;
+    }
+
+    .discussion-list li {
+      background: var(--off-white);
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .discussion-list li strong {
+      display: block;
+      font-style: normal;
+      color: var(--primary);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Tips Box */
+    .tips-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tips-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tips-box ul {
+      list-style: none;
+    }
+
+    .tips-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .tips-box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    /* Concept Coverage Box */
+    .va-portal-box {
+      background: rgba(0, 63, 114, 0.08);
+      border: 2px solid var(--va-blue);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .va-portal-box h3 {
+      color: var(--va-blue);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .va-portal-box ul {
+      list-style: none;
+    }
+
+    .va-portal-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .va-portal-box li::before {
+      content: "🌐";
+      position: absolute;
+      left: 0;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .timeline-header, .discussion-section h3 {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div>
+        <h1>Week 2: Getting Online — Browsers, Networks &amp; Searching</h1>
+        <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">VUB Digital Literacy — Level 1 · IC3 GS6 Aligned</p>
+      </div>
+      <span class="header-badge">Instructor Guide</span>
+    </div>
+    <div class="header-meta">
+      <span>📅 Week 2 of 5</span>
+      <span>⏱️ 2 Hours</span>
+      <span>👥 Veterans Group</span>
+      <span>📍 Computer Lab</span>
+    </div>
+  </header>
+
+  <div class="overview-box">
+    <h2>🎯 Learning Objectives</h2>
+    <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--gray);">By the end of this session, participants will be able to: <em>(IC3 GS6 Level 1 objective codes in blue)</em></p>
+    <ul class="objectives-list">
+      <li>Recognize desktop and operating-system terms <span class="obj-code">IC3 1.1.1</span></li>
+      <li>Explain what a web browser does and use the address bar <span class="obj-code">IC3 1.1.2</span></li>
+      <li>Navigate with tabs, bookmarks, history, and back/forward <span class="obj-code">IC3 1.1.3–1.1.4</span></li>
+      <li>Compare wired, Wi-Fi, and cellular connections <span class="obj-code">IC3 1.6.3</span></li>
+      <li>Identify the role of the modem, router, and ISP <span class="obj-code">IC3 1.6.4</span></li>
+      <li>Check whether a device is connected to the internet <span class="obj-code">IC3 1.6.5</span></li>
+      <li>Apply basic network troubleshooting steps <span class="obj-code">IC3 1.6.6</span></li>
+      <li>Define a search need and judge relevant vs. irrelevant results <span class="obj-code">IC3 3.1.1–3.1.2</span></li>
+      <li>Collect and retain source references <span class="obj-code">IC3 3.1.3</span></li>
+      <li>Use Find (Ctrl+F) within a page or file <span class="obj-code">IC3 3.2</span></li>
+      <li>Explain public domain and Creative Commons content <span class="obj-code">IC3 3.3</span></li>
+    </ul>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-header">⏰ Session Timeline (2 Hours)</div>
+    <div class="timeline-body">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00-0:10</div>
+        <div class="timeline-content">
+          <h4>Welcome &amp; Warm-Up <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <p>Recap Week 1 briefly. Ask: "When you want to look something up online, where do you start?" Distribute handouts while students settle. Confirm everyone can open a web browser.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:10-0:35</div>
+        <div class="timeline-content">
+          <h4>Desktop, Browsers &amp; Navigation <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Slides 2–5. On the projector, point out the desktop and taskbar, then open a browser. Demonstrate the address bar, tabs, bookmarking with the star, and history (Ctrl+H). Show back/forward/refresh. <em>(1.1.1–1.1.4)</em></p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:35-0:55</div>
+        <div class="timeline-content">
+          <h4>Networking: How We Connect <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Slides 6–9. Explain wired vs. Wi-Fi vs. cellular, then modem/router/ISP in plain terms. Show the live Wi-Fi taskbar icon and the "Am I connected?" check. Walk through the troubleshooting steps. <em>(1.6.3–1.6.6)</em></p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:55-1:05</div>
+        <div class="timeline-content">
+          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <p>10-minute break. Encourage participants to stretch and use the restroom.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:05-1:30</div>
+        <div class="timeline-content">
+          <h4>Smart Searching, Ctrl+F &amp; Copyright <span class="activity-type activity-demo">Demo</span></h4>
+          <p>Slides 10–14. Demonstrate a vague vs. clear search live. Show how to spot ads and read web addresses. Demo Ctrl+F on a long page. Cover keeping sources, then copyright / public domain / Creative Commons. <em>(3.1, 3.2, 3.3)</em></p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:30-1:55</div>
+        <div class="timeline-content">
+          <h4>Hands-On: Search &amp; Connect Lab <span class="activity-type activity-practice">Practice</span></h4>
+          <p>Participants work through the "Search &amp; Connect Lab" handout: browser navigation drills, checking Wi-Fi status, the troubleshooting checklist, a guided web search with source capture, and Ctrl+F practice. Walk around and assist. <em>(1.1, 1.6.5–1.6.6, 3.1.3, 3.2)</em></p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:55-2:00</div>
+        <div class="timeline-content">
+          <h4>Wrap-Up &amp; Take-Home Challenge <span class="activity-type activity-apply">Application</span></h4>
+          <p>Use the knowledge-check slide as a group review. Challenge: this week, bookmark one website you use often and try a Ctrl+F search. Preview Week 3 (Creating &amp; Communicating).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <h3>📝 Instructor Notes</h3>
+    <ul>
+      <li><strong>Plain language first:</strong> Avoid jargon. Say "the box from your internet company" before introducing "modem." Define each term as you show it on screen.</li>
+      <li><strong>Show, don't just tell:</strong> Networking is abstract. Whenever possible, point at the real Wi-Fi icon, the real router (if present), and a real search so it stays concrete.</li>
+      <li><strong>Browser may vary:</strong> Lab PCs likely have Microsoft Edge; some students use Chrome at home. Note that tabs, bookmarks, history, and Ctrl+F work the same in all browsers.</li>
+      <li><strong>Bookmarks build confidence:</strong> Helping a veteran bookmark va.gov or their email is a quick, memorable win — do it early.</li>
+      <li><strong>Troubleshooting reassurance:</strong> Emphasize that restarting the router fixes most home internet problems — they don't need to be "techies" to do it.</li>
+      <li><strong>Copyright, kept simple:</strong> Keep the copyright slide light — the goal is "most things online belong to someone; give credit or look for free-to-use." No legal depth needed.</li>
+    </ul>
+  </div>
+
+  <div class="va-portal-box">
+    <h3>🌐 Key Concepts to Cover</h3>
+    <ul>
+      <li><strong>Browser parts</strong> — address bar (URL), tabs, bookmarks/favorites (star), history (Ctrl+H), back/forward/refresh</li>
+      <li><strong>Connection types</strong> — wired (Ethernet), Wi-Fi, cellular; what each is best for</li>
+      <li><strong>Home network gear</strong> — ISP → modem → router; the combined modem/router box</li>
+      <li><strong>Connectivity check</strong> — Wi-Fi bars vs. globe icon; loading a trusted site as the real test</li>
+      <li><strong>Smart search</strong> — clear keywords, relevant vs. irrelevant results, ads vs. real results, keeping sources</li>
+      <li><strong>Find &amp; reuse</strong> — Ctrl+F in pages and files; copyright, public domain, Creative Commons</li>
+    </ul>
+  </div>
+
+  <div class="materials-section">
+    <h3>📦 Materials Checklist</h3>
+    <div class="materials-grid">
+      <div class="material-category">
+        <h4>Handouts (Print)</h4>
+        <ul>
+          <li>Search &amp; Connect Lab</li>
+          <li>Browser &amp; Wi-Fi Quick Reference</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Technology</h4>
+        <ul>
+          <li>Projector connected &amp; working</li>
+          <li>Each workstation powered on</li>
+          <li>Internet access verified</li>
+          <li>A web browser open on each screen</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Preparation</h4>
+        <ul>
+          <li>Pick a long webpage for the Ctrl+F demo</li>
+          <li>Decide a sample search topic in advance</li>
+          <li>Locate the lab Wi-Fi network name</li>
+          <li>Know where the lab router is (if visible)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="discussion-section">
+    <h3>💬 Discussion Questions</h3>
+    <ul class="discussion-list">
+      <li>
+        <strong>Opener:</strong>
+        "When you want to look something up online, what do you do first? Do you have any websites bookmarked?"
+      </li>
+      <li>
+        <strong>During Networking:</strong>
+        "Has your internet ever stopped working at home? What did you do? Did restarting the box help?"
+      </li>
+      <li>
+        <strong>During Searching:</strong>
+        "Have you ever clicked a search result and landed somewhere that felt like a scam or an ad? How could you tell?"
+      </li>
+      <li>
+        <strong>Copyright:</strong>
+        "If you found a great photo online, would you feel okay using it? When is it okay, and when should you ask first?"
+      </li>
+      <li>
+        <strong>Wrap-up:</strong>
+        "What's one thing from today you'll try at home this week?"
+      </li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>✅ Tips for Success</h3>
+    <ul>
+      <li>Have students follow along on their own screens during the demos — doing beats watching</li>
+      <li>Repeat keyboard shortcuts out loud (Ctrl+F, Ctrl+H) and have them written on the handout</li>
+      <li>If a student's internet drops during the lab, treat it as a live troubleshooting demo for the group</li>
+      <li>Celebrate the first successful bookmark and the first successful Ctrl+F — these stick</li>
+      <li>Reassure anyone overwhelmed by networking: they only need to recognize the terms, not configure anything</li>
+      <li>Pair a confident student with a hesitant one during the lab if helpful</li>
+    </ul>
+  </div>
+
+  <div class="notes-section" style="background: rgba(23, 162, 184, 0.1); border-color: #17A2B8;">
+    <h3 style="color: #17A2B8;">🔮 Looking Ahead: Week 3</h3>
+    <ul>
+      <li><strong>Topic:</strong> Creating &amp; Communicating — Documents, Email &amp; Teamwork</li>
+      <li><strong>Key Concepts:</strong> Creating and saving documents, file naming, citations, email response options, inclusive language, collaboration etiquette</li>
+      <li><strong>Prep Needed:</strong> Ensure a word processor (Word or WordPad) is available on each workstation</li>
+      <li><strong>Connection:</strong> The searching and source-keeping skills from this week feed directly into citing sources next week</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Digital Literacy — Level 1 | Instructor Guide - Week 2</p>
+    <p style="margin-top: 0.5rem; font-style: italic;">Questions? Contact: Britt Legg</p>
+  </footer>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

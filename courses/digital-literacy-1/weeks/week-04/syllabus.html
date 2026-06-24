@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 4 Instructor Guide | VUB Digital Literacy — Level 1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--va-blue) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+
+    .header-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Overview Box */
+    .overview-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .overview-box h2 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .objectives-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .objectives-list li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .objectives-list li::before {
+      content: "🎯";
+      position: absolute;
+      left: 0;
+    }
+
+    .obj-code {
+      display: inline-block;
+      background: rgba(0, 63, 114, 0.12);
+      color: var(--va-blue);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.05rem 0.4rem;
+      border-radius: 8px;
+      margin-left: 0.35rem;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-header {
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px 8px 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline-body {
+      border: 2px solid var(--va-blue);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid var(--off-white);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-time {
+      background: var(--off-white);
+      padding: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timeline-content {
+      padding: 0.75rem 1rem;
+    }
+
+    .timeline-content h4 {
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-content p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin: 0;
+    }
+
+    /* Activity Badge */
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+
+    .activity-lecture {
+      background: rgba(27, 54, 93, 0.15);
+      color: var(--primary);
+    }
+
+    .activity-demo {
+      background: rgba(201, 162, 39, 0.2);
+      color: #8B7500;
+    }
+
+    .activity-practice {
+      background: rgba(40, 167, 69, 0.15);
+      color: var(--success);
+    }
+
+    .activity-assessment {
+      background: rgba(220, 53, 69, 0.15);
+      color: var(--danger);
+    }
+
+    .activity-warmup {
+      background: rgba(255, 152, 0, 0.15);
+      color: #E65100;
+    }
+
+    .activity-break {
+      background: rgba(156, 39, 176, 0.15);
+      color: #7B1FA2;
+    }
+
+    .activity-eval {
+      background: rgba(3, 169, 244, 0.15);
+      color: #0277BD;
+    }
+
+    .activity-apply {
+      background: rgba(76, 175, 80, 0.15);
+      color: #2E7D32;
+    }
+
+    /* Instructor Notes */
+    .notes-section {
+      background: rgba(201, 162, 39, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .notes-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .notes-section ul {
+      list-style: none;
+    }
+
+    .notes-section li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .notes-section li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Materials Checklist */
+    .materials-section {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .materials-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .material-category h4 {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .material-category ul {
+      list-style: none;
+    }
+
+    .material-category li {
+      padding: 0.25rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .material-category li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    /* Discussion Questions */
+    .discussion-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .discussion-section h3 {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .discussion-list {
+      list-style: none;
+    }
+
+    .discussion-list li {
+      background: var(--off-white);
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .discussion-list li strong {
+      display: block;
+      font-style: normal;
+      color: var(--primary);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Tips Box */
+    .tips-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tips-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tips-box ul {
+      list-style: none;
+    }
+
+    .tips-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .tips-box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    /* Assessment Info */
+    .assessment-box {
+      background: rgba(220, 53, 69, 0.08);
+      border: 2px solid var(--danger);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .assessment-box h3 {
+      color: var(--danger);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .assessment-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* VA Portal Box (repurposed: domain coverage) */
+    .va-portal-box {
+      background: rgba(0, 63, 114, 0.08);
+      border: 2px solid var(--va-blue);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .va-portal-box h3 {
+      color: var(--va-blue);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .va-portal-box ul {
+      list-style: none;
+    }
+
+    .va-portal-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .va-portal-box li::before {
+      content: "📘";
+      position: absolute;
+      left: 0;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .timeline-header, .discussion-section h3 {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div>
+        <h1>Week 4: Citizenship &amp; Safety — Identity, Privacy &amp; Security</h1>
+        <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">VUB Digital Literacy — Level 1 · IC3 GS6 Aligned</p>
+      </div>
+      <span class="header-badge">Instructor Guide</span>
+    </div>
+    <div class="header-meta">
+      <span>📅 Week 4 of 5</span>
+      <span>⏱️ 2 Hours</span>
+      <span>👥 Veterans Group</span>
+      <span>📍 Computer Lab (Windows)</span>
+    </div>
+  </header>
+
+  <div class="overview-box">
+    <h2>🎯 Learning Objectives</h2>
+    <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--gray);">By the end of this session, participants will be able to (IC3 GS6 Level 1 objectives in brackets):</p>
+    <ul class="objectives-list">
+      <li>Manage personal data and PII online<span class="obj-code">2.1</span></li>
+      <li>Protect their digital reputation; recognize permanence and legal/ethical behavior<span class="obj-code">2.2</span></li>
+      <li>Explain the impact of negative digital communication<span class="obj-code">2.3.1</span></li>
+      <li>Assess the validity of online information<span class="obj-code">2.3.2</span></li>
+      <li>Explain online anonymity and the value of nonresponse<span class="obj-code">2.3.3 / 2.3.4</span></li>
+      <li>Describe common digital security threats<span class="obj-code">7.1</span></li>
+      <li>Build strong passphrases; reset a password; lock a device; clear browser data<span class="obj-code">7.2</span></li>
+      <li>Recognize tracking and risks of info stored on a device; use private browsing<span class="obj-code">7.3</span></li>
+      <li>Identify mental and physical/ergonomic health risks<span class="obj-code">7.4</span></li>
+    </ul>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-header">⏰ Session Timeline (2 Hours)</div>
+    <div class="timeline-body">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00-0:10</div>
+        <div class="timeline-content">
+          <h4>Welcome &amp; Warm-Up <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <p>Greet the group. Ask: "Have you ever gotten a suspicious email or text pretending to be from the VA, a bank, or a delivery company?" Let a few share. Distribute the two handouts.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:10-0:35</div>
+        <div class="timeline-content">
+          <h4>Digital Identity, PII &amp; Reputation <span class="activity-type activity-lecture">Lecture</span></h4>
+          <p>Slides 2-5. Cover digital identity and managing personal data (2.1), what PII is and how to protect it, permanence of online actions, and legal/ethical behavior (2.2). Use the "grandkid test" framing.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:35-0:55</div>
+        <div class="timeline-content">
+          <h4>Responding to Inappropriate Content <span class="activity-type activity-lecture">Discussion</span></h4>
+          <p>Slides 6-8. Impact of negative communication (2.3.1), checking validity of online info (2.3.2), anonymity (2.3.3), and the value of nonresponse — block, report, walk away (2.3.4). Invite real examples.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:55-1:05</div>
+        <div class="timeline-content">
+          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <p>10-minute break. Encourage participants to stand, stretch, and rest their eyes — a natural tie-in to today's ergonomics topic.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:05-1:30</div>
+        <div class="timeline-content">
+          <h4>Security, Passwords &amp; Tracking <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Slides 9-15. Security threats (7.1); strong passphrases, reset, lock, clear browser data (7.2); tracking and stored-data risks (7.3.3), private browsing and its limits (7.3.4); mental and physical/ergonomic health (7.4).</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:30-1:55</div>
+        <div class="timeline-content">
+          <h4>"Lock It Down" Hands-On Lab <span class="activity-type activity-practice">Practice</span></h4>
+          <p>Participants work through the lab on their own PCs: build a passphrase, lock the screen (Windows + L), clear browser history/cookies, open a private window, evaluate a source, run the privacy self-audit, check what's stored on the PC, and do a desk ergonomics check. Walk the room and assist.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:55-2:00</div>
+        <div class="timeline-content">
+          <h4>Knowledge Check &amp; Wrap-Up <span class="activity-type activity-apply">Application</span></h4>
+          <p>Run the 3-question knowledge check on the last slides. Recap key takeaways. Preview Week 5: Review &amp; Testing Day (cumulative recap + Post-Test). Encourage students to keep the quick-reference card at their desk.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <h3>📝 Instructor Notes</h3>
+    <ul>
+      <li><strong>Non-Alarmist Tone:</strong> Security topics can feel scary. Keep it calm and empowering — "here are simple habits that keep you safe," not "the internet is dangerous."</li>
+      <li><strong>Passphrases over Passwords:</strong> Emphasize that <em>length</em> beats complexity. A long passphrase of unrelated words is both stronger and easier to remember than "P@ss1!".</li>
+      <li><strong>Private Mode Myth:</strong> Many learners believe Incognito makes them invisible. Be explicit about its limits (slide 14) — it only avoids saving data on that device.</li>
+      <li><strong>Real VA Relevance:</strong> Tie PII and phishing to VA accounts and benefits — this audience is a frequent scam target. Reinforce: the VA never asks for your password by email/text.</li>
+      <li><strong>Nonresponse is a Skill:</strong> Normalize NOT replying to trolls. For some veterans the instinct is to defend themselves — frame walking away as the stronger move.</li>
+      <li><strong>Ergonomics for Older Learners:</strong> Spend a moment physically adjusting a chair/monitor as a demo. Small changes prevent real neck, back, and eye strain.</li>
+      <li><strong>Lab Pace:</strong> The lab has 8 stations. It's fine if slower learners only finish the first few in class — the handout lets them finish at home.</li>
+    </ul>
+  </div>
+
+  <div class="va-portal-box">
+    <h3>📘 IC3 GS6 Level 1 Domain Coverage</h3>
+    <ul>
+      <li><strong>Domain 2 — Digital Citizenship:</strong> 2.1 digital identity / PII; 2.2 reputation, permanence, legal/ethical; 2.3.1-2.3.4 negative communication, validity, anonymity, nonresponse</li>
+      <li><strong>Domain 7 — Safety &amp; Security:</strong> 7.1 threats; 7.2 passwords, reset, lock, clear browser data; 7.3 tracking, stored-data risk, private browsing; 7.4 mental &amp; physical health risks</li>
+      <li><strong>Lab → Proficiency:</strong> the "Lock It Down" lab directly exercises 7.2.3-7.2.4 (lock / clear data), 7.3.4 (private window), 2.3.2 (source validity), 2.1 (privacy self-audit), 7.3.3 (stored-data check), and 7.4.2 (ergonomics)</li>
+    </ul>
+  </div>
+
+  <div class="materials-section">
+    <h3>📦 Materials Checklist</h3>
+    <div class="materials-grid">
+      <div class="material-category">
+        <h4>Handouts (Print)</h4>
+        <ul>
+          <li>Lock It Down Lab (1 per student)</li>
+          <li>Security &amp; Ergonomics Quick Reference</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Technology</h4>
+        <ul>
+          <li>Projector connected &amp; working</li>
+          <li>Each workstation powered on</li>
+          <li>A web browser available (Chrome/Edge)</li>
+          <li>Presentation open on each screen</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Preparation</h4>
+        <ul>
+          <li>Confirm Windows + L locks the lab PCs</li>
+          <li>Know where "Clear browsing data" lives</li>
+          <li>Have a sample webpage to evaluate</li>
+          <li>Prepare a phishing-email example</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="discussion-section">
+    <h3>💬 Discussion Questions</h3>
+    <ul class="discussion-list">
+      <li>
+        <strong>Opener:</strong>
+        "What kind of personal information do you think is most important to keep private online — and why?"
+      </li>
+      <li>
+        <strong>During Validity Section:</strong>
+        "Have you ever seen something online that turned out to be false? How did you find out?"
+      </li>
+      <li>
+        <strong>Nonresponse Section:</strong>
+        "Is it ever better to NOT respond to someone online? When?"
+      </li>
+      <li>
+        <strong>Passwords Section:</strong>
+        "How many different passwords do you think you have? How do you keep track of them?"
+      </li>
+      <li>
+        <strong>Wrap-up:</strong>
+        "What's one security habit you'll start this week — a passphrase, locking your screen, or clearing your data?"
+      </li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>✅ Tips for Success</h3>
+    <ul>
+      <li>Demonstrate Windows + L live — it's instant and memorable</li>
+      <li>Type a sample passphrase on the projector so they see how words combine</li>
+      <li>Walk the room during the lab; many veterans won't ask for help out loud</li>
+      <li>Validate frustration with passwords and scams — it's a shared experience</li>
+      <li>Celebrate when someone clears their data or opens a private window for the first time</li>
+      <li>Keep security framing positive: simple habits, big protection</li>
+    </ul>
+  </div>
+
+  <div class="assessment-box">
+    <h3>📊 No Formal Assessment This Week</h3>
+    <p>
+      <strong>Format:</strong> Week 4 has no graded test. Use the embedded 3-question knowledge check (last slides) and the hands-on lab as informal, low-stakes checks for understanding.<br>
+      <strong>Looking Ahead:</strong> The Post-Test is administered next week (Week 5, Review &amp; Testing Day). Remind students it mirrors the Week 1 Pre-Test so they can see their growth.
+    </p>
+  </div>
+
+  <div class="notes-section" style="background: rgba(23, 162, 184, 0.1); border-color: #17A2B8;">
+    <h3 style="color: #17A2B8;">🔮 Looking Ahead: Week 5</h3>
+    <ul>
+      <li><strong>Topic:</strong> Review &amp; Testing Day — cumulative recap across all 7 IC3 domains</li>
+      <li><strong>Format:</strong> Review game (Jeopardy-style) → Post-Test → wrap-up and Level 2 preview</li>
+      <li><strong>Prep Needed:</strong> Have the Post-Test ready on each workstation; print the Level 1 study guide</li>
+      <li><strong>Connection:</strong> This week's safety habits are some of the most practical, testable skills in the course</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound — West Virginia</strong></p>
+    <p>Digital Literacy — Level 1 (IC3 GS6 Aligned) | Instructor Guide - Week 4</p>
+    <p style="margin-top: 0.5rem; font-style: italic;">Questions? Contact: Britt Legg</p>
+  </footer>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 5: Review & Testing Day | VUB Digital Literacy — Level 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B365D;
+      --primary-dark: #0D1B2A;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --red: #B31942;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .logo {
+      text-align: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .logo h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .logo p {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .week-indicator {
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .week-indicator .week-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .week-indicator .week-title {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .chapter {
+      margin-bottom: 1rem;
+    }
+
+    .chapter-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .chapter-slides {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .slide-link {
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slide-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .slide-link.active {
+      background: var(--va-blue);
+      font-weight: 600;
+    }
+
+    .slide-link.completed::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource-link::before {
+      content: "\2193 ";
+      opacity: 0.6;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .progress-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--va-blue) 0%, var(--accent) 100%);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Slides Container */
+    .slides-container {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .slide {
+      display: none;
+      background: var(--light);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 1000px;
+      min-height: 600px;
+      padding: 3rem;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Styles */
+    .slide-header {
+      margin-bottom: 2rem;
+    }
+
+    .slide-title {
+      font-size: 2.25rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray);
+    }
+
+    .slide-content {
+      font-size: 1.5rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .slide-content ul, .slide-content ol {
+      margin-left: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .slide-content li {
+      margin-bottom: 1rem;
+    }
+
+    /* Title Slide */
+    .title-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--light);
+      border-radius: 16px;
+    }
+
+    .title-slide .slide-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-slide .slide-title {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+      color: var(--light);
+    }
+
+    .title-slide .slide-subtitle {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .course-info {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* Info Boxes */
+    .info-box {
+      background: var(--off-white);
+      border-left: 4px solid var(--va-blue);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+    }
+
+    .info-box.success {
+      border-left-color: var(--success);
+      background: rgba(40, 167, 69, 0.1);
+    }
+
+    .info-box.warning {
+      border-left-color: var(--va-red);
+      background: rgba(196, 38, 46, 0.1);
+    }
+
+    .info-box-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .info-box-content {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Key Points */
+    .key-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--off-white);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .key-point-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .key-point-text {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .key-point-text strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .column {
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+
+    .column h3 {
+      color: var(--va-blue);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .column ul {
+      margin-left: 1.25rem;
+    }
+
+    .column li {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Steps List */
+    .steps-list {
+      list-style: none;
+      margin-left: 0 !important;
+      counter-reset: step-counter;
+    }
+
+    .steps-list li {
+      position: relative;
+      padding-left: 3.5rem;
+      margin-bottom: 1.5rem;
+      counter-increment: step-counter;
+    }
+
+    .steps-list li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--va-blue);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    /* Portal Card */
+    .portal-card {
+      background: white;
+      border: 2px solid var(--va-blue);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .portal-card-icon {
+      font-size: 3rem;
+      flex-shrink: 0;
+    }
+
+    .portal-card h4 {
+      color: var(--va-blue);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .portal-card p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .portal-card .url {
+      font-family: monospace;
+      background: var(--off-white);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: var(--va-blue);
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    /* Demo Box */
+    .demo-box {
+      background: linear-gradient(135deg, var(--va-blue) 0%, #002F5A 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .demo-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .demo-box p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Navigation Footer */
+    .nav-footer {
+      background: var(--light);
+      border-top: 1px solid #eee;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.prev {
+      background: var(--off-white);
+      color: var(--primary);
+    }
+
+    .nav-btn.prev:hover {
+      background: #e8e8e8;
+    }
+
+    .nav-btn.next {
+      background: var(--va-blue);
+      color: white;
+    }
+
+    .nav-btn.next:hover {
+      background: #002F5A;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .slide-counter {
+      font-size: 0.9rem;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* Completion Slide */
+    .completion-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+    }
+
+    .completion-badge {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, var(--va-blue) 0%, #002F5A 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 63, 114, 0.3);
+    }
+
+    .completion-badge span {
+      font-size: 4rem;
+    }
+
+    .completion-slide h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .completion-slide p {
+      font-size: 1.25rem;
+      color: var(--gray);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* Handout Prompt */
+    .handout-prompt {
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      color: var(--primary);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .handout-prompt-icon {
+      font-size: 2rem;
+    }
+
+    .handout-prompt-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* Pre-test Link */
+    .pretest-link {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .pretest-link:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      display: none;
+    }
+
+    .confetti.active {
+      display: block;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti-fall 3s ease-out forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar { width: 240px; }
+      .main-content { margin-left: 240px; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; }
+      .two-column { grid-template-columns: 1fr; }
+    }
+
+    /* Review-game reveal button (added for Week 5 Jeopardy-style recap) */
+    .review-category {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+
+    .review-question {
+      background: var(--off-white);
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      font-size: 1.35rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .reveal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--va-blue);
+      color: var(--light);
+      border: none;
+      border-radius: 8px;
+      padding: 0.85rem 1.5rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      min-height: 44px;
+      transition: all 0.2s ease;
+    }
+
+    .reveal-btn:hover {
+      background: #002F5A;
+    }
+
+    .reveal-btn:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .reveal-answer {
+      margin-top: 1.25rem;
+    }
+
+    .reveal-answer .info-box {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="logo">
+      <h2>VUB Digital Literacy</h2>
+      <p>Level 1 · IC3 GS6 Aligned</p>
+    </div>
+
+    <div class="week-indicator">
+      <div class="week-num">Week 5</div>
+      <div class="week-title">Review &amp; Testing Day</div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Welcome &amp; How Today Works</div>
+      <div class="chapter-slides">
+        <div class="slide-link active" data-slide="0">Welcome</div>
+        <div class="slide-link" data-slide="1">How Today Works</div>
+        <div class="slide-link" data-slide="2">Review Game Rules</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Review Game by Domain</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="3">1 · Technology Basics</div>
+        <div class="slide-link" data-slide="4">1 · Technology Basics (cont.)</div>
+        <div class="slide-link" data-slide="5">2 · Digital Citizenship</div>
+        <div class="slide-link" data-slide="6">3 · Information Management</div>
+        <div class="slide-link" data-slide="7">4 · Content Creation</div>
+        <div class="slide-link" data-slide="8">4 · Content Creation (cont.)</div>
+        <div class="slide-link" data-slide="9">5 · Communication</div>
+        <div class="slide-link" data-slide="10">6 · Collaboration</div>
+        <div class="slide-link" data-slide="11">7 · Safety &amp; Security</div>
+        <div class="slide-link" data-slide="12">7 · Safety &amp; Security (cont.)</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Wrap Up &amp; Post-Test</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="13">Lightning Round</div>
+        <div class="slide-link" data-slide="14">You Made It</div>
+        <div class="slide-link" data-slide="15">What's Next: Level 2</div>
+        <div class="slide-link" data-slide="16">Post-Test Time</div>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <div class="resources-title">Resources</div>
+      <a class="resource-link" href="handouts/level-1-study-guide.html" target="_blank">Level 1 Study Guide</a>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="slides-container">
+      <!-- Slide 0: Title -->
+      <div class="slide active title-slide">
+        <div class="slide-icon">🎓</div>
+        <h1 class="slide-title">Review &amp; Testing Day</h1>
+        <p class="slide-subtitle">Everything you've learned — one celebration, one Post-Test</p>
+        <p class="course-info">Week 5 of 5 · VUB Digital Literacy — Level 1</p>
+      </div>
+
+      <!-- Slide 1: How Today Works -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">How Today Works</h1>
+          <p class="slide-subtitle">No new material — today we review and measure your growth</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🎲</div>
+            <div class="key-point-text">
+              <strong>First: the Review Game</strong>
+              A friendly, Jeopardy-style recap of all 7 topics from Weeks 1–4. We read a question, you think it through, then we reveal the answer together.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">📝</div>
+            <div class="key-point-text">
+              <strong>Then: the Post-Test</strong>
+              The same kind of test you took in Week 1 — so you can see how much you've learned. No grades, no pressure.
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">You've got this</div>
+            <div class="info-box-content">
+              You've already done the hard part — five weeks of showing up and practicing. Today is your victory lap.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Review Game Rules -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Review Game Rules</h1>
+          <p class="slide-subtitle">Seven categories — one for each topic we covered</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>📋 The Categories</h3>
+              <ul>
+                <li>Technology Basics</li>
+                <li>Digital Citizenship</li>
+                <li>Information Management</li>
+                <li>Content Creation</li>
+                <li>Communication</li>
+                <li>Collaboration</li>
+                <li>Safety &amp; Security</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>✅ How to Play</h3>
+              <ul>
+                <li>Read each question out loud as a group</li>
+                <li>Take a guess — out loud or in your head</li>
+                <li>Click <strong>Reveal answer</strong> to check</li>
+                <li>No score-keeping — it's all about remembering</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">Tip for instructors and learners</div>
+            <div class="info-box-content">
+              Don't peek! Guess first, then reveal. That little moment of effort is exactly what helps the answer stick.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Technology Basics (1 of 2) -->
+      <div class="slide">
+        <div class="slide-header">
+          <span class="review-category">Category 1 · Technology Basics</span>
+          <h1 class="slide-title">Parts, Devices &amp; Software</h1>
+        </div>
+        <div class="slide-content">
+          <div class="review-question">
+            Q: A keyboard, mouse, and microphone are all examples of one kind of device. What do we call them — and what's the opposite kind?
+          </div>
+          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+            Reveal answer
+          </button>
+          <div class="reveal-answer" hidden>
+            <div class="info-box success">
+              <div class="info-box-title">Answer</div>
+              <div class="info-box-content">
+                They are <strong>input devices</strong> — they send information <em>into</em> the computer.
+                The opposite is an <strong>output device</strong> (monitor, printer, speakers), which sends
+                information <em>out</em> to you.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Technology Basics (2 of 2) -->
+      <div class="slide">
+        <div class="slide-header">
+          <span class="review-category">Category 1 · Technology Basics</span>
+          <h1 class="slide-title">Memory, Storage &amp; Operating Systems</h1>
+        </div>
+        <div class="slide-content">
+          <div class="review-question">
+            Q: What's the difference between <strong>memory (RAM)</strong> and <strong>storage</strong>, and what is an <strong>operating system</strong>?
+          </div>
+          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+            Reveal answer
+          </button>
+          <div class="reveal-answer" hidden>
+            <div class="info-box success">
+              <div class="info-box-title">Answer</div>
+              <div class="info-box-content">
+                <strong>Memory (RAM)</strong> is the short-term workspace the computer uses while it's running —
+                it empties when you shut down. <strong>Storage</strong> (hard drive or SSD) keeps your files
+                for the long term, even when the power is off. The <strong>operating system</strong> — like
+                <strong>Windows</strong>, macOS, Android, or iOS — is the main software that runs the device
+                and lets all your other apps work.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Digital Citizenship -->
+      <div class="slide">
+        <div class="slide-header">
+          <span class="review-category">Category 2 · Digital Citizenship</span>
+          <h1 class="slide-title">Your Identity &amp; Reputation Online</h1>
+        </div>
+        <div class="slide-content">
+          <div class="review-question">
+            Q: What does <strong>PII</strong> stand for, and why do we say the things you post online are "permanent"?
+          </div>
+          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+            Reveal answer
+          </button>
+          <div class="reveal-answer" hidden>
+            <div class="info-box success">
+              <div class="info-box-title">Answer</div>
+              <div class="info-box-content">
+                <strong>PII</strong> means <strong>Personally Identifiable Information</strong> — details that
+                can identify you, like your full name, Social Security number, birth date, or address. Guard it
+                carefully. We call posts "permanent" because once something is shared online, others can copy,
+                screenshot, or save it — so it can stay around long after you delete it. Post as if it's forever.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Information Management -->
+      <div class="slide">
+        <div class="slide-header">
+          <span class="review-category">Category 3 · Information Management</span>
+          <h1 class="slide-title">Searching &amp; Using Content</h1>
+        </div>
+        <div class="slide-content">
+          <div class="review-question">
+            Q: Which keyboard shortcut finds a word on a webpage or in a document, and what does <strong>Creative Commons</strong> mean?
+          </div>
+          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+            Reveal answer
+          </button>
+          <div class="reveal-answer" hidden>
+            <div class="info-box success">
+              <div class="info-box-title">Answer</div>
+              <div class="info-box-content">
+                <strong>Ctrl + F</strong> opens "Find" to jump straight to a word on a page or in a file.
+                <strong>Creative Commons</strong> is a type of license a creator can add to their work that tells
+                you exactly how you're allowed to use it — often free to reuse if you give credit. (Compare with
+                <strong>public domain</strong> content, which is free for anyone to use because it's no longer
+                under copyright.)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: Content Creation (1 of 2) -->
+      <div class="slide">
+        <div class="slide-header">
+          <span class="review-category">Category 4 · Content Creation</span>
+          <h1 class="slide-title">Saving &amp; Naming Your Work</h1>
+        </div>
+        <div class="slide-content">
+          <div class="review-question">
+            Q: Why is <strong>VA-benefits-letter-2026.docx</strong> a better file name than <strong>document1.docx</strong>, and what's a simple backup habit?
+          </div>
+          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+            Reveal answer
+          </button>
+          <div class="reveal-answer" hidden>
+            <div class="info-box success">
+              <div class="info-box-title">Answer</div>
+              <div class="info-box-content">
+                A clear name tells you <em>what's inside and when it's from</em> without opening it — so you can
+                find it again later. Good names are specific, with no confusing symbols. For backups, keep a
+                second copy somewhere else — like a USB drive or a cloud folder — so one lost or broken device
+                never costs you your work.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Content Creation (2 of 2) -->
+      <div class="slide">
+        <div class="slide-header">
+          <span class="review-category">Category 4 · Content Creation</span>
+          <h1 class="slide-title">Citations &amp; Printing</h1>
+        </div>
+        <div class="slide-content">
+          <div class="review-question">
+            Q: What is a <strong>citation</strong> for, and what's the difference between <strong>portrait</strong> and <strong>landscape</strong> printing?
+          </div>
+          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+            Reveal answer
+          </button>
+          <div class="reveal-answer" hidden>
+            <div class="info-box success">
+              <div class="info-box-title">Answer</div>
+              <div class="info-box-content">
+                A <strong>citation</strong> gives credit to where you found information or an idea, so you're not
+                taking someone else's work as your own. <strong>Portrait</strong> prints the page taller than it
+                is wide (the normal letter layout); <strong>landscape</strong> turns it sideways so it's wider
+                than it is tall — handy for wide tables or photos.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: Communication -->
+      <div class="slide">
+        <div class="slide-header">
+          <span class="review-category">Category 5 · Communication</span>
+          <h1 class="slide-title">Email &amp; Talking Online</h1>
+        </div>
+        <div class="slide-content">
+          <div class="review-question">
+            Q: What's the difference between <strong>Reply</strong> and <strong>Reply All</strong>, and what is <strong>Bcc</strong> for?
+          </div>
+          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+            Reveal answer
+          </button>
+          <div class="reveal-answer" hidden>
+            <div class="info-box success">
+              <div class="info-box-title">Answer</div>
+              <div class="info-box-content">
+                <strong>Reply</strong> sends your message to just the original sender. <strong>Reply All</strong>
+                sends it to <em>everyone</em> on the email — useful sometimes, but easy to overuse. <strong>Bcc</strong>
+                (blind carbon copy) sends a copy to people without the other recipients seeing their addresses —
+                good for protecting privacy when emailing a group.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 10: Collaboration -->
+      <div class="slide">
+        <div class="slide-header">
+          <span class="review-category">Category 6 · Collaboration</span>
+          <h1 class="slide-title">Working Together Online</h1>
+        </div>
+        <div class="slide-content">
+          <div class="review-question">
+            Q: What's the difference between <strong>synchronous</strong> and <strong>asynchronous</strong> communication?
+          </div>
+          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+            Reveal answer
+          </button>
+          <div class="reveal-answer" hidden>
+            <div class="info-box success">
+              <div class="info-box-title">Answer</div>
+              <div class="info-box-content">
+                <strong>Synchronous</strong> means at the same time — like a phone call or a video meeting where
+                everyone is present together. <strong>Asynchronous</strong> means not at the same time — like
+                email or a shared document, where you reply whenever it's convenient. Good digital etiquette —
+                being clear, polite, and respectful — matters in both.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: Safety & Security (1 of 2) -->
+      <div class="slide">
+        <div class="slide-header">
+          <span class="review-category">Category 7 · Safety &amp; Security</span>
+          <h1 class="slide-title">Strong Passwords &amp; Locking Up</h1>
+        </div>
+        <div class="slide-content">
+          <div class="review-question">
+            Q: What makes a password <strong>strong</strong>, and which shortcut locks your Windows computer when you step away?
+          </div>
+          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+            Reveal answer
+          </button>
+          <div class="reveal-answer" hidden>
+            <div class="info-box success">
+              <div class="info-box-title">Answer</div>
+              <div class="info-box-content">
+                A strong password is <strong>long</strong> and hard to guess — a <strong>passphrase</strong> of
+                several words (like <em>BlueCoffeeRiver42!</em>) works well. Don't reuse the same password
+                everywhere. To lock your Windows PC instantly, press <strong>Win + L</strong> — always lock it
+                when you walk away from a shared lab computer.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: Safety & Security (2 of 2) -->
+      <div class="slide">
+        <div class="slide-header">
+          <span class="review-category">Category 7 · Safety &amp; Security</span>
+          <h1 class="slide-title">Scams, Private Browsing &amp; Your Health</h1>
+        </div>
+        <div class="slide-content">
+          <div class="review-question">
+            Q: What is <strong>phishing</strong>, what does <strong>private browsing</strong> do, and name one way to protect your body at the computer.
+          </div>
+          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+            Reveal answer
+          </button>
+          <div class="reveal-answer" hidden>
+            <div class="info-box success">
+              <div class="info-box-title">Answer</div>
+              <div class="info-box-content">
+                <strong>Phishing</strong> is a fake message (email or text) that tries to trick you into giving up
+                passwords or personal info — don't click suspicious links. <strong>Private browsing</strong> (an
+                "InPrivate" or "Incognito" window) doesn't save your history or sign-ins on that device — helpful
+                on shared computers, though it doesn't make you anonymous. For your body: take breaks, sit up with
+                good posture, and rest your eyes (look away every 20 minutes) — that's <strong>ergonomics</strong>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 13: Lightning Round -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Lightning Round</h1>
+          <p class="slide-subtitle">Five quick ones — call them out as a group</p>
+        </div>
+        <div class="slide-content">
+          <div class="review-question">
+            Quick fire: (1) Copy shortcut? (2) Paste shortcut? (3) Undo shortcut?
+            (4) The "www" you type to reach a website is called the…? (5) A secret word that protects an account is a…?
+          </div>
+          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+            Reveal answers
+          </button>
+          <div class="reveal-answer" hidden>
+            <div class="info-box success">
+              <div class="info-box-title">Answers</div>
+              <div class="info-box-content">
+                (1) <strong>Ctrl + C</strong> · (2) <strong>Ctrl + V</strong> · (3) <strong>Ctrl + Z</strong> ·
+                (4) the <strong>URL</strong> (web address) · (5) a <strong>password</strong> (better yet, a passphrase!).
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 14: You Made It (recap/summary) -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">You Made It! 🎉</h1>
+          <p class="slide-subtitle">Look how much you can do now</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon">🖥️</div>
+            <div class="key-point-text">
+              <strong>You know your computer</strong>
+              Parts, devices, memory vs. storage, and what an operating system does.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🌐</div>
+            <div class="key-point-text">
+              <strong>You can get online and find answers</strong>
+              Browsers, Wi-Fi, smart searching, and Ctrl + F.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">✍️</div>
+            <div class="key-point-text">
+              <strong>You can create, save, and communicate</strong>
+              Documents, good file names, citations, email, and online etiquette.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon">🔒</div>
+            <div class="key-point-text">
+              <strong>You can stay safe and be a good digital citizen</strong>
+              Strong passwords, spotting scams, protecting your info, and your health.
+            </div>
+          </div>
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-text">Take home the "Level 1 Study Guide" — a one-page summary of every topic for the Post-Test and beyond.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 15: What's Next - Level 2 -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">What's Next: Level 2</h1>
+          <p class="slide-subtitle">Your digital literacy journey keeps going</p>
+        </div>
+        <div class="slide-content">
+          <div class="info-box success">
+            <div class="info-box-title">You finished the foundation</div>
+            <div class="info-box-content">
+              Digital Literacy — Level 1 covered the seven core areas of the IC3 GS6 framework. That's the
+              groundwork everything else builds on.
+            </div>
+          </div>
+          <div class="two-column">
+            <div class="column">
+              <h3>🚀 Where Level 2 Goes</h3>
+              <ul>
+                <li>Deeper work in everyday apps</li>
+                <li>More hands-on documents and spreadsheets</li>
+                <li>Building on the skills you just proved</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>💪 Keep Practicing</h3>
+              <ul>
+                <li>Use your study guide and quick-reference cards</li>
+                <li>Try one new skill at home each week</li>
+                <li>Ask questions — that's how confidence grows</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">First, one last step today</div>
+            <div class="info-box-content">
+              Let's take the Post-Test so you can see — in black and white — how far you've come since Week 1.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 16: Post-Test Time -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Post-Test Time</h1>
+          <p class="slide-subtitle">The same kind of test as Week 1 — now let's measure your growth</p>
+        </div>
+        <div class="slide-content">
+          <div class="info-box">
+            <div class="info-box-title">About the Post-Test</div>
+            <div class="info-box-content">
+              <ul style="margin-top: 0.5rem;">
+                <li><strong>About 20 questions</strong> covering all 7 topics from the course</li>
+                <li><strong>No time limit</strong> — take your time and read carefully</li>
+                <li><strong>Not pass/fail</strong> — it shows how much you've learned</li>
+                <li>Compare it to your Week 1 Pre-Test to see your improvement!</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="demo-box">
+            <h3>📈 Measuring Your Growth</h3>
+            <p>Back in Week 1, this was all new. Today you have five weeks of practice behind you — this test is your chance to prove it to yourself. Be proud of every answer you know now that you didn't before.</p>
+          </div>
+
+          <div style="text-align: center;">
+            <a href="../../assessments/post-test.html" class="pretest-link">Start Post-Test →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div class="nav-footer">
+      <button class="nav-btn prev" id="prevBtn" disabled>
+        ← Previous
+      </button>
+      <span class="slide-counter">
+        Slide <span id="currentSlide">1</span> of <span id="totalSlides">17</span>
+      </span>
+      <button class="nav-btn next" id="nextBtn">
+        Next →
+      </button>
+    </div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div class="confetti" id="confetti"></div>
+
+  <script src="../../../../shared/progress.js"></script>
+  <script src="../../../../shared/glossary.js" defer></script>
+  <script>
+    // Presentation State
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideLinks = document.querySelectorAll('.slide-link');
+
+    // DOM Elements
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSlideSpan = document.getElementById('currentSlide');
+    const totalSlidesSpan = document.getElementById('totalSlides');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const confettiContainer = document.getElementById('confetti');
+
+    // Initialize
+    totalSlidesSpan.textContent = totalSlides;
+    loadProgress();
+    updateSlide();
+
+    // Navigation Functions
+    function updateSlide() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      slideLinks.forEach((link, index) => {
+        link.classList.toggle('active', index === currentSlide);
+        if (index < currentSlide) {
+          link.classList.add('completed');
+        }
+      });
+
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.textContent = currentSlide === totalSlides - 1 ? 'Finish ✓' : 'Next →';
+
+      currentSlideSpan.textContent = currentSlide + 1;
+
+      const progress = Math.round((currentSlide / (totalSlides - 1)) * 100);
+      progressFill.style.width = progress + '%';
+      progressText.textContent = progress;
+
+      saveProgress();
+
+      if (currentSlide === totalSlides - 1) {
+        setTimeout(triggerConfetti, 500);
+      }
+
+      const activeLink = document.querySelector('.slide-link.active');
+      if (activeLink) {
+        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlide();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    // Event Listeners
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    slideLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const slideIndex = parseInt(link.dataset.slide);
+        goToSlide(slideIndex);
+      });
+    });
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'PageUp':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          goToSlide(totalSlides - 1);
+          break;
+      }
+    });
+
+    // Reveal-answer toggle (Jeopardy-style review game)
+    document.querySelectorAll('[data-reveal]').forEach(btn => {
+      const originalLabel = btn.textContent.trim();
+      btn.addEventListener('click', () => {
+        const answer = btn.nextElementSibling;
+        if (!answer) return;
+        const isHidden = answer.hasAttribute('hidden');
+        if (isHidden) {
+          answer.removeAttribute('hidden');
+          btn.setAttribute('aria-expanded', 'true');
+          btn.textContent = 'Hide answer';
+        } else {
+          answer.setAttribute('hidden', '');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.textContent = originalLabel;
+        }
+      });
+    });
+
+    // Progress Persistence (via shared VubProgress library)
+    function saveProgress() {
+      if (window.VubProgress) {
+        VubProgress.saveSlide('dl1', 5, currentSlide, totalSlides);
+      }
+    }
+
+    function loadProgress() {
+      if (window.VubProgress) {
+        const entry = VubProgress.get('dl1', 5);
+        if (entry && typeof entry.slide === 'number') {
+          currentSlide = entry.slide;
+        }
+      }
+    }
+
+    // Confetti Animation
+    function triggerConfetti() {
+      confettiContainer.classList.add('active');
+      confettiContainer.innerHTML = '';
+
+      const colors = ['#003F72', '#C9A227', '#1B365D', '#C4262E', '#28A745'];
+
+      for (let i = 0; i < 100; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 2 + 's';
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confettiContainer.appendChild(piece);
+      }
+
+      setTimeout(() => {
+        confettiContainer.classList.remove('active');
+      }, 5000);
+    }
+
+    // Touch/Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+  </script>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

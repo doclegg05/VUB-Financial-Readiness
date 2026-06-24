@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security &amp; Ergonomics — Quick Reference</title>
+<style>
+  :root { --va-blue: #003F72; --primary: #1B365D; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.95rem; color: #1a1a1a;
+    max-width: 8.5in; padding: 0.5in; margin: 0 auto; background: #fff; line-height: 1.3; }
+  .header { background: linear-gradient(135deg, #003F72 0%, #1B365D 100%); color: #fff;
+    padding: 0.5rem 0.75rem; border-radius: 6px; margin-bottom: 0.4rem; display: flex;
+    justify-content: space-between; align-items: center; flex-wrap: wrap; }
+  .header h1 { font-size: 1.15rem; font-weight: 700; }
+  .badge { background: rgba(255,255,255,0.25); padding: 0.15rem 0.5rem; border-radius: 3px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; }
+  .header .subtitle { width: 100%; font-size: 0.75rem; opacity: 0.9; margin-top: 0.15rem; }
+  .key { display: inline-block; background: #f0f0f0; border: 2px solid #ccc;
+    border-bottom: 3px solid #aaa; border-radius: 4px; padding: 0.1rem 0.4rem;
+    font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9rem; font-weight: 600;
+    color: var(--primary); min-width: 1.5rem; text-align: center; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+  .section { break-inside: avoid; }
+  .section-header { padding: 0.2rem 0.5rem; border-radius: 3px; color: #fff;
+    font-weight: 700; font-size: 0.8rem; margin-bottom: 0.2rem; }
+  .sh-blue { background: var(--primary); }
+  .sh-light { background: #2E5A88; }
+  .sh-teal { background: #1a6b5a; }
+  .sh-purple { background: #4a3b6b; }
+  .sh-red { background: #8B1432; }
+  .essential { grid-column: 1 / -1; }
+  .essential .section-header { background: var(--va-blue); font-size: 0.85rem; padding: 0.25rem 0.5rem; }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 0.15rem 0.3rem; border-bottom: 1px solid #e0e0e0; vertical-align: top; }
+  td:first-child { white-space: nowrap; width: 42%; font-weight: 600; color: var(--va-blue); }
+  tr:last-child td { border-bottom: none; }
+  ul.list { list-style: none; padding: 0.1rem 0.3rem; }
+  ul.list li { padding: 0.12rem 0 0.12rem 1rem; position: relative; font-size: 0.85rem;
+    border-bottom: 1px solid #e0e0e0; }
+  ul.list li:last-child { border-bottom: none; }
+  ul.list li::before { content: "\2713"; position: absolute; left: 0; color: #1a6b5a; font-weight: 700; }
+  ul.list.dont li::before { content: "\2717"; color: #8B1432; }
+  .plus { margin: 0 0.1rem; font-weight: 600; color: #666; }
+  .footer { margin-top: 0.4rem; text-align: center; font-size: 0.7rem; color: #666;
+    border-top: 1px solid #ddd; padding-top: 0.25rem; }
+  .tip { background: #FFF8E1; border: 1px solid #FFD54F; border-radius: 4px;
+    padding: 0.25rem 0.5rem; margin-top: 0.35rem; font-size: 0.8rem; text-align: center; }
+  .tip strong { color: var(--primary); }
+  @media print {
+    body { padding: 0.25in; }
+    .header, .section-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Security &amp; Ergonomics &mdash; Quick Reference</h1>
+  <span class="badge">KEEP AT YOUR DESK</span>
+  <div class="subtitle">VUB Digital Literacy — Level 1 (IC3 GS6 Aligned) &mdash; Week 4</div>
+</div>
+
+<div class="section essential">
+  <div class="section-header">&#128274; Password &amp; Passphrase Rules (start here!)</div>
+  <table>
+    <tr><td>Make it long</td><td>Use a passphrase of 12+ characters &mdash; e.g. <code>PurpleTrout-Coffee-Sunrise7</code></td></tr>
+    <tr><td>Use unrelated words</td><td>Random words are strong and easy to remember; add a capital and a number</td></tr>
+    <tr><td>One per account</td><td>Never reuse the same password on important accounts</td></tr>
+    <tr><td>Don't make it guessable</td><td>No names, birthdays, "password," or "123456"</td></tr>
+    <tr><td>Extra protection</td><td>Turn on two-factor authentication; consider a password manager</td></tr>
+    <tr><td>Keep it secret</td><td>Never share it, and don't write it on a sticky note on your monitor</td></tr>
+  </table>
+</div>
+
+<div class="grid">
+  <div class="section">
+    <div class="section-header sh-blue">Lock &amp; Reset</div>
+    <table>
+      <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">L</span></td><td>Lock your screen instantly</td></tr>
+      <tr><td>Step away?</td><td>Always lock it first</td></tr>
+      <tr><td>Forgot password?</td><td>Click "Forgot password?" on the sign-in page</td></tr>
+      <tr><td>Verify identity</td><td>Confirm by email or text code, then set a new passphrase</td></tr>
+      <tr><td>Account hacked?</td><td>Reset the password right away</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-header sh-light">Clear Browser Data</div>
+    <table>
+      <tr><td><span class="key">Ctrl</span><span class="plus">+</span><span class="key">Shift</span><span class="plus">+</span><span class="key">Del</span></td><td>Open "Clear browsing data"</td></tr>
+      <tr><td>Choose</td><td>History, cookies, cached files</td></tr>
+      <tr><td>Time range</td><td>"Last hour" or "All time"</td></tr>
+      <tr><td>Note</td><td>Clearing cookies signs you out of sites</td></tr>
+    </table>
+
+    <div class="section-header sh-teal" style="margin-top:0.35rem">Private Browsing</div>
+    <table>
+      <tr><td><span class="key">Ctrl</span><span class="plus">+</span><span class="key">Shift</span><span class="plus">+</span><span class="key">N</span></td><td>Incognito (Chrome)</td></tr>
+      <tr><td><span class="key">Ctrl</span><span class="plus">+</span><span class="key">Shift</span><span class="plus">+</span><span class="key">P</span></td><td>InPrivate (Edge / Firefox)</td></tr>
+      <tr><td>It does</td><td>Skip saving history &amp; cookies on this device</td></tr>
+      <tr><td>It does NOT</td><td>Hide you from your provider, network, or sites you log into</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="grid" style="margin-top:0.4rem;">
+  <div class="section">
+    <div class="section-header sh-red">&#128065; Spot Fake Info &amp; Scams</div>
+    <ul class="list">
+      <li>Who wrote it? Look for a named author or organization</li>
+      <li>Where? Trust .gov, major news, and known organizations</li>
+      <li>When? Check for a recent date</li>
+      <li>Confirm it on a second trusted source</li>
+    </ul>
+    <ul class="list dont">
+      <li>No author or source listed</li>
+      <li>Shocking headline or urgent "act now" tone</li>
+      <li>Spelling and grammar errors</li>
+      <li>Asks for money or personal information</li>
+    </ul>
+    <div class="tip" style="margin-top:0.25rem;"><strong>Trolls?</strong> Don't reply. Block, report, and walk away.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-header sh-purple">&#128188; Desk Ergonomics</div>
+    <ul class="list">
+      <li>Screen about an arm's length away</li>
+      <li>Top of screen at or just below eye level</li>
+      <li>Sit back, lower back supported, feet flat</li>
+      <li>Wrists straight, elbows near 90&deg;</li>
+      <li>20-20-20: every 20 min, look 20 ft away for 20 sec</li>
+      <li>Stand and stretch every half hour</li>
+    </ul>
+    <div class="section-header sh-blue" style="margin-top:0.35rem">Protect Your PII</div>
+    <ul class="list">
+      <li>Never send SSN or passwords by email/text</li>
+      <li>Look for the lock icon (https) before you type it</li>
+      <li>The VA and banks never ask for passwords by email</li>
+    </ul>
+  </div>
+</div>
+
+<div class="tip"><strong>One habit a day:</strong> a long passphrase, <span class="key">Win</span>+<span class="key">L</span> when you leave, and clearing data on shared PCs keep you safe.</div>
+<div class="footer">Veterans Upward Bound &mdash; West Virginia &nbsp;|&nbsp; Keep this card at your desk for quick reference!</div>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

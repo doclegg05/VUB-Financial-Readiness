@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-Test (Printable) | Digital Literacy — Level 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.35;
+      color: #222;
+      max-width: 8.5in;
+      margin: 0 auto;
+      padding: 0.4in;
+      background: white;
+    }
+
+    @media print {
+      body { padding: 0.3in; }
+      .no-print { display: none !important; }
+      .page-break { page-break-before: always; }
+    }
+
+    .print-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: #1B365D;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+    .print-btn:hover { background: #2C4A7C; }
+    .print-btn:focus-visible { outline: 3px solid #C9A227; outline-offset: 2px; }
+
+    .header { text-align: center; border-bottom: 2px solid #1B365D; padding-bottom: 8px; margin-bottom: 10px; }
+    .header h1 { color: #1B365D; font-size: 14pt; margin-bottom: 2px; }
+    .header .subtitle { color: #5A6A7A; font-size: 9pt; margin-bottom: 4px; }
+    .header .test-badge { display: inline-block; background: #1B365D; color: white; padding: 2px 12px; font-size: 9pt; font-weight: 600; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    .student-info { display: flex; gap: 18px; margin-bottom: 8px; padding: 6px 10px; background: #F5F7FA; font-size: 9.5pt; }
+    .info-field { display: flex; align-items: center; gap: 5px; }
+    .info-field label { font-weight: 600; color: #1B365D; }
+    .info-field .line { border-bottom: 1px solid #333; width: 200px; }
+    .info-field:last-child .line { width: 110px; }
+
+    .instructions { background: #FFF9E6; border: 1px solid #C9A227; padding: 6px 10px; margin-bottom: 10px; font-size: 8.5pt; display: flex; gap: 20px; flex-wrap: wrap; }
+    .instructions strong { color: #1B365D; }
+
+    .questions-container { column-count: 2; column-gap: 22px; }
+
+    .category-header { background: #1B365D; color: white; padding: 3px 8px; font-size: 8pt; font-weight: 600; margin-bottom: 6px; break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    .question { margin-bottom: 9px; padding-bottom: 6px; border-bottom: 1px solid #DEE2E6; break-inside: avoid; }
+    .question:last-child { border-bottom: none; }
+    .question-header { display: flex; align-items: flex-start; margin-bottom: 4px; }
+    .question-number { background: #1B365D; color: white; min-width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 8pt; font-weight: 600; margin-right: 6px; flex-shrink: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .question-text { font-size: 9pt; color: #222; flex: 1; }
+
+    .options { margin-left: 24px; display: grid; grid-template-columns: 1fr; gap: 3px 10px; }
+    .options.two-col { grid-template-columns: 1fr 1fr; }
+    .option { display: flex; align-items: flex-start; font-size: 8.5pt; }
+    .option-bubble { width: 12px; height: 12px; border: 1.5px solid #1B365D; border-radius: 50%; margin-right: 5px; flex-shrink: 0; margin-top: 1px; }
+    .option-letter { font-weight: 600; color: #1B365D; margin-right: 3px; }
+    .option-text { color: #222; }
+
+    .score-box { position: absolute; top: 0.4in; right: 0.4in; border: 2px solid #1B365D; padding: 4px 12px; text-align: center; background: white; }
+    .score-box label { font-size: 7pt; color: #5A6A7A; display: block; }
+    .score-box .score-line { font-size: 11pt; font-weight: 600; color: #1B365D; }
+
+    .footer { margin-top: 10px; padding-top: 6px; border-top: 1px solid #1B365D; text-align: center; font-size: 8pt; color: #5A6A7A; }
+  </style>
+</head>
+<body>
+  <button class="print-btn no-print" onclick="window.print()">Print / Save as PDF</button>
+
+  <div class="score-box">
+    <label>SCORE</label>
+    <div class="score-line">___/20</div>
+  </div>
+
+  <div class="header">
+    <h1>Veterans Upward Bound &mdash; West Virginia</h1>
+    <div class="subtitle">Digital Literacy &mdash; Level 1 (IC3 GS6 Level 1 aligned)</div>
+    <span class="test-badge">PRE-TEST ASSESSMENT</span>
+  </div>
+
+  <div class="student-info">
+    <div class="info-field"><label>Name:</label><div class="line"></div></div>
+    <div class="info-field"><label>Date:</label><div class="line"></div></div>
+  </div>
+
+  <div class="instructions">
+    <span><strong>Instructions:</strong> Fill in or circle the bubble for your answer. Choose only ONE answer per question.</span>
+    <span><strong>Note:</strong> This is a baseline assessment &mdash; it is okay if you do not know all the answers!</span>
+  </div>
+
+  <div class="questions-container">
+    <!-- Technology Basics -->
+    <div class="category-header">Technology Basics (1-6)</div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">1</span><span class="question-text">Which of these is an input device?</span></div>
+      <div class="options two-col">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Monitor</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Keyboard</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Printer</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">Speakers</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">2</span><span class="question-text">What is the difference between RAM (memory) and storage (hard drive or SSD)?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">RAM holds work temporarily while the computer is on; storage keeps files even when it is off</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">RAM keeps files forever; storage is erased when you shut down</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">They are two names for the exact same thing</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">RAM is only used by printers</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">3</span><span class="question-text">Which best describes "open source" software?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Software you must always pay for before using</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Software whose code is publicly available and often free to use and modify</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Software that only runs on Apple computers</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">Software that cannot connect to the internet</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">4</span><span class="question-text">Which of these is an operating system?</span></div>
+      <div class="options two-col">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Microsoft Word</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Google Chrome</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Windows</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">Zoom</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">5</span><span class="question-text">In a web browser, what is the address bar used for?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Typing in the website address (URL) you want to visit</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Changing the brightness of the screen</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Turning the computer off</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">Printing the current page</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">6</span><span class="question-text">Which option lets a laptop connect to the internet without any cables?</span></div>
+      <div class="options two-col">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">An Ethernet cable</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">A USB flash drive</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Wi-Fi</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">A printer cable</span></div>
+      </div>
+    </div>
+
+    <!-- Digital Citizenship -->
+    <div class="category-header">Digital Citizenship (7-9)</div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">7</span><span class="question-text">Which of these is an example of personally identifiable information (PII) you should protect?</span></div>
+      <div class="options two-col">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Your favorite color</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Your Social Security number</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">The weather today</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">A local sports team's name</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">8</span><span class="question-text">Why should you think carefully before posting something online?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Posts always disappear after one hour</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Online posts can be permanent and may be seen by many people later</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Only you can ever see what you post</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">Posting online is free, so it does not matter</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">9</span><span class="question-text">What is usually the best response to a rude or upsetting comment from a stranger online?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Argue back with insults of your own</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Share their personal information publicly</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Do not respond; block or report them if needed</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">Send the comment to all of your contacts</span></div>
+      </div>
+    </div>
+
+    <!-- Information Management -->
+    <div class="category-header">Information Management (10-11)</div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">10</span><span class="question-text">When searching online, which approach gives the most useful results?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Type one very broad word and hope for the best</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Use specific keywords that describe exactly what you need</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Always click the very first link no matter what</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">Search using random letters</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">11</span><span class="question-text">Which keyboard shortcut helps you find a specific word on a webpage or in a document?</span></div>
+      <div class="options two-col">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Ctrl + F</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Ctrl + P</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Ctrl + Z</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">Ctrl + B</span></div>
+      </div>
+    </div>
+
+    <!-- Content Creation -->
+    <div class="category-header">Content Creation (12-14)</div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">12</span><span class="question-text">In a word processor, what does the "Save" command do?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Deletes the document from your computer</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Stores your document so you can open it again later</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Emails the document to everyone</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">Changes the document to a different language</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">13</span><span class="question-text">Why should you give credit (a citation) when you use someone else's words or work?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">To make the document longer</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">To honestly show where the information came from and avoid taking credit for others' work</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Because citations are required to print a document</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">It hides who really wrote the material</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">14</span><span class="question-text">Which is the best, clearly named file for a 2026 budget spreadsheet?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">document1.xlsx</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">asdf.xlsx</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">2026-household-budget.xlsx</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">final final REAL.xlsx</span></div>
+      </div>
+    </div>
+
+    <!-- Communication -->
+    <div class="category-header">Communication (15-16)</div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">15</span><span class="question-text">In email, what does "Reply All" do?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Sends your reply only to the original sender</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Sends your reply to the sender and everyone else who received the message</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Deletes the email for everyone</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">Forwards the email to a brand-new person you type in</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">16</span><span class="question-text">Which message uses inclusive, respectful language?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Hey everyone, welcome to the team!</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Listen up, you people, and pay attention.</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Only smart folks will understand this.</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">This is obvious, so don't bother asking questions.</span></div>
+      </div>
+    </div>
+
+    <!-- Collaboration -->
+    <div class="category-header">Collaboration (17)</div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">17</span><span class="question-text">Which is an example of ASYNCHRONOUS (not live, anytime) collaboration?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">A live video meeting on Zoom</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">A phone call happening right now</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Leaving a comment on a shared document for a coworker to read later</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">A real-time chat where both people type at the same time</span></div>
+      </div>
+    </div>
+
+    <!-- Safety & Security -->
+    <div class="category-header">Safety &amp; Security (18-20)</div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">18</span><span class="question-text">Which of these is the STRONGEST password?</span></div>
+      <div class="options two-col">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">password</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">123456</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Blue-Coffee-Mountain-72!</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">your first name</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">19</span><span class="question-text">What is the main benefit of using a browser's private (incognito) mode?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">It makes your internet connection much faster</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">It does not save your browsing history or sign-ins on that device after you close it</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">It blocks all viruses automatically</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">It gives you free Wi-Fi anywhere</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-header"><span class="question-number">20</span><span class="question-text">Which habit helps protect your physical health while using a computer for a long time?</span></div>
+      <div class="options">
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">A.</span><span class="option-text">Never blink and stare closely at the screen</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">B.</span><span class="option-text">Take regular breaks, sit with good posture, and rest your eyes</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">C.</span><span class="option-text">Keep the screen as bright as possible at all times</span></div>
+        <div class="option"><span class="option-bubble"></span><span class="option-letter">D.</span><span class="option-text">Hold the keyboard above your head while typing</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>Veterans Upward Bound &mdash; West Virginia</strong> | Digital Literacy &mdash; Level 1 | Pre-Test Assessment
+  </div>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

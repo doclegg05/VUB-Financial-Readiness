@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 3 Instructor Guide | VUB Digital Literacy — Level 1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1B365D;
+      --primary-light: #2C4A7C;
+      --accent: #C9A227;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --warning: #FFC107;
+      --danger: #DC3545;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.6;
+      padding: 0.5in;
+      max-width: 8.5in;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--va-blue) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .header-badge {
+      background: var(--accent);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+
+    .header-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Overview Box */
+    .overview-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .overview-box h2 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .objectives-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .objectives-list li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .objectives-list li::before {
+      content: "🎯";
+      position: absolute;
+      left: 0;
+    }
+
+    .ic3-tag {
+      display: inline-block;
+      background: rgba(0, 63, 114, 0.12);
+      color: var(--va-blue);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.05rem 0.4rem;
+      border-radius: 8px;
+      margin-left: 0.25rem;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-header {
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px 8px 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline-body {
+      border: 2px solid var(--va-blue);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid var(--off-white);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-time {
+      background: var(--off-white);
+      padding: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timeline-content {
+      padding: 0.75rem 1rem;
+    }
+
+    .timeline-content h4 {
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-content p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin: 0;
+    }
+
+    /* Activity Badge */
+    .activity-type {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+
+    .activity-lecture {
+      background: rgba(27, 54, 93, 0.15);
+      color: var(--primary);
+    }
+
+    .activity-demo {
+      background: rgba(201, 162, 39, 0.2);
+      color: #8B7500;
+    }
+
+    .activity-practice {
+      background: rgba(40, 167, 69, 0.15);
+      color: var(--success);
+    }
+
+    .activity-assessment {
+      background: rgba(220, 53, 69, 0.15);
+      color: var(--danger);
+    }
+
+    .activity-warmup {
+      background: rgba(255, 152, 0, 0.15);
+      color: #E65100;
+    }
+
+    .activity-break {
+      background: rgba(156, 39, 176, 0.15);
+      color: #7B1FA2;
+    }
+
+    .activity-eval {
+      background: rgba(3, 169, 244, 0.15);
+      color: #0277BD;
+    }
+
+    .activity-apply {
+      background: rgba(76, 175, 80, 0.15);
+      color: #2E7D32;
+    }
+
+    /* Instructor Notes */
+    .notes-section {
+      background: rgba(201, 162, 39, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .notes-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .notes-section ul {
+      list-style: none;
+    }
+
+    .notes-section li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .notes-section li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Materials Checklist */
+    .materials-section {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .materials-section h3 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .material-category h4 {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .material-category ul {
+      list-style: none;
+    }
+
+    .material-category li {
+      padding: 0.25rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .material-category li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    /* Discussion Questions */
+    .discussion-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .discussion-section h3 {
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .discussion-list {
+      list-style: none;
+    }
+
+    .discussion-list li {
+      background: var(--off-white);
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .discussion-list li strong {
+      display: block;
+      font-style: normal;
+      color: var(--primary);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Tips Box */
+    .tips-box {
+      background: rgba(40, 167, 69, 0.1);
+      border: 2px solid var(--success);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tips-box h3 {
+      color: var(--success);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tips-box ul {
+      list-style: none;
+    }
+
+    .tips-box li {
+      padding: 0.35rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .tips-box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    /* Coverage / Alignment Box */
+    .alignment-box {
+      background: rgba(0, 63, 114, 0.08);
+      border: 2px solid var(--va-blue);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .alignment-box h3 {
+      color: var(--va-blue);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .alignment-box table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .alignment-box th {
+      text-align: left;
+      color: var(--primary);
+      border-bottom: 2px solid rgba(0,63,114,0.2);
+      padding: 0.35rem 0.5rem;
+    }
+
+    .alignment-box td {
+      padding: 0.35rem 0.5rem;
+      border-bottom: 1px solid rgba(0,63,114,0.1);
+      vertical-align: top;
+    }
+
+    .alignment-box td:first-child {
+      font-weight: 700;
+      color: var(--va-blue);
+      white-space: nowrap;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--off-white);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .timeline-header, .discussion-section h3 {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div>
+        <h1>Week 3: Creating &amp; Communicating</h1>
+        <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">VUB Digital Literacy — Level 1 · IC3 GS6 Aligned</p>
+      </div>
+      <span class="header-badge">Instructor Guide</span>
+    </div>
+    <div class="header-meta">
+      <span>📅 Week 3 of 5</span>
+      <span>⏱️ 2 Hours</span>
+      <span>👥 Veterans Group</span>
+      <span>📍 Computer Lab</span>
+    </div>
+  </header>
+
+  <div class="overview-box">
+    <h2>🎯 Learning Objectives</h2>
+    <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--gray);">By the end of this session, participants will be able to (IC3 GS6 Level 1 domains in tags):</p>
+    <ul class="objectives-list">
+      <li>Create a basic document and a basic presentation <span class="ic3-tag">4.1</span></li>
+      <li>Reference sources and add a simple citation <span class="ic3-tag">4.2</span></li>
+      <li>Save and back up work (the 3-2-1 idea) <span class="ic3-tag">4.3.1</span></li>
+      <li>Apply file naming &amp; organization conventions <span class="ic3-tag">4.3.2</span></li>
+      <li>Choose printing orientation, sides &amp; settings <span class="ic3-tag">4.4</span></li>
+      <li>Post appropriately &amp; follow acceptable-use policies <span class="ic3-tag">5.1</span></li>
+      <li>Use inclusive language &amp; email reply options <span class="ic3-tag">5.2</span></li>
+      <li>Collaborate, give feedback &amp; use good etiquette <span class="ic3-tag">6.1 / 6.2</span></li>
+    </ul>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-header">⏰ Session Timeline (2 Hours)</div>
+    <div class="timeline-body">
+      <div class="timeline-item">
+        <div class="timeline-time">0:00-0:08</div>
+        <div class="timeline-content">
+          <h4>Welcome &amp; Warm-Up <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <p>Recap Weeks 1-2 in a sentence. Ask: "Have you ever lost a file or couldn't find one you saved? What happened?" This sets up today's save/naming focus. Distribute both handouts.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:08-0:15</div>
+        <div class="timeline-content">
+          <h4>Objectives &amp; Why It Matters <span class="activity-type activity-lecture">Lecture</span></h4>
+          <p>Present slides 1-1 (title &amp; objectives). Frame the day: today we make things, save them well, and share them respectfully — skills used every week after this.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:15-0:35</div>
+        <div class="timeline-content">
+          <h4>Documents, Citations &amp; Saving <span class="activity-type activity-demo">Demo</span></h4>
+          <p>Present slides 2-7. On the projector, create a short Word document, add one citation (References tab), and save it with a clear file name. Demonstrate the 3-2-1 backup idea with a USB drive. <span class="ic3-tag">4.1 / 4.2 / 4.3</span></p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:35-0:55</div>
+        <div class="timeline-content">
+          <h4>Lab Part A — Make, Name &amp; Save <span class="activity-type activity-practice">Practice</span></h4>
+          <p>Participants follow the lab to create a document, give it a good file name, add a simple citation, and save it. Walk the room. <span class="ic3-tag">4.1.1 / 4.2.4 / 4.3.2</span></p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">0:55-1:05</div>
+        <div class="timeline-content">
+          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <p>10-minute break. Encourage participants to stretch and step away from the screen.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:05-1:20</div>
+        <div class="timeline-content">
+          <h4>Printing Concepts <span class="activity-type activity-demo">Demo</span></h4>
+          <p>Present slides 8-9. Open the print screen (Ctrl+P) on the projector — show portrait vs landscape, double-sided, copies, page range, and Save as PDF. No paper required. <span class="ic3-tag">4.4</span></p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:20-1:38</div>
+        <div class="timeline-content">
+          <h4>Communication &amp; Email Options <span class="activity-type activity-lecture">Presentation</span></h4>
+          <p>Present slides 10-13. Spend real time on Reply vs Reply All vs Forward vs Bcc — the most common veteran email mistake. Cover acceptable-use policies and inclusive language. <span class="ic3-tag">5.1 / 5.2</span></p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:38-1:50</div>
+        <div class="timeline-content">
+          <h4>Lab Part B — Email &amp; Etiquette Scenarios <span class="activity-type activity-practice">Practice</span></h4>
+          <p>Participants work the email-response and reply-all/inclusive-language scenarios in the lab. Cover collaboration (synchronous vs asynchronous) and etiquette from slides 14-15. <span class="ic3-tag">5.2 / 6.1 / 6.2</span></p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:50-1:57</div>
+        <div class="timeline-content">
+          <h4>Knowledge Check <span class="activity-type activity-eval">Evaluation</span></h4>
+          <p>Work slide 16 together. Ask the 3 questions aloud, let participants answer, then reveal. Clear up any confusion about reply-all and file naming.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">1:57-2:00</div>
+        <div class="timeline-content">
+          <h4>Wrap-Up &amp; Take-Home <span class="activity-type activity-apply">Application</span></h4>
+          <p>Summarize (slides 17-18). Challenge: at home, save one real document with a good file name and back it up to a USB drive or the cloud. Preview Week 4 (Citizenship &amp; Safety).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alignment-box">
+    <h3>📐 IC3 GS6 Level 1 Coverage Map</h3>
+    <table>
+      <thead>
+        <tr><th>Objective</th><th>Where it's covered today</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>4.1</td><td>Slides 2-3 (document &amp; presentation); Lab Part A</td></tr>
+        <tr><td>4.2</td><td>Slides 4-5 (referencing &amp; citation); Lab Part A</td></tr>
+        <tr><td>4.3.1</td><td>Slide 6 (save &amp; back up, 3-2-1 idea)</td></tr>
+        <tr><td>4.3.2</td><td>Slide 7 (file naming &amp; organization); Lab Part A</td></tr>
+        <tr><td>4.4</td><td>Slides 8-9 (orientation, double-sided, settings, methods)</td></tr>
+        <tr><td>5.1</td><td>Slide 10 (where to post, acceptable-use policies)</td></tr>
+        <tr><td>5.2.2 / 5.2.3 / 5.2.4</td><td>Slides 11-13 (inclusive language, email options, effective vs ineffective); Lab Part B</td></tr>
+        <tr><td>6.1 / 6.2</td><td>Slides 14-15 (collaboration, feedback, etiquette)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notes-section">
+    <h3>📝 Instructor Notes</h3>
+    <ul>
+      <li><strong>Reply All is the big one:</strong> Many learners have accidentally "replied all." Spend extra time here — it's the most useful and most embarrassing-to-get-wrong skill of the day.</li>
+      <li><strong>Software availability:</strong> If the lab has Microsoft Word/PowerPoint, use them. If not, the free web versions (Office.com) or Google Docs/Slides work the same way — adapt the menu names.</li>
+      <li><strong>No printing needed:</strong> The printing section is taught with Print Preview and "Save as PDF" so you don't waste paper or depend on a working lab printer.</li>
+      <li><strong>File naming pays off:</strong> Tie naming back to the warm-up "lost file" story — a good name is how you find it again next year.</li>
+      <li><strong>Citations, kept simple:</strong> Don't get into MLA vs APA. A basic "author, title, website, date" line is enough at Level 1.</li>
+      <li><strong>Go slow on save vs save-as:</strong> Older learners often confuse the two. Show that the first save asks for a name and place; later saves just update.</li>
+    </ul>
+  </div>
+
+  <div class="materials-section">
+    <h3>📦 Materials Checklist</h3>
+    <div class="materials-grid">
+      <div class="material-category">
+        <h4>Handouts (Print)</h4>
+        <ul>
+          <li>Make, Save &amp; Share Lab</li>
+          <li>Files, Print &amp; Email Quick Reference</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Technology</h4>
+        <ul>
+          <li>Projector connected &amp; working</li>
+          <li>Each workstation powered on</li>
+          <li>Word/PowerPoint (or web versions) available</li>
+          <li>A USB flash drive to demo backup</li>
+        </ul>
+      </div>
+      <div class="material-category">
+        <h4>Preparation</h4>
+        <ul>
+          <li>Test that you can open the print screen (Ctrl+P)</li>
+          <li>Prepare a sample email thread for Reply/Reply All</li>
+          <li>Confirm "Save as PDF" works on the lab PCs</li>
+          <li>Have a "VA Documents" folder ready to show</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="discussion-section">
+    <h3>💬 Discussion Questions</h3>
+    <ul class="discussion-list">
+      <li>
+        <strong>Opener:</strong>
+        "Have you ever lost a file or couldn't find one you saved? What happened — and what would have helped?"
+      </li>
+      <li>
+        <strong>During Saving/Naming:</strong>
+        "If you opened your computer a year from now, which file name would you actually understand?"
+      </li>
+      <li>
+        <strong>Email Section:</strong>
+        "Has anyone ever gotten a 'reply all' they wished they hadn't? When is reply-all actually the right choice?"
+      </li>
+      <li>
+        <strong>Communication:</strong>
+        "What's one thing that makes an online message feel respectful to you?"
+      </li>
+      <li>
+        <strong>Wrap-up:</strong>
+        "What's one document at home you'll save properly and back up this week?"
+      </li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>✅ Tips for Success</h3>
+    <ul>
+      <li>Demonstrate everything on the projector first, then let them try — show, don't just tell</li>
+      <li>Use real, veteran-relevant files in examples (a benefits letter, a budget)</li>
+      <li>Repeat keyboard shortcuts out loud: "Control... S... to save"</li>
+      <li>Celebrate the first person who saves a file with a good name</li>
+      <li>Walk the room during both lab parts — quiet learners often need help most</li>
+      <li>Reassure them mistakes are fine: Ctrl+Z (undo) fixes most things</li>
+    </ul>
+  </div>
+
+  <div class="notes-section" style="background: rgba(23, 162, 184, 0.1); border-color: #17A2B8;">
+    <h3 style="color: #17A2B8;">🔮 Looking Ahead: Week 4</h3>
+    <ul>
+      <li><strong>Topic:</strong> Citizenship &amp; Safety — Identity, Privacy &amp; Security</li>
+      <li><strong>Key Concepts:</strong> Digital identity &amp; PII, strong passphrases, locking devices, private browsing, spotting fake info, ergonomics</li>
+      <li><strong>Connection:</strong> Now that they create and share content, Week 4 keeps them and their information safe while doing it</li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound - West Virginia</strong></p>
+    <p>Digital Literacy — Level 1 (IC3 GS6 Aligned) | Instructor Guide - Week 3</p>
+    <p style="margin-top: 0.5rem; font-style: italic;">Questions? Contact: Britt Legg</p>
+  </footer>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lock It Down — Hands-On Lab | VUB Digital Literacy — Level 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B365D; --primary-light: #2C4A7C;
+      --va-blue: #003F72; --va-blue-dark: #002F5A;
+      --accent: #C9A227; --accent-light: #E6C65C;
+      --light: #FFFFFF; --off-white: #F5F7FA; --gray: #5A6A7A;
+      --success: #28A745; --warning: #FFC107; --danger: #DC3545; --info: #17A2B8;
+    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); color: #333; line-height: 1.6; padding: 0.5in; max-width: 8.5in; margin: 0 auto; }
+    .header { background: linear-gradient(135deg, var(--va-blue) 0%, var(--primary) 100%); color: var(--light); padding: 1.25rem 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .header h1 { font-size: 1.5rem; margin: 0; }
+    .header-subtitle { font-size: 0.95rem; opacity: 0.9; margin-top: 0.15rem; }
+    .header-meta { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; }
+    .header-badge { background: var(--accent); color: var(--primary); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .header-right { text-align: right; flex-shrink: 0; }
+    .header-time { font-size: 0.8rem; opacity: 0.85; margin-top: 0.5rem; }
+    .name-field { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-size: 1rem; }
+    .name-field label { font-weight: 600; color: var(--va-blue); }
+    .name-field .line { flex: 1; border-bottom: 2px dashed var(--gray); max-width: 300px; }
+    .goal-box { background: linear-gradient(135deg, var(--off-white) 0%, #EDF2F7 100%); border: 2px solid var(--accent); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem; }
+    .goal-box h2 { color: var(--va-blue); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .goal-box .build-list { list-style: none; margin-top: 0.75rem; }
+    .goal-box .build-list li { font-size: 0.95rem; padding: 0.25rem 0; color: #333; }
+    .goal-box .build-list li::before { content: "\2713  "; color: var(--success); font-weight: 700; }
+    .part-header { background: var(--va-blue); color: var(--light); padding: 0.75rem 1rem; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+    .part-header h2 { font-size: 1.15rem; margin: 0; }
+    .part-timing { background: var(--accent); color: var(--va-blue); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
+    .part-type { background: rgba(255,255,255,0.2); color: var(--light); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.65rem; font-weight: 600; margin-left: 0.5rem; }
+    .part-content { border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 8px 8px; padding: 1.25rem; margin-bottom: 0.5rem; }
+    .section { margin-bottom: 1.25rem; }
+    .section-title { background: var(--off-white); color: var(--va-blue); padding: 0.5rem 1rem; border-left: 4px solid var(--accent); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .checklist { list-style: none; }
+    .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; margin-bottom: 0.5rem; background: var(--off-white); border-radius: 8px; font-size: 0.95rem; }
+    .checkbox { width: 22px; height: 22px; border: 2px solid var(--va-blue); border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+    .checklist-text { flex: 1; }
+    .checklist-text strong { color: var(--va-blue); }
+    .checklist-text .detail { display: block; font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem; }
+    .key { display: inline-block; background: var(--off-white); border: 2px solid #ccc; border-bottom: 3px solid #aaa; border-radius: 4px; padding: 0.1rem 0.4rem; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.85rem; font-weight: 600; color: var(--primary); min-width: 1.5rem; text-align: center; }
+    .tip-box { background: #FFF8E1; border-left: 4px solid var(--accent); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .tip-box strong { color: #856404; }
+    .warning-box { background: #FFF3F3; border-left: 4px solid var(--danger); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; margin: 0.75rem 0; }
+    .warning-box strong { color: var(--danger); }
+    .table-preview { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 0.75rem 0; }
+    .table-preview th { background: var(--va-blue); color: var(--light); padding: 0.5rem; text-align: left; font-weight: 600; }
+    .table-preview td { padding: 0.5rem; border-bottom: 1px solid #E2E8F0; }
+    .table-preview tr:nth-child(even) { background: var(--off-white); }
+    .checkpoint-box { background: linear-gradient(135deg, rgba(0,63,114,0.1) 0%, rgba(0,63,114,0.04) 100%); border: 2px solid var(--va-blue); border-radius: 10px; padding: 1rem; margin: 1.25rem 0; }
+    .checkpoint-box h4 { color: var(--va-blue); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .checkpoint-box .check-items { list-style: none; margin: 0; padding: 0; }
+    .checkpoint-box .check-items li { font-size: 0.9rem; color: #333; padding: 0.2rem 0; }
+    .fill-line { display: flex; align-items: center; gap: 0.5rem; margin: 0.75rem 0; font-size: 0.9rem; }
+    .fill-line .label { color: var(--gray); white-space: nowrap; }
+    .fill-line .blank { flex: 1; border-bottom: 1px dashed var(--gray); min-height: 1.5rem; }
+    .success-box { background: rgba(40,167,69,0.1); border: 2px solid var(--success); border-radius: 10px; padding: 1.25rem; margin-top: 2rem; }
+    .success-box h3 { color: var(--success); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .success-box p { font-size: 0.9rem; color: var(--gray); margin-bottom: 0.5rem; }
+    .success-box .skills-earned { list-style: none; margin-top: 0.5rem; }
+    .success-box .skills-earned li { font-size: 0.9rem; padding: 0.2rem 0; }
+    .success-box .skills-earned li::before { content: "\2B50  "; }
+    .footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid var(--off-white); text-align: center; font-size: 0.8rem; color: var(--gray); }
+    @media print {
+      body { padding: 0.25in; }
+      .header, .part-header, .checkbox, .checkpoint-box, .table-preview th, .key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .part-header { page-break-before: auto; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div>
+      <span class="header-badge">HANDS-ON LAB</span>
+      <h1 style="margin-top: 0.35rem;">Lock It Down</h1>
+      <div class="header-subtitle">Identity, Privacy &amp; Security — Practice Stations</div>
+      <div class="header-meta">Week 4 | VUB Digital Literacy — Level 1 (IC3 GS6 Aligned)</div>
+    </div>
+    <div class="header-right">
+      <div class="header-time">~25 minutes</div>
+      <div class="header-time">8 stations</div>
+    </div>
+  </header>
+
+  <div class="name-field">
+    <label>Name:</label><div class="line"></div>
+    <label style="margin-left: 2rem;">Date:</label><div class="line" style="max-width: 150px;"></div>
+  </div>
+
+  <div class="goal-box">
+    <h2>Today You Will</h2>
+    <ul class="build-list">
+      <li>Build a strong passphrase you can actually remember</li>
+      <li>Lock your screen and clear your browser data</li>
+      <li>Open a private window and learn what it does (and doesn't) do</li>
+      <li>Check whether online information is trustworthy</li>
+      <li>Run a privacy self-audit and set up a comfortable, safe desk</li>
+    </ul>
+  </div>
+
+  <!-- STATION 1 -->
+  <div class="part-header">
+    <h2>Station 1: Build a Strong Passphrase</h2>
+    <div><span class="part-timing">~4 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Pick Three Unrelated Words</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Choose three random, unrelated words</strong>
+        <span class="detail">Example: <em>trout</em>, <em>coffee</em>, <em>sunrise</em>. Avoid names, birthdays, or anything someone could guess about you.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Join Them &amp; Add a Twist</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Connect the words and mix in a capital letter and a number</strong>
+        <span class="detail">Example: <code>PurpleTrout-Coffee-Sunrise7</code>. Aim for at least 12 characters &mdash; longer is stronger.</span>
+      </div></li></ul>
+    </div>
+    <div class="fill-line">
+      <span class="label">My practice passphrase (don't use a real one here):</span><span class="blank"></span>
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> Length beats complexity. A long passphrase of plain words is both harder to crack and easier to remember than a short jumble like "P@ss1!".
+    </div>
+    <div class="warning-box">
+      <strong>Caution:</strong> Use a <em>different</em> passphrase for each important account, and never write it on a sticky note on your monitor. Consider a password manager to remember them for you.
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; check the box when done:</h4>
+      <ul class="check-items"><li>&#9744; I built a passphrase that is 12+ characters with mixed words, a capital, and a number</li></ul>
+    </div>
+  </div>
+
+  <!-- STATION 2 -->
+  <div class="part-header">
+    <h2>Station 2: Lock Your Screen</h2>
+    <div><span class="part-timing">~2 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Lock With a Shortcut</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Press the lock-screen shortcut</strong>
+        <span class="detail">Press <span class="key">Windows</span> + <span class="key">L</span>. Your screen locks right away. Sign back in with your password or PIN.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Set Automatic Locking (Optional)</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Have Windows lock by itself when you step away</strong>
+        <span class="detail">Open Settings (<span class="key">Windows</span> + <span class="key">I</span>) &rarr; Accounts &rarr; Sign-in options. Under "If you've been away, when should Windows require you to sign in again?" choose a short time.</span>
+      </div></li></ul>
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> Get in the habit of pressing <span class="key">Windows</span> + <span class="key">L</span> any time you leave your seat &mdash; at the lab, the library, or a clinic waiting room.
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; check the box when done:</h4>
+      <ul class="check-items"><li>&#9744; I locked my screen with Windows + L and signed back in</li></ul>
+    </div>
+  </div>
+
+  <!-- STATION 3 -->
+  <div class="part-header">
+    <h2>Station 3: Clear Your Browser Data</h2>
+    <div><span class="part-timing">~3 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Open "Clear Browsing Data"</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Open the clear-data window</strong>
+        <span class="detail">In Chrome or Edge, press <span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">Delete</span>. (Or click the three dots &#8942; in the top-right &rarr; Settings &rarr; Privacy.)</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Choose What to Clear</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Select history, cookies, and cached files</strong>
+        <span class="detail">Pick a time range, such as "Last hour" or "All time." Then click <strong>Clear data</strong>.</span>
+      </div></li></ul>
+    </div>
+    <div class="warning-box">
+      <strong>Heads up:</strong> Clearing cookies signs you out of websites &mdash; that's expected. You'll just sign back in next time.
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> Always clear your data <em>and</em> sign out of your accounts before leaving a shared or public computer.
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; check the box when done:</h4>
+      <ul class="check-items"><li>&#9744; I cleared my browsing history and cookies</li></ul>
+    </div>
+  </div>
+
+  <!-- STATION 4 -->
+  <div class="part-header">
+    <h2>Station 4: Open a Private Window</h2>
+    <div><span class="part-timing">~3 min</span><span class="part-type">GUIDED</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Open Private / Incognito Mode</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Open a private window</strong>
+        <span class="detail">In Chrome, press <span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">N</span> (Incognito). In Edge or Firefox, press <span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">P</span> (InPrivate). Notice the dark window and the icon.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Visit a Site, Then Close It</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Browse, then close the private window</strong>
+        <span class="detail">Visit any website, then close the window. That browsing won't be saved in your history on this device.</span>
+      </div></li></ul>
+    </div>
+    <div class="warning-box">
+      <strong>Important:</strong> Private mode does NOT make you invisible. Your internet provider, the network you're on, and any site you log into can still see you. It only avoids saving history and cookies on <em>this</em> computer.
+    </div>
+    <div class="fill-line">
+      <span class="label">One good use for a private window is:</span><span class="blank"></span>
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; check the box when done:</h4>
+      <ul class="check-items"><li>&#9744; I opened a private window and can explain one thing it does NOT do</li></ul>
+    </div>
+  </div>
+
+  <!-- STATION 5 -->
+  <div class="part-header">
+    <h2>Station 5: Is This Source Trustworthy?</h2>
+    <div><span class="part-timing">~4 min</span><span class="part-type">INDEPENDENT</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Pick a Web Page to Check</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Choose any article or page your instructor suggests (or search a health or news topic)</strong>
+        <span class="detail">You'll judge whether you can trust what it says.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Run the Validity Checklist</h3>
+      <table class="table-preview">
+        <thead><tr><th>Ask...</th><th>Your answer (Yes / No / Not sure)</th></tr></thead>
+        <tbody>
+          <tr><td>Is there a named author or organization?</td><td>&nbsp;</td></tr>
+          <tr><td>Is the site trustworthy (.gov, major news, known org)?</td><td>&nbsp;</td></tr>
+          <tr><td>Is the information current (has a recent date)?</td><td>&nbsp;</td></tr>
+          <tr><td>Is the tone calm and factual (not shocking/urgent)?</td><td>&nbsp;</td></tr>
+          <tr><td>Can I confirm it on a second trusted source?</td><td>&nbsp;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> Mostly "Yes" answers? Likely trustworthy. Several "No" answers, or it asks for money or personal info? Be skeptical and verify elsewhere before believing or sharing it.
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; check the box when done:</h4>
+      <ul class="check-items"><li>&#9744; I evaluated a source and decided whether I trust it</li></ul>
+    </div>
+  </div>
+
+  <!-- STATION 6 -->
+  <div class="part-header">
+    <h2>Station 6: Privacy &amp; Identity Self-Audit</h2>
+    <div><span class="part-timing">~3 min</span><span class="part-type">INDEPENDENT</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Check Each Habit You Already Do</h3>
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>I use different passwords for my important accounts</strong></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>I never share my full Social Security number or passwords by email or text</strong></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>I look for the lock icon (https) before entering personal information</strong></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>I've reviewed the privacy settings on my main accounts</strong></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>I think before I post &mdash; would I be okay with anyone seeing it?</strong></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>I have two-factor authentication turned on where I can</strong></div></li>
+      </ul>
+    </div>
+    <div class="fill-line">
+      <span class="label">One privacy habit I will start this week:</span><span class="blank"></span>
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; check the box when done:</h4>
+      <ul class="check-items"><li>&#9744; I completed my privacy self-audit and picked one habit to improve</li></ul>
+    </div>
+  </div>
+
+  <!-- STATION 7 -->
+  <div class="part-header">
+    <h2>Station 7: What's Stored on This PC?</h2>
+    <div><span class="part-timing">~3 min</span><span class="part-type">INDEPENDENT</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Step 1 &mdash; Look in Your Downloads Folder</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>Open File Explorer and check Downloads</strong>
+        <span class="detail">Press <span class="key">Windows</span> + <span class="key">E</span>, then click "Downloads" on the left. These files live on this computer &mdash; anyone using it could open them.</span>
+      </div></li></ul>
+    </div>
+    <div class="section">
+      <h3 class="section-title">Step 2 &mdash; Check for Saved Passwords</h3>
+      <ul class="checklist"><li><div class="checkbox"></div><div class="checklist-text">
+        <strong>See if your browser is saving passwords</strong>
+        <span class="detail">In Chrome or Edge, open the three-dot menu &rarr; Settings &rarr; Passwords. On a shared computer, you do NOT want passwords saved here.</span>
+      </div></li></ul>
+    </div>
+    <div class="warning-box">
+      <strong>Why it matters:</strong> Downloaded files, saved passwords, and autofill details all stay on the device. If it's lost, stolen, or shared, that information could be exposed. Remove what you don't need and don't save passwords on shared PCs.
+    </div>
+    <div class="fill-line">
+      <span class="label">One item stored on this PC I would clean up:</span><span class="blank"></span>
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; check the box when done:</h4>
+      <ul class="check-items"><li>&#9744; I checked what's stored on this computer (downloads and saved passwords)</li></ul>
+    </div>
+  </div>
+
+  <!-- STATION 8 -->
+  <div class="part-header">
+    <h2>Station 8: Desk Ergonomics Check</h2>
+    <div><span class="part-timing">~3 min</span><span class="part-type">INDEPENDENT</span></div>
+  </div>
+  <div class="part-content">
+    <div class="section">
+      <h3 class="section-title">Adjust Your Workstation</h3>
+      <ul class="checklist">
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Screen distance</strong><span class="detail">Sit so the screen is about an arm's length away.</span></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Screen height</strong><span class="detail">The top of the screen should be at or just below eye level, so you look slightly down.</span></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Chair &amp; back</strong><span class="detail">Sit back in the chair with your lower back supported; feet flat on the floor.</span></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Wrists &amp; arms</strong><span class="detail">Keep wrists straight and elbows near 90 degrees while typing.</span></div></li>
+        <li><div class="checkbox"></div><div class="checklist-text"><strong>Eye breaks (20-20-20)</strong><span class="detail">Every 20 minutes, look at something about 20 feet away for 20 seconds.</span></div></li>
+      </ul>
+    </div>
+    <div class="tip-box">
+      <strong>Tip:</strong> Stand up and stretch every half hour. Small adjustments now prevent neck, back, wrist, and eye strain later.
+    </div>
+    <div class="checkpoint-box">
+      <h4>Checkpoint &mdash; check the box when done:</h4>
+      <ul class="check-items"><li>&#9744; I adjusted my screen, chair, and posture for comfort and safety</li></ul>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-box">
+    <h3>Lab Complete!</h3>
+    <p>Outstanding! You've practiced the core habits of a safe, confident digital citizen.</p>
+    <ul class="skills-earned">
+      <li>Build a strong passphrase and lock your screen</li>
+      <li>Clear browser data and use a private window wisely</li>
+      <li>Judge whether online information is trustworthy</li>
+      <li>Audit your privacy, check stored data, and set up a healthy desk</li>
+    </ul>
+    <p style="margin-top: 0.75rem; font-weight: 600; color: var(--va-blue);">
+      Keep these habits going &mdash; a little protection every day adds up to a lot of safety.
+    </p>
+  </div>
+
+  <footer class="footer">
+    <p><strong>Veterans Upward Bound &mdash; West Virginia</strong> | Week 4: Citizenship &amp; Safety</p>
+    <p style="margin-top: 0.25rem;">Keep this handout! Use it as a reference when securing your computer at home.</p>
+  </footer>
+
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

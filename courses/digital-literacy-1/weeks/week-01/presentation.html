@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 1: Inside the Computer | VUB Digital Literacy — Level 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B365D;
+      --primary-dark: #0D1B2A;
+      --accent: #C9A227;
+      --accent-light: #E6C65C;
+      --red: #B31942;
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #5A6A7A;
+      --success: #28A745;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .logo {
+      text-align: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .logo h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .logo p {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .week-indicator {
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .week-indicator .week-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .week-indicator .week-title {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .chapter {
+      margin-bottom: 1rem;
+    }
+
+    .chapter-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .chapter-slides {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .slide-link {
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slide-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .slide-link.active {
+      background: var(--va-blue);
+      font-weight: 600;
+    }
+
+    .slide-link.completed::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource-link::before {
+      content: "\2193 ";
+      opacity: 0.6;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    .progress-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--va-blue) 0%, var(--accent) 100%);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Slides Container */
+    .slides-container {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .slide {
+      display: none;
+      background: var(--light);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 1000px;
+      min-height: 600px;
+      padding: 3rem;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Styles */
+    .slide-header {
+      margin-bottom: 2rem;
+    }
+
+    .slide-title {
+      font-size: 2.25rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray);
+    }
+
+    .slide-content {
+      font-size: 1.5rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .slide-content ul, .slide-content ol {
+      margin-left: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .slide-content li {
+      margin-bottom: 1rem;
+    }
+
+    /* Title Slide */
+    .title-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--light);
+      border-radius: 16px;
+    }
+
+    .title-slide .slide-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-slide .slide-title {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+      color: var(--light);
+    }
+
+    .title-slide .slide-subtitle {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .course-info {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* Info Boxes */
+    .info-box {
+      background: var(--off-white);
+      border-left: 4px solid var(--va-blue);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+    }
+
+    .info-box.success {
+      border-left-color: var(--success);
+      background: rgba(40, 167, 69, 0.1);
+    }
+
+    .info-box.warning {
+      border-left-color: var(--va-red);
+      background: rgba(196, 38, 46, 0.1);
+    }
+
+    .info-box-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .info-box-content {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Key Points */
+    .key-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--off-white);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .key-point-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .key-point-text {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .key-point-text strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .column {
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+
+    .column h3 {
+      color: var(--va-blue);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .column ul {
+      margin-left: 1.25rem;
+    }
+
+    .column li {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Steps List */
+    .steps-list {
+      list-style: none;
+      margin-left: 0 !important;
+      counter-reset: step-counter;
+    }
+
+    .steps-list li {
+      position: relative;
+      padding-left: 3.5rem;
+      margin-bottom: 1.5rem;
+      counter-increment: step-counter;
+    }
+
+    .steps-list li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--va-blue);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    /* Portal Card */
+    .portal-card {
+      background: white;
+      border: 2px solid var(--va-blue);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .portal-card-icon {
+      font-size: 3rem;
+      flex-shrink: 0;
+    }
+
+    .portal-card h4 {
+      color: var(--va-blue);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .portal-card p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .portal-card .url {
+      font-family: monospace;
+      background: var(--off-white);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: var(--va-blue);
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    /* Demo Box */
+    .demo-box {
+      background: linear-gradient(135deg, var(--va-blue) 0%, #002F5A 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .demo-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .demo-box p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Navigation Footer */
+    .nav-footer {
+      background: var(--light);
+      border-top: 1px solid #eee;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.prev {
+      background: var(--off-white);
+      color: var(--primary);
+    }
+
+    .nav-btn.prev:hover {
+      background: #e8e8e8;
+    }
+
+    .nav-btn.next {
+      background: var(--va-blue);
+      color: white;
+    }
+
+    .nav-btn.next:hover {
+      background: #002F5A;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .slide-counter {
+      font-size: 0.9rem;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* Completion Slide */
+    .completion-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+    }
+
+    .completion-badge {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, var(--va-blue) 0%, #002F5A 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 63, 114, 0.3);
+    }
+
+    .completion-badge span {
+      font-size: 4rem;
+    }
+
+    .completion-slide h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .completion-slide p {
+      font-size: 1.25rem;
+      color: var(--gray);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* Handout Prompt */
+    .handout-prompt {
+      background: linear-gradient(135deg, var(--accent) 0%, #D4AF37 100%);
+      color: var(--primary);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .handout-prompt-icon {
+      font-size: 2rem;
+    }
+
+    .handout-prompt-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* Pre-test Link */
+    .pretest-link {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .pretest-link:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+    }
+
+    /* Knowledge-check reveal */
+    .knowledge-check {
+      background: var(--off-white);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0;
+    }
+
+    .knowledge-check .kc-question {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .reveal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 44px;
+      padding: 0.6rem 1.25rem;
+      background: var(--va-blue);
+      color: var(--light);
+      border: 2px solid var(--va-blue);
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .reveal-btn:hover {
+      background: #002F5A;
+    }
+
+    .reveal-btn:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .reveal-btn[aria-expanded="true"]::before {
+      content: "\2713 ";
+    }
+
+    .kc-answer {
+      margin-top: 1rem;
+      padding: 1rem 1.25rem;
+      background: rgba(40, 167, 69, 0.12);
+      border-left: 4px solid var(--success);
+      border-radius: 0 8px 8px 0;
+      font-size: 1.1rem;
+      color: #1e4620;
+    }
+
+    .kc-answer strong { color: var(--success); }
+
+    /* Visible focus for all interactive elements */
+    a:focus-visible,
+    button:focus-visible,
+    .slide-link:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      display: none;
+    }
+
+    .confetti.active {
+      display: block;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti-fall 3s ease-out forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar { width: 240px; }
+      .main-content { margin-left: 240px; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; }
+      .two-column { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="logo">
+      <h2>VUB Digital Literacy</h2>
+      <p>Level 1 · IC3 GS6 Aligned</p>
+    </div>
+
+    <div class="week-indicator">
+      <div class="week-num">Week 1</div>
+      <div class="week-title">Inside the Computer</div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Introduction</div>
+      <div class="chapter-slides">
+        <div class="slide-link active" data-slide="0">Welcome & Overview</div>
+        <div class="slide-link" data-slide="1">Learning Objectives</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Devices & Hardware</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="2">Input & Output Devices</div>
+        <div class="slide-link" data-slide="3">Ports, Cables & Connectors</div>
+        <div class="slide-link" data-slide="4">Types of Computing Devices</div>
+        <div class="slide-link" data-slide="5">Inside the Box</div>
+        <div class="slide-link" data-slide="6">Memory vs. Storage</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Software & OS</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="7">What Is Software?</div>
+        <div class="slide-link" data-slide="8">Paid vs. Free Software</div>
+        <div class="slide-link" data-slide="9">Installing Safely</div>
+        <div class="slide-link" data-slide="10">What Is an Operating System?</div>
+        <div class="slide-link" data-slide="11">Windows, Mac & Mobile</div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-title">Wrap-Up & Pre-Test</div>
+      <div class="chapter-slides">
+        <div class="slide-link" data-slide="12">Knowledge Check</div>
+        <div class="slide-link" data-slide="13">Your Hands-On Lab</div>
+        <div class="slide-link" data-slide="14">Key Takeaways</div>
+        <div class="slide-link" data-slide="15">You Did It!</div>
+        <div class="slide-link" data-slide="16">Pre-Test Time</div>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <div class="resources-title">Resources</div>
+      <a class="resource-link" href="handouts/meet-your-computer-lab.html" target="_blank">Meet Your Computer Lab</a>
+      <a class="resource-link" href="handouts/computer-parts-quick-reference.html" target="_blank">Computer Parts Quick Reference</a>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="slides-container">
+      <!-- Slide 0: Title -->
+      <div class="slide active title-slide">
+        <div class="slide-icon" aria-hidden="true">🖥️</div>
+        <h1 class="slide-title">Inside the Computer</h1>
+        <p class="slide-subtitle">Hardware, Devices, Software & Operating Systems</p>
+        <p class="course-info">Week 1 of 5 · VUB Digital Literacy — Level 1</p>
+      </div>
+
+      <!-- Slide 1: Learning Objectives -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Today's Learning Objectives</h1>
+          <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🔌</div>
+            <div class="key-point-text">
+              <strong>Identify devices & connections</strong>
+              Name common input and output devices and the ports they plug into
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🧠</div>
+            <div class="key-point-text">
+              <strong>Explain hardware basics</strong>
+              Tell the difference between memory (RAM) and storage (the drive)
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">💿</div>
+            <div class="key-point-text">
+              <strong>Understand software</strong>
+              Know system vs. application software, and install programs safely
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🪟</div>
+            <div class="key-point-text">
+              <strong>Compare operating systems</strong>
+              Recognize Windows, macOS, and mobile operating systems
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">IC3 GS6 Level 1 Alignment</div>
+            <div class="info-box-content">
+              This lesson covers objectives <strong>1.2</strong> (devices &amp; connections),
+              <strong>1.3</strong> (software), <strong>1.4</strong> (hardware), and
+              <strong>1.5</strong> (operating systems).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Input & Output Devices -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Input & Output Devices</h1>
+          <p class="slide-subtitle">How you talk to the computer, and how it talks back</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>⌨️ Input Devices (you → computer)</h3>
+              <ul>
+                <li>Keyboard — type text and commands</li>
+                <li>Mouse / touchpad — point and click</li>
+                <li>Microphone — record your voice</li>
+                <li>Webcam — capture video</li>
+                <li>Scanner — turn paper into a file</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>🖥️ Output Devices (computer → you)</h3>
+              <ul>
+                <li>Monitor / screen — shows the picture</li>
+                <li>Speakers / headphones — play sound</li>
+                <li>Printer — puts your work on paper</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">An easy way to remember</div>
+            <div class="info-box-content">
+              <strong>Input</strong> goes <em>in</em> to the computer. <strong>Output</strong>
+              comes <em>out</em> to you. A touchscreen does both — it takes your touch (input)
+              and shows the picture (output).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Ports, Cables & Connectors -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Ports, Cables & Connectors</h1>
+          <p class="slide-subtitle">The plugs on the back and sides of your computer</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🔵</div>
+            <div class="key-point-text">
+              <strong>USB</strong>
+              The most common plug. Connects a keyboard, mouse, flash drive, or phone charger.
+              USB-A is the flat rectangle; USB-C is the small oval that fits either way up.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">📺</div>
+            <div class="key-point-text">
+              <strong>HDMI</strong>
+              Carries picture and sound to a monitor or TV with one cable.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🌐</div>
+            <div class="key-point-text">
+              <strong>Ethernet</strong>
+              A wider plug (looks like a fat phone jack) for a wired internet connection.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🔋</div>
+            <div class="key-point-text">
+              <strong>Power</strong>
+              Connects the computer or laptop charger to the wall.
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">Good news</div>
+            <div class="info-box-content">
+              Plugs are shaped so they only fit the right port. If a cable will not go in,
+              turn it over or try a different port — never force it.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Types of Computing Devices -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Types of Computing Devices</h1>
+          <p class="slide-subtitle">Same idea, different sizes</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🖥️</div>
+            <div class="key-point-text">
+              <strong>Desktop</strong>
+              Stays on a desk. Powerful, easy to repair, plugs into the wall. The tower, monitor,
+              keyboard, and mouse are separate pieces.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">💻</div>
+            <div class="key-point-text">
+              <strong>Laptop</strong>
+              Folds shut and runs on a battery. Screen, keyboard, and touchpad are built in. Portable.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">📱</div>
+            <div class="key-point-text">
+              <strong>Tablet</strong>
+              A flat touchscreen, like a big phone. Lightweight, good for reading and video.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">📞</div>
+            <div class="key-point-text">
+              <strong>Smartphone</strong>
+              A pocket computer that also makes calls. Always with you and connects over cellular.
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">The big idea</div>
+            <div class="info-box-content">
+              All four are computers. They take input, do work, store information, and show output —
+              just in different sizes for different jobs.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Inside the Box -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Inside the Box</h1>
+          <p class="slide-subtitle">The main parts that do the work</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">⚙️</div>
+            <div class="key-point-text">
+              <strong>CPU — the "brain"</strong>
+              The processor that does the thinking and runs your programs.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🧠</div>
+            <div class="key-point-text">
+              <strong>RAM — short-term memory</strong>
+              The computer's "desk space." Holds whatever you are working on right now.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">💾</div>
+            <div class="key-point-text">
+              <strong>Drive — long-term storage</strong>
+              The "filing cabinet." Keeps your files, photos, and programs even when the power is off.
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">You do not have to memorize this</div>
+            <div class="info-box-content">
+              Knowing these names just helps you understand store clerks, repair techs, and
+              the numbers you will see in the next slide.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Memory vs. Storage -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Memory vs. Storage</h1>
+          <p class="slide-subtitle">Two different things people often mix up</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>🧠 Memory (RAM)</h3>
+              <ul>
+                <li>Short-term, like your desk</li>
+                <li>Holds what is open right now</li>
+                <li>Empties when you shut down</li>
+                <li>More RAM = run more at once</li>
+                <li>Measured in GB (e.g. 8 or 16 GB)</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>💾 Storage (the Drive)</h3>
+              <ul>
+                <li>Long-term, like a filing cabinet</li>
+                <li>Keeps files when power is off</li>
+                <li>Holds photos, documents, programs</li>
+                <li>More storage = keep more files</li>
+                <li>Measured in GB or TB (e.g. 256 GB, 1 TB)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">Remember it this way</div>
+            <div class="info-box-content">
+              <strong>Memory</strong> is your desk — clears off at the end of the day.
+              <strong>Storage</strong> is your filing cabinet — keeps things for good.
+              A TB (terabyte) is about 1,000 GB.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: What Is Software? -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">What Is Software?</h1>
+          <p class="slide-subtitle">Hardware is what you touch; software is what it runs</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>🪟 System Software</h3>
+              <ul>
+                <li>The operating system itself (Windows)</li>
+                <li>Runs the whole computer</li>
+                <li>Starts up when you turn it on</li>
+                <li>Manages the hardware for you</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>📂 Application Software ("apps")</h3>
+              <ul>
+                <li>Programs you open to do a task</li>
+                <li>Web browser (Edge, Chrome)</li>
+                <li>Word, a PDF reader, a photo viewer</li>
+                <li>Email, games, a calculator</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">A simple way to picture it</div>
+            <div class="info-box-content">
+              <strong>Hardware</strong> = the parts you can hold. <strong>System software</strong> =
+              the operating system that runs everything. <strong>Applications</strong> = the
+              individual programs you open to write, browse, or watch.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Paid vs. Free Software -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Paid vs. Free Software</h1>
+          <p class="slide-subtitle">Proprietary and open-source — both are normal and safe</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>🔒 Proprietary</h3>
+              <ul>
+                <li>Owned by one company</li>
+                <li>You buy it or pay a subscription</li>
+                <li>The inner code is private</li>
+                <li>Examples: Microsoft Office, Windows</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>🔓 Open Source</h3>
+              <ul>
+                <li>Code is public and free to use</li>
+                <li>Usually free to download</li>
+                <li>Maintained by a community</li>
+                <li>Examples: Firefox, LibreOffice, VLC</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-title">Which is better?</div>
+            <div class="info-box-content">
+              Neither — it depends on your needs. Both kinds can be excellent. The important
+              thing is to download from a trusted place, which is next.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: Installing Safely -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Installing Software Safely</h1>
+          <p class="slide-subtitle">Where you get a program matters most</p>
+        </div>
+        <div class="slide-content">
+          <ol class="steps-list">
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Use a trusted source</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">The Microsoft Store, or the maker's official website (for example, microsoft.com or mozilla.org).</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Check the web address</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Make sure it is the real company's site, not a look-alike with a slightly wrong name.</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Run the installer and read each screen</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Click Next carefully. Decline any extra "bonus" toolbars or programs you did not ask for.</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Approve the security prompt</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Windows asks "Do you want to allow this app to make changes?" Click Yes only if you trust the source.</span>
+            </li>
+          </ol>
+          <div class="info-box warning">
+            <div class="info-box-title">⚠️ Stay safe</div>
+            <div class="info-box-content">
+              Never install software from a pop-up ad or an email link. "Your computer is
+              infected — click here!" is always a scam. When in doubt, ask the instructor.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 10: What Is an Operating System? -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">What Is an Operating System?</h1>
+          <p class="slide-subtitle">The master program that runs the whole computer</p>
+        </div>
+        <div class="slide-content">
+          <div class="portal-card">
+            <div class="portal-card-icon" aria-hidden="true">🪟</div>
+            <div>
+              <h4>The Operating System (OS)</h4>
+              <p>The OS starts when you power on and stays running the whole time. It shows your
+              desktop, manages your files, and lets every app share the keyboard, screen, and
+              memory. The computers in this lab run <strong>Microsoft Windows</strong>.</p>
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🖱️</div>
+            <div class="key-point-text">
+              <strong>What the OS gives you</strong>
+              The desktop, the taskbar, the Start menu, windows, and File Explorer.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11: Windows, Mac & Mobile -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Windows, Mac & Mobile</h1>
+          <p class="slide-subtitle">The operating systems you will meet most</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🪟</div>
+            <div class="key-point-text">
+              <strong>Windows (Microsoft)</strong>
+              The most common OS on desktops and laptops — and what this lab uses. Look for the
+              Start button in the bottom-left corner.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🍎</div>
+            <div class="key-point-text">
+              <strong>macOS (Apple)</strong>
+              Runs only on Apple Mac computers. Same idea as Windows, with a slightly different look.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">📱</div>
+            <div class="key-point-text">
+              <strong>Mobile: Android & iOS</strong>
+              The operating systems on phones and tablets. <strong>Android</strong> (Google) runs
+              on many brands; <strong>iOS / iPadOS</strong> (Apple) runs on iPhones and iPads. They
+              use taps and swipes instead of a mouse.
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">The reassuring part</div>
+            <div class="info-box-content">
+              Once you learn one operating system, the others feel familiar. They all let you
+              open programs, save files, and connect to the internet.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: Knowledge Check -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Knowledge Check</h1>
+          <p class="slide-subtitle">Read each question, think about your answer, then reveal it</p>
+        </div>
+        <div class="slide-content">
+          <div class="knowledge-check">
+            <p class="kc-question">1. Which of these is an <em>input</em> device?</p>
+            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">A printer · A monitor · A keyboard · A speaker</p>
+            <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="kc-a1">Show answer</button>
+            <div class="kc-answer" id="kc-a1" hidden>
+              <strong>Answer:</strong> A <strong>keyboard</strong>. You use it to put information
+              <em>into</em> the computer. A printer, monitor, and speaker are all output devices.
+            </div>
+          </div>
+
+          <div class="knowledge-check">
+            <p class="kc-question">2. What is the difference between memory (RAM) and storage (the drive)?</p>
+            <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="kc-a2">Show answer</button>
+            <div class="kc-answer" id="kc-a2" hidden>
+              <strong>Answer:</strong> <strong>RAM</strong> is short-term — like your desk — and
+              empties when you shut down. <strong>Storage</strong> is long-term — like a filing
+              cabinet — and keeps your files when the power is off.
+            </div>
+          </div>
+
+          <div class="knowledge-check">
+            <p class="kc-question">3. Where is the safest place to download a new program?</p>
+            <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="kc-a3">Show answer</button>
+            <div class="kc-answer" id="kc-a3" hidden>
+              <strong>Answer:</strong> From a <strong>trusted source</strong> — the Microsoft Store
+              or the maker's official website. Never from a pop-up ad or an email link.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 13: Your Hands-On Lab -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Your Hands-On Lab</h1>
+          <p class="slide-subtitle">Now let's explore the computer in front of you</p>
+        </div>
+        <div class="slide-content">
+          <p>Time to put this to use. In the <strong>"Meet Your Computer Lab"</strong> handout,
+          you will explore the real computer at your workstation.</p>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🔍</div>
+            <div class="key-point-text">
+              <strong>You will</strong>
+              Find the ports and peripherals · open <em>This PC</em> and <em>Settings</em> to read
+              your RAM and storage · list a few installed apps · identify your Windows version.
+            </div>
+          </div>
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
+            <div class="handout-prompt-text">Open your "Meet Your Computer Lab" handout and follow along step by step.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 14: Key Takeaways -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Key Takeaways</h1>
+          <p class="slide-subtitle">What to remember from today</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🔌</div>
+            <div class="key-point-text">
+              <strong>Devices plug in through ports</strong>
+              Input devices send information in; output devices send it out. USB and HDMI are the most common plugs.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🧠</div>
+            <div class="key-point-text">
+              <strong>Memory is the desk; storage is the cabinet</strong>
+              RAM holds what is open now; the drive keeps your files for good.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">💿</div>
+            <div class="key-point-text">
+              <strong>Software runs on the hardware</strong>
+              The OS runs the computer; apps do your tasks. Install only from trusted sources.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🪟</div>
+            <div class="key-point-text">
+              <strong>Windows, macOS, and mobile are all operating systems</strong>
+              Learn one and the rest feel familiar. This lab uses Windows.
+            </div>
+          </div>
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
+            <div class="handout-prompt-text">Take your handouts home! The quick-reference card is great to keep at your desk.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 15: Completion / You Did It! -->
+      <div class="slide completion-slide">
+        <div class="completion-badge" aria-hidden="true"><span>🎉</span></div>
+        <h2>You Did It!</h2>
+        <p>You finished Week 1. You can now name the parts of a computer, tell memory from
+        storage, understand software, and recognize the major operating systems. That is a
+        real foundation to build on. One more step today: the Pre-Test.</p>
+      </div>
+
+      <!-- Slide 16: Pre-Test Time -->
+      <div class="slide">
+        <div class="slide-header">
+          <h1 class="slide-title">Pre-Test Time</h1>
+          <p class="slide-subtitle">Let's see where you're starting</p>
+        </div>
+        <div class="slide-content">
+          <div class="info-box">
+            <div class="info-box-title">About the Pre-Test</div>
+            <div class="info-box-content">
+              <ul style="margin-top: 0.5rem;">
+                <li><strong>About 20 questions</strong> covering the whole 5-week course</li>
+                <li><strong>No time limit</strong> — take your time</li>
+                <li><strong>Not pass/fail</strong> — it measures your starting point</li>
+                <li>You'll take a similar test in Week 5 to see how far you've come!</li>
+              </ul>
+            </div>
+          </div>
+          <div class="demo-box">
+            <h3>📝 Why take a Pre-Test?</h3>
+            <p>Do not worry if you do not know every answer — that is exactly the point. The
+            Pre-Test marks where you are starting so we can celebrate your growth at the end.</p>
+          </div>
+          <div style="text-align: center;">
+            <a href="../../assessments/pre-test.html" class="pretest-link">Start Pre-Test →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div class="nav-footer">
+      <button class="nav-btn prev" id="prevBtn" disabled>
+        ← Previous
+      </button>
+      <span class="slide-counter">
+        Slide <span id="currentSlide">1</span> of <span id="totalSlides">17</span>
+      </span>
+      <button class="nav-btn next" id="nextBtn">
+        Next →
+      </button>
+    </div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div class="confetti" id="confetti"></div>
+
+  <script src="../../../../shared/progress.js"></script>
+  <script src="../../../../shared/glossary.js" defer></script>
+  <script>
+    // Presentation State
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideLinks = document.querySelectorAll('.slide-link');
+
+    // DOM Elements
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSlideSpan = document.getElementById('currentSlide');
+    const totalSlidesSpan = document.getElementById('totalSlides');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const confettiContainer = document.getElementById('confetti');
+
+    // Initialize
+    totalSlidesSpan.textContent = totalSlides;
+    loadProgress();
+    updateSlide();
+
+    // Navigation Functions
+    function updateSlide() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      slideLinks.forEach((link, index) => {
+        link.classList.toggle('active', index === currentSlide);
+        if (index < currentSlide) {
+          link.classList.add('completed');
+        }
+      });
+
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.textContent = currentSlide === totalSlides - 1 ? 'Finish ✓' : 'Next →';
+
+      currentSlideSpan.textContent = currentSlide + 1;
+
+      const progress = Math.round((currentSlide / (totalSlides - 1)) * 100);
+      progressFill.style.width = progress + '%';
+      progressText.textContent = progress;
+
+      saveProgress();
+
+      if (currentSlide === totalSlides - 1) {
+        setTimeout(triggerConfetti, 500);
+      }
+
+      const activeLink = document.querySelector('.slide-link.active');
+      if (activeLink) {
+        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlide();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    // Event Listeners
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    slideLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const slideIndex = parseInt(link.dataset.slide);
+        goToSlide(slideIndex);
+      });
+    });
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'PageUp':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          goToSlide(totalSlides - 1);
+          break;
+      }
+    });
+
+    // Progress Persistence (via shared VubProgress library)
+    function saveProgress() {
+      if (window.VubProgress) {
+        VubProgress.saveSlide('dl1', 1, currentSlide, totalSlides);
+      }
+    }
+
+    function loadProgress() {
+      if (window.VubProgress) {
+        const entry = VubProgress.get('dl1', 1);
+        if (entry && typeof entry.slide === 'number') {
+          currentSlide = entry.slide;
+        }
+      }
+    }
+
+    // Confetti Animation
+    function triggerConfetti() {
+      confettiContainer.classList.add('active');
+      confettiContainer.innerHTML = '';
+
+      const colors = ['#003F72', '#C9A227', '#1B365D', '#C4262E', '#28A745'];
+
+      for (let i = 0; i < 100; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 2 + 's';
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confettiContainer.appendChild(piece);
+      }
+
+      setTimeout(() => {
+        confettiContainer.classList.remove('active');
+      }, 5000);
+    }
+
+    // Knowledge-check reveal toggles (accessible, not color-only)
+    document.querySelectorAll('.reveal-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const answer = document.getElementById(btn.getAttribute('aria-controls'));
+        if (!answer) return;
+        const isOpen = answer.hidden === false;
+        answer.hidden = isOpen;
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        btn.textContent = isOpen ? 'Show answer' : 'Hide answer';
+      });
+    });
+
+    // Touch/Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+  </script>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>
