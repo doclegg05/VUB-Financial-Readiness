@@ -8,6 +8,7 @@
       "type": "weeks",
       "progressKey": "ics",
       "category": "Computer Skills",
+      "emphasis": "Hands-on labs",
       "path": "courses/computer-skills/",
       "entry": "courses/computer-skills/index.html",
       "preTest": "courses/computer-skills/weeks/week-01/pre-test.html",
@@ -30,6 +31,7 @@
       "type": "modules",
       "progressKey": "fr",
       "category": "Finance",
+      "emphasis": "Planning tools",
       "path": "courses/financial-readiness/",
       "entry": "courses/financial-readiness/financial-readiness.html",
       "preTest": "courses/financial-readiness/assessments/pre-test-form.html",
@@ -40,6 +42,26 @@
         { "n": 3, "title": "Healthcare & Long-Term Care", "topic": "Medicare/TRICARE, Aid & Attendance", "path": "courses/financial-readiness/financial-readiness.html#module3", "statusKey": "fr:module3" },
         { "n": 4, "title": "Managing Your Retirement Income", "topic": "Tax-efficient withdrawals, RMDs", "path": "courses/financial-readiness/financial-readiness.html#module4", "statusKey": "fr:module4" },
         { "n": 5, "title": "Legacy Planning", "topic": "Survivor Benefit Plan (SBP)", "path": "courses/financial-readiness/financial-readiness.html#module5", "statusKey": "fr:module5" }
+      ]
+    },
+    {
+      "id": "digital-literacy-1",
+      "title": "Digital Literacy — Level 1",
+      "subtitle": "A 5-week foundation in digital literacy for veterans, aligned to IC3 GS6 Level 1.",
+      "type": "weeks",
+      "progressKey": "dl1",
+      "category": "Digital Literacy",
+      "emphasis": "Hands-on labs",
+      "path": "courses/digital-literacy-1/",
+      "entry": "courses/digital-literacy-1/index.html",
+      "preTest": "courses/digital-literacy-1/assessments/pre-test.html",
+      "postTest": "courses/digital-literacy-1/assessments/post-test.html",
+      "lessons": [
+        { "n": 1, "title": "Inside the Computer", "topic": "Devices, hardware, software, operating systems", "path": "courses/digital-literacy-1/weeks/week-01/presentation.html", "statusKey": "dl1:w1" },
+        { "n": 2, "title": "Getting Online", "topic": "Browsers, networks & Wi-Fi, searching, copyright", "path": "courses/digital-literacy-1/weeks/week-02/presentation.html", "statusKey": "dl1:w2" },
+        { "n": 3, "title": "Creating & Communicating", "topic": "Documents, files, printing, email, teamwork", "path": "courses/digital-literacy-1/weeks/week-03/presentation.html", "statusKey": "dl1:w3" },
+        { "n": 4, "title": "Citizenship & Safety", "topic": "Identity, privacy, passwords, online safety", "path": "courses/digital-literacy-1/weeks/week-04/presentation.html", "statusKey": "dl1:w4" },
+        { "n": 5, "title": "Review & Testing Day", "topic": "Cumulative review game + Post-Test", "path": "courses/digital-literacy-1/weeks/week-05/presentation.html", "statusKey": "dl1:w5" }
       ]
     }
   ]
