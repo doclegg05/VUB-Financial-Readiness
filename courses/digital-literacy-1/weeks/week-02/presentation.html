@@ -711,7 +711,7 @@
 </head>
 <body>
   <!-- Sidebar Navigation -->
-  <nav class="sidebar">
+  <nav class="sidebar" aria-label="Lesson chapters">
     <div class="logo">
       <h2>VUB Digital Literacy</h2>
       <p>Level 1 · IC3 GS6 Aligned</p>
@@ -771,7 +771,7 @@
     </div>
 
     <div class="progress-section">
-      <div class="progress-bar">
+      <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Lesson progress">
         <div class="progress-fill" id="progressFill"></div>
       </div>
       <div class="progress-text"><span id="progressText">0</span>% Complete</div>
@@ -1442,6 +1442,8 @@
       const progress = Math.round((currentSlide / (totalSlides - 1)) * 100);
       progressFill.style.width = progress + '%';
       progressText.textContent = progress;
+      var progressBar = document.getElementById('progressBar');
+      if (progressBar) progressBar.setAttribute('aria-valuenow', String(progress));
 
       saveProgress();
 
@@ -1545,6 +1547,7 @@
 
     // Confetti Animation
     function triggerConfetti() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       confettiContainer.classList.add('active');
       confettiContainer.innerHTML = '';
 

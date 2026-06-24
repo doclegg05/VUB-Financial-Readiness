@@ -226,7 +226,7 @@
     <span class="course-badge">Final Knowledge Check</span>
 
     <div class="progress-container" id="progressContainer" style="display: none;">
-      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" aria-label="Questions answered"><div class="progress-fill" id="progressFill"></div></div>
       <div class="progress-text" id="progressText">0 of 20</div>
     </div>
   </header>
@@ -269,6 +269,7 @@
         <div class="name-input-group">
           <label for="participantName">Please enter your name:</label>
           <input type="text" id="participantName" placeholder="Your full name" autocomplete="name" required>
+          <p id="nameError" role="alert" style="color:var(--danger);margin-top:.5rem" hidden>Please enter your name to begin.</p>
         </div>
 
         <button class="btn-start" id="btnStart">Begin Final Assessment &#x2192;</button>
@@ -325,6 +326,7 @@
 
         <div class="score-breakdown" id="scoreBreakdown"></div>
         <div class="results-message" id="resultsMessage"></div>
+        <p id="saveWarning" role="alert" hidden style="background: rgba(192,35,59,0.1); border: 2px solid var(--danger); color: var(--danger); padding: 1rem 1.25rem; border-radius: 10px; margin-bottom: 1.5rem; font-weight: 600; text-align: left;">&#x26A0;&#xFE0F; Your results could not be saved on this device &mdash; please print your report now.</p>
         <div class="review-list" id="reviewList"></div>
 
         <p style="color: var(--gray); margin-bottom: 1.5rem; font-size: 0.95rem;">
@@ -559,7 +561,7 @@
           if (preTestResults && preTestResults.name) participantInput.value = preTestResults.name;
         }
       } catch (e) {
-        console.log('Could not load pre-test results');
+        // Pre-test results unavailable or unreadable — the pre/post comparison simply won't show.
       }
 
       renderQuestions();
@@ -626,11 +628,18 @@
 
     function startQuiz() {
       participantName = participantInput.value.trim();
+      var nameError = document.getElementById('nameError');
       if (!participantName) {
         participantInput.focus();
         participantInput.style.borderColor = 'var(--danger)';
+        participantInput.setAttribute('aria-invalid', 'true');
+        participantInput.setAttribute('aria-describedby', 'nameError');
+        if (nameError) nameError.hidden = false;
         return;
       }
+      participantInput.removeAttribute('aria-invalid');
+      participantInput.removeAttribute('aria-describedby');
+      if (nameError) nameError.hidden = true;
       startSection.classList.add('hidden');
       quizSection.classList.add('active');
       progressContainer.style.display = 'flex';
@@ -675,6 +684,8 @@
       var answered = Object.keys(answers).length;
       progressFill.style.width = (answered / questions.length) * 100 + '%';
       progressText.textContent = answered + ' of ' + questions.length;
+      var progressBar = document.getElementById('progressBar');
+      if (progressBar) progressBar.setAttribute('aria-valuenow', String(answered));
     }
 
     function submitQuiz() {
@@ -776,7 +787,9 @@
       try {
         localStorage.setItem('vub_dl1_posttest_results', JSON.stringify(results));
       } catch (e) {
-        console.log('Could not save to localStorage');
+        // Saving failed (e.g. private mode / storage full) — warn the student visibly.
+        var saveWarning = document.getElementById('saveWarning');
+        if (saveWarning) saveWarning.hidden = false;
       }
 
       window.quizResults = {

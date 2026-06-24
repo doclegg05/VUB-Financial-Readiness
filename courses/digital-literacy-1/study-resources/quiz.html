@@ -137,7 +137,7 @@
     <div class="meter" aria-hidden="true"><div class="meter-fill" id="meter-fill"></div></div>
   </div>
 
-  <section id="quiz-area" aria-live="polite">
+  <section id="quiz-area">
     <div class="q-card">
       <span class="domain-tag" id="q-domain"></span>
       <p class="q-text" id="q-text"></p>
@@ -147,7 +147,7 @@
         <span id="rationale"></span>
       </div>
       <div class="controls">
-        <span class="score-line" id="progress-line"></span>
+        <span class="score-line" id="progress-line" aria-live="polite" aria-atomic="true"></span>
         <button type="button" class="btn btn-primary" id="next-btn" disabled>Next question &rarr;</button>
       </div>
     </div>
