@@ -76,10 +76,10 @@
         'html[data-text-size] :where(p,li,dd,dt,td,th,label,input,textarea,select,summary,figcaption,blockquote){font-size:max(1em,var(--vub-text-min))!important;line-height:var(--vub-line-height)!important}' +
         'html[data-text-size] :where(button,a,.btn,.slide-link,.resource-link,.nav-links a,.detail,.meta,.caption,.small){font-size:max(1em,var(--vub-ui-min))!important;line-height:1.45!important}' +
         '}' +
-        '.vub-textsize-fab{position:fixed;right:18px;top:18px;z-index:10000;display:inline-flex;align-items:center;gap:8px;padding:7px;border:1px solid rgba(228,196,90,.65);border-radius:10px;background:linear-gradient(180deg,#0C2E55,#07223F);color:#fff;box-shadow:0 8px 22px rgba(0,0,0,.28);font-family:Source Sans 3,Segoe UI,Verdana,sans-serif}' +
+        '.vub-textsize-fab{position:fixed;right:18px;bottom:var(--vub-textsize-fab-bottom,18px);z-index:10000;display:inline-flex;align-items:center;gap:8px;padding:7px;border:1px solid rgba(228,196,90,.65);border-radius:10px;background:linear-gradient(180deg,#0C2E55,#07223F);color:#fff;box-shadow:0 8px 22px rgba(0,0,0,.28);font-family:Source Sans 3,Segoe UI,Verdana,sans-serif}' +
         '.vub-textsize-fab .lab{font-size:13px;font-weight:800;white-space:nowrap}.vub-textsize-fab .status{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}' +
         '.vub-textsize-fab button{min-width:44px;min-height:38px;border:1px solid rgba(94,134,196,.8);border-radius:8px;background:rgba(7,34,63,.35);color:#fff;font-size:17px;font-weight:800;cursor:pointer;letter-spacing:.01em}.vub-textsize-fab button:disabled{opacity:.45;cursor:not-allowed}' +
-        '@media(max-width:520px){.vub-textsize-fab{right:10px;top:10px}.vub-textsize-fab .lab{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}}' +
+        '@media(max-width:520px){.vub-textsize-fab{right:10px;bottom:var(--vub-textsize-fab-bottom,10px)}.vub-textsize-fab .lab{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}}' +
         '@media print{.vub-textsize-fab{display:none!important}}' +
       '</style>'
     ));

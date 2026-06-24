@@ -1,10 +1,10 @@
 /* ─── Floating "?" help button ─────────────────────────── */
 .vub-help-fab {
   position: fixed;
-  /* Default sits BELOW the floating Text Size control (text-size.js injects a
-     ~52px-tall FAB at top:18px on standalone pages) so the two don't overlap.
-     App-bar pages set --vub-help-fab-top via .vub-dashboard (below the bar) instead. */
-  top: var(--vub-help-fab-top, 78px);
+  /* Top-right by default. The Text Size control now lives at the bottom-right
+     (text-size.js), so these no longer collide. App-bar pages push this below
+     the bar via .vub-dashboard's --vub-help-fab-top. */
+  top: var(--vub-help-fab-top, 1rem);
   right: var(--vub-help-fab-right, 1rem);
   z-index: 9000;
   display: inline-flex;
@@ -240,7 +240,7 @@
 /* ─── Responsive ───────────────────────────────────────── */
 @media (max-width: 520px) {
   .vub-help-fab {
-    top: var(--vub-help-fab-top, 70px); /* clear the Text Size FAB on small screens */
+    top: var(--vub-help-fab-top, 0.6rem);
     right: var(--vub-help-fab-right, 0.6rem);
     padding: 0.55rem 0.85rem 0.55rem 0.65rem;
     font-size: 0.88rem;
