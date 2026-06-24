@@ -100,6 +100,7 @@
     }
 
     .slide-link {
+      font-family: inherit; background: none; border: none; text-align: left; width: 100%; color: inherit;
       padding: 0.6rem 0.75rem;
       border-radius: 6px;
       cursor: pointer;
@@ -648,11 +649,15 @@
       .main-content { margin-left: 0; }
       .two-column { grid-template-columns: 1fr; }
     }
+  
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .slide-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
 </head>
 <body>
   <!-- Sidebar Navigation -->
-  <nav class="sidebar">
+  <nav class="sidebar" aria-label="Lesson chapters">
     <div class="logo">
       <h2>VUB Computer Skills</h2>
       <p>Intermediate Course</p>
@@ -666,46 +671,46 @@
     <div class="chapter">
       <div class="chapter-title">Introduction</div>
       <div class="chapter-slides">
-        <div class="slide-link active" data-slide="0">Welcome & Overview</div>
-        <div class="slide-link" data-slide="1">Learning Objectives</div>
-        <div class="slide-link" data-slide="2">Why VA Online Services?</div>
+        <button type="button" class="slide-link active" data-slide="0">Welcome & Overview</button>
+        <button type="button" class="slide-link" data-slide="1">Learning Objectives</button>
+        <button type="button" class="slide-link" data-slide="2">Why VA Online Services?</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">VA.gov</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="3">What is VA.gov?</div>
-        <div class="slide-link" data-slide="4">Creating Your Account</div>
-        <div class="slide-link" data-slide="5">ID.me Verification</div>
-        <div class="slide-link" data-slide="6">Navigating VA.gov</div>
+        <button type="button" class="slide-link" data-slide="3">What is VA.gov?</button>
+        <button type="button" class="slide-link" data-slide="4">Creating Your Account</button>
+        <button type="button" class="slide-link" data-slide="5">ID.me Verification</button>
+        <button type="button" class="slide-link" data-slide="6">Navigating VA.gov</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">MyHealtheVet</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="7">What is MyHealtheVet?</div>
-        <div class="slide-link" data-slide="8">Secure Messaging</div>
-        <div class="slide-link" data-slide="9">Prescriptions & Refills</div>
-        <div class="slide-link" data-slide="10">Health Records</div>
+        <button type="button" class="slide-link" data-slide="7">What is MyHealtheVet?</button>
+        <button type="button" class="slide-link" data-slide="8">Secure Messaging</button>
+        <button type="button" class="slide-link" data-slide="9">Prescriptions & Refills</button>
+        <button type="button" class="slide-link" data-slide="10">Health Records</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">eBenefits</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="11">What is eBenefits?</div>
-        <div class="slide-link" data-slide="12">Key Features</div>
+        <button type="button" class="slide-link" data-slide="11">What is eBenefits?</button>
+        <button type="button" class="slide-link" data-slide="12">Key Features</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Safety & Wrap Up</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="13">Avoiding Fake VA Sites</div>
-        <div class="slide-link" data-slide="14">Key Takeaways</div>
-        <div class="slide-link" data-slide="15">Pre-Test Time</div>
+        <button type="button" class="slide-link" data-slide="13">Avoiding Fake VA Sites</button>
+        <button type="button" class="slide-link" data-slide="14">Key Takeaways</button>
+        <button type="button" class="slide-link" data-slide="15">Pre-Test Time</button>
       </div>
     </div>
 
@@ -717,7 +722,7 @@
     </div>
 
     <div class="progress-section">
-      <div class="progress-bar">
+      <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Lesson progress">
         <div class="progress-fill" id="progressFill"></div>
       </div>
       <div class="progress-text"><span id="progressText">0</span>% Complete</div>
@@ -726,11 +731,12 @@
 
   <!-- Main Content -->
   <div class="main-content">
+    <h1 class="sr-only">Week 1: Course Introduction &amp; VA Online Services</h1>
     <div class="slides-container">
       <!-- Slide 0: Title -->
       <div class="slide active title-slide">
         <div class="slide-icon">🏛️</div>
-        <h1 class="slide-title">VA Online Services</h1>
+        <h2 class="slide-title">VA Online Services</h2>
         <p class="slide-subtitle">Navigate VA.gov, MyHealtheVet & eBenefits with confidence</p>
         <p class="course-info">Week 1 of 8 • VUB Intermediate Computer Skills</p>
         <p class="course-info" style="margin-top: 0.5rem;">Week 1 of 8</p>
@@ -739,7 +745,7 @@
       <!-- Slide 1: Learning Objectives -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Today's Learning Objectives</h1>
+          <h2 class="slide-title">Today's Learning Objectives</h2>
           <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
         </div>
         <div class="slide-content">
@@ -777,7 +783,7 @@
       <!-- Slide 2: Why VA Online Services? -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Why Learn VA Online Services?</h1>
+          <h2 class="slide-title">Why Learn VA Online Services?</h2>
           <p class="slide-subtitle">Save time and take control of your benefits</p>
         </div>
         <div class="slide-content">
@@ -813,7 +819,7 @@
       <!-- Slide 3: What is VA.gov? -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">What is VA.gov?</h1>
+          <h2 class="slide-title">What is VA.gov?</h2>
           <p class="slide-subtitle">The main portal for all veteran services</p>
         </div>
         <div class="slide-content">
@@ -852,7 +858,7 @@
       <!-- Slide 4: Creating Your Account -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Creating Your VA.gov Account</h1>
+          <h2 class="slide-title">Creating Your VA.gov Account</h2>
           <p class="slide-subtitle">Three ways to sign in</p>
         </div>
         <div class="slide-content">
@@ -890,7 +896,7 @@
       <!-- Slide 5: ID.me Verification -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">ID.me Verification Process</h1>
+          <h2 class="slide-title">ID.me Verification Process</h2>
           <p class="slide-subtitle">Proving you are who you say you are</p>
         </div>
         <div class="slide-content">
@@ -929,7 +935,7 @@
       <!-- Slide 6: Navigating VA.gov -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Navigating VA.gov</h1>
+          <h2 class="slide-title">Navigating VA.gov</h2>
           <p class="slide-subtitle">Finding what you need</p>
         </div>
         <div class="slide-content">
@@ -965,7 +971,7 @@
       <!-- Slide 7: What is MyHealtheVet? -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">What is MyHealtheVet?</h1>
+          <h2 class="slide-title">What is MyHealtheVet?</h2>
           <p class="slide-subtitle">Your VA healthcare in the palm of your hand</p>
         </div>
         <div class="slide-content">
@@ -995,7 +1001,7 @@
       <!-- Slide 8: Secure Messaging -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Secure Messaging</h1>
+          <h2 class="slide-title">Secure Messaging</h2>
           <p class="slide-subtitle">Communicate directly with your healthcare team</p>
         </div>
         <div class="slide-content">
@@ -1034,7 +1040,7 @@
       <!-- Slide 9: Prescriptions & Refills -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Prescriptions & Refills</h1>
+          <h2 class="slide-title">Prescriptions & Refills</h2>
           <p class="slide-subtitle">Never run out of your medications</p>
         </div>
         <div class="slide-content">
@@ -1069,7 +1075,7 @@
       <!-- Slide 10: Health Records -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Viewing Health Records</h1>
+          <h2 class="slide-title">Viewing Health Records</h2>
           <p class="slide-subtitle">Your complete VA health history</p>
         </div>
         <div class="slide-content">
@@ -1107,7 +1113,7 @@
       <!-- Slide 11: What is eBenefits? -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">What is eBenefits?</h1>
+          <h2 class="slide-title">What is eBenefits?</h2>
           <p class="slide-subtitle">Managing your VA benefits and documents</p>
         </div>
         <div class="slide-content">
@@ -1132,7 +1138,7 @@
       <!-- Slide 12: eBenefits Key Features -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">eBenefits Key Features</h1>
+          <h2 class="slide-title">eBenefits Key Features</h2>
           <p class="slide-subtitle">What you can do on eBenefits</p>
         </div>
         <div class="slide-content">
@@ -1170,7 +1176,7 @@
       <!-- Slide 13: Avoiding Fake VA Sites -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Avoiding Fake VA Sites</h1>
+          <h2 class="slide-title">Avoiding Fake VA Sites</h2>
           <p class="slide-subtitle">Protect yourself from scams</p>
         </div>
         <div class="slide-content">
@@ -1204,7 +1210,7 @@
       <!-- Slide 14: Key Takeaways -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Key Takeaways</h1>
+          <h2 class="slide-title">Key Takeaways</h2>
           <p class="slide-subtitle">What to remember from today</p>
         </div>
         <div class="slide-content">
@@ -1247,7 +1253,7 @@
       <!-- Slide 15: Pre-Test Time -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Pre-Test Assessment</h1>
+          <h2 class="slide-title">Pre-Test Assessment</h2>
           <p class="slide-subtitle">Let's see where you're starting</p>
         </div>
         <div class="slide-content">
@@ -1336,6 +1342,8 @@
       const progress = Math.round((currentSlide / (totalSlides - 1)) * 100);
       progressFill.style.width = progress + '%';
       progressText.textContent = progress;
+      var pbar = document.getElementById('progressBar');
+      if (pbar) pbar.setAttribute('aria-valuenow', String(progress));
 
       saveProgress();
 
@@ -1424,6 +1432,7 @@
 
     // Confetti Animation
     function triggerConfetti() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       confettiContainer.classList.add('active');
       confettiContainer.innerHTML = '';
 

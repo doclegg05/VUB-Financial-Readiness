@@ -97,6 +97,7 @@
     }
 
     .slide-link {
+      font-family: inherit; background: none; border: none; text-align: left; width: 100%; color: inherit;
       padding: 0.6rem 0.75rem;
       border-radius: 6px;
       cursor: pointer;
@@ -716,11 +717,15 @@
         grid-template-columns: 1fr;
       }
     }
+  
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .slide-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
 </head>
 <body>
   <!-- Sidebar Navigation -->
-  <nav class="sidebar">
+  <nav class="sidebar" aria-label="Lesson chapters">
     <div class="logo">
       <h2>VUB Computer Skills</h2>
       <p>Intermediate Course</p>
@@ -734,49 +739,49 @@
     <div class="chapter">
       <div class="chapter-title">Warm-Up</div>
       <div class="chapter-slides">
-        <div class="slide-link active" data-slide="0">Welcome & Celebration</div>
-        <div class="slide-link" data-slide="1">Our 8-Week Journey</div>
+        <button type="button" class="slide-link active" data-slide="0">Welcome & Celebration</button>
+        <button type="button" class="slide-link" data-slide="1">Our 8-Week Journey</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Introduction</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="2">Today's Agenda</div>
+        <button type="button" class="slide-link" data-slide="2">Today's Agenda</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Mobile</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="3">Why Go Mobile?</div>
-        <div class="slide-link" data-slide="4">Gmail on Your Phone</div>
-        <div class="slide-link" data-slide="5">Drive Mobile</div>
+        <button type="button" class="slide-link" data-slide="3">Why Go Mobile?</button>
+        <button type="button" class="slide-link" data-slide="4">Gmail on Your Phone</button>
+        <button type="button" class="slide-link" data-slide="5">Drive Mobile</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Practice</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="6">Workshop Time!</div>
-        <div class="slide-link" data-slide="7">Break Time</div>
+        <button type="button" class="slide-link" data-slide="6">Workshop Time!</button>
+        <button type="button" class="slide-link" data-slide="7">Break Time</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Assessment</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="8">Post-Test Info</div>
-        <div class="slide-link" data-slide="9">How Did You Do?</div>
+        <button type="button" class="slide-link" data-slide="8">Post-Test Info</button>
+        <button type="button" class="slide-link" data-slide="9">How Did You Do?</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Celebration</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="10">Your Achievements</div>
-        <div class="slide-link" data-slide="11">Next Steps</div>
-        <div class="slide-link" data-slide="12">Course Complete!</div>
+        <button type="button" class="slide-link" data-slide="10">Your Achievements</button>
+        <button type="button" class="slide-link" data-slide="11">Next Steps</button>
+        <button type="button" class="slide-link" data-slide="12">Course Complete!</button>
       </div>
     </div>
 
@@ -787,7 +792,7 @@
     </div>
 
     <div class="progress-section">
-      <div class="progress-bar">
+      <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Lesson progress">
         <div class="progress-fill" id="progressFill"></div>
       </div>
       <div class="progress-text"><span id="progressText">0</span>% Complete</div>
@@ -796,11 +801,12 @@
 
   <!-- Main Content -->
   <div class="main-content">
+    <h1 class="sr-only">Week 8: Mobile Integration &amp; Course Review</h1>
     <div class="slides-container">
       <!-- Slide 0: Title -->
       <div class="slide active title-slide">
         <div class="slide-icon">🎓</div>
-        <h1 class="slide-title">Mobile Integration & Course Review</h1>
+        <h2 class="slide-title">Mobile Integration & Course Review</h2>
         <p class="slide-subtitle">Bringing it all together on the final day!</p>
         <p class="course-info">Week 8 of 8</p>
         <div class="final-week-badge">Final Week!</div>
@@ -809,7 +815,7 @@
       <!-- Slide 1: Our 8-Week Journey (NEW Warm-up) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Our 8-Week Journey</h1>
+          <h2 class="slide-title">Our 8-Week Journey</h2>
           <p class="slide-subtitle">Look how far we've come!</p>
         </div>
         <div class="slide-content">
@@ -872,7 +878,7 @@
       <!-- Slide 2: Today's Agenda -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Today's Agenda</h1>
+          <h2 class="slide-title">Today's Agenda</h2>
           <p class="slide-subtitle">Our final session together</p>
         </div>
         <div class="slide-content">
@@ -910,7 +916,7 @@
       <!-- Slide 3: Why Go Mobile -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Why Go Mobile?</h1>
+          <h2 class="slide-title">Why Go Mobile?</h2>
           <p class="slide-subtitle">Your skills work everywhere</p>
         </div>
         <div class="slide-content">
@@ -948,7 +954,7 @@
       <!-- Slide 4: Gmail Mobile -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Gmail on Your Phone</h1>
+          <h2 class="slide-title">Gmail on Your Phone</h2>
           <p class="slide-subtitle">Email in your pocket</p>
         </div>
         <div class="slide-content">
@@ -988,7 +994,7 @@
       <!-- Slide 5: Google Drive Mobile -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Google Drive Mobile</h1>
+          <h2 class="slide-title">Google Drive Mobile</h2>
           <p class="slide-subtitle">Your files, everywhere</p>
         </div>
         <div class="slide-content">
@@ -1026,7 +1032,7 @@
       <!-- Slide 6: Workshop Time! (NEW) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Workshop Time!</h1>
+          <h2 class="slide-title">Workshop Time!</h2>
           <p class="slide-subtitle">Mobile Setup & Course Review</p>
         </div>
         <div class="slide-content">
@@ -1060,7 +1066,7 @@
       <!-- Slide 7: Break Time (NEW) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Break Time</h1>
+          <h2 class="slide-title">Break Time</h2>
           <p class="slide-subtitle">10 minutes — Save your work!</p>
         </div>
         <div class="slide-content">
@@ -1074,7 +1080,7 @@
       <!-- Slide 8: Post-Test Info -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Post-Test Time!</h1>
+          <h2 class="slide-title">Post-Test Time!</h2>
           <p class="slide-subtitle">Let's see how much you've learned</p>
         </div>
         <div class="slide-content">
@@ -1111,7 +1117,7 @@
       <!-- Slide 9: How Did You Do? (NEW Show & Share) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">How Did You Do?</h1>
+          <h2 class="slide-title">How Did You Do?</h2>
           <p class="slide-subtitle">Let's celebrate your growth!</p>
         </div>
         <div class="slide-content">
@@ -1142,7 +1148,7 @@
       <!-- Slide 10: Your Achievements (UPDATED) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Your Achievements</h1>
+          <h2 class="slide-title">Your Achievements</h2>
           <p class="slide-subtitle">You should be proud!</p>
         </div>
         <div class="slide-content">
@@ -1180,7 +1186,7 @@
       <!-- Slide 11: Next Steps -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">What's Next?</h1>
+          <h2 class="slide-title">What's Next?</h2>
           <p class="slide-subtitle">Keep learning and growing</p>
         </div>
         <div class="slide-content">
@@ -1312,6 +1318,8 @@
       const progress = Math.round((currentSlide / (totalSlides - 1)) * 100);
       progressFill.style.width = progress + '%';
       progressText.textContent = progress;
+      var pbar = document.getElementById('progressBar');
+      if (pbar) pbar.setAttribute('aria-valuenow', String(progress));
 
       // Save progress
       saveProgress();
@@ -1399,6 +1407,7 @@
 
     // Confetti Animation
     function triggerConfetti() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       confettiContainer.classList.add('active');
       confettiContainer.innerHTML = '';
 

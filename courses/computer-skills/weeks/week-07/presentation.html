@@ -100,6 +100,7 @@
     }
 
     .slide-link {
+      font-family: inherit; background: none; border: none; text-align: left; width: 100%; color: inherit;
       padding: 0.6rem 0.75rem;
       border-radius: 6px;
       cursor: pointer;
@@ -683,11 +684,15 @@
         grid-template-columns: 1fr;
       }
     }
+  
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .slide-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
 </head>
 <body>
   <!-- Sidebar Navigation -->
-  <nav class="sidebar">
+  <nav class="sidebar" aria-label="Lesson chapters">
     <div class="logo">
       <h2>VUB Computer Skills</h2>
       <p>Intermediate Course</p>
@@ -701,59 +706,59 @@
     <div class="chapter">
       <div class="chapter-title">Warm-Up</div>
       <div class="chapter-slides">
-        <div class="slide-link active" data-slide="0">Welcome & Overview</div>
-        <div class="slide-link" data-slide="1">AI Myth vs. Fact</div>
+        <button type="button" class="slide-link active" data-slide="0">Welcome & Overview</button>
+        <button type="button" class="slide-link" data-slide="1">AI Myth vs. Fact</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Introduction</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="2">Learning Objectives</div>
-        <div class="slide-link" data-slide="3">AI Explained Simply</div>
+        <button type="button" class="slide-link" data-slide="2">Learning Objectives</button>
+        <button type="button" class="slide-link" data-slide="3">AI Explained Simply</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Understanding AI</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="4">AI in Daily Life</div>
-        <div class="slide-link" data-slide="5">How AI Works</div>
+        <button type="button" class="slide-link" data-slide="4">AI in Daily Life</button>
+        <button type="button" class="slide-link" data-slide="5">How AI Works</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Using ChatGPT</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="6">Getting Started</div>
-        <div class="slide-link" data-slide="7">ChatGPT Interface</div>
-        <div class="slide-link" data-slide="8">Writing Prompts</div>
-        <div class="slide-link" data-slide="9">Prompt Examples</div>
+        <button type="button" class="slide-link" data-slide="6">Getting Started</button>
+        <button type="button" class="slide-link" data-slide="7">ChatGPT Interface</button>
+        <button type="button" class="slide-link" data-slide="8">Writing Prompts</button>
+        <button type="button" class="slide-link" data-slide="9">Prompt Examples</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Practice</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="10">Workshop Time!</div>
-        <div class="slide-link" data-slide="11">Break</div>
+        <button type="button" class="slide-link" data-slide="10">Workshop Time!</button>
+        <button type="button" class="slide-link" data-slide="11">Break</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Safety & Evaluation</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="12">What AI Cannot Do</div>
-        <div class="slide-link" data-slide="13">Staying Safe</div>
-        <div class="slide-link" data-slide="14">Show & Share</div>
+        <button type="button" class="slide-link" data-slide="12">What AI Cannot Do</button>
+        <button type="button" class="slide-link" data-slide="13">Staying Safe</button>
+        <button type="button" class="slide-link" data-slide="14">Show & Share</button>
       </div>
     </div>
 
     <div class="chapter">
       <div class="chapter-title">Application</div>
       <div class="chapter-slides">
-        <div class="slide-link" data-slide="15">Your AI Challenge</div>
-        <div class="slide-link" data-slide="16">Week Complete!</div>
+        <button type="button" class="slide-link" data-slide="15">Your AI Challenge</button>
+        <button type="button" class="slide-link" data-slide="16">Week Complete!</button>
       </div>
     </div>
 
@@ -765,7 +770,7 @@
     </div>
 
     <div class="progress-section">
-      <div class="progress-bar">
+      <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Lesson progress">
         <div class="progress-fill" id="progressFill"></div>
       </div>
       <div class="progress-text"><span id="progressText">0</span>% Complete</div>
@@ -774,11 +779,12 @@
 
   <!-- Main Content -->
   <div class="main-content">
+    <h1 class="sr-only">Week 7: Introduction to AI Tools</h1>
     <div class="slides-container">
       <!-- Slide 0: Title -->
       <div class="slide active title-slide">
         <div class="slide-icon">🤖</div>
-        <h1 class="slide-title">Introduction to AI Tools</h1>
+        <h2 class="slide-title">Introduction to AI Tools</h2>
         <p class="slide-subtitle">Discover how AI assistants can help with everyday tasks</p>
         <p class="course-info">Week 7 of 8</p>
       </div>
@@ -786,7 +792,7 @@
       <!-- Slide 1: AI Myth vs. Fact (NEW warm-up) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">AI Myth vs. Fact</h1>
+          <h2 class="slide-title">AI Myth vs. Fact</h2>
           <p class="slide-subtitle">How much do you know about artificial intelligence?</p>
         </div>
         <div class="slide-content">
@@ -831,7 +837,7 @@
       <!-- Slide 2: Learning Objectives -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Today's Learning Objectives</h1>
+          <h2 class="slide-title">Today's Learning Objectives</h2>
           <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
         </div>
         <div class="slide-content">
@@ -869,7 +875,7 @@
       <!-- Slide 3: AI Explained Simply -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">What is Artificial Intelligence?</h1>
+          <h2 class="slide-title">What is Artificial Intelligence?</h2>
           <p class="slide-subtitle">A simple explanation</p>
         </div>
         <div class="slide-content">
@@ -906,7 +912,7 @@
       <!-- Slide 4: AI in Daily Life -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">AI You Already Use</h1>
+          <h2 class="slide-title">AI You Already Use</h2>
           <p class="slide-subtitle">AI is more common than you might think!</p>
         </div>
         <div class="slide-content">
@@ -944,7 +950,7 @@
       <!-- Slide 5: How AI Assistants Work -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">How AI Assistants Work</h1>
+          <h2 class="slide-title">How AI Assistants Work</h2>
           <p class="slide-subtitle">Understanding the basics</p>
         </div>
         <div class="slide-content">
@@ -979,7 +985,7 @@
       <!-- Slide 6: Getting Started with ChatGPT -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Getting Started with ChatGPT</h1>
+          <h2 class="slide-title">Getting Started with ChatGPT</h2>
           <p class="slide-subtitle">How to access this popular AI tool</p>
         </div>
         <div class="slide-content">
@@ -1013,7 +1019,7 @@
       <!-- Slide 7: The ChatGPT Interface -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">The ChatGPT Interface</h1>
+          <h2 class="slide-title">The ChatGPT Interface</h2>
           <p class="slide-subtitle">What you'll see on screen</p>
         </div>
         <div class="slide-content">
@@ -1048,7 +1054,7 @@
       <!-- Slide 8: Writing Good Prompts -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Writing Good Prompts</h1>
+          <h2 class="slide-title">Writing Good Prompts</h2>
           <p class="slide-subtitle">Get better answers by asking better questions</p>
         </div>
         <div class="slide-content">
@@ -1086,7 +1092,7 @@
       <!-- Slide 9: Prompt Examples -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Prompt Examples</h1>
+          <h2 class="slide-title">Prompt Examples</h2>
           <p class="slide-subtitle">See the difference good prompts make</p>
         </div>
         <div class="slide-content">
@@ -1116,7 +1122,7 @@
       <!-- Slide 10: Workshop Time! (NEW) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Workshop Time!</h1>
+          <h2 class="slide-title">Workshop Time!</h2>
           <p class="slide-subtitle">Hands-on practice with ChatGPT</p>
         </div>
         <div class="slide-content">
@@ -1154,7 +1160,7 @@
       <!-- Slide 11: Break Time (NEW) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Break Time</h1>
+          <h2 class="slide-title">Break Time</h2>
           <p class="slide-subtitle">10 minutes — Don't close ChatGPT!</p>
         </div>
         <div class="slide-content">
@@ -1184,7 +1190,7 @@
       <!-- Slide 12: What AI Cannot Do -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">What AI Cannot Do</h1>
+          <h2 class="slide-title">What AI Cannot Do</h2>
           <p class="slide-subtitle">Understanding AI's limitations</p>
         </div>
         <div class="slide-content">
@@ -1222,7 +1228,7 @@
       <!-- Slide 13: Staying Safe with AI -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Staying Safe with AI</h1>
+          <h2 class="slide-title">Staying Safe with AI</h2>
           <p class="slide-subtitle">Important safety guidelines</p>
         </div>
         <div class="slide-content">
@@ -1265,7 +1271,7 @@
       <!-- Slide 14: Show & Share (NEW evaluation) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Show & Share</h1>
+          <h2 class="slide-title">Show & Share</h2>
           <p class="slide-subtitle">Share your best prompts and biggest surprises!</p>
         </div>
         <div class="slide-content">
@@ -1305,7 +1311,7 @@
       <!-- Slide 15: Your AI Challenge (NEW application) -->
       <div class="slide">
         <div class="slide-header">
-          <h1 class="slide-title">Your AI Challenge</h1>
+          <h2 class="slide-title">Your AI Challenge</h2>
           <p class="slide-subtitle">Put your AI skills to work this week!</p>
         </div>
         <div class="slide-content">
@@ -1433,6 +1439,8 @@
       const progress = Math.round((currentSlide / (totalSlides - 1)) * 100);
       progressFill.style.width = progress + '%';
       progressText.textContent = progress;
+      var pbar = document.getElementById('progressBar');
+      if (pbar) pbar.setAttribute('aria-valuenow', String(progress));
 
       // Save progress
       saveProgress();
@@ -1520,6 +1528,7 @@
 
     // Confetti Animation
     function triggerConfetti() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       confettiContainer.classList.add('active');
       confettiContainer.innerHTML = '';
 
