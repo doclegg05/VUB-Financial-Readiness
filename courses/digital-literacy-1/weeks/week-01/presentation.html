@@ -19,12 +19,14 @@
       --success: #28A745;
       --va-blue: #003F72;
       --va-red: #C4262E;
+      --vub-textsize-fab-bottom: 90px; /* lift the bottom-right Text Size control above the nav bar */
     }
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: var(--off-white);
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
       display: flex;
     }
 
@@ -214,13 +216,14 @@
       margin-left: 280px;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+      height: 100vh;
     }
 
     /* Slides Container */
     .slides-container {
       flex: 1;
-      padding: 2rem;
+      min-height: 0;
+      padding: 1.5rem 2rem;
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -234,8 +237,8 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.1);
       width: 100%;
       max-width: 1000px;
-      min-height: 600px;
-      padding: 3rem;
+      min-height: 0;
+      padding: 2rem 2.5rem;
       animation: fadeIn 0.4s ease;
     }
 
