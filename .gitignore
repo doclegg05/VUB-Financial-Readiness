@@ -32,6 +32,8 @@ design.md/
 # Playwright test output
 test-results/
 playwright-report/
+# Local static-preview logs
+.serve-*.log
 # Source logo lives in assets/; ignore the root working copy
 /VUB Logo.png
 # Legacy course subrepos (archived in M3-D; tracked by their own git)
@@ -43,3 +45,11 @@ playwright-report/
 # committed canonically. Recovery = on-disk archive + freeze tag + git history.
 /_archive/*
 !/_archive/README.md
+
+# --- Local scratch / junk / student PII — never commit (cleanup 2026-06-24) ---
+# Stray static-preview error logs (companion to .serve-*.log above)
+.serve-*.err
+# "Save Page As" artifacts (…_files/ folders saved from the browser)
+/VUB-Financial-Readiness_*_files/
+# Student paperwork submissions — PII; must never reach a public repo
+/VUB Financial Readiness Paperwork Submission/

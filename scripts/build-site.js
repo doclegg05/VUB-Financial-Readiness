@@ -50,7 +50,7 @@ for (const item of PUBLISH) copyRecursive(path.join(ROOT, item), path.join(SITE_
 // Critical files that must survive the copy — fail loudly if a refactor ever drops them.
 const REQUIRED_FILES = [
   "index.html", "courses.json",
-  "shared/brand.css", "shared/shell.css", "shared/shell.js",
+  "shared/brand.css", "shared/shell.css", "shared/shell.js", "shared/text-size.js",
   "shared/progress.js", "shared/glossary.js",
   "assets/vub-usflag.svg", "assets/vub-seal-white.png",
   "assets/fonts/source-sans-3-latin-400-normal.woff2",

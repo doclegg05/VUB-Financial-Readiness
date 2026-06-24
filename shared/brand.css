@@ -59,8 +59,12 @@
 }
 
 /* Older-learner text-size control hook: set data-text-size on <html> */
-html[data-text-size="lg"]  { --fs-base: 20px; --fs-slide: 28px; --lh: 1.8; }
-html[data-text-size="xl"]  { --fs-base: 22px; --fs-slide: 32px; --lh: 1.85; }
+@media screen {
+  html[data-text-size="sm"]  { font-size: 94%; --fs-base: 16px; --fs-slide: 22px; --lh: 1.6; }
+  html[data-text-size="lg"]  { font-size: 112.5%; --fs-base: 22px; --fs-slide: 32px; --lh: 1.85; }
+  html[data-text-size="xl"]  { font-size: 125%; --fs-base: 26px; --fs-slide: 38px; --lh: 1.95; }
+  html[data-text-size="xxl"] { font-size: 137.5%; --fs-base: 30px; --fs-slide: 44px; --lh: 2.05; }
+}
 
 /* Baseline applications (opt-in via class to avoid disturbing existing pages in M2) */
 .vub-brand, .vub-brand body {

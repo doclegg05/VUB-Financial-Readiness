@@ -6,7 +6,7 @@
 (function (global) {
   'use strict';
   var TS_KEY = 'vub:textsize:v1';
-  var SIZES = ['', 'lg', 'xl'];                 // '' = default
+  var SIZES = ['sm', '', 'lg', 'xl', 'xxl'];    // '' = default
   var SEAL = '/assets/vub-seal-white.png';
 
   function el(html) { var t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstChild; }
@@ -34,14 +34,12 @@
         '<span class="sp"></span>' +
         '<nav class="vub-controls" aria-label="Site controls">' +
           '<span class="vub-textsize"><span class="lab">Text Size</span>' +
-            '<button type="button" class="minus" aria-label="Decrease text size">−</button>' +
-            '<button type="button" class="plus" aria-label="Increase text size">+</button></span>' +
-          '<a class="vub-help" href="#"><span class="i" aria-hidden="true">?</span> Help</a>' +
-          '<a class="vub-instr" href="/instructors/">For Instructors <span aria-hidden="true">▸</span></a>' +
+            '<button type="button" class="minus" data-vub-textsize-minus aria-label="Decrease text size">A−</button>' +
+            '<button type="button" class="plus" data-vub-textsize-plus aria-label="Increase text size">A+</button></span>' +
+          '<a class="vub-help" href="#" aria-label="Open help"><span class="i" aria-hidden="true">?</span><span class="label">Help</span></a>' +
+          '<a class="vub-instr" href="/instructors/" aria-label="Open instructor area"><span class="label">For Instructors</span><span class="chev" aria-hidden="true">▸</span></a>' +
         '</nav>' +
       '</div></header>');
-    bar.querySelector('.minus').addEventListener('click', function () { step(-1); });
-    bar.querySelector('.plus').addEventListener('click', function () { step(1); });
     bar.querySelector('.vub-help').addEventListener('click', function (e) {
       e.preventDefault();
       if (global.VubGlossary && global.VubGlossary.open) global.VubGlossary.open();

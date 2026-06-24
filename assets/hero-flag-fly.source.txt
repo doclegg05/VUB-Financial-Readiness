@@ -1,0 +1,23 @@
+Hero flag video provenance
+
+Local file:
+assets/hero-flag-fly.webm
+
+Source:
+DVIDS video "American Flag"
+https://www.dvidshub.net/video/941301/american-flag
+
+Source details:
+Video by Rodney Turner, Defense Information Systems Agency Joint Staff Support Center.
+Video ID: 941301
+VIRIN: 241024-D-YA157-8712
+Date taken: 2024-10-24
+Length: 00:00:16
+
+DVIDS marks this work as PUBLIC DOMAIN. DVIDS also states that Department of War/Defense
+visual information use is subject to its public-use notice and non-endorsement restrictions:
+https://www.dvidshub.net/about/copyright
+
+Processing:
+Downloaded from the public MP4 source exposed on the DVIDS page, removed audio, scaled to
+1280x720, and encoded as VP9 WebM for the offline homepage hero.
