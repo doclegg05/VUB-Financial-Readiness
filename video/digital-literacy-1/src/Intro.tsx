@@ -1,7 +1,9 @@
 import React from 'react';
 import {
   AbsoluteFill,
+  Audio,
   Sequence,
+  staticFile,
   useCurrentFrame,
   interpolate,
 } from 'remotion';
@@ -317,9 +319,11 @@ export const Intro: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: NAVY }}>
       <Sequence durationInFrames={240}>
+        <Audio src={staticFile('vo-1-welcome.mp3')} />
         <Title />
       </Sequence>
       <Sequence from={240} durationInFrames={480}>
+        <Audio src={staticFile('vo-2-what.mp3')} />
         <Centered
           eyebrow="What is digital literacy?"
           heading="The confidence to use today's technology"
@@ -327,6 +331,7 @@ export const Intro: React.FC = () => {
         />
       </Sequence>
       <Sequence from={720} durationInFrames={450}>
+        <Audio src={staticFile('vo-3-ic3.mp3')} />
         <Centered
           eyebrow="A recognized standard"
           heading="Aligned to IC3 GS6 — Level 1"
@@ -334,9 +339,11 @@ export const Intro: React.FC = () => {
         />
       </Sequence>
       <Sequence from={1170} durationInFrames={1500}>
+        <Audio src={staticFile('vo-4-roadmap.mp3')} />
         <Roadmap />
       </Sequence>
       <Sequence from={2670} durationInFrames={750}>
+        <Audio src={staticFile('vo-5-how.mp3')} />
         <Bullets
           eyebrow="How the class works"
           heading="Hands-on, at your pace"
@@ -348,6 +355,7 @@ export const Intro: React.FC = () => {
         />
       </Sequence>
       <Sequence from={3420} durationInFrames={750}>
+        <Audio src={staticFile('vo-6-why.mp3')} />
         <Bullets
           eyebrow="Why it matters"
           heading="Skills that serve you"
@@ -359,6 +367,7 @@ export const Intro: React.FC = () => {
         />
       </Sequence>
       <Sequence from={4170} durationInFrames={630}>
+        <Audio src={staticFile('vo-7-closing.mp3')} />
         <Closing />
       </Sequence>
     </AbsoluteFill>
