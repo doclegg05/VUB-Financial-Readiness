@@ -272,7 +272,7 @@ VUB Lessons/
 **Phase:** Implementation Complete (All 8 Weeks)
 **Last Update:** February 2026
 
-> **Related course (June 2026):** A separate **Digital Literacy — Level 1** course (IC3 GS6-aligned; 5 weeks = 4 lessons + a review/testing day) was added to the platform at `courses/digital-literacy-1/` and the catalog (`courses.json`). It is the first rung of a planned Level 1 → 2 → 3 ladder and is independent of this 8-week Intermediate course. Design spec: `docs/specs/2026-06-24-digital-literacy-l1-design.md`. (The Remotion intro video for it is still pending.)
+> **Related course (June 2026):** A separate **Digital Literacy — Level 1** course (IC3 GS6-aligned; 5 weeks = 4 lessons + a review/testing day) was added to the platform at `courses/digital-literacy-1/` and the catalog (`courses.json`). It is the first rung of a planned Level 1 → 2 → 3 ladder and is independent of this 8-week Intermediate course. Design spec: `docs/specs/2026-06-24-digital-literacy-l1-design.md`. (The Remotion intro video is complete — rendered with an ElevenLabs voiceover at `video/digital-literacy-1/out/dl1-intro.mp4`.)
 
 ### Completed Work
 - [x] Week 1: VA Online Services presentation, syllabus, and 3 handouts
