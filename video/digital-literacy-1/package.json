@@ -6,6 +6,13 @@
   "scripts": {
     "start": "remotion studio src/index.ts",
     "render": "remotion render src/index.ts Intro out/dl1-intro.mp4",
+    "render:week1": "remotion render src/index.ts Week1Overview out/dl1-week1-overview.mp4",
+    "render:week2": "remotion render src/index.ts Week2Overview out/dl1-week2-overview.mp4",
+    "render:week2lesson": "remotion render src/index.ts Week2Lesson out/dl1-week2-lesson.mp4",
+    "render:week1lesson": "remotion render src/index.ts Week1Lesson out/dl1-week1-lesson.mp4",
+    "render:week3lesson": "remotion render src/index.ts Week3Lesson out/dl1-week3-lesson.mp4",
+    "render:week4lesson": "remotion render src/index.ts Week4Lesson out/dl1-week4-lesson.mp4",
+    "render:week5lesson": "remotion render src/index.ts Week5Lesson out/dl1-week5-lesson.mp4",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {
