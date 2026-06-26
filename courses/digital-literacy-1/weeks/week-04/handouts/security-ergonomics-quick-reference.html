@@ -8,13 +8,13 @@
   :root { --va-blue: #003F72; --primary: #1B365D; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.95rem; color: #1a1a1a;
-    max-width: 8.5in; padding: 0.5in; margin: 0 auto; background: #fff; line-height: 1.3; }
+    max-width: 8.5in; padding: 0.5in; margin: 0 auto; background: #fff; line-height: 1.5; }
   .header { background: linear-gradient(135deg, #003F72 0%, #1B365D 100%); color: #fff;
     padding: 0.5rem 0.75rem; border-radius: 6px; margin-bottom: 0.4rem; display: flex;
     justify-content: space-between; align-items: center; flex-wrap: wrap; }
   .header h1 { font-size: 1.15rem; font-weight: 700; }
   .badge { background: rgba(255,255,255,0.25); padding: 0.15rem 0.5rem; border-radius: 3px;
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; }
+    font-size: 0.875rem; font-weight: 700; letter-spacing: 0.05em; }
   .header .subtitle { width: 100%; font-size: 0.75rem; opacity: 0.9; margin-top: 0.15rem; }
   .key { display: inline-block; background: #f0f0f0; border: 2px solid #ccc;
     border-bottom: 3px solid #aaa; border-radius: 4px; padding: 0.1rem 0.4rem;
@@ -23,7 +23,7 @@
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
   .section { break-inside: avoid; }
   .section-header { padding: 0.2rem 0.5rem; border-radius: 3px; color: #fff;
-    font-weight: 700; font-size: 0.8rem; margin-bottom: 0.2rem; }
+    font-weight: 700; font-size: 0.9rem; margin-bottom: 0.2rem; }
   .sh-blue { background: var(--primary); }
   .sh-light { background: #2E5A88; }
   .sh-teal { background: #1a6b5a; }
@@ -42,7 +42,7 @@
   ul.list li::before { content: "\2713"; position: absolute; left: 0; color: #1a6b5a; font-weight: 700; }
   ul.list.dont li::before { content: "\2717"; color: #8B1432; }
   .plus { margin: 0 0.1rem; font-weight: 600; color: #666; }
-  .footer { margin-top: 0.4rem; text-align: center; font-size: 0.7rem; color: #666;
+  .footer { margin-top: 0.4rem; text-align: center; font-size: 0.875rem; color: #666;
     border-top: 1px solid #ddd; padding-top: 0.25rem; }
   .tip { background: #FFF8E1; border: 1px solid #FFD54F; border-radius: 4px;
     padding: 0.25rem 0.5rem; margin-top: 0.35rem; font-size: 0.8rem; text-align: center; }
@@ -51,17 +51,28 @@
     body { padding: 0.25in; }
     .header, .section-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
+  @media screen and (max-width: 640px) {
+    body { max-width: 100%; padding: 1rem; }
+    .header { align-items: flex-start; gap: 0.35rem; }
+    .grid { grid-template-columns: 1fr; }
+    .section,
+    table { min-width: 0; }
+    td { overflow-wrap: anywhere; }
+    td:first-child { width: auto; white-space: normal; }
+    .key { white-space: nowrap; }
+  }
 </style>
 </head>
 <body>
-<div class="header">
+<header class="header">
   <h1>Security &amp; Ergonomics &mdash; Quick Reference</h1>
   <span class="badge">KEEP AT YOUR DESK</span>
   <div class="subtitle">VUB Digital Literacy — Level 1 (IC3 GS6 Aligned) &mdash; Week 4</div>
-</div>
+</header>
 
+<main>
 <div class="section essential">
-  <div class="section-header">&#128274; Password &amp; Passphrase Rules (start here!)</div>
+  <h2 class="section-header">&#128274; Password &amp; Passphrase Rules (start here!)</h2>
   <table>
     <tr><td>Make it long</td><td>Use a passphrase of 12+ characters &mdash; e.g. <code>PurpleTrout-Coffee-Sunrise7</code></td></tr>
     <tr><td>Use unrelated words</td><td>Random words are strong and easy to remember; add a capital and a number</td></tr>
@@ -74,7 +85,7 @@
 
 <div class="grid">
   <div class="section">
-    <div class="section-header sh-blue">Lock &amp; Reset</div>
+    <h2 class="section-header sh-blue">Lock &amp; Reset</h2>
     <table>
       <tr><td><span class="key">Win</span> <span class="plus">+</span> <span class="key">L</span></td><td>Lock your screen instantly</td></tr>
       <tr><td>Step away?</td><td>Always lock it first</td></tr>
@@ -85,7 +96,7 @@
   </div>
 
   <div class="section">
-    <div class="section-header sh-light">Clear Browser Data</div>
+    <h2 class="section-header sh-light">Clear Browser Data</h2>
     <table>
       <tr><td><span class="key">Ctrl</span><span class="plus">+</span><span class="key">Shift</span><span class="plus">+</span><span class="key">Del</span></td><td>Open "Clear browsing data"</td></tr>
       <tr><td>Choose</td><td>History, cookies, cached files</td></tr>
@@ -93,7 +104,7 @@
       <tr><td>Note</td><td>Clearing cookies signs you out of sites</td></tr>
     </table>
 
-    <div class="section-header sh-teal" style="margin-top:0.35rem">Private Browsing</div>
+    <h3 class="section-header sh-teal" style="margin-top:0.35rem">Private Browsing</h3>
     <table>
       <tr><td><span class="key">Ctrl</span><span class="plus">+</span><span class="key">Shift</span><span class="plus">+</span><span class="key">N</span></td><td>Incognito (Chrome)</td></tr>
       <tr><td><span class="key">Ctrl</span><span class="plus">+</span><span class="key">Shift</span><span class="plus">+</span><span class="key">P</span></td><td>InPrivate (Edge / Firefox)</td></tr>
@@ -105,7 +116,7 @@
 
 <div class="grid" style="margin-top:0.4rem;">
   <div class="section">
-    <div class="section-header sh-red">&#128065; Spot Fake Info &amp; Scams</div>
+    <h2 class="section-header sh-red">&#128065; Spot Fake Info &amp; Scams</h2>
     <ul class="list">
       <li>Who wrote it? Look for a named author or organization</li>
       <li>Where? Trust .gov, major news, and known organizations</li>
@@ -122,7 +133,7 @@
   </div>
 
   <div class="section">
-    <div class="section-header sh-purple">&#128188; Desk Ergonomics</div>
+    <h2 class="section-header sh-purple">&#128188; Desk Ergonomics</h2>
     <ul class="list">
       <li>Screen about an arm's length away</li>
       <li>Top of screen at or just below eye level</li>
@@ -131,7 +142,7 @@
       <li>20-20-20: every 20 min, look 20 ft away for 20 sec</li>
       <li>Stand and stretch every half hour</li>
     </ul>
-    <div class="section-header sh-blue" style="margin-top:0.35rem">Protect Your PII</div>
+    <h3 class="section-header sh-blue" style="margin-top:0.35rem">Protect Your PII</h3>
     <ul class="list">
       <li>Never send SSN or passwords by email/text</li>
       <li>Look for the lock icon (https) before you type it</li>
@@ -141,6 +152,7 @@
 </div>
 
 <div class="tip"><strong>One habit a day:</strong> a long passphrase, <span class="key">Win</span>+<span class="key">L</span> when you leave, and clearing data on shared PCs keep you safe.</div>
+</main>
 <div class="footer">Veterans Upward Bound &mdash; West Virginia &nbsp;|&nbsp; Keep this card at your desk for quick reference!</div>
   <script src="/shared/text-size.js" defer></script>
 </body>

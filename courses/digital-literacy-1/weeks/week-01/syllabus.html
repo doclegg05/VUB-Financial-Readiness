@@ -11,6 +11,11 @@
       box-sizing: border-box;
     }
 
+    *:focus-visible {
+      outline: 3px solid #C9A227;
+      outline-offset: 2px;
+    }
+
     :root {
       --primary: #1B365D;
       --primary-light: #2C4A7C;
@@ -112,7 +117,7 @@
     }
 
     .objectives-list li::before {
-      content: "🎯";
+      content: "\2022";
       position: absolute;
       left: 0;
     }
@@ -176,7 +181,7 @@
       padding: 0.75rem 1rem;
     }
 
-    .timeline-content h4 {
+    .timeline-content h3 {
       color: var(--primary);
       font-size: 0.95rem;
       margin-bottom: 0.25rem;
@@ -206,7 +211,7 @@
 
     .activity-demo {
       background: rgba(201, 162, 39, 0.2);
-      color: #8B7500;
+      color: #6B5900;
     }
 
     .activity-practice {
@@ -221,7 +226,7 @@
 
     .activity-warmup {
       background: rgba(255, 152, 0, 0.15);
-      color: #E65100;
+      color: #B33F00;
     }
 
     .activity-break {
@@ -453,7 +458,7 @@
     }
 
     .objmap-box li::before {
-      content: "📘";
+      content: "\2022";
       position: absolute;
       left: 0;
     }
@@ -503,6 +508,7 @@
     </div>
   </header>
 
+  <main>
   <div class="overview-box">
     <h2>🎯 Learning Objectives</h2>
     <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--gray);">By the end of this session, participants will be able to:</p>
@@ -535,63 +541,63 @@
       <div class="timeline-item">
         <div class="timeline-time">0:00–0:10</div>
         <div class="timeline-content">
-          <h4>Welcome & Course Kickoff <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <h3>Welcome & Course Kickoff <span class="activity-type activity-warmup">Warm-Up</span></h3>
           <p>Introduce yourself and the 5-week Digital Literacy course. Ask: "What is one thing about your computer you've always wondered about?" Distribute handouts while students settle in.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">0:10–0:30</div>
         <div class="timeline-content">
-          <h4>Pre-Test Assessment <span class="activity-type activity-assessment">Assessment</span></h4>
-          <p>Have participants open and complete the ~20-question Pre-Test (slide 17 links to it). Reassure them it is a baseline, not a grade. Let them work at their own pace.</p>
+          <h3>Pre-Test Assessment <span class="activity-type activity-assessment">Assessment</span></h3>
+          <p>Have participants open and complete the ~20-question browser Pre-Test (slide 2 links to it). Reassure them it is a baseline, not a grade. Let them work at their own pace. When they finish, have them click <strong>Print Report (PDF)</strong> if you want a saved or printed baseline record.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">0:30–0:40</div>
         <div class="timeline-content">
-          <h4>Objectives & Why This Matters <span class="activity-type activity-lecture">Lecture</span></h4>
+          <h3>Objectives & Why This Matters <span class="activity-type activity-lecture">Lecture</span></h3>
           <p>Review today's objectives (slides 1–2). Frame the lesson: understanding the parts of a computer makes everything in Weeks 2–5 easier and removes the fear of "breaking something."</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">0:40–1:00</div>
         <div class="timeline-content">
-          <h4>Devices, Ports & Hardware <span class="activity-type activity-lecture">Presentation</span></h4>
+          <h3>Devices, Ports & Hardware <span class="activity-type activity-lecture">Presentation</span></h3>
           <p>Slides 3–7: input/output devices, ports & connectors, device types, inside the box, memory vs. storage. Hold up a real USB and HDMI cable if available. Use the projector and point to ports on the demo PC.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:00–1:10</div>
         <div class="timeline-content">
-          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <h3>Break <span class="activity-type activity-break">Break</span></h3>
           <p>10-minute break. Encourage participants to stretch and use the restroom.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:10–1:30</div>
         <div class="timeline-content">
-          <h4>Software & Operating Systems <span class="activity-type activity-lecture">Presentation</span></h4>
+          <h3>Software & Operating Systems <span class="activity-type activity-lecture">Presentation</span></h3>
           <p>Slides 8–12: system vs. application software, proprietary vs. open source, installing safely, what an OS is, and Windows/macOS/mobile. Stress the "install only from trusted sources" safety point.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:30–1:38</div>
         <div class="timeline-content">
-          <h4>Knowledge Check <span class="activity-type activity-eval">Evaluation</span></h4>
+          <h3>Knowledge Check <span class="activity-type activity-eval">Evaluation</span></h3>
           <p>Slide 13: work the three reveal questions together as a group. Let students answer aloud before you reveal each one. Clear up any confusion before the lab.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:38–1:55</div>
         <div class="timeline-content">
-          <h4>Hands-On Lab — "Meet Your Computer" <span class="activity-type activity-practice">Practice</span></h4>
+          <h3>Hands-On Lab — "Meet Your Computer" <span class="activity-type activity-practice">Practice</span></h3>
           <p>Hand out the "Meet Your Computer Lab" sheet. Students find ports/peripherals, open <em>This PC</em> and <em>Settings</em> to read RAM &amp; storage, list installed apps, and identify the Windows version. Walk the room and assist. (Exercises 1.2, 1.4, 1.5.)</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:55–2:00</div>
         <div class="timeline-content">
-          <h4>Wrap-Up & Take-Home Challenge <span class="activity-type activity-apply">Application</span></h4>
+          <h3>Wrap-Up & Take-Home Challenge <span class="activity-type activity-apply">Application</span></h3>
           <p>Slides 14–16: recap key takeaways. Challenge: at home, find one device and name its ports. Preview Week 2 (Getting Online). Remind students to keep the quick-reference card.</p>
         </div>
       </div>
@@ -626,7 +632,7 @@
           <li>Projector connected & working</li>
           <li>Each workstation powered on</li>
           <li>Presentation URL on each screen</li>
-          <li>Pre-Test URL bookmarked</li>
+          <li>Pre-Test URL bookmarked and PDF report flow tested</li>
         </ul>
       </div>
       <div class="material-category">
@@ -699,6 +705,8 @@
       <li><strong>Connection:</strong> This week's hardware/OS foundation makes navigating the desktop and browser in Week 2 far easier</li>
     </ul>
   </div>
+
+  </main>
 
   <footer class="footer">
     <p><strong>Veterans Upward Bound — West Virginia</strong></p>

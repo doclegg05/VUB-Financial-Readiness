@@ -14,7 +14,7 @@
     justify-content: space-between; align-items: center; flex-wrap: wrap; }
   .header h1 { font-size: 1.2rem; font-weight: 700; }
   .badge { background: var(--accent); color: var(--primary); padding: 0.15rem 0.55rem;
-    border-radius: 12px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;
+    border-radius: 12px; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.05em;
     text-transform: uppercase; }
   .header .subtitle { width: 100%; font-size: 0.78rem; opacity: 0.92; margin-top: 0.2rem; }
   .intro { background: #F5F7FA; border-left: 4px solid var(--accent); border-radius: 0 6px 6px 0;
@@ -29,7 +29,7 @@
   .domain-body { padding: 0.45rem 0.6rem; }
   .domain-body p.lead { font-size: 0.8rem; color: #555; margin-bottom: 0.35rem; font-style: italic; }
   .domain-body ul { list-style: none; }
-  .domain-body li { padding: 0.18rem 0 0.18rem 1rem; position: relative; font-size: 0.82rem; }
+  .domain-body li { padding: 0.18rem 0 0.18rem 1rem; position: relative; font-size: 0.9rem; }
   .domain-body li::before { content: "•"; position: absolute; left: 0.15rem; color: var(--va-blue);
     font-weight: 700; }
   .term { font-weight: 700; color: var(--primary); }
@@ -37,7 +37,7 @@
     border-bottom: 2px solid #aaa; border-radius: 3px; padding: 0 0.3rem;
     font-family: 'Consolas', 'Courier New', monospace; font-size: 0.78rem; font-weight: 600;
     color: var(--primary); }
-  .footer { margin-top: 0.6rem; text-align: center; font-size: 0.72rem; color: #666;
+  .footer { margin-top: 0.6rem; text-align: center; font-size: 0.875rem; color: #666;
     border-top: 1px solid #ddd; padding-top: 0.3rem; }
   @media print {
     body { padding: 0.3in; font-size: 0.9rem; }
@@ -46,12 +46,13 @@
 </style>
 </head>
 <body>
-<div class="header">
+<header class="header">
   <h1>Digital Literacy Level 1 &mdash; Study Guide</h1>
   <span class="badge">Exam Prep</span>
   <div class="subtitle">VUB Digital Literacy &mdash; Level 1 (IC3 GS6 Aligned) &nbsp;|&nbsp; Cumulative review of all 7 topics</div>
-</div>
+</header>
 
+<main>
 <div class="intro">
   <strong>How to use this guide:</strong> One section per topic, covering the key terms and ideas to know for the Post-Test.
   Read it through, then quiz yourself by covering the answers. You learned all of this in Weeks 1&ndash;4 &mdash; this just brings it together.
@@ -61,7 +62,7 @@
 
   <!-- Domain 1 -->
   <div class="domain">
-    <div class="domain-header"><span class="domain-num">1</span> Technology Basics</div>
+    <h2 class="domain-header"><span class="domain-num">1</span> Technology Basics</h2>
     <div class="domain-body">
       <p class="lead">Devices, hardware, software, and operating systems.</p>
       <ul>
@@ -77,7 +78,7 @@
 
   <!-- Domain 2 -->
   <div class="domain">
-    <div class="domain-header"><span class="domain-num">2</span> Digital Citizenship</div>
+    <h2 class="domain-header"><span class="domain-num">2</span> Digital Citizenship</h2>
     <div class="domain-body">
       <p class="lead">Your identity, reputation, and behavior online.</p>
       <ul>
@@ -92,7 +93,7 @@
 
   <!-- Domain 3 -->
   <div class="domain">
-    <div class="domain-header"><span class="domain-num">3</span> Information Management</div>
+    <h2 class="domain-header"><span class="domain-num">3</span> Information Management</h2>
     <div class="domain-body">
       <p class="lead">Searching and using online content responsibly.</p>
       <ul>
@@ -107,7 +108,7 @@
 
   <!-- Domain 4 -->
   <div class="domain">
-    <div class="domain-header"><span class="domain-num">4</span> Content Creation</div>
+    <h2 class="domain-header"><span class="domain-num">4</span> Content Creation</h2>
     <div class="domain-body">
       <p class="lead">Making, saving, citing, and printing your work.</p>
       <ul>
@@ -122,7 +123,7 @@
 
   <!-- Domain 5 -->
   <div class="domain">
-    <div class="domain-header"><span class="domain-num">5</span> Communication</div>
+    <h2 class="domain-header"><span class="domain-num">5</span> Communication</h2>
     <div class="domain-body">
       <p class="lead">Expressing yourself and interacting online.</p>
       <ul>
@@ -137,7 +138,7 @@
 
   <!-- Domain 6 -->
   <div class="domain">
-    <div class="domain-header"><span class="domain-num">6</span> Collaboration</div>
+    <h2 class="domain-header"><span class="domain-num">6</span> Collaboration</h2>
     <div class="domain-body">
       <p class="lead">Working together with others online.</p>
       <ul>
@@ -152,7 +153,7 @@
 
   <!-- Domain 7 -->
   <div class="domain">
-    <div class="domain-header"><span class="domain-num">7</span> Safety &amp; Security</div>
+    <h2 class="domain-header"><span class="domain-num">7</span> Safety &amp; Security</h2>
     <div class="domain-body">
       <p class="lead">Protecting your devices, your data, and yourself.</p>
       <ul>
@@ -168,7 +169,7 @@
 
   <!-- Lightning facts -->
   <div class="domain">
-    <div class="domain-header"><span class="domain-num">★</span> Must-Know Quick Facts</div>
+    <h2 class="domain-header"><span class="domain-num">★</span> Must-Know Quick Facts</h2>
     <div class="domain-body">
       <p class="lead">The shortcuts and terms that come up most.</p>
       <ul>
@@ -182,6 +183,7 @@
   </div>
 
 </div>
+</main>
 
 <div class="footer">
   Veterans Upward Bound &mdash; West Virginia &nbsp;|&nbsp; Digital Literacy Level 1 Study Guide &nbsp;|&nbsp; Keep this for your Post-Test and beyond!

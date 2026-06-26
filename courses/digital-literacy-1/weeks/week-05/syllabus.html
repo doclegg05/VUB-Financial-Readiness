@@ -11,6 +11,11 @@
       box-sizing: border-box;
     }
 
+    *:focus-visible {
+      outline: 3px solid #C9A227;
+      outline-offset: 2px;
+    }
+
     :root {
       --primary: #1B365D;
       --primary-light: #2C4A7C;
@@ -112,7 +117,7 @@
     }
 
     .objectives-list li::before {
-      content: "🎯";
+      content: "\2022";
       position: absolute;
       left: 0;
     }
@@ -165,7 +170,7 @@
       padding: 0.75rem 1rem;
     }
 
-    .timeline-content h4 {
+    .timeline-content h3 {
       color: var(--primary);
       font-size: 0.95rem;
       margin-bottom: 0.25rem;
@@ -195,7 +200,7 @@
 
     .activity-demo {
       background: rgba(201, 162, 39, 0.2);
-      color: #8B7500;
+      color: #6B5900;
     }
 
     .activity-practice {
@@ -210,7 +215,7 @@
 
     .activity-warmup {
       background: rgba(255, 152, 0, 0.15);
-      color: #E65100;
+      color: #B33F00;
     }
 
     .activity-break {
@@ -457,6 +462,7 @@
     </div>
   </header>
 
+  <main>
   <div class="overview-box">
     <h2>🎯 Session Goals</h2>
     <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--gray);">This is a review-and-testing day — <strong>no new content</strong>. By the end of the session, participants will have:</p>
@@ -476,49 +482,49 @@
       <div class="timeline-item">
         <div class="timeline-time">0:00-0:08</div>
         <div class="timeline-content">
-          <h4>Welcome &amp; How Today Works <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <h3>Welcome &amp; How Today Works <span class="activity-type activity-warmup">Warm-Up</span></h3>
           <p>Welcome everyone to the final session. Explain the plan: a fun review game first, then the Post-Test, then a wrap-up. Reassure them the test is not graded. Hand out the Level 1 Study Guide so they can follow along.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">0:08-0:50</div>
         <div class="timeline-content">
-          <h4>Review Game — All 7 Topics <span class="activity-type activity-practice">Review Game</span></h4>
+          <h3>Review Game — All 7 Topics <span class="activity-type activity-practice">Review Game</span></h3>
           <p>Project the Week 5 presentation. Work through the seven categories (Technology Basics → Safety &amp; Security). Read each question, let the group guess out loud, then click "Reveal answer." Keep it light and celebratory — this is recall practice, not a quiz. Finish with the Lightning Round.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">0:50-1:00</div>
         <div class="timeline-content">
-          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <h3>Break <span class="activity-type activity-break">Break</span></h3>
           <p>10-minute break. Encourage participants to stretch and get water before the Post-Test so they can focus.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:00-1:10</div>
         <div class="timeline-content">
-          <h4>Post-Test Setup &amp; Instructions <span class="activity-type activity-demo">Setup</span></h4>
-          <p>Have each participant open the Post-Test (from the last presentation slide or the course page). Show how to enter their name and answer questions. Remind them: no time limit, work at your own pace, raise a hand if a question is unclear.</p>
+          <h3>Post-Test Setup &amp; Instructions <span class="activity-type activity-demo">Setup</span></h3>
+          <p>Have each participant open the browser Post-Test (from the last presentation slide or the course page). Show how to enter their name, answer questions, and use <strong>Print Report (PDF)</strong> after submitting. Remind them: no time limit, work at your own pace, raise a hand if a question is unclear.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:10-1:40</div>
         <div class="timeline-content">
-          <h4>Post-Test Administration <span class="activity-type activity-assessment">Assessment</span></h4>
-          <p>Participants complete the ~20-question Post-Test independently. Keep the room quiet and calm. Walk around to help with the computer (not the answers). Those who finish early can review their results or read the study guide.</p>
+          <h3>Post-Test Administration <span class="activity-type activity-assessment">Assessment</span></h3>
+          <p>Participants complete the ~20-question Post-Test independently. Keep the room quiet and calm. Walk around to help with the computer (not the answers). Those who finish early can review their results, print/save their PDF report, or read the study guide.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:40-1:50</div>
         <div class="timeline-content">
-          <h4>Results &amp; Celebrate Growth <span class="activity-type activity-eval">Evaluation</span></h4>
-          <p>Walk through how to read the score and the pre→post comparison. Celebrate improvement out loud — the point is growth, not perfection. Invite a few volunteers to share one thing they can do now that they couldn't five weeks ago.</p>
+          <h3>Results &amp; Celebrate Growth <span class="activity-type activity-eval">Evaluation</span></h3>
+          <p>Walk through how to read the score, the pre→post comparison, and the printable PDF report. Celebrate improvement out loud — the point is growth, not perfection. Invite a few volunteers to share one thing they can do now that they couldn't five weeks ago.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:50-2:00</div>
         <div class="timeline-content">
-          <h4>Wrap-Up &amp; Level 2 Preview <span class="activity-type activity-apply">Application</span></h4>
+          <h3>Wrap-Up &amp; Level 2 Preview <span class="activity-type activity-apply">Application</span></h3>
           <p>Thank everyone for completing the course. Hand out any certificates of completion. Preview Digital Literacy — Level 2 and encourage them to keep their study guide and quick-reference cards. Final challenge: try one skill at home this week.</p>
         </div>
       </div>
@@ -561,7 +567,7 @@
         <h4>Preparation</h4>
         <ul>
           <li>Click through the review game once beforehand</li>
-          <li>Confirm Post-Test scoring works</li>
+          <li>Confirm Post-Test scoring and PDF report printing work</li>
           <li>Know how to show the pre→post comparison</li>
           <li>Have Level 2 details ready to preview</li>
         </ul>
@@ -627,6 +633,8 @@
       <li><strong>Connection:</strong> Confidence built in Level 1 is the foundation for deeper, hands-on application work in Level 2</li>
     </ul>
   </div>
+
+  </main>
 
   <footer class="footer">
     <p><strong>Veterans Upward Bound - West Virginia</strong></p>

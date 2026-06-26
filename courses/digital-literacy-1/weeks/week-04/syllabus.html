@@ -11,6 +11,11 @@
       box-sizing: border-box;
     }
 
+    *:focus-visible {
+      outline: 3px solid #C9A227;
+      outline-offset: 2px;
+    }
+
     :root {
       --primary: #1B365D;
       --primary-light: #2C4A7C;
@@ -112,7 +117,7 @@
     }
 
     .objectives-list li::before {
-      content: "🎯";
+      content: "\2022";
       position: absolute;
       left: 0;
     }
@@ -176,7 +181,7 @@
       padding: 0.75rem 1rem;
     }
 
-    .timeline-content h4 {
+    .timeline-content h3 {
       color: var(--primary);
       font-size: 0.95rem;
       margin-bottom: 0.25rem;
@@ -206,7 +211,7 @@
 
     .activity-demo {
       background: rgba(201, 162, 39, 0.2);
-      color: #8B7500;
+      color: #6B5900;
     }
 
     .activity-practice {
@@ -221,7 +226,7 @@
 
     .activity-warmup {
       background: rgba(255, 152, 0, 0.15);
-      color: #E65100;
+      color: #B33F00;
     }
 
     .activity-break {
@@ -453,7 +458,7 @@
     }
 
     .va-portal-box li::before {
-      content: "📘";
+      content: "\2022";
       position: absolute;
       left: 0;
     }
@@ -503,6 +508,7 @@
     </div>
   </header>
 
+  <main>
   <div class="overview-box">
     <h2>🎯 Learning Objectives</h2>
     <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--gray);">By the end of this session, participants will be able to (IC3 GS6 Level 1 objectives in brackets):</p>
@@ -525,49 +531,49 @@
       <div class="timeline-item">
         <div class="timeline-time">0:00-0:10</div>
         <div class="timeline-content">
-          <h4>Welcome &amp; Warm-Up <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <h3>Welcome &amp; Warm-Up <span class="activity-type activity-warmup">Warm-Up</span></h3>
           <p>Greet the group. Ask: "Have you ever gotten a suspicious email or text pretending to be from the VA, a bank, or a delivery company?" Let a few share. Distribute the two handouts.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">0:10-0:35</div>
         <div class="timeline-content">
-          <h4>Digital Identity, PII &amp; Reputation <span class="activity-type activity-lecture">Lecture</span></h4>
+          <h3>Digital Identity, PII &amp; Reputation <span class="activity-type activity-lecture">Lecture</span></h3>
           <p>Slides 2-5. Cover digital identity and managing personal data (2.1), what PII is and how to protect it, permanence of online actions, and legal/ethical behavior (2.2). Use the "grandkid test" framing.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">0:35-0:55</div>
         <div class="timeline-content">
-          <h4>Responding to Inappropriate Content <span class="activity-type activity-lecture">Discussion</span></h4>
+          <h3>Responding to Inappropriate Content <span class="activity-type activity-lecture">Discussion</span></h3>
           <p>Slides 6-8. Impact of negative communication (2.3.1), checking validity of online info (2.3.2), anonymity (2.3.3), and the value of nonresponse — block, report, walk away (2.3.4). Invite real examples.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">0:55-1:05</div>
         <div class="timeline-content">
-          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <h3>Break <span class="activity-type activity-break">Break</span></h3>
           <p>10-minute break. Encourage participants to stand, stretch, and rest their eyes — a natural tie-in to today's ergonomics topic.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:05-1:30</div>
         <div class="timeline-content">
-          <h4>Security, Passwords &amp; Tracking <span class="activity-type activity-lecture">Presentation</span></h4>
+          <h3>Security, Passwords &amp; Tracking <span class="activity-type activity-lecture">Presentation</span></h3>
           <p>Slides 9-15. Security threats (7.1); strong passphrases, reset, lock, clear browser data (7.2); tracking and stored-data risks (7.3.3), private browsing and its limits (7.3.4); mental and physical/ergonomic health (7.4).</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:30-1:55</div>
         <div class="timeline-content">
-          <h4>"Lock It Down" Hands-On Lab <span class="activity-type activity-practice">Practice</span></h4>
+          <h3>"Lock It Down" Hands-On Lab <span class="activity-type activity-practice">Practice</span></h3>
           <p>Participants work through the lab on their own PCs: build a passphrase, lock the screen (Windows + L), clear browser history/cookies, open a private window, evaluate a source, run the privacy self-audit, check what's stored on the PC, and do a desk ergonomics check. Walk the room and assist.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:55-2:00</div>
         <div class="timeline-content">
-          <h4>Knowledge Check &amp; Wrap-Up <span class="activity-type activity-apply">Application</span></h4>
+          <h3>Knowledge Check &amp; Wrap-Up <span class="activity-type activity-apply">Application</span></h3>
           <p>Run the 3-question knowledge check on the last slides. Recap key takeaways. Preview Week 5: Review &amp; Testing Day (cumulative recap + Post-Test). Encourage students to keep the quick-reference card at their desk.</p>
         </div>
       </div>
@@ -682,6 +688,8 @@
       <li><strong>Connection:</strong> This week's safety habits are some of the most practical, testable skills in the course</li>
     </ul>
   </div>
+
+  </main>
 
   <footer class="footer">
     <p><strong>Veterans Upward Bound — West Virginia</strong></p>

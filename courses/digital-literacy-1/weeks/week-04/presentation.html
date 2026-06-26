@@ -7,6 +7,12 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     :root {
       --primary: #1B365D;
       --primary-dark: #0D1B2A;
@@ -15,16 +21,21 @@
       --red: #B31942;
       --light: #FFFFFF;
       --off-white: #F5F7FA;
-      --gray: #5A6A7A;
+      --gray: #54626F;
       --success: #28A745;
       --va-blue: #003F72;
       --va-red: #C4262E;
       --vub-textsize-fab-bottom: 90px; /* lift the bottom-right Text Size control above the nav bar */
     }
 
+    html[data-text-size="lg"] { --vub-textsize-fab-bottom: 120px; }
+    html[data-text-size="xl"],
+    html[data-text-size="xxl"] { --vub-textsize-fab-bottom: 150px; }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: var(--off-white);
+      width: 100%;
       height: 100vh;
       overflow: hidden;
       display: flex;
@@ -40,7 +51,7 @@
       flex-direction: column;
       position: fixed;
       height: 100vh;
-      overflow-y: auto;
+      overflow: hidden;
       z-index: 100;
     }
 
@@ -165,7 +176,7 @@
     .resource-link {
       display: block;
       padding: 0.5rem 0.75rem;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.85);
       font-size: 0.8rem;
       text-decoration: none;
       border-radius: 6px;
@@ -214,6 +225,8 @@
     .main-content {
       flex: 1;
       margin-left: 280px;
+      min-width: 0;
+      width: calc(100vw - 280px);
       display: flex;
       flex-direction: column;
       height: 100vh;
@@ -227,7 +240,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      overflow-y: auto;
+      overflow: hidden;
     }
 
     .slide {
@@ -239,6 +252,8 @@
       max-width: 1000px;
       min-height: 0;
       padding: 2rem 2.5rem;
+      transform: scale(var(--slide-scale, 1));
+      transform-origin: top center;
       animation: fadeIn 0.4s ease;
     }
 
@@ -255,8 +270,8 @@
     .slide.active.completion-slide { display: flex; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     /* Slide Styles */
@@ -674,12 +689,17 @@
     /* Responsive */
     @media (max-width: 1024px) {
       .sidebar { width: 240px; }
-      .main-content { margin-left: 240px; }
+      .main-content { margin-left: 240px; width: calc(100vw - 240px); }
     }
 
     @media (max-width: 768px) {
       .sidebar { display: none; }
-      .main-content { margin-left: 0; }
+      .main-content { margin-left: 0; min-width: 0; width: 100%; }
+      .slides-container { padding: 0.75rem; }
+      .slide { padding: 1.25rem; border-radius: 10px; }
+      .nav-footer { padding: 0.6rem; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+      .nav-btn { flex: 1 1 0; min-width: 0; justify-content: center; padding: 0.55rem 0.35rem; font-size: 0.95rem; text-align: center; white-space: nowrap; }
+      .slide-counter { order: -1; flex: 0 0 100%; text-align: center; font-size: 0.85rem; white-space: nowrap; }
       .two-column { grid-template-columns: 1fr; }
     }
 
@@ -743,6 +763,8 @@
       display: block;
       margin-bottom: 0.25rem;
     }
+
+    @media (prefers-reduced-motion: reduce){ .slide{animation:none;} .confetti-piece{animation:none;} .progress-fill{transition:none;} }
   </style>
 </head>
 <body>
@@ -759,8 +781,8 @@
       <div class="week-title">Citizenship &amp; Safety</div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Digital Identity</div>
+    <div class="chapter" role="group" aria-labelledby="ch-digital-identity">
+      <div class="chapter-title" id="ch-digital-identity">Digital Identity</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link active" data-slide="0">Welcome &amp; Overview</button>
         <button type="button" class="slide-link" data-slide="1">Learning Objectives</button>
@@ -771,8 +793,8 @@
       </div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Responding to Bad Content</div>
+    <div class="chapter" role="group" aria-labelledby="ch-bad-content">
+      <div class="chapter-title" id="ch-bad-content">Responding to Bad Content</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link" data-slide="6">Impact of Negative Messages</button>
         <button type="button" class="slide-link" data-slide="7">Is This Information True?</button>
@@ -780,8 +802,8 @@
       </div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Security &amp; Passwords</div>
+    <div class="chapter" role="group" aria-labelledby="ch-security">
+      <div class="chapter-title" id="ch-security">Security &amp; Passwords</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link" data-slide="9">Common Security Threats</button>
         <button type="button" class="slide-link" data-slide="10">Strong Passphrases</button>
@@ -790,8 +812,8 @@
       </div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Tracking &amp; Health</div>
+    <div class="chapter" role="group" aria-labelledby="ch-tracking-health">
+      <div class="chapter-title" id="ch-tracking-health">Tracking &amp; Health</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link" data-slide="13">Tracking &amp; Stored Data</button>
         <button type="button" class="slide-link" data-slide="14">Private Browsing</button>
@@ -799,8 +821,8 @@
       </div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Wrap-Up</div>
+    <div class="chapter" role="group" aria-labelledby="ch-wrap-up">
+      <div class="chapter-title" id="ch-wrap-up">Wrap-Up</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link" data-slide="16">Knowledge Check</button>
         <button type="button" class="slide-link" data-slide="17">Your Handouts</button>
@@ -824,12 +846,13 @@
   </nav>
 
   <!-- Main Content -->
-  <div class="main-content">
+  <main class="main-content">
     <h1 class="sr-only">Week 4: Citizenship &amp; Safety</h1>
+    <div id="slide-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     <div class="slides-container">
       <!-- Slide 0: Title -->
       <div class="slide active title-slide">
-        <div class="slide-icon">🛡️</div>
+        <div class="slide-icon" aria-hidden="true">🛡️</div>
         <h2 class="slide-title">Citizenship &amp; Safety</h2>
         <p class="slide-subtitle">Your identity, privacy, and security online</p>
         <p class="course-info">Week 4 of 5 · VUB Digital Literacy — Level 1</p>
@@ -843,28 +866,28 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">🪪</div>
+            <div class="key-point-icon" aria-hidden="true">🪪</div>
             <div class="key-point-text">
               <strong>Manage Your Digital Identity</strong>
               Protect your personal data and personal information, and guard your online reputation
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🧭</div>
+            <div class="key-point-icon" aria-hidden="true">🧭</div>
             <div class="key-point-text">
               <strong>Respond Wisely to Bad Content</strong>
               Judge whether information is true, and know when the best reply is no reply
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🔐</div>
+            <div class="key-point-icon" aria-hidden="true">🔐</div>
             <div class="key-point-text">
               <strong>Protect Your Devices</strong>
               Build strong passphrases, lock your screen, and clear your browser data
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">💚</div>
+            <div class="key-point-icon" aria-hidden="true">💚</div>
             <div class="key-point-text">
               <strong>Stay Healthy Online</strong>
               Recognize tracking, browse privately, and set up a comfortable, safe workstation
@@ -956,21 +979,21 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">📌</div>
+            <div class="key-point-icon" aria-hidden="true">📌</div>
             <div class="key-point-text">
               <strong>Posts Can Last Forever</strong>
               Even after you delete something, others may have saved it, shared it, or taken a screenshot
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🔎</div>
+            <div class="key-point-icon" aria-hidden="true">🔎</div>
             <div class="key-point-text">
               <strong>People Look You Up</strong>
               Employers, banks, and new acquaintances may search your name online
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🌟</div>
+            <div class="key-point-icon" aria-hidden="true">🌟</div>
             <div class="key-point-text">
               <strong>You Build Your Reputation</strong>
               Kind, helpful, and honest posts shape how people see you — in a good way
@@ -1030,21 +1053,21 @@
         <div class="slide-content">
           <p>Online communication can turn hurtful fast — rude comments, harassment, rumors, or "trolling" (posting to provoke a reaction). It affects real people.</p>
           <div class="key-point">
-            <div class="key-point-icon">😟</div>
+            <div class="key-point-icon" aria-hidden="true">😟</div>
             <div class="key-point-text">
               <strong>It Affects Wellbeing</strong>
               Negative messages can cause stress, anxiety, anger, and hurt feelings — for the target and for bystanders
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">⚡</div>
+            <div class="key-point-icon" aria-hidden="true">⚡</div>
             <div class="key-point-text">
               <strong>It Spreads Quickly</strong>
               A harsh comment can be shared widely in minutes and is hard to take back
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🤝</div>
+            <div class="key-point-icon" aria-hidden="true">🤝</div>
             <div class="key-point-text">
               <strong>You Set the Tone</strong>
               Choosing to be calm and respectful — even in disagreement — makes online spaces better for everyone
@@ -1098,14 +1121,14 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">🎭</div>
+            <div class="key-point-icon" aria-hidden="true">🎭</div>
             <div class="key-point-text">
               <strong>Online Anonymity</strong>
               People can hide their real identity online. This can protect privacy and free speech — but it also emboldens some to behave badly because they feel they will not be held responsible
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🤫</div>
+            <div class="key-point-icon" aria-hidden="true">🤫</div>
             <div class="key-point-text">
               <strong>The Value of Nonresponse</strong>
               Trolls and bullies want a reaction. Not replying — "do not feed the troll" — removes their reward and often makes them stop
@@ -1133,21 +1156,21 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">🎣</div>
+            <div class="key-point-icon" aria-hidden="true">🎣</div>
             <div class="key-point-text">
               <strong>Phishing</strong>
               Fake emails, texts, or calls that trick you into giving up passwords or PII. They often pretend to be your bank, the VA, or a delivery company
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🦠</div>
+            <div class="key-point-icon" aria-hidden="true">🦠</div>
             <div class="key-point-text">
               <strong>Malware &amp; Viruses</strong>
               Harmful programs that sneak onto your device through bad downloads or links and can steal information or lock your files
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">💸</div>
+            <div class="key-point-icon" aria-hidden="true">💸</div>
             <div class="key-point-text">
               <strong>Scams &amp; Identity Theft</strong>
               Tricks to take your money or use your identity — fake prizes, "tech support" calls, or romance scams
@@ -1279,14 +1302,14 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">👣</div>
+            <div class="key-point-icon" aria-hidden="true">👣</div>
             <div class="key-point-text">
               <strong>Navigation Tracking</strong>
               Websites and advertisers use cookies to follow what you do online — which is why an item you viewed seems to "follow" you in ads. It can feel convenient, but it is also a privacy trade-off
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">💾</div>
+            <div class="key-point-icon" aria-hidden="true">💾</div>
             <div class="key-point-text">
               <strong>Risks of Information Stored on a Device</strong>
               Saved passwords, autofill details, downloaded files, and photos all live on your computer or phone. If the device is lost, stolen, or shared, that information could be exposed
@@ -1429,11 +1452,11 @@
         </div>
         <div class="slide-content">
           <div class="handout-prompt">
-            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
             <div class="handout-prompt-text">Open the "Lock It Down Lab" — build a passphrase, lock your screen, clear browser data, open a private window, check a source, and review your desk setup.</div>
           </div>
           <div class="handout-prompt">
-            <div class="handout-prompt-icon">🗂️</div>
+            <div class="handout-prompt-icon" aria-hidden="true">🗂️</div>
             <div class="handout-prompt-text">Keep the "Security &amp; Ergonomics Quick Reference" card at your desk for password rules, lock/clear-data steps, and ergonomics reminders.</div>
           </div>
           <div class="demo-box">
@@ -1451,35 +1474,35 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">🪪</div>
+            <div class="key-point-icon" aria-hidden="true">🪪</div>
             <div class="key-point-text">
               <strong>Guard Your Identity</strong>
               Protect your PII, think before you post — the internet remembers
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🧭</div>
+            <div class="key-point-icon" aria-hidden="true">🧭</div>
             <div class="key-point-text">
               <strong>Be a Smart Reader</strong>
               Check that information is true, and do not feed the trolls — block, report, walk away
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🔐</div>
+            <div class="key-point-icon" aria-hidden="true">🔐</div>
             <div class="key-point-text">
               <strong>Lock It Down</strong>
               Long passphrases, lock your screen (Windows + L), and clear data on shared computers
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">💚</div>
+            <div class="key-point-icon" aria-hidden="true">💚</div>
             <div class="key-point-text">
               <strong>Take Care of Yourself</strong>
               Browse privately when it helps, take screen breaks, and set up a comfortable desk
             </div>
           </div>
           <div class="handout-prompt">
-            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
             <div class="handout-prompt-text">Take your handouts home! They have step-by-step instructions for everything we covered.</div>
           </div>
         </div>
@@ -1487,7 +1510,7 @@
 
       <!-- Slide 19: Completion -->
       <div class="slide completion-slide">
-        <div class="completion-badge"><span>🛡️</span></div>
+        <div class="completion-badge" aria-hidden="true"><span>🛡️</span></div>
         <h2>Great Work!</h2>
         <p>You can now manage your digital identity, respond wisely to bad content, protect your devices with strong passphrases, and stay healthy online. Next week is our Review &amp; Testing Day — you've got this!</p>
       </div>
@@ -1505,7 +1528,7 @@
         Next →
       </button>
     </div>
-  </div>
+  </main>
 
   <!-- Confetti Container -->
   <div class="confetti" id="confetti"></div>
@@ -1515,6 +1538,7 @@
   <script>
     // Presentation State
     let currentSlide = 0;
+    let fitFrame = 0;
     const slides = document.querySelectorAll('.slide');
     const totalSlides = slides.length;
     const slideLinks = document.querySelectorAll('.slide-link');
@@ -1539,9 +1563,10 @@
         slide.classList.toggle('active', index === currentSlide);
       });
 
-      slideLinks.forEach((link, index) => {
-        link.classList.toggle('active', index === currentSlide);
-        if (index < currentSlide) {
+      slideLinks.forEach((link) => {
+        const targetSlide = parseInt(link.dataset.slide, 10);
+        link.classList.toggle('active', targetSlide === currentSlide);
+        if (targetSlide < currentSlide) {
           link.classList.add('completed');
         }
       });
@@ -1567,6 +1592,38 @@
       if (activeLink) {
         activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
+
+      const announce = document.getElementById('slide-announce');
+      if (announce) {
+        const activeSlide = slides[currentSlide];
+        const heading = activeSlide ? activeSlide.querySelector('h2') : null;
+        announce.textContent = heading ? heading.textContent.trim() : '';
+      }
+
+      scheduleSlideFit();
+    }
+
+    function scheduleSlideFit() {
+      cancelAnimationFrame(fitFrame);
+      fitFrame = requestAnimationFrame(fitActiveSlide);
+    }
+
+    function fitActiveSlide() {
+      const container = document.querySelector('.slides-container');
+      const activeSlide = document.querySelector('.slide.active');
+      if (!container || !activeSlide) return;
+
+      activeSlide.style.setProperty('--slide-scale', '1');
+      const containerRect = container.getBoundingClientRect();
+      const slideRect = activeSlide.getBoundingClientRect();
+      const topInset = Math.max(0, slideRect.top - containerRect.top);
+      const availableWidth = Math.max(1, container.clientWidth - 4);
+      const availableHeight = Math.max(1, container.clientHeight - topInset - 4);
+      const slideWidth = Math.max(1, activeSlide.scrollWidth);
+      const slideHeight = Math.max(1, activeSlide.scrollHeight);
+      const scale = Math.min(1, availableWidth / slideWidth, availableHeight / slideHeight);
+      activeSlide.style.setProperty('--slide-scale', String(Math.floor(scale * 1000) / 1000));
+      container.scrollTop = 0;
     }
 
     function goToSlide(index) {
@@ -1615,6 +1672,11 @@
 
     // Keyboard Navigation
     document.addEventListener('keydown', (e) => {
+      // Don't hijack keys when a button/link has focus and user presses space/enter
+      const tag = (e.target.tagName || '').toLowerCase();
+      if ((e.key === ' ' || e.key === 'Enter') && (tag === 'button' || tag === 'a')) {
+        return;
+      }
       switch(e.key) {
         case 'ArrowRight':
         case 'PageDown':
@@ -1676,6 +1738,22 @@
         confettiContainer.classList.remove('active');
       }, 5000);
     }
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (target && target.closest('.reveal-btn, .answer-toggle, .kc-toggle, [data-reveal]')) {
+        setTimeout(scheduleSlideFit, 0);
+      }
+    });
+
+    window.addEventListener('resize', scheduleSlideFit);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(scheduleSlideFit);
+    }
+    new MutationObserver(scheduleSlideFit).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-text-size']
+    });
 
     // Touch/Swipe Support
     let touchStartX = 0;

@@ -6,6 +6,7 @@
   <title>Lock It Down — Hands-On Lab | VUB Digital Literacy — Level 1</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    *:focus-visible { outline: 3px solid #C9A227; outline-offset: 2px; }
     :root {
       --primary: #1B365D; --primary-light: #2C4A7C;
       --va-blue: #003F72; --va-blue-dark: #002F5A;
@@ -18,7 +19,7 @@
     .header h1 { font-size: 1.5rem; margin: 0; }
     .header-subtitle { font-size: 0.95rem; opacity: 0.9; margin-top: 0.15rem; }
     .header-meta { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; }
-    .header-badge { background: var(--accent); color: var(--primary); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .header-badge { background: var(--accent); color: var(--primary); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
     .header-right { text-align: right; flex-shrink: 0; }
     .header-time { font-size: 0.8rem; opacity: 0.85; margin-top: 0.5rem; }
     .name-field { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-size: 1rem; }
@@ -31,8 +32,8 @@
     .goal-box .build-list li::before { content: "\2713  "; color: var(--success); font-weight: 700; }
     .part-header { background: var(--va-blue); color: var(--light); padding: 0.75rem 1rem; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
     .part-header h2 { font-size: 1.15rem; margin: 0; }
-    .part-timing { background: var(--accent); color: var(--va-blue); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
-    .part-type { background: rgba(255,255,255,0.2); color: var(--light); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.65rem; font-weight: 600; margin-left: 0.5rem; }
+    .part-timing { background: var(--accent); color: var(--va-blue); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.875rem; font-weight: 700; }
+    .part-type { background: rgba(255,255,255,0.2); color: var(--light); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.875rem; font-weight: 600; margin-left: 0.5rem; }
     .part-content { border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 8px 8px; padding: 1.25rem; margin-bottom: 0.5rem; }
     .section { margin-bottom: 1.25rem; }
     .section-title { background: var(--off-white); color: var(--va-blue); padding: 0.5rem 1rem; border-left: 4px solid var(--accent); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
@@ -88,6 +89,7 @@
     </div>
   </header>
 
+  <main>
   <div class="name-field">
     <label>Name:</label><div class="line"></div>
     <label style="margin-left: 2rem;">Date:</label><div class="line" style="max-width: 150px;"></div>
@@ -364,6 +366,7 @@
       Keep these habits going &mdash; a little protection every day adds up to a lot of safety.
     </p>
   </div>
+  </main>
 
   <footer class="footer">
     <p><strong>Veterans Upward Bound &mdash; West Virginia</strong> | Week 4: Citizenship &amp; Safety</p>

@@ -32,7 +32,7 @@
 
   .topbar { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%); color: #fff; padding: 1.25rem 1rem; }
   .topbar-inner { max-width: 820px; margin: 0 auto; }
-  .back-link { display: inline-block; color: var(--gold-light); text-decoration: none; font-weight: 700; font-size: 1rem; margin-bottom: 0.6rem; padding: 0.35rem 0.1rem; }
+  .back-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--gold-light); text-decoration: none; font-weight: 700; font-size: 1rem; margin-bottom: 0.6rem; padding: 0.35rem 0.65rem; }
   .back-link:hover, .back-link:focus { text-decoration: underline; }
   .topbar h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 1.85rem; line-height: 1.25; }
   .topbar .sub { font-size: 1rem; opacity: 0.92; margin-top: 0.35rem; }
@@ -86,6 +86,8 @@
   .btn-primary { background: var(--navy); color: #fff; border-color: var(--navy); }
   .btn-primary:hover:not(:disabled) { background: var(--navy-light); border-color: var(--navy-light); }
   .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn-print { background: var(--va-blue); color: #fff; border-color: var(--va-blue); }
+  .btn-print:hover { background: var(--navy); border-color: var(--navy); }
   .btn-ghost { background: #fff; color: var(--navy); border-color: var(--navy); }
   .btn-ghost:hover { background: var(--off-white); }
 
@@ -109,6 +111,27 @@
     .q-text { font-size: 1.15rem; }
     .btn { flex: 1 1 auto; }
   }
+
+  @media print {
+    body { background: #fff; color: #111; }
+    .topbar,
+    .intro,
+    .meter-wrap,
+    #quiz-area,
+    footer,
+    .results .actions,
+    .vub-textsize-fab { display: none !important; }
+    main { max-width: none; padding: 0; }
+    .results {
+      display: block !important;
+      box-shadow: none;
+      border: 2px solid #111;
+      border-top: 8px solid #111;
+      text-align: left;
+    }
+    .results h2,
+    .results .big-score { color: #111; }
+  }
 </style>
 </head>
 <body>
@@ -126,7 +149,8 @@
     <h2>Check what you know</h2>
     <p>This is a practice quiz to help you study &mdash; it is <strong>not</strong> the Pre-Test or Post-Test
        and no score is recorded. Pick an answer to see right away whether it is correct and why. Take it as
-       many times as you like. Great for the Week&nbsp;5 review day.</p>
+       many times as you like. Great for the Week&nbsp;5 review day. Need a refresher first?
+       Open the <a href="flashcards.html">Flashcards</a>.</p>
   </section>
 
   <div class="meter-wrap" id="meter-wrap">
@@ -134,7 +158,7 @@
       <span id="meter-text">Question 1</span>
       <span id="score-text">Score: 0</span>
     </div>
-    <div class="meter" aria-hidden="true"><div class="meter-fill" id="meter-fill"></div></div>
+    <div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0" aria-label="Quiz progress"><div class="meter-fill" id="meter-fill"></div></div>
   </div>
 
   <section id="quiz-area">
@@ -159,6 +183,7 @@
     <div class="pct" id="final-pct"></div>
     <p class="msg" id="final-msg"></p>
     <div class="actions">
+      <button type="button" class="btn btn-print" onclick="window.print()">Print Results (PDF)</button>
       <button type="button" class="btn btn-primary" id="retry-btn">Try again</button>
       <a class="btn btn-ghost" href="/courses/digital-literacy-1/index.html">Back to course</a>
     </div>
@@ -175,7 +200,7 @@
 
   // Practice item pool — written to the IC3 GS6 Level 1 objectives.
   // Separate from the graded Pre/Post tests in ../assessments/.
-  var QUESTIONS = [
+  var RAW_QUESTIONS = [
     {
       domain: "1. Technology Basics",
       q: "Which of these is an input device?",
@@ -328,6 +353,31 @@
     }
   ];
 
+  var CORRECT_SLOT_PATTERN = [0, 2, 1, 3, 1, 0, 2, 3, 0, 2, 1, 3, 2, 0, 1];
+
+  function applyCorrectAnswerPattern(items, pattern) {
+    return items.map(function (item, index) {
+      var options = item.options.slice();
+      var correct = options.filter(function (opt) { return opt.correct; })[0];
+      var distractors = options.filter(function (opt) { return !opt.correct; });
+      var slot = pattern[index % pattern.length] % options.length;
+      var patterned = [];
+      var distractorIndex = 0;
+
+      for (var i = 0; i < options.length; i++) {
+        patterned[i] = i === slot ? correct : distractors[distractorIndex++];
+      }
+
+      return {
+        domain: item.domain,
+        q: item.q,
+        options: patterned
+      };
+    });
+  }
+
+  var QUESTIONS = applyCorrectAnswerPattern(RAW_QUESTIONS, CORRECT_SLOT_PATTERN);
+
   var idx = 0;
   var score = 0;
   var answered = false;
@@ -355,6 +405,7 @@
     meterText.textContent = "Question " + (idx + 1) + " of " + QUESTIONS.length;
     scoreText.textContent = "Score: " + score;
     meterFill.style.width = ((idx) / QUESTIONS.length * 100) + "%";
+    if (meterFill.parentElement) { meterFill.parentElement.setAttribute("aria-valuenow", String(idx)); }
 
     qDomain.textContent = item.domain;
     qText.textContent = item.q;

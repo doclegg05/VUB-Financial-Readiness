@@ -7,6 +7,12 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     :root {
       --primary: #1B365D;
       --primary-dark: #0D1B2A;
@@ -15,16 +21,21 @@
       --red: #B31942;
       --light: #FFFFFF;
       --off-white: #F5F7FA;
-      --gray: #5A6A7A;
+      --gray: #54626F;
       --success: #28A745;
       --va-blue: #003F72;
       --va-red: #C4262E;
       --vub-textsize-fab-bottom: 90px; /* lift the bottom-right Text Size control above the nav bar */
     }
 
+    html[data-text-size="lg"] { --vub-textsize-fab-bottom: 120px; }
+    html[data-text-size="xl"],
+    html[data-text-size="xxl"] { --vub-textsize-fab-bottom: 150px; }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: var(--off-white);
+      width: 100%;
       height: 100vh;
       overflow: hidden;
       display: flex;
@@ -40,7 +51,7 @@
       flex-direction: column;
       position: fixed;
       height: 100vh;
-      overflow-y: auto;
+      overflow: hidden;
       z-index: 100;
     }
 
@@ -165,7 +176,7 @@
     .resource-link {
       display: block;
       padding: 0.5rem 0.75rem;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.85);
       font-size: 0.8rem;
       text-decoration: none;
       border-radius: 6px;
@@ -214,6 +225,8 @@
     .main-content {
       flex: 1;
       margin-left: 280px;
+      min-width: 0;
+      width: calc(100vw - 280px);
       display: flex;
       flex-direction: column;
       height: 100vh;
@@ -227,7 +240,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      overflow-y: auto;
+      overflow: hidden;
     }
 
     .slide {
@@ -239,6 +252,8 @@
       max-width: 1000px;
       min-height: 0;
       padding: 2rem 2.5rem;
+      transform: scale(var(--slide-scale, 1));
+      transform-origin: top center;
       animation: fadeIn 0.4s ease;
     }
 
@@ -255,8 +270,8 @@
     .slide.active.completion-slide { display: flex; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     /* Slide Styles */
@@ -733,12 +748,17 @@
     /* Responsive */
     @media (max-width: 1024px) {
       .sidebar { width: 240px; }
-      .main-content { margin-left: 240px; }
+      .main-content { margin-left: 240px; width: calc(100vw - 240px); }
     }
 
     @media (max-width: 768px) {
       .sidebar { display: none; }
-      .main-content { margin-left: 0; }
+      .main-content { margin-left: 0; min-width: 0; width: 100%; }
+      .slides-container { padding: 0.75rem; }
+      .slide { padding: 1.25rem; border-radius: 10px; }
+      .nav-footer { padding: 0.6rem; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+      .nav-btn { flex: 1 1 0; min-width: 0; justify-content: center; padding: 0.55rem 0.35rem; font-size: 0.95rem; text-align: center; white-space: nowrap; }
+      .slide-counter { order: -1; flex: 0 0 100%; text-align: center; font-size: 0.85rem; white-space: nowrap; }
       .two-column { grid-template-columns: 1fr; }
     }
   </style>
@@ -757,8 +777,8 @@
       <div class="week-title">Getting Online</div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Browsers &amp; Digital Environments</div>
+    <div class="chapter" role="group" aria-labelledby="ch-browsers">
+      <div class="chapter-title" id="ch-browsers">Browsers &amp; Digital Environments</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link active" data-slide="0">Welcome &amp; Overview</button>
         <button type="button" class="slide-link" data-slide="1">Learning Objectives</button>
@@ -769,8 +789,8 @@
       </div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Networking</div>
+    <div class="chapter" role="group" aria-labelledby="ch-networking">
+      <div class="chapter-title" id="ch-networking">Networking</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link" data-slide="6">Wired, Wi-Fi &amp; Cellular</button>
         <button type="button" class="slide-link" data-slide="7">Modem, Router &amp; ISP</button>
@@ -779,8 +799,8 @@
       </div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Searching &amp; Copyright</div>
+    <div class="chapter" role="group" aria-labelledby="ch-searching">
+      <div class="chapter-title" id="ch-searching">Searching &amp; Copyright</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link" data-slide="10">Define Your Search</button>
         <button type="button" class="slide-link" data-slide="11">Relevant vs. Irrelevant</button>
@@ -790,8 +810,8 @@
       </div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Wrap-Up</div>
+    <div class="chapter" role="group" aria-labelledby="ch-wrap-up">
+      <div class="chapter-title" id="ch-wrap-up">Wrap-Up</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link" data-slide="15">Knowledge Check</button>
         <button type="button" class="slide-link" data-slide="16">Key Takeaways</button>
@@ -814,12 +834,13 @@
   </nav>
 
   <!-- Main Content -->
-  <div class="main-content">
+  <main class="main-content">
     <h1 class="sr-only">Week 2: Getting Online — Browsers, Networks &amp; Searching</h1>
+    <div id="slide-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     <div class="slides-container">
       <!-- Slide 0: Title -->
       <div class="slide active title-slide">
-        <div class="slide-icon">🌐</div>
+        <div class="slide-icon" aria-hidden="true">🌐</div>
         <h2 class="slide-title">Getting Online</h2>
         <p class="slide-subtitle">Browsers, Networks &amp; Smart Searching</p>
         <p class="course-info">Week 2 of 5 · VUB Digital Literacy — Level 1</p>
@@ -833,28 +854,28 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">🧭</div>
+            <div class="key-point-icon" aria-hidden="true">🧭</div>
             <div class="key-point-text">
               <strong>Navigate Your Computer &amp; the Web</strong>
               Use the desktop, and move around web browsers with tabs, bookmarks, and history
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">📶</div>
+            <div class="key-point-icon" aria-hidden="true">📶</div>
             <div class="key-point-text">
               <strong>Understand How You Connect</strong>
               Know the difference between wired, Wi-Fi, and cellular — and check if you're connected
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🔧</div>
+            <div class="key-point-icon" aria-hidden="true">🔧</div>
             <div class="key-point-text">
               <strong>Fix Common Connection Problems</strong>
               Walk through simple steps when the internet stops working
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🔍</div>
+            <div class="key-point-icon" aria-hidden="true">🔍</div>
             <div class="key-point-text">
               <strong>Search Smarter &amp; Use Content Fairly</strong>
               Find good answers, keep your sources, and understand copyright basics
@@ -871,21 +892,21 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">🖥️</div>
+            <div class="key-point-icon" aria-hidden="true">🖥️</div>
             <div class="key-point-text">
               <strong>Desktop</strong>
               The main screen you see after signing in. It holds icons, shortcuts, and your background
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">📊</div>
+            <div class="key-point-icon" aria-hidden="true">📊</div>
             <div class="key-point-text">
               <strong>Taskbar</strong>
               The bar along the bottom. It shows open programs and has the Start button and clock
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🪟</div>
+            <div class="key-point-icon" aria-hidden="true">🪟</div>
             <div class="key-point-text">
               <strong>Start Menu &amp; Windows Key</strong>
               Press the <strong style="display:inline;">Windows</strong> key (bottom-left of the keyboard) to open Start and find any program
@@ -908,14 +929,14 @@
         </div>
         <div class="slide-content">
           <div class="portal-card">
-            <div class="portal-card-icon">🌐</div>
+            <div class="portal-card-icon" aria-hidden="true">🌐</div>
             <div>
               <h4>A Web Browser</h4>
               <p>A program that opens websites. Common browsers are Microsoft Edge, Google Chrome, and Mozilla Firefox. They all do the same basic job.</p>
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">📍</div>
+            <div class="key-point-icon" aria-hidden="true">📍</div>
             <div class="key-point-text">
               <strong>Address Bar</strong>
               The box at the top where you type a website address (the URL), like <em>va.gov</em>. You can also type a question to search
@@ -938,21 +959,21 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">🗂️</div>
+            <div class="key-point-icon" aria-hidden="true">🗂️</div>
             <div class="key-point-text">
               <strong>Tabs</strong>
               Open several pages in one window. Each tab is like a page in a folder — click between them at the top
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">⭐</div>
+            <div class="key-point-icon" aria-hidden="true">⭐</div>
             <div class="key-point-text">
               <strong>Bookmarks (Favorites)</strong>
               Save a website so you can return without retyping it. Click the star ⭐ in the address bar to bookmark a page
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🕘</div>
+            <div class="key-point-icon" aria-hidden="true">🕘</div>
             <div class="key-point-text">
               <strong>History</strong>
               A list of pages you've visited. Press <strong style="display:inline;">Ctrl + H</strong> to find a site you saw earlier but didn't bookmark
@@ -1010,21 +1031,21 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">🔌</div>
+            <div class="key-point-icon" aria-hidden="true">🔌</div>
             <div class="key-point-text">
               <strong>Wired (Ethernet)</strong>
               A cable plugs your computer directly into the router. Very fast and steady — common for desktop PCs
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">📶</div>
+            <div class="key-point-icon" aria-hidden="true">📶</div>
             <div class="key-point-text">
               <strong>Wi-Fi</strong>
               A wireless signal in your home or this lab. No cables — your device connects through the air to the router
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">📱</div>
+            <div class="key-point-icon" aria-hidden="true">📱</div>
             <div class="key-point-text">
               <strong>Cellular (Mobile Data)</strong>
               The same network that carries phone calls. Phones use it for internet when away from Wi-Fi
@@ -1077,21 +1098,21 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">📶</div>
+            <div class="key-point-icon" aria-hidden="true">📶</div>
             <div class="key-point-text">
               <strong>Check the Wi-Fi Icon</strong>
               Look at the bottom-right of the taskbar. Curved bars 📶 mean Wi-Fi is connected. More bars = stronger signal
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🌐</div>
+            <div class="key-point-icon" aria-hidden="true">🌐</div>
             <div class="key-point-text">
               <strong>A Globe Icon Means Trouble</strong>
               If you see a globe 🌐 instead of the Wi-Fi bars, you are not connected to the internet
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">✅</div>
+            <div class="key-point-icon" aria-hidden="true">✅</div>
             <div class="key-point-text">
               <strong>The Real Test</strong>
               Open your browser and visit a website you trust. If it loads, you're online
@@ -1148,7 +1169,7 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">❓</div>
+            <div class="key-point-icon" aria-hidden="true">❓</div>
             <div class="key-point-text">
               <strong>Decide What You Actually Need</strong>
               Before typing, ask: what am I trying to find out? The clearer your question, the better the results
@@ -1225,21 +1246,21 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">⭐</div>
+            <div class="key-point-icon" aria-hidden="true">⭐</div>
             <div class="key-point-text">
               <strong>Bookmark the Page</strong>
               Click the star ⭐ to save a useful page so you can find it again
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">📋</div>
+            <div class="key-point-icon" aria-hidden="true">📋</div>
             <div class="key-point-text">
               <strong>Copy the Web Address</strong>
               Click in the address bar, press <strong style="display:inline;">Ctrl + C</strong> to copy, and paste it into a note or document
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">📝</div>
+            <div class="key-point-icon" aria-hidden="true">📝</div>
             <div class="key-point-text">
               <strong>Note the Basics</strong>
               Write down the website name and the date you visited. That's enough to find it later or share it
@@ -1292,21 +1313,21 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">©️</div>
+            <div class="key-point-icon" aria-hidden="true">©️</div>
             <div class="key-point-text">
               <strong>Copyright</strong>
               Most photos, music, and writing online belong to whoever made them. By default, you may not copy or reuse it without permission
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🆓</div>
+            <div class="key-point-icon" aria-hidden="true">🆓</div>
             <div class="key-point-text">
               <strong>Public Domain</strong>
               Work that is free for anyone to use — often because it's very old or made by the U.S. government. No permission needed
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🅭</div>
+            <div class="key-point-icon" aria-hidden="true">🅭</div>
             <div class="key-point-text">
               <strong>Creative Commons</strong>
               The creator gives permission to reuse their work, usually if you credit them. Look for a "CC" label
@@ -1368,28 +1389,28 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">🧭</div>
+            <div class="key-point-icon" aria-hidden="true">🧭</div>
             <div class="key-point-text">
               <strong>Browsers Have Three Helpers</strong>
               Tabs, bookmarks, and history make moving around the web easy
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">📶</div>
+            <div class="key-point-icon" aria-hidden="true">📶</div>
             <div class="key-point-text">
               <strong>Know How You Connect</strong>
               Wired, Wi-Fi, or cellular — check the taskbar icon to see if you're online
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🔧</div>
+            <div class="key-point-icon" aria-hidden="true">🔧</div>
             <div class="key-point-text">
               <strong>Restarting Fixes Most Problems</strong>
               When the internet drops, restart the router, then the computer
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🔍</div>
+            <div class="key-point-icon" aria-hidden="true">🔍</div>
             <div class="key-point-text">
               <strong>Search Clearly, Source Carefully</strong>
               Use specific words, trust .gov/.edu, keep your sources, and respect copyright
@@ -1397,7 +1418,7 @@
           </div>
 
           <div class="handout-prompt">
-            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
             <div class="handout-prompt-text">Take your handouts home! The Search &amp; Connect Lab and the Browser &amp; Wi-Fi card have step-by-step reminders.</div>
           </div>
         </div>
@@ -1405,7 +1426,7 @@
 
       <!-- Slide 17: Completion -->
       <div class="slide completion-slide">
-        <div class="completion-badge">
+        <div class="completion-badge" aria-hidden="true">
           <span>🎉</span>
         </div>
         <h2>You Did It!</h2>
@@ -1429,7 +1450,7 @@
         Next →
       </button>
     </div>
-  </div>
+  </main>
 
   <!-- Confetti Container -->
   <div class="confetti" id="confetti"></div>
@@ -1439,6 +1460,7 @@
   <script>
     // Presentation State
     let currentSlide = 0;
+    let fitFrame = 0;
     const slides = document.querySelectorAll('.slide');
     const totalSlides = slides.length;
     const slideLinks = document.querySelectorAll('.slide-link');
@@ -1463,9 +1485,10 @@
         slide.classList.toggle('active', index === currentSlide);
       });
 
-      slideLinks.forEach((link, index) => {
-        link.classList.toggle('active', index === currentSlide);
-        if (index < currentSlide) {
+      slideLinks.forEach((link) => {
+        const targetSlide = parseInt(link.dataset.slide, 10);
+        link.classList.toggle('active', targetSlide === currentSlide);
+        if (targetSlide < currentSlide) {
           link.classList.add('completed');
         }
       });
@@ -1491,6 +1514,38 @@
       if (activeLink) {
         activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
+
+      const announce = document.getElementById('slide-announce');
+      if (announce) {
+        const activeSlide = slides[currentSlide];
+        const heading = activeSlide ? activeSlide.querySelector('h2') : null;
+        announce.textContent = heading ? heading.textContent.trim() : '';
+      }
+
+      scheduleSlideFit();
+    }
+
+    function scheduleSlideFit() {
+      cancelAnimationFrame(fitFrame);
+      fitFrame = requestAnimationFrame(fitActiveSlide);
+    }
+
+    function fitActiveSlide() {
+      const container = document.querySelector('.slides-container');
+      const activeSlide = document.querySelector('.slide.active');
+      if (!container || !activeSlide) return;
+
+      activeSlide.style.setProperty('--slide-scale', '1');
+      const containerRect = container.getBoundingClientRect();
+      const slideRect = activeSlide.getBoundingClientRect();
+      const topInset = Math.max(0, slideRect.top - containerRect.top);
+      const availableWidth = Math.max(1, container.clientWidth - 4);
+      const availableHeight = Math.max(1, container.clientHeight - topInset - 4);
+      const slideWidth = Math.max(1, activeSlide.scrollWidth);
+      const slideHeight = Math.max(1, activeSlide.scrollHeight);
+      const scale = Math.min(1, availableWidth / slideWidth, availableHeight / slideHeight);
+      activeSlide.style.setProperty('--slide-scale', String(Math.floor(scale * 1000) / 1000));
+      container.scrollTop = 0;
     }
 
     function goToSlide(index) {
@@ -1527,6 +1582,11 @@
 
     // Keyboard Navigation
     document.addEventListener('keydown', (e) => {
+      // Don't hijack keys when a button/link has focus and user presses space/enter
+      const tag = (e.target.tagName || '').toLowerCase();
+      if ((e.key === ' ' || e.key === 'Enter') && (tag === 'button' || tag === 'a')) {
+        return;
+      }
       switch(e.key) {
         case 'ArrowRight':
         case 'PageDown':
@@ -1603,6 +1663,22 @@
         confettiContainer.classList.remove('active');
       }, 5000);
     }
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (target && target.closest('.reveal-btn, .answer-toggle, .kc-toggle, [data-reveal]')) {
+        setTimeout(scheduleSlideFit, 0);
+      }
+    });
+
+    window.addEventListener('resize', scheduleSlideFit);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(scheduleSlideFit);
+    }
+    new MutationObserver(scheduleSlideFit).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-text-size']
+    });
 
     // Touch/Swipe Support
     let touchStartX = 0;

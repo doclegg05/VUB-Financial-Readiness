@@ -8,13 +8,13 @@
   :root { --windows-blue: #0078D4; --primary: #1B365D; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.95rem; color: #1a1a1a;
-    max-width: 8.5in; padding: 0.5in; margin: 0 auto; background: #fff; line-height: 1.3; }
+    max-width: 8.5in; padding: 0.5in; margin: 0 auto; background: #fff; line-height: 1.5; }
   .header { background: linear-gradient(135deg, #0078D4 0%, #005A9E 100%); color: #fff;
     padding: 0.5rem 0.75rem; border-radius: 6px; margin-bottom: 0.4rem; display: flex;
     justify-content: space-between; align-items: center; flex-wrap: wrap; }
   .header h1 { font-size: 1.15rem; font-weight: 700; }
   .badge { background: rgba(255,255,255,0.25); padding: 0.15rem 0.5rem; border-radius: 3px;
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; }
+    font-size: 0.875rem; font-weight: 700; letter-spacing: 0.05em; }
   .header .subtitle { width: 100%; font-size: 0.75rem; opacity: 0.9; margin-top: 0.15rem; }
   .key { display: inline-block; background: #f0f0f0; border: 2px solid #ccc;
     border-bottom: 3px solid #aaa; border-radius: 4px; padding: 0.1rem 0.4rem;
@@ -23,7 +23,7 @@
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
   .section { break-inside: avoid; }
   .section-header { padding: 0.2rem 0.5rem; border-radius: 3px; color: #fff;
-    font-weight: 700; font-size: 0.8rem; margin-bottom: 0.2rem; }
+    font-weight: 700; font-size: 0.9rem; margin-bottom: 0.2rem; }
   .sh-blue { background: var(--primary); }
   .sh-light { background: #2E5A88; }
   .sh-teal { background: #1a6b5a; }
@@ -40,7 +40,7 @@
   .steps li { font-size: 0.85rem; padding: 0.1rem 0; }
   .steps li strong { color: var(--primary); }
   .plus { margin: 0 0.1rem; font-weight: 600; color: #666; }
-  .footer { margin-top: 0.4rem; text-align: center; font-size: 0.7rem; color: #666;
+  .footer { margin-top: 0.4rem; text-align: center; font-size: 0.875rem; color: #666;
     border-top: 1px solid #ddd; padding-top: 0.25rem; }
   .tip { background: #FFF8E1; border: 1px solid #FFD54F; border-radius: 4px;
     padding: 0.25rem 0.5rem; margin-top: 0.35rem; font-size: 0.8rem; text-align: center; }
@@ -49,17 +49,28 @@
     body { padding: 0.25in; }
     .header, .section-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
+  @media screen and (max-width: 640px) {
+    body { max-width: 100%; padding: 1rem; }
+    .header { align-items: flex-start; gap: 0.35rem; }
+    .grid { grid-template-columns: 1fr; }
+    .section,
+    table { min-width: 0; }
+    td { overflow-wrap: anywhere; }
+    td:first-child { width: auto; white-space: normal; }
+    .key { white-space: nowrap; }
+  }
 </style>
 </head>
 <body>
-<div class="header">
+<header class="header">
   <h1>Browser &amp; Wi-Fi &mdash; Quick Reference</h1>
   <span class="badge">KEEP AT YOUR DESK</span>
   <div class="subtitle">VUB Digital Literacy — Level 1 &mdash; Week 2: Getting Online</div>
-</div>
+</header>
 
+<main>
 <div class="section essential">
-  <div class="section-header">&#11088; Browser Shortcuts (use these first!)</div>
+  <h2 class="section-header">&#11088; Browser Shortcuts (use these first!)</h2>
   <table>
     <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">T</span></td><td>Open a new tab</td></tr>
     <tr><td><span class="key">Ctrl</span> <span class="plus">+</span> <span class="key">F</span></td><td>Find a word on the page (or in a file)</td></tr>
@@ -72,7 +83,7 @@
 
 <div class="grid">
   <div class="section">
-    <div class="section-header sh-blue">Parts of the Browser</div>
+    <h2 class="section-header sh-blue">Parts of the Browser</h2>
     <table>
       <tr><td><strong>Address bar</strong></td><td>Type a website (URL) or a search</td></tr>
       <tr><td><strong>Tabs</strong></td><td>Several pages in one window</td></tr>
@@ -83,7 +94,7 @@
       <tr><td><strong>Padlock 🔒</strong></td><td>Secure connection</td></tr>
     </table>
 
-    <div class="section-header sh-light" style="margin-top:0.35rem">Reading a Web Address</div>
+    <h3 class="section-header sh-light" style="margin-top:0.35rem">Reading a Web Address</h3>
     <table>
       <tr><td><strong>.gov</strong></td><td>Official U.S. government site</td></tr>
       <tr><td><strong>.edu</strong></td><td>School or university</td></tr>
@@ -92,7 +103,7 @@
   </div>
 
   <div class="section">
-    <div class="section-header sh-teal">Am I Connected?</div>
+    <h2 class="section-header sh-teal">Am I Connected?</h2>
     <table>
       <tr><td><strong>📶 Bars</strong></td><td>Wi-Fi connected (more = stronger)</td></tr>
       <tr><td><strong>🌐 Globe</strong></td><td>NOT connected to the internet</td></tr>
@@ -100,7 +111,7 @@
       <tr><td><strong>Click icon</strong></td><td>See networks; yours says "Connected"</td></tr>
     </table>
 
-    <div class="section-header sh-purple" style="margin-top:0.35rem">Home Network Gear</div>
+    <h3 class="section-header sh-purple" style="margin-top:0.35rem">Home Network Gear</h3>
     <table>
       <tr><td><strong>ISP</strong></td><td>The company you pay for internet</td></tr>
       <tr><td><strong>Modem</strong></td><td>Brings the signal into your home</td></tr>
@@ -110,7 +121,7 @@
 </div>
 
 <div class="section steps" style="margin-top:0.4rem">
-  <div class="section-header sh-blue">&#128295; Wi-Fi Troubleshooting (try in order, stop when it works)</div>
+  <h2 class="section-header sh-blue">&#128295; Wi-Fi Troubleshooting (try in order, stop when it works)</h2>
   <ol>
     <li><strong>Check the network icon</strong> — Wi-Fi on? Right network? (Globe = not connected.)</li>
     <li><strong>Try another website</strong> — if only one fails, that site is the problem.</li>
@@ -121,7 +132,7 @@
 </div>
 
 <div class="section steps" style="margin-top:0.4rem">
-  <div class="section-header sh-teal">&#128269; Smart Search Tips</div>
+  <h2 class="section-header sh-teal">&#128269; Smart Search Tips</h2>
   <ol>
     <li><strong>Start with your need</strong> — decide your question before you type.</li>
     <li><strong>Use a few clear words</strong> — 3–4 specific words beat a full sentence.</li>
@@ -133,6 +144,7 @@
 </div>
 
 <div class="tip"><strong>Pro tip:</strong> <span class="key">Ctrl</span>+<span class="key">F</span> finds any word on a page or in a document — the single most useful shortcut for getting answers fast!</div>
+</main>
 <div class="footer">Veterans Upward Bound &mdash; West Virginia &nbsp;|&nbsp; Keep this card at your desk for quick reference!</div>
   <script src="/shared/text-size.js" defer></script>
 </body>

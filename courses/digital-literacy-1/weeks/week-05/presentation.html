@@ -7,6 +7,12 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     :root {
       --primary: #1B365D;
       --primary-dark: #0D1B2A;
@@ -15,16 +21,21 @@
       --red: #B31942;
       --light: #FFFFFF;
       --off-white: #F5F7FA;
-      --gray: #5A6A7A;
+      --gray: #54626F;
       --success: #28A745;
       --va-blue: #003F72;
       --va-red: #C4262E;
       --vub-textsize-fab-bottom: 90px; /* lift the bottom-right Text Size control above the nav bar */
     }
 
+    html[data-text-size="lg"] { --vub-textsize-fab-bottom: 120px; }
+    html[data-text-size="xl"],
+    html[data-text-size="xxl"] { --vub-textsize-fab-bottom: 150px; }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: var(--off-white);
+      width: 100%;
       height: 100vh;
       overflow: hidden;
       display: flex;
@@ -40,7 +51,7 @@
       flex-direction: column;
       position: fixed;
       height: 100vh;
-      overflow-y: auto;
+      overflow: hidden;
       z-index: 100;
     }
 
@@ -165,7 +176,7 @@
     .resource-link {
       display: block;
       padding: 0.5rem 0.75rem;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.85);
       font-size: 0.8rem;
       text-decoration: none;
       border-radius: 6px;
@@ -214,6 +225,8 @@
     .main-content {
       flex: 1;
       margin-left: 280px;
+      min-width: 0;
+      width: calc(100vw - 280px);
       display: flex;
       flex-direction: column;
       height: 100vh;
@@ -227,7 +240,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      overflow-y: auto;
+      overflow: hidden;
     }
 
     .slide {
@@ -239,6 +252,8 @@
       max-width: 1000px;
       min-height: 0;
       padding: 2rem 2.5rem;
+      transform: scale(var(--slide-scale, 1));
+      transform-origin: top center;
       animation: fadeIn 0.4s ease;
     }
 
@@ -255,8 +270,8 @@
     .slide.active.completion-slide { display: flex; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     /* Slide Styles */
@@ -674,12 +689,17 @@
     /* Responsive */
     @media (max-width: 1024px) {
       .sidebar { width: 240px; }
-      .main-content { margin-left: 240px; }
+      .main-content { margin-left: 240px; width: calc(100vw - 240px); }
     }
 
     @media (max-width: 768px) {
       .sidebar { display: none; }
-      .main-content { margin-left: 0; }
+      .main-content { margin-left: 0; min-width: 0; width: 100%; }
+      .slides-container { padding: 0.75rem; }
+      .slide { padding: 1.25rem; border-radius: 10px; }
+      .nav-footer { padding: 0.6rem; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+      .nav-btn { flex: 1 1 0; min-width: 0; justify-content: center; padding: 0.55rem 0.35rem; font-size: 0.95rem; text-align: center; white-space: nowrap; }
+      .slide-counter { order: -1; flex: 0 0 100%; text-align: center; font-size: 0.85rem; white-space: nowrap; }
       .two-column { grid-template-columns: 1fr; }
     }
 
@@ -741,6 +761,8 @@
     .reveal-answer .info-box {
       margin-top: 0;
     }
+
+    @media (prefers-reduced-motion: reduce){ .slide{animation:none;} .confetti-piece{animation:none;} .progress-fill{transition:none;} }
   </style>
 </head>
 <body>
@@ -757,8 +779,8 @@
       <div class="week-title">Review &amp; Testing Day</div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Welcome &amp; How Today Works</div>
+    <div class="chapter" role="group" aria-labelledby="ch-welcome">
+      <div class="chapter-title" id="ch-welcome">Welcome &amp; How Today Works</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link active" data-slide="0">Welcome</button>
         <button type="button" class="slide-link" data-slide="1">How Today Works</button>
@@ -766,8 +788,8 @@
       </div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Review Game by Domain</div>
+    <div class="chapter" role="group" aria-labelledby="ch-review-game">
+      <div class="chapter-title" id="ch-review-game">Review Game by Domain</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link" data-slide="3">1 · Technology Basics</button>
         <button type="button" class="slide-link" data-slide="4">1 · Technology Basics (cont.)</button>
@@ -782,8 +804,8 @@
       </div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Wrap Up &amp; Post-Test</div>
+    <div class="chapter" role="group" aria-labelledby="ch-wrap-up">
+      <div class="chapter-title" id="ch-wrap-up">Wrap Up &amp; Post-Test</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link" data-slide="13">Lightning Round</button>
         <button type="button" class="slide-link" data-slide="14">You Made It</button>
@@ -806,12 +828,13 @@
   </nav>
 
   <!-- Main Content -->
-  <div class="main-content">
+  <main class="main-content">
     <h1 class="sr-only">Week 5: Review &amp; Testing Day</h1>
+    <div id="slide-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     <div class="slides-container">
       <!-- Slide 0: Title -->
       <div class="slide active title-slide">
-        <div class="slide-icon">🎓</div>
+        <div class="slide-icon" aria-hidden="true">🎓</div>
         <h2 class="slide-title">Review &amp; Testing Day</h2>
         <p class="slide-subtitle">Everything you've learned — one celebration, one Post-Test</p>
         <p class="course-info">Week 5 of 5 · VUB Digital Literacy — Level 1</p>
@@ -825,14 +848,14 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">🎲</div>
+            <div class="key-point-icon" aria-hidden="true">🎲</div>
             <div class="key-point-text">
               <strong>First: the Review Game</strong>
               A friendly, Jeopardy-style recap of all 7 topics from Weeks 1–4. We read a question, you think it through, then we reveal the answer together.
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">📝</div>
+            <div class="key-point-icon" aria-hidden="true">📝</div>
             <div class="key-point-text">
               <strong>Then: the Post-Test</strong>
               The same kind of test you took in Week 1 — so you can see how much you've learned. No grades, no pressure.
@@ -896,10 +919,10 @@
           <div class="review-question">
             Q: A keyboard, mouse, and microphone are all examples of one kind of device. What do we call them — and what's the opposite kind?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a1" data-reveal>
             Reveal answer
           </button>
-          <div class="reveal-answer" hidden>
+          <div class="reveal-answer" id="reveal-a1" hidden>
             <div class="info-box success">
               <div class="info-box-title">Answer</div>
               <div class="info-box-content">
@@ -922,10 +945,10 @@
           <div class="review-question">
             Q: What's the difference between <strong>memory (RAM)</strong> and <strong>storage</strong>, and what is an <strong>operating system</strong>?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a2" data-reveal>
             Reveal answer
           </button>
-          <div class="reveal-answer" hidden>
+          <div class="reveal-answer" id="reveal-a2" hidden>
             <div class="info-box success">
               <div class="info-box-title">Answer</div>
               <div class="info-box-content">
@@ -950,10 +973,10 @@
           <div class="review-question">
             Q: What does <strong>PII</strong> stand for, and why do we say the things you post online are "permanent"?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a3" data-reveal>
             Reveal answer
           </button>
-          <div class="reveal-answer" hidden>
+          <div class="reveal-answer" id="reveal-a3" hidden>
             <div class="info-box success">
               <div class="info-box-title">Answer</div>
               <div class="info-box-content">
@@ -977,10 +1000,10 @@
           <div class="review-question">
             Q: Which keyboard shortcut finds a word on a webpage or in a document, and what does <strong>Creative Commons</strong> mean?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a4" data-reveal>
             Reveal answer
           </button>
-          <div class="reveal-answer" hidden>
+          <div class="reveal-answer" id="reveal-a4" hidden>
             <div class="info-box success">
               <div class="info-box-title">Answer</div>
               <div class="info-box-content">
@@ -1005,10 +1028,10 @@
           <div class="review-question">
             Q: Why is <strong>VA-benefits-letter-2026.docx</strong> a better file name than <strong>document1.docx</strong>, and what's a simple backup habit?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a5" data-reveal>
             Reveal answer
           </button>
-          <div class="reveal-answer" hidden>
+          <div class="reveal-answer" id="reveal-a5" hidden>
             <div class="info-box success">
               <div class="info-box-title">Answer</div>
               <div class="info-box-content">
@@ -1032,10 +1055,10 @@
           <div class="review-question">
             Q: What is a <strong>citation</strong> for, and what's the difference between <strong>portrait</strong> and <strong>landscape</strong> printing?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a6" data-reveal>
             Reveal answer
           </button>
-          <div class="reveal-answer" hidden>
+          <div class="reveal-answer" id="reveal-a6" hidden>
             <div class="info-box success">
               <div class="info-box-title">Answer</div>
               <div class="info-box-content">
@@ -1059,10 +1082,10 @@
           <div class="review-question">
             Q: What's the difference between <strong>Reply</strong> and <strong>Reply All</strong>, and what is <strong>Bcc</strong> for?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a7" data-reveal>
             Reveal answer
           </button>
-          <div class="reveal-answer" hidden>
+          <div class="reveal-answer" id="reveal-a7" hidden>
             <div class="info-box success">
               <div class="info-box-title">Answer</div>
               <div class="info-box-content">
@@ -1086,10 +1109,10 @@
           <div class="review-question">
             Q: What's the difference between <strong>synchronous</strong> and <strong>asynchronous</strong> communication?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a8" data-reveal>
             Reveal answer
           </button>
-          <div class="reveal-answer" hidden>
+          <div class="reveal-answer" id="reveal-a8" hidden>
             <div class="info-box success">
               <div class="info-box-title">Answer</div>
               <div class="info-box-content">
@@ -1113,10 +1136,10 @@
           <div class="review-question">
             Q: What makes a password <strong>strong</strong>, and which shortcut locks your Windows computer when you step away?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a9" data-reveal>
             Reveal answer
           </button>
-          <div class="reveal-answer" hidden>
+          <div class="reveal-answer" id="reveal-a9" hidden>
             <div class="info-box success">
               <div class="info-box-title">Answer</div>
               <div class="info-box-content">
@@ -1140,10 +1163,10 @@
           <div class="review-question">
             Q: What is <strong>phishing</strong>, what does <strong>private browsing</strong> do, and name one way to protect your body at the computer.
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a10" data-reveal>
             Reveal answer
           </button>
-          <div class="reveal-answer" hidden>
+          <div class="reveal-answer" id="reveal-a10" hidden>
             <div class="info-box success">
               <div class="info-box-title">Answer</div>
               <div class="info-box-content">
@@ -1169,10 +1192,10 @@
             Quick fire: (1) Copy shortcut? (2) Paste shortcut? (3) Undo shortcut?
             (4) The "www" you type to reach a website is called the…? (5) A secret word that protects an account is a…?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" data-reveal>
+          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a11" data-reveal>
             Reveal answers
           </button>
-          <div class="reveal-answer" hidden>
+          <div class="reveal-answer" id="reveal-a11" hidden>
             <div class="info-box success">
               <div class="info-box-title">Answers</div>
               <div class="info-box-content">
@@ -1192,35 +1215,35 @@
         </div>
         <div class="slide-content">
           <div class="key-point">
-            <div class="key-point-icon">🖥️</div>
+            <div class="key-point-icon" aria-hidden="true">🖥️</div>
             <div class="key-point-text">
               <strong>You know your computer</strong>
               Parts, devices, memory vs. storage, and what an operating system does.
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🌐</div>
+            <div class="key-point-icon" aria-hidden="true">🌐</div>
             <div class="key-point-text">
               <strong>You can get online and find answers</strong>
               Browsers, Wi-Fi, smart searching, and Ctrl + F.
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">✍️</div>
+            <div class="key-point-icon" aria-hidden="true">✍️</div>
             <div class="key-point-text">
               <strong>You can create, save, and communicate</strong>
               Documents, good file names, citations, email, and online etiquette.
             </div>
           </div>
           <div class="key-point">
-            <div class="key-point-icon">🔒</div>
+            <div class="key-point-icon" aria-hidden="true">🔒</div>
             <div class="key-point-text">
               <strong>You can stay safe and be a good digital citizen</strong>
               Strong passwords, spotting scams, protecting your info, and your health.
             </div>
           </div>
           <div class="handout-prompt">
-            <div class="handout-prompt-icon">📋</div>
+            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
             <div class="handout-prompt-text">Take home the "Level 1 Study Guide" — a one-page summary of every topic for the Post-Test and beyond.</div>
           </div>
         </div>
@@ -1281,6 +1304,7 @@
                 <li><strong>About 20 questions</strong> covering all 7 topics from the course</li>
                 <li><strong>No time limit</strong> — take your time and read carefully</li>
                 <li><strong>Not pass/fail</strong> — it shows how much you've learned</li>
+                <li>After you submit, use <strong>Print Report (PDF)</strong> to save or print your results</li>
                 <li>Compare it to your Week 1 Pre-Test to see your improvement!</li>
               </ul>
             </div>
@@ -1310,7 +1334,7 @@
         Next →
       </button>
     </div>
-  </div>
+  </main>
 
   <!-- Confetti Container -->
   <div class="confetti" id="confetti"></div>
@@ -1320,6 +1344,7 @@
   <script>
     // Presentation State
     let currentSlide = 0;
+    let fitFrame = 0;
     const slides = document.querySelectorAll('.slide');
     const totalSlides = slides.length;
     const slideLinks = document.querySelectorAll('.slide-link');
@@ -1344,9 +1369,10 @@
         slide.classList.toggle('active', index === currentSlide);
       });
 
-      slideLinks.forEach((link, index) => {
-        link.classList.toggle('active', index === currentSlide);
-        if (index < currentSlide) {
+      slideLinks.forEach((link) => {
+        const targetSlide = parseInt(link.dataset.slide, 10);
+        link.classList.toggle('active', targetSlide === currentSlide);
+        if (targetSlide < currentSlide) {
           link.classList.add('completed');
         }
       });
@@ -1372,6 +1398,38 @@
       if (activeLink) {
         activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
+
+      const announce = document.getElementById('slide-announce');
+      if (announce) {
+        const activeSlide = slides[currentSlide];
+        const heading = activeSlide ? activeSlide.querySelector('h2') : null;
+        announce.textContent = heading ? heading.textContent.trim() : '';
+      }
+
+      scheduleSlideFit();
+    }
+
+    function scheduleSlideFit() {
+      cancelAnimationFrame(fitFrame);
+      fitFrame = requestAnimationFrame(fitActiveSlide);
+    }
+
+    function fitActiveSlide() {
+      const container = document.querySelector('.slides-container');
+      const activeSlide = document.querySelector('.slide.active');
+      if (!container || !activeSlide) return;
+
+      activeSlide.style.setProperty('--slide-scale', '1');
+      const containerRect = container.getBoundingClientRect();
+      const slideRect = activeSlide.getBoundingClientRect();
+      const topInset = Math.max(0, slideRect.top - containerRect.top);
+      const availableWidth = Math.max(1, container.clientWidth - 4);
+      const availableHeight = Math.max(1, container.clientHeight - topInset - 4);
+      const slideWidth = Math.max(1, activeSlide.scrollWidth);
+      const slideHeight = Math.max(1, activeSlide.scrollHeight);
+      const scale = Math.min(1, availableWidth / slideWidth, availableHeight / slideHeight);
+      activeSlide.style.setProperty('--slide-scale', String(Math.floor(scale * 1000) / 1000));
+      container.scrollTop = 0;
     }
 
     function goToSlide(index) {
@@ -1408,6 +1466,11 @@
 
     // Keyboard Navigation
     document.addEventListener('keydown', (e) => {
+      // Don't hijack keys when a button/link has focus and user presses space/enter
+      const tag = (e.target.tagName || '').toLowerCase();
+      if ((e.key === ' ' || e.key === 'Enter') && (tag === 'button' || tag === 'a')) {
+        return;
+      }
       switch(e.key) {
         case 'ArrowRight':
         case 'PageDown':
@@ -1488,6 +1551,22 @@
         confettiContainer.classList.remove('active');
       }, 5000);
     }
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (target && target.closest('.reveal-btn, .answer-toggle, .kc-toggle, [data-reveal]')) {
+        setTimeout(scheduleSlideFit, 0);
+      }
+    });
+
+    window.addEventListener('resize', scheduleSlideFit);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(scheduleSlideFit);
+    }
+    new MutationObserver(scheduleSlideFit).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-text-size']
+    });
 
     // Touch/Swipe Support
     let touchStartX = 0;

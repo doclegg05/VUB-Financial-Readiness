@@ -53,7 +53,7 @@
       color: var(--primary-dark);
       padding: 0.1rem 0.6rem;
       border-radius: 20px;
-      font-size: 0.6rem;
+      font-size: 0.85rem;
       font-weight: 700;
       margin-top: 0.2rem;
       text-transform: uppercase;
@@ -126,7 +126,7 @@
     .answer-option:hover { border-color: var(--primary-light); background: var(--off-white); }
     .answer-option.selected { border-color: var(--accent); background: rgba(201,162,39,0.12); }
     .answer-option:focus-within { outline: 3px solid var(--primary-light); outline-offset: 2px; }
-    .answer-option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .answer-option input { position: absolute; clip: rect(0,0,0,0); clip-path: inset(50%); width: 1px; height: 1px; overflow: hidden; white-space: nowrap; }
     .answer-marker {
       width: 30px; height: 30px;
       border: 2px solid var(--gray-light);
@@ -140,6 +140,7 @@
     .answer-text { flex: 1; }
 
     .quiz-navigation { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; gap: 0.5rem; }
+    .submit-status { text-align: center; color: var(--gray); font-size: 0.95rem; min-height: 1.4em; margin: 0 0 0.5rem; }
     .nav-btn {
       padding: 0.875rem 2rem; font-size: 1rem; font-weight: 600;
       border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; min-height: 44px;
@@ -183,6 +184,7 @@
     /* Per-question review */
     .review-list { text-align: left; margin-bottom: 2rem; }
     .review-list h3 { color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; }
+    .review-list-heading { color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; }
     .review-item { border: 1px solid var(--muted); border-left: 5px solid var(--gray-light); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
     .review-item.correct { border-left-color: var(--success); }
     .review-item.incorrect { border-left-color: var(--danger); }
@@ -284,7 +286,7 @@
 </head>
 <body>
   <header class="quiz-header">
-    <h1>&#x1F4DD; Pre-Test &mdash; Digital Literacy: Level 1</h1>
+    <h1><span aria-hidden="true">&#x1F4DD;</span> Pre-Test &mdash; Digital Literacy: Level 1</h1>
     <p>Veterans Upward Bound &mdash; West Virginia</p>
     <span class="course-badge">Baseline Knowledge Check</span>
 
@@ -342,7 +344,7 @@
     <!-- Quiz -->
     <div class="quiz-section" id="quizSection">
       <div class="instructions">
-        <h2>&#x1F4CC; Instructions</h2>
+        <h2><span aria-hidden="true">&#x1F4CC;</span> Instructions</h2>
         <ul>
           <li>Read each question carefully before selecting your answer</li>
           <li>Click an answer choice (or press number keys 1&ndash;4) to select it</li>
@@ -363,6 +365,7 @@
         <button class="nav-btn btn-next" id="btnNext">Next &#x2192;</button>
         <button class="nav-btn btn-submit" id="btnSubmit" style="display: none;">Submit Assessment &#x2713;</button>
       </div>
+      <p id="submitStatus" class="submit-status" aria-live="polite"></p>
     </div>
 
     <!-- Results -->
@@ -705,10 +708,17 @@
     function updateNavigation() {
       btnPrev.disabled = currentQuestion === 0;
       var isLast = currentQuestion === questions.length - 1;
-      var allAnswered = Object.keys(answers).length === questions.length;
+      var answeredCount = Object.keys(answers).length;
+      var allAnswered = answeredCount === questions.length;
       btnNext.style.display = isLast ? 'none' : 'inline-block';
       btnSubmit.style.display = isLast ? 'inline-block' : 'none';
       btnSubmit.disabled = !allAnswered;
+      var submitStatus = document.getElementById('submitStatus');
+      if (submitStatus) {
+        submitStatus.textContent = (isLast && !allAnswered)
+          ? (answeredCount + ' of ' + questions.length + ' questions answered — answer all questions to submit.')
+          : '';
+      }
     }
 
     function updateProgress() {
@@ -766,7 +776,7 @@
 
       // Per-question review (text + icon, never color alone)
       document.getElementById('reviewList').innerHTML =
-        '<h3>Review Your Answers</h3>' +
+        '<h2 class="review-list-heading">Review Your Answers</h2>' +
         questions.map(function(q) {
           var studentLetter = answers[q.id];
           var isCorrect = studentLetter === q.correct;

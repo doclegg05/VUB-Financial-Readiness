@@ -7,6 +7,12 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     :root {
       --primary: #1B365D;
       --primary-dark: #0D1B2A;
@@ -15,16 +21,21 @@
       --red: #B31942;
       --light: #FFFFFF;
       --off-white: #F5F7FA;
-      --gray: #5A6A7A;
+      --gray: #54626F;
       --success: #28A745;
       --va-blue: #003F72;
       --va-red: #C4262E;
       --vub-textsize-fab-bottom: 90px; /* lift the bottom-right Text Size control above the nav bar */
     }
 
+    html[data-text-size="lg"] { --vub-textsize-fab-bottom: 120px; }
+    html[data-text-size="xl"],
+    html[data-text-size="xxl"] { --vub-textsize-fab-bottom: 150px; }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: var(--off-white);
+      width: 100%;
       height: 100vh;
       overflow: hidden;
       display: flex;
@@ -40,7 +51,7 @@
       flex-direction: column;
       position: fixed;
       height: 100vh;
-      overflow-y: auto;
+      overflow: hidden;
       z-index: 100;
     }
 
@@ -165,7 +176,7 @@
     .resource-link {
       display: block;
       padding: 0.5rem 0.75rem;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.85);
       font-size: 0.8rem;
       text-decoration: none;
       border-radius: 6px;
@@ -214,6 +225,8 @@
     .main-content {
       flex: 1;
       margin-left: 280px;
+      min-width: 0;
+      width: calc(100vw - 280px);
       display: flex;
       flex-direction: column;
       height: 100vh;
@@ -227,7 +240,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      overflow-y: auto;
+      overflow: hidden;
     }
 
     .slide {
@@ -239,6 +252,8 @@
       max-width: 1000px;
       min-height: 0;
       padding: 2rem 2.5rem;
+      transform: scale(var(--slide-scale, 1));
+      transform-origin: top center;
       animation: fadeIn 0.4s ease;
     }
 
@@ -255,8 +270,8 @@
     .slide.active.completion-slide { display: flex; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     /* Slide Styles */
@@ -742,12 +757,17 @@
     /* Responsive */
     @media (max-width: 1024px) {
       .sidebar { width: 240px; }
-      .main-content { margin-left: 240px; }
+      .main-content { margin-left: 240px; width: calc(100vw - 240px); }
     }
 
     @media (max-width: 768px) {
       .sidebar { display: none; }
-      .main-content { margin-left: 0; }
+      .main-content { margin-left: 0; min-width: 0; width: 100%; }
+      .slides-container { padding: 0.75rem; }
+      .slide { padding: 1.25rem; border-radius: 10px; }
+      .nav-footer { padding: 0.6rem; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+      .nav-btn { flex: 1 1 0; min-width: 0; justify-content: center; padding: 0.55rem 0.35rem; font-size: 0.95rem; text-align: center; white-space: nowrap; }
+      .slide-counter { order: -1; flex: 0 0 100%; text-align: center; font-size: 0.85rem; white-space: nowrap; }
       .two-column { grid-template-columns: 1fr; }
     }
   </style>
@@ -766,8 +786,8 @@
       <div class="week-title">Inside the Computer</div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Start Here</div>
+    <div class="chapter" role="group" aria-labelledby="ch-start-here">
+      <div class="chapter-title" id="ch-start-here">Start Here</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link active" data-slide="0">Welcome & Overview</button>
         <button type="button" class="slide-link" data-slide="1">Learning Objectives</button>
@@ -775,8 +795,8 @@
       </div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Devices & Hardware</div>
+    <div class="chapter" role="group" aria-labelledby="ch-devices-hardware">
+      <div class="chapter-title" id="ch-devices-hardware">Devices & Hardware</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link" data-slide="3">Input & Output Devices</button>
         <button type="button" class="slide-link" data-slide="4">Ports, Cables & Connectors</button>
@@ -786,8 +806,8 @@
       </div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Software & OS</div>
+    <div class="chapter" role="group" aria-labelledby="ch-software-os">
+      <div class="chapter-title" id="ch-software-os">Software & OS</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link" data-slide="8">What Is Software?</button>
         <button type="button" class="slide-link" data-slide="9">Paid vs. Free Software</button>
@@ -797,8 +817,8 @@
       </div>
     </div>
 
-    <div class="chapter">
-      <div class="chapter-title">Wrap-Up</div>
+    <div class="chapter" role="group" aria-labelledby="ch-wrap-up">
+      <div class="chapter-title" id="ch-wrap-up">Wrap-Up</div>
       <div class="chapter-slides">
         <button type="button" class="slide-link" data-slide="13">Knowledge Check</button>
         <button type="button" class="slide-link" data-slide="14">Your Hands-On Lab</button>
@@ -822,8 +842,9 @@
   </nav>
 
   <!-- Main Content -->
-  <div class="main-content">
+  <main class="main-content">
     <h1 class="sr-only">Week 1: Inside the Computer</h1>
+    <div id="slide-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     <div class="slides-container">
       <!-- Slide 0: Title -->
       <div class="slide active title-slide">
@@ -893,6 +914,7 @@
                 <li><strong>About 20 questions</strong> covering the whole 5-week course</li>
                 <li><strong>No time limit</strong> — take your time</li>
                 <li><strong>Not pass/fail</strong> — it measures your starting point</li>
+                <li>After you submit, use <strong>Print Report (PDF)</strong> if your instructor asks for a record</li>
                 <li>You'll take a similar test in Week 5 to see how far you've come!</li>
               </ul>
             </div>
@@ -1419,7 +1441,7 @@
         Next →
       </button>
     </div>
-  </div>
+  </main>
 
   <!-- Confetti Container -->
   <div class="confetti" id="confetti"></div>
@@ -1429,6 +1451,7 @@
   <script>
     // Presentation State
     let currentSlide = 0;
+    let fitFrame = 0;
     const slides = document.querySelectorAll('.slide');
     const totalSlides = slides.length;
     const slideLinks = document.querySelectorAll('.slide-link');
@@ -1453,9 +1476,10 @@
         slide.classList.toggle('active', index === currentSlide);
       });
 
-      slideLinks.forEach((link, index) => {
-        link.classList.toggle('active', index === currentSlide);
-        if (index < currentSlide) {
+      slideLinks.forEach((link) => {
+        const targetSlide = parseInt(link.dataset.slide, 10);
+        link.classList.toggle('active', targetSlide === currentSlide);
+        if (targetSlide < currentSlide) {
           link.classList.add('completed');
         }
       });
@@ -1481,6 +1505,38 @@
       if (activeLink) {
         activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
+
+      const announce = document.getElementById('slide-announce');
+      if (announce) {
+        const activeSlide = slides[currentSlide];
+        const heading = activeSlide ? activeSlide.querySelector('h2') : null;
+        announce.textContent = heading ? heading.textContent.trim() : '';
+      }
+
+      scheduleSlideFit();
+    }
+
+    function scheduleSlideFit() {
+      cancelAnimationFrame(fitFrame);
+      fitFrame = requestAnimationFrame(fitActiveSlide);
+    }
+
+    function fitActiveSlide() {
+      const container = document.querySelector('.slides-container');
+      const activeSlide = document.querySelector('.slide.active');
+      if (!container || !activeSlide) return;
+
+      activeSlide.style.setProperty('--slide-scale', '1');
+      const containerRect = container.getBoundingClientRect();
+      const slideRect = activeSlide.getBoundingClientRect();
+      const topInset = Math.max(0, slideRect.top - containerRect.top);
+      const availableWidth = Math.max(1, container.clientWidth - 4);
+      const availableHeight = Math.max(1, container.clientHeight - topInset - 4);
+      const slideWidth = Math.max(1, activeSlide.scrollWidth);
+      const slideHeight = Math.max(1, activeSlide.scrollHeight);
+      const scale = Math.min(1, availableWidth / slideWidth, availableHeight / slideHeight);
+      activeSlide.style.setProperty('--slide-scale', String(Math.floor(scale * 1000) / 1000));
+      container.scrollTop = 0;
     }
 
     function goToSlide(index) {
@@ -1517,6 +1573,11 @@
 
     // Keyboard Navigation
     document.addEventListener('keydown', (e) => {
+      // Don't hijack keys when a button/link has focus and user presses space/enter
+      const tag = (e.target.tagName || '').toLowerCase();
+      if ((e.key === ' ' || e.key === 'Enter') && (tag === 'button' || tag === 'a')) {
+        return;
+      }
       switch(e.key) {
         case 'ArrowRight':
         case 'PageDown':
@@ -1589,6 +1650,22 @@
         btn.setAttribute('aria-expanded', String(!isOpen));
         btn.textContent = isOpen ? 'Show answer' : 'Hide answer';
       });
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (target && target.closest('.reveal-btn, .answer-toggle, .kc-toggle, [data-reveal]')) {
+        setTimeout(scheduleSlideFit, 0);
+      }
+    });
+
+    window.addEventListener('resize', scheduleSlideFit);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(scheduleSlideFit);
+    }
+    new MutationObserver(scheduleSlideFit).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-text-size']
     });
 
     // Touch/Swipe Support

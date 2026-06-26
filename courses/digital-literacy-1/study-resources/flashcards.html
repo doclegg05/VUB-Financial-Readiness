@@ -36,9 +36,10 @@
   }
   .topbar-inner { max-width: 960px; margin: 0 auto; }
   .back-link {
-    display: inline-block; color: var(--gold-light); text-decoration: none;
+    display: inline-flex; align-items: center; min-height: 44px;
+    color: var(--gold-light); text-decoration: none;
     font-weight: 700; font-size: 1rem; margin-bottom: 0.6rem;
-    padding: 0.35rem 0.1rem;
+    padding: 0.35rem 0.65rem;
   }
   .back-link:hover, .back-link:focus { text-decoration: underline; }
   .topbar h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 1.85rem; line-height: 1.25; }
@@ -169,7 +170,8 @@
     <h2>How to use these cards</h2>
     <p>Read the term, think about what it means, then flip the card to check your answer.
        Click a card (or press <kbd>Spacebar</kbd>) to flip it. Use <kbd>&larr;</kbd> and <kbd>&rarr;</kbd>
-       or the buttons to move between cards. Use the buttons below to study one topic area at a time.</p>
+       or the buttons to move between cards. Use the buttons below to study one topic area at a time.
+       When you are ready, open the <a href="quiz.html">Practice Quiz</a>.</p>
   </section>
 
   <section class="filter" aria-label="Choose a topic area">
@@ -304,6 +306,8 @@
   var filterGroup = document.getElementById("filter-group");
   var countEl = document.getElementById("count");
   var card = document.getElementById("card");
+  var frontFace = card.querySelector(".face-front");
+  var backFace = card.querySelector(".face-back");
   var frontDomain = document.getElementById("front-domain");
   var frontTerm = document.getElementById("front-term");
   var backDomain = document.getElementById("back-domain");
@@ -371,6 +375,9 @@
     backDef.textContent = c.b;
 
     card.classList.toggle("flipped", flipped);
+    // Hide the face that is not currently showing so AT reads only one side.
+    frontFace.setAttribute("aria-hidden", flipped ? "true" : "false");
+    backFace.setAttribute("aria-hidden", flipped ? "false" : "true");
     card.setAttribute("aria-label",
       "Card " + (index + 1) + " of " + total + ". " +
       (flipped ? ("Meaning: " + c.b) : ("Term: " + c.t + ". Flip to see the meaning.")));

@@ -11,6 +11,11 @@
       box-sizing: border-box;
     }
 
+    *:focus-visible {
+      outline: 3px solid #C9A227;
+      outline-offset: 2px;
+    }
+
     :root {
       --primary: #1B365D;
       --primary-light: #2C4A7C;
@@ -112,7 +117,7 @@
     }
 
     .objectives-list li::before {
-      content: "🎯";
+      content: "\2022";
       position: absolute;
       left: 0;
     }
@@ -176,7 +181,7 @@
       padding: 0.75rem 1rem;
     }
 
-    .timeline-content h4 {
+    .timeline-content h3 {
       color: var(--primary);
       font-size: 0.95rem;
       margin-bottom: 0.25rem;
@@ -206,7 +211,7 @@
 
     .activity-demo {
       background: rgba(201, 162, 39, 0.2);
-      color: #8B7500;
+      color: #6B5900;
     }
 
     .activity-practice {
@@ -221,7 +226,7 @@
 
     .activity-warmup {
       background: rgba(255, 152, 0, 0.15);
-      color: #E65100;
+      color: #B33F00;
     }
 
     .activity-break {
@@ -488,6 +493,7 @@
     </div>
   </header>
 
+  <main>
   <div class="overview-box">
     <h2>🎯 Learning Objectives</h2>
     <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--gray);">By the end of this session, participants will be able to (IC3 GS6 Level 1 domains in tags):</p>
@@ -509,70 +515,70 @@
       <div class="timeline-item">
         <div class="timeline-time">0:00-0:08</div>
         <div class="timeline-content">
-          <h4>Welcome &amp; Warm-Up <span class="activity-type activity-warmup">Warm-Up</span></h4>
+          <h3>Welcome &amp; Warm-Up <span class="activity-type activity-warmup">Warm-Up</span></h3>
           <p>Recap Weeks 1-2 in a sentence. Ask: "Have you ever lost a file or couldn't find one you saved? What happened?" This sets up today's save/naming focus. Distribute both handouts.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">0:08-0:15</div>
         <div class="timeline-content">
-          <h4>Objectives &amp; Why It Matters <span class="activity-type activity-lecture">Lecture</span></h4>
+          <h3>Objectives &amp; Why It Matters <span class="activity-type activity-lecture">Lecture</span></h3>
           <p>Present slides 1-1 (title &amp; objectives). Frame the day: today we make things, save them well, and share them respectfully — skills used every week after this.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">0:15-0:35</div>
         <div class="timeline-content">
-          <h4>Documents, Citations &amp; Saving <span class="activity-type activity-demo">Demo</span></h4>
+          <h3>Documents, Citations &amp; Saving <span class="activity-type activity-demo">Demo</span></h3>
           <p>Present slides 2-7. On the projector, create a short Word document, add one citation (References tab), and save it with a clear file name. Demonstrate the 3-2-1 backup idea with a USB drive. <span class="ic3-tag">4.1 / 4.2 / 4.3</span></p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">0:35-0:55</div>
         <div class="timeline-content">
-          <h4>Lab Part A — Make, Name &amp; Save <span class="activity-type activity-practice">Practice</span></h4>
+          <h3>Lab Part A — Make, Name &amp; Save <span class="activity-type activity-practice">Practice</span></h3>
           <p>Participants follow the lab to create a document, give it a good file name, add a simple citation, and save it. Walk the room. <span class="ic3-tag">4.1.1 / 4.2.4 / 4.3.2</span></p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">0:55-1:05</div>
         <div class="timeline-content">
-          <h4>Break <span class="activity-type activity-break">Break</span></h4>
+          <h3>Break <span class="activity-type activity-break">Break</span></h3>
           <p>10-minute break. Encourage participants to stretch and step away from the screen.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:05-1:20</div>
         <div class="timeline-content">
-          <h4>Printing Concepts <span class="activity-type activity-demo">Demo</span></h4>
+          <h3>Printing Concepts <span class="activity-type activity-demo">Demo</span></h3>
           <p>Present slides 8-9. Open the print screen (Ctrl+P) on the projector — show portrait vs landscape, double-sided, copies, page range, and Save as PDF. No paper required. <span class="ic3-tag">4.4</span></p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:20-1:38</div>
         <div class="timeline-content">
-          <h4>Communication &amp; Email Options <span class="activity-type activity-lecture">Presentation</span></h4>
+          <h3>Communication &amp; Email Options <span class="activity-type activity-lecture">Presentation</span></h3>
           <p>Present slides 10-13. Spend real time on Reply vs Reply All vs Forward vs Bcc — the most common veteran email mistake. Cover acceptable-use policies and inclusive language. <span class="ic3-tag">5.1 / 5.2</span></p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:38-1:50</div>
         <div class="timeline-content">
-          <h4>Lab Part B — Email &amp; Etiquette Scenarios <span class="activity-type activity-practice">Practice</span></h4>
+          <h3>Lab Part B — Email &amp; Etiquette Scenarios <span class="activity-type activity-practice">Practice</span></h3>
           <p>Participants work the email-response and reply-all/inclusive-language scenarios in the lab. Cover collaboration (synchronous vs asynchronous) and etiquette from slides 14-15. <span class="ic3-tag">5.2 / 6.1 / 6.2</span></p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:50-1:57</div>
         <div class="timeline-content">
-          <h4>Knowledge Check <span class="activity-type activity-eval">Evaluation</span></h4>
+          <h3>Knowledge Check <span class="activity-type activity-eval">Evaluation</span></h3>
           <p>Work slide 16 together. Ask the 3 questions aloud, let participants answer, then reveal. Clear up any confusion about reply-all and file naming.</p>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-time">1:57-2:00</div>
         <div class="timeline-content">
-          <h4>Wrap-Up &amp; Take-Home <span class="activity-type activity-apply">Application</span></h4>
+          <h3>Wrap-Up &amp; Take-Home <span class="activity-type activity-apply">Application</span></h3>
           <p>Summarize (slides 17-18). Challenge: at home, save one real document with a good file name and back it up to a USB drive or the cloud. Preview Week 4 (Citizenship &amp; Safety).</p>
         </div>
       </div>
@@ -687,6 +693,8 @@
       <li><strong>Connection:</strong> Now that they create and share content, Week 4 keeps them and their information safe while doing it</li>
     </ul>
   </div>
+
+  </main>
 
   <footer class="footer">
     <p><strong>Veterans Upward Bound - West Virginia</strong></p>

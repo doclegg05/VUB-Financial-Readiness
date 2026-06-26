@@ -8,13 +8,13 @@
   :root { --va-blue: #003F72; --primary: #1B365D; --accent: #C9A227; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.95rem; color: #1a1a1a;
-    max-width: 8.5in; padding: 0.5in; margin: 0 auto; background: #fff; line-height: 1.3; }
+    max-width: 8.5in; padding: 0.5in; margin: 0 auto; background: #fff; line-height: 1.5; }
   .header { background: linear-gradient(135deg, #003F72 0%, #1B365D 100%); color: #fff;
     padding: 0.5rem 0.75rem; border-radius: 6px; margin-bottom: 0.4rem; display: flex;
     justify-content: space-between; align-items: center; flex-wrap: wrap; }
   .header h1 { font-size: 1.15rem; font-weight: 700; }
   .badge { background: rgba(255,255,255,0.25); padding: 0.15rem 0.5rem; border-radius: 3px;
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; }
+    font-size: 0.875rem; font-weight: 700; letter-spacing: 0.05em; }
   .header .subtitle { width: 100%; font-size: 0.75rem; opacity: 0.9; margin-top: 0.15rem; }
   .tag { display: inline-block; background: #eef2f7; border: 1px solid #cdd7e2;
     border-radius: 4px; padding: 0.05rem 0.35rem; font-size: 0.8rem; font-weight: 600;
@@ -22,7 +22,7 @@
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
   .section { break-inside: avoid; }
   .section-header { padding: 0.2rem 0.5rem; border-radius: 3px; color: #fff;
-    font-weight: 700; font-size: 0.8rem; margin-bottom: 0.2rem; }
+    font-weight: 700; font-size: 0.9rem; margin-bottom: 0.2rem; }
   .sh-blue { background: var(--primary); }
   .sh-light { background: #2E5A88; }
   .sh-teal { background: #1a6b5a; }
@@ -34,7 +34,7 @@
   td { padding: 0.15rem 0.3rem; border-bottom: 1px solid #e0e0e0; vertical-align: middle; }
   td:first-child { white-space: nowrap; width: 38%; font-weight: 600; color: var(--va-blue); }
   tr:last-child td { border-bottom: none; }
-  .footer { margin-top: 0.4rem; text-align: center; font-size: 0.7rem; color: #666;
+  .footer { margin-top: 0.4rem; text-align: center; font-size: 0.875rem; color: #666;
     border-top: 1px solid #ddd; padding-top: 0.25rem; }
   .tip { background: #FFF8E1; border: 1px solid #FFD54F; border-radius: 4px;
     padding: 0.25rem 0.5rem; margin-top: 0.35rem; font-size: 0.8rem; text-align: center; }
@@ -43,17 +43,28 @@
     body { padding: 0.25in; }
     .header, .section-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
+  @media screen and (max-width: 640px) {
+    body { max-width: 100%; padding: 1rem; }
+    .header { align-items: flex-start; gap: 0.35rem; }
+    .grid { grid-template-columns: 1fr; }
+    .section,
+    table { min-width: 0; }
+    td { overflow-wrap: anywhere; }
+    td:first-child { width: auto; white-space: normal; }
+    .tag { white-space: nowrap; }
+  }
 </style>
 </head>
 <body>
-<div class="header">
+<header class="header">
   <h1>Computer Parts &mdash; Quick Reference</h1>
   <span class="badge">KEEP AT YOUR DESK</span>
   <div class="subtitle">VUB Digital Literacy — Level 1 &mdash; Week 1</div>
-</div>
+</header>
 
+<main>
 <div class="section full">
-  <div class="section-header">&#11088; Memory vs. Storage (the most important difference!)</div>
+  <h2 class="section-header">&#11088; Memory vs. Storage (the most important difference!)</h2>
   <table>
     <tr><td>Memory (RAM)</td><td>Short-term, like your <strong>desk</strong>. Holds what is open right now. Empties when you shut down. Measured in GB.</td></tr>
     <tr><td>Storage (the Drive)</td><td>Long-term, like a <strong>filing cabinet</strong>. Keeps files, photos, and programs even when off. Measured in GB or TB.</td></tr>
@@ -62,7 +73,7 @@
 
 <div class="grid">
   <div class="section">
-    <div class="section-header sh-blue">Input Devices (you &rarr; computer)</div>
+    <h2 class="section-header sh-blue">Input Devices (you &rarr; computer)</h2>
     <table>
       <tr><td>Keyboard</td><td>Type text and commands</td></tr>
       <tr><td>Mouse / Touchpad</td><td>Point and click</td></tr>
@@ -71,14 +82,14 @@
       <tr><td>Scanner</td><td>Turn paper into a file</td></tr>
     </table>
 
-    <div class="section-header sh-light" style="margin-top:0.35rem">Output Devices (computer &rarr; you)</div>
+    <h3 class="section-header sh-light" style="margin-top:0.35rem">Output Devices (computer &rarr; you)</h3>
     <table>
       <tr><td>Monitor / Screen</td><td>Shows the picture</td></tr>
       <tr><td>Speakers / Headphones</td><td>Play sound</td></tr>
       <tr><td>Printer</td><td>Puts work on paper</td></tr>
     </table>
 
-    <div class="section-header sh-teal" style="margin-top:0.35rem">Inside the Box</div>
+    <h3 class="section-header sh-teal" style="margin-top:0.35rem">Inside the Box</h3>
     <table>
       <tr><td>CPU</td><td>The "brain" &mdash; does the thinking</td></tr>
       <tr><td>RAM</td><td>Short-term memory (the desk)</td></tr>
@@ -87,7 +98,7 @@
   </div>
 
   <div class="section">
-    <div class="section-header sh-blue">Ports & Connectors</div>
+    <h2 class="section-header sh-blue">Ports & Connectors</h2>
     <table>
       <tr><td><span class="tag">USB-A</span></td><td>Flat rectangle &mdash; keyboard, mouse, flash drive</td></tr>
       <tr><td><span class="tag">USB-C</span></td><td>Small oval &mdash; fits either way up</td></tr>
@@ -97,7 +108,7 @@
       <tr><td><span class="tag">Power</span></td><td>Connects to the wall / charger</td></tr>
     </table>
 
-    <div class="section-header sh-light" style="margin-top:0.35rem">Devices (same idea, different sizes)</div>
+    <h3 class="section-header sh-light" style="margin-top:0.35rem">Devices (same idea, different sizes)</h3>
     <table>
       <tr><td>Desktop</td><td>Stays on a desk; powerful</td></tr>
       <tr><td>Laptop</td><td>Folds shut; runs on battery</td></tr>
@@ -105,7 +116,7 @@
       <tr><td>Smartphone</td><td>Pocket computer + phone</td></tr>
     </table>
 
-    <div class="section-header sh-purple" style="margin-top:0.35rem">Software & Operating Systems</div>
+    <h3 class="section-header sh-purple" style="margin-top:0.35rem">Software & Operating Systems</h3>
     <table>
       <tr><td>System software</td><td>The OS that runs everything (Windows)</td></tr>
       <tr><td>Application ("app")</td><td>A program you open: browser, Word</td></tr>
@@ -117,6 +128,7 @@
 </div>
 
 <div class="tip"><strong>Install safely:</strong> only download programs from the Microsoft Store or the maker's official website &mdash; never from a pop-up ad or an email link.</div>
+</main>
 <div class="footer">Veterans Upward Bound &mdash; West Virginia &nbsp;|&nbsp; Digital Literacy — Level 1 &nbsp;|&nbsp; Keep this card at your desk!</div>
   <script src="/shared/text-size.js" defer></script>
 </body>
