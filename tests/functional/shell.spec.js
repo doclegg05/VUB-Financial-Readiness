@@ -48,6 +48,31 @@ test('legacy computer-skills week route redirects to canonical presentation', as
   await expect(page.locator('body')).not.toContainText('Page Not Found');
 });
 
+test('digital literacy retired form routes open browser assessments', async ({ page }) => {
+  await page.goto('/courses/digital-literacy-1/assessments/pre-test-form.html');
+  await expect(page).toHaveURL(/\/courses\/digital-literacy-1\/assessments\/pre-test(\.html)?$/);
+  await expect(page.getByRole('heading', { level: 1, name: /Pre-Test/i })).toBeVisible();
+
+  await page.goto('/courses/digital-literacy-1/assessments/post-test-form.html');
+  await expect(page).toHaveURL(/\/courses\/digital-literacy-1\/assessments\/post-test(\.html)?$/);
+  await expect(page.getByRole('heading', { level: 1, name: /Post-Test/i })).toBeVisible();
+});
+
+test('digital literacy practice quiz exposes printable PDF results', async ({ page }) => {
+  await page.goto('/courses/digital-literacy-1/study-resources/quiz.html');
+
+  let steps = 0;
+  while (!(await page.locator('#results-area').isVisible()) && steps < 30) {
+    await page.locator('.opt-btn').first().click();
+    await page.locator('#next-btn').click();
+    steps += 1;
+  }
+
+  expect(steps).toBeGreaterThan(0);
+  await expect(page.locator('#results-area')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Print Results (PDF)' })).toBeVisible();
+});
+
 test('Help opens the glossary modal and the duplicate FAB is hidden', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('body.vub-has-shell')).toBeVisible();
