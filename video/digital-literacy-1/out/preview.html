@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DL1 Video Previews</title>
+  <style>
+    :root { --navy:#0D1B2A; --navy-mid:#1B365D; --gold:#C9A227; --gold-light:#E6C65C; --muted:#E6ECF7; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:linear-gradient(135deg,var(--navy-mid),var(--navy)); color:#fff;
+      font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; line-height:1.6; padding:2rem 1.25rem 4rem; }
+    .wrap { max-width: 1000px; margin: 0 auto; }
+    h1 { font-family:Georgia,'Times New Roman',serif; font-size:2.2rem; margin:0 0 .25rem; }
+    .sub { color:var(--muted); margin:0 0 2rem; }
+    .star { color:var(--gold); }
+    section { background:rgba(255,255,255,.05); border:1px solid rgba(228,196,90,.28); border-radius:14px;
+      padding:1.25rem 1.5rem; margin-bottom:1.75rem; }
+    h2 { font-family:Georgia,serif; font-size:1.4rem; margin:0 0 .15rem; }
+    .tag { display:inline-block; font-size:.72rem; font-weight:800; letter-spacing:1px; text-transform:uppercase;
+      color:var(--navy); background:var(--gold-light); border-radius:20px; padding:.15rem .65rem; margin-bottom:.5rem; }
+    .desc { color:var(--muted); font-size:.95rem; margin:.25rem 0 1rem; }
+    video { width:100%; border-radius:10px; background:#000; display:block; }
+    .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
+    .grid figure { margin:0; }
+    .grid img { width:100%; border-radius:8px; border:1px solid rgba(255,255,255,.12); display:block; }
+    figcaption { font-size:.85rem; color:var(--muted); margin-top:.4rem; }
+    .note { background:#fffbef; color:#4a4327; border-left:5px solid var(--gold);
+      padding:.85rem 1.1rem; border-radius:0 8px 8px 0; font-size:.9rem; margin-bottom:2rem; }
+    @media (max-width:640px){ .grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1><span class="star">★</span> Digital Literacy — Level 1 · Video Previews</h1>
+    <p class="sub">Everything rendered so far, viewable here in your browser. Use the player controls to play with sound.</p>
+
+    <div class="note"><strong>Tip:</strong> if a video looks stale, refresh the page — it streams the latest render straight from disk.</div>
+
+    <section>
+      <span class="tag">Audio A/B · the "tunnel voice" fix</span>
+      <h2>Voice quality — which sounds best?</h2>
+      <p class="desc">The exact same Week 2 line, three ways. If you prefer #2 or #3, I'll regenerate <em>all</em> narration that way.</p>
+      <div style="margin:.6rem 0;"><strong>1 · Current</strong> <span class="desc">— speaker-boost ON (what's in the videos now; the "tunnel" one)</span><br>
+        <audio controls preload="none" src="../public/w2-2-why.mp3" style="width:100%;margin-top:.35rem;"></audio></div>
+      <div style="margin:.6rem 0;"><strong>2 · Cleaner</strong> <span class="desc">— speaker-boost OFF, steadier delivery</span><br>
+        <audio controls preload="none" src="audio-clean.mp3" style="width:100%;margin-top:.35rem;"></audio></div>
+      <div style="margin:.6rem 0;"><strong>3 · Cleaner + EQ</strong> <span class="desc">— boxy low-mids cut (~350 Hz), presence added</span><br>
+        <audio controls preload="none" src="audio-eq.mp3" style="width:100%;margin-top:.35rem;"></audio></div>
+    </section>
+
+    <section style="border-color:rgba(127,163,176,.55);">
+      <span class="tag" style="background:#b3ccd4;">★ NEW · Week 2 Full Lesson</span>
+      <h2>Week 2 — Getting Online (full lesson · ~9 min)</h2>
+      <p class="desc">The real thing: 27 scenes on the polished theme-aware engine, cleaner #2 voice, watched straight through (the hands-on lab follows). Blue-gray Week 2 theme. Four scenes use built/themed placeholders until you send the 2 hero images + 2 screenshots. <em>If the player 404s, the render is still finishing — refresh in a few minutes.</em></p>
+      <video controls preload="metadata" src="dl1-week2-lesson.mp4"></video>
+    </section>
+
+    <section>
+      <span class="tag">Course Intro · narrated</span>
+      <h2>Course Intro</h2>
+      <p class="desc">The course-wide overview (~2:40), ElevenLabs narration baked in. The short, brand-style intro piece.</p>
+      <video controls preload="metadata" src="dl1-intro.mp4"></video>
+    </section>
+
+    <section>
+      <span class="tag">Week 1 Overview · narrated</span>
+      <h2>Week 1 — Inside the Computer (short overview)</h2>
+      <p class="desc">The ~69s text-style overview (navy/gold). This is the version slated to be superseded by the full 6–8 min lesson video.</p>
+      <video controls preload="metadata" src="dl1-week1-overview.mp4"></video>
+    </section>
+
+    <section>
+      <span class="tag">Week 2 Overview · image experiment</span>
+      <h2>Week 2 — Getting Online (image experiment)</h2>
+      <p class="desc">The ~60s overview using your ElevenLabs background images, with Ken Burns motion + soft fades. The "underwhelming vs. the reference" version that kicked off the redesign.</p>
+      <video controls preload="metadata" src="dl1-week2-overview.mp4"></video>
+    </section>
+
+    <section>
+      <span class="tag">Engine Smoke Test · silent · placeholder</span>
+      <h2>New Engine — 5 scene-kinds (Week 2 blue-gray theme)</h2>
+      <p class="desc">A silent style check of the new theme-aware engine — now with the design-polish pass (refined glass cards, brand badge + wordmark, gradient numeral badges, depth). Shows all five kinds: chapterCard, uiCallout, compare, steps, and the question reveal. ~5s/scene so reveals complete; the real video syncs timing to narration.</p>
+      <video controls preload="metadata" src="engine-smoke.mp4"></video>
+      <div class="grid" style="margin-top:1.25rem;">
+        <figure><img src="preview-1.png" alt="Objectives card"><figcaption>1 · chapterCard (objectives)</figcaption></figure>
+        <figure><img src="preview-2.png" alt="UI callout"><figcaption>2 · uiCallout (Desktop · Taskbar · Start)</figcaption></figure>
+        <figure><img src="preview-3.png" alt="Compare"><figcaption>3 · compare (Wired · Wi-Fi · Cellular)</figcaption></figure>
+        <figure><img src="preview-4.png" alt="Steps"><figcaption>4 · steps (troubleshooting)</figcaption></figure>
+        <figure><img src="preview-5.png" alt="Question reveal"><figcaption>5 · question (answer revealed)</figcaption></figure>
+        <figure><img src="preview-6.png" alt="Recap card"><figcaption>6 · chapterCard (recap)</figcaption></figure>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
