@@ -23,10 +23,10 @@ const OUTPUT_FORMAT = 'mp3_44100_128';
 const FPS = 30;
 
 const VOICE_SETTINGS = {
-  stability: 0.5,
+  stability: 0.55,
   similarity_boost: 0.75,
   style: 0.0,
-  use_speaker_boost: true,
+  use_speaker_boost: false,
 };
 
 // id      -> output filename (public/<id>.mp3) and <Audio> reference in Intro.tsx
