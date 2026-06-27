@@ -203,62 +203,62 @@
   var RAW_QUESTIONS = [
     {
       domain: "1. Technology Basics",
-      q: "Which of these is an input device?",
+      q: "A device that sends information OUT of the computer to you is called an output device. Which one of these is an output device?",
       options: [
-        { t: "A keyboard", correct: true, why: "A keyboard puts information INTO the computer when you type, so it is an input device." },
-        { t: "A monitor", correct: false, why: "A monitor shows you a picture, so it is an output device — information coming OUT of the computer." },
-        { t: "A printer", correct: false, why: "A printer puts work on paper, which is information coming out of the computer — an output device." },
-        { t: "A speaker", correct: false, why: "Speakers play sound out of the computer, making them an output device, not input." }
+        { t: "A monitor (screen)", correct: true, why: "A monitor shows you a picture, so information is coming OUT of the computer to you — that makes it an output device." },
+        { t: "A mouse", correct: false, why: "A mouse sends your clicks and movement INTO the computer, so it is an input device, not output." },
+        { t: "A microphone", correct: false, why: "A microphone takes your voice INTO the computer, so it is an input device." },
+        { t: "A webcam", correct: false, why: "A webcam captures video and feeds it INTO the computer, making it an input device." }
       ]
     },
     {
       domain: "1. Technology Basics",
-      q: "What is the main difference between RAM and storage?",
+      q: "You turn the computer off and back on. Which part loses whatever was in it, and which part still has your saved photos and documents?",
       options: [
-        { t: "RAM is short-term memory that clears when you shut down; storage keeps your files even when the computer is off", correct: true, why: "RAM is like a desk you work on (it empties at shutdown); storage is like a filing cabinet that keeps your files for good." },
-        { t: "RAM keeps files forever; storage clears every time", correct: false, why: "It is the other way around. Storage keeps files long-term; RAM is the temporary working memory." },
-        { t: "They are two words for the exact same thing", correct: false, why: "They do different jobs. RAM is temporary working memory; storage is long-term keeping of files." },
-        { t: "RAM is a type of printer", correct: false, why: "RAM is computer memory, not a printer. A printer is an output device." }
+        { t: "RAM loses what was in it; storage (the hard drive or SSD) still has your saved files", correct: true, why: "RAM is fast working memory that empties at shutdown. Storage holds files long-term, so your photos and documents are still there." },
+        { t: "Storage loses everything; RAM remembers your files between shutdowns", correct: false, why: "That is backwards. Storage keeps files for good; RAM is the part that empties when the power goes off." },
+        { t: "Both RAM and storage are wiped clean every time you shut down", correct: false, why: "Only RAM clears at shutdown. Storage keeps your saved files, which is why they reopen later." },
+        { t: "Neither one ever loses anything; they are identical", correct: false, why: "They are different. RAM is temporary working memory; storage is long-term keeping of files." }
       ]
     },
     {
       domain: "1. Technology Basics",
-      q: "Which of these is an operating system?",
+      q: "An operating system is the main software that runs the whole device. Which of these is the operating system on most smartphones?",
       options: [
-        { t: "Windows", correct: true, why: "Windows is an operating system — the main software that runs the whole computer and lets you open programs." },
-        { t: "A web browser", correct: false, why: "A browser is an application you run on top of the operating system, not the operating system itself." },
-        { t: "A USB cable", correct: false, why: "A USB cable is hardware you plug in. An operating system is software." },
-        { t: "Microsoft Word", correct: false, why: "Word is an application (a program you open), not the operating system that runs the computer." }
+        { t: "Android", correct: true, why: "Android is a phone operating system — the main software that runs the whole phone and lets you open apps. (Apple phones use iOS.)" },
+        { t: "Gmail", correct: false, why: "Gmail is an app you open on top of the operating system, not the operating system itself." },
+        { t: "The charging cable", correct: false, why: "A charging cable is hardware you plug in. An operating system is software." },
+        { t: "The camera lens", correct: false, why: "The camera lens is a physical part of the phone, not the software that runs it." }
       ]
     },
     {
       domain: "2. Digital Citizenship",
-      q: "Which of these counts as PII (personally identifiable information) you should protect?",
+      q: "A form online asks for several details. Which one is sensitive personal information (PII) you should be most careful about sharing?",
       options: [
-        { t: "Your Social Security number", correct: true, why: "Your Social Security number can identify you and be used for fraud, so it is sensitive PII to guard carefully." },
-        { t: "Today's weather", correct: false, why: "The weather is public information that says nothing about who you are." },
-        { t: "The name of your favorite movie", correct: false, why: "A favorite movie does not identify you the way your name, address, or SSN would." },
-        { t: "A photo of a sunset with no people in it", correct: false, why: "A plain sunset photo contains nothing that identifies you personally." }
+        { t: "Your bank account number", correct: true, why: "A bank account number ties directly to you and your money, so it is sensitive PII that can be misused for fraud." },
+        { t: "Your zodiac sign", correct: false, why: "A zodiac sign is general and shared by millions of people — it does not identify you personally." },
+        { t: "The brand of coffee you like", correct: false, why: "A coffee preference says nothing that could be used to identify you or access your accounts." },
+        { t: "The current month of the year", correct: false, why: "The month is public information and reveals nothing private about you." }
       ]
     },
     {
       domain: "2. Digital Citizenship",
-      q: "Someone posts a rude comment trying to start an argument with you online. What is usually the best response?",
+      q: "A stranger replies to your photo with an insulting, mean-spirited message. What is usually the wisest thing to do?",
       options: [
-        { t: "Do not respond — block and report the person instead", correct: true, why: "Nonresponse is often the safest choice. Arguing rewards the behavior; blocking and reporting protects you." },
-        { t: "Reply with an even ruder comment", correct: false, why: "Responding with insults usually makes things worse and can hurt your own digital reputation." },
-        { t: "Share their comment widely so everyone can pile on", correct: false, why: "Spreading the conflict invites more negativity and can pull others into a harmful argument." },
-        { t: "Post their private information online", correct: false, why: "Posting someone's private details is harmful and can be illegal. Never do this." }
+        { t: "Ignore it, then use the block and report buttons", correct: true, why: "Walking away and using block/report is usually safest. Engaging only encourages the person; reporting helps the platform act." },
+        { t: "Fire back with a meaner comment of your own", correct: false, why: "Trading insults usually escalates the fight and can damage your own online reputation." },
+        { t: "Screenshot it and tag all your friends to gang up on them", correct: false, why: "Rallying a group to attack back just spreads the conflict and pulls others into it." },
+        { t: "Track down and post where the person lives", correct: false, why: "Exposing someone's address or private details is harmful and can be illegal. Never do this." }
       ]
     },
     {
       domain: "3. Information Management",
-      q: "You want to find a single word on a long web page quickly. Which shortcut helps?",
+      q: "You are reading a long article and want to jump straight to every place the word \"benefits\" appears. Which key combination opens the search box to do that?",
       options: [
-        { t: "Ctrl + F (Find)", correct: true, why: "Ctrl + F opens a Find box that jumps to your word on the current page or in a file." },
-        { t: "Ctrl + P (Print)", correct: false, why: "Ctrl + P opens the print dialog — useful for printing, not for finding a word." },
-        { t: "Ctrl + S (Save)", correct: false, why: "Ctrl + S saves a file. It does not search the page." },
-        { t: "Ctrl + Z (Undo)", correct: false, why: "Ctrl + Z undoes your last action. It does not find text." }
+        { t: "Ctrl + F", correct: true, why: "Ctrl + F (think \"Find\") opens a small search box that jumps to each spot your word appears on the page or in a document." },
+        { t: "Ctrl + C", correct: false, why: "Ctrl + C copies whatever you have selected. It does not search the page." },
+        { t: "Ctrl + V", correct: false, why: "Ctrl + V pastes what you copied. It does not find a word." },
+        { t: "Ctrl + A", correct: false, why: "Ctrl + A selects everything on the page. It does not open a search box." }
       ]
     },
     {
@@ -273,12 +273,12 @@
     },
     {
       domain: "4. Content Creation",
-      q: "Which is the best file name for a letter you wrote to the VA on February 9, 2026?",
+      q: "You scanned a copy of your car insurance card to keep on the computer. Which file name will be easiest to find again months from now?",
       options: [
-        { t: "VA-Letter-2026-02-09", correct: true, why: "A clear, dated name makes the file easy to find and sort later — a good naming convention." },
-        { t: "document1", correct: false, why: "“document1” tells you nothing about the contents and is easy to lose among other files." },
-        { t: "asdf", correct: false, why: "Random letters give you no idea what the file is when you look for it later." },
-        { t: "Untitled (final) (final2) (real-final)", correct: false, why: "Messy, repeated names cause confusion. A clear, dated name is far easier to manage." }
+        { t: "Car-Insurance-Card-2026", correct: true, why: "A clear, descriptive, dated name tells you exactly what the file is and sorts neatly with related files." },
+        { t: "scan0001", correct: false, why: "“scan0001” is what the scanner names everything — it tells you nothing about the contents." },
+        { t: "kjhg", correct: false, why: "Random letters give you no idea what the file holds when you go looking later." },
+        { t: "new new copy of the good one", correct: false, why: "Vague, rambling names cause confusion. A short, descriptive name is far easier to manage." }
       ]
     },
     {
@@ -293,12 +293,12 @@
     },
     {
       domain: "5. Communication",
-      q: "You get an email sent to ten people. You only need to answer the person who sent it. What should you click?",
+      q: "Your daughter emails a family update to you and six relatives. You want to send a quick private \"Thanks!\" to her alone, not the whole family. Which button does that?",
       options: [
-        { t: "Reply (sends only to the sender)", correct: true, why: "“Reply” goes to just the sender — the right choice when only that one person needs your answer." },
-        { t: "Reply All (sends to everyone)", correct: false, why: "Reply All would email all ten people. Use it only when the whole group truly needs your message." },
-        { t: "Forward", correct: false, why: "Forward sends the email to someone new, not back to the sender." },
-        { t: "Delete", correct: false, why: "Deleting removes the email without answering the sender at all." }
+        { t: "Reply", correct: true, why: "“Reply” sends your message back to just the one person who wrote you — perfect for a private note to your daughter." },
+        { t: "Reply All", correct: false, why: "Reply All would send your “Thanks!” to your daughter AND all six relatives. Use it only when everyone needs to see it." },
+        { t: "Forward", correct: false, why: "Forward passes the email along to a different person, not back to the sender." },
+        { t: "Archive", correct: false, why: "Archive tucks the email away to clean up your inbox; it does not send any reply." }
       ]
     },
     {
@@ -313,12 +313,12 @@
     },
     {
       domain: "6. Collaboration",
-      q: "Which is an example of ASYNCHRONOUS communication (people respond at different times)?",
+      q: "“Asynchronous” means people take part at different times instead of all at once. Which of these is asynchronous?",
       options: [
-        { t: "Sending an email and getting a reply hours later", correct: true, why: "Email is asynchronous — you reply whenever you are able, not instantly." },
-        { t: "A live video meeting", correct: false, why: "A live video meeting is synchronous — everyone is talking at the same time." },
-        { t: "A phone call happening right now", correct: false, why: "A live phone call is synchronous because both people are talking at the same time." },
-        { t: "A real-time chat where you both reply instantly", correct: false, why: "An instant back-and-forth chat is synchronous — it happens at the same time." }
+        { t: "Recording a voice message that your friend listens to and answers tomorrow", correct: true, why: "A voice message is asynchronous — you leave it now and the other person responds whenever they get to it." },
+        { t: "A video call where you can see each other talking", correct: false, why: "A live video call is synchronous — everyone is present and talking at the same moment." },
+        { t: "A group of people texting back and forth in the same minute", correct: false, why: "A rapid back-and-forth text exchange happens in real time, so it is synchronous." },
+        { t: "Two people speaking on a phone call right now", correct: false, why: "A live phone call is synchronous because both people are on the line at the same time." }
       ]
     },
     {
@@ -333,22 +333,22 @@
     },
     {
       domain: "7. Safety & Security",
-      q: "Which makes the strongest, hardest-to-guess password?",
+      q: "You are setting up a new account and want the safest password. Which choice is hardest for someone to crack?",
       options: [
-        { t: "A long passphrase of several random words, like “BrightCanoeMapleRiver”", correct: true, why: "Length is what makes passwords strong. A long phrase of random words is hard to guess but easy to remember." },
-        { t: "Your first name", correct: false, why: "A name is short and easy to guess — weak protection." },
-        { t: "123456", correct: false, why: "Simple number runs are among the first things attackers try." },
-        { t: "The word “password”", correct: false, why: "“password” is one of the most common and easily guessed choices." }
+        { t: "A four-word passphrase such as “Lantern-Garden-Otter-Brick”", correct: true, why: "A long string of unrelated words is both hard to guess and easy to remember — length is what gives a password its strength." },
+        { t: "Your pet's name plus the year", correct: false, why: "Details like a pet's name are easy for others to find or guess, so they make weak passwords." },
+        { t: "qwerty", correct: false, why: "Keyboard runs like “qwerty” are among the very first patterns attackers try." },
+        { t: "abc123", correct: false, why: "Short, simple combinations like “abc123” are extremely common and quickly guessed." }
       ]
     },
     {
       domain: "7. Safety & Security",
-      q: "You are using a shared library computer. What helps protect your privacy?",
+      q: "You need to check your email on a hotel lobby computer that other guests also use. What is the smartest way to keep your privacy?",
       options: [
-        { t: "Use private browsing and sign out when you finish", correct: true, why: "Private browsing avoids saving your history and sign-ins, and signing out keeps the next person out of your accounts." },
-        { t: "Save all your passwords in the browser for next time", correct: false, why: "On a shared computer, saved passwords let the next user into your accounts — the opposite of safe." },
-        { t: "Stay signed in to your email when you leave", correct: false, why: "Leaving yourself signed in lets the next person read and use your account." },
-        { t: "Turn the monitor brightness up", correct: false, why: "Screen brightness does nothing to protect your accounts or private information." }
+        { t: "Open a private (incognito) window, then sign out and close it when you finish", correct: true, why: "A private window does not store your history or sign-ins, and signing out keeps the next guest from reaching your account." },
+        { t: "Let the browser remember your password so it is handy next time", correct: false, why: "On a shared computer, a saved password hands your account to whoever sits down next — exactly what you want to avoid." },
+        { t: "Leave your email open so you do not have to log in again later", correct: false, why: "An open, signed-in account lets the next person read and use your email freely." },
+        { t: "Make the text size larger so it is easier to read", correct: false, why: "Changing the text size is about comfort; it does nothing to protect your account or private details." }
       ]
     }
   ];

@@ -1197,7 +1197,7 @@
             <div class="info-box-title">✅ A Good Passphrase</div>
             <div class="info-box-content">
               <code style="font-size: 1.2rem;">PurpleTrout-Coffee-Sunrise7</code><br>
-              Long (16+ characters), uses unrelated words, mixes in a capital letter and a number. Easy to picture, hard to crack.
+              Long (12+ characters), uses unrelated words, mixes in a capital letter and a number. Easy to picture, hard to crack.
             </div>
           </div>
           <div class="two-column">
@@ -1237,7 +1237,7 @@
                 <li>On the sign-in page, click "Forgot password?"</li>
                 <li>Confirm your identity by email or text code</li>
                 <li>Create a new, strong passphrase</li>
-                <li>Reset right away if an account is hacked</li>
+                <li>If hacked and you can still sign in: change the password in the account's Settings. If the hacker may control your email or phone, secure those first, then use the provider's account-recovery page</li>
               </ul>
             </div>
             <div class="column">
@@ -1305,7 +1305,7 @@
             <div class="key-point-icon" aria-hidden="true">👣</div>
             <div class="key-point-text">
               <strong>Navigation Tracking</strong>
-              Websites and advertisers use cookies to follow what you do online — which is why an item you viewed seems to "follow" you in ads. It can feel convenient, but it is also a privacy trade-off
+              Websites and advertisers use cookies and other tracking tools to follow what you do online — which is why an item you viewed seems to "follow" you in ads. It can feel convenient, but it is also a privacy trade-off
             </div>
           </div>
           <div class="key-point">
@@ -1566,9 +1566,7 @@
       slideLinks.forEach((link) => {
         const targetSlide = parseInt(link.dataset.slide, 10);
         link.classList.toggle('active', targetSlide === currentSlide);
-        if (targetSlide < currentSlide) {
-          link.classList.add('completed');
-        }
+        link.classList.toggle('completed', targetSlide < currentSlide);
       });
 
       prevBtn.disabled = currentSlide === 0;

@@ -1030,6 +1030,12 @@
           <p class="slide-subtitle">Wired, Wi-Fi, and cellular</p>
         </div>
         <div class="slide-content">
+          <div class="info-box">
+            <div class="info-box-title">First, what is a network?</div>
+            <div class="info-box-content">
+              A network is two or more devices connected so they can share information, and the internet is the worldwide "network of networks." Being "online" simply means your device is connected to the internet so it can reach websites, email, and apps.
+            </div>
+          </div>
           <div class="key-point">
             <div class="key-point-icon" aria-hidden="true">🔌</div>
             <div class="key-point-text">
@@ -1108,7 +1114,7 @@
             <div class="key-point-icon" aria-hidden="true">🌐</div>
             <div class="key-point-text">
               <strong>A Globe Icon Means Trouble</strong>
-              If you see a globe 🌐 instead of the Wi-Fi bars, you are not connected to the internet
+              If you see a globe 🌐 instead of the Wi-Fi bars, you usually have no internet access right now — you may be joined to a network but can't reach the internet. The sure test is to open a trusted website
             </div>
           </div>
           <div class="key-point">
@@ -1355,7 +1361,7 @@
               <span class="toggle-mark" aria-hidden="true">+</span> Show answer
             </button>
             <div class="answer-reveal" id="kc-answer-1" hidden>
-              The globe icon means your device is <strong>not connected</strong> to the internet. Check that Wi-Fi is on and you've joined the correct network.
+              The globe icon means your device has <strong>no internet access</strong> — it may be on a network but can't reach the internet. The sure test is to open a trusted website. Check that Wi-Fi is on and you've joined the correct network.
             </div>
           </div>
 
@@ -1488,9 +1494,7 @@
       slideLinks.forEach((link) => {
         const targetSlide = parseInt(link.dataset.slide, 10);
         link.classList.toggle('active', targetSlide === currentSlide);
-        if (targetSlide < currentSlide) {
-          link.classList.add('completed');
-        }
+        link.classList.toggle('completed', targetSlide < currentSlide);
       });
 
       prevBtn.disabled = currentSlide === 0;

@@ -5,12 +5,14 @@
  *   {
  *     ics: { "1": { slide, total, lastVisited, completed }, ... },
  *     fr:  { "1": { visited, lastVisited, completed }, ... },
+ *     dl1: { "1": { slide, total, lastVisited, completed }, ... },
  *     _meta: { lastCourse, lastWeek, lastUrl }
  *   }
  *
  * Course IDs:
  *   ics = Intermediate Computer Skills (8 slide-based weeks)
  *   fr  = Financial Readiness (6 section-based modules)
+ *   dl1 = Digital Literacy Level 1 (IC3 GS6 aligned, 5 weeks)
  */
 (function (global) {
   'use strict';
@@ -76,14 +78,15 @@
   function safeRead() {
     try {
       const raw = localStorage.getItem(KEY);
-      if (!raw) return { ics: {}, fr: {}, _meta: {} };
+      if (!raw) return { ics: {}, fr: {}, dl1: {}, _meta: {} };
       const parsed = JSON.parse(raw);
       if (!parsed.ics) parsed.ics = {};
       if (!parsed.fr) parsed.fr = {};
+      if (!parsed.dl1) parsed.dl1 = {};
       if (!parsed._meta) parsed._meta = {};
       return parsed;
     } catch (e) {
-      return { ics: {}, fr: {}, _meta: {} };
+      return { ics: {}, fr: {}, dl1: {}, _meta: {} };
     }
   }
 
