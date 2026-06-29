@@ -134,6 +134,18 @@
       gap: 1.5rem;
     }
 
+    .classes-empty {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      border: 1px dashed rgba(12,26,53,0.18);
+      padding: 2rem 1.75rem;
+      color: var(--navy);
+      line-height: 1.6;
+    }
+    .classes-empty p { margin: 0 0 0.5rem; }
+    .classes-empty p:last-child { margin-bottom: 0; }
+
     .class-card {
       background: var(--white);
       border-radius: var(--radius);
@@ -271,7 +283,7 @@
     <ul class="nav-links" role="list">
       <li><a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a></li>
       <li><a href="../intake.html"><i class="fa-solid fa-upload" aria-hidden="true"></i> Submit a Test</a></li>
-      <li><a href="mailto:britt.legg76@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact</a></li>
+      <li><a href="mailto:[Instructor Email]"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact</a></li>
     </ul>
   </nav>
 
@@ -295,37 +307,11 @@
   <main>
     <div class="classes-grid">
 
-      <!-- ── Computer Skills — Spring 2026 / Beckley ─ -->
-      <article class="class-card">
-        <div class="class-status">
-          <span class="dot" aria-hidden="true"></span>
-          Active
-        </div>
-        <h2 class="class-title">Intermediate Computer Skills</h2>
-        <p class="class-cohort">Spring 2026 — Beckley, WV</p>
-
-        <div class="class-meta">
-          <div class="meta-item">
-            <span class="meta-value">Feb 9, 2026</span>
-            <span class="meta-key">Start</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-value">8 weeks</span>
-            <span class="meta-key">Duration</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-value">Britt Legg</span>
-            <span class="meta-key">Instructor</span>
-          </div>
-        </div>
-
-        <div class="class-actions">
-          <a href="computer-skills-spring-2026-beckley/" class="btn btn-navy">
-            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            Open Class Page
-          </a>
-        </div>
-      </article>
+      <!-- No active classes yet. New class pages are added via the intake workflow below. -->
+      <div class="classes-empty">
+        <p><strong>No active classes yet.</strong></p>
+        <p>When a class is set up, it will appear here with a link instructors can share with students. To add one, submit the pre/post test materials below.</p>
+      </div>
 
     </div>
 
