@@ -10,6 +10,7 @@
 // courses/digital-literacy-1/weeks/week-01/presentation.html). The key is never logged.
 // Each clip is checked against its scene's frame budget in src/weeks-data.ts (30fps).
 
+import './load-env.mjs'; // auto-load .env (key never logged)
 import { writeFile, mkdir, readFile } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

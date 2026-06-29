@@ -76,11 +76,19 @@ the repo: an ElevenLabs API key and a few photoreal/screenshot assets (below).
 ```bash
 cd video/digital-literacy-1
 npm install
-export ELEVENLABS_API_KEY=...                  # required — see "Narration" above
+# Provide the key one of two ways:
+#   (a) copy .env.example to .env and fill in ELEVENLABS_API_KEY (auto-loaded; git-ignored), or
+#   (b) export ELEVENLABS_API_KEY=...   (a set env-var always wins over .env)
 node generate-week3-lesson-narration.mjs       # writes public/w3l-01.mp3 … and week3-lesson-durations.json
 npm run render:week3lesson                      # writes out/dl1-week3-lesson.mp4
 # Week 4: node generate-week4-lesson-narration.mjs ; npm run render:week4lesson
 ```
+
+**Secrets & environment.** The key is never committed. The generators auto-load a `.env`
+(from this folder or the repo root) via `./load-env.mjs`; `.env.example` documents the
+variables. In the **web environment**, set `ELEVENLABS_API_KEY` as a configured secret instead
+of a file. If Remotion can't download its own headless Chromium (network-restricted box), set
+`REMOTION_BROWSER` to a local `chrome-headless-shell` binary — see `.env.example`.
 
 The narration generators print whether any clip overruns its scene. The `durationInFrames`
 in the data files are **provisional** (estimated from word counts); after the generator writes
