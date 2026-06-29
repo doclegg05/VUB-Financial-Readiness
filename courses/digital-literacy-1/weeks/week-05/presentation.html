@@ -1198,7 +1198,7 @@
         <div class="slide-content">
           <div class="review-question">
             Quick fire: (1) Copy shortcut? (2) Paste shortcut? (3) Undo shortcut?
-            (4) The "www" you type to reach a website is called the…? (5) A secret word that protects an account is a…?
+            (4) The full web address you type to reach a website is called the…? (5) A secret word that protects an account is a…?
           </div>
           <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a11" data-reveal>
             Reveal answers
@@ -1380,9 +1380,7 @@
       slideLinks.forEach((link) => {
         const targetSlide = parseInt(link.dataset.slide, 10);
         link.classList.toggle('active', targetSlide === currentSlide);
-        if (targetSlide < currentSlide) {
-          link.classList.add('completed');
-        }
+        link.classList.toggle('completed', targetSlide < currentSlide);
       });
 
       prevBtn.disabled = currentSlide === 0;
@@ -1506,7 +1504,7 @@
     document.querySelectorAll('[data-reveal]').forEach(btn => {
       const originalLabel = btn.textContent.trim();
       btn.addEventListener('click', () => {
-        const answer = btn.nextElementSibling;
+        const answer = document.getElementById(btn.getAttribute('aria-controls'));
         if (!answer) return;
         const isHidden = answer.hasAttribute('hidden');
         if (isHidden) {

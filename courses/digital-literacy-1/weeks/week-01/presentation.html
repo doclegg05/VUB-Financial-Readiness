@@ -1487,9 +1487,7 @@
       slideLinks.forEach((link) => {
         const targetSlide = parseInt(link.dataset.slide, 10);
         link.classList.toggle('active', targetSlide === currentSlide);
-        if (targetSlide < currentSlide) {
-          link.classList.add('completed');
-        }
+        link.classList.toggle('completed', targetSlide < currentSlide);
       });
 
       prevBtn.disabled = currentSlide === 0;
