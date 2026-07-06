@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Week 1: Inside the Computer | VUB Digital Literacy — Level 1</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Week 1: Inside the Computer | VUB Digital Literacy — Level 1</title>
+<style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
@@ -778,685 +782,743 @@
       .slide-counter { order: -1; flex: 0 0 100%; text-align: center; font-size: 0.85rem; white-space: nowrap; }
       .two-column { grid-template-columns: 1fr; }
     }
-  </style>
+
+    /* YouTube Embed Styles */
+    .video-slide-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .video-wrapper {
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      background: #000;
+      position: relative;
+      margin: 1rem 0;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-fallback-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem;
+      border: 2px dashed rgba(27, 54, 93, 0.3);
+      border-radius: 12px;
+      background: #fffbef;
+      color: #4a4327;
+      text-align: center;
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+    .video-fallback-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+  
+    /* Premium Sidebar Scrollbar styling */
+    .sidebar-scroll-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      padding-right: 0.25rem;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+</style>
 </head>
 <body>
-  <!-- Sidebar Navigation -->
-  <nav class="sidebar" aria-label="Lesson chapters">
-    <a class="logo" href="/courses/digital-literacy-1/index.html" aria-label="Back to the Digital Literacy — Level 1 dashboard">
-      <img class="logo-img" src="/assets/vub-seal-white.png" alt="VUB" width="56" height="56">
-      <h2>VUB Digital Literacy</h2>
-      <p>Level 1 · IC3 GS6 Aligned</p>
-    </a>
+<!-- Sidebar Navigation -->
+<nav aria-label="Lesson chapters" class="sidebar">
+<a aria-label="Back to the Digital Literacy — Level 1 dashboard" class="logo" href="/courses/digital-literacy-1/index.html">
+<img alt="VUB" class="logo-img" height="56" src="/assets/vub-seal-white.png" width="56"/>
+<h2>VUB Digital Literacy</h2>
+<p>Level 1 · IC3 GS6 Aligned</p>
+</a>
+<div class="week-indicator">
+<div class="week-num">Week 1</div>
+<div class="week-title">Inside the Computer</div>
+</div><div class="sidebar-scroll-container"><div aria-labelledby="ch-start-here" class="chapter" role="group">
+<div class="chapter-title" id="ch-start-here">Start Here</div>
+<div class="chapter-slides">
+<button class="slide-link active" data-slide="0" type="button">Pre-Test</button>
+<button class="slide-link" data-slide="1" type="button">Welcome &amp; Overview</button><button class="slide-link" data-slide="2" type="button">Lesson Recap Video</button>
+<button class="slide-link" data-slide="3" type="button">Learning Objectives</button>
+</div>
+</div><div aria-labelledby="ch-devices-hardware" class="chapter" role="group">
+<div class="chapter-title" id="ch-devices-hardware">Devices &amp; Hardware</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="4" type="button">Input &amp; Output Devices</button>
+<button class="slide-link" data-slide="5" type="button">Ports, Cables &amp; Connectors</button>
+<button class="slide-link" data-slide="6" type="button">Types of Computing Devices</button>
+<button class="slide-link" data-slide="7" type="button">Inside the Box</button>
+<button class="slide-link" data-slide="8" type="button">Memory vs. Storage</button>
+</div>
+</div><div aria-labelledby="ch-software-os" class="chapter" role="group">
+<div class="chapter-title" id="ch-software-os">Software &amp; OS</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="9" type="button">What Is Software?</button>
+<button class="slide-link" data-slide="10" type="button">Paid vs. Free Software</button>
+<button class="slide-link" data-slide="11" type="button">Installing Safely</button>
+<button class="slide-link" data-slide="12" type="button">What Is an Operating System?</button>
+<button class="slide-link" data-slide="13" type="button">Windows, Mac &amp; Mobile</button>
+</div>
+</div><div aria-labelledby="ch-wrap-up" class="chapter" role="group">
+<div class="chapter-title" id="ch-wrap-up">Wrap-Up</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="14" type="button">Knowledge Check</button>
+<button class="slide-link" data-slide="15" type="button">Your Hands-On Lab</button>
+<button class="slide-link" data-slide="16" type="button">Key Takeaways</button>
+<button class="slide-link" data-slide="17" type="button">You Did It!</button>
+</div>
+</div><div class="resources-section">
+<div class="resources-title">Resources</div>
+<a class="resource-link" href="handouts/meet-your-computer-lab.html" target="_blank">Meet Your Computer Lab</a>
+<a class="resource-link" href="handouts/computer-parts-quick-reference.html" target="_blank">Computer Parts Quick Reference</a>
+</div></div>
 
-    <div class="week-indicator">
-      <div class="week-num">Week 1</div>
-      <div class="week-title">Inside the Computer</div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-start-here">
-      <div class="chapter-title" id="ch-start-here">Start Here</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link active" data-slide="0">Welcome & Overview</button>
-        <button type="button" class="slide-link" data-slide="1">Learning Objectives</button>
-        <button type="button" class="slide-link" data-slide="2">Pre-Test</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-devices-hardware">
-      <div class="chapter-title" id="ch-devices-hardware">Devices & Hardware</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="3">Input & Output Devices</button>
-        <button type="button" class="slide-link" data-slide="4">Ports, Cables & Connectors</button>
-        <button type="button" class="slide-link" data-slide="5">Types of Computing Devices</button>
-        <button type="button" class="slide-link" data-slide="6">Inside the Box</button>
-        <button type="button" class="slide-link" data-slide="7">Memory vs. Storage</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-software-os">
-      <div class="chapter-title" id="ch-software-os">Software & OS</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="8">What Is Software?</button>
-        <button type="button" class="slide-link" data-slide="9">Paid vs. Free Software</button>
-        <button type="button" class="slide-link" data-slide="10">Installing Safely</button>
-        <button type="button" class="slide-link" data-slide="11">What Is an Operating System?</button>
-        <button type="button" class="slide-link" data-slide="12">Windows, Mac & Mobile</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-wrap-up">
-      <div class="chapter-title" id="ch-wrap-up">Wrap-Up</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="13">Knowledge Check</button>
-        <button type="button" class="slide-link" data-slide="14">Your Hands-On Lab</button>
-        <button type="button" class="slide-link" data-slide="15">Key Takeaways</button>
-        <button type="button" class="slide-link" data-slide="16">You Did It!</button>
-      </div>
-    </div>
-
-    <div class="resources-section">
-      <div class="resources-title">Resources</div>
-      <a class="resource-link" href="handouts/meet-your-computer-lab.html" target="_blank">Meet Your Computer Lab</a>
-      <a class="resource-link" href="handouts/computer-parts-quick-reference.html" target="_blank">Computer Parts Quick Reference</a>
-    </div>
-
-    <div class="progress-section">
-      <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Lesson progress">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
-    </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <h1 class="sr-only">Week 1: Inside the Computer</h1>
-    <div id="slide-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-    <div class="slides-container">
-      <!-- Slide 0: Title -->
-      <div class="slide active title-slide">
-        <div class="slide-icon" aria-hidden="true">🖥️</div>
-        <h2 class="slide-title">Inside the Computer</h2>
-        <p class="slide-subtitle">Hardware, Devices, Software & Operating Systems</p>
-        <p class="course-info">Week 1 of 5 · VUB Digital Literacy — Level 1</p>
-      </div>
-
-      <!-- Slide 1: Learning Objectives -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Today's Learning Objectives</h2>
-          <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔌</div>
-            <div class="key-point-text">
-              <strong>Identify devices & connections</strong>
+<div class="progress-section">
+<div aria-label="Lesson progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="progress-bar" id="progressBar" role="progressbar">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+<div class="progress-text"><span id="progressText">0</span>% Complete</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="main-content">
+<h1 class="sr-only">Week 1: Inside the Computer</h1>
+<div aria-atomic="true" aria-live="polite" class="sr-only" id="slide-announce"></div>
+<div class="slides-container">
+<!-- Slide 0: Pre-Test (taken before the lesson begins) -->
+<div class="slide active">
+<div class="slide-header">
+<h2 class="slide-title">Pre-Test — Before We Begin</h2>
+<p class="slide-subtitle">Let's see where you're starting</p>
+</div>
+<div class="slide-content">
+<div class="info-box">
+<div class="info-box-title">About the Pre-Test</div>
+<div class="info-box-content">
+<ul style="margin-top: 0.5rem;">
+<li><strong>About 20 questions</strong> covering the whole 5-week course</li>
+<li><strong>No time limit</strong> — take your time</li>
+<li><strong>Not pass/fail</strong> — it measures your starting point</li>
+<li>After you submit, use <strong>Print Report (PDF)</strong> if your instructor asks for a record</li>
+<li>You'll take a similar test in Week 5 to see how far you've come!</li>
+</ul>
+</div>
+</div>
+<div class="demo-box">
+<h3>📝 Why take it first?</h3>
+<p>Do not worry if you do not know every answer — that is exactly the point. Taking it
+            now marks where you are starting, so at the end we can celebrate how much you have grown.</p>
+</div>
+<div style="text-align: center;">
+<a class="pretest-link" href="../../assessments/pre-test.html">Start Pre-Test →</a>
+</div>
+</div>
+</div>
+<!-- Slide 1: Welcome & Overview (Title) -->
+<div class="slide title-slide">
+<div aria-hidden="true" class="slide-icon">🖥️</div>
+<h2 class="slide-title">Inside the Computer</h2>
+<p class="slide-subtitle">Hardware, Devices, Software &amp; Operating Systems</p>
+<p class="course-info">Week 1 of 5 · VUB Digital Literacy — Level 1</p>
+</div><div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Lesson Recap Video</h2>
+<p class="slide-subtitle">Watch a video summary of this week's lesson</p>
+</div>
+<div class="slide-content video-slide-content">
+<div class="video-wrapper" id="videoWrapperWeek1">
+<!-- Dynamic iframe injected via JS or fallback card -->
+</div>
+<p style="margin-top: 1rem; font-size: 0.95rem; color: var(--gray); text-align: center;">
+            Note: Watching this video requires an internet connection.
+          </p>
+</div>
+</div>
+<!-- Slide 2: Learning Objectives -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Today's Learning Objectives</h2>
+<p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔌</div>
+<div class="key-point-text">
+<strong>Identify devices &amp; connections</strong>
               Name common input and output devices and the ports they plug into
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🧠</div>
-            <div class="key-point-text">
-              <strong>Explain hardware basics</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🧠</div>
+<div class="key-point-text">
+<strong>Explain hardware basics</strong>
               Tell the difference between memory (RAM) and storage (the drive)
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">💿</div>
-            <div class="key-point-text">
-              <strong>Understand software</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">💿</div>
+<div class="key-point-text">
+<strong>Understand software</strong>
               Know system vs. application software, and install programs safely
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🪟</div>
-            <div class="key-point-text">
-              <strong>Compare operating systems</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🪟</div>
+<div class="key-point-text">
+<strong>Compare operating systems</strong>
               Recognize Windows, macOS, and mobile operating systems
             </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">IC3 GS6 Level 1 Alignment</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box">
+<div class="info-box-title">IC3 GS6 Level 1 Alignment</div>
+<div class="info-box-content">
               This lesson covers objectives <strong>1.2</strong> (devices &amp; connections),
               <strong>1.3</strong> (software), <strong>1.4</strong> (hardware), and
               <strong>1.5</strong> (operating systems).
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 2: Pre-Test (taken before the lesson begins) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Pre-Test — Before We Begin</h2>
-          <p class="slide-subtitle">Let's see where you're starting</p>
-        </div>
-        <div class="slide-content">
-          <div class="info-box">
-            <div class="info-box-title">About the Pre-Test</div>
-            <div class="info-box-content">
-              <ul style="margin-top: 0.5rem;">
-                <li><strong>About 20 questions</strong> covering the whole 5-week course</li>
-                <li><strong>No time limit</strong> — take your time</li>
-                <li><strong>Not pass/fail</strong> — it measures your starting point</li>
-                <li>After you submit, use <strong>Print Report (PDF)</strong> if your instructor asks for a record</li>
-                <li>You'll take a similar test in Week 5 to see how far you've come!</li>
-              </ul>
-            </div>
-          </div>
-          <div class="demo-box">
-            <h3>📝 Why take it first?</h3>
-            <p>Do not worry if you do not know every answer — that is exactly the point. Taking it
-            now marks where you are starting, so at the end we can celebrate how much you have grown.</p>
-          </div>
-          <div style="text-align: center;">
-            <a href="../../assessments/pre-test.html" class="pretest-link">Start Pre-Test →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3: Input & Output Devices -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Input & Output Devices</h2>
-          <p class="slide-subtitle">How you talk to the computer, and how it talks back</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>⌨️ Input Devices (you → computer)</h3>
-              <ul>
-                <li>Keyboard — type text and commands</li>
-                <li>Mouse / touchpad — point and click</li>
-                <li>Microphone — record your voice</li>
-                <li>Webcam — capture video</li>
-                <li>Scanner — turn paper into a file</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>🖥️ Output Devices (computer → you)</h3>
-              <ul>
-                <li>Monitor / screen — shows the picture</li>
-                <li>Speakers / headphones — play sound</li>
-                <li>Printer — puts your work on paper</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">An easy way to remember</div>
-            <div class="info-box-content">
-              <strong>Input</strong> goes <em>in</em> to the computer. <strong>Output</strong>
+</div>
+</div>
+</div>
+<!-- Slide 3: Input & Output Devices -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Input &amp; Output Devices</h2>
+<p class="slide-subtitle">How you talk to the computer, and how it talks back</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>⌨️ Input Devices (you → computer)</h3>
+<ul>
+<li>Keyboard — type text and commands</li>
+<li>Mouse / touchpad — point and click</li>
+<li>Microphone — record your voice</li>
+<li>Webcam — capture video</li>
+<li>Scanner — turn paper into a file</li>
+</ul>
+</div>
+<div class="column">
+<h3>🖥️ Output Devices (computer → you)</h3>
+<ul>
+<li>Monitor / screen — shows the picture</li>
+<li>Speakers / headphones — play sound</li>
+<li>Printer — puts your work on paper</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-box-title">An easy way to remember</div>
+<div class="info-box-content">
+<strong>Input</strong> goes <em>in</em> to the computer. <strong>Output</strong>
               comes <em>out</em> to you. A touchscreen does both — it takes your touch (input)
               and shows the picture (output).
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 4: Ports, Cables & Connectors -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Ports, Cables & Connectors</h2>
-          <p class="slide-subtitle">The plugs on the back and sides of your computer</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔵</div>
-            <div class="key-point-text">
-              <strong>USB</strong>
+</div>
+</div>
+</div>
+<!-- Slide 4: Ports, Cables & Connectors -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Ports, Cables &amp; Connectors</h2>
+<p class="slide-subtitle">The plugs on the back and sides of your computer</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔵</div>
+<div class="key-point-text">
+<strong>USB</strong>
               The most common plug. Connects a keyboard, mouse, flash drive, or phone charger.
               USB-A is the flat rectangle; USB-C is the small oval that fits either way up.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📺</div>
-            <div class="key-point-text">
-              <strong>HDMI</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📺</div>
+<div class="key-point-text">
+<strong>HDMI</strong>
               Carries picture and sound to a monitor or TV with one cable.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🌐</div>
-            <div class="key-point-text">
-              <strong>Ethernet</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🌐</div>
+<div class="key-point-text">
+<strong>Ethernet</strong>
               A wider plug (looks like a fat phone jack) for a wired internet connection.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔋</div>
-            <div class="key-point-text">
-              <strong>Power</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔋</div>
+<div class="key-point-text">
+<strong>Power</strong>
               Connects the computer or laptop charger to the wall.
             </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">Good news</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box success">
+<div class="info-box-title">Good news</div>
+<div class="info-box-content">
               Plugs are shaped so they only fit the right port. If a cable will not go in,
               turn it over or try a different port — never force it.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 5: Types of Computing Devices -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Types of Computing Devices</h2>
-          <p class="slide-subtitle">Same idea, different sizes</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🖥️</div>
-            <div class="key-point-text">
-              <strong>Desktop</strong>
+</div>
+</div>
+</div>
+<!-- Slide 5: Types of Computing Devices -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Types of Computing Devices</h2>
+<p class="slide-subtitle">Same idea, different sizes</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🖥️</div>
+<div class="key-point-text">
+<strong>Desktop</strong>
               Stays on a desk. Powerful, easy to repair, plugs into the wall. The tower, monitor,
               keyboard, and mouse are separate pieces.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">💻</div>
-            <div class="key-point-text">
-              <strong>Laptop</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">💻</div>
+<div class="key-point-text">
+<strong>Laptop</strong>
               Folds shut and runs on a battery. Screen, keyboard, and touchpad are built in. Portable.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📱</div>
-            <div class="key-point-text">
-              <strong>Tablet</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📱</div>
+<div class="key-point-text">
+<strong>Tablet</strong>
               A flat touchscreen, like a big phone. Lightweight, good for reading and video.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📞</div>
-            <div class="key-point-text">
-              <strong>Smartphone</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📞</div>
+<div class="key-point-text">
+<strong>Smartphone</strong>
               A pocket computer that also makes calls. Always with you and connects over cellular.
             </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">The big idea</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box">
+<div class="info-box-title">The big idea</div>
+<div class="info-box-content">
               All four are computers. They take input, do work, store information, and show output —
               just in different sizes for different jobs.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 6: Inside the Box -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Inside the Box</h2>
-          <p class="slide-subtitle">The main parts that do the work</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">⚙️</div>
-            <div class="key-point-text">
-              <strong>CPU — the "brain"</strong>
+</div>
+</div>
+</div>
+<!-- Slide 6: Inside the Box -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Inside the Box</h2>
+<p class="slide-subtitle">The main parts that do the work</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">⚙️</div>
+<div class="key-point-text">
+<strong>CPU — the "brain"</strong>
               The processor that does the thinking and runs your programs.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🧠</div>
-            <div class="key-point-text">
-              <strong>RAM — short-term memory</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🧠</div>
+<div class="key-point-text">
+<strong>RAM — short-term memory</strong>
               The computer's "desk space." Holds whatever you are working on right now.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">💾</div>
-            <div class="key-point-text">
-              <strong>Drive — long-term storage</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">💾</div>
+<div class="key-point-text">
+<strong>Drive — long-term storage</strong>
               The "filing cabinet." Keeps your files, photos, and programs even when the power is off.
             </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">You do not have to memorize this</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box">
+<div class="info-box-title">You do not have to memorize this</div>
+<div class="info-box-content">
               Knowing these names just helps you understand store clerks, repair techs, and
               the numbers you will see in the next slide.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 7: Memory vs. Storage -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Memory vs. Storage</h2>
-          <p class="slide-subtitle">Two different things people often mix up</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>🧠 Memory (RAM)</h3>
-              <ul>
-                <li>Short-term, like your desk</li>
-                <li>Holds what is open right now</li>
-                <li>Empties when you shut down</li>
-                <li>More RAM = run more at once</li>
-                <li>Measured in GB (e.g. 8 or 16 GB)</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>💾 Storage (the Drive)</h3>
-              <ul>
-                <li>Long-term, like a filing cabinet</li>
-                <li>Keeps files when power is off</li>
-                <li>Holds photos, documents, programs</li>
-                <li>More storage = keep more files</li>
-                <li>Measured in GB or TB (e.g. 256 GB, 1 TB)</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">Remember it this way</div>
-            <div class="info-box-content">
-              <strong>Memory</strong> is your desk — clears off at the end of the day.
+</div>
+</div>
+</div>
+<!-- Slide 7: Memory vs. Storage -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Memory vs. Storage</h2>
+<p class="slide-subtitle">Two different things people often mix up</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>🧠 Memory (RAM)</h3>
+<ul>
+<li>Short-term, like your desk</li>
+<li>Holds what is open right now</li>
+<li>Empties when you shut down</li>
+<li>More RAM = run more at once</li>
+<li>Measured in GB (e.g. 8 or 16 GB)</li>
+</ul>
+</div>
+<div class="column">
+<h3>💾 Storage (the Drive)</h3>
+<ul>
+<li>Long-term, like a filing cabinet</li>
+<li>Keeps files when power is off</li>
+<li>Holds photos, documents, programs</li>
+<li>More storage = keep more files</li>
+<li>Measured in GB or TB (e.g. 256 GB, 1 TB)</li>
+</ul>
+</div>
+</div>
+<div class="info-box success">
+<div class="info-box-title">Remember it this way</div>
+<div class="info-box-content">
+<strong>Memory</strong> is your desk — clears off at the end of the day.
               <strong>Storage</strong> is your filing cabinet — keeps things for good.
               A TB (terabyte) is about 1,000 GB.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 8: What Is Software? -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">What Is Software?</h2>
-          <p class="slide-subtitle">Hardware is what you touch; software is what it runs</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>🪟 System Software</h3>
-              <ul>
-                <li>The operating system itself (Windows)</li>
-                <li>Runs the whole computer</li>
-                <li>Starts up when you turn it on</li>
-                <li>Manages the hardware for you</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>📂 Application Software ("apps")</h3>
-              <ul>
-                <li>Programs you open to do a task</li>
-                <li>Web browser (Edge, Chrome)</li>
-                <li>Word, a PDF reader, a photo viewer</li>
-                <li>Email, games, a calculator</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">A simple way to picture it</div>
-            <div class="info-box-content">
-              <strong>Hardware</strong> = the parts you can hold. <strong>System software</strong> =
+</div>
+</div>
+</div>
+<!-- Slide 8: What Is Software? -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">What Is Software?</h2>
+<p class="slide-subtitle">Hardware is what you touch; software is what it runs</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>🪟 System Software</h3>
+<ul>
+<li>The operating system itself (Windows)</li>
+<li>Runs the whole computer</li>
+<li>Starts up when you turn it on</li>
+<li>Manages the hardware for you</li>
+</ul>
+</div>
+<div class="column">
+<h3>📂 Application Software ("apps")</h3>
+<ul>
+<li>Programs you open to do a task</li>
+<li>Web browser (Edge, Chrome)</li>
+<li>Word, a PDF reader, a photo viewer</li>
+<li>Email, games, a calculator</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-box-title">A simple way to picture it</div>
+<div class="info-box-content">
+<strong>Hardware</strong> = the parts you can hold. <strong>System software</strong> =
               the operating system that runs everything. <strong>Applications</strong> = the
               individual programs you open to write, browse, or watch.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 9: Paid vs. Free Software -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Paid vs. Free Software</h2>
-          <p class="slide-subtitle">Proprietary and open-source — both are normal and safe</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>🔒 Proprietary</h3>
-              <ul>
-                <li>Owned by one company</li>
-                <li>You buy it or pay a subscription</li>
-                <li>The inner code is private</li>
-                <li>Examples: Microsoft Office, Windows</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>🔓 Open Source</h3>
-              <ul>
-                <li>Code is public and free to use</li>
-                <li>Usually free to download</li>
-                <li>Maintained by a community</li>
-                <li>Examples: Firefox, LibreOffice, VLC</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Which is better?</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 9: Paid vs. Free Software -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Paid vs. Free Software</h2>
+<p class="slide-subtitle">Proprietary and open-source — both are normal and safe</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>🔒 Proprietary</h3>
+<ul>
+<li>Owned by one company</li>
+<li>You buy it or pay a subscription</li>
+<li>The inner code is private</li>
+<li>Examples: Microsoft Office, Windows</li>
+</ul>
+</div>
+<div class="column">
+<h3>🔓 Open Source</h3>
+<ul>
+<li>Code is public and free to use</li>
+<li>Usually free to download</li>
+<li>Maintained by a community</li>
+<li>Examples: Firefox, LibreOffice, VLC</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-box-title">Which is better?</div>
+<div class="info-box-content">
               Neither — it depends on your needs. Both kinds can be excellent. The important
               thing is to download from a trusted place, which is next.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 10: Installing Safely -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Installing Software Safely</h2>
-          <p class="slide-subtitle">Where you get a program matters most</p>
-        </div>
-        <div class="slide-content">
-          <ol class="steps-list">
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Use a trusted source</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">The Microsoft Store, or the maker's official website (for example, microsoft.com or mozilla.org).</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Check the web address</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">Make sure it is the real company's site, not a look-alike with a slightly wrong name.</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Run the installer and read each screen</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">Click Next carefully. Decline any extra "bonus" toolbars or programs you did not ask for.</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Approve the security prompt</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">Windows asks "Do you want to allow this app to make changes?" Click Yes only if you trust the source.</span>
-            </li>
-          </ol>
-          <div class="info-box warning">
-            <div class="info-box-title">⚠️ Stay safe</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 10: Installing Safely -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Installing Software Safely</h2>
+<p class="slide-subtitle">Where you get a program matters most</p>
+</div>
+<div class="slide-content">
+<ol class="steps-list">
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Use a trusted source</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">The Microsoft Store, or the maker's official website (for example, microsoft.com or mozilla.org).</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Check the web address</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">Make sure it is the real company's site, not a look-alike with a slightly wrong name.</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Run the installer and read each screen</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">Click Next carefully. Decline any extra "bonus" toolbars or programs you did not ask for.</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Approve the security prompt</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">Windows asks "Do you want to allow this app to make changes?" Click Yes only if you trust the source.</span>
+</li>
+</ol>
+<div class="info-box warning">
+<div class="info-box-title">⚠️ Stay safe</div>
+<div class="info-box-content">
               Never install software from a pop-up ad or an email link. "Your computer is
               infected — click here!" is always a scam. When in doubt, ask the instructor.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 11: What Is an Operating System? -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">What Is an Operating System?</h2>
-          <p class="slide-subtitle">The master program that runs the whole computer</p>
-        </div>
-        <div class="slide-content">
-          <div class="portal-card">
-            <div class="portal-card-icon" aria-hidden="true">🪟</div>
-            <div>
-              <h4>The Operating System (OS)</h4>
-              <p>The OS starts when you power on and stays running the whole time. It shows your
+</div>
+</div>
+</div>
+<!-- Slide 11: What Is an Operating System? -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">What Is an Operating System?</h2>
+<p class="slide-subtitle">The master program that runs the whole computer</p>
+</div>
+<div class="slide-content">
+<div class="portal-card">
+<div aria-hidden="true" class="portal-card-icon">🪟</div>
+<div>
+<h4>The Operating System (OS)</h4>
+<p>The OS starts when you power on and stays running the whole time. It shows your
               desktop, manages your files, and lets every app share the keyboard, screen, and
               memory. The computers in this lab run <strong>Microsoft Windows</strong>.</p>
-            </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🖱️</div>
-            <div class="key-point-text">
-              <strong>What the OS gives you</strong>
+</div>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🖱️</div>
+<div class="key-point-text">
+<strong>What the OS gives you</strong>
               The desktop, the taskbar, the Start menu, windows, and File Explorer.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 12: Windows, Mac & Mobile -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Windows, Mac & Mobile</h2>
-          <p class="slide-subtitle">The operating systems you will meet most</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🪟</div>
-            <div class="key-point-text">
-              <strong>Windows (Microsoft)</strong>
+</div>
+</div>
+</div>
+<!-- Slide 12: Windows, Mac & Mobile -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Windows, Mac &amp; Mobile</h2>
+<p class="slide-subtitle">The operating systems you will meet most</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🪟</div>
+<div class="key-point-text">
+<strong>Windows (Microsoft)</strong>
               The most common OS on desktops and laptops — and what this lab uses. Look for the
               Start button in the bottom-left corner.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🍎</div>
-            <div class="key-point-text">
-              <strong>macOS (Apple)</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🍎</div>
+<div class="key-point-text">
+<strong>macOS (Apple)</strong>
               Runs only on Apple Mac computers. Same idea as Windows, with a slightly different look.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📱</div>
-            <div class="key-point-text">
-              <strong>Mobile: Android & iOS</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📱</div>
+<div class="key-point-text">
+<strong>Mobile: Android &amp; iOS</strong>
               The operating systems on phones and tablets. <strong>Android</strong> (Google) runs
               on many brands; <strong>iOS / iPadOS</strong> (Apple) runs on iPhones and iPads. They
               use taps and swipes instead of a mouse.
             </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">The reassuring part</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box success">
+<div class="info-box-title">The reassuring part</div>
+<div class="info-box-content">
               Once you learn one operating system, the others feel familiar. They all let you
               open programs, save files, and connect to the internet.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 13: Knowledge Check -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Knowledge Check</h2>
-          <p class="slide-subtitle">Read each question, think about your answer, then reveal it</p>
-        </div>
-        <div class="slide-content">
-          <div class="knowledge-check">
-            <p class="kc-question">1. Which of these is an <em>input</em> device?</p>
-            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">A printer · A monitor · A keyboard · A speaker</p>
-            <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="kc-a1">Show answer</button>
-            <div class="kc-answer" id="kc-a1" hidden>
-              <strong>Answer:</strong> A <strong>keyboard</strong>. You use it to put information
+</div>
+</div>
+</div>
+<!-- Slide 13: Knowledge Check -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Knowledge Check</h2>
+<p class="slide-subtitle">Read each question, think about your answer, then reveal it</p>
+</div>
+<div class="slide-content">
+<div class="knowledge-check">
+<p class="kc-question">1. Which of these is an <em>input</em> device?</p>
+<p style="font-size: 1.1rem; margin-bottom: 0.5rem;">A printer · A monitor · A keyboard · A speaker</p>
+<button aria-controls="kc-a1" aria-expanded="false" class="reveal-btn" type="button">Show answer</button>
+<div class="kc-answer" hidden="" id="kc-a1">
+<strong>Answer:</strong> A <strong>keyboard</strong>. You use it to put information
               <em>into</em> the computer. A printer, monitor, and speaker are all output devices.
             </div>
-          </div>
-
-          <div class="knowledge-check">
-            <p class="kc-question">2. What is the difference between memory (RAM) and storage (the drive)?</p>
-            <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="kc-a2">Show answer</button>
-            <div class="kc-answer" id="kc-a2" hidden>
-              <strong>Answer:</strong> <strong>RAM</strong> is short-term — like your desk — and
+</div>
+<div class="knowledge-check">
+<p class="kc-question">2. What is the difference between memory (RAM) and storage (the drive)?</p>
+<button aria-controls="kc-a2" aria-expanded="false" class="reveal-btn" type="button">Show answer</button>
+<div class="kc-answer" hidden="" id="kc-a2">
+<strong>Answer:</strong> <strong>RAM</strong> is short-term — like your desk — and
               empties when you shut down. <strong>Storage</strong> is long-term — like a filing
               cabinet — and keeps your files when the power is off.
             </div>
-          </div>
-
-          <div class="knowledge-check">
-            <p class="kc-question">3. Where is the safest place to download a new program?</p>
-            <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="kc-a3">Show answer</button>
-            <div class="kc-answer" id="kc-a3" hidden>
-              <strong>Answer:</strong> From a <strong>trusted source</strong> — the Microsoft Store
+</div>
+<div class="knowledge-check">
+<p class="kc-question">3. Where is the safest place to download a new program?</p>
+<button aria-controls="kc-a3" aria-expanded="false" class="reveal-btn" type="button">Show answer</button>
+<div class="kc-answer" hidden="" id="kc-a3">
+<strong>Answer:</strong> From a <strong>trusted source</strong> — the Microsoft Store
               or the maker's official website. Never from a pop-up ad or an email link.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 14: Your Hands-On Lab -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Your Hands-On Lab</h2>
-          <p class="slide-subtitle">Now let's explore the computer in front of you</p>
-        </div>
-        <div class="slide-content">
-          <p>Time to put this to use. In the <strong>"Meet Your Computer Lab"</strong> handout,
+</div>
+</div>
+</div>
+<!-- Slide 14: Your Hands-On Lab -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Your Hands-On Lab</h2>
+<p class="slide-subtitle">Now let's explore the computer in front of you</p>
+</div>
+<div class="slide-content">
+<p>Time to put this to use. In the <strong>"Meet Your Computer Lab"</strong> handout,
           you will explore the real computer at your workstation.</p>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔍</div>
-            <div class="key-point-text">
-              <strong>You will</strong>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔍</div>
+<div class="key-point-text">
+<strong>You will</strong>
               Find the ports and peripherals · open <em>This PC</em> and <em>Settings</em> to read
               your RAM and storage · list a few installed apps · identify your Windows version.
             </div>
-          </div>
-          <div class="handout-prompt">
-            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
-            <div class="handout-prompt-text">Open your "Meet Your Computer Lab" handout and follow along step by step.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 15: Key Takeaways -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Key Takeaways</h2>
-          <p class="slide-subtitle">What to remember from today</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔌</div>
-            <div class="key-point-text">
-              <strong>Devices plug in through ports</strong>
+</div>
+<div class="handout-prompt">
+<div aria-hidden="true" class="handout-prompt-icon">📋</div>
+<div class="handout-prompt-text">Open your "Meet Your Computer Lab" handout and follow along step by step.</div>
+</div>
+</div>
+</div>
+<!-- Slide 15: Key Takeaways -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Key Takeaways</h2>
+<p class="slide-subtitle">What to remember from today</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔌</div>
+<div class="key-point-text">
+<strong>Devices plug in through ports</strong>
               Input devices send information in; output devices send it out. USB and HDMI are the most common plugs.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🧠</div>
-            <div class="key-point-text">
-              <strong>Memory is the desk; storage is the cabinet</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🧠</div>
+<div class="key-point-text">
+<strong>Memory is the desk; storage is the cabinet</strong>
               RAM holds what is open now; the drive keeps your files for good.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">💿</div>
-            <div class="key-point-text">
-              <strong>Software runs on the hardware</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">💿</div>
+<div class="key-point-text">
+<strong>Software runs on the hardware</strong>
               The OS runs the computer; apps do your tasks. Install only from trusted sources.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🪟</div>
-            <div class="key-point-text">
-              <strong>Windows, macOS, and mobile are all operating systems</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🪟</div>
+<div class="key-point-text">
+<strong>Windows, macOS, and mobile are all operating systems</strong>
               Learn one and the rest feel familiar. This lab uses Windows.
             </div>
-          </div>
-          <div class="handout-prompt">
-            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
-            <div class="handout-prompt-text">Take your handouts home! The quick-reference card is great to keep at your desk.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 16: Completion / You Did It! (last slide) -->
-      <div class="slide completion-slide">
-        <div class="completion-badge" aria-hidden="true"><span>🎉</span></div>
-        <h2>You Did It!</h2>
-        <p>You finished Week 1! You can now name the parts of a computer, tell memory from
+</div>
+<div class="handout-prompt">
+<div aria-hidden="true" class="handout-prompt-icon">📋</div>
+<div class="handout-prompt-text">Take your handouts home! The quick-reference card is great to keep at your desk.</div>
+</div>
+</div>
+</div>
+<!-- Slide 16: Lesson Recap Video -->
+<!-- Slide 17: Completion / You Did It! (last slide) -->
+<div class="slide completion-slide">
+<div aria-hidden="true" class="completion-badge"><span>🎉</span></div>
+<h2>You Did It!</h2>
+<p>You finished Week 1! You can now name the parts of a computer, tell memory from
         storage, understand software, and recognize the major operating systems. That is a
         real foundation to build on — see you next week for Week 2: Getting Online.</p>
-      </div>
-    </div>
-
-    <!-- Navigation Footer -->
-    <div class="nav-footer">
-      <button class="nav-btn prev" id="prevBtn" disabled>
+</div>
+</div>
+<!-- Navigation Footer -->
+<div class="nav-footer">
+<button class="nav-btn prev" disabled="" id="prevBtn">
         ← Previous
       </button>
-      <span class="slide-counter">
+<span class="slide-counter">
         Slide <span id="currentSlide">1</span> of <span id="totalSlides">17</span>
-      </span>
-      <button class="nav-btn next" id="nextBtn">
+</span>
+<button class="nav-btn next" id="nextBtn">
         Next →
       </button>
-    </div>
-  </main>
-
-  <!-- Confetti Container -->
-  <div class="confetti" id="confetti"></div>
-
-  <script src="../../../../shared/progress.js"></script>
-  <script src="../../../../shared/glossary.js" defer></script>
-  <script>
+</div>
+</main>
+<!-- Confetti Container -->
+<div class="confetti" id="confetti"></div>
+<script src="../../../../shared/video-ids.js"></script>
+<script src="../../../../shared/progress.js"></script>
+<script defer="" src="../../../../shared/glossary.js"></script>
+<script>
     // Presentation State
     let currentSlide = 0;
     let fitFrame = 0;
@@ -1517,6 +1579,50 @@
         const activeSlide = slides[currentSlide];
         const heading = activeSlide ? activeSlide.querySelector('h2') : null;
         announce.textContent = heading ? heading.textContent.trim() : '';
+      }
+
+      // Stop any playing video when navigating away
+      slides.forEach((slide, index) => {
+        if (index !== currentSlide) {
+          const iframe = slide.querySelector('.video-wrapper iframe');
+          if (iframe) {
+            const currentSrc = iframe.src;
+            iframe.src = '';
+            iframe.src = currentSrc;
+          }
+        }
+      });
+
+      // Lazy load YouTube iframe when video slide becomes active
+      const videoSlide = slides[currentSlide];
+      if (videoSlide) {
+        const wrapper = videoSlide.querySelector('.video-wrapper');
+        if (wrapper && !wrapper.querySelector('iframe') && !wrapper.querySelector('.video-fallback-card')) {
+          const videoId = window.VUB_VIDEO_IDS?.week1;
+          const isConfigured = videoId && videoId !== "REPLACE_WITH_WEEK1_VIDEO_ID";
+          const isOnline = navigator.onLine;
+
+          if (isConfigured && isOnline) {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            iframe.title = "Lesson Recap Video";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
+            wrapper.appendChild(iframe);
+          } else {
+            const fallback = document.createElement('div');
+            fallback.className = 'video-fallback-card';
+            fallback.innerHTML = `
+              <div class="video-fallback-icon" aria-hidden="true">📺</div>
+              <h3>Video Recap Offline or Unconfigured</h3>
+              <p style="margin: 0.5rem 0 1rem;">
+                \${!isConfigured ? 'The video link has not been configured in shared/video-ids.js yet.' : 'To watch this video recap, please check your internet connection.'}
+              </p>
+              <p style="font-size: 0.9rem; opacity: 0.85;">You can continue reading the slides normally.</p>
+            `;
+            wrapper.appendChild(fallback);
+          }
+        }
       }
 
       scheduleSlideFit();
@@ -1700,6 +1806,6 @@
       }
     }
   </script>
-  <script src="/shared/text-size.js" defer></script>
+<script defer="" src="/shared/text-size.js"></script>
 </body>
 </html>

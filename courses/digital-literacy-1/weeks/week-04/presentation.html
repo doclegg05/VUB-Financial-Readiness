@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Week 4: Citizenship &amp; Safety | VUB Digital Literacy — Level 1</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Week 4: Citizenship &amp; Safety | VUB Digital Literacy — Level 1</title>
+<style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
@@ -773,777 +777,831 @@
     }
 
     @media (prefers-reduced-motion: reduce){ .slide{animation:none;} .confetti-piece{animation:none;} .progress-fill{transition:none;} }
-  </style>
+
+    /* YouTube Embed Styles */
+    .video-slide-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .video-wrapper {
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      background: #000;
+      position: relative;
+      margin: 1rem 0;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-fallback-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem;
+      border: 2px dashed rgba(27, 54, 93, 0.3);
+      border-radius: 12px;
+      background: #fffbef;
+      color: #4a4327;
+      text-align: center;
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+    .video-fallback-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+  
+    /* Premium Sidebar Scrollbar styling */
+    .sidebar-scroll-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      padding-right: 0.25rem;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+</style>
 </head>
 <body>
-  <!-- Sidebar Navigation -->
-  <nav class="sidebar" aria-label="Lesson chapters">
-    <a class="logo" href="/courses/digital-literacy-1/index.html" aria-label="Back to the Digital Literacy — Level 1 dashboard">
-      <img class="logo-img" src="/assets/vub-seal-white.png" alt="VUB" width="56" height="56">
-      <h2>VUB Digital Literacy</h2>
-      <p>Level 1 · IC3 GS6 Aligned</p>
-    </a>
+<!-- Sidebar Navigation -->
+<nav aria-label="Lesson chapters" class="sidebar">
+<a aria-label="Back to the Digital Literacy — Level 1 dashboard" class="logo" href="/courses/digital-literacy-1/index.html">
+<img alt="VUB" class="logo-img" height="56" src="/assets/vub-seal-white.png" width="56"/>
+<h2>VUB Digital Literacy</h2>
+<p>Level 1 · IC3 GS6 Aligned</p>
+</a>
+<div class="week-indicator">
+<div class="week-num">Week 4</div>
+<div class="week-title">Citizenship &amp; Safety</div>
+</div><div class="sidebar-scroll-container"><div aria-labelledby="ch-digital-identity" class="chapter" role="group">
+<div class="chapter-title" id="ch-digital-identity">Digital Identity</div>
+<div class="chapter-slides">
+<button class="slide-link active" data-slide="0" type="button">Welcome &amp; Overview</button><button class="slide-link" data-slide="1" type="button">Lesson Recap Video</button>
+<button class="slide-link" data-slide="2" type="button">Learning Objectives</button>
+<button class="slide-link" data-slide="3" type="button">Your Digital Identity</button>
+<button class="slide-link" data-slide="4" type="button">Protecting Your PII</button>
+<button class="slide-link" data-slide="5" type="button">Reputation &amp; Permanence</button>
+<button class="slide-link" data-slide="6" type="button">Legal &amp; Ethical Behavior</button>
+</div>
+</div><div aria-labelledby="ch-bad-content" class="chapter" role="group">
+<div class="chapter-title" id="ch-bad-content">Responding to Bad Content</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="7" type="button">Impact of Negative Messages</button>
+<button class="slide-link" data-slide="8" type="button">Is This Information True?</button>
+<button class="slide-link" data-slide="9" type="button">Anonymity &amp; Nonresponse</button>
+</div>
+</div><div aria-labelledby="ch-security" class="chapter" role="group">
+<div class="chapter-title" id="ch-security">Security &amp; Passwords</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="10" type="button">Common Security Threats</button>
+<button class="slide-link" data-slide="11" type="button">Strong Passphrases</button>
+<button class="slide-link" data-slide="12" type="button">Reset &amp; Lock</button>
+<button class="slide-link" data-slide="13" type="button">Clearing Browser Data</button>
+</div>
+</div><div aria-labelledby="ch-tracking-health" class="chapter" role="group">
+<div class="chapter-title" id="ch-tracking-health">Tracking &amp; Health</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="14" type="button">Tracking &amp; Stored Data</button>
+<button class="slide-link" data-slide="15" type="button">Private Browsing</button>
+<button class="slide-link" data-slide="16" type="button">Staying Healthy Online</button>
+</div>
+</div><div aria-labelledby="ch-wrap-up" class="chapter" role="group">
+<div class="chapter-title" id="ch-wrap-up">Wrap-Up</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="17" type="button">Knowledge Check</button>
+<button class="slide-link" data-slide="18" type="button">Your Handouts</button>
+<button class="slide-link" data-slide="19" type="button">Key Takeaways</button>
+<button class="slide-link" data-slide="20" type="button">Great Work!</button>
+</div>
+</div><div class="resources-section">
+<div class="resources-title">Resources</div>
+<a class="resource-link" href="handouts/lock-it-down-lab.html" target="_blank">Lock It Down Lab</a>
+<a class="resource-link" href="handouts/security-ergonomics-quick-reference.html" target="_blank">Security &amp; Ergonomics Quick Reference</a>
+</div></div>
 
-    <div class="week-indicator">
-      <div class="week-num">Week 4</div>
-      <div class="week-title">Citizenship &amp; Safety</div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-digital-identity">
-      <div class="chapter-title" id="ch-digital-identity">Digital Identity</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link active" data-slide="0">Welcome &amp; Overview</button>
-        <button type="button" class="slide-link" data-slide="1">Learning Objectives</button>
-        <button type="button" class="slide-link" data-slide="2">Your Digital Identity</button>
-        <button type="button" class="slide-link" data-slide="3">Protecting Your PII</button>
-        <button type="button" class="slide-link" data-slide="4">Reputation &amp; Permanence</button>
-        <button type="button" class="slide-link" data-slide="5">Legal &amp; Ethical Behavior</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-bad-content">
-      <div class="chapter-title" id="ch-bad-content">Responding to Bad Content</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="6">Impact of Negative Messages</button>
-        <button type="button" class="slide-link" data-slide="7">Is This Information True?</button>
-        <button type="button" class="slide-link" data-slide="8">Anonymity &amp; Nonresponse</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-security">
-      <div class="chapter-title" id="ch-security">Security &amp; Passwords</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="9">Common Security Threats</button>
-        <button type="button" class="slide-link" data-slide="10">Strong Passphrases</button>
-        <button type="button" class="slide-link" data-slide="11">Reset &amp; Lock</button>
-        <button type="button" class="slide-link" data-slide="12">Clearing Browser Data</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-tracking-health">
-      <div class="chapter-title" id="ch-tracking-health">Tracking &amp; Health</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="13">Tracking &amp; Stored Data</button>
-        <button type="button" class="slide-link" data-slide="14">Private Browsing</button>
-        <button type="button" class="slide-link" data-slide="15">Staying Healthy Online</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-wrap-up">
-      <div class="chapter-title" id="ch-wrap-up">Wrap-Up</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="16">Knowledge Check</button>
-        <button type="button" class="slide-link" data-slide="17">Your Handouts</button>
-        <button type="button" class="slide-link" data-slide="18">Key Takeaways</button>
-        <button type="button" class="slide-link" data-slide="19">Great Work!</button>
-      </div>
-    </div>
-
-    <div class="resources-section">
-      <div class="resources-title">Resources</div>
-      <a class="resource-link" href="handouts/lock-it-down-lab.html" target="_blank">Lock It Down Lab</a>
-      <a class="resource-link" href="handouts/security-ergonomics-quick-reference.html" target="_blank">Security &amp; Ergonomics Quick Reference</a>
-    </div>
-
-    <div class="progress-section">
-      <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Lesson progress">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
-    </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <h1 class="sr-only">Week 4: Citizenship &amp; Safety</h1>
-    <div id="slide-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-    <div class="slides-container">
-      <!-- Slide 0: Title -->
-      <div class="slide active title-slide">
-        <div class="slide-icon" aria-hidden="true">🛡️</div>
-        <h2 class="slide-title">Citizenship &amp; Safety</h2>
-        <p class="slide-subtitle">Your identity, privacy, and security online</p>
-        <p class="course-info">Week 4 of 5 · VUB Digital Literacy — Level 1</p>
-      </div>
-
-      <!-- Slide 1: Learning Objectives -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Today's Learning Objectives</h2>
-          <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🪪</div>
-            <div class="key-point-text">
-              <strong>Manage Your Digital Identity</strong>
+<div class="progress-section">
+<div aria-label="Lesson progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="progress-bar" id="progressBar" role="progressbar">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+<div class="progress-text"><span id="progressText">0</span>% Complete</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="main-content">
+<h1 class="sr-only">Week 4: Citizenship &amp; Safety</h1>
+<div aria-atomic="true" aria-live="polite" class="sr-only" id="slide-announce"></div>
+<div class="slides-container">
+<!-- Slide 0: Title -->
+<div class="slide active title-slide">
+<div aria-hidden="true" class="slide-icon">🛡️</div>
+<h2 class="slide-title">Citizenship &amp; Safety</h2>
+<p class="slide-subtitle">Your identity, privacy, and security online</p>
+<p class="course-info">Week 4 of 5 · VUB Digital Literacy — Level 1</p>
+</div><div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Lesson Recap Video</h2>
+<p class="slide-subtitle">Watch a video summary of this week's lesson</p>
+</div>
+<div class="slide-content video-slide-content">
+<div class="video-wrapper" id="videoWrapperWeek4">
+<!-- Dynamic iframe injected via JS or fallback card -->
+</div>
+<p style="margin-top: 1rem; font-size: 0.95rem; color: var(--gray); text-align: center;">
+            Note: Watching this video requires an internet connection.
+          </p>
+</div>
+</div>
+<!-- Slide 1: Learning Objectives -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Today's Learning Objectives</h2>
+<p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🪪</div>
+<div class="key-point-text">
+<strong>Manage Your Digital Identity</strong>
               Protect your personal data and personal information, and guard your online reputation
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🧭</div>
-            <div class="key-point-text">
-              <strong>Respond Wisely to Bad Content</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🧭</div>
+<div class="key-point-text">
+<strong>Respond Wisely to Bad Content</strong>
               Judge whether information is true, and know when the best reply is no reply
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔐</div>
-            <div class="key-point-text">
-              <strong>Protect Your Devices</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔐</div>
+<div class="key-point-text">
+<strong>Protect Your Devices</strong>
               Build strong passphrases, lock your screen, and clear your browser data
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">💚</div>
-            <div class="key-point-text">
-              <strong>Stay Healthy Online</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">💚</div>
+<div class="key-point-text">
+<strong>Stay Healthy Online</strong>
               Recognize tracking, browse privately, and set up a comfortable, safe workstation
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 2: Your Digital Identity -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Your Digital Identity</h2>
-          <p class="slide-subtitle">Everything the internet knows about you</p>
-        </div>
-        <div class="slide-content">
-          <p>Your <strong>digital identity</strong> is the picture of you that builds up online — your accounts, your posts, your photos, and the details websites collect. You manage it every time you decide what to share.</p>
-          <div class="two-column">
-            <div class="column">
-              <h3>You Control This</h3>
-              <ul>
-                <li>What you post and share</li>
-                <li>Which accounts you create</li>
-                <li>Your privacy settings</li>
-                <li>Who you connect with</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>Smart Habits</h3>
-              <ul>
-                <li>Share less, not more</li>
-                <li>Review privacy settings yearly</li>
-                <li>Use a separate email for sign-ups</li>
-                <li>Think before you post</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">A Simple Rule</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 2: Your Digital Identity -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Your Digital Identity</h2>
+<p class="slide-subtitle">Everything the internet knows about you</p>
+</div>
+<div class="slide-content">
+<p>Your <strong>digital identity</strong> is the picture of you that builds up online — your accounts, your posts, your photos, and the details websites collect. You manage it every time you decide what to share.</p>
+<div class="two-column">
+<div class="column">
+<h3>You Control This</h3>
+<ul>
+<li>What you post and share</li>
+<li>Which accounts you create</li>
+<li>Your privacy settings</li>
+<li>Who you connect with</li>
+</ul>
+</div>
+<div class="column">
+<h3>Smart Habits</h3>
+<ul>
+<li>Share less, not more</li>
+<li>Review privacy settings yearly</li>
+<li>Use a separate email for sign-ups</li>
+<li>Think before you post</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-box-title">A Simple Rule</div>
+<div class="info-box-content">
               Before you share something online, ask: "Would I be comfortable if a stranger, my family, and a future employer all saw this?"
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3: Protecting Your PII -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Protecting Your Personal Information</h2>
-          <p class="slide-subtitle">What is PII, and why guard it?</p>
-        </div>
-        <div class="slide-content">
-          <p><strong>PII</strong> stands for <em>Personally Identifiable Information</em> — any detail that can be used to identify you. In the wrong hands, it can lead to identity theft or fraud.</p>
-          <div class="two-column">
-            <div class="column">
-              <h3>Examples of PII</h3>
-              <ul>
-                <li>Social Security number</li>
-                <li>Date of birth</li>
-                <li>Home address &amp; phone</li>
-                <li>Bank or VA account numbers</li>
-                <li>Driver's license number</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>How to Protect It</h3>
-              <ul>
-                <li>Never share it in email or text</li>
-                <li>Only enter it on trusted sites</li>
-                <li>Look for the lock icon (https)</li>
-                <li>Shred paper documents</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box warning">
-            <div class="info-box-title">⚠️ Remember</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 3: Protecting Your PII -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Protecting Your Personal Information</h2>
+<p class="slide-subtitle">What is PII, and why guard it?</p>
+</div>
+<div class="slide-content">
+<p><strong>PII</strong> stands for <em>Personally Identifiable Information</em> — any detail that can be used to identify you. In the wrong hands, it can lead to identity theft or fraud.</p>
+<div class="two-column">
+<div class="column">
+<h3>Examples of PII</h3>
+<ul>
+<li>Social Security number</li>
+<li>Date of birth</li>
+<li>Home address &amp; phone</li>
+<li>Bank or VA account numbers</li>
+<li>Driver's license number</li>
+</ul>
+</div>
+<div class="column">
+<h3>How to Protect It</h3>
+<ul>
+<li>Never share it in email or text</li>
+<li>Only enter it on trusted sites</li>
+<li>Look for the lock icon (https)</li>
+<li>Shred paper documents</li>
+</ul>
+</div>
+</div>
+<div class="info-box warning">
+<div class="info-box-title">⚠️ Remember</div>
+<div class="info-box-content">
               No legitimate company, bank, or the VA will ask for your full Social Security number or password in an unexpected email, text, or phone call.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 4: Reputation & Permanence -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Reputation &amp; Permanence</h2>
-          <p class="slide-subtitle">The internet has a long memory</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📌</div>
-            <div class="key-point-text">
-              <strong>Posts Can Last Forever</strong>
+</div>
+</div>
+</div>
+<!-- Slide 4: Reputation & Permanence -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Reputation &amp; Permanence</h2>
+<p class="slide-subtitle">The internet has a long memory</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📌</div>
+<div class="key-point-text">
+<strong>Posts Can Last Forever</strong>
               Even after you delete something, others may have saved it, shared it, or taken a screenshot
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔎</div>
-            <div class="key-point-text">
-              <strong>People Look You Up</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔎</div>
+<div class="key-point-text">
+<strong>People Look You Up</strong>
               Employers, banks, and new acquaintances may search your name online
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🌟</div>
-            <div class="key-point-text">
-              <strong>You Build Your Reputation</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🌟</div>
+<div class="key-point-text">
+<strong>You Build Your Reputation</strong>
               Kind, helpful, and honest posts shape how people see you — in a good way
             </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">The Grandkid Test</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box success">
+<div class="info-box-title">The Grandkid Test</div>
+<div class="info-box-content">
               If you would not want your grandchildren — or your old unit — to read it years from now, it is better not to post it.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 5: Legal & Ethical Behavior -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Legal &amp; Ethical Behavior</h2>
-          <p class="slide-subtitle">Doing the right thing online</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>✅ Good Practice</h3>
-              <ul>
-                <li>Give credit for others' work</li>
-                <li>Respect copyright on photos &amp; music</li>
-                <li>Be honest and accurate</li>
-                <li>Treat people with respect</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>❌ Avoid</h3>
-              <ul>
-                <li>Copying work and calling it yours</li>
-                <li>Sharing others' private information</li>
-                <li>Posting harmful or untrue claims</li>
-                <li>Pretending to be someone else</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Simple Test</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 5: Legal & Ethical Behavior -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Legal &amp; Ethical Behavior</h2>
+<p class="slide-subtitle">Doing the right thing online</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>✅ Good Practice</h3>
+<ul>
+<li>Give credit for others' work</li>
+<li>Respect copyright on photos &amp; music</li>
+<li>Be honest and accurate</li>
+<li>Treat people with respect</li>
+</ul>
+</div>
+<div class="column">
+<h3>❌ Avoid</h3>
+<ul>
+<li>Copying work and calling it yours</li>
+<li>Sharing others' private information</li>
+<li>Posting harmful or untrue claims</li>
+<li>Pretending to be someone else</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-box-title">Simple Test</div>
+<div class="info-box-content">
               The same values that guide you in person — honesty, respect, and fairness — apply online. If it would be wrong face-to-face, it is wrong on a screen.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 6: Impact of Negative Messages -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">The Impact of Negative Messages</h2>
-          <p class="slide-subtitle">Words on a screen still carry weight</p>
-        </div>
-        <div class="slide-content">
-          <p>Online communication can turn hurtful fast — rude comments, harassment, rumors, or "trolling" (posting to provoke a reaction). It affects real people.</p>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">😟</div>
-            <div class="key-point-text">
-              <strong>It Affects Wellbeing</strong>
+</div>
+</div>
+</div>
+<!-- Slide 6: Impact of Negative Messages -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">The Impact of Negative Messages</h2>
+<p class="slide-subtitle">Words on a screen still carry weight</p>
+</div>
+<div class="slide-content">
+<p>Online communication can turn hurtful fast — rude comments, harassment, rumors, or "trolling" (posting to provoke a reaction). It affects real people.</p>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">😟</div>
+<div class="key-point-text">
+<strong>It Affects Wellbeing</strong>
               Negative messages can cause stress, anxiety, anger, and hurt feelings — for the target and for bystanders
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">⚡</div>
-            <div class="key-point-text">
-              <strong>It Spreads Quickly</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">⚡</div>
+<div class="key-point-text">
+<strong>It Spreads Quickly</strong>
               A harsh comment can be shared widely in minutes and is hard to take back
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🤝</div>
-            <div class="key-point-text">
-              <strong>You Set the Tone</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🤝</div>
+<div class="key-point-text">
+<strong>You Set the Tone</strong>
               Choosing to be calm and respectful — even in disagreement — makes online spaces better for everyone
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 7: Is This Information True? -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Is This Information True?</h2>
-          <p class="slide-subtitle">Checking the validity of what you read online</p>
-        </div>
-        <div class="slide-content">
-          <p>Not everything online is accurate. Scams, rumors, and "fake news" are common. Before you believe — or share — something, check it.</p>
-          <div class="two-column">
-            <div class="column">
-              <h3>Ask Yourself</h3>
-              <ul>
-                <li><strong>Who</strong> wrote it? Are they an expert?</li>
-                <li><strong>Where</strong> is it published?</li>
-                <li><strong>When</strong> — is it current?</li>
-                <li><strong>Why</strong> — to inform, or to sell/scare?</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>Red Flags</h3>
-              <ul>
-                <li>No author or source listed</li>
-                <li>Shocking headline, urgent tone</li>
-                <li>Spelling and grammar errors</li>
-                <li>Asks for money or PII</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">✅ Check With a Second Source</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 7: Is This Information True? -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Is This Information True?</h2>
+<p class="slide-subtitle">Checking the validity of what you read online</p>
+</div>
+<div class="slide-content">
+<p>Not everything online is accurate. Scams, rumors, and "fake news" are common. Before you believe — or share — something, check it.</p>
+<div class="two-column">
+<div class="column">
+<h3>Ask Yourself</h3>
+<ul>
+<li><strong>Who</strong> wrote it? Are they an expert?</li>
+<li><strong>Where</strong> is it published?</li>
+<li><strong>When</strong> — is it current?</li>
+<li><strong>Why</strong> — to inform, or to sell/scare?</li>
+</ul>
+</div>
+<div class="column">
+<h3>Red Flags</h3>
+<ul>
+<li>No author or source listed</li>
+<li>Shocking headline, urgent tone</li>
+<li>Spelling and grammar errors</li>
+<li>Asks for money or PII</li>
+</ul>
+</div>
+</div>
+<div class="info-box success">
+<div class="info-box-title">✅ Check With a Second Source</div>
+<div class="info-box-content">
               If a claim is true, you can usually confirm it on a trusted site — a major news outlet, a .gov site like va.gov, or a well-known organization. If only one place says it, be skeptical.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 8: Anonymity & Nonresponse -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Anonymity &amp; the Power of Nonresponse</h2>
-          <p class="slide-subtitle">Sometimes the best reply is no reply</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🎭</div>
-            <div class="key-point-text">
-              <strong>Online Anonymity</strong>
+</div>
+</div>
+</div>
+<!-- Slide 8: Anonymity & Nonresponse -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Anonymity &amp; the Power of Nonresponse</h2>
+<p class="slide-subtitle">Sometimes the best reply is no reply</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🎭</div>
+<div class="key-point-text">
+<strong>Online Anonymity</strong>
               People can hide their real identity online. This can protect privacy and free speech — but it also emboldens some to behave badly because they feel they will not be held responsible
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🤫</div>
-            <div class="key-point-text">
-              <strong>The Value of Nonresponse</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🤫</div>
+<div class="key-point-text">
+<strong>The Value of Nonresponse</strong>
               Trolls and bullies want a reaction. Not replying — "do not feed the troll" — removes their reward and often makes them stop
             </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Instead of Responding, You Can:</div>
-            <div class="info-box-content">
-              <ul style="margin-top: 0.5rem;">
-                <li><strong>Block</strong> the person so they cannot contact you</li>
-                <li><strong>Report</strong> the post to the platform</li>
-                <li><strong>Save</strong> a screenshot if it is serious or threatening</li>
-                <li><strong>Walk away</strong> — step back and protect your peace of mind</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 9: Common Security Threats -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Common Security Threats</h2>
-          <p class="slide-subtitle">Know the dangers so you can avoid them</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🎣</div>
-            <div class="key-point-text">
-              <strong>Phishing</strong>
+</div>
+<div class="info-box">
+<div class="info-box-title">Instead of Responding, You Can:</div>
+<div class="info-box-content">
+<ul style="margin-top: 0.5rem;">
+<li><strong>Block</strong> the person so they cannot contact you</li>
+<li><strong>Report</strong> the post to the platform</li>
+<li><strong>Save</strong> a screenshot if it is serious or threatening</li>
+<li><strong>Walk away</strong> — step back and protect your peace of mind</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 9: Common Security Threats -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Common Security Threats</h2>
+<p class="slide-subtitle">Know the dangers so you can avoid them</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🎣</div>
+<div class="key-point-text">
+<strong>Phishing</strong>
               Fake emails, texts, or calls that trick you into giving up passwords or PII. They often pretend to be your bank, the VA, or a delivery company
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🦠</div>
-            <div class="key-point-text">
-              <strong>Malware &amp; Viruses</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🦠</div>
+<div class="key-point-text">
+<strong>Malware &amp; Viruses</strong>
               Harmful programs that sneak onto your device through bad downloads or links and can steal information or lock your files
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">💸</div>
-            <div class="key-point-text">
-              <strong>Scams &amp; Identity Theft</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">💸</div>
+<div class="key-point-text">
+<strong>Scams &amp; Identity Theft</strong>
               Tricks to take your money or use your identity — fake prizes, "tech support" calls, or romance scams
             </div>
-          </div>
-          <div class="info-box warning">
-            <div class="info-box-title">⚠️ The Golden Rule</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box warning">
+<div class="info-box-title">⚠️ The Golden Rule</div>
+<div class="info-box-content">
               Slow down. If a message creates urgency or fear ("act now!"), that is a warning sign. When in doubt, do not click — contact the company directly using a number you trust.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 10: Strong Passphrases -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Building a Strong Passphrase</h2>
-          <p class="slide-subtitle">Longer is stronger</p>
-        </div>
-        <div class="slide-content">
-          <p>Today's best advice: use a <strong>passphrase</strong> — several words strung together. It is long, hard to guess, and easy for you to remember.</p>
-          <div class="info-box success">
-            <div class="info-box-title">✅ A Good Passphrase</div>
-            <div class="info-box-content">
-              <code style="font-size: 1.2rem;">PurpleTrout-Coffee-Sunrise7</code><br>
-              Long (12+ characters), uses unrelated words, mixes in a capital letter and a number. Easy to picture, hard to crack.
+</div>
+</div>
+</div>
+<!-- Slide 10: Strong Passphrases -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Building a Strong Passphrase</h2>
+<p class="slide-subtitle">Longer is stronger</p>
+</div>
+<div class="slide-content">
+<p>Today's best advice: use a <strong>passphrase</strong> — several words strung together. It is long, hard to guess, and easy for you to remember.</p>
+<div class="info-box success">
+<div class="info-box-title">✅ A Good Passphrase</div>
+<div class="info-box-content">
+<code style="font-size: 1.2rem;">PurpleTrout-Coffee-Sunrise7</code><br/>
+              Long (16+ characters), uses unrelated words, mixes in a capital letter and a number. Easy to picture, hard to crack.
             </div>
-          </div>
-          <div class="two-column">
-            <div class="column">
-              <h3>Do</h3>
-              <ul>
-                <li>Make it 12+ characters (longer is better)</li>
-                <li>Use a different password for each account</li>
-                <li>Consider a password manager</li>
-                <li>Turn on two-factor authentication</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>Don't</h3>
-              <ul>
-                <li>Use names, birthdays, or "password123"</li>
-                <li>Reuse the same one everywhere</li>
-                <li>Write it on a sticky note on the monitor</li>
-                <li>Share it with anyone</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 11: Reset & Lock -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Resetting a Password &amp; Locking Your Device</h2>
-          <p class="slide-subtitle">Two skills everyone needs</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>🔑 Reset a Forgotten Password</h3>
-              <ul>
-                <li>On the sign-in page, click "Forgot password?"</li>
-                <li>Confirm your identity by email or text code</li>
-                <li>Create a new, strong passphrase</li>
-                <li>If hacked and you can still sign in: change the password in the account's Settings. If the hacker may control your email or phone, secure those first, then use the provider's account-recovery page</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>🔒 Lock Your Screen</h3>
-              <ul>
-                <li>Press <strong>Windows + L</strong> to lock instantly</li>
-                <li>Lock it whenever you step away</li>
-                <li>Set it to lock automatically after a few minutes</li>
-                <li>Your password unlocks it again</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Why Lock?</div>
-            <div class="info-box-content">
+</div>
+<div class="two-column">
+<div class="column">
+<h3>Do</h3>
+<ul>
+<li>Make it 12+ characters (longer is better)</li>
+<li>Use a different password for each account</li>
+<li>Consider a password manager</li>
+<li>Turn on two-factor authentication</li>
+</ul>
+</div>
+<div class="column">
+<h3>Don't</h3>
+<ul>
+<li>Use names, birthdays, or "password123"</li>
+<li>Reuse the same one everywhere</li>
+<li>Write it on a sticky note on the monitor</li>
+<li>Share it with anyone</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 11: Reset & Lock -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Resetting a Password &amp; Locking Your Device</h2>
+<p class="slide-subtitle">Two skills everyone needs</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>🔑 Reset a Forgotten Password</h3>
+<ul>
+<li>On the sign-in page, click "Forgot password?"</li>
+<li>Confirm your identity by email or text code</li>
+<li>Create a new, strong passphrase</li>
+<li>Reset right away if an account is hacked</li>
+</ul>
+</div>
+<div class="column">
+<h3>🔒 Lock Your Screen</h3>
+<ul>
+<li>Press <strong>Windows + L</strong> to lock instantly</li>
+<li>Lock it whenever you step away</li>
+<li>Set it to lock automatically after a few minutes</li>
+<li>Your password unlocks it again</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-box-title">Why Lock?</div>
+<div class="info-box-content">
               Locking your screen keeps others from seeing your email, health records, or files while you are away from your desk — at the lab, the library, or a clinic.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 12: Clearing Browser Data -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Clearing Your Browser Data</h2>
-          <p class="slide-subtitle">Cleaning up history, cookies, and saved info</p>
-        </div>
-        <div class="slide-content">
-          <p>Your browser remembers the sites you visit (history) and stores small files called <strong>cookies</strong>. On a shared or public computer, it is smart to clear them.</p>
-          <ol class="steps-list">
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Open your browser's menu</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">Click the three dots (⋮) in the top-right corner</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Find "Clear browsing data"</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">It is usually under Settings, History, or Privacy. The shortcut Ctrl+Shift+Delete opens it directly</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Choose what to clear</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">History, cookies, and cached files. Pick a time range like "Last hour" or "All time"</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Click "Clear data"</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">Done! Note: clearing cookies will sign you out of websites</span>
-            </li>
-          </ol>
-          <div class="info-box success">
-            <div class="info-box-title">💡 On Public Computers</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 12: Clearing Browser Data -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Clearing Your Browser Data</h2>
+<p class="slide-subtitle">Cleaning up history, cookies, and saved info</p>
+</div>
+<div class="slide-content">
+<p>Your browser remembers the sites you visit (history) and stores small files called <strong>cookies</strong>. On a shared or public computer, it is smart to clear them.</p>
+<ol class="steps-list">
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Open your browser's menu</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">Click the three dots (⋮) in the top-right corner</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Find "Clear browsing data"</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">It is usually under Settings, History, or Privacy. The shortcut Ctrl+Shift+Delete opens it directly</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Choose what to clear</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">History, cookies, and cached files. Pick a time range like "Last hour" or "All time"</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Click "Clear data"</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">Done! Note: clearing cookies will sign you out of websites</span>
+</li>
+</ol>
+<div class="info-box success">
+<div class="info-box-title">💡 On Public Computers</div>
+<div class="info-box-content">
               Always sign out of your accounts and clear browsing data before leaving a library or shared lab computer.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 13: Tracking & Stored Data -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Tracking &amp; Information Stored on Your Device</h2>
-          <p class="slide-subtitle">Who is watching, and what is saved?</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">👣</div>
-            <div class="key-point-text">
-              <strong>Navigation Tracking</strong>
-              Websites and advertisers use cookies and other tracking tools to follow what you do online — which is why an item you viewed seems to "follow" you in ads. It can feel convenient, but it is also a privacy trade-off
+</div>
+</div>
+</div>
+<!-- Slide 13: Tracking & Stored Data -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Tracking &amp; Information Stored on Your Device</h2>
+<p class="slide-subtitle">Who is watching, and what is saved?</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">👣</div>
+<div class="key-point-text">
+<strong>Navigation Tracking</strong>
+              Websites and advertisers use cookies to follow what you do online — which is why an item you viewed seems to "follow" you in ads. It can feel convenient, but it is also a privacy trade-off
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">💾</div>
-            <div class="key-point-text">
-              <strong>Risks of Information Stored on a Device</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">💾</div>
+<div class="key-point-text">
+<strong>Risks of Information Stored on a Device</strong>
               Saved passwords, autofill details, downloaded files, and photos all live on your computer or phone. If the device is lost, stolen, or shared, that information could be exposed
             </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Protect Stored Information</div>
-            <div class="info-box-content">
-              <ul style="margin-top: 0.5rem;">
-                <li>Lock your device with a password or PIN</li>
-                <li>Do not save passwords on shared computers</li>
-                <li>Sign out and clear data when you finish</li>
-                <li>Remove old files and downloads you no longer need</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 14: Private Browsing -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Private Browsing</h2>
-          <p class="slide-subtitle">A handy tool — with limits</p>
-        </div>
-        <div class="slide-content">
-          <p>Most browsers offer a <strong>private window</strong> — called <em>Incognito</em> in Chrome or <em>InPrivate</em> in Edge. Open one with <strong>Ctrl+Shift+N</strong> (Chrome) or <strong>Ctrl+Shift+P</strong> (Edge/Firefox).</p>
-          <div class="two-column">
-            <div class="column">
-              <h3>✅ What It Does</h3>
-              <ul>
-                <li>Does not save your history on that device</li>
-                <li>Does not keep cookies after you close it</li>
-                <li>Will not autofill or save logins</li>
-                <li>Great on shared computers</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>❌ What It Does NOT Do</h3>
-              <ul>
-                <li>It does not make you invisible</li>
-                <li>Your internet provider can still see sites</li>
-                <li>Websites you log into still know it is you</li>
-                <li>It is not full anonymity or protection</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box warning">
-            <div class="info-box-title">⚠️ Don't Be Fooled</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box">
+<div class="info-box-title">Protect Stored Information</div>
+<div class="info-box-content">
+<ul style="margin-top: 0.5rem;">
+<li>Lock your device with a password or PIN</li>
+<li>Do not save passwords on shared computers</li>
+<li>Sign out and clear data when you finish</li>
+<li>Remove old files and downloads you no longer need</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 14: Private Browsing -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Private Browsing</h2>
+<p class="slide-subtitle">A handy tool — with limits</p>
+</div>
+<div class="slide-content">
+<p>Most browsers offer a <strong>private window</strong> — called <em>Incognito</em> in Chrome or <em>InPrivate</em> in Edge. Open one with <strong>Ctrl+Shift+N</strong> (Chrome) or <strong>Ctrl+Shift+P</strong> (Edge/Firefox).</p>
+<div class="two-column">
+<div class="column">
+<h3>✅ What It Does</h3>
+<ul>
+<li>Does not save your history on that device</li>
+<li>Does not keep cookies after you close it</li>
+<li>Will not autofill or save logins</li>
+<li>Great on shared computers</li>
+</ul>
+</div>
+<div class="column">
+<h3>❌ What It Does NOT Do</h3>
+<ul>
+<li>It does not make you invisible</li>
+<li>Your internet provider can still see sites</li>
+<li>Websites you log into still know it is you</li>
+<li>It is not full anonymity or protection</li>
+</ul>
+</div>
+</div>
+<div class="info-box warning">
+<div class="info-box-title">⚠️ Don't Be Fooled</div>
+<div class="info-box-content">
               Private mode keeps things tidy on your own device. It does not hide you from websites, your employer's network, or your internet provider.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 15: Staying Healthy Online -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Staying Healthy Online</h2>
-          <p class="slide-subtitle">Caring for your mind and body</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>🧠 Mental Wellbeing</h3>
-              <ul>
-                <li>Take breaks from screens and news</li>
-                <li>Limit doom-scrolling before bed</li>
-                <li>Unfollow accounts that stress you</li>
-                <li>Connect in person, too</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>💺 Physical &amp; Ergonomics</h3>
-              <ul>
-                <li>Screen at arm's length, top at eye level</li>
-                <li>Sit back in the chair, feet flat</li>
-                <li>Keep wrists straight while typing</li>
-                <li>20-20-20: every 20 min, look 20 feet away for 20 seconds</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">💚 Small Changes, Big Difference</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 15: Staying Healthy Online -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Staying Healthy Online</h2>
+<p class="slide-subtitle">Caring for your mind and body</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>🧠 Mental Wellbeing</h3>
+<ul>
+<li>Take breaks from screens and news</li>
+<li>Limit doom-scrolling before bed</li>
+<li>Unfollow accounts that stress you</li>
+<li>Connect in person, too</li>
+</ul>
+</div>
+<div class="column">
+<h3>💺 Physical &amp; Ergonomics</h3>
+<ul>
+<li>Screen at arm's length, top at eye level</li>
+<li>Sit back in the chair, feet flat</li>
+<li>Keep wrists straight while typing</li>
+<li>20-20-20: every 20 min, look 20 feet away for 20 seconds</li>
+</ul>
+</div>
+</div>
+<div class="info-box success">
+<div class="info-box-title">💚 Small Changes, Big Difference</div>
+<div class="info-box-content">
               Stand up and stretch every half hour. Adjusting your chair and screen can prevent neck, back, wrist, and eye strain over time.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 16: Knowledge Check -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Knowledge Check</h2>
-          <p class="slide-subtitle">Try each question, then reveal the answer</p>
-        </div>
-        <div class="slide-content">
-          <div class="kc-question">
-            <div class="kc-prompt">1. Which of these is the strongest password?</div>
-            <button class="kc-toggle" type="button" aria-expanded="false" aria-controls="kc-a1">
-              <span>Show answer</span>
-            </button>
-            <div class="kc-answer" id="kc-a1" hidden>
-              <span class="kc-label">Answer</span>
+</div>
+</div>
+</div>
+<!-- Slide 16: Knowledge Check -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Knowledge Check</h2>
+<p class="slide-subtitle">Try each question, then reveal the answer</p>
+</div>
+<div class="slide-content">
+<div class="kc-question">
+<div class="kc-prompt">1. Which of these is the strongest password?</div>
+<button aria-controls="kc-a1" aria-expanded="false" class="kc-toggle" type="button">
+<span>Show answer</span>
+</button>
+<div class="kc-answer" hidden="" id="kc-a1">
+<span class="kc-label">Answer</span>
               A long passphrase like <code>PurpleTrout-Coffee-Sunrise7</code>. Length and unrelated words make it far harder to guess than a short password or a birthday.
             </div>
-          </div>
-
-          <div class="kc-question">
-            <div class="kc-prompt">2. A stranger posts a rude, insulting comment just to get a reaction. What is usually the best response?</div>
-            <button class="kc-toggle" type="button" aria-expanded="false" aria-controls="kc-a2">
-              <span>Show answer</span>
-            </button>
-            <div class="kc-answer" id="kc-a2" hidden>
-              <span class="kc-label">Answer</span>
+</div>
+<div class="kc-question">
+<div class="kc-prompt">2. A stranger posts a rude, insulting comment just to get a reaction. What is usually the best response?</div>
+<button aria-controls="kc-a2" aria-expanded="false" class="kc-toggle" type="button">
+<span>Show answer</span>
+</button>
+<div class="kc-answer" hidden="" id="kc-a2">
+<span class="kc-label">Answer</span>
               Do not reply. Nonresponse removes the reaction the troll wants. Then block or report them, and save a screenshot if it is threatening.
             </div>
-          </div>
-
-          <div class="kc-question">
-            <div class="kc-prompt">3. True or false: a private (Incognito) window makes you completely anonymous online.</div>
-            <button class="kc-toggle" type="button" aria-expanded="false" aria-controls="kc-a3">
-              <span>Show answer</span>
-            </button>
-            <div class="kc-answer" id="kc-a3" hidden>
-              <span class="kc-label">Answer</span>
+</div>
+<div class="kc-question">
+<div class="kc-prompt">3. True or false: a private (Incognito) window makes you completely anonymous online.</div>
+<button aria-controls="kc-a3" aria-expanded="false" class="kc-toggle" type="button">
+<span>Show answer</span>
+</button>
+<div class="kc-answer" hidden="" id="kc-a3">
+<span class="kc-label">Answer</span>
               False. Private mode just avoids saving history and cookies on that device. Your internet provider, the network, and sites you log into can still see you.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 17: Your Handouts -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Your Handouts &amp; Hands-On Lab</h2>
-          <p class="slide-subtitle">Practice what we learned</p>
-        </div>
-        <div class="slide-content">
-          <div class="handout-prompt">
-            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
-            <div class="handout-prompt-text">Open the "Lock It Down Lab" — build a passphrase, lock your screen, clear browser data, open a private window, check a source, and review your desk setup.</div>
-          </div>
-          <div class="handout-prompt">
-            <div class="handout-prompt-icon" aria-hidden="true">🗂️</div>
-            <div class="handout-prompt-text">Keep the "Security &amp; Ergonomics Quick Reference" card at your desk for password rules, lock/clear-data steps, and ergonomics reminders.</div>
-          </div>
-          <div class="demo-box">
-            <h3>🖥️ Let's Do It Together</h3>
-            <p>We'll work through the lab step by step on your own computer. Raise your hand any time and I'll come help.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 18: Key Takeaways -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Key Takeaways</h2>
-          <p class="slide-subtitle">What to remember from today</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🪪</div>
-            <div class="key-point-text">
-              <strong>Guard Your Identity</strong>
+</div>
+</div>
+</div>
+<!-- Slide 17: Your Handouts -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Your Handouts &amp; Hands-On Lab</h2>
+<p class="slide-subtitle">Practice what we learned</p>
+</div>
+<div class="slide-content">
+<div class="handout-prompt">
+<div aria-hidden="true" class="handout-prompt-icon">📋</div>
+<div class="handout-prompt-text">Open the "Lock It Down Lab" — build a passphrase, lock your screen, clear browser data, open a private window, check a source, and review your desk setup.</div>
+</div>
+<div class="handout-prompt">
+<div aria-hidden="true" class="handout-prompt-icon">🗂️</div>
+<div class="handout-prompt-text">Keep the "Security &amp; Ergonomics Quick Reference" card at your desk for password rules, lock/clear-data steps, and ergonomics reminders.</div>
+</div>
+<div class="demo-box">
+<h3>🖥️ Let's Do It Together</h3>
+<p>We'll work through the lab step by step on your own computer. Raise your hand any time and I'll come help.</p>
+</div>
+</div>
+</div>
+<!-- Slide 18: Key Takeaways -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Key Takeaways</h2>
+<p class="slide-subtitle">What to remember from today</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🪪</div>
+<div class="key-point-text">
+<strong>Guard Your Identity</strong>
               Protect your PII, think before you post — the internet remembers
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🧭</div>
-            <div class="key-point-text">
-              <strong>Be a Smart Reader</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🧭</div>
+<div class="key-point-text">
+<strong>Be a Smart Reader</strong>
               Check that information is true, and do not feed the trolls — block, report, walk away
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔐</div>
-            <div class="key-point-text">
-              <strong>Lock It Down</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔐</div>
+<div class="key-point-text">
+<strong>Lock It Down</strong>
               Long passphrases, lock your screen (Windows + L), and clear data on shared computers
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">💚</div>
-            <div class="key-point-text">
-              <strong>Take Care of Yourself</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">💚</div>
+<div class="key-point-text">
+<strong>Take Care of Yourself</strong>
               Browse privately when it helps, take screen breaks, and set up a comfortable desk
             </div>
-          </div>
-          <div class="handout-prompt">
-            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
-            <div class="handout-prompt-text">Take your handouts home! They have step-by-step instructions for everything we covered.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 19: Completion -->
-      <div class="slide completion-slide">
-        <div class="completion-badge" aria-hidden="true"><span>🛡️</span></div>
-        <h2>Great Work!</h2>
-        <p>You can now manage your digital identity, respond wisely to bad content, protect your devices with strong passphrases, and stay healthy online. Next week is our Review &amp; Testing Day — you've got this!</p>
-      </div>
-    </div>
-
-    <!-- Navigation Footer -->
-    <div class="nav-footer">
-      <button class="nav-btn prev" id="prevBtn" disabled>
+</div>
+<div class="handout-prompt">
+<div aria-hidden="true" class="handout-prompt-icon">📋</div>
+<div class="handout-prompt-text">Take your handouts home! They have step-by-step instructions for everything we covered.</div>
+</div>
+</div>
+</div>
+<!-- Slide 19: Lesson Recap Video -->
+<!-- Slide 20: Completion -->
+<div class="slide completion-slide">
+<div aria-hidden="true" class="completion-badge"><span>🛡️</span></div>
+<h2>Great Work!</h2>
+<p>You can now manage your digital identity, respond wisely to bad content, protect your devices with strong passphrases, and stay healthy online. Next week is our Review &amp; Testing Day — you've got this!</p>
+</div>
+</div>
+<!-- Navigation Footer -->
+<div class="nav-footer">
+<button class="nav-btn prev" disabled="" id="prevBtn">
         ← Previous
       </button>
-      <span class="slide-counter">
+<span class="slide-counter">
         Slide <span id="currentSlide">1</span> of <span id="totalSlides">20</span>
-      </span>
-      <button class="nav-btn next" id="nextBtn">
+</span>
+<button class="nav-btn next" id="nextBtn">
         Next →
       </button>
-    </div>
-  </main>
-
-  <!-- Confetti Container -->
-  <div class="confetti" id="confetti"></div>
-
-  <script src="../../../../shared/progress.js"></script>
-  <script src="../../../../shared/glossary.js" defer></script>
-  <script>
+</div>
+</main>
+<!-- Confetti Container -->
+<div class="confetti" id="confetti"></div>
+<script src="../../../../shared/video-ids.js"></script>
+<script src="../../../../shared/progress.js"></script>
+<script defer="" src="../../../../shared/glossary.js"></script>
+<script>
     // Presentation State
     let currentSlide = 0;
     let fitFrame = 0;
@@ -1604,6 +1662,50 @@
         const activeSlide = slides[currentSlide];
         const heading = activeSlide ? activeSlide.querySelector('h2') : null;
         announce.textContent = heading ? heading.textContent.trim() : '';
+      }
+
+      // Stop any playing video when navigating away
+      slides.forEach((slide, index) => {
+        if (index !== currentSlide) {
+          const iframe = slide.querySelector('.video-wrapper iframe');
+          if (iframe) {
+            const currentSrc = iframe.src;
+            iframe.src = '';
+            iframe.src = currentSrc;
+          }
+        }
+      });
+
+      // Lazy load YouTube iframe when video slide becomes active
+      const videoSlide = slides[currentSlide];
+      if (videoSlide) {
+        const wrapper = videoSlide.querySelector('.video-wrapper');
+        if (wrapper && !wrapper.querySelector('iframe') && !wrapper.querySelector('.video-fallback-card')) {
+          const videoId = window.VUB_VIDEO_IDS?.week4;
+          const isConfigured = videoId && videoId !== "REPLACE_WITH_WEEK4_VIDEO_ID";
+          const isOnline = navigator.onLine;
+
+          if (isConfigured && isOnline) {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            iframe.title = "Lesson Recap Video";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
+            wrapper.appendChild(iframe);
+          } else {
+            const fallback = document.createElement('div');
+            fallback.className = 'video-fallback-card';
+            fallback.innerHTML = `
+              <div class="video-fallback-icon" aria-hidden="true">📺</div>
+              <h3>Video Recap Offline or Unconfigured</h3>
+              <p style="margin: 0.5rem 0 1rem;">
+                \${!isConfigured ? 'The video link has not been configured in shared/video-ids.js yet.' : 'To watch this video recap, please check your internet connection.'}
+              </p>
+              <p style="font-size: 0.9rem; opacity: 0.85;">You can continue reading the slides normally.</p>
+            `;
+            wrapper.appendChild(fallback);
+          }
+        }
       }
 
       scheduleSlideFit();
@@ -1787,6 +1889,6 @@
       }
     }
   </script>
-  <script src="/shared/text-size.js" defer></script>
+<script defer="" src="/shared/text-size.js"></script>
 </body>
 </html>

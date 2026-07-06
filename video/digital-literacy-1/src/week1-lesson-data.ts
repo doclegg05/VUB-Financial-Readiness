@@ -25,7 +25,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w1l-01.mp3',
-    durationInFrames: Math.max(90, Math.ceil(55 / 2.2 * 30) + 75),
+    durationInFrames: 464,
     heading: 'The machine in front of you.',
     subtitle: 'Nobody is born knowing this — by the end you’ll know what each part does.',
   },
@@ -33,7 +33,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w1l-02.mp3',
-    durationInFrames: Math.max(90, Math.ceil(78 / 2.2 * 30) + 75),
+    durationInFrames: 611,
     kicker: 'Week 1 · Objectives',
     heading: 'Today you’ll be able to…',
     objectives: [
@@ -47,7 +47,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w1l-03.mp3',
-    durationInFrames: Math.max(90, Math.ceil(34 / 2.2 * 30) + 75),
+    durationInFrames: 237,
     kicker: 'Chapter 1',
     heading: 'Devices & Hardware',
     subtitle: 'The pieces you can touch — and the few simple groups they fall into.',
@@ -56,7 +56,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w1l-04.mp3',
-    durationInFrames: Math.max(90, Math.ceil(82 / 2.2 * 30) + 75),
+    durationInFrames: 857,
     heading: 'Input vs. Output',
     columns: [
       {
@@ -76,7 +76,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'uiCallout',
     audio: 'w1l-05.mp3',
-    durationInFrames: Math.max(90, Math.ceil(102 / 2.2 * 30) + 75),
+    durationInFrames: 1059,
     heading: 'USB · HDMI · Ethernet · Power',
     callouts: [
       { label: 'USB', note: 'The most common plug. A-flat rectangle or C-small oval (fits either way).' },
@@ -90,7 +90,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w1l-06.mp3',
-    durationInFrames: Math.max(90, Math.ceil(78 / 2.2 * 30) + 75),
+    durationInFrames: 914,
     heading: 'Same idea, different sizes',
     columns: [
       { icon: '🖥️', title: 'Desktop', lines: ['Stays on a desk', 'Separate pieces', 'Easy to repair'] },
@@ -103,7 +103,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w1l-07.mp3',
-    durationInFrames: Math.max(90, Math.ceil(54 / 2.2 * 30) + 75),
+    durationInFrames: 491,
     kicker: 'Lab · Part 1',
     heading: 'You’ll practice this in the lab.',
     subtitle: 'Find the Ports & Devices — name one input and one output. You’ll only look, never unplug.',
@@ -112,7 +112,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w1l-08.mp3',
-    durationInFrames: Math.max(90, Math.ceil(44 / 2.2 * 30) + 75),
+    durationInFrames: 345,
     kicker: 'Chapter 2',
     heading: 'Inside the Box',
     subtitle: 'You don’t have to memorize this — but three parts do the real work.',
@@ -121,7 +121,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w1l-09.mp3',
-    durationInFrames: Math.max(90, Math.ceil(58 / 2.2 * 30) + 75),
+    durationInFrames: 671,
     heading: 'The three parts that do the work',
     columns: [
       { icon: '⚙️', title: 'CPU', lines: ['The “brain”', 'Does the thinking', 'Runs your programs'] },
@@ -133,7 +133,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w1l-10.mp3',
-    durationInFrames: Math.max(90, Math.ceil(102 / 2.2 * 30) + 75),
+    durationInFrames: 926,
     heading: 'Memory vs. Storage',
     columns: [
       {
@@ -152,7 +152,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w1l-11.mp3',
-    durationInFrames: Math.max(90, Math.ceil(50 / 2.2 * 30) + 75),
+    durationInFrames: 438,
     kicker: 'Lab · Part 2',
     heading: 'You’ll practice this in the lab.',
     subtitle: 'How Much Memory & Storage? Open Settings and This PC to read your own numbers.',
@@ -161,7 +161,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w1l-12.mp3',
-    durationInFrames: Math.max(90, Math.ceil(34 / 2.2 * 30) + 75),
+    durationInFrames: 283,
     kicker: 'Chapter 3',
     heading: 'Software',
     subtitle: 'Hardware is what you touch — software is what it runs.',
@@ -170,7 +170,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w1l-13.mp3',
-    durationInFrames: Math.max(90, Math.ceil(78 / 2.2 * 30) + 75),
+    durationInFrames: 859,
     heading: 'Two kinds of software',
     columns: [
       {
@@ -189,7 +189,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w1l-14.mp3',
-    durationInFrames: Math.max(90, Math.ceil(82 / 2.2 * 30) + 75),
+    durationInFrames: 920,
     heading: 'Paid vs. Free — both are safe',
     columns: [
       {
@@ -208,7 +208,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'steps',
     audio: 'w1l-15.mp3',
-    durationInFrames: Math.max(90, Math.ceil(108 / 2.2 * 30) + 75),
+    durationInFrames: 1049,
     heading: 'Install safely — where matters most',
     steps: [
       { label: 'Use a trusted source', note: 'The Microsoft Store, or the maker’s official site (microsoft.com).' },
@@ -221,7 +221,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w1l-16.mp3',
-    durationInFrames: Math.max(90, Math.ceil(40 / 2.2 * 30) + 75),
+    durationInFrames: 392,
     kicker: 'Lab · Part 3',
     heading: 'You’ll practice this in the lab.',
     subtitle: 'Which Apps Are Installed? Open the Start menu and spot the apps already on your PC.',
@@ -230,7 +230,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w1l-17.mp3',
-    durationInFrames: Math.max(90, Math.ceil(34 / 2.2 * 30) + 75),
+    durationInFrames: 275,
     kicker: 'Chapter 4',
     heading: 'Operating Systems',
     subtitle: 'The master program that runs the whole computer.',
@@ -239,7 +239,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'uiCallout',
     audio: 'w1l-18.mp3',
-    durationInFrames: Math.max(90, Math.ceil(74 / 2.2 * 30) + 75),
+    durationInFrames: 712,
     heading: 'The OS runs everything.',
     callouts: [
       { label: 'Starts at power-on', note: 'And stays running the whole time.' },
@@ -252,7 +252,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w1l-19.mp3',
-    durationInFrames: Math.max(90, Math.ceil(96 / 2.2 * 30) + 75),
+    durationInFrames: 949,
     heading: 'Windows · macOS · Mobile',
     columns: [
       {
@@ -272,7 +272,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w1l-20.mp3',
-    durationInFrames: Math.max(90, Math.ceil(48 / 2.2 * 30) + 75),
+    durationInFrames: 399,
     kicker: 'Lab · Part 4',
     heading: 'You’ll practice this in the lab.',
     subtitle: 'Which Operating System? Find your Windows version on the About page — reading it can’t break a thing.',
@@ -281,7 +281,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'question',
     audio: 'w1l-21.mp3',
-    durationInFrames: Math.max(90, Math.ceil(54 / 2.2 * 30) + 75),
+    durationInFrames: 469,
     heading: 'Which of these is an input device?',
     question: 'Which of these is an input device?',
     answer: 'A keyboard.',
@@ -291,7 +291,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'question',
     audio: 'w1l-22.mp3',
-    durationInFrames: Math.max(90, Math.ceil(52 / 2.2 * 30) + 75),
+    durationInFrames: 512,
     heading: 'Memory (RAM) vs. storage (the drive)?',
     question: 'Memory (RAM) vs. storage (the drive)?',
     answer: 'RAM is short-term; storage is long-term.',
@@ -301,7 +301,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'question',
     audio: 'w1l-23.mp3',
-    durationInFrames: Math.max(90, Math.ceil(42 / 2.2 * 30) + 75),
+    durationInFrames: 352,
     heading: 'Safest place to download a program?',
     question: 'Safest place to download a program?',
     answer: 'From a trusted source.',
@@ -311,7 +311,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w1l-24.mp3',
-    durationInFrames: Math.max(90, Math.ceil(92 / 2.2 * 30) + 75),
+    durationInFrames: 860,
     kicker: 'Recap',
     heading: 'What to remember',
     objectives: [
@@ -326,7 +326,7 @@ export const WEEK1_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w1l-25.mp3',
-    durationInFrames: Math.max(90, Math.ceil(82 / 2.2 * 30) + 75),
+    durationInFrames: 647,
     heading: 'You did it.',
     subtitle: 'You can name the parts, tell memory from storage, understand software, and know the operating systems. Next week: getting online.',
   },

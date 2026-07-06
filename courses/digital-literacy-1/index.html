@@ -87,8 +87,18 @@
     }
 
     .hero-inner {
-      max-width: 1120px;
+      max-width: 1260px;
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(2rem, 4vw, 3rem);
+      align-items: center;
+    }
+
+    @media (min-width: 850px) {
+      .hero-inner {
+        grid-template-columns: 1fr 1.45fr;
+      }
     }
 
     .eyebrow {
@@ -498,9 +508,17 @@
 
   <section class="hero">
     <div class="hero-inner">
-      <span class="eyebrow">Digital Literacy — Level 1</span>
-      <h1>Select the weekly lesson.</h1>
-      <p>A five-week foundation in digital literacy, aligned to the IC3 GS6 Level 1 objectives — four lesson weeks plus a review &amp; testing day. Open the presentation for the week you are teaching or attending, with syllabi and hands-on labs close by.</p>
+      <div>
+        <span class="eyebrow">Digital Literacy — Level 1</span>
+        <h1>Select the weekly lesson.</h1>
+        <p>A five-week foundation in digital literacy, aligned to the IC3 GS6 Level 1 objectives — four lesson weeks plus a review &amp; testing day. Open the presentation for the week you are teaching or attending, with syllabi and hands-on labs close by.</p>
+      </div>
+      <!-- Video Player Container (Shown only when intro video is configured) -->
+      <div class="video-container-wrap" style="display: none; width: 100%;" id="videoContainerWrap">
+        <div class="video-wrapper" style="width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4); background: #000; position: relative;">
+          <iframe id="introVideoIframe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" src="" title="Course Introduction Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -704,6 +722,18 @@
         }
       });
     })();
+  </script>
+  <script src="/shared/video-ids.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const videoId = window.VUB_VIDEO_IDS?.intro;
+      const iframe = document.getElementById('introVideoIframe');
+      const container = document.getElementById('videoContainerWrap');
+      if (videoId && videoId !== 'REPLACE_WITH_INTRO_VIDEO_ID' && iframe && container) {
+        iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+        container.style.display = 'block';
+      }
+    });
   </script>
   <script src="/shared/text-size.js" defer></script>
 </body>
