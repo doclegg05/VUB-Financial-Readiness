@@ -55,9 +55,17 @@
       flex-direction: column;
       position: fixed;
       height: 100vh;
-      overflow: hidden;
+      overflow-y: auto;
       z-index: 100;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.25) rgba(0,0,0,0.15);
     }
+
+    /* Independent slide-selector scroll: the sidebar scrolls on its own without affecting the displayed slide */
+    .sidebar::-webkit-scrollbar { width: 8px; }
+    .sidebar::-webkit-scrollbar-track { background: rgba(0,0,0,0.15); }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 4px; }
+    .sidebar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
 
     .logo {
       display: block;
@@ -1541,9 +1549,7 @@
       slideLinks.forEach((link) => {
         const targetSlide = parseInt(link.dataset.slide, 10);
         link.classList.toggle('active', targetSlide === currentSlide);
-        if (targetSlide < currentSlide) {
-          link.classList.add('completed');
-        }
+        link.classList.toggle('completed', targetSlide < currentSlide);
       });
 
       prevBtn.disabled = currentSlide === 0;

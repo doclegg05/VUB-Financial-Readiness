@@ -55,9 +55,17 @@
       flex-direction: column;
       position: fixed;
       height: 100vh;
-      overflow: hidden;
+      overflow-y: auto;
       z-index: 100;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.25) rgba(0,0,0,0.15);
     }
+
+    /* Independent slide-selector scroll: the sidebar scrolls on its own without affecting the displayed slide */
+    .sidebar::-webkit-scrollbar { width: 8px; }
+    .sidebar::-webkit-scrollbar-track { background: rgba(0,0,0,0.15); }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 4px; }
+    .sidebar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
 
     .logo {
       display: block;
@@ -1259,7 +1267,7 @@
 <div class="slide-content">
 <div class="review-question">
             Quick fire: (1) Copy shortcut? (2) Paste shortcut? (3) Undo shortcut?
-            (4) The "www" you type to reach a website is called the…? (5) A secret word that protects an account is a…?
+            (4) The full web address you type to reach a website is called the…? (5) A secret word that protects an account is a…?
           </div>
 <button aria-controls="reveal-a11" aria-expanded="false" class="reveal-btn" data-reveal="" type="button">
             Reveal answers
@@ -1435,9 +1443,7 @@
       slideLinks.forEach((link) => {
         const targetSlide = parseInt(link.dataset.slide, 10);
         link.classList.toggle('active', targetSlide === currentSlide);
-        if (targetSlide < currentSlide) {
-          link.classList.add('completed');
-        }
+        link.classList.toggle('completed', targetSlide < currentSlide);
       });
 
       prevBtn.disabled = currentSlide === 0;
@@ -1605,7 +1611,7 @@
     document.querySelectorAll('[data-reveal]').forEach(btn => {
       const originalLabel = btn.textContent.trim();
       btn.addEventListener('click', () => {
-        const answer = btn.nextElementSibling;
+        const answer = document.getElementById(btn.getAttribute('aria-controls'));
         if (!answer) return;
         const isHidden = answer.hasAttribute('hidden');
         if (isHidden) {
