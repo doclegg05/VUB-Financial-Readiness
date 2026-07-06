@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Week 3: Creating & Communicating | VUB Digital Literacy — Level 1</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Week 3: Creating &amp; Communicating | VUB Digital Literacy — Level 1</title>
+<style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
@@ -51,9 +55,17 @@
       flex-direction: column;
       position: fixed;
       height: 100vh;
-      overflow: hidden;
+      overflow-y: auto;
       z-index: 100;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.25) rgba(0,0,0,0.15);
     }
+
+    /* Independent slide-selector scroll: the sidebar scrolls on its own without affecting the displayed slide */
+    .sidebar::-webkit-scrollbar { width: 8px; }
+    .sidebar::-webkit-scrollbar-track { background: rgba(0,0,0,0.15); }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 4px; }
+    .sidebar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
 
     .logo {
       display: block;
@@ -759,685 +771,740 @@
       .slide-counter { order: -1; flex: 0 0 100%; text-align: center; font-size: 0.85rem; white-space: nowrap; }
       .two-column { grid-template-columns: 1fr; }
     }
-  </style>
+
+    /* YouTube Embed Styles */
+    .video-slide-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .video-wrapper {
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      background: #000;
+      position: relative;
+      margin: 1rem 0;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-fallback-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem;
+      border: 2px dashed rgba(27, 54, 93, 0.3);
+      border-radius: 12px;
+      background: #fffbef;
+      color: #4a4327;
+      text-align: center;
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+    .video-fallback-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+  
+    /* Premium Sidebar Scrollbar styling */
+    .sidebar-scroll-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      padding-right: 0.25rem;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+</style>
 </head>
 <body>
-  <!-- Sidebar Navigation -->
-  <nav class="sidebar" aria-label="Lesson chapters">
-    <a class="logo" href="/courses/digital-literacy-1/index.html" aria-label="Back to the Digital Literacy — Level 1 dashboard">
-      <img class="logo-img" src="/assets/vub-seal-white.png" alt="VUB" width="56" height="56">
-      <h2>VUB Digital Literacy</h2>
-      <p>Level 1 · IC3 GS6 Aligned</p>
-    </a>
+<!-- Sidebar Navigation -->
+<nav aria-label="Lesson chapters" class="sidebar">
+<a aria-label="Back to the Digital Literacy — Level 1 dashboard" class="logo" href="/courses/digital-literacy-1/index.html">
+<img alt="VUB" class="logo-img" height="56" src="/assets/vub-seal-white.png" width="56"/>
+<h2>VUB Digital Literacy</h2>
+<p>Level 1 · IC3 GS6 Aligned</p>
+</a>
+<div class="week-indicator">
+<div class="week-num">Week 3</div>
+<div class="week-title">Creating &amp; Communicating</div>
+</div><div class="sidebar-scroll-container"><div aria-labelledby="ch-documents" class="chapter" role="group">
+<div class="chapter-title" id="ch-documents">Documents &amp; Files</div>
+<div class="chapter-slides">
+<button class="slide-link active" data-slide="0" type="button">Welcome &amp; Overview</button><button class="slide-link" data-slide="1" type="button">Lesson Recap Video</button>
+<button class="slide-link" data-slide="2" type="button">Learning Objectives</button>
+<button class="slide-link" data-slide="3" type="button">Create a Document</button>
+<button class="slide-link" data-slide="4" type="button">Create a Presentation</button>
+<button class="slide-link" data-slide="5" type="button">Giving Credit (Referencing)</button>
+<button class="slide-link" data-slide="6" type="button">Adding a Citation</button>
+<button class="slide-link" data-slide="7" type="button">Save &amp; Back Up Your Work</button>
+<button class="slide-link" data-slide="8" type="button">Naming &amp; Organizing Files</button>
+</div>
+</div><div aria-labelledby="ch-printing" class="chapter" role="group">
+<div class="chapter-title" id="ch-printing">Printing</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="9" type="button">Orientation &amp; Double-Sided</button>
+<button class="slide-link" data-slide="10" type="button">Print Settings &amp; Methods</button>
+</div>
+</div><div aria-labelledby="ch-communication" class="chapter" role="group">
+<div class="chapter-title" id="ch-communication">Communication</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="11" type="button">Where &amp; How to Post</button>
+<button class="slide-link" data-slide="12" type="button">Using Inclusive Language</button>
+<button class="slide-link" data-slide="13" type="button">Email: Reply, Reply All &amp; More</button>
+<button class="slide-link" data-slide="14" type="button">Effective vs. Ineffective</button>
+</div>
+</div><div aria-labelledby="ch-collaboration" class="chapter" role="group">
+<div class="chapter-title" id="ch-collaboration">Collaboration</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="15" type="button">Working Together Online</button>
+<button class="slide-link" data-slide="16" type="button">Digital Etiquette</button>
+</div>
+</div><div aria-labelledby="ch-wrap-up" class="chapter" role="group">
+<div class="chapter-title" id="ch-wrap-up">Wrap-Up</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="17" type="button">Knowledge Check</button>
+<button class="slide-link" data-slide="18" type="button">Your Handouts &amp; Summary</button>
+<button class="slide-link" data-slide="19" type="button">Great Work!</button>
+</div>
+</div><div class="resources-section">
+<div class="resources-title">Resources</div>
+<a class="resource-link" href="handouts/make-save-share-lab.html" target="_blank">Make, Save &amp; Share Lab</a>
+<a class="resource-link" href="handouts/files-print-email-quick-reference.html" target="_blank">Files, Print &amp; Email Quick Reference</a>
+</div></div>
 
-    <div class="week-indicator">
-      <div class="week-num">Week 3</div>
-      <div class="week-title">Creating &amp; Communicating</div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-documents">
-      <div class="chapter-title" id="ch-documents">Documents &amp; Files</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link active" data-slide="0">Welcome &amp; Overview</button>
-        <button type="button" class="slide-link" data-slide="1">Learning Objectives</button>
-        <button type="button" class="slide-link" data-slide="2">Create a Document</button>
-        <button type="button" class="slide-link" data-slide="3">Create a Presentation</button>
-        <button type="button" class="slide-link" data-slide="4">Giving Credit (Referencing)</button>
-        <button type="button" class="slide-link" data-slide="5">Adding a Citation</button>
-        <button type="button" class="slide-link" data-slide="6">Save &amp; Back Up Your Work</button>
-        <button type="button" class="slide-link" data-slide="7">Naming &amp; Organizing Files</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-printing">
-      <div class="chapter-title" id="ch-printing">Printing</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="8">Orientation &amp; Double-Sided</button>
-        <button type="button" class="slide-link" data-slide="9">Print Settings &amp; Methods</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-communication">
-      <div class="chapter-title" id="ch-communication">Communication</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="10">Where &amp; How to Post</button>
-        <button type="button" class="slide-link" data-slide="11">Using Inclusive Language</button>
-        <button type="button" class="slide-link" data-slide="12">Email: Reply, Reply All &amp; More</button>
-        <button type="button" class="slide-link" data-slide="13">Effective vs. Ineffective</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-collaboration">
-      <div class="chapter-title" id="ch-collaboration">Collaboration</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="14">Working Together Online</button>
-        <button type="button" class="slide-link" data-slide="15">Digital Etiquette</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-wrap-up">
-      <div class="chapter-title" id="ch-wrap-up">Wrap-Up</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="16">Knowledge Check</button>
-        <button type="button" class="slide-link" data-slide="17">Your Handouts &amp; Summary</button>
-        <button type="button" class="slide-link" data-slide="18">Great Work!</button>
-      </div>
-    </div>
-
-    <div class="resources-section">
-      <div class="resources-title">Resources</div>
-      <a class="resource-link" href="handouts/make-save-share-lab.html" target="_blank">Make, Save &amp; Share Lab</a>
-      <a class="resource-link" href="handouts/files-print-email-quick-reference.html" target="_blank">Files, Print &amp; Email Quick Reference</a>
-    </div>
-
-    <div class="progress-section">
-      <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Lesson progress">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
-    </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <h1 class="sr-only">Week 3: Creating &amp; Communicating</h1>
-    <div id="slide-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-    <div class="slides-container">
-      <!-- Slide 0: Title -->
-      <div class="slide active title-slide">
-        <div class="slide-icon" aria-hidden="true">✍️</div>
-        <h2 class="slide-title">Creating &amp; Communicating</h2>
-        <p class="slide-subtitle">Documents, files, printing, email &amp; teamwork</p>
-        <p class="course-info">Week 3 of 5 · VUB Digital Literacy — Level 1</p>
-      </div>
-
-      <!-- Slide 1: Learning Objectives -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Today's Learning Objectives</h2>
-          <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📄</div>
-            <div class="key-point-text">
-              <strong>Create &amp; Save Work</strong>
+<div class="progress-section">
+<div aria-label="Lesson progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="progress-bar" id="progressBar" role="progressbar">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+<div class="progress-text"><span id="progressText">0</span>% Complete</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="main-content">
+<h1 class="sr-only">Week 3: Creating &amp; Communicating</h1>
+<div aria-atomic="true" aria-live="polite" class="sr-only" id="slide-announce"></div>
+<div class="slides-container">
+<!-- Slide 0: Title -->
+<div class="slide active title-slide">
+<div aria-hidden="true" class="slide-icon">✍️</div>
+<h2 class="slide-title">Creating &amp; Communicating</h2>
+<p class="slide-subtitle">Documents, files, printing, email &amp; teamwork</p>
+<p class="course-info">Week 3 of 5 · VUB Digital Literacy — Level 1</p>
+</div><div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Lesson Recap Video</h2>
+<p class="slide-subtitle">Watch a video summary of this week's lesson</p>
+</div>
+<div class="slide-content video-slide-content">
+<div class="video-wrapper" id="videoWrapperWeek3">
+<!-- Dynamic iframe injected via JS or fallback card -->
+</div>
+<p style="margin-top: 1rem; font-size: 0.95rem; color: var(--gray); text-align: center;">
+            Note: Watching this video requires an internet connection.
+          </p>
+</div>
+</div>
+<!-- Slide 1: Learning Objectives -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Today's Learning Objectives</h2>
+<p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📄</div>
+<div class="key-point-text">
+<strong>Create &amp; Save Work</strong>
               Make a basic document and presentation, then name, save, and back it up
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔖</div>
-            <div class="key-point-text">
-              <strong>Give Proper Credit</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔖</div>
+<div class="key-point-text">
+<strong>Give Proper Credit</strong>
               Reference your sources and add a simple citation
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🖨️</div>
-            <div class="key-point-text">
-              <strong>Print With Confidence</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🖨️</div>
+<div class="key-point-text">
+<strong>Print With Confidence</strong>
               Choose orientation, double-sided, and the right print settings
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">💬</div>
-            <div class="key-point-text">
-              <strong>Communicate &amp; Collaborate</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">💬</div>
+<div class="key-point-text">
+<strong>Communicate &amp; Collaborate</strong>
               Post respectfully, use email reply options correctly, and work well with others
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 2: Create a Document (4.1.1) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Creating a Basic Document</h2>
-          <p class="slide-subtitle">Microsoft Word — the everyday writing tool</p>
-        </div>
-        <div class="slide-content">
-          <p>A <strong>word processor</strong> like Microsoft Word lets you write letters, lists, and notes — then change them anytime.</p>
-          <ol class="steps-list">
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Open Word</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">Press the Windows key, type "Word," and press Enter. Choose "Blank document."</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Type your text</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">The blinking cursor shows where your words will appear.</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Make it look good</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">Use the <strong>Home</strong> tab to make text <strong>Bold</strong>, change the size, or center it.</span>
-            </li>
-          </ol>
-          <div class="info-box success">
-            <div class="info-box-title">You're already halfway there</div>
-            <div class="info-box-content">If you can type, you can make a document. The buttons just change how it looks.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3: Create a Presentation (4.1.2) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Creating a Basic Presentation</h2>
-          <p class="slide-subtitle">Microsoft PowerPoint — one idea per slide</p>
-        </div>
-        <div class="slide-content">
-          <p>A <strong>presentation</strong> is a stack of "slides." Each slide holds a short headline and a few points — like the screen you're reading now.</p>
-          <div class="two-column">
-            <div class="column">
-              <h3>How to Build One</h3>
-              <ul>
-                <li>Open PowerPoint, choose "Blank"</li>
-                <li>Click in the title box, type a headline</li>
-                <li>Click "New Slide" to add another</li>
-                <li>Add pictures from the <strong>Insert</strong> tab</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>Keep Slides Simple</h3>
-              <ul>
-                <li>One main idea per slide</li>
-                <li>Large text — easy to read</li>
-                <li>A few words, not paragraphs</li>
-                <li>A picture is worth many words</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 4: Referencing & Attribution (4.2.1-4.2.3) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Giving Credit to Your Sources</h2>
-          <p class="slide-subtitle">Referencing and attribution</p>
-        </div>
-        <div class="slide-content">
-          <p><strong>Referencing</strong> means telling your reader where you got your information. <strong>Attribution</strong> means naming the person or place it came from.</p>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🤝</div>
-            <div class="key-point-text">
-              <strong>Why it matters</strong>
+</div>
+</div>
+</div>
+<!-- Slide 2: Create a Document (4.1.1) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Creating a Basic Document</h2>
+<p class="slide-subtitle">Microsoft Word — the everyday writing tool</p>
+</div>
+<div class="slide-content">
+<p>A <strong>word processor</strong> like Microsoft Word lets you write letters, lists, and notes — then change them anytime.</p>
+<ol class="steps-list">
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Open Word</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">Press the Windows key, type "Word," and press Enter. Choose "Blank document."</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Type your text</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">The blinking cursor shows where your words will appear.</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Make it look good</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">Use the <strong>Home</strong> tab to make text <strong>Bold</strong>, change the size, or center it.</span>
+</li>
+</ol>
+<div class="info-box success">
+<div class="info-box-title">You're already halfway there</div>
+<div class="info-box-content">If you can type, you can make a document. The buttons just change how it looks.</div>
+</div>
+</div>
+</div>
+<!-- Slide 3: Create a Presentation (4.1.2) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Creating a Basic Presentation</h2>
+<p class="slide-subtitle">Microsoft PowerPoint — one idea per slide</p>
+</div>
+<div class="slide-content">
+<p>A <strong>presentation</strong> is a stack of "slides." Each slide holds a short headline and a few points — like the screen you're reading now.</p>
+<div class="two-column">
+<div class="column">
+<h3>How to Build One</h3>
+<ul>
+<li>Open PowerPoint, choose "Blank"</li>
+<li>Click in the title box, type a headline</li>
+<li>Click "New Slide" to add another</li>
+<li>Add pictures from the <strong>Insert</strong> tab</li>
+</ul>
+</div>
+<div class="column">
+<h3>Keep Slides Simple</h3>
+<ul>
+<li>One main idea per slide</li>
+<li>Large text — easy to read</li>
+<li>A few words, not paragraphs</li>
+<li>A picture is worth many words</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 4: Referencing & Attribution (4.2.1-4.2.3) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Giving Credit to Your Sources</h2>
+<p class="slide-subtitle">Referencing and attribution</p>
+</div>
+<div class="slide-content">
+<p><strong>Referencing</strong> means telling your reader where you got your information. <strong>Attribution</strong> means naming the person or place it came from.</p>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🤝</div>
+<div class="key-point-text">
+<strong>Why it matters</strong>
               It's honest, it gives credit to the original author, and it lets your reader check the facts for themselves.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔎</div>
-            <div class="key-point-text">
-              <strong>Where to find the details</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔎</div>
+<div class="key-point-text">
+<strong>Where to find the details</strong>
               Look on the webpage or document for the author's name, the title, the website, and the date.
             </div>
-          </div>
-          <div class="info-box warning">
-            <div class="info-box-title">Avoid plagiarism</div>
-            <div class="info-box-content">Copying someone's words or pictures without credit is called plagiarism. Always say where it came from.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 5: Citations (4.2.4) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Adding a Simple Citation</h2>
-          <p class="slide-subtitle">A short note that credits the source</p>
-        </div>
-        <div class="slide-content">
-          <p>A <strong>citation</strong> is a short line that names your source. A basic one includes the author, the title, the website, and the date you found it.</p>
-          <div class="info-box">
-            <div class="info-box-title">Example citation</div>
-            <div class="info-box-content" style="font-family: monospace; font-size: 1rem;">
+</div>
+<div class="info-box warning">
+<div class="info-box-title">Avoid plagiarism</div>
+<div class="info-box-content">Copying someone's words or pictures without credit is called plagiarism. Always say where it came from.</div>
+</div>
+</div>
+</div>
+<!-- Slide 5: Citations (4.2.4) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Adding a Simple Citation</h2>
+<p class="slide-subtitle">A short note that credits the source</p>
+</div>
+<div class="slide-content">
+<p>A <strong>citation</strong> is a short line that names your source. A basic one includes the author, the title, the website, and the date you found it.</p>
+<div class="info-box">
+<div class="info-box-title">Example citation</div>
+<div class="info-box-content" style="font-family: monospace; font-size: 1rem;">
               U.S. Department of Veterans Affairs. "VA Health Care." va.gov. Accessed June 24, 2026.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">💡</div>
-            <div class="key-point-text">
-              <strong>An easy way in Word</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">💡</div>
+<div class="key-point-text">
+<strong>An easy way in Word</strong>
               Word has a <strong>References</strong> tab. Click "Insert Citation" to add a source and let Word format it for you.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 6: Save & Back Up (4.3.1) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Save &amp; Back Up Your Work</h2>
-          <p class="slide-subtitle">Don't lose what you worked hard to make</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">💾</div>
-            <div class="key-point-text">
-              <strong>Save early, save often</strong>
+</div>
+</div>
+</div>
+<!-- Slide 6: Save & Back Up (4.3.1) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Save &amp; Back Up Your Work</h2>
+<p class="slide-subtitle">Don't lose what you worked hard to make</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">💾</div>
+<div class="key-point-text">
+<strong>Save early, save often</strong>
               Press <strong>Ctrl + S</strong> the moment you start, and again every few minutes.
             </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">The 3-2-1 backup idea</div>
-            <div class="info-box-content">
-              <ul style="margin-top: 0.5rem;">
-                <li><strong>3</strong> copies of anything important</li>
-                <li><strong>2</strong> different places (for example, your PC and a USB drive)</li>
-                <li><strong>1</strong> copy somewhere away from home (like the cloud)</li>
-              </ul>
-            </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">☁️</div>
-            <div class="key-point-text">
-              <strong>Where to keep copies</strong>
+</div>
+<div class="info-box">
+<div class="info-box-title">The 3-2-1 backup idea</div>
+<div class="info-box-content">
+<ul style="margin-top: 0.5rem;">
+<li><strong>3</strong> copies of anything important</li>
+<li><strong>2</strong> different places (for example, your PC and a USB drive)</li>
+<li><strong>1</strong> copy somewhere away from home (like the cloud)</li>
+</ul>
+</div>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">☁️</div>
+<div class="key-point-text">
+<strong>Where to keep copies</strong>
               On your computer, on a USB flash drive, and in cloud storage like OneDrive or Google Drive.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 7: File Management & Naming (4.3.2) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Naming &amp; Organizing Files</h2>
-          <p class="slide-subtitle">A good name today saves a search tomorrow</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>✅ Good File Names</h3>
-              <ul>
-                <li>VA-Benefits-Letter-2026-06.docx</li>
-                <li>Grocery-Budget-March.xlsx</li>
-                <li>Resume-John-Smith.docx</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>❌ Hard to Find Later</h3>
-              <ul>
-                <li>Document1.docx</li>
-                <li>untitled.docx</li>
-                <li>asdf.docx</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">Naming tips</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 7: File Management & Naming (4.3.2) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Naming &amp; Organizing Files</h2>
+<p class="slide-subtitle">A good name today saves a search tomorrow</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>✅ Good File Names</h3>
+<ul>
+<li>VA-Benefits-Letter-2026-06.docx</li>
+<li>Grocery-Budget-March.xlsx</li>
+<li>Resume-John-Smith.docx</li>
+</ul>
+</div>
+<div class="column">
+<h3>❌ Hard to Find Later</h3>
+<ul>
+<li>Document1.docx</li>
+<li>untitled.docx</li>
+<li>asdf.docx</li>
+</ul>
+</div>
+</div>
+<div class="info-box success">
+<div class="info-box-title">Naming tips</div>
+<div class="info-box-content">
               Use words you'll remember. Add the date as <strong>YEAR-MONTH</strong> so files sort in order. Put related files in <strong>folders</strong> (like "VA Documents").
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 8: Printing — orientation & double-sided (4.4.1-4.4.2) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Printing: Orientation &amp; Sides</h2>
-          <p class="slide-subtitle">Two choices that change how your page looks</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>📄 Portrait vs. Landscape</h3>
-              <ul>
-                <li><strong>Portrait</strong> — tall, like a letter. The usual choice.</li>
-                <li><strong>Landscape</strong> — wide, like a calendar. Good for wide tables or photos.</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>🔁 One-Sided vs. Two-Sided</h3>
-              <ul>
-                <li><strong>Single-sided</strong> — one page per sheet.</li>
-                <li><strong>Double-sided</strong> — prints on both sides. Saves paper.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Where to find these</div>
-            <div class="info-box-content">Press <strong>Ctrl + P</strong> to open the print screen. Orientation and "Print on Both Sides" are in the list of options on the left.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 9: Print settings & methods (4.4.3-4.4.4) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Print Settings &amp; Methods</h2>
-          <p class="slide-subtitle">Get exactly the pages you want</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">⚙️</div>
-            <div class="key-point-text">
-              <strong>Common settings</strong>
+</div>
+</div>
+</div>
+<!-- Slide 8: Printing — orientation & double-sided (4.4.1-4.4.2) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Printing: Orientation &amp; Sides</h2>
+<p class="slide-subtitle">Two choices that change how your page looks</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>📄 Portrait vs. Landscape</h3>
+<ul>
+<li><strong>Portrait</strong> — tall, like a letter. The usual choice.</li>
+<li><strong>Landscape</strong> — wide, like a calendar. Good for wide tables or photos.</li>
+</ul>
+</div>
+<div class="column">
+<h3>🔁 One-Sided vs. Two-Sided</h3>
+<ul>
+<li><strong>Single-sided</strong> — one page per sheet.</li>
+<li><strong>Double-sided</strong> — prints on both sides. Saves paper.</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-box-title">Where to find these</div>
+<div class="info-box-content">Press <strong>Ctrl + P</strong> to open the print screen. Orientation and "Print on Both Sides" are in the list of options on the left.</div>
+</div>
+</div>
+</div>
+<!-- Slide 9: Print settings & methods (4.4.3-4.4.4) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Print Settings &amp; Methods</h2>
+<p class="slide-subtitle">Get exactly the pages you want</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">⚙️</div>
+<div class="key-point-text">
+<strong>Common settings</strong>
               Pick the <strong>printer</strong>, the number of <strong>copies</strong>, which <strong>pages</strong> (all or just "1-3"), and <strong>color or black-and-white</strong>.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔍</div>
-            <div class="key-point-text">
-              <strong>Always check Print Preview</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔍</div>
+<div class="key-point-text">
+<strong>Always check Print Preview</strong>
               The preview on the right shows the page before it prints — catch mistakes and save paper.
             </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Ways to print (print methods)</div>
-            <div class="info-box-content">A printer plugged into your PC with a cable, a <strong>wireless</strong> printer on your Wi-Fi, or <strong>Save as PDF</strong> to make a file instead of paper.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 10: Where/how to post & AUP (5.1) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Where &amp; How to Post Online</h2>
-          <p class="slide-subtitle">Choosing the right place — and following the rules</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📍</div>
-            <div class="key-point-text">
-              <strong>Pick the right place</strong>
+</div>
+<div class="info-box">
+<div class="info-box-title">Ways to print (print methods)</div>
+<div class="info-box-content">A printer plugged into your PC with a cable, a <strong>wireless</strong> printer on your Wi-Fi, or <strong>Save as PDF</strong> to make a file instead of paper.</div>
+</div>
+</div>
+</div>
+<!-- Slide 10: Where/how to post & AUP (5.1) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Where &amp; How to Post Online</h2>
+<p class="slide-subtitle">Choosing the right place — and following the rules</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📍</div>
+<div class="key-point-text">
+<strong>Pick the right place</strong>
               Email for private notes, a group like Facebook for friends and family, a forum for a hobby. Match the message to the audience.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📜</div>
-            <div class="key-point-text">
-              <strong>Acceptable-use policies</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📜</div>
+<div class="key-point-text">
+<strong>Acceptable-use policies</strong>
               Most websites have rules about what you can post. Breaking them can get a post removed or your account closed.
             </div>
-          </div>
-          <div class="info-box warning">
-            <div class="info-box-title">Before you post, ask yourself</div>
-            <div class="info-box-content">Is it true? Is it kind? Would I be comfortable if my family saw it? Remember — once it's posted, it can be hard to take back.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 11: Inclusive language (5.2.3) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Using Inclusive Language</h2>
-          <p class="slide-subtitle">Words that welcome everyone</p>
-        </div>
-        <div class="slide-content">
-          <p><strong>Inclusive language</strong> means choosing words that respect everyone and leave no one out.</p>
-          <div class="two-column">
-            <div class="column">
-              <h3>Try This</h3>
-              <ul>
-                <li>"Hello everyone" / "Hi team"</li>
-                <li>"Folks" or "all of you"</li>
-                <li>Ask how someone prefers to be addressed</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>Instead Of</h3>
-              <ul>
-                <li>Assuming everyone is the same</li>
-                <li>Jokes that target a group</li>
-                <li>Words that leave people out</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">The simple rule</div>
-            <div class="info-box-content">Write the way you'd want to be spoken to — with respect. When in doubt, keep it friendly and plain.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 12: Email response options (5.2.4) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Email: Reply, Reply All &amp; More</h2>
-          <p class="slide-subtitle">Four buttons that work very differently</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">↩️</div>
-            <div class="key-point-text">
-              <strong>Reply</strong>
+</div>
+<div class="info-box warning">
+<div class="info-box-title">Before you post, ask yourself</div>
+<div class="info-box-content">Is it true? Is it kind? Would I be comfortable if my family saw it? Remember — once it's posted, it can be hard to take back.</div>
+</div>
+</div>
+</div>
+<!-- Slide 11: Inclusive language (5.2.3) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Using Inclusive Language</h2>
+<p class="slide-subtitle">Words that welcome everyone</p>
+</div>
+<div class="slide-content">
+<p><strong>Inclusive language</strong> means choosing words that respect everyone and leave no one out.</p>
+<div class="two-column">
+<div class="column">
+<h3>Try This</h3>
+<ul>
+<li>"Hello everyone" / "Hi team"</li>
+<li>"Folks" or "all of you"</li>
+<li>Ask how someone prefers to be addressed</li>
+</ul>
+</div>
+<div class="column">
+<h3>Instead Of</h3>
+<ul>
+<li>Assuming everyone is the same</li>
+<li>Jokes that target a group</li>
+<li>Words that leave people out</li>
+</ul>
+</div>
+</div>
+<div class="info-box success">
+<div class="info-box-title">The simple rule</div>
+<div class="info-box-content">Write the way you'd want to be spoken to — with respect. When in doubt, keep it friendly and plain.</div>
+</div>
+</div>
+</div>
+<!-- Slide 12: Email response options (5.2.4) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Email: Reply, Reply All &amp; More</h2>
+<p class="slide-subtitle">Four buttons that work very differently</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">↩️</div>
+<div class="key-point-text">
+<strong>Reply</strong>
               Answers <strong>only the person who sent it</strong>. Use this most of the time.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">↪️</div>
-            <div class="key-point-text">
-              <strong>Reply All</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">↪️</div>
+<div class="key-point-text">
+<strong>Reply All</strong>
               Answers the sender <strong>and everyone</strong> who got the message. Use only when all of them truly need your reply.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">➡️</div>
-            <div class="key-point-text">
-              <strong>Forward</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">➡️</div>
+<div class="key-point-text">
+<strong>Forward</strong>
               Sends the message on to <strong>someone new</strong> who wasn't on it.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🙈</div>
-            <div class="key-point-text">
-              <strong>Bcc (blind carbon copy)</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🙈</div>
+<div class="key-point-text">
+<strong>Bcc (blind carbon copy)</strong>
               Sends a copy to someone <strong>without the others seeing</strong> their address. Good for protecting privacy in a group email.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 13: Effective vs ineffective (5.2.2) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Effective vs. Ineffective Messages</h2>
-          <p class="slide-subtitle">Small habits make a big difference</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>✅ Effective</h3>
-              <ul>
-                <li>Clear subject line</li>
-                <li>A polite greeting and your name</li>
-                <li>Gets to the point</li>
-                <li>Re-read before sending</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>❌ Ineffective</h3>
-              <ul>
-                <li>No subject, or a vague one</li>
-                <li>ALL CAPS (reads like shouting)</li>
-                <li>Too long and rambling</li>
-                <li>Sent in anger</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">When in doubt, wait</div>
-            <div class="info-box-content">If a message upsets you, save a draft and come back later. A calm reply is almost always a better one.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 14: Collaboration (6.1) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Working Together Online</h2>
-          <p class="slide-subtitle">Digital collaboration basics</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🌟</div>
-            <div class="key-point-text">
-              <strong>Why collaborate?</strong>
+</div>
+</div>
+</div>
+<!-- Slide 13: Effective vs ineffective (5.2.2) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Effective vs. Ineffective Messages</h2>
+<p class="slide-subtitle">Small habits make a big difference</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>✅ Effective</h3>
+<ul>
+<li>Clear subject line</li>
+<li>A polite greeting and your name</li>
+<li>Gets to the point</li>
+<li>Re-read before sending</li>
+</ul>
+</div>
+<div class="column">
+<h3>❌ Ineffective</h3>
+<ul>
+<li>No subject, or a vague one</li>
+<li>ALL CAPS (reads like shouting)</li>
+<li>Too long and rambling</li>
+<li>Sent in anger</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-box-title">When in doubt, wait</div>
+<div class="info-box-content">If a message upsets you, save a draft and come back later. A calm reply is almost always a better one.</div>
+</div>
+</div>
+</div>
+<!-- Slide 14: Collaboration (6.1) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Working Together Online</h2>
+<p class="slide-subtitle">Digital collaboration basics</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🌟</div>
+<div class="key-point-text">
+<strong>Why collaborate?</strong>
               You can work on the same document from different places, see each other's changes, and finish faster — no printing or mailing.
             </div>
-          </div>
-          <div class="two-column">
-            <div class="column">
-              <h3>⏱️ Synchronous</h3>
-              <ul>
-                <li>Happening at the <strong>same time</strong></li>
-                <li>Video calls, live chat</li>
-                <li>Editing a doc together live</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>📭 Asynchronous</h3>
-              <ul>
-                <li>At <strong>different times</strong></li>
-                <li>Email, shared comments</li>
-                <li>Reply when it suits you</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">Giving feedback</div>
-            <div class="info-box-content">Be specific and kind. Say what works, then suggest one improvement. Use the <strong>Comments</strong> feature instead of changing someone's words directly.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 15: Etiquette (6.2) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Digital Etiquette</h2>
-          <p class="slide-subtitle">Good manners in writing and on screen</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>✍️ Written Etiquette</h3>
-              <ul>
-                <li>Be polite and patient</li>
-                <li>Avoid ALL CAPS and sarcasm</li>
-                <li>Check spelling before sending</li>
-                <li>Give people time to reply</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>📹 Visual Etiquette</h3>
-              <ul>
-                <li>Mute when you're not talking</li>
-                <li>Good lighting, tidy background</li>
-                <li>Look toward the camera</li>
-                <li>Don't talk over others</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">The golden rule online</div>
-            <div class="info-box-content">There's a real person on the other side. Treat them the way you'd want to be treated.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 16: Knowledge Check -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Knowledge Check</h2>
-          <p class="slide-subtitle">Tap "Show answer" after you've had a think</p>
-        </div>
-        <div class="slide-content">
-          <div class="kc-question">
-            <p class="kc-prompt">1. You got an email sent to 10 people, but only the sender needs your answer. Which button do you use?</p>
-            <button class="kc-toggle" type="button" aria-expanded="false" aria-controls="kc-a1">
-              <span aria-hidden="true">💡</span> Show answer
+</div>
+<div class="two-column">
+<div class="column">
+<h3>⏱️ Synchronous</h3>
+<ul>
+<li>Happening at the <strong>same time</strong></li>
+<li>Video calls, live chat</li>
+<li>Editing a doc together live</li>
+</ul>
+</div>
+<div class="column">
+<h3>📭 Asynchronous</h3>
+<ul>
+<li>At <strong>different times</strong></li>
+<li>Email, shared comments</li>
+<li>Reply when it suits you</li>
+</ul>
+</div>
+</div>
+<div class="info-box success">
+<div class="info-box-title">Giving feedback</div>
+<div class="info-box-content">Be specific and kind. Say what works, then suggest one improvement. Use the <strong>Comments</strong> feature instead of changing someone's words directly.</div>
+</div>
+</div>
+</div>
+<!-- Slide 15: Etiquette (6.2) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Digital Etiquette</h2>
+<p class="slide-subtitle">Good manners in writing and on screen</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>✍️ Written Etiquette</h3>
+<ul>
+<li>Be polite and patient</li>
+<li>Avoid ALL CAPS and sarcasm</li>
+<li>Check spelling before sending</li>
+<li>Give people time to reply</li>
+</ul>
+</div>
+<div class="column">
+<h3>📹 Visual Etiquette</h3>
+<ul>
+<li>Mute when you're not talking</li>
+<li>Good lighting, tidy background</li>
+<li>Look toward the camera</li>
+<li>Don't talk over others</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-box-title">The golden rule online</div>
+<div class="info-box-content">There's a real person on the other side. Treat them the way you'd want to be treated.</div>
+</div>
+</div>
+</div>
+<!-- Slide 16: Knowledge Check -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Knowledge Check</h2>
+<p class="slide-subtitle">Tap "Show answer" after you've had a think</p>
+</div>
+<div class="slide-content">
+<div class="kc-question">
+<p class="kc-prompt">1. You got an email sent to 10 people, but only the sender needs your answer. Which button do you use?</p>
+<button aria-controls="kc-a1" aria-expanded="false" class="kc-toggle" type="button">
+<span aria-hidden="true">💡</span> Show answer
             </button>
-            <div class="kc-answer" id="kc-a1" hidden>
-              <strong>Reply.</strong> "Reply" goes to the sender only. "Reply All" would send your message to all 10 people — usually unnecessary and sometimes embarrassing.
+<div class="kc-answer" hidden="" id="kc-a1">
+<strong>Reply.</strong> "Reply" goes to the sender only. "Reply All" would send your message to all 10 people — usually unnecessary and sometimes embarrassing.
             </div>
-          </div>
-
-          <div class="kc-question">
-            <p class="kc-prompt">2. Which file name will be easiest to find next year?</p>
-            <button class="kc-toggle" type="button" aria-expanded="false" aria-controls="kc-a2">
-              <span aria-hidden="true">💡</span> Show answer
+</div>
+<div class="kc-question">
+<p class="kc-prompt">2. Which file name will be easiest to find next year?</p>
+<button aria-controls="kc-a2" aria-expanded="false" class="kc-toggle" type="button">
+<span aria-hidden="true">💡</span> Show answer
             </button>
-            <div class="kc-answer" id="kc-a2" hidden>
-              <strong>VA-Benefits-Letter-2026-06.docx.</strong> It describes what's inside and includes a date, so it's clear and sorts in order. Names like "Document1" tell you nothing later.
+<div class="kc-answer" hidden="" id="kc-a2">
+<strong>VA-Benefits-Letter-2026-06.docx.</strong> It describes what's inside and includes a date, so it's clear and sorts in order. Names like "Document1" tell you nothing later.
             </div>
-          </div>
-
-          <div class="kc-question">
-            <p class="kc-prompt">3. You want a tall page for a letter. Which orientation do you choose?</p>
-            <button class="kc-toggle" type="button" aria-expanded="false" aria-controls="kc-a3">
-              <span aria-hidden="true">💡</span> Show answer
+</div>
+<div class="kc-question">
+<p class="kc-prompt">3. You want a tall page for a letter. Which orientation do you choose?</p>
+<button aria-controls="kc-a3" aria-expanded="false" class="kc-toggle" type="button">
+<span aria-hidden="true">💡</span> Show answer
             </button>
-            <div class="kc-answer" id="kc-a3" hidden>
-              <strong>Portrait.</strong> Portrait is tall (like a letter). Landscape is wide (like a calendar) and is better for wide tables or photos.
+<div class="kc-answer" hidden="" id="kc-a3">
+<strong>Portrait.</strong> Portrait is tall (like a letter). Landscape is wide (like a calendar) and is better for wide tables or photos.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 17: Handout prompt + summary -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Your Handouts &amp; Summary</h2>
-          <p class="slide-subtitle">Take these home — they walk you through everything</p>
-        </div>
-        <div class="slide-content">
-          <div class="handout-prompt">
-            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
-            <div class="handout-prompt-text">Use the "Make, Save &amp; Share Lab" to practice today, and keep the "Files, Print &amp; Email Quick Reference" at your desk.</div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📄</div>
-            <div class="key-point-text">
-              <strong>Create &amp; save</strong>
+</div>
+</div>
+</div>
+<!-- Slide 17: Handout prompt + summary -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Your Handouts &amp; Summary</h2>
+<p class="slide-subtitle">Take these home — they walk you through everything</p>
+</div>
+<div class="slide-content">
+<div class="handout-prompt">
+<div aria-hidden="true" class="handout-prompt-icon">📋</div>
+<div class="handout-prompt-text">Use the "Make, Save &amp; Share Lab" to practice today, and keep the "Files, Print &amp; Email Quick Reference" at your desk.</div>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📄</div>
+<div class="key-point-text">
+<strong>Create &amp; save</strong>
               Make documents and slides, give a good file name, and back up with the 3-2-1 idea.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🖨️</div>
-            <div class="key-point-text">
-              <strong>Print right</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🖨️</div>
+<div class="key-point-text">
+<strong>Print right</strong>
               Choose portrait or landscape, double-sided to save paper, and always check the preview.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">💬</div>
-            <div class="key-point-text">
-              <strong>Communicate well</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">💬</div>
+<div class="key-point-text">
+<strong>Communicate well</strong>
               Use the correct email reply option, inclusive language, and good etiquette when working with others.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 18: Completion -->
-      <div class="slide completion-slide">
-        <div class="completion-badge">
-          <span aria-hidden="true">🎉</span>
-        </div>
-        <h2>Great Work!</h2>
-        <p>You finished Week 3 — Creating &amp; Communicating. You can now make and save documents, name your files, print with the right settings, and communicate respectfully online. Next week: Citizenship &amp; Safety.</p>
-      </div>
-    </div>
-
-    <!-- Navigation Footer -->
-    <div class="nav-footer">
-      <button class="nav-btn prev" id="prevBtn" disabled>
+</div>
+</div>
+</div>
+<!-- Slide 18: Lesson Recap Video -->
+<!-- Slide 19: Completion -->
+<div class="slide completion-slide">
+<div class="completion-badge">
+<span aria-hidden="true">🎉</span>
+</div>
+<h2>Great Work!</h2>
+<p>You finished Week 3 — Creating &amp; Communicating. You can now make and save documents, name your files, print with the right settings, and communicate respectfully online. Next week: Citizenship &amp; Safety.</p>
+</div>
+</div>
+<!-- Navigation Footer -->
+<div class="nav-footer">
+<button class="nav-btn prev" disabled="" id="prevBtn">
         ← Previous
       </button>
-      <span class="slide-counter">
+<span class="slide-counter">
         Slide <span id="currentSlide">1</span> of <span id="totalSlides">19</span>
-      </span>
-      <button class="nav-btn next" id="nextBtn">
+</span>
+<button class="nav-btn next" id="nextBtn">
         Next →
       </button>
-    </div>
-  </main>
-
-  <!-- Confetti Container -->
-  <div class="confetti" id="confetti"></div>
-
-  <script src="../../../../shared/progress.js"></script>
-  <script src="../../../../shared/glossary.js" defer></script>
-  <script>
+</div>
+</main>
+<!-- Confetti Container -->
+<div class="confetti" id="confetti"></div>
+<script src="../../../../shared/video-ids.js"></script>
+<script src="../../../../shared/progress.js"></script>
+<script defer="" src="../../../../shared/glossary.js"></script>
+<script>
     // Presentation State
     let currentSlide = 0;
     let fitFrame = 0;
@@ -1498,6 +1565,50 @@
         const activeSlide = slides[currentSlide];
         const heading = activeSlide ? activeSlide.querySelector('h2') : null;
         announce.textContent = heading ? heading.textContent.trim() : '';
+      }
+
+      // Stop any playing video when navigating away
+      slides.forEach((slide, index) => {
+        if (index !== currentSlide) {
+          const iframe = slide.querySelector('.video-wrapper iframe');
+          if (iframe) {
+            const currentSrc = iframe.src;
+            iframe.src = '';
+            iframe.src = currentSrc;
+          }
+        }
+      });
+
+      // Lazy load YouTube iframe when video slide becomes active
+      const videoSlide = slides[currentSlide];
+      if (videoSlide) {
+        const wrapper = videoSlide.querySelector('.video-wrapper');
+        if (wrapper && !wrapper.querySelector('iframe') && !wrapper.querySelector('.video-fallback-card')) {
+          const videoId = window.VUB_VIDEO_IDS?.week3;
+          const isConfigured = videoId && videoId !== "REPLACE_WITH_WEEK3_VIDEO_ID";
+          const isOnline = navigator.onLine;
+
+          if (isConfigured && isOnline) {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            iframe.title = "Lesson Recap Video";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
+            wrapper.appendChild(iframe);
+          } else {
+            const fallback = document.createElement('div');
+            fallback.className = 'video-fallback-card';
+            fallback.innerHTML = `
+              <div class="video-fallback-icon" aria-hidden="true">📺</div>
+              <h3>Video Recap Offline or Unconfigured</h3>
+              <p style="margin: 0.5rem 0 1rem;">
+                \${!isConfigured ? 'The video link has not been configured in shared/video-ids.js yet.' : 'To watch this video recap, please check your internet connection.'}
+              </p>
+              <p style="font-size: 0.9rem; opacity: 0.85;">You can continue reading the slides normally.</p>
+            `;
+            wrapper.appendChild(fallback);
+          }
+        }
       }
 
       scheduleSlideFit();
@@ -1681,6 +1792,6 @@
       }
     }
   </script>
-  <script src="/shared/text-size.js" defer></script>
+<script defer="" src="/shared/text-size.js"></script>
 </body>
 </html>

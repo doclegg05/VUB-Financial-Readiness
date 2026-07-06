@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Title | Week XX: Lesson Name</title>
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM (VUB Navy, Gold, and Red Branding)
+       ========================================================================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    :root {
+      --primary: #1B365D;           /* Primary Navy Brand */
+      --primary-dark: #0D1B2A;      /* Dark Navy background */
+      --accent: #C9A227;            /* Accent Gold */
+      --accent-light: #E6C65C;      /* Highlight Gold */
+      --red: #B31942;               /* CTA/Highlight Red */
+      --light: #FFFFFF;
+      --off-white: #F5F7FA;
+      --gray: #54626F;
+      --success: #28A745;
+      --va-blue: #003F72;
+      --va-red: #C4262E;
+      --vub-textsize-fab-bottom: 90px;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--off-white);
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+    }
+
+    /* Accessibility focus state */
+    a:focus-visible, button:focus-visible { 
+      outline: 4px solid var(--accent); 
+      outline-offset: 3px; 
+    }
+
+    /* Screen reader helper */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* ==========================================================================
+       SIDEBAR NAVIGATION
+       ========================================================================== */
+    .sidebar {
+      width: 280px;
+      background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 100;
+    }
+
+    .logo {
+      display: block;
+      text-align: center;
+      padding: 0.5rem 0.5rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .logo:hover { background: rgba(255,255,255,0.07); }
+
+    .logo-img {
+      display: block;
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 0.6rem;
+    }
+
+    .logo h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .logo p {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .week-indicator {
+      background: var(--va-blue);
+      color: var(--light);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .week-indicator .week-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .week-indicator .week-title {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    /* Scrollable Chapters Area */
+    .sidebar-scroll-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      padding-right: 0.25rem;
+    }
+
+    .sidebar-scroll-container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar-scroll-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+    }
+
+    .sidebar-scroll-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+
+    .sidebar-scroll-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .chapter {
+      margin-bottom: 1rem;
+    }
+
+    .chapter-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .chapter-slides {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .slide-link {
+      font-family: inherit; background: none; border: none; text-align: left; width: 100%; color: inherit;
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slide-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .slide-link.active {
+      background: var(--va-blue);
+      font-weight: 600;
+    }
+
+    .slide-link.completed::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .resources-title {
+      color: var(--accent);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.8rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource-link::before {
+      content: "\2193 ";
+      opacity: 0.6;
+    }
+
+    .resource-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    /* Fixed Progress Bar at Bottom of Sidebar */
+    .progress-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--va-blue) 0%, var(--accent) 100%);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      font-size: 0.75rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    /* ==========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================== */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      min-width: 0;
+      width: calc(100vw - 280px);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .slides-container {
+      flex: 1;
+      min-height: 0;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow: hidden;
+    }
+
+    /* Slide Scaling and Visibility */
+    .slide {
+      display: none;
+      background: var(--light);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      width: 900px;
+      min-height: 600px;
+      padding: 2.5rem;
+      flex-direction: column;
+      transform-origin: top center;
+      transform: scale(var(--slide-scale, 1));
+      margin-bottom: 2rem;
+    }
+
+    .slide.active {
+      display: flex;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(calc(var(--slide-scale, 1) * 0.98)) translateY(10px); }
+      to { opacity: 1; transform: scale(var(--slide-scale, 1)) translateY(0); }
+    }
+
+    .slide-header {
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.75rem;
+    }
+
+    .slide-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--primary);
+      font-size: 2.25rem;
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      color: var(--gray);
+      font-size: 1.15rem;
+      margin-top: 0.25rem;
+    }
+
+    .slide-content {
+      flex: 1;
+      font-size: 1.25rem; /* Min body size 24px is met on zoom; base is clean 1.25rem */
+      line-height: 1.7;
+    }
+
+    .slide-content ul, .slide-content ol {
+      margin-left: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .slide-content li {
+      margin-bottom: 1rem;
+    }
+
+    /* ==========================================================================
+       SLIDE COMPONENT TEMPLATES
+       ========================================================================== */
+    
+    /* 1. Title/Hero Slide */
+    .title-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--light);
+      border-radius: 16px;
+    }
+
+    .title-slide .slide-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-slide .slide-title {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+      color: var(--light);
+    }
+
+    .title-slide .slide-subtitle {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .course-info {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* 2. Info Accent Box */
+    .info-box {
+      background: var(--off-white);
+      border-left: 4px solid var(--va-blue);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+    }
+
+    .info-box.success {
+      border-left-color: var(--success);
+      background: rgba(40, 167, 69, 0.08);
+    }
+
+    .info-box.warning {
+      border-left-color: var(--va-red);
+      background: rgba(196, 38, 46, 0.08);
+    }
+
+    .info-box-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* 3. Icon Key Point Row */
+    .key-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--off-white);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .key-point-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .key-point-text {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .key-point-text strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* 4. Two-Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .column {
+      background: var(--off-white);
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+
+    .column h3 {
+      color: var(--va-blue);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    /* 5. Circular Step Flow Layout */
+    .steps-list {
+      list-style: none;
+      margin-left: 0 !important;
+      counter-reset: step-counter;
+    }
+
+    .steps-list li {
+      position: relative;
+      padding-left: 3.5rem;
+      margin-bottom: 1.5rem;
+      counter-increment: step-counter;
+    }
+
+    .steps-list li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--va-blue);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    /* 6. Handout/Instructions Prompt box */
+    .handout-prompt {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--va-blue) 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+
+    .handout-prompt-icon {
+      font-size: 3rem;
+    }
+
+    .handout-prompt-text {
+      font-size: 1.15rem;
+    }
+
+    /* 7. Knowledge Check Card & Toggle */
+    .kc-card {
+      background: var(--off-white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 1.5rem 0;
+    }
+
+    .kc-card .question {
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .reveal-btn {
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .reveal-btn:hover { background: #8B1432; }
+
+    .answer-reveal {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px dashed rgba(27, 54, 93, 0.2);
+      font-size: 1.2rem;
+    }
+
+    /* 8. YouTube Video Layout */
+    .video-slide-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .video-wrapper {
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      background: #000;
+      position: relative;
+      margin: 1rem 0;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-fallback-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem;
+      border: 2px dashed rgba(27, 54, 93, 0.3);
+      border-radius: 12px;
+      background: #fffbef;
+      color: #4a4327;
+      text-align: center;
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+
+    .video-fallback-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    /* 9. Celebration slide badge */
+    .completion-slide {
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .completion-badge {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      color: white;
+      font-size: 3.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 24px rgba(201, 162, 39, 0.3);
+    }
+
+    /* ==========================================================================
+       NAVIGATION FOOTER
+       ========================================================================== */
+    .nav-footer {
+      background: var(--light);
+      border-top: 1px solid #eee;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.prev {
+      background: var(--off-white);
+      color: var(--primary);
+    }
+
+    .nav-btn.prev:hover:not(:disabled) { background: #e8e8e8; }
+    .nav-btn.prev:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .nav-btn.next {
+      background: var(--primary);
+      color: var(--light);
+    }
+
+    .nav-btn.next:hover { background: var(--primary-dark); }
+
+    .slide-counter {
+      font-size: 1rem;
+      color: var(--gray);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       CONFETTI SYSTEM
+       ========================================================================== */
+    .confetti {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 1000;
+      display: none;
+    }
+
+    .confetti.active { display: block; }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 20px;
+      opacity: 0.8;
+      animation: fall 4s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ==========================================================================
+       RESPONSIVE LAYOUTS
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .sidebar { width: 240px; }
+      .main-content { margin-left: 240px; width: calc(100vw - 240px); }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; min-width: 0; width: 100%; }
+      .slides-container { padding: 0.75rem; }
+      .slide { padding: 1.25rem; border-radius: 10px; }
+      .nav-footer { padding: 0.6rem; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+      .nav-btn { flex: 1 1 0; min-width: 0; justify-content: center; padding: 0.55rem 0.35rem; font-size: 0.95rem; text-align: center; white-space: nowrap; }
+      .slide-counter { order: -1; flex: 0 0 100%; text-align: center; font-size: 0.85rem; white-space: nowrap; }
+      .two-column { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#slide-announce" class="sr-only">Skip to current slide content</a>
+
+  <!-- ==========================================================================
+       SIDEBAR NAVIGATION
+       ========================================================================== -->
+  <nav class="sidebar" aria-label="Lesson chapters">
+    <a class="logo" href="/courses/digital-literacy-1/index.html" aria-label="Back to dashboard">
+      <img class="logo-img" src="/assets/vub-seal-white.png" alt="VUB Seal" width="56" height="56">
+      <h2>VUB Course Template</h2>
+      <p>IC3 GS6 Aligned</p>
+    </a>
+
+    <div class="week-indicator">
+      <div class="week-num">Week X</div>
+      <div class="week-title">Lesson Title</div>
+    </div>
+
+    <!-- Scrollable content area in sidebar -->
+    <div class="sidebar-scroll-container">
+      <div class="chapter" role="group" aria-labelledby="ch-intro">
+        <div class="chapter-title" id="ch-intro">Start Here</div>
+        <div class="chapter-slides">
+          <!-- IMPORTANT: data-slide maps directly to the array index of the slide div in the DOM -->
+          <button type="button" class="slide-link active" data-slide="0">Welcome & Overview</button>
+          <button type="button" class="slide-link" data-slide="1">Lesson Recap Video</button>
+          <button type="button" class="slide-link" data-slide="2">Learning Objectives</button>
+        </div>
+      </div>
+
+      <div class="chapter" role="group" aria-labelledby="ch-content">
+        <div class="chapter-title" id="ch-content">Lesson Topics</div>
+        <div class="chapter-slides">
+          <button type="button" class="slide-link" data-slide="3">Single Column Layout</button>
+          <button type="button" class="slide-link" data-slide="4">Two Column Layout</button>
+          <button type="button" class="slide-link" data-slide="5">Circular Step Flow</button>
+        </div>
+      </div>
+
+      <div class="chapter" role="group" aria-labelledby="ch-wrap">
+        <div class="chapter-title" id="ch-wrap">Wrap-Up</div>
+        <div class="chapter-slides">
+          <button type="button" class="slide-link" data-slide="6">Knowledge Check</button>
+          <button type="button" class="slide-link" data-slide="7">Summary & Lab</button>
+          <button type="button" class="slide-link" data-slide="8">You Did It!</button>
+        </div>
+      </div>
+
+      <div class="resources-section">
+        <div class="resources-title">Resources</div>
+        <!-- Adjust paths relative to the final deployment folder depth -->
+        <a class="resource-link" href="handouts/lab-sheet.html" target="_blank">Lab Sheet</a>
+        <a class="resource-link" href="handouts/quick-reference.html" target="_blank">Quick Reference</a>
+      </div>
+    </div>
+
+    <!-- Pinned progress indicator at bottom -->
+    <div class="progress-section">
+      <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Lesson progress">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       MAIN PRESENTATION SLIDES
+       ========================================================================== -->
+  <main class="main-content">
+    <h1 class="sr-only">Week X: Lesson Title</h1>
+    <div id="slide-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    
+    <div class="slides-container">
+      
+      <!-- Slide 0: Title Slide (Welcome) -->
+      <div class="slide active title-slide">
+        <div class="slide-icon" aria-hidden="true">📖</div>
+        <h2 class="slide-title">Welcome to Week X</h2>
+        <p class="slide-subtitle">A Subtitle Describing the Main Theme</p>
+        <p class="course-info">Week X of Y · Veterans Upward Bound</p>
+      </div>
+
+      <!-- Slide 1: Lesson Recap Video -->
+      <div class="slide">
+        <div class="slide-header">
+          <h2 class="slide-title">Lesson Recap Video</h2>
+          <p class="slide-subtitle">Watch a video summary of this week's lesson</p>
+        </div>
+        <div class="slide-content video-slide-content">
+          <div class="video-wrapper">
+            <!-- Dynamic YouTube iframe or offline fallback card is injected here via JS -->
+          </div>
+          <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--gray); text-align: center;">
+            Note: Watching this video requires an internet connection.
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 2: Learning Objectives -->
+      <div class="slide">
+        <div class="slide-header">
+          <h2 class="slide-title">Learning Objectives</h2>
+          <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🎯</div>
+            <div class="key-point-text">
+              <strong>Objective One</strong>
+              A short description of what skills students will practice.
+            </div>
+          </div>
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">🔧</div>
+            <div class="key-point-text">
+              <strong>Objective Two</strong>
+              Use a standard, recognizable symbol for ease of understanding.
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-box-title">Why it matters</div>
+            <div class="info-box-content">
+              Explain the real-world connection to their benefits, goals, or everyday life.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Single Column / Key Points Layout -->
+      <div class="slide">
+        <div class="slide-header">
+          <h2 class="slide-title">Single Column Theme</h2>
+          <p class="slide-subtitle">Ideal for presenting key concepts sequentially</p>
+        </div>
+        <div class="slide-content">
+          <div class="key-point">
+            <div class="key-point-icon" aria-hidden="true">💡</div>
+            <div class="key-point-text">
+              <strong>Concept Header</strong>
+              Explain the concept clearly. Limit text length so it fits well on screens.
+            </div>
+          </div>
+          <p style="margin: 1.5rem 0 1rem;">You can also write standard paragraph text here. Keep sentences short and definitions highlighted.</p>
+          <div class="info-box">
+            <div class="info-box-title">Did you know?</div>
+            <div class="info-box-content">
+              Adding little breakout boxes breaks up the flow and maintains reader focus.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Two-Column / Compare Layout -->
+      <div class="slide">
+        <div class="slide-header">
+          <h2 class="slide-title">Two Column Contrast</h2>
+          <p class="slide-subtitle">Ideal for comparisons, pros/cons, or parallel lists</p>
+        </div>
+        <div class="slide-content">
+          <div class="two-column">
+            <div class="column">
+              <h3>✔️ Best Practices</h3>
+              <ul>
+                <li>Short bullet points</li>
+                <li>Clear action verbs</li>
+                <li>High contrast icons</li>
+              </ul>
+            </div>
+            <div class="column">
+              <h3>⚠️ Things to Avoid</h3>
+              <ul>
+                <li>Long paragraphs</li>
+                <li>Tiny fonts (&lt;24pt on display)</li>
+                <li>Overwhelming graphics</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box warning">
+            <div class="info-box-title">⚠️ Remember</div>
+            <div class="info-box-content">
+              Ensure you do not rely on color alone to convey difference. Add symbols or labels.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Circular Step Flow Layout -->
+      <div class="slide">
+        <div class="slide-header">
+          <h2 class="slide-title">Circular Step Flow</h2>
+          <p class="slide-subtitle">Perfect for workflows, installation steps, or checklists</p>
+        </div>
+        <div class="slide-content">
+          <ol class="steps-list">
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Step 1 Title</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Explain the first action a user must take clearly.</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Step 2 Title</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Followed by the next sequential action.</span>
+            </li>
+            <li>
+              <strong style="font-size: 1.25rem; color: var(--primary);">Step 3 Title</strong><br>
+              <span style="font-size: 1.1rem; color: #555;">Finish the task and verify results.</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Slide 6: Knowledge Check Slide -->
+      <div class="slide">
+        <div class="slide-header">
+          <h2 class="slide-title">Knowledge Check</h2>
+          <p class="slide-subtitle">Let's check your understanding</p>
+        </div>
+        <div class="slide-content">
+          <div class="kc-card">
+            <p class="question">1. What is the single best way to make a password strong?</p>
+            <!-- aria-controls matches the ID of the answer block below -->
+            <button class="reveal-btn" type="button" aria-controls="answer-1" aria-expanded="false">
+              Show answer
+            </button>
+            <div class="answer-reveal" id="answer-1" hidden>
+              Make it a long <strong>passphrase</strong> of multiple unrelated words. Length beats complexity.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: Summary & Lab Prep Slide -->
+      <div class="slide">
+        <div class="slide-header">
+          <h2 class="slide-title">Summary &amp; Lab Prep</h2>
+          <p class="slide-subtitle">What is next in class</p>
+        </div>
+        <div class="slide-content">
+          <p>We are going to move to our workstations to practice these skills hands-on.</p>
+          <div class="handout-prompt">
+            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
+            <div class="handout-prompt-text">
+              <strong>Open today's lab worksheet:</strong>
+              Follow the instructions at your station, and ask the instructor if you hit a snag.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Celebration Slide (Triggers Confetti) -->
+      <div class="slide completion-slide">
+        <div class="completion-badge" aria-hidden="true">
+          <span>🎉</span>
+        </div>
+        <h2>You Did It!</h2>
+        <p style="margin-top: 1rem; max-width: 600px; line-height: 1.6;">
+          You completed today's lesson. Take your handouts home, practice on your own device, and we will see you next week!
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Navigation Footer -->
+    <div class="nav-footer">
+      <button class="nav-btn prev" id="prevBtn" disabled>
+        ← Previous
+      </button>
+      <span class="slide-counter">
+        Slide <span id="currentSlide">1</span> of <span id="totalSlides">9</span>
+      </span>
+      <button class="nav-btn next" id="nextBtn">
+        Next →
+      </button>
+    </div>
+  </main>
+
+  <!-- Confetti Container (Instantiated on the last slide) -->
+  <div class="confetti" id="confetti"></div>
+
+  <!-- Shared Library Scripts (Adjust nesting depth if moved) -->
+  <script src="../../../../shared/video-ids.js"></script>
+  <script src="../../../../shared/progress.js"></script>
+  <script src="../../../../shared/glossary.js" defer></script>
+  <script>
+    // ==========================================================================
+    // SLIDESHOW FRAMEWORK LOGIC
+    // ==========================================================================
+    
+    // TEMPLATE CONFIGURATION: Set your Course ID and Week number here
+    const COURSE_ID = 'dl1';
+    const WEEK_NUM = 1; // Used for progress saving
+
+    let currentSlide = 0;
+    let fitFrame = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideLinks = document.querySelectorAll('.slide-link');
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSlideSpan = document.getElementById('currentSlide');
+    const totalSlidesSpan = document.getElementById('totalSlides');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const confettiContainer = document.getElementById('confetti');
+
+    // Initialize
+    totalSlidesSpan.textContent = totalSlides;
+    loadProgress();
+    updateSlide();
+
+    // Navigation and Updates
+    function updateSlide() {
+      // Toggle active slide visibility
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      // Update sidebar list styling and checkmarks
+      slideLinks.forEach((link) => {
+        const targetSlide = parseInt(link.dataset.slide, 10);
+        link.classList.toggle('active', targetSlide === currentSlide);
+        if (targetSlide < currentSlide) {
+          link.classList.add('completed');
+        } else {
+          link.classList.remove('completed');
+        }
+      });
+
+      // Update footer controls
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.textContent = currentSlide === totalSlides - 1 ? 'Finish ✓' : 'Next →';
+      currentSlideSpan.textContent = currentSlide + 1;
+
+      // Update progress bar
+      const progress = Math.round((currentSlide / (totalSlides - 1)) * 100);
+      progressFill.style.width = progress + '%';
+      progressText.textContent = progress;
+      const progressBar = document.getElementById('progressBar');
+      if (progressBar) progressBar.setAttribute('aria-valuenow', String(progress));
+
+      saveProgress();
+
+      // Trigger Confetti on completion slide
+      if (currentSlide === totalSlides - 1) {
+        setTimeout(triggerConfetti, 500);
+      }
+
+      // Scroll active sidebar link into view if overflow occurs
+      const activeLink = document.querySelector('.slide-link.active');
+      if (activeLink) {
+        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      // Accessibility Announcement
+      const announce = document.getElementById('slide-announce');
+      if (announce) {
+        const activeSlide = slides[currentSlide];
+        const heading = activeSlide ? activeSlide.querySelector('h2') : null;
+        announce.textContent = heading ? heading.textContent.trim() : '';
+      }
+
+      // Stop any playing video if navigating away
+      slides.forEach((slide, index) => {
+        if (index !== currentSlide) {
+          const iframe = slide.querySelector('.video-wrapper iframe');
+          if (iframe) {
+            const currentSrc = iframe.src;
+            iframe.src = '';
+            iframe.src = currentSrc;
+          }
+        }
+      });
+
+      // Lazy load YouTube recap video iframe when the video slide is shown
+      const videoSlide = slides[currentSlide];
+      if (videoSlide) {
+        const wrapper = videoSlide.querySelector('.video-wrapper');
+        if (wrapper && !wrapper.querySelector('iframe') && !wrapper.querySelector('.video-fallback-card')) {
+          // TEMPLATE NOTE: Configure the week configuration key mapping (e.g., week1, week2, etc.)
+          const videoId = window.VUB_VIDEO_IDS?.[`week${WEEK_NUM}`] || window.VUB_VIDEO_IDS?.intro;
+          const isConfigured = videoId && videoId !== `REPLACE_WITH_WEEK${WEEK_NUM}_VIDEO_ID` && videoId !== "REPLACE_WITH_INTRO_VIDEO_ID";
+          const isOnline = navigator.onLine;
+
+          if (isConfigured && isOnline) {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            iframe.title = "Lesson Recap Video";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
+            wrapper.appendChild(iframe);
+          } else {
+            const fallback = document.createElement('div');
+            fallback.className = 'video-fallback-card';
+            fallback.innerHTML = `
+              <div class="video-fallback-icon" aria-hidden="true">📺</div>
+              <h3>Video Recap Offline or Unconfigured</h3>
+              <p style="margin: 0.5rem 0 1rem;">
+                ${!isConfigured ? 'The video link has not been configured in shared/video-ids.js yet.' : 'To watch this video recap, please check your internet connection.'}
+              </p>
+              <p style="font-size: 0.9rem; opacity: 0.85;">You can continue reading the slides normally.</p>
+            `;
+            wrapper.appendChild(fallback);
+          }
+        }
+      }
+
+      scheduleSlideFit();
+    }
+
+    // Auto Scaling Layout Calculations
+    function scheduleSlideFit() {
+      cancelAnimationFrame(fitFrame);
+      fitFrame = requestAnimationFrame(fitActiveSlide);
+    }
+
+    function fitActiveSlide() {
+      const container = document.querySelector('.slides-container');
+      const activeSlide = document.querySelector('.slide.active');
+      if (!container || !activeSlide) return;
+
+      activeSlide.style.setProperty('--slide-scale', '1');
+      const containerRect = container.getBoundingClientRect();
+      const slideRect = activeSlide.getBoundingClientRect();
+      const topInset = Math.max(0, slideRect.top - containerRect.top);
+      const availableWidth = Math.max(1, container.clientWidth - 4);
+      const availableHeight = Math.max(1, container.clientHeight - topInset - 4);
+      const slideWidth = Math.max(1, activeSlide.scrollWidth);
+      const slideHeight = Math.max(1, activeSlide.scrollHeight);
+      const scale = Math.min(1, availableWidth / slideWidth, availableHeight / slideHeight);
+      activeSlide.style.setProperty('--slide-scale', String(Math.floor(scale * 1000) / 1000));
+      container.scrollTop = 0;
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlide();
+      }
+    }
+
+    // Event Listeners
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    slideLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const slideIndex = parseInt(link.dataset.slide, 10);
+        goToSlide(slideIndex);
+      });
+    });
+
+    // Keyboard controls
+    document.addEventListener('keydown', (e) => {
+      const tag = (e.target.tagName || '').toLowerCase();
+      if ((e.key === ' ' || e.key === 'Enter') && (tag === 'button' || tag === 'a')) {
+        return; // Let native button/link triggers handle themselves
+      }
+      switch(e.key) {
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'PageUp':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          goToSlide(totalSlides - 1);
+          break;
+      }
+    });
+
+    // Progress Persistence
+    function saveProgress() {
+      if (window.VubProgress) {
+        VubProgress.saveSlide(COURSE_ID, WEEK_NUM, currentSlide, totalSlides);
+      }
+    }
+
+    function loadProgress() {
+      if (window.VubProgress) {
+        const entry = VubProgress.get(COURSE_ID, WEEK_NUM);
+        if (entry && typeof entry.slide === 'number') {
+          currentSlide = entry.slide;
+        }
+      }
+    }
+
+    // Confetti System
+    function triggerConfetti() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      confettiContainer.classList.add('active');
+      confettiContainer.innerHTML = '';
+
+      const colors = ['#003F72', '#C9A227', '#1B365D', '#C4262E', '#28A745'];
+
+      for (let i = 0; i < 100; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 2 + 's';
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confettiContainer.appendChild(piece);
+      }
+
+      setTimeout(() => {
+        confettiContainer.classList.remove('active');
+      }, 5000);
+    }
+
+    // Accessible Show/Hide Answer Toggle Button
+    document.querySelectorAll('.reveal-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const answer = document.getElementById(btn.getAttribute('aria-controls'));
+        if (!answer) return;
+        const isOpen = answer.hidden === false;
+        answer.hidden = isOpen;
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        btn.textContent = isOpen ? 'Show answer' : 'Hide answer';
+      });
+    });
+
+    // Resize recalculations
+    window.addEventListener('resize', scheduleSlideFit);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(scheduleSlideFit);
+    }
+    new MutationObserver(scheduleSlideFit).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-text-size']
+    });
+
+    // Touch Swipe Navigation
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+  </script>
+  <script src="/shared/text-size.js" defer></script>
+</body>
+</html>

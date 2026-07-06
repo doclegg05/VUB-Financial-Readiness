@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Week 5: Review & Testing Day | VUB Digital Literacy — Level 1</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Week 5: Review &amp; Testing Day | VUB Digital Literacy — Level 1</title>
+<style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
@@ -51,9 +55,17 @@
       flex-direction: column;
       position: fixed;
       height: 100vh;
-      overflow: hidden;
+      overflow-y: auto;
       z-index: 100;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.25) rgba(0,0,0,0.15);
     }
+
+    /* Independent slide-selector scroll: the sidebar scrolls on its own without affecting the displayed slide */
+    .sidebar::-webkit-scrollbar { width: 8px; }
+    .sidebar::-webkit-scrollbar-track { background: rgba(0,0,0,0.15); }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 4px; }
+    .sidebar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
 
     .logo {
       display: block;
@@ -763,585 +775,644 @@
     }
 
     @media (prefers-reduced-motion: reduce){ .slide{animation:none;} .confetti-piece{animation:none;} .progress-fill{transition:none;} }
-  </style>
+
+    /* YouTube Embed Styles */
+    .video-slide-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .video-wrapper {
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      background: #000;
+      position: relative;
+      margin: 1rem 0;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-fallback-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem;
+      border: 2px dashed rgba(27, 54, 93, 0.3);
+      border-radius: 12px;
+      background: #fffbef;
+      color: #4a4327;
+      text-align: center;
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+    .video-fallback-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+  
+    /* Premium Sidebar Scrollbar styling */
+    .sidebar-scroll-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      padding-right: 0.25rem;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+</style>
 </head>
 <body>
-  <!-- Sidebar Navigation -->
-  <nav class="sidebar" aria-label="Lesson chapters">
-    <a class="logo" href="/courses/digital-literacy-1/index.html" aria-label="Back to the Digital Literacy — Level 1 dashboard">
-      <img class="logo-img" src="/assets/vub-seal-white.png" alt="VUB" width="56" height="56">
-      <h2>VUB Digital Literacy</h2>
-      <p>Level 1 · IC3 GS6 Aligned</p>
-    </a>
+<!-- Sidebar Navigation -->
+<nav aria-label="Lesson chapters" class="sidebar">
+<a aria-label="Back to the Digital Literacy — Level 1 dashboard" class="logo" href="/courses/digital-literacy-1/index.html">
+<img alt="VUB" class="logo-img" height="56" src="/assets/vub-seal-white.png" width="56"/>
+<h2>VUB Digital Literacy</h2>
+<p>Level 1 · IC3 GS6 Aligned</p>
+</a>
+<div class="week-indicator">
+<div class="week-num">Week 5</div>
+<div class="week-title">Review &amp; Testing Day</div>
+</div><div class="sidebar-scroll-container"><div aria-labelledby="ch-welcome" class="chapter" role="group">
+<div class="chapter-title" id="ch-welcome">Welcome &amp; How Today Works</div>
+<div class="chapter-slides">
+<button class="slide-link active" data-slide="0" type="button">Welcome</button><button class="slide-link" data-slide="1" type="button">Course Recap Video</button>
+<button class="slide-link" data-slide="2" type="button">How Today Works</button>
+<button class="slide-link" data-slide="3" type="button">Review Game Rules</button>
+</div>
+</div><div aria-labelledby="ch-review-game" class="chapter" role="group">
+<div class="chapter-title" id="ch-review-game">Review Game by Domain</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="4" type="button">1 · Technology Basics</button>
+<button class="slide-link" data-slide="5" type="button">1 · Technology Basics (cont.)</button>
+<button class="slide-link" data-slide="6" type="button">2 · Digital Citizenship</button>
+<button class="slide-link" data-slide="7" type="button">3 · Information Management</button>
+<button class="slide-link" data-slide="8" type="button">4 · Content Creation</button>
+<button class="slide-link" data-slide="9" type="button">4 · Content Creation (cont.)</button>
+<button class="slide-link" data-slide="10" type="button">5 · Communication</button>
+<button class="slide-link" data-slide="11" type="button">6 · Collaboration</button>
+<button class="slide-link" data-slide="12" type="button">7 · Safety &amp; Security</button>
+<button class="slide-link" data-slide="13" type="button">7 · Safety &amp; Security (cont.)</button>
+</div>
+</div><div aria-labelledby="ch-wrap-up" class="chapter" role="group">
+<div class="chapter-title" id="ch-wrap-up">Wrap Up &amp; Post-Test</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="14" type="button">Lightning Round</button>
+<button class="slide-link" data-slide="15" type="button">You Made It</button>
+<button class="slide-link" data-slide="16" type="button">What's Next: Level 2</button>
+<button class="slide-link" data-slide="17" type="button">Post-Test Time</button>
+</div>
+</div><div class="resources-section">
+<div class="resources-title">Resources</div>
+<a class="resource-link" href="handouts/level-1-study-guide.html" target="_blank">Level 1 Study Guide</a>
+</div></div>
 
-    <div class="week-indicator">
-      <div class="week-num">Week 5</div>
-      <div class="week-title">Review &amp; Testing Day</div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-welcome">
-      <div class="chapter-title" id="ch-welcome">Welcome &amp; How Today Works</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link active" data-slide="0">Welcome</button>
-        <button type="button" class="slide-link" data-slide="1">How Today Works</button>
-        <button type="button" class="slide-link" data-slide="2">Review Game Rules</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-review-game">
-      <div class="chapter-title" id="ch-review-game">Review Game by Domain</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="3">1 · Technology Basics</button>
-        <button type="button" class="slide-link" data-slide="4">1 · Technology Basics (cont.)</button>
-        <button type="button" class="slide-link" data-slide="5">2 · Digital Citizenship</button>
-        <button type="button" class="slide-link" data-slide="6">3 · Information Management</button>
-        <button type="button" class="slide-link" data-slide="7">4 · Content Creation</button>
-        <button type="button" class="slide-link" data-slide="8">4 · Content Creation (cont.)</button>
-        <button type="button" class="slide-link" data-slide="9">5 · Communication</button>
-        <button type="button" class="slide-link" data-slide="10">6 · Collaboration</button>
-        <button type="button" class="slide-link" data-slide="11">7 · Safety &amp; Security</button>
-        <button type="button" class="slide-link" data-slide="12">7 · Safety &amp; Security (cont.)</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-wrap-up">
-      <div class="chapter-title" id="ch-wrap-up">Wrap Up &amp; Post-Test</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="13">Lightning Round</button>
-        <button type="button" class="slide-link" data-slide="14">You Made It</button>
-        <button type="button" class="slide-link" data-slide="15">What's Next: Level 2</button>
-        <button type="button" class="slide-link" data-slide="16">Post-Test Time</button>
-      </div>
-    </div>
-
-    <div class="resources-section">
-      <div class="resources-title">Resources</div>
-      <a class="resource-link" href="handouts/level-1-study-guide.html" target="_blank">Level 1 Study Guide</a>
-    </div>
-
-    <div class="progress-section">
-      <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Lesson progress">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
-    </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <h1 class="sr-only">Week 5: Review &amp; Testing Day</h1>
-    <div id="slide-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-    <div class="slides-container">
-      <!-- Slide 0: Title -->
-      <div class="slide active title-slide">
-        <div class="slide-icon" aria-hidden="true">🎓</div>
-        <h2 class="slide-title">Review &amp; Testing Day</h2>
-        <p class="slide-subtitle">Everything you've learned — one celebration, one Post-Test</p>
-        <p class="course-info">Week 5 of 5 · VUB Digital Literacy — Level 1</p>
-      </div>
-
-      <!-- Slide 1: How Today Works -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">How Today Works</h2>
-          <p class="slide-subtitle">No new material — today we review and measure your growth</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🎲</div>
-            <div class="key-point-text">
-              <strong>First: the Review Game</strong>
+<div class="progress-section">
+<div aria-label="Lesson progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="progress-bar" id="progressBar" role="progressbar">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+<div class="progress-text"><span id="progressText">0</span>% Complete</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="main-content">
+<h1 class="sr-only">Week 5: Review &amp; Testing Day</h1>
+<div aria-atomic="true" aria-live="polite" class="sr-only" id="slide-announce"></div>
+<div class="slides-container">
+<!-- Slide 0: Title -->
+<div class="slide active title-slide">
+<div aria-hidden="true" class="slide-icon">🎓</div>
+<h2 class="slide-title">Review &amp; Testing Day</h2>
+<p class="slide-subtitle">Everything you've learned — one celebration, one Post-Test</p>
+<p class="course-info">Week 5 of 5 · VUB Digital Literacy — Level 1</p>
+</div><div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Course Recap Video</h2>
+<p class="slide-subtitle">Watch a complete course recap and review video</p>
+</div>
+<div class="slide-content video-slide-content">
+<div class="video-wrapper" id="videoWrapperWeek5">
+<!-- Dynamic iframe injected via JS or fallback card -->
+</div>
+<p style="margin-top: 1rem; font-size: 0.95rem; color: var(--gray); text-align: center;">
+            Note: Watching this video requires an internet connection.
+          </p>
+</div>
+</div>
+<!-- Slide 1: How Today Works -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">How Today Works</h2>
+<p class="slide-subtitle">No new material — today we review and measure your growth</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🎲</div>
+<div class="key-point-text">
+<strong>First: the Review Game</strong>
               A friendly, Jeopardy-style recap of all 7 topics from Weeks 1–4. We read a question, you think it through, then we reveal the answer together.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📝</div>
-            <div class="key-point-text">
-              <strong>Then: the Post-Test</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📝</div>
+<div class="key-point-text">
+<strong>Then: the Post-Test</strong>
               The same kind of test you took in Week 1 — so you can see how much you've learned. No grades, no pressure.
             </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">You've got this</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box success">
+<div class="info-box-title">You've got this</div>
+<div class="info-box-content">
               You've already done the hard part — five weeks of showing up and practicing. Today is your victory lap.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 2: Review Game Rules -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Review Game Rules</h2>
-          <p class="slide-subtitle">Seven categories — one for each topic we covered</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>📋 The Categories</h3>
-              <ul>
-                <li>Technology Basics</li>
-                <li>Digital Citizenship</li>
-                <li>Information Management</li>
-                <li>Content Creation</li>
-                <li>Communication</li>
-                <li>Collaboration</li>
-                <li>Safety &amp; Security</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>✅ How to Play</h3>
-              <ul>
-                <li>Read each question out loud as a group</li>
-                <li>Take a guess — out loud or in your head</li>
-                <li>Click <strong>Reveal answer</strong> to check</li>
-                <li>No score-keeping — it's all about remembering</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Tip for instructors and learners</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 2: Review Game Rules -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Review Game Rules</h2>
+<p class="slide-subtitle">Seven categories — one for each topic we covered</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>📋 The Categories</h3>
+<ul>
+<li>Technology Basics</li>
+<li>Digital Citizenship</li>
+<li>Information Management</li>
+<li>Content Creation</li>
+<li>Communication</li>
+<li>Collaboration</li>
+<li>Safety &amp; Security</li>
+</ul>
+</div>
+<div class="column">
+<h3>✅ How to Play</h3>
+<ul>
+<li>Read each question out loud as a group</li>
+<li>Take a guess — out loud or in your head</li>
+<li>Click <strong>Reveal answer</strong> to check</li>
+<li>No score-keeping — it's all about remembering</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-box-title">Tip for instructors and learners</div>
+<div class="info-box-content">
               Don't peek! Guess first, then reveal. That little moment of effort is exactly what helps the answer stick.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3: Technology Basics (1 of 2) -->
-      <div class="slide">
-        <div class="slide-header">
-          <span class="review-category">Category 1 · Technology Basics</span>
-          <h2 class="slide-title">Parts, Devices &amp; Software</h2>
-        </div>
-        <div class="slide-content">
-          <div class="review-question">
+</div>
+</div>
+</div>
+<!-- Slide 3: Technology Basics (1 of 2) -->
+<div class="slide">
+<div class="slide-header">
+<span class="review-category">Category 1 · Technology Basics</span>
+<h2 class="slide-title">Parts, Devices &amp; Software</h2>
+</div>
+<div class="slide-content">
+<div class="review-question">
             Q: A keyboard, mouse, and microphone are all examples of one kind of device. What do we call them — and what's the opposite kind?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a1" data-reveal>
+<button aria-controls="reveal-a1" aria-expanded="false" class="reveal-btn" data-reveal="" type="button">
             Reveal answer
           </button>
-          <div class="reveal-answer" id="reveal-a1" hidden>
-            <div class="info-box success">
-              <div class="info-box-title">Answer</div>
-              <div class="info-box-content">
+<div class="reveal-answer" hidden="" id="reveal-a1">
+<div class="info-box success">
+<div class="info-box-title">Answer</div>
+<div class="info-box-content">
                 They are <strong>input devices</strong> — they send information <em>into</em> the computer.
                 The opposite is an <strong>output device</strong> (monitor, printer, speakers), which sends
                 information <em>out</em> to you.
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 4: Technology Basics (2 of 2) -->
-      <div class="slide">
-        <div class="slide-header">
-          <span class="review-category">Category 1 · Technology Basics</span>
-          <h2 class="slide-title">Memory, Storage &amp; Operating Systems</h2>
-        </div>
-        <div class="slide-content">
-          <div class="review-question">
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 4: Technology Basics (2 of 2) -->
+<div class="slide">
+<div class="slide-header">
+<span class="review-category">Category 1 · Technology Basics</span>
+<h2 class="slide-title">Memory, Storage &amp; Operating Systems</h2>
+</div>
+<div class="slide-content">
+<div class="review-question">
             Q: What's the difference between <strong>memory (RAM)</strong> and <strong>storage</strong>, and what is an <strong>operating system</strong>?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a2" data-reveal>
+<button aria-controls="reveal-a2" aria-expanded="false" class="reveal-btn" data-reveal="" type="button">
             Reveal answer
           </button>
-          <div class="reveal-answer" id="reveal-a2" hidden>
-            <div class="info-box success">
-              <div class="info-box-title">Answer</div>
-              <div class="info-box-content">
-                <strong>Memory (RAM)</strong> is the short-term workspace the computer uses while it's running —
+<div class="reveal-answer" hidden="" id="reveal-a2">
+<div class="info-box success">
+<div class="info-box-title">Answer</div>
+<div class="info-box-content">
+<strong>Memory (RAM)</strong> is the short-term workspace the computer uses while it's running —
                 it empties when you shut down. <strong>Storage</strong> (hard drive or SSD) keeps your files
                 for the long term, even when the power is off. The <strong>operating system</strong> — like
                 <strong>Windows</strong>, macOS, Android, or iOS — is the main software that runs the device
                 and lets all your other apps work.
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 5: Digital Citizenship -->
-      <div class="slide">
-        <div class="slide-header">
-          <span class="review-category">Category 2 · Digital Citizenship</span>
-          <h2 class="slide-title">Your Identity &amp; Reputation Online</h2>
-        </div>
-        <div class="slide-content">
-          <div class="review-question">
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 5: Digital Citizenship -->
+<div class="slide">
+<div class="slide-header">
+<span class="review-category">Category 2 · Digital Citizenship</span>
+<h2 class="slide-title">Your Identity &amp; Reputation Online</h2>
+</div>
+<div class="slide-content">
+<div class="review-question">
             Q: What does <strong>PII</strong> stand for, and why do we say the things you post online are "permanent"?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a3" data-reveal>
+<button aria-controls="reveal-a3" aria-expanded="false" class="reveal-btn" data-reveal="" type="button">
             Reveal answer
           </button>
-          <div class="reveal-answer" id="reveal-a3" hidden>
-            <div class="info-box success">
-              <div class="info-box-title">Answer</div>
-              <div class="info-box-content">
-                <strong>PII</strong> means <strong>Personally Identifiable Information</strong> — details that
+<div class="reveal-answer" hidden="" id="reveal-a3">
+<div class="info-box success">
+<div class="info-box-title">Answer</div>
+<div class="info-box-content">
+<strong>PII</strong> means <strong>Personally Identifiable Information</strong> — details that
                 can identify you, like your full name, Social Security number, birth date, or address. Guard it
                 carefully. We call posts "permanent" because once something is shared online, others can copy,
                 screenshot, or save it — so it can stay around long after you delete it. Post as if it's forever.
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 6: Information Management -->
-      <div class="slide">
-        <div class="slide-header">
-          <span class="review-category">Category 3 · Information Management</span>
-          <h2 class="slide-title">Searching &amp; Using Content</h2>
-        </div>
-        <div class="slide-content">
-          <div class="review-question">
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 6: Information Management -->
+<div class="slide">
+<div class="slide-header">
+<span class="review-category">Category 3 · Information Management</span>
+<h2 class="slide-title">Searching &amp; Using Content</h2>
+</div>
+<div class="slide-content">
+<div class="review-question">
             Q: Which keyboard shortcut finds a word on a webpage or in a document, and what does <strong>Creative Commons</strong> mean?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a4" data-reveal>
+<button aria-controls="reveal-a4" aria-expanded="false" class="reveal-btn" data-reveal="" type="button">
             Reveal answer
           </button>
-          <div class="reveal-answer" id="reveal-a4" hidden>
-            <div class="info-box success">
-              <div class="info-box-title">Answer</div>
-              <div class="info-box-content">
-                <strong>Ctrl + F</strong> opens "Find" to jump straight to a word on a page or in a file.
+<div class="reveal-answer" hidden="" id="reveal-a4">
+<div class="info-box success">
+<div class="info-box-title">Answer</div>
+<div class="info-box-content">
+<strong>Ctrl + F</strong> opens "Find" to jump straight to a word on a page or in a file.
                 <strong>Creative Commons</strong> is a type of license a creator can add to their work that tells
                 you exactly how you're allowed to use it — often free to reuse if you give credit. (Compare with
                 <strong>public domain</strong> content, which is free for anyone to use because it's no longer
                 under copyright.)
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 7: Content Creation (1 of 2) -->
-      <div class="slide">
-        <div class="slide-header">
-          <span class="review-category">Category 4 · Content Creation</span>
-          <h2 class="slide-title">Saving &amp; Naming Your Work</h2>
-        </div>
-        <div class="slide-content">
-          <div class="review-question">
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 7: Content Creation (1 of 2) -->
+<div class="slide">
+<div class="slide-header">
+<span class="review-category">Category 4 · Content Creation</span>
+<h2 class="slide-title">Saving &amp; Naming Your Work</h2>
+</div>
+<div class="slide-content">
+<div class="review-question">
             Q: Why is <strong>VA-benefits-letter-2026.docx</strong> a better file name than <strong>document1.docx</strong>, and what's a simple backup habit?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a5" data-reveal>
+<button aria-controls="reveal-a5" aria-expanded="false" class="reveal-btn" data-reveal="" type="button">
             Reveal answer
           </button>
-          <div class="reveal-answer" id="reveal-a5" hidden>
-            <div class="info-box success">
-              <div class="info-box-title">Answer</div>
-              <div class="info-box-content">
+<div class="reveal-answer" hidden="" id="reveal-a5">
+<div class="info-box success">
+<div class="info-box-title">Answer</div>
+<div class="info-box-content">
                 A clear name tells you <em>what's inside and when it's from</em> without opening it — so you can
                 find it again later. Good names are specific, with no confusing symbols. For backups, keep a
                 second copy somewhere else — like a USB drive or a cloud folder — so one lost or broken device
                 never costs you your work.
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 8: Content Creation (2 of 2) -->
-      <div class="slide">
-        <div class="slide-header">
-          <span class="review-category">Category 4 · Content Creation</span>
-          <h2 class="slide-title">Citations &amp; Printing</h2>
-        </div>
-        <div class="slide-content">
-          <div class="review-question">
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 8: Content Creation (2 of 2) -->
+<div class="slide">
+<div class="slide-header">
+<span class="review-category">Category 4 · Content Creation</span>
+<h2 class="slide-title">Citations &amp; Printing</h2>
+</div>
+<div class="slide-content">
+<div class="review-question">
             Q: What is a <strong>citation</strong> for, and what's the difference between <strong>portrait</strong> and <strong>landscape</strong> printing?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a6" data-reveal>
+<button aria-controls="reveal-a6" aria-expanded="false" class="reveal-btn" data-reveal="" type="button">
             Reveal answer
           </button>
-          <div class="reveal-answer" id="reveal-a6" hidden>
-            <div class="info-box success">
-              <div class="info-box-title">Answer</div>
-              <div class="info-box-content">
+<div class="reveal-answer" hidden="" id="reveal-a6">
+<div class="info-box success">
+<div class="info-box-title">Answer</div>
+<div class="info-box-content">
                 A <strong>citation</strong> gives credit to where you found information or an idea, so you're not
                 taking someone else's work as your own. <strong>Portrait</strong> prints the page taller than it
                 is wide (the normal letter layout); <strong>landscape</strong> turns it sideways so it's wider
                 than it is tall — handy for wide tables or photos.
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 9: Communication -->
-      <div class="slide">
-        <div class="slide-header">
-          <span class="review-category">Category 5 · Communication</span>
-          <h2 class="slide-title">Email &amp; Talking Online</h2>
-        </div>
-        <div class="slide-content">
-          <div class="review-question">
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 9: Communication -->
+<div class="slide">
+<div class="slide-header">
+<span class="review-category">Category 5 · Communication</span>
+<h2 class="slide-title">Email &amp; Talking Online</h2>
+</div>
+<div class="slide-content">
+<div class="review-question">
             Q: What's the difference between <strong>Reply</strong> and <strong>Reply All</strong>, and what is <strong>Bcc</strong> for?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a7" data-reveal>
+<button aria-controls="reveal-a7" aria-expanded="false" class="reveal-btn" data-reveal="" type="button">
             Reveal answer
           </button>
-          <div class="reveal-answer" id="reveal-a7" hidden>
-            <div class="info-box success">
-              <div class="info-box-title">Answer</div>
-              <div class="info-box-content">
-                <strong>Reply</strong> sends your message to just the original sender. <strong>Reply All</strong>
+<div class="reveal-answer" hidden="" id="reveal-a7">
+<div class="info-box success">
+<div class="info-box-title">Answer</div>
+<div class="info-box-content">
+<strong>Reply</strong> sends your message to just the original sender. <strong>Reply All</strong>
                 sends it to <em>everyone</em> on the email — useful sometimes, but easy to overuse. <strong>Bcc</strong>
                 (blind carbon copy) sends a copy to people without the other recipients seeing their addresses —
                 good for protecting privacy when emailing a group.
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 10: Collaboration -->
-      <div class="slide">
-        <div class="slide-header">
-          <span class="review-category">Category 6 · Collaboration</span>
-          <h2 class="slide-title">Working Together Online</h2>
-        </div>
-        <div class="slide-content">
-          <div class="review-question">
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 10: Collaboration -->
+<div class="slide">
+<div class="slide-header">
+<span class="review-category">Category 6 · Collaboration</span>
+<h2 class="slide-title">Working Together Online</h2>
+</div>
+<div class="slide-content">
+<div class="review-question">
             Q: What's the difference between <strong>synchronous</strong> and <strong>asynchronous</strong> communication?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a8" data-reveal>
+<button aria-controls="reveal-a8" aria-expanded="false" class="reveal-btn" data-reveal="" type="button">
             Reveal answer
           </button>
-          <div class="reveal-answer" id="reveal-a8" hidden>
-            <div class="info-box success">
-              <div class="info-box-title">Answer</div>
-              <div class="info-box-content">
-                <strong>Synchronous</strong> means at the same time — like a phone call or a video meeting where
+<div class="reveal-answer" hidden="" id="reveal-a8">
+<div class="info-box success">
+<div class="info-box-title">Answer</div>
+<div class="info-box-content">
+<strong>Synchronous</strong> means at the same time — like a phone call or a video meeting where
                 everyone is present together. <strong>Asynchronous</strong> means not at the same time — like
                 email or a shared document, where you reply whenever it's convenient. Good digital etiquette —
                 being clear, polite, and respectful — matters in both.
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 11: Safety & Security (1 of 2) -->
-      <div class="slide">
-        <div class="slide-header">
-          <span class="review-category">Category 7 · Safety &amp; Security</span>
-          <h2 class="slide-title">Strong Passwords &amp; Locking Up</h2>
-        </div>
-        <div class="slide-content">
-          <div class="review-question">
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 11: Safety & Security (1 of 2) -->
+<div class="slide">
+<div class="slide-header">
+<span class="review-category">Category 7 · Safety &amp; Security</span>
+<h2 class="slide-title">Strong Passwords &amp; Locking Up</h2>
+</div>
+<div class="slide-content">
+<div class="review-question">
             Q: What makes a password <strong>strong</strong>, and which shortcut locks your Windows computer when you step away?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a9" data-reveal>
+<button aria-controls="reveal-a9" aria-expanded="false" class="reveal-btn" data-reveal="" type="button">
             Reveal answer
           </button>
-          <div class="reveal-answer" id="reveal-a9" hidden>
-            <div class="info-box success">
-              <div class="info-box-title">Answer</div>
-              <div class="info-box-content">
+<div class="reveal-answer" hidden="" id="reveal-a9">
+<div class="info-box success">
+<div class="info-box-title">Answer</div>
+<div class="info-box-content">
                 A strong password is <strong>long</strong> and hard to guess — a <strong>passphrase</strong> of
                 several words (like <em>BlueCoffeeRiver42!</em>) works well. Don't reuse the same password
                 everywhere. To lock your Windows PC instantly, press <strong>Win + L</strong> — always lock it
                 when you walk away from a shared lab computer.
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 12: Safety & Security (2 of 2) -->
-      <div class="slide">
-        <div class="slide-header">
-          <span class="review-category">Category 7 · Safety &amp; Security</span>
-          <h2 class="slide-title">Scams, Private Browsing &amp; Your Health</h2>
-        </div>
-        <div class="slide-content">
-          <div class="review-question">
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 12: Safety & Security (2 of 2) -->
+<div class="slide">
+<div class="slide-header">
+<span class="review-category">Category 7 · Safety &amp; Security</span>
+<h2 class="slide-title">Scams, Private Browsing &amp; Your Health</h2>
+</div>
+<div class="slide-content">
+<div class="review-question">
             Q: What is <strong>phishing</strong>, what does <strong>private browsing</strong> do, and name one way to protect your body at the computer.
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a10" data-reveal>
+<button aria-controls="reveal-a10" aria-expanded="false" class="reveal-btn" data-reveal="" type="button">
             Reveal answer
           </button>
-          <div class="reveal-answer" id="reveal-a10" hidden>
-            <div class="info-box success">
-              <div class="info-box-title">Answer</div>
-              <div class="info-box-content">
-                <strong>Phishing</strong> is a fake message (email or text) that tries to trick you into giving up
+<div class="reveal-answer" hidden="" id="reveal-a10">
+<div class="info-box success">
+<div class="info-box-title">Answer</div>
+<div class="info-box-content">
+<strong>Phishing</strong> is a fake message (email or text) that tries to trick you into giving up
                 passwords or personal info — don't click suspicious links. <strong>Private browsing</strong> (an
                 "InPrivate" or "Incognito" window) doesn't save your history or sign-ins on that device — helpful
                 on shared computers, though it doesn't make you anonymous. For your body: take breaks, sit up with
                 good posture, and rest your eyes (look away every 20 minutes) — that's <strong>ergonomics</strong>.
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 13: Lightning Round -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Lightning Round</h2>
-          <p class="slide-subtitle">Five quick ones — call them out as a group</p>
-        </div>
-        <div class="slide-content">
-          <div class="review-question">
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 13: Lightning Round -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Lightning Round</h2>
+<p class="slide-subtitle">Five quick ones — call them out as a group</p>
+</div>
+<div class="slide-content">
+<div class="review-question">
             Quick fire: (1) Copy shortcut? (2) Paste shortcut? (3) Undo shortcut?
             (4) The full web address you type to reach a website is called the…? (5) A secret word that protects an account is a…?
           </div>
-          <button type="button" class="reveal-btn" aria-expanded="false" aria-controls="reveal-a11" data-reveal>
+<button aria-controls="reveal-a11" aria-expanded="false" class="reveal-btn" data-reveal="" type="button">
             Reveal answers
           </button>
-          <div class="reveal-answer" id="reveal-a11" hidden>
-            <div class="info-box success">
-              <div class="info-box-title">Answers</div>
-              <div class="info-box-content">
+<div class="reveal-answer" hidden="" id="reveal-a11">
+<div class="info-box success">
+<div class="info-box-title">Answers</div>
+<div class="info-box-content">
                 (1) <strong>Ctrl + C</strong> · (2) <strong>Ctrl + V</strong> · (3) <strong>Ctrl + Z</strong> ·
                 (4) the <strong>URL</strong> (web address) · (5) a <strong>password</strong> (better yet, a passphrase!).
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 14: You Made It (recap/summary) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">You Made It! 🎉</h2>
-          <p class="slide-subtitle">Look how much you can do now</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🖥️</div>
-            <div class="key-point-text">
-              <strong>You know your computer</strong>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 14: You Made It (recap/summary) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">You Made It! 🎉</h2>
+<p class="slide-subtitle">Look how much you can do now</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🖥️</div>
+<div class="key-point-text">
+<strong>You know your computer</strong>
               Parts, devices, memory vs. storage, and what an operating system does.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🌐</div>
-            <div class="key-point-text">
-              <strong>You can get online and find answers</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🌐</div>
+<div class="key-point-text">
+<strong>You can get online and find answers</strong>
               Browsers, Wi-Fi, smart searching, and Ctrl + F.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">✍️</div>
-            <div class="key-point-text">
-              <strong>You can create, save, and communicate</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">✍️</div>
+<div class="key-point-text">
+<strong>You can create, save, and communicate</strong>
               Documents, good file names, citations, email, and online etiquette.
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔒</div>
-            <div class="key-point-text">
-              <strong>You can stay safe and be a good digital citizen</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔒</div>
+<div class="key-point-text">
+<strong>You can stay safe and be a good digital citizen</strong>
               Strong passwords, spotting scams, protecting your info, and your health.
             </div>
-          </div>
-          <div class="handout-prompt">
-            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
-            <div class="handout-prompt-text">Take home the "Level 1 Study Guide" — a one-page summary of every topic for the Post-Test and beyond.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 15: What's Next - Level 2 -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">What's Next: Level 2</h2>
-          <p class="slide-subtitle">Your digital literacy journey keeps going</p>
-        </div>
-        <div class="slide-content">
-          <div class="info-box success">
-            <div class="info-box-title">You finished the foundation</div>
-            <div class="info-box-content">
+</div>
+<div class="handout-prompt">
+<div aria-hidden="true" class="handout-prompt-icon">📋</div>
+<div class="handout-prompt-text">Take home the "Level 1 Study Guide" — a one-page summary of every topic for the Post-Test and beyond.</div>
+</div>
+</div>
+</div>
+<!-- Slide 15: What's Next - Level 2 -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">What's Next: Level 2</h2>
+<p class="slide-subtitle">Your digital literacy journey keeps going</p>
+</div>
+<div class="slide-content">
+<div class="info-box success">
+<div class="info-box-title">You finished the foundation</div>
+<div class="info-box-content">
               Digital Literacy — Level 1 covered the seven core areas of the IC3 GS6 framework. That's the
               groundwork everything else builds on.
             </div>
-          </div>
-          <div class="two-column">
-            <div class="column">
-              <h3>🚀 Where Level 2 Goes</h3>
-              <ul>
-                <li>Deeper work in everyday apps</li>
-                <li>More hands-on documents and spreadsheets</li>
-                <li>Building on the skills you just proved</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>💪 Keep Practicing</h3>
-              <ul>
-                <li>Use your study guide and quick-reference cards</li>
-                <li>Try one new skill at home each week</li>
-                <li>Ask questions — that's how confidence grows</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">First, one last step today</div>
-            <div class="info-box-content">
+</div>
+<div class="two-column">
+<div class="column">
+<h3>🚀 Where Level 2 Goes</h3>
+<ul>
+<li>Deeper work in everyday apps</li>
+<li>More hands-on documents and spreadsheets</li>
+<li>Building on the skills you just proved</li>
+</ul>
+</div>
+<div class="column">
+<h3>💪 Keep Practicing</h3>
+<ul>
+<li>Use your study guide and quick-reference cards</li>
+<li>Try one new skill at home each week</li>
+<li>Ask questions — that's how confidence grows</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-box-title">First, one last step today</div>
+<div class="info-box-content">
               Let's take the Post-Test so you can see — in black and white — how far you've come since Week 1.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 16: Post-Test Time -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Post-Test Time</h2>
-          <p class="slide-subtitle">The same kind of test as Week 1 — now let's measure your growth</p>
-        </div>
-        <div class="slide-content">
-          <div class="info-box">
-            <div class="info-box-title">About the Post-Test</div>
-            <div class="info-box-content">
-              <ul style="margin-top: 0.5rem;">
-                <li><strong>About 20 questions</strong> covering all 7 topics from the course</li>
-                <li><strong>No time limit</strong> — take your time and read carefully</li>
-                <li><strong>Not pass/fail</strong> — it shows how much you've learned</li>
-                <li>After you submit, use <strong>Print Report (PDF)</strong> to save or print your results</li>
-                <li>Compare it to your Week 1 Pre-Test to see your improvement!</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="demo-box">
-            <h3>📈 Measuring Your Growth</h3>
-            <p>Back in Week 1, this was all new. Today you have five weeks of practice behind you — this test is your chance to prove it to yourself. Be proud of every answer you know now that you didn't before.</p>
-          </div>
-
-          <div style="text-align: center;">
-            <a href="../../assessments/post-test.html" class="pretest-link">Start Post-Test →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Navigation Footer -->
-    <div class="nav-footer">
-      <button class="nav-btn prev" id="prevBtn" disabled>
+</div>
+</div>
+</div>
+<!-- Slide 16: Course Recap Video -->
+<!-- Slide 17: Post-Test Time -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Post-Test Time</h2>
+<p class="slide-subtitle">The same kind of test as Week 1 — now let's measure your growth</p>
+</div>
+<div class="slide-content">
+<div class="info-box">
+<div class="info-box-title">About the Post-Test</div>
+<div class="info-box-content">
+<ul style="margin-top: 0.5rem;">
+<li><strong>About 20 questions</strong> covering all 7 topics from the course</li>
+<li><strong>No time limit</strong> — take your time and read carefully</li>
+<li><strong>Not pass/fail</strong> — it shows how much you've learned</li>
+<li>After you submit, use <strong>Print Report (PDF)</strong> to save or print your results</li>
+<li>Compare it to your Week 1 Pre-Test to see your improvement!</li>
+</ul>
+</div>
+</div>
+<div class="demo-box">
+<h3>📈 Measuring Your Growth</h3>
+<p>Back in Week 1, this was all new. Today you have five weeks of practice behind you — this test is your chance to prove it to yourself. Be proud of every answer you know now that you didn't before.</p>
+</div>
+<div style="text-align: center;">
+<a class="pretest-link" href="../../assessments/post-test.html">Start Post-Test →</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Navigation Footer -->
+<div class="nav-footer">
+<button class="nav-btn prev" disabled="" id="prevBtn">
         ← Previous
       </button>
-      <span class="slide-counter">
+<span class="slide-counter">
         Slide <span id="currentSlide">1</span> of <span id="totalSlides">17</span>
-      </span>
-      <button class="nav-btn next" id="nextBtn">
+</span>
+<button class="nav-btn next" id="nextBtn">
         Next →
       </button>
-    </div>
-  </main>
-
-  <!-- Confetti Container -->
-  <div class="confetti" id="confetti"></div>
-
-  <script src="../../../../shared/progress.js"></script>
-  <script src="../../../../shared/glossary.js" defer></script>
-  <script>
+</div>
+</main>
+<!-- Confetti Container -->
+<div class="confetti" id="confetti"></div>
+<script src="../../../../shared/video-ids.js"></script>
+<script src="../../../../shared/progress.js"></script>
+<script defer="" src="../../../../shared/glossary.js"></script>
+<script>
     // Presentation State
     let currentSlide = 0;
     let fitFrame = 0;
@@ -1402,6 +1473,50 @@
         const activeSlide = slides[currentSlide];
         const heading = activeSlide ? activeSlide.querySelector('h2') : null;
         announce.textContent = heading ? heading.textContent.trim() : '';
+      }
+
+      // Stop any playing video when navigating away
+      slides.forEach((slide, index) => {
+        if (index !== currentSlide) {
+          const iframe = slide.querySelector('.video-wrapper iframe');
+          if (iframe) {
+            const currentSrc = iframe.src;
+            iframe.src = '';
+            iframe.src = currentSrc;
+          }
+        }
+      });
+
+      // Lazy load YouTube iframe when video slide becomes active
+      const videoSlide = slides[currentSlide];
+      if (videoSlide) {
+        const wrapper = videoSlide.querySelector('.video-wrapper');
+        if (wrapper && !wrapper.querySelector('iframe') && !wrapper.querySelector('.video-fallback-card')) {
+          const videoId = window.VUB_VIDEO_IDS?.week5;
+          const isConfigured = videoId && videoId !== "REPLACE_WITH_WEEK5_VIDEO_ID";
+          const isOnline = navigator.onLine;
+
+          if (isConfigured && isOnline) {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            iframe.title = "Lesson Recap Video";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
+            wrapper.appendChild(iframe);
+          } else {
+            const fallback = document.createElement('div');
+            fallback.className = 'video-fallback-card';
+            fallback.innerHTML = `
+              <div class="video-fallback-icon" aria-hidden="true">📺</div>
+              <h3>Video Recap Offline or Unconfigured</h3>
+              <p style="margin: 0.5rem 0 1rem;">
+                \${!isConfigured ? 'The video link has not been configured in shared/video-ids.js yet.' : 'To watch this video recap, please check your internet connection.'}
+              </p>
+              <p style="font-size: 0.9rem; opacity: 0.85;">You can continue reading the slides normally.</p>
+            `;
+            wrapper.appendChild(fallback);
+          }
+        }
       }
 
       scheduleSlideFit();
@@ -1592,6 +1707,6 @@
       }
     }
   </script>
-  <script src="/shared/text-size.js" defer></script>
+<script defer="" src="/shared/text-size.js"></script>
 </body>
 </html>

@@ -28,7 +28,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w3l-01.mp3',
-    durationInFrames: Math.max(90, Math.ceil(52 / 2.2 * 30) + 75),
+    durationInFrames: 456,
     heading: 'You made something. Now keep it.',
     subtitle: 'Make your work, save it so it’s never lost, and share it the right way — none of it is hard.',
   },
@@ -36,7 +36,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w3l-02.mp3',
-    durationInFrames: Math.max(90, Math.ceil(37 / 2.2 * 30) + 75),
+    durationInFrames: 339,
     kicker: 'Week 3 · Objectives',
     heading: 'Today you’ll be able to…',
     objectives: [
@@ -50,7 +50,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w3l-03.mp3',
-    durationInFrames: Math.max(90, Math.ceil(30 / 2.2 * 30) + 75),
+    durationInFrames: 319,
     kicker: 'Chapter 1',
     heading: 'Make & Save',
     subtitle: 'Make something and keep it safe — if you can type, you’re halfway there.',
@@ -59,7 +59,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'steps',
     audio: 'w3l-04.mp3',
-    durationInFrames: Math.max(90, Math.ceil(68 / 2.2 * 30) + 75),
+    durationInFrames: 769,
     heading: 'Make a document in three steps',
     steps: [
       { label: 'Open Word', note: 'Press the Windows key, type “Word,” press Enter, choose “Blank document.”' },
@@ -71,7 +71,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w3l-05.mp3',
-    durationInFrames: Math.max(90, Math.ceil(63 / 2.2 * 30) + 75),
+    durationInFrames: 669,
     heading: 'A document vs. a presentation',
     columns: [
       { icon: '📄', title: 'Document', lines: ['One long page you write on', 'Like a letter', 'Made in Word'] },
@@ -82,7 +82,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'uiCallout',
     audio: 'w3l-06.mp3',
-    durationInFrames: Math.max(90, Math.ceil(61 / 2.2 * 30) + 75),
+    durationInFrames: 673,
     heading: 'Give credit to your source.',
     callouts: [
       { label: '🔖 Referencing', note: 'Telling your reader where you found your information.' },
@@ -94,7 +94,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'steps',
     audio: 'w3l-07.mp3',
-    durationInFrames: Math.max(90, Math.ceil(70 / 2.2 * 30) + 75),
+    durationInFrames: 730,
     heading: 'Save it so you never lose it',
     steps: [
       { label: 'Press Ctrl + S', note: 'The moment you start, and again every few minutes.' },
@@ -106,7 +106,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w3l-08.mp3',
-    durationInFrames: Math.max(90, Math.ceil(57 / 2.2 * 30) + 75),
+    durationInFrames: 619,
     heading: 'A name you’ll understand next year',
     columns: [
       {
@@ -126,7 +126,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w3l-09.mp3',
-    durationInFrames: Math.max(90, Math.ceil(40 / 2.2 * 30) + 75),
+    durationInFrames: 370,
     kicker: 'Lab · Parts 1 & 2',
     heading: 'You’ll practice this in the lab.',
     subtitle: 'Make a document and save it with a good name, then add a simple citation.',
@@ -135,7 +135,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w3l-10.mp3',
-    durationInFrames: Math.max(90, Math.ceil(24 / 2.2 * 30) + 75),
+    durationInFrames: 255,
     kicker: 'Chapter 2',
     heading: 'Printing',
     subtitle: 'A couple of simple choices — and you can always check your work first.',
@@ -144,7 +144,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w3l-11.mp3',
-    durationInFrames: Math.max(90, Math.ceil(58 / 2.2 * 30) + 75),
+    durationInFrames: 632,
     heading: 'Tall or wide · One side or two',
     columns: [
       {
@@ -163,7 +163,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'steps',
     audio: 'w3l-12.mp3',
-    durationInFrames: Math.max(90, Math.ceil(66 / 2.2 * 30) + 75),
+    durationInFrames: 799,
     heading: 'How to print',
     steps: [
       { label: 'Press Ctrl + P', note: 'A preview on the right shows your page exactly as it will print.' },
@@ -176,7 +176,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'uiCallout',
     audio: 'w3l-13.mp3',
-    durationInFrames: Math.max(90, Math.ceil(44 / 2.2 * 30) + 75),
+    durationInFrames: 427,
     heading: 'Always check the preview.',
     callouts: [
       { label: '🔍 The preview', note: 'The picture of your page on the print screen — before any paper comes out.' },
@@ -188,7 +188,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w3l-14.mp3',
-    durationInFrames: Math.max(90, Math.ceil(28 / 2.2 * 30) + 75),
+    durationInFrames: 294,
     kicker: 'Lab · Part 3',
     heading: 'You’ll practice this in the lab.',
     subtitle: 'Try every print setting — without printing a single page, using Save as PDF.',
@@ -197,7 +197,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w3l-15.mp3',
-    durationInFrames: Math.max(90, Math.ceil(19 / 2.2 * 30) + 75),
+    durationInFrames: 230,
     kicker: 'Chapter 3',
     heading: 'Communicate',
     subtitle: 'Working together online, kindly and clearly — small habits, big difference.',
@@ -206,7 +206,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w3l-16.mp3',
-    durationInFrames: Math.max(90, Math.ceil(62 / 2.2 * 30) + 75),
+    durationInFrames: 538,
     heading: 'Effective vs. ineffective messages',
     columns: [
       {
@@ -225,7 +225,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'uiCallout',
     audio: 'w3l-17.mp3',
-    durationInFrames: Math.max(90, Math.ceil(64 / 2.2 * 30) + 75),
+    durationInFrames: 611,
     heading: 'Reply · Reply All · Forward · Bcc',
     callouts: [
       { label: '↩️ Reply', note: 'Answers only the person who sent it. Use this most of the time.' },
@@ -238,7 +238,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w3l-18.mp3',
-    durationInFrames: Math.max(90, Math.ceil(58 / 2.2 * 30) + 75),
+    durationInFrames: 626,
     heading: 'Welcome everyone · Work together',
     columns: [
       {
@@ -257,7 +257,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w3l-19.mp3',
-    durationInFrames: Math.max(90, Math.ceil(36 / 2.2 * 30) + 75),
+    durationInFrames: 385,
     kicker: 'Lab · Parts 4 & 5',
     heading: 'You’ll practice this in the lab.',
     subtitle: 'Choose the right email button for real situations, then handle the “reply-all” trap.',
@@ -266,7 +266,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'question',
     audio: 'w3l-20.mp3',
-    durationInFrames: Math.max(90, Math.ceil(45 / 2.2 * 30) + 75),
+    durationInFrames: 470,
     question: 'Only the sender needs your answer — which button?',
     answer: 'Reply.',
     why: 'Reply goes to the sender only. Reply All would send it to all ten — usually unnecessary.',
@@ -275,7 +275,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'question',
     audio: 'w3l-21.mp3',
-    durationInFrames: Math.max(90, Math.ceil(31 / 2.2 * 30) + 75),
+    durationInFrames: 488,
     question: 'Which file name is easiest to find next year?',
     answer: 'VA-Benefits-Letter-2026-06.',
     why: 'It describes what’s inside and includes the date, so it’s clear and sorts in order.',
@@ -284,7 +284,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'question',
     audio: 'w3l-22.mp3',
-    durationInFrames: Math.max(90, Math.ceil(38 / 2.2 * 30) + 75),
+    durationInFrames: 457,
     question: 'A tall page for a letter — which orientation?',
     answer: 'Portrait.',
     why: 'Portrait is tall, like a letter. Landscape is wide, better for wide tables or photos.',
@@ -293,7 +293,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w3l-23.mp3',
-    durationInFrames: Math.max(90, Math.ceil(49 / 2.2 * 30) + 75),
+    durationInFrames: 534,
     kicker: 'Recap',
     heading: 'What to remember',
     objectives: [
@@ -308,7 +308,7 @@ export const WEEK3_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w3l-24.mp3',
-    durationInFrames: Math.max(90, Math.ceil(60 / 2.2 * 30) + 75),
+    durationInFrames: 491,
     heading: 'You did it.',
     subtitle: 'You can create, save, print, and share your work. Next week: citizenship and safety — keeping you and your information safe online.',
   },
