@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Week 2: Getting Online — Browsers, Networks & Searching | VUB Digital Literacy — Level 1</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Week 2: Getting Online — Browsers, Networks &amp; Searching | VUB Digital Literacy — Level 1</title>
+<style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
@@ -761,703 +765,759 @@
       .slide-counter { order: -1; flex: 0 0 100%; text-align: center; font-size: 0.85rem; white-space: nowrap; }
       .two-column { grid-template-columns: 1fr; }
     }
-  </style>
+
+    /* YouTube Embed Styles */
+    .video-slide-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .video-wrapper {
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      background: #000;
+      position: relative;
+      margin: 1rem 0;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-fallback-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem;
+      border: 2px dashed rgba(27, 54, 93, 0.3);
+      border-radius: 12px;
+      background: #fffbef;
+      color: #4a4327;
+      text-align: center;
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+    .video-fallback-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+  
+    /* Premium Sidebar Scrollbar styling */
+    .sidebar-scroll-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      padding-right: 0.25rem;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+    
+    .sidebar-scroll-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+</style>
 </head>
 <body>
-  <!-- Sidebar Navigation -->
-  <nav class="sidebar" aria-label="Lesson chapters">
-    <a class="logo" href="/courses/digital-literacy-1/index.html" aria-label="Back to the Digital Literacy — Level 1 dashboard">
-      <img class="logo-img" src="/assets/vub-seal-white.png" alt="VUB" width="56" height="56">
-      <h2>VUB Digital Literacy</h2>
-      <p>Level 1 · IC3 GS6 Aligned</p>
-    </a>
+<!-- Sidebar Navigation -->
+<nav aria-label="Lesson chapters" class="sidebar">
+<a aria-label="Back to the Digital Literacy — Level 1 dashboard" class="logo" href="/courses/digital-literacy-1/index.html">
+<img alt="VUB" class="logo-img" height="56" src="/assets/vub-seal-white.png" width="56"/>
+<h2>VUB Digital Literacy</h2>
+<p>Level 1 · IC3 GS6 Aligned</p>
+</a>
+<div class="week-indicator">
+<div class="week-num">Week 2</div>
+<div class="week-title">Getting Online</div>
+</div><div class="sidebar-scroll-container"><div aria-labelledby="ch-browsers" class="chapter" role="group">
+<div class="chapter-title" id="ch-browsers">Browsers &amp; Digital Environments</div>
+<div class="chapter-slides">
+<button class="slide-link active" data-slide="0" type="button">Welcome &amp; Overview</button><button class="slide-link" data-slide="1" type="button">Lesson Recap Video</button>
+<button class="slide-link" data-slide="2" type="button">Learning Objectives</button>
+<button class="slide-link" data-slide="3" type="button">The Desktop &amp; OS Terms</button>
+<button class="slide-link" data-slide="4" type="button">What a Web Browser Does</button>
+<button class="slide-link" data-slide="5" type="button">Tabs, Bookmarks &amp; History</button>
+<button class="slide-link" data-slide="6" type="button">Moving Between Sites &amp; Apps</button>
+</div>
+</div><div aria-labelledby="ch-networking" class="chapter" role="group">
+<div class="chapter-title" id="ch-networking">Networking</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="7" type="button">Wired, Wi-Fi &amp; Cellular</button>
+<button class="slide-link" data-slide="8" type="button">Modem, Router &amp; ISP</button>
+<button class="slide-link" data-slide="9" type="button">Am I Connected?</button>
+<button class="slide-link" data-slide="10" type="button">Basic Troubleshooting</button>
+</div>
+</div><div aria-labelledby="ch-searching" class="chapter" role="group">
+<div class="chapter-title" id="ch-searching">Searching &amp; Copyright</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="11" type="button">Define Your Search</button>
+<button class="slide-link" data-slide="12" type="button">Relevant vs. Irrelevant</button>
+<button class="slide-link" data-slide="13" type="button">Keep Your Sources</button>
+<button class="slide-link" data-slide="14" type="button">Find on Page (Ctrl+F)</button>
+<button class="slide-link" data-slide="15" type="button">Copyright &amp; Creative Commons</button>
+</div>
+</div><div aria-labelledby="ch-wrap-up" class="chapter" role="group">
+<div class="chapter-title" id="ch-wrap-up">Wrap-Up</div>
+<div class="chapter-slides">
+<button class="slide-link" data-slide="16" type="button">Knowledge Check</button>
+<button class="slide-link" data-slide="17" type="button">Key Takeaways</button>
+<button class="slide-link" data-slide="18" type="button">You Did It!</button>
+</div>
+</div><div class="resources-section">
+<div class="resources-title">Resources</div>
+<a class="resource-link" href="handouts/search-connect-lab.html" target="_blank">Search &amp; Connect Lab</a>
+<a class="resource-link" href="handouts/browser-wifi-quick-reference.html" target="_blank">Browser &amp; Wi-Fi Quick Reference</a>
+</div></div>
 
-    <div class="week-indicator">
-      <div class="week-num">Week 2</div>
-      <div class="week-title">Getting Online</div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-browsers">
-      <div class="chapter-title" id="ch-browsers">Browsers &amp; Digital Environments</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link active" data-slide="0">Welcome &amp; Overview</button>
-        <button type="button" class="slide-link" data-slide="1">Learning Objectives</button>
-        <button type="button" class="slide-link" data-slide="2">The Desktop &amp; OS Terms</button>
-        <button type="button" class="slide-link" data-slide="3">What a Web Browser Does</button>
-        <button type="button" class="slide-link" data-slide="4">Tabs, Bookmarks &amp; History</button>
-        <button type="button" class="slide-link" data-slide="5">Moving Between Sites &amp; Apps</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-networking">
-      <div class="chapter-title" id="ch-networking">Networking</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="6">Wired, Wi-Fi &amp; Cellular</button>
-        <button type="button" class="slide-link" data-slide="7">Modem, Router &amp; ISP</button>
-        <button type="button" class="slide-link" data-slide="8">Am I Connected?</button>
-        <button type="button" class="slide-link" data-slide="9">Basic Troubleshooting</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-searching">
-      <div class="chapter-title" id="ch-searching">Searching &amp; Copyright</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="10">Define Your Search</button>
-        <button type="button" class="slide-link" data-slide="11">Relevant vs. Irrelevant</button>
-        <button type="button" class="slide-link" data-slide="12">Keep Your Sources</button>
-        <button type="button" class="slide-link" data-slide="13">Find on Page (Ctrl+F)</button>
-        <button type="button" class="slide-link" data-slide="14">Copyright &amp; Creative Commons</button>
-      </div>
-    </div>
 
-    <div class="chapter" role="group" aria-labelledby="ch-wrap-up">
-      <div class="chapter-title" id="ch-wrap-up">Wrap-Up</div>
-      <div class="chapter-slides">
-        <button type="button" class="slide-link" data-slide="15">Knowledge Check</button>
-        <button type="button" class="slide-link" data-slide="16">Key Takeaways</button>
-        <button type="button" class="slide-link" data-slide="17">You Did It!</button>
-      </div>
-    </div>
-
-    <div class="resources-section">
-      <div class="resources-title">Resources</div>
-      <a class="resource-link" href="handouts/search-connect-lab.html" target="_blank">Search &amp; Connect Lab</a>
-      <a class="resource-link" href="handouts/browser-wifi-quick-reference.html" target="_blank">Browser &amp; Wi-Fi Quick Reference</a>
-    </div>
-
-    <div class="progress-section">
-      <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Lesson progress">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <div class="progress-text"><span id="progressText">0</span>% Complete</div>
-    </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <h1 class="sr-only">Week 2: Getting Online — Browsers, Networks &amp; Searching</h1>
-    <div id="slide-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-    <div class="slides-container">
-      <!-- Slide 0: Title -->
-      <div class="slide active title-slide">
-        <div class="slide-icon" aria-hidden="true">🌐</div>
-        <h2 class="slide-title">Getting Online</h2>
-        <p class="slide-subtitle">Browsers, Networks &amp; Smart Searching</p>
-        <p class="course-info">Week 2 of 5 · VUB Digital Literacy — Level 1</p>
-      </div>
-
-      <!-- Slide 1: Learning Objectives -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Today's Learning Objectives</h2>
-          <p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🧭</div>
-            <div class="key-point-text">
-              <strong>Navigate Your Computer &amp; the Web</strong>
+<div class="progress-section">
+<div aria-label="Lesson progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="progress-bar" id="progressBar" role="progressbar">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+<div class="progress-text"><span id="progressText">0</span>% Complete</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="main-content">
+<h1 class="sr-only">Week 2: Getting Online — Browsers, Networks &amp; Searching</h1>
+<div aria-atomic="true" aria-live="polite" class="sr-only" id="slide-announce"></div>
+<div class="slides-container">
+<!-- Slide 0: Title -->
+<div class="slide active title-slide">
+<div aria-hidden="true" class="slide-icon">🌐</div>
+<h2 class="slide-title">Getting Online</h2>
+<p class="slide-subtitle">Browsers, Networks &amp; Smart Searching</p>
+<p class="course-info">Week 2 of 5 · VUB Digital Literacy — Level 1</p>
+</div><div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Lesson Recap Video</h2>
+<p class="slide-subtitle">Watch a video summary of this week's lesson</p>
+</div>
+<div class="slide-content video-slide-content">
+<div class="video-wrapper" id="videoWrapperWeek2">
+<!-- Dynamic iframe injected via JS or fallback card -->
+</div>
+<p style="margin-top: 1rem; font-size: 0.95rem; color: var(--gray); text-align: center;">
+            Note: Watching this video requires an internet connection.
+          </p>
+</div>
+</div>
+<!-- Slide 1: Learning Objectives -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Today's Learning Objectives</h2>
+<p class="slide-subtitle">By the end of this lesson, you will be able to:</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🧭</div>
+<div class="key-point-text">
+<strong>Navigate Your Computer &amp; the Web</strong>
               Use the desktop, and move around web browsers with tabs, bookmarks, and history
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📶</div>
-            <div class="key-point-text">
-              <strong>Understand How You Connect</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📶</div>
+<div class="key-point-text">
+<strong>Understand How You Connect</strong>
               Know the difference between wired, Wi-Fi, and cellular — and check if you're connected
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔧</div>
-            <div class="key-point-text">
-              <strong>Fix Common Connection Problems</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔧</div>
+<div class="key-point-text">
+<strong>Fix Common Connection Problems</strong>
               Walk through simple steps when the internet stops working
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔍</div>
-            <div class="key-point-text">
-              <strong>Search Smarter &amp; Use Content Fairly</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔍</div>
+<div class="key-point-text">
+<strong>Search Smarter &amp; Use Content Fairly</strong>
               Find good answers, keep your sources, and understand copyright basics
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 2: The Desktop & OS Terms -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">The Desktop &amp; Operating System Terms</h2>
-          <p class="slide-subtitle">The home base of your Windows computer</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🖥️</div>
-            <div class="key-point-text">
-              <strong>Desktop</strong>
+</div>
+</div>
+</div>
+<!-- Slide 2: The Desktop & OS Terms -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">The Desktop &amp; Operating System Terms</h2>
+<p class="slide-subtitle">The home base of your Windows computer</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🖥️</div>
+<div class="key-point-text">
+<strong>Desktop</strong>
               The main screen you see after signing in. It holds icons, shortcuts, and your background
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📊</div>
-            <div class="key-point-text">
-              <strong>Taskbar</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📊</div>
+<div class="key-point-text">
+<strong>Taskbar</strong>
               The bar along the bottom. It shows open programs and has the Start button and clock
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🪟</div>
-            <div class="key-point-text">
-              <strong>Start Menu &amp; Windows Key</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🪟</div>
+<div class="key-point-text">
+<strong>Start Menu &amp; Windows Key</strong>
               Press the <strong style="display:inline;">Windows</strong> key (bottom-left of the keyboard) to open Start and find any program
             </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Why "operating system"?</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box">
+<div class="info-box-title">Why "operating system"?</div>
+<div class="info-box-content">
               The operating system (Windows) is the master program that runs your computer and lets every other app work. The desktop and taskbar are part of it.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3: What a Web Browser Does -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">What a Web Browser Does</h2>
-          <p class="slide-subtitle">Your window to the internet</p>
-        </div>
-        <div class="slide-content">
-          <div class="portal-card">
-            <div class="portal-card-icon" aria-hidden="true">🌐</div>
-            <div>
-              <h4>A Web Browser</h4>
-              <p>A program that opens websites. Common browsers are Microsoft Edge, Google Chrome, and Mozilla Firefox. They all do the same basic job.</p>
-            </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📍</div>
-            <div class="key-point-text">
-              <strong>Address Bar</strong>
+</div>
+</div>
+</div>
+<!-- Slide 3: What a Web Browser Does -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">What a Web Browser Does</h2>
+<p class="slide-subtitle">Your window to the internet</p>
+</div>
+<div class="slide-content">
+<div class="portal-card">
+<div aria-hidden="true" class="portal-card-icon">🌐</div>
+<div>
+<h4>A Web Browser</h4>
+<p>A program that opens websites. Common browsers are Microsoft Edge, Google Chrome, and Mozilla Firefox. They all do the same basic job.</p>
+</div>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📍</div>
+<div class="key-point-text">
+<strong>Address Bar</strong>
               The box at the top where you type a website address (the URL), like <em>va.gov</em>. You can also type a question to search
             </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">Reading a web address</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box success">
+<div class="info-box-title">Reading a web address</div>
+<div class="info-box-content">
               In <strong>www.va.gov</strong>, the <strong>.gov</strong> ending tells you it's an official U.S. government site. A small padlock 🔒 means the connection is secure.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 4: Tabs, Bookmarks & History -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Tabs, Bookmarks &amp; History</h2>
-          <p class="slide-subtitle">Three tools that make browsing easier</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🗂️</div>
-            <div class="key-point-text">
-              <strong>Tabs</strong>
+</div>
+</div>
+</div>
+<!-- Slide 4: Tabs, Bookmarks & History -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Tabs, Bookmarks &amp; History</h2>
+<p class="slide-subtitle">Three tools that make browsing easier</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🗂️</div>
+<div class="key-point-text">
+<strong>Tabs</strong>
               Open several pages in one window. Each tab is like a page in a folder — click between them at the top
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">⭐</div>
-            <div class="key-point-text">
-              <strong>Bookmarks (Favorites)</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">⭐</div>
+<div class="key-point-text">
+<strong>Bookmarks (Favorites)</strong>
               Save a website so you can return without retyping it. Click the star ⭐ in the address bar to bookmark a page
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🕘</div>
-            <div class="key-point-text">
-              <strong>History</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🕘</div>
+<div class="key-point-text">
+<strong>History</strong>
               A list of pages you've visited. Press <strong style="display:inline;">Ctrl + H</strong> to find a site you saw earlier but didn't bookmark
             </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Tip</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box">
+<div class="info-box-title">Tip</div>
+<div class="info-box-content">
               Bookmark the websites you use most — like va.gov or your email — so they're one click away every time.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 5: Moving Between Sites & Apps -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Moving Between Sites &amp; Programs</h2>
-          <p class="slide-subtitle">Navigating your "digital environment"</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>Within the Browser</h3>
-              <ul>
-                <li><strong>Back ←</strong> returns to the last page</li>
-                <li><strong>Forward →</strong> goes ahead again</li>
-                <li><strong>Refresh ⟳</strong> reloads the page</li>
-                <li><strong>Home 🏠</strong> goes to your start page</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>Between Programs</h3>
-              <ul>
-                <li>Click an icon on the taskbar</li>
-                <li>Press <strong>Alt + Tab</strong> to switch windows</li>
-                <li>A browser and a document can be open at the same time</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">The big idea</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 5: Moving Between Sites & Apps -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Moving Between Sites &amp; Programs</h2>
+<p class="slide-subtitle">Navigating your "digital environment"</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>Within the Browser</h3>
+<ul>
+<li><strong>Back ←</strong> returns to the last page</li>
+<li><strong>Forward →</strong> goes ahead again</li>
+<li><strong>Refresh ⟳</strong> reloads the page</li>
+<li><strong>Home 🏠</strong> goes to your start page</li>
+</ul>
+</div>
+<div class="column">
+<h3>Between Programs</h3>
+<ul>
+<li>Click an icon on the taskbar</li>
+<li>Press <strong>Alt + Tab</strong> to switch windows</li>
+<li>A browser and a document can be open at the same time</li>
+</ul>
+</div>
+</div>
+<div class="info-box success">
+<div class="info-box-title">The big idea</div>
+<div class="info-box-content">
               A "digital environment" just means a place you work — a website, an app, or your desktop. The same skills move you around all of them.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 6: Wired, Wi-Fi & Cellular -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Three Ways to Connect</h2>
-          <p class="slide-subtitle">Wired, Wi-Fi, and cellular</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔌</div>
-            <div class="key-point-text">
-              <strong>Wired (Ethernet)</strong>
+</div>
+</div>
+</div>
+<!-- Slide 6: Wired, Wi-Fi & Cellular -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Three Ways to Connect</h2>
+<p class="slide-subtitle">Wired, Wi-Fi, and cellular</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔌</div>
+<div class="key-point-text">
+<strong>Wired (Ethernet)</strong>
               A cable plugs your computer directly into the router. Very fast and steady — common for desktop PCs
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📶</div>
-            <div class="key-point-text">
-              <strong>Wi-Fi</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📶</div>
+<div class="key-point-text">
+<strong>Wi-Fi</strong>
               A wireless signal in your home or this lab. No cables — your device connects through the air to the router
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📱</div>
-            <div class="key-point-text">
-              <strong>Cellular (Mobile Data)</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📱</div>
+<div class="key-point-text">
+<strong>Cellular (Mobile Data)</strong>
               The same network that carries phone calls. Phones use it for internet when away from Wi-Fi
             </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Which is best?</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box">
+<div class="info-box-title">Which is best?</div>
+<div class="info-box-content">
               At home, Wi-Fi is the most common. A wired cable is steadiest. Cellular is for when you're out and about. They all get you to the same internet.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 7: Modem, Router & ISP -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Modem, Router &amp; Internet Provider</h2>
-          <p class="slide-subtitle">The gear that brings the internet to your home</p>
-        </div>
-        <div class="slide-content">
-          <ol class="steps-list">
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Internet Service Provider (ISP)</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">The company you pay for internet — such as a cable or phone company. They send the signal to your house.</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Modem</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">A box that brings the provider's signal into your home through a wall outlet.</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Router</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">Shares that internet with your devices — by Wi-Fi or by cable. It creates your Wi-Fi network name.</span>
-            </li>
-          </ol>
-          <div class="info-box success">
-            <div class="info-box-title">Good to know</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 7: Modem, Router & ISP -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Modem, Router &amp; Internet Provider</h2>
+<p class="slide-subtitle">The gear that brings the internet to your home</p>
+</div>
+<div class="slide-content">
+<ol class="steps-list">
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Internet Service Provider (ISP)</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">The company you pay for internet — such as a cable or phone company. They send the signal to your house.</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Modem</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">A box that brings the provider's signal into your home through a wall outlet.</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Router</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">Shares that internet with your devices — by Wi-Fi or by cable. It creates your Wi-Fi network name.</span>
+</li>
+</ol>
+<div class="info-box success">
+<div class="info-box-title">Good to know</div>
+<div class="info-box-content">
               Many homes have one box that is a modem and router combined. If the internet goes out, this box is the first place to check.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 8: Am I Connected? -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Am I Connected?</h2>
-          <p class="slide-subtitle">How to tell if your device is online</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📶</div>
-            <div class="key-point-text">
-              <strong>Check the Wi-Fi Icon</strong>
+</div>
+</div>
+</div>
+<!-- Slide 8: Am I Connected? -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Am I Connected?</h2>
+<p class="slide-subtitle">How to tell if your device is online</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📶</div>
+<div class="key-point-text">
+<strong>Check the Wi-Fi Icon</strong>
               Look at the bottom-right of the taskbar. Curved bars 📶 mean Wi-Fi is connected. More bars = stronger signal
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🌐</div>
-            <div class="key-point-text">
-              <strong>A Globe Icon Means Trouble</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🌐</div>
+<div class="key-point-text">
+<strong>A Globe Icon Means Trouble</strong>
               If you see a globe 🌐 instead of the Wi-Fi bars, you are not connected to the internet
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">✅</div>
-            <div class="key-point-text">
-              <strong>The Real Test</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">✅</div>
+<div class="key-point-text">
+<strong>The Real Test</strong>
               Open your browser and visit a website you trust. If it loads, you're online
             </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Click to see your networks</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box">
+<div class="info-box-title">Click to see your networks</div>
+<div class="info-box-content">
               Click the Wi-Fi icon on the taskbar to see available networks and which one you're on. Your network shows as "Connected."
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 9: Basic Troubleshooting -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">When the Internet Stops Working</h2>
-          <p class="slide-subtitle">Simple steps to try, in order</p>
-        </div>
-        <div class="slide-content">
-          <ol class="steps-list">
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Check the Wi-Fi icon</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">Make sure Wi-Fi is turned on and you're connected to the right network.</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Try another website</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">If only one site fails, the problem is that site — not your connection.</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Restart your modem/router</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">Unplug it, wait 30 seconds, plug it back in, and wait two minutes. This fixes most problems.</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Restart your computer</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">A simple restart clears many small glitches.</span>
-            </li>
-          </ol>
-          <div class="info-box warning">
-            <div class="info-box-title">Still not working?</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 9: Basic Troubleshooting -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">When the Internet Stops Working</h2>
+<p class="slide-subtitle">Simple steps to try, in order</p>
+</div>
+<div class="slide-content">
+<ol class="steps-list">
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Check the Wi-Fi icon</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">Make sure Wi-Fi is turned on and you're connected to the right network.</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Try another website</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">If only one site fails, the problem is that site — not your connection.</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Restart your modem/router</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">Unplug it, wait 30 seconds, plug it back in, and wait two minutes. This fixes most problems.</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Restart your computer</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">A simple restart clears many small glitches.</span>
+</li>
+</ol>
+<div class="info-box warning">
+<div class="info-box-title">Still not working?</div>
+<div class="info-box-content">
               If none of these help, the problem may be with your internet provider. Call them — an outage in your area is not something you can fix at home.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 10: Define Your Search -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Search Smarter: Start With Your Need</h2>
-          <p class="slide-subtitle">Good searches begin with a clear question</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">❓</div>
-            <div class="key-point-text">
-              <strong>Decide What You Actually Need</strong>
+</div>
+</div>
+</div>
+<!-- Slide 10: Define Your Search -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Search Smarter: Start With Your Need</h2>
+<p class="slide-subtitle">Good searches begin with a clear question</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">❓</div>
+<div class="key-point-text">
+<strong>Decide What You Actually Need</strong>
               Before typing, ask: what am I trying to find out? The clearer your question, the better the results
             </div>
-          </div>
-          <div class="two-column">
-            <div class="column">
-              <h3>Vague Search</h3>
-              <ul>
-                <li>"benefits"</li>
-                <li>"doctor"</li>
-                <li>"taxes"</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>Clear Search</h3>
-              <ul>
-                <li>"VA disability benefits eligibility"</li>
-                <li>"VA clinic near Charleston WV"</li>
-                <li>"free tax help for veterans"</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">Use a few specific words</div>
-            <div class="info-box-content">
+</div>
+<div class="two-column">
+<div class="column">
+<h3>Vague Search</h3>
+<ul>
+<li>"benefits"</li>
+<li>"doctor"</li>
+<li>"taxes"</li>
+</ul>
+</div>
+<div class="column">
+<h3>Clear Search</h3>
+<ul>
+<li>"VA disability benefits eligibility"</li>
+<li>"VA clinic near Charleston WV"</li>
+<li>"free tax help for veterans"</li>
+</ul>
+</div>
+</div>
+<div class="info-box success">
+<div class="info-box-title">Use a few specific words</div>
+<div class="info-box-content">
               You don't need full sentences. Three or four well-chosen words usually work best.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 11: Relevant vs Irrelevant -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Good Results vs. Bad Results</h2>
-          <p class="slide-subtitle">Not every result is worth your time</p>
-        </div>
-        <div class="slide-content">
-          <div class="two-column">
-            <div class="column">
-              <h3>✅ Trust These More</h3>
-              <ul>
-                <li>Sites ending in <strong>.gov</strong> or <strong>.edu</strong></li>
-                <li>Well-known organizations</li>
-                <li>Recent dates on the page</li>
-                <li>Clear, plain information</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h3>⚠️ Be Careful With</h3>
-              <ul>
-                <li>Results marked "Ad" or "Sponsored"</li>
-                <li>Sites that ask for payment or personal info</li>
-                <li>Pages full of pop-ups</li>
-                <li>Promises that sound too good</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-title">Look before you click</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 11: Relevant vs Irrelevant -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Good Results vs. Bad Results</h2>
+<p class="slide-subtitle">Not every result is worth your time</p>
+</div>
+<div class="slide-content">
+<div class="two-column">
+<div class="column">
+<h3>✅ Trust These More</h3>
+<ul>
+<li>Sites ending in <strong>.gov</strong> or <strong>.edu</strong></li>
+<li>Well-known organizations</li>
+<li>Recent dates on the page</li>
+<li>Clear, plain information</li>
+</ul>
+</div>
+<div class="column">
+<h3>⚠️ Be Careful With</h3>
+<ul>
+<li>Results marked "Ad" or "Sponsored"</li>
+<li>Sites that ask for payment or personal info</li>
+<li>Pages full of pop-ups</li>
+<li>Promises that sound too good</li>
+</ul>
+</div>
+</div>
+<div class="info-box">
+<div class="info-box-title">Look before you click</div>
+<div class="info-box-content">
               Read the web address under each result. Ads usually appear first and are labeled "Ad." The most useful answer is often a little further down.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 12: Keep Your Sources -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Keep Track of Where You Found It</h2>
-          <p class="slide-subtitle">Saving your sources saves you time later</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">⭐</div>
-            <div class="key-point-text">
-              <strong>Bookmark the Page</strong>
+</div>
+</div>
+</div>
+<!-- Slide 12: Keep Your Sources -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Keep Track of Where You Found It</h2>
+<p class="slide-subtitle">Saving your sources saves you time later</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">⭐</div>
+<div class="key-point-text">
+<strong>Bookmark the Page</strong>
               Click the star ⭐ to save a useful page so you can find it again
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📋</div>
-            <div class="key-point-text">
-              <strong>Copy the Web Address</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📋</div>
+<div class="key-point-text">
+<strong>Copy the Web Address</strong>
               Click in the address bar, press <strong style="display:inline;">Ctrl + C</strong> to copy, and paste it into a note or document
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📝</div>
-            <div class="key-point-text">
-              <strong>Note the Basics</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📝</div>
+<div class="key-point-text">
+<strong>Note the Basics</strong>
               Write down the website name and the date you visited. That's enough to find it later or share it
             </div>
-          </div>
-          <div class="info-box success">
-            <div class="info-box-title">Why bother?</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box success">
+<div class="info-box-title">Why bother?</div>
+<div class="info-box-content">
               If you ever need to prove where information came from — or just look it up again — your saved source is right there.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 13: Find on Page (Ctrl+F) -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Find a Word Fast: Ctrl + F</h2>
-          <p class="slide-subtitle">Search inside a page or a document</p>
-        </div>
-        <div class="slide-content">
-          <ol class="steps-list">
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Press Ctrl + F</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">A small search box appears, usually in the top-right corner. This works in web browsers and in programs like Word and Adobe Reader.</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Type the word you want</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">The page jumps to it and highlights every match.</span>
-            </li>
-            <li>
-              <strong style="font-size: 1.25rem; color: var(--primary);">Use the arrows to move</strong><br>
-              <span style="font-size: 1.1rem; color: #555;">Click the up/down arrows (or press Enter) to jump to the next match.</span>
-            </li>
-          </ol>
-          <div class="info-box">
-            <div class="info-box-title">Why it's so useful</div>
-            <div class="info-box-content">
+</div>
+</div>
+</div>
+<!-- Slide 13: Find on Page (Ctrl+F) -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Find a Word Fast: Ctrl + F</h2>
+<p class="slide-subtitle">Search inside a page or a document</p>
+</div>
+<div class="slide-content">
+<ol class="steps-list">
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Press Ctrl + F</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">A small search box appears, usually in the top-right corner. This works in web browsers and in programs like Word and Adobe Reader.</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Type the word you want</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">The page jumps to it and highlights every match.</span>
+</li>
+<li>
+<strong style="font-size: 1.25rem; color: var(--primary);">Use the arrows to move</strong><br/>
+<span style="font-size: 1.1rem; color: #555;">Click the up/down arrows (or press Enter) to jump to the next match.</span>
+</li>
+</ol>
+<div class="info-box">
+<div class="info-box-title">Why it's so useful</div>
+<div class="info-box-content">
               Instead of reading a long page to find one fact, Ctrl + F takes you straight to it. It works the same way almost everywhere.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 14: Copyright & Creative Commons -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Copyright, Public Domain &amp; Creative Commons</h2>
-          <p class="slide-subtitle">What you can and can't reuse</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">©️</div>
-            <div class="key-point-text">
-              <strong>Copyright</strong>
+</div>
+</div>
+</div>
+<!-- Slide 14: Copyright & Creative Commons -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Copyright, Public Domain &amp; Creative Commons</h2>
+<p class="slide-subtitle">What you can and can't reuse</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">©️</div>
+<div class="key-point-text">
+<strong>Copyright</strong>
               Most photos, music, and writing online belong to whoever made them. By default, you may not copy or reuse it without permission
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🆓</div>
-            <div class="key-point-text">
-              <strong>Public Domain</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🆓</div>
+<div class="key-point-text">
+<strong>Public Domain</strong>
               Work that is free for anyone to use — often because it's very old or made by the U.S. government. No permission needed
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🅭</div>
-            <div class="key-point-text">
-              <strong>Creative Commons</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🅭</div>
+<div class="key-point-text">
+<strong>Creative Commons</strong>
               The creator gives permission to reuse their work, usually if you credit them. Look for a "CC" label
             </div>
-          </div>
-          <div class="info-box warning">
-            <div class="info-box-title">Simple rule</div>
-            <div class="info-box-content">
+</div>
+<div class="info-box warning">
+<div class="info-box-title">Simple rule</div>
+<div class="info-box-content">
               When in doubt, give credit and link back to where you found it — or look for content clearly marked free to use.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 15: Knowledge Check -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Knowledge Check</h2>
-          <p class="slide-subtitle">Think it through, then reveal the answer</p>
-        </div>
-        <div class="slide-content">
-          <div class="knowledge-check">
-            <p class="question">1. You open the taskbar and see a globe icon instead of the Wi-Fi bars. What does that tell you?</p>
-            <button class="answer-toggle" type="button" aria-expanded="false" aria-controls="kc-answer-1">
-              <span class="toggle-mark" aria-hidden="true">+</span> Show answer
+</div>
+</div>
+</div>
+<!-- Slide 15: Knowledge Check -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Knowledge Check</h2>
+<p class="slide-subtitle">Think it through, then reveal the answer</p>
+</div>
+<div class="slide-content">
+<div class="knowledge-check">
+<p class="question">1. You open the taskbar and see a globe icon instead of the Wi-Fi bars. What does that tell you?</p>
+<button aria-controls="kc-answer-1" aria-expanded="false" class="answer-toggle" type="button">
+<span aria-hidden="true" class="toggle-mark">+</span> Show answer
             </button>
-            <div class="answer-reveal" id="kc-answer-1" hidden>
+<div class="answer-reveal" hidden="" id="kc-answer-1">
               The globe icon means your device is <strong>not connected</strong> to the internet. Check that Wi-Fi is on and you've joined the correct network.
             </div>
-          </div>
-
-          <div class="knowledge-check">
-            <p class="question">2. You want to find one specific word on a long webpage. What's the fastest way?</p>
-            <button class="answer-toggle" type="button" aria-expanded="false" aria-controls="kc-answer-2">
-              <span class="toggle-mark" aria-hidden="true">+</span> Show answer
+</div>
+<div class="knowledge-check">
+<p class="question">2. You want to find one specific word on a long webpage. What's the fastest way?</p>
+<button aria-controls="kc-answer-2" aria-expanded="false" class="answer-toggle" type="button">
+<span aria-hidden="true" class="toggle-mark">+</span> Show answer
             </button>
-            <div class="answer-reveal" id="kc-answer-2" hidden>
+<div class="answer-reveal" hidden="" id="kc-answer-2">
               Press <strong>Ctrl + F</strong>, type the word, and the page jumps to it and highlights every match.
             </div>
-          </div>
-
-          <div class="knowledge-check">
-            <p class="question">3. A photo online has no special label. Can you assume it's free to copy and reuse?</p>
-            <button class="answer-toggle" type="button" aria-expanded="false" aria-controls="kc-answer-3">
-              <span class="toggle-mark" aria-hidden="true">+</span> Show answer
+</div>
+<div class="knowledge-check">
+<p class="question">3. A photo online has no special label. Can you assume it's free to copy and reuse?</p>
+<button aria-controls="kc-answer-3" aria-expanded="false" class="answer-toggle" type="button">
+<span aria-hidden="true" class="toggle-mark">+</span> Show answer
             </button>
-            <div class="answer-reveal" id="kc-answer-3" hidden>
+<div class="answer-reveal" hidden="" id="kc-answer-3">
               No. Most online content is protected by <strong>copyright</strong> by default. Only reuse it if it's clearly public domain, marked Creative Commons, or you have permission.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 16: Key Takeaways -->
-      <div class="slide">
-        <div class="slide-header">
-          <h2 class="slide-title">Key Takeaways</h2>
-          <p class="slide-subtitle">What to remember from today</p>
-        </div>
-        <div class="slide-content">
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🧭</div>
-            <div class="key-point-text">
-              <strong>Browsers Have Three Helpers</strong>
+</div>
+</div>
+</div>
+<!-- Slide 16: Key Takeaways -->
+<div class="slide">
+<div class="slide-header">
+<h2 class="slide-title">Key Takeaways</h2>
+<p class="slide-subtitle">What to remember from today</p>
+</div>
+<div class="slide-content">
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🧭</div>
+<div class="key-point-text">
+<strong>Browsers Have Three Helpers</strong>
               Tabs, bookmarks, and history make moving around the web easy
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">📶</div>
-            <div class="key-point-text">
-              <strong>Know How You Connect</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">📶</div>
+<div class="key-point-text">
+<strong>Know How You Connect</strong>
               Wired, Wi-Fi, or cellular — check the taskbar icon to see if you're online
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔧</div>
-            <div class="key-point-text">
-              <strong>Restarting Fixes Most Problems</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔧</div>
+<div class="key-point-text">
+<strong>Restarting Fixes Most Problems</strong>
               When the internet drops, restart the router, then the computer
             </div>
-          </div>
-          <div class="key-point">
-            <div class="key-point-icon" aria-hidden="true">🔍</div>
-            <div class="key-point-text">
-              <strong>Search Clearly, Source Carefully</strong>
+</div>
+<div class="key-point">
+<div aria-hidden="true" class="key-point-icon">🔍</div>
+<div class="key-point-text">
+<strong>Search Clearly, Source Carefully</strong>
               Use specific words, trust .gov/.edu, keep your sources, and respect copyright
             </div>
-          </div>
-
-          <div class="handout-prompt">
-            <div class="handout-prompt-icon" aria-hidden="true">📋</div>
-            <div class="handout-prompt-text">Take your handouts home! The Search &amp; Connect Lab and the Browser &amp; Wi-Fi card have step-by-step reminders.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 17: Completion -->
-      <div class="slide completion-slide">
-        <div class="completion-badge" aria-hidden="true">
-          <span>🎉</span>
-        </div>
-        <h2>You Did It!</h2>
-        <p>
+</div>
+<div class="handout-prompt">
+<div aria-hidden="true" class="handout-prompt-icon">📋</div>
+<div class="handout-prompt-text">Take your handouts home! The Search &amp; Connect Lab and the Browser &amp; Wi-Fi card have step-by-step reminders.</div>
+</div>
+</div>
+</div>
+<!-- Slide 17: Lesson Recap Video -->
+<!-- Slide 18: Completion -->
+<div class="slide completion-slide">
+<div aria-hidden="true" class="completion-badge">
+<span>🎉</span>
+</div>
+<h2>You Did It!</h2>
+<p>
           You've learned how to get online, stay connected, and search the web with confidence.
           Practice these skills this week — open a browser, bookmark a site, and try a Ctrl + F search.
           Next week: creating documents and communicating online.
         </p>
-      </div>
-    </div>
-
-    <!-- Navigation Footer -->
-    <div class="nav-footer">
-      <button class="nav-btn prev" id="prevBtn" disabled>
+</div>
+</div>
+<!-- Navigation Footer -->
+<div class="nav-footer">
+<button class="nav-btn prev" disabled="" id="prevBtn">
         ← Previous
       </button>
-      <span class="slide-counter">
+<span class="slide-counter">
         Slide <span id="currentSlide">1</span> of <span id="totalSlides">18</span>
-      </span>
-      <button class="nav-btn next" id="nextBtn">
+</span>
+<button class="nav-btn next" id="nextBtn">
         Next →
       </button>
-    </div>
-  </main>
-
-  <!-- Confetti Container -->
-  <div class="confetti" id="confetti"></div>
-
-  <script src="../../../../shared/progress.js"></script>
-  <script src="../../../../shared/glossary.js" defer></script>
-  <script>
+</div>
+</main>
+<!-- Confetti Container -->
+<div class="confetti" id="confetti"></div>
+<script src="../../../../shared/video-ids.js"></script>
+<script src="../../../../shared/progress.js"></script>
+<script defer="" src="../../../../shared/glossary.js"></script>
+<script>
     // Presentation State
     let currentSlide = 0;
     let fitFrame = 0;
@@ -1520,6 +1580,50 @@
         const activeSlide = slides[currentSlide];
         const heading = activeSlide ? activeSlide.querySelector('h2') : null;
         announce.textContent = heading ? heading.textContent.trim() : '';
+      }
+
+      // Stop any playing video when navigating away
+      slides.forEach((slide, index) => {
+        if (index !== currentSlide) {
+          const iframe = slide.querySelector('.video-wrapper iframe');
+          if (iframe) {
+            const currentSrc = iframe.src;
+            iframe.src = '';
+            iframe.src = currentSrc;
+          }
+        }
+      });
+
+      // Lazy load YouTube iframe when video slide becomes active
+      const videoSlide = slides[currentSlide];
+      if (videoSlide) {
+        const wrapper = videoSlide.querySelector('.video-wrapper');
+        if (wrapper && !wrapper.querySelector('iframe') && !wrapper.querySelector('.video-fallback-card')) {
+          const videoId = window.VUB_VIDEO_IDS?.week2;
+          const isConfigured = videoId && videoId !== "REPLACE_WITH_WEEK2_VIDEO_ID";
+          const isOnline = navigator.onLine;
+
+          if (isConfigured && isOnline) {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            iframe.title = "Lesson Recap Video";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
+            wrapper.appendChild(iframe);
+          } else {
+            const fallback = document.createElement('div');
+            fallback.className = 'video-fallback-card';
+            fallback.innerHTML = `
+              <div class="video-fallback-icon" aria-hidden="true">📺</div>
+              <h3>Video Recap Offline or Unconfigured</h3>
+              <p style="margin: 0.5rem 0 1rem;">
+                \${!isConfigured ? 'The video link has not been configured in shared/video-ids.js yet.' : 'To watch this video recap, please check your internet connection.'}
+              </p>
+              <p style="font-size: 0.9rem; opacity: 0.85;">You can continue reading the slides normally.</p>
+            `;
+            wrapper.appendChild(fallback);
+          }
+        }
       }
 
       scheduleSlideFit();
@@ -1706,6 +1810,6 @@
       }
     }
   </script>
-  <script src="/shared/text-size.js" defer></script>
+<script defer="" src="/shared/text-size.js"></script>
 </body>
 </html>
