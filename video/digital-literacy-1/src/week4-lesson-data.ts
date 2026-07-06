@@ -27,7 +27,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w4l-01.mp3',
-    durationInFrames: Math.max(90, Math.ceil(52 / 2.2 * 30) + 75),
+    durationInFrames: 519,
     heading: 'A text says your account is locked.',
     subtitle: 'That little jump of worry is the warning sign — by the end, you’ll know how to stay safe.',
   },
@@ -35,7 +35,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w4l-02.mp3',
-    durationInFrames: Math.max(90, Math.ceil(60 / 2.2 * 30) + 75),
+    durationInFrames: 682,
     kicker: 'Week 4 · Objectives',
     heading: 'Today you’ll be able to…',
     objectives: [
@@ -49,7 +49,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w4l-03.mp3',
-    durationInFrames: Math.max(90, Math.ceil(28 / 2.2 * 30) + 75),
+    durationInFrames: 275,
     kicker: 'Chapter 1',
     heading: 'Your Identity Online',
     subtitle: 'Everything you do builds a picture of you — and you’re in control of most of it.',
@@ -58,7 +58,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'uiCallout',
     audio: 'w4l-04.mp3',
-    durationInFrames: Math.max(90, Math.ceil(76 / 2.2 * 30) + 75),
+    durationInFrames: 753,
     heading: 'Your digital identity.',
     callouts: [
       { label: '🪪 You control it', note: 'Your accounts, posts, photos, and what you share.' },
@@ -71,7 +71,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w4l-05.mp3',
-    durationInFrames: Math.max(90, Math.ceil(83 / 2.2 * 30) + 75),
+    durationInFrames: 827,
     heading: 'Protect your personal information',
     columns: [
       {
@@ -90,7 +90,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'uiCallout',
     audio: 'w4l-06.mp3',
-    durationInFrames: Math.max(90, Math.ceil(99 / 2.2 * 30) + 75),
+    durationInFrames: 983,
     heading: 'The internet has a long memory.',
     callouts: [
       { label: '📌 Posts can last forever', note: 'Deleted ≠ gone — others may have saved a screenshot.' },
@@ -103,7 +103,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w4l-07.mp3',
-    durationInFrames: Math.max(90, Math.ceil(41 / 2.2 * 30) + 75),
+    durationInFrames: 434,
     kicker: 'Lab · Station 6',
     heading: 'You’ll practice this in the lab.',
     subtitle: 'Privacy & Identity Self-Audit — check your safe habits and pick one new one to start.',
@@ -112,7 +112,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w4l-08.mp3',
-    durationInFrames: Math.max(90, Math.ceil(26 / 2.2 * 30) + 75),
+    durationInFrames: 322,
     kicker: 'Chapter 2',
     heading: 'Reading Online Wisely',
     subtitle: 'Not everything you read is true — and not every message deserves a reply.',
@@ -121,7 +121,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w4l-09.mp3',
-    durationInFrames: Math.max(90, Math.ceil(81 / 2.2 * 30) + 75),
+    durationInFrames: 782,
     heading: 'Is this information true?',
     columns: [
       {
@@ -140,7 +140,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'uiCallout',
     audio: 'w4l-10.mp3',
-    durationInFrames: Math.max(90, Math.ceil(94 / 2.2 * 30) + 75),
+    durationInFrames: 899,
     heading: 'When the best reply is no reply.',
     callouts: [
       { label: '🚫 Block', note: 'Stop them from contacting you.' },
@@ -154,7 +154,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w4l-11.mp3',
-    durationInFrames: Math.max(90, Math.ceil(38 / 2.2 * 30) + 75),
+    durationInFrames: 347,
     kicker: 'Lab · Station 5',
     heading: 'You’ll practice this in the lab.',
     subtitle: 'Is This Source Trustworthy? — run a short checklist on a real page and decide for yourself.',
@@ -163,7 +163,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w4l-12.mp3',
-    durationInFrames: Math.max(90, Math.ceil(26 / 2.2 * 30) + 75),
+    durationInFrames: 278,
     kicker: 'Chapter 3',
     heading: 'Lock It Down',
     subtitle: 'Simple habits that keep your accounts and your computer safe.',
@@ -172,7 +172,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w4l-13.mp3',
-    durationInFrames: Math.max(90, Math.ceil(102 / 2.2 * 30) + 75),
+    durationInFrames: 978,
     heading: 'Phishing · Malware · Scams',
     columns: [
       { icon: '🎣', title: 'Phishing', lines: ['Fake email, text, or call', 'Pretends to be a bank or the VA', 'Wants your password or PII'] },
@@ -184,7 +184,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'uiCallout',
     audio: 'w4l-14.mp3',
-    durationInFrames: Math.max(90, Math.ceil(83 / 2.2 * 30) + 75),
+    durationInFrames: 829,
     heading: 'A passphrase: longer is stronger.',
     callouts: [
       { label: '✅ Several words joined', note: 'Like Purple-Trout-Coffee-Sunrise-7.' },
@@ -198,7 +198,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'steps',
     audio: 'w4l-15.mp3',
-    durationInFrames: Math.max(90, Math.ceil(92 / 2.2 * 30) + 75),
+    durationInFrames: 953,
     heading: 'Reset · Lock · Clear data',
     steps: [
       { label: 'Reset a forgotten password', note: 'Click “Forgot password,” confirm by email/text code, make a new one.' },
@@ -210,7 +210,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w4l-16.mp3',
-    durationInFrames: Math.max(90, Math.ceil(40 / 2.2 * 30) + 75),
+    durationInFrames: 471,
     kicker: 'Lab · Stations 1–3',
     heading: 'You’ll practice this in the lab.',
     subtitle: 'Build a passphrase, lock your screen with Windows + L, and clear your browser data.',
@@ -219,7 +219,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w4l-17.mp3',
-    durationInFrames: Math.max(90, Math.ceil(21 / 2.2 * 30) + 75),
+    durationInFrames: 261,
     kicker: 'Chapter 4',
     heading: 'Tracking & Staying Healthy',
     subtitle: 'A little awareness keeps both your information and your body in good shape.',
@@ -229,7 +229,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'compare',
     audio: 'w4l-18.mp3',
-    durationInFrames: Math.max(90, Math.ceil(89 / 2.2 * 30) + 75),
+    durationInFrames: 898,
     heading: 'Private browsing — and its limits',
     columns: [
       {
@@ -248,7 +248,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'uiCallout',
     audio: 'w4l-19.mp3',
-    durationInFrames: Math.max(90, Math.ceil(99 / 2.2 * 30) + 75),
+    durationInFrames: 937,
     heading: 'Take care of yourself, too.',
     callouts: [
       { label: '🍪 Cookies follow you', note: 'Small files track what you do — that’s why ads “follow” you.' },
@@ -261,7 +261,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w4l-20.mp3',
-    durationInFrames: Math.max(90, Math.ceil(43 / 2.2 * 30) + 75),
+    durationInFrames: 404,
     kicker: 'Lab · Stations 4, 7 & 8',
     heading: 'You’ll finish strong in the lab.',
     subtitle: 'Open a private window, see what’s stored on the PC, and run a quick desk setup check.',
@@ -270,7 +270,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'question',
     audio: 'w4l-21.mp3',
-    durationInFrames: Math.max(90, Math.ceil(32 / 2.2 * 30) + 75),
+    durationInFrames: 403,
     question: 'Which is the strongest password?',
     answer: 'A long passphrase like Purple-Trout-Coffee-Sunrise-7.',
     why: 'Length and unrelated words make it far harder to guess than a short password or a birthday.',
@@ -279,7 +279,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'question',
     audio: 'w4l-22.mp3',
-    durationInFrames: Math.max(90, Math.ceil(41 / 2.2 * 30) + 75),
+    durationInFrames: 456,
     question: 'A troll posts a rude comment for a reaction. Best response?',
     answer: 'Don’t reply — then block or report.',
     why: 'Not responding removes the reaction the troll wants. Save a screenshot if it’s threatening.',
@@ -288,7 +288,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'question',
     audio: 'w4l-23.mp3',
-    durationInFrames: Math.max(90, Math.ceil(42 / 2.2 * 30) + 75),
+    durationInFrames: 545,
     question: 'True or false: Incognito makes you anonymous?',
     answer: 'False — it only stops saving data on that device.',
     why: 'Your internet provider, the network, and sites you log into can still see you.',
@@ -297,7 +297,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w4l-24.mp3',
-    durationInFrames: Math.max(90, Math.ceil(62 / 2.2 * 30) + 75),
+    durationInFrames: 634,
     kicker: 'Recap',
     heading: 'What to remember',
     objectives: [
@@ -312,7 +312,7 @@ export const WEEK4_LESSON: OverviewScene[] = [
   {
     kind: 'chapterCard',
     audio: 'w4l-25.mp3',
-    durationInFrames: Math.max(90, Math.ceil(67 / 2.2 * 30) + 75),
+    durationInFrames: 618,
     heading: 'You did it.',
     subtitle: 'You can protect your identity, read online with a clear head, lock down your devices, and stay healthy. Next week: Review & Testing Day.',
   },
