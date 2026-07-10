@@ -57,3 +57,67 @@ accessible, offline copy of the same script. If you change scene durations, upda
 `durationInFrames` in `src/Root.tsx` (currently 4800 = 160s at 30fps). If you change the
 spoken wording, also update the `SCENES` array in `generate-narration.mjs` and re-run it
 so the audio matches.
+
+---
+
+## Per-week lesson videos (Weeks 1–5)
+
+Each week also has a full theme-aware **lesson video** built from a shared engine
+(`src/LessonOverview.tsx`) and a per-week data file (`src/weekN-lesson-data.ts`). The
+compositions are wired in `src/Root.tsx` (`Week1Lesson` … `Week5Lesson`) and bundle cleanly.
+**Week 3 and Week 4 are complete in source** (24 and 25 scenes; full narration written) and
+**ship with offline transcripts** at
+`courses/digital-literacy-1/weeks/week-0{3,4}/video-transcript.html` (linked from the course
+console). Producing the rendered MP4s is the only remaining step and needs two inputs not in
+the repo: an ElevenLabs API key and a few photoreal/screenshot assets (below).
+
+### Render a week's lesson video
+
+```bash
+cd video/digital-literacy-1
+npm install
+# Provide the key one of two ways:
+#   (a) copy .env.example to .env and fill in ELEVENLABS_API_KEY (auto-loaded; git-ignored), or
+#   (b) export ELEVENLABS_API_KEY=...   (a set env-var always wins over .env)
+node generate-week3-lesson-narration.mjs       # writes public/w3l-01.mp3 … and week3-lesson-durations.json
+npm run render:week3lesson                      # writes out/dl1-week3-lesson.mp4
+# Week 4: node generate-week4-lesson-narration.mjs ; npm run render:week4lesson
+```
+
+**Secrets & environment.** The key is never committed. The generators auto-load a `.env`
+(from this folder or the repo root) via `./load-env.mjs`; `.env.example` documents the
+variables. In the **web environment**, set `ELEVENLABS_API_KEY` as a configured secret instead
+of a file. If Remotion can't download its own headless Chromium (network-restricted box), set
+`REMOTION_BROWSER` to a local `chrome-headless-shell` binary — see `.env.example`.
+
+The narration generators print whether any clip overruns its scene. The `durationInFrames`
+in the data files are **provisional** (estimated from word counts); after the generator writes
+`public/weekN-lesson-durations.json`, tighten any flagged scene's `durationInFrames` so the
+visuals match the measured audio, then re-render. The `w*l-*.mp3` clips are git-ignored, so
+regenerate them on a fresh clone (otherwise the video renders silent).
+
+### User-supplied assets (4 per video)
+
+Four scenes per video render in a built/themed style (no background) until you drop the real
+image into `public/` and set its filename on the scene's `bg` field in the data file. None are
+required to render — they're polish — but the script was written around them.
+
+**Week 3** (`src/week3-lesson-data.ts`):
+- **Scene 1 — hook hero** (photoreal): older veteran at a home desk, a finished letter on screen, a USB drive on the desk.
+- **Scene 9 — screenshot**: Word "Save As" screen with a clear file name typed in (e.g. `VA-Notes-2026-06`).
+- **Scene 13 — screenshot**: the Ctrl+P print screen — orientation dropdown + the page preview on the right.
+- **Scene 24 — outro hero** (photoreal): the same veteran, relaxed, holding a printed page; a "VA Documents" folder on screen.
+
+**Week 4** (`src/week4-lesson-data.ts`):
+- **Scene 1 — hook hero** (photoreal): older veteran at a home desk looking at a phone showing a suspicious "account locked" text.
+- **Scene 15 — screenshot**: the "Clear browsing data" window with history & cookies checked.
+- **Scene 18 — screenshot**: a private/Incognito window showing its dark theme and the private-mode icon.
+- **Scene 25 — outro hero** (photoreal): the same veteran, relaxed and confident, the suspicious text now closed; printed handout beside the keyboard.
+
+### After rendering
+
+Same as the intro: the rendered MP4 is **not** embedded (offline-first). The offline copy is
+the transcript page (already shipped). Optionally upload the MP4 to YouTube and add a click-out
+"Watch the video" link to the matching `video-transcript.html`. **Keep the data file's narration
+in sync with its `generate-weekN-lesson-narration.mjs` and the transcript page** — all three
+carry the same script.

@@ -14,6 +14,7 @@
 // and also writes public/week5-lesson-durations.json (id → clip seconds) for tightening
 // the provisional durationInFrames in src/week5-lesson-data.ts (WEEK5_LESSON, 30fps).
 
+import './load-env.mjs'; // auto-load .env (key never logged)
 import { writeFile, mkdir, readFile } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

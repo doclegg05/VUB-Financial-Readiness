@@ -12,6 +12,7 @@
 // against its scene's frame budget in src/Intro.tsx (30fps) so we know whether a
 // scene needs to be lengthened before rendering.
 
+import './load-env.mjs'; // auto-load .env (key never logged)
 import { writeFile, mkdir, readFile } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

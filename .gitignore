@@ -1,6 +1,15 @@
 # Dependencies
 node_modules/
 
+# Secrets — never commit. Supply via the environment (local .env or the web
+# environment's configured env-var/secret). .env.example is the committed template.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+
 # IDE and editor files
 .vscode/
 .idea/
