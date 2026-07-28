@@ -235,7 +235,8 @@ Each weekly presentation includes:
 
 ```
 VUB Lessons/
-├── AGENTS.md                     # This file - project governance
+├── AGENTS.md                     # Canonical agent briefing (project governance)
+├── CLAUDE.md                     # Thin wrapper that imports AGENTS.md
 ├── index.html                    # Course landing page
 ├── css/
 │   ├── styles.css               # VUB design system
@@ -271,6 +272,8 @@ VUB Lessons/
 
 **Phase:** Implementation Complete (All 8 Weeks)
 **Last Update:** February 2026
+
+> **Related course (June 2026):** A separate **Digital Literacy — Level 1** course (IC3 GS6-aligned; 5 weeks = 4 lessons + a review/testing day) was added to the platform at `courses/digital-literacy-1/` and the catalog (`courses.json`). It is the first rung of a planned Level 1 → 2 → 3 ladder and is independent of this 8-week Intermediate course. Design spec: `docs/specs/2026-06-24-digital-literacy-l1-design.md`. (The Remotion intro video is complete — rendered with an ElevenLabs voiceover at `video/digital-literacy-1/out/dl1-intro.mp4`. Per-week lesson-video sources are built and bundle cleanly; **Weeks 3 & 4 ship offline `video-transcript.html` pages** linked from the console. Rendering the per-week MP4s is the only outstanding video step — it needs an ElevenLabs API key + a few user-supplied hero/screenshot assets; see `video/digital-literacy-1/README.md` for the render runbook + asset checklist.)
 
 ### Completed Work
 - [x] Week 1: VA Online Services presentation, syllabus, and 3 handouts
