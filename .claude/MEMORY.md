@@ -4,7 +4,7 @@
 - **Name**: VUB Learning platform (`vublessons`)
 - **Description**: Static site hosting three Veterans Upward Bound courses — Intermediate Computer Skills (8 wks), Financial Readiness (5 modules), Digital Literacy L1 (5 wks)
 - **Tech stack**: Static HTML/CSS/JS, no framework. Node build script (copy-only), Playwright tests, Python link checker
-- **Repo**: https://github.com/doclegg05/VUB-Financial-Readiness — **name is misleading**, this is the whole platform, not one course
+- **Repo**: https://github.com/doclegg05/vublessons — renamed from `VUB-Financial-Readiness` on 2026-07-28; GitHub redirects the old URL
 - **Live**: https://vublessons.com (Netlify project `vubcourse`, builds `main` → `dist/site`)
 
 ## Current Status
@@ -20,7 +20,9 @@ Consolidated and healthy. All three courses live and serving 200. Build clean (1
 - **Where we left off**: `VUB-Course` fully retired — Pages off, repo archived read-only, local clone removed. `VUB-Financial-Readiness` is now the single source for everything on vublessons.com. Remaining items are pre-existing, not from this session.
 
 ### Deploy facts (verified, not inferred)
-vublessons.com is Netlify project `vubcourse`, building **`doclegg05/VUB-Financial-Readiness` branch `main`** — confirmed by the Netlify deploy record's `commit_url`, by `VUB-Course` having had no `netlify.toml`/`package.json`/`scripts/` at all, and by a push landing live in ~20s. `VUB-Course` never fed vublessons.com; it published a *separate* copy via GitHub Pages, now disabled.
+vublessons.com is Netlify project `vubcourse` (site id `714b5a28-24ff-4394-9a7c-8c364aa89f4d`), building **`doclegg05/vublessons` branch `main`** — confirmed by the Netlify deploy record's `commit_url`, by `VUB-Course` having had no `netlify.toml`/`package.json`/`scripts/` at all, and by a push landing live in ~20s. `VUB-Course` never fed vublessons.com; it published a *separate* copy via GitHub Pages, now disabled.
+
+The repo rename (2026-07-28) did **not** break the deploy: Netlify links via the GitHub App (tracks repo ID, not name), and there are no classic webhooks on the repo. Verified by a post-rename push producing a fresh deploy.
 
 ## Open Items
 - [x] ~~Disable GitHub Pages on `doclegg05/VUB-Course`~~ — done 2026-07-28. `doclegg05.github.io/VUB-Course/` now 404s.

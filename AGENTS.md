@@ -5,10 +5,12 @@
 **VUB Learning** — the Veterans Upward Bound course platform for WV Veterans Upward
 Bound. It is a **static site hosting three independent courses**, not a single course.
 
-> **Repo naming:** the GitHub remote is still `doclegg05/VUB-Financial-Readiness`, from
-> when this repo held only the Financial Readiness course. That name is now misleading —
-> `package.json` already calls it `vublessons`. Financial Readiness is **one of three**
-> courses here. Don't assume repo scope from the remote name.
+> **Repo naming:** this repo was renamed `VUB-Financial-Readiness` → **`vublessons`** on
+> 2026-07-28, matching the `package.json` name. It carried the old name from when it held
+> only the Financial Readiness course — which is now **one of three** courses here.
+> GitHub redirects the old URL, so stale clones and links keep working, but use
+> `doclegg05/vublessons`. Older `docs/` and `_archive/` references to the previous name
+> are historical and were left as-is.
 
 **Live site:** <https://vublessons.com> — Netlify project `vubcourse`, built from `main`.
 
