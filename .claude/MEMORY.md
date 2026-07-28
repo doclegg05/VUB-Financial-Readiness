@@ -12,12 +12,33 @@ Consolidated and healthy. All three courses live and serving 200. Build clean (1
 
 ## Last Session
 - **Date**: 2026-07-28
-- **What we worked on**: Investigated a request to "merge VUB-Course and VUB-Financial-Readiness". Found the merge was already done in June 2026 (M1–M3 consolidation) — `VUB-Course` was a superseded duplicate. Retired it, and fixed a live content defect the earlier consolidation left behind.
-- **What we decided**:
-  - Week 2 of Computer Skills stays **Windows Tips & Productivity**; the standalone repo's Video Conferencing lesson is retired (preserved in the archived `VUB-Course` repo at commit `2870359`).
-  - Retire `VUB-Course` rather than merge it — nothing in it was newer.
-  - Rename the repo to `vublessons` after all — initially deferred for deploy risk, then done later the same session once the Netlify linkage was confirmed safe (GitHub App, no classic webhooks).
-- **Where we left off**: `VUB-Course` fully retired — Pages off, repo archived read-only, local clone removed. `vublessons` is now the single source for everything on vublessons.com, under its new name. Remaining items are pre-existing or Windows-only.
+
+**Asked for:** "merge the VUB-Course and VUB-Financial-Readiness repos without affecting the web version."
+
+**What was actually true:** the merge had already happened in the June 2026 M1–M3 consolidation. `VUB-Course` was a superseded duplicate, unchanged since February, formally marked "archive, never canonical". The platform copy was strictly ahead everywhere (a11y fixes, resources sections, `shared/` integration, 8 extra handouts). So the job was a **retirement**, not a merge — plus a live defect the consolidation had left behind.
+
+**The live defect (main deliverable).** Week 2 of Computer Skills was changed from Video Conferencing to Windows Tips in June, but its assessments were never updated. From June to 2026-07-28 the live site tested veterans on Zoom, VA Video Connect, and telehealth — 3 questions on the pre-test, 3 on the post-test — for a lesson that teaches Windows shortcuts. Rewrote all six from the actual slide content, kept pre/post parallel so gain comparison survives, and updated both printables, both instructor answer keys, the topic lists, and `syllabus-overview.html`. Deleted 3 orphaned Zoom handouts.
+
+**Work completed, in order** (`ad74312` → `b327ea1`):
+| # | Change |
+|---|--------|
+| 1 | Week 2 assessment alignment + orphaned handout removal (live content fix) |
+| 2 | `AGENTS.md` rewritten for the platform — it was a stale copy of the old single-course briefing pointing at a root `css/ js/ weeks/` layout that doesn't exist |
+| 3 | `VUB-Course` retired: Pages disabled, repo archived read-only, local clone removed |
+| 4 | Repo renamed `VUB-Financial-Readiness` → `vublessons`; local folder and remote updated |
+| 5 | 5 long-failing DL1 sidebar-scroll tests fixed → suite 18/18 |
+
+**Decisions:**
+  - Week 2 stays **Windows Tips & Productivity**; the Video Conferencing lesson is retired (preserved in the archived `VUB-Course` repo at `2870359`).
+  - Retire `VUB-Course` rather than merge — nothing in it was newer.
+  - Rename to `vublessons` — initially deferred for deploy risk, then done once preflight showed Netlify links via the GitHub App (repo ID, not name) with no classic webhooks.
+  - Fix the DL1 *tests*, not the page — the feature works; the tests scrolled the wrong element.
+
+**Two of my own mistakes, for the record:**
+  - Archived `VUB-Course` *before* disabling Pages. Archived repos are read-only for settings, so the Pages toggle became unreachable and the repo had to be unarchived and re-archived. Disable Pages first.
+  - Added a `.gitignore` negation (`.claude/` + `!.claude/MEMORY.md`) that silently does nothing — git can't re-include a file whose parent directory is excluded. It only appeared to work because the first add used `-f`. Fixed to `.claude/*`.
+
+- **Where we left off**: Everything green and deployed. `vublessons` is the single source for vublessons.com. All remaining open items are either Windows-only or pre-existing.
 
 ### Deploy facts (verified, not inferred)
 vublessons.com is Netlify project `vubcourse` (site id `714b5a28-24ff-4394-9a7c-8c364aa89f4d`), building **`doclegg05/vublessons` branch `main`** — confirmed by the Netlify deploy record's `commit_url`, by `VUB-Course` having had no `netlify.toml`/`package.json`/`scripts/` at all, and by a push landing live in ~20s. `VUB-Course` never fed vublessons.com; it published a *separate* copy via GitHub Pages, now disabled.
@@ -66,6 +87,7 @@ Britt asked to be reminded of both (2026-07-28).
 | 2026-07-28 | Retire `VUB-Course` instead of merging | Platform copy was strictly ahead (a11y fixes, resources sections, shared/ integration); only Week 2 differed, and that was a deliberate curriculum change |
 | 2026-07-28 | Defer repo rename | Only step with real deploy risk; no functional benefit today |
 | 2026-07-28 | **Reversed the above — renamed to `vublessons`** | Britt asked for it. Preflight showed the risk was low: Netlify links via the GitHub App (repo ID, not name) and the repo had no classic webhooks. Confirmed after by a fresh deploy building from `doclegg05/vublessons` |
+| 2026-07-28 | Fix the DL1 sidebar *tests*, not the page | The feature works — verified by scrolling the real container and by a real mouse wheel. The tests drove `.sidebar`, which never overflows, so the scroll was a no-op. Wrong expectation in the test |
 
 ## Architecture Notes
 - `courses.json` is the **catalog source of truth** — drives the homepage and course consoles. It is *not* generated from the course trees; adding a lesson means editing both.
