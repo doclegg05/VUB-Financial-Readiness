@@ -25,7 +25,20 @@ vublessons.com is Netlify project `vubcourse`, building **`doclegg05/VUB-Financi
 ## Open Items
 - [x] ~~Disable GitHub Pages on `doclegg05/VUB-Course`~~ — done 2026-07-28. `doclegg05.github.io/VUB-Course/` now 404s.
 - [x] ~~Re-archive `doclegg05/VUB-Course` read-only~~ — done 2026-07-28. Archived, public, content preserved at `2870359` (includes the retired Video Conferencing Week 2).
-- [ ] **Freeze tag is not on GitHub.** `preflight-freeze-2026-06-03` (`42619ff`) and branch `freeze/preflight-2026-06-03` exist only in the Windows machine's local `_archive/VUB-Course-2026-06-03/`. That commit captured ~33 uncommitted files never merged to `main`. If the Windows machine is lost, so is it. Push those refs from Windows if the snapshot matters.
+- [ ] **⚠️ ON THE WINDOWS MACHINE: push the VUB-Course freeze refs.** Britt asked to be reminded (2026-07-28).
+
+  `preflight-freeze-2026-06-03` (`42619ff`) and branch `freeze/preflight-2026-06-03` exist **only** in the Windows machine's local `_archive/VUB-Course-2026-06-03/`. `git ls-remote doclegg05/VUB-Course` returns `refs/heads/main` and nothing else. That commit captured ~33 files never merged to `main` — this is the sole copy. If that machine dies, so does the snapshot.
+
+  **`doclegg05/VUB-Course` is archived read-only, and archived repos reject pushes.** Unarchive first or the push fails confusingly:
+
+  ```bash
+  gh api -X PATCH repos/doclegg05/VUB-Course -f archived=false
+  cd "C:/Users/Instructor/Dev/curriculum/VUB Lessons/_archive/VUB-Course-2026-06-03"   # verify path
+  git push origin preflight-freeze-2026-06-03 freeze/preflight-2026-06-03
+  gh api -X PATCH repos/doclegg05/VUB-Course -f archived=true
+  ```
+
+  Verify with `git ls-remote --tags origin`, then tick this box.
 - [ ] 5 failing `tests/functional/dl1-sidebar-scroll.spec.js` cases (resource link not in viewport after sidebar scroll). Pre-existing, untouched this session.
 - [ ] Consider renaming repo → `vublessons` (deferred; verify Netlify survives the rename).
 
