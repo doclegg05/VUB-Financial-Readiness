@@ -42,7 +42,8 @@ The repo rename (2026-07-28) did **not** break the deploy: Netlify links via the
 
   Verify with `git ls-remote --tags origin`, then tick this box.
 - [ ] 5 failing `tests/functional/dl1-sidebar-scroll.spec.js` cases (resource link not in viewport after sidebar scroll). Pre-existing, untouched this session.
-- [ ] Consider renaming repo → `vublessons` (deferred; verify Netlify survives the rename).
+- [x] ~~Rename repo → `vublessons`~~ — done 2026-07-28. Netlify survived (new deploy `6a68ddbd` built from `doclegg05/vublessons`, state ready). Local folder also renamed to `MacDev/projects/vublessons`.
+- [ ] **Windows clone still points at the old remote.** Harmless (GitHub redirects), but run `git remote set-url origin https://github.com/doclegg05/vublessons.git` there when convenient.
 
 ## Key Decisions Log
 | Date | Decision | Rationale |
