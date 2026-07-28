@@ -34,10 +34,6 @@ Consolidated and healthy. All three courses live and serving 200. Build clean (1
   - Rename to `vublessons` — initially deferred for deploy risk, then done once preflight showed Netlify links via the GitHub App (repo ID, not name) with no classic webhooks.
   - Fix the DL1 *tests*, not the page — the feature works; the tests scrolled the wrong element.
 
-**Two of my own mistakes, for the record:**
-  - Archived `VUB-Course` *before* disabling Pages. Archived repos are read-only for settings, so the Pages toggle became unreachable and the repo had to be unarchived and re-archived. Disable Pages first.
-  - Added a `.gitignore` negation (`.claude/` + `!.claude/MEMORY.md`) that silently does nothing — git can't re-include a file whose parent directory is excluded. It only appeared to work because the first add used `-f`. Fixed to `.claude/*`.
-
 - **Where we left off**: Everything green and deployed. `vublessons` is the single source for vublessons.com. All remaining open items are either Windows-only or pre-existing.
 
 ### Deploy facts (verified, not inferred)
@@ -95,6 +91,7 @@ Britt asked to be reminded of both (2026-07-28).
 - `shared/` (brand.css, shell.js, text-size.js, progress.js, glossary.js…) is referenced with **root-absolute** paths, so pages only work when served from the site root — not opened off disk.
 - **GitHub Pages is also enabled on this repo** and serves the repo root, ignoring `netlify.toml`. The pretty URLs (`/financial-readiness`, `/computer-skills`, `/syllabus`, `/intake`) 404 there. `vublessons.com` is the real site.
 - Docs under `docs/` are historical and contain dead Windows paths (`C:/Users/Instructor/Dev/...`). Treat as history, not instructions.
+- **`.gitignore` uses `.claude/*`, not `.claude/`, on purpose.** Only `MEMORY.md` is tracked under `.claude/`; the negation that allows it can't work under the trailing-slash form, because git won't re-include a file whose parent directory is excluded. Keep the `/*` form if you add another tracked file there.
 - **DL1 lesson sidebar scrolls on an INNER element.** `.sidebar` (the `<nav>`) carries `overflow-y: auto` but never overflows; the real scroller is `.sidebar-scroll-container` (`flex: 1; overflow-y: auto`), which keeps the sidebar header and slide counter fixed. Script or test the inner element — driving `.sidebar.scrollTop` is a silent no-op.
 
 ## Known Issues
