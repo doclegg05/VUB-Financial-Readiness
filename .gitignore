@@ -20,8 +20,9 @@ secrets/
 .DS_Store
 Thumbs.db
 
-# Claude Code local settings
+# Claude Code local settings (but track the shared project memory)
 .claude/
+!.claude/MEMORY.md
 
 # Memory/state files (optional - remove this line if you want to track state)
 MEMORY/
