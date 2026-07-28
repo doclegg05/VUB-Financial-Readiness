@@ -16,8 +16,8 @@ Consolidated and healthy. All three courses live and serving 200. Build clean (1
 - **What we decided**:
   - Week 2 of Computer Skills stays **Windows Tips & Productivity**; the standalone repo's Video Conferencing lesson is retired (preserved in the archived `VUB-Course` repo at commit `2870359`).
   - Retire `VUB-Course` rather than merge it — nothing in it was newer.
-  - Do **not** rename this repo to `vublessons` for now (deploy risk); documented the misleading name in `AGENTS.md` instead.
-- **Where we left off**: `VUB-Course` fully retired — Pages off, repo archived read-only, local clone removed. `VUB-Financial-Readiness` is now the single source for everything on vublessons.com. Remaining items are pre-existing, not from this session.
+  - Rename the repo to `vublessons` after all — initially deferred for deploy risk, then done later the same session once the Netlify linkage was confirmed safe (GitHub App, no classic webhooks).
+- **Where we left off**: `VUB-Course` fully retired — Pages off, repo archived read-only, local clone removed. `vublessons` is now the single source for everything on vublessons.com, under its new name. Remaining items are pre-existing or Windows-only.
 
 ### Deploy facts (verified, not inferred)
 vublessons.com is Netlify project `vubcourse` (site id `714b5a28-24ff-4394-9a7c-8c364aa89f4d`), building **`doclegg05/vublessons` branch `main`** — confirmed by the Netlify deploy record's `commit_url`, by `VUB-Course` having had no `netlify.toml`/`package.json`/`scripts/` at all, and by a push landing live in ~20s. `VUB-Course` never fed vublessons.com; it published a *separate* copy via GitHub Pages, now disabled.
@@ -27,7 +27,10 @@ The repo rename (2026-07-28) did **not** break the deploy: Netlify links via the
 ## Open Items
 - [x] ~~Disable GitHub Pages on `doclegg05/VUB-Course`~~ — done 2026-07-28. `doclegg05.github.io/VUB-Course/` now 404s.
 - [x] ~~Re-archive `doclegg05/VUB-Course` read-only~~ — done 2026-07-28. Archived, public, content preserved at `2870359` (includes the retired Video Conferencing Week 2).
-- [ ] **⚠️ ON THE WINDOWS MACHINE: push the VUB-Course freeze refs.** Britt asked to be reminded (2026-07-28).
+### ⚠️ ON THE WINDOWS MACHINE — two tasks, can't be done from the Mac
+Britt asked to be reminded of both (2026-07-28).
+
+- [ ] **W1. Push the VUB-Course freeze refs.** *(data-loss risk — do this first)*
 
   `preflight-freeze-2026-06-03` (`42619ff`) and branch `freeze/preflight-2026-06-03` exist **only** in the Windows machine's local `_archive/VUB-Course-2026-06-03/`. `git ls-remote doclegg05/VUB-Course` returns `refs/heads/main` and nothing else. That commit captured ~33 files never merged to `main` — this is the sole copy. If that machine dies, so does the snapshot.
 
@@ -41,9 +44,19 @@ The repo rename (2026-07-28) did **not** break the deploy: Netlify links via the
   ```
 
   Verify with `git ls-remote --tags origin`, then tick this box.
+
+- [ ] **W2. Repoint this clone at the renamed remote.** *(cosmetic — GitHub redirects, nothing is broken)*
+
+  This repo was renamed `VUB-Financial-Readiness` → `vublessons` on 2026-07-28. Run inside the Windows clone:
+
+  ```bash
+  git remote set-url origin https://github.com/doclegg05/vublessons.git
+  git remote -v   # confirm, then tick this box
+  ```
+
+  Consider renaming the Windows folder to match too (on the Mac it's now `MacDev/projects/vublessons`).
 - [ ] 5 failing `tests/functional/dl1-sidebar-scroll.spec.js` cases (resource link not in viewport after sidebar scroll). Pre-existing, untouched this session.
 - [x] ~~Rename repo → `vublessons`~~ — done 2026-07-28. Netlify survived (new deploy `6a68ddbd` built from `doclegg05/vublessons`, state ready). Local folder also renamed to `MacDev/projects/vublessons`.
-- [ ] **Windows clone still points at the old remote.** Harmless (GitHub redirects), but run `git remote set-url origin https://github.com/doclegg05/vublessons.git` there when convenient.
 
 ## Key Decisions Log
 | Date | Decision | Rationale |
@@ -52,6 +65,7 @@ The repo rename (2026-07-28) did **not** break the deploy: Netlify links via the
 | 2026-07-28 | Delete the 3 Zoom/telehealth handouts | Orphaned under a Windows lesson after the topic swap; nothing else linked them |
 | 2026-07-28 | Retire `VUB-Course` instead of merging | Platform copy was strictly ahead (a11y fixes, resources sections, shared/ integration); only Week 2 differed, and that was a deliberate curriculum change |
 | 2026-07-28 | Defer repo rename | Only step with real deploy risk; no functional benefit today |
+| 2026-07-28 | **Reversed the above — renamed to `vublessons`** | Britt asked for it. Preflight showed the risk was low: Netlify links via the GitHub App (repo ID, not name) and the repo had no classic webhooks. Confirmed after by a fresh deploy building from `doclegg05/vublessons` |
 
 ## Architecture Notes
 - `courses.json` is the **catalog source of truth** — drives the homepage and course consoles. It is *not* generated from the course trees; adding a lesson means editing both.
