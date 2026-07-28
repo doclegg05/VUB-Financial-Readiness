@@ -17,11 +17,14 @@ Consolidated and healthy. All three courses live and serving 200. Build clean (1
   - Week 2 of Computer Skills stays **Windows Tips & Productivity**; the standalone repo's Video Conferencing lesson is retired (preserved in the archived `VUB-Course` repo at commit `2870359`).
   - Retire `VUB-Course` rather than merge it — nothing in it was newer.
   - Do **not** rename this repo to `vublessons` for now (deploy risk); documented the misleading name in `AGENTS.md` instead.
-- **Where we left off**: One step outstanding — see Open Items.
+- **Where we left off**: `VUB-Course` fully retired — Pages off, repo archived read-only, local clone removed. `VUB-Financial-Readiness` is now the single source for everything on vublessons.com. Remaining items are pre-existing, not from this session.
+
+### Deploy facts (verified, not inferred)
+vublessons.com is Netlify project `vubcourse`, building **`doclegg05/VUB-Financial-Readiness` branch `main`** — confirmed by the Netlify deploy record's `commit_url`, by `VUB-Course` having had no `netlify.toml`/`package.json`/`scripts/` at all, and by a push landing live in ~20s. `VUB-Course` never fed vublessons.com; it published a *separate* copy via GitHub Pages, now disabled.
 
 ## Open Items
-- [ ] **Disable GitHub Pages on `doclegg05/VUB-Course`.** The retired February course is *still publicly served* at https://doclegg05.github.io/VUB-Course/, competing with vublessons.com. The API call was blocked by the local permission classifier. Repo was deliberately left **unarchived** so this setting can still be changed.
-- [ ] **Re-archive `doclegg05/VUB-Course` read-only** once Pages is off. (It was archived, then unarchived — archived repos can't have settings changed, so Pages must go first.)
+- [x] ~~Disable GitHub Pages on `doclegg05/VUB-Course`~~ — done 2026-07-28. `doclegg05.github.io/VUB-Course/` now 404s.
+- [x] ~~Re-archive `doclegg05/VUB-Course` read-only~~ — done 2026-07-28. Archived, public, content preserved at `2870359` (includes the retired Video Conferencing Week 2).
 - [ ] **Freeze tag is not on GitHub.** `preflight-freeze-2026-06-03` (`42619ff`) and branch `freeze/preflight-2026-06-03` exist only in the Windows machine's local `_archive/VUB-Course-2026-06-03/`. That commit captured ~33 uncommitted files never merged to `main`. If the Windows machine is lost, so is it. Push those refs from Windows if the snapshot matters.
 - [ ] 5 failing `tests/functional/dl1-sidebar-scroll.spec.js` cases (resource link not in viewport after sidebar scroll). Pre-existing, untouched this session.
 - [ ] Consider renaming repo → `vublessons` (deferred; verify Netlify survives the rename).

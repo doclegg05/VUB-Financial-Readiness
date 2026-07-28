@@ -20,8 +20,10 @@ secrets/
 .DS_Store
 Thumbs.db
 
-# Claude Code local settings (but track the shared project memory)
-.claude/
+# Claude Code local settings (but track the shared project memory).
+# Must be `.claude/*`, not `.claude/`: git cannot re-include a file whose
+# parent directory is itself excluded, so the negation below would be ignored.
+.claude/*
 !.claude/MEMORY.md
 
 # Memory/state files (optional - remove this line if you want to track state)
