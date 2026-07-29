@@ -234,6 +234,7 @@
     .name-input-group label { display: block; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem; }
     .name-input-group input { width: 100%; max-width: 420px; padding: 1rem; font-size: 1.1rem; border: 2px solid var(--muted); border-radius: 8px; transition: all 0.15s ease; }
     .name-input-group input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201,162,39,0.25); }
+    .name-input-group input + label, .name-input-group p + label { margin-top: 1.25rem; }
 
     .back-bar { max-width: 900px; margin: 0 auto; padding: 0.75rem 2rem 0; }
     .back-link { color: var(--primary); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
@@ -335,6 +336,9 @@
           <label for="participantName">Please enter your name:</label>
           <input type="text" id="participantName" placeholder="Your full name" autocomplete="name" required>
           <p id="nameError" role="alert" style="color:var(--danger);margin-top:.5rem" hidden>Please enter your name to begin.</p>
+          <label for="instructorName">Please enter your instructor's name:</label>
+          <input type="text" id="instructorName" placeholder="Instructor's full name" required>
+          <p id="instructorError" role="alert" style="color:var(--danger);margin-top:.5rem" hidden>Please enter your instructor's name to begin.</p>
         </div>
 
         <button class="btn-start" id="btnStart">Begin Assessment &#x2192;</button>
@@ -407,7 +411,7 @@
       <div class="report-info">
         <div class="report-info-item"><div class="report-info-label">Student Name</div><div class="report-info-value" id="reportName">&mdash;</div></div>
         <div class="report-info-item"><div class="report-info-label">Test Date</div><div class="report-info-value" id="reportDate">&mdash;</div></div>
-        <div class="report-info-item"><div class="report-info-label">Instructor</div><div class="report-info-value">[Instructor Name]</div></div>
+        <div class="report-info-item"><div class="report-info-label">Instructor</div><div class="report-info-value" id="reportInstructor">&mdash;</div></div>
       </div>
       <div class="report-score-summary">
         <div class="report-score-number" id="reportScore">0%</div>
@@ -576,6 +580,7 @@
     var currentQuestion = 0;
     var answers = {};
     var participantName = "";
+    var instructorName = "";
 
     var startSection = document.getElementById('startSection');
     var quizSection = document.getElementById('quizSection');
@@ -590,6 +595,7 @@
     var btnSubmit = document.getElementById('btnSubmit');
     var btnStart = document.getElementById('btnStart');
     var participantInput = document.getElementById('participantName');
+    var instructorInput = document.getElementById('instructorName');
 
     function escapeHtml(text) {
       return String(text)
@@ -663,20 +669,30 @@
       });
     }
 
+    // Both name fields are required. Flag an empty one with a message, not colour alone.
+    function validateNameField(input, errorEl) {
+      var filled = input.value.trim() !== '';
+      input.style.borderColor = filled ? '' : 'var(--danger)';
+      if (filled) {
+        input.removeAttribute('aria-invalid');
+        input.removeAttribute('aria-describedby');
+      } else {
+        input.setAttribute('aria-invalid', 'true');
+        if (errorEl) input.setAttribute('aria-describedby', errorEl.id);
+      }
+      if (errorEl) errorEl.hidden = filled;
+      return filled;
+    }
+
     function startQuiz() {
       participantName = participantInput.value.trim();
-      var nameError = document.getElementById('nameError');
-      if (!participantName) {
-        participantInput.focus();
-        participantInput.style.borderColor = 'var(--danger)';
-        participantInput.setAttribute('aria-invalid', 'true');
-        participantInput.setAttribute('aria-describedby', 'nameError');
-        if (nameError) nameError.hidden = false;
+      instructorName = instructorInput.value.trim();
+      var nameOk = validateNameField(participantInput, document.getElementById('nameError'));
+      var instructorOk = validateNameField(instructorInput, document.getElementById('instructorError'));
+      if (!nameOk || !instructorOk) {
+        (nameOk ? instructorInput : participantInput).focus();
         return;
       }
-      participantInput.removeAttribute('aria-invalid');
-      participantInput.removeAttribute('aria-describedby');
-      if (nameError) nameError.hidden = true;
       startSection.classList.add('hidden');
       quizSection.classList.add('active');
       progressContainer.style.display = 'flex';
@@ -798,6 +814,7 @@
 
       var results = {
         name: participantName,
+        instructor: instructorName,
         date: new Date().toLocaleDateString(),
         score: overallPercentage,
         answers: answers,
@@ -814,6 +831,7 @@
       window.quizResults = {
         testType: 'Pre-Test',
         name: participantName,
+        instructor: instructorName,
         date: new Date().toLocaleDateString(),
         timestamp: new Date().toISOString(),
         totalCorrect: totalCorrect,
@@ -836,12 +854,12 @@
     function downloadResults() {
       var results = window.quizResults;
       if (!results) { alert('No results to download. Please complete the assessment first.'); return; }
-      var rows = [['test_type', 'student_name', 'date', 'timestamp', 'score_percent', 'correct', 'total_questions', 'category', 'category_correct', 'category_total', 'category_percent', 'question_id', 'student_answer', 'correct_answer', 'is_correct']];
+      var rows = [['test_type', 'student_name', 'instructor_name', 'date', 'timestamp', 'score_percent', 'correct', 'total_questions', 'category', 'category_correct', 'category_total', 'category_percent', 'question_id', 'student_answer', 'correct_answer', 'is_correct']];
       questions.forEach(function(q) {
         var category = results.categories[q.category];
         var categoryPercent = Math.round((category.correct / category.total) * 100);
         var studentAnswer = results.answers[q.id] || '';
-        rows.push([results.testType, results.name, results.date, results.timestamp, results.percentage, results.totalCorrect, results.totalQuestions, q.category, category.correct, category.total, categoryPercent, q.id, studentAnswer, q.correct, studentAnswer === q.correct ? 'yes' : 'no']);
+        rows.push([results.testType, results.name, results.instructor, results.date, results.timestamp, results.percentage, results.totalCorrect, results.totalQuestions, q.category, category.correct, category.total, categoryPercent, q.id, studentAnswer, q.correct, studentAnswer === q.correct ? 'yes' : 'no']);
       });
       var csv = rows.map(function(row) { return row.map(csvEscape).join(','); }).join('\r\n');
       var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
@@ -859,6 +877,7 @@
       var results = window.quizResults;
       if (!results) { alert('No results to print. Please complete the assessment first.'); return; }
       document.getElementById('reportName').textContent = results.name;
+      document.getElementById('reportInstructor').textContent = results.instructor || '—';
       document.getElementById('reportDate').textContent = results.date;
       document.getElementById('reportScore').textContent = results.percentage + '%';
       document.getElementById('reportScoreDetail').textContent = results.totalCorrect + ' of ' + results.totalQuestions + ' correct';
