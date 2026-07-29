@@ -651,6 +651,12 @@
       box-shadow: 0 0 0 3px rgba(201,162,39,0.2);
     }
 
+    /* Second field in the group (instructor) needs breathing room above it */
+    .name-input-group input + label,
+    .name-input-group p + label {
+      margin-top: 1.25rem;
+    }
+
     /* Print Report Button */
     .btn-print {
       background: #1B365D;
@@ -999,6 +1005,10 @@
         <div class="name-input-group">
           <label for="participantName">Please enter your name:</label>
           <input type="text" id="participantName" placeholder="Your full name" required>
+          <p id="nameError" role="alert" style="color:var(--danger);margin-top:.5rem" hidden>Please enter your name to begin.</p>
+          <label for="instructorName">Please enter your instructor's name:</label>
+          <input type="text" id="instructorName" placeholder="Instructor's full name" required>
+          <p id="instructorError" role="alert" style="color:var(--danger);margin-top:.5rem" hidden>Please enter your instructor's name to begin.</p>
         </div>
 
         <button class="btn-start" id="btnStart">Begin Assessment →</button>
@@ -1087,7 +1097,7 @@
         </div>
         <div class="report-info-item">
           <div class="report-info-label">Instructor</div>
-          <div class="report-info-value">[Instructor Name]</div>
+          <div class="report-info-value" id="reportInstructor">—</div>
         </div>
       </div>
 
@@ -1381,6 +1391,7 @@
     let currentQuestion = 0;
     let answers = {};
     let participantName = "";
+    let instructorName = "";
 
     // DOM Elements
     const startSection = document.getElementById('startSection');
@@ -1396,6 +1407,7 @@
     const btnSubmit = document.getElementById('btnSubmit');
     const btnStart = document.getElementById('btnStart');
     const participantInput = document.getElementById('participantName');
+    const instructorInput = document.getElementById('instructorName');
 
     // Initialize Quiz
     function init() {
@@ -1484,11 +1496,28 @@
     }
 
     // Start Quiz
+    // Both name fields are required. Flag an empty one with a message, not colour alone.
+    function validateNameField(input, errorEl) {
+      const filled = input.value.trim() !== '';
+      input.style.borderColor = filled ? '' : 'var(--danger)';
+      if (filled) {
+        input.removeAttribute('aria-invalid');
+        input.removeAttribute('aria-describedby');
+      } else {
+        input.setAttribute('aria-invalid', 'true');
+        if (errorEl) input.setAttribute('aria-describedby', errorEl.id);
+      }
+      if (errorEl) errorEl.hidden = filled;
+      return filled;
+    }
+
     function startQuiz() {
       participantName = participantInput.value.trim();
-      if (!participantName) {
-        participantInput.focus();
-        participantInput.style.borderColor = 'var(--danger)';
+      instructorName = instructorInput.value.trim();
+      const nameOk = validateNameField(participantInput, document.getElementById('nameError'));
+      const instructorOk = validateNameField(instructorInput, document.getElementById('instructorError'));
+      if (!nameOk || !instructorOk) {
+        (nameOk ? instructorInput : participantInput).focus();
         return;
       }
 
@@ -1629,6 +1658,7 @@
       // Store results (for instructor reference)
       const results = {
         name: participantName,
+        instructor: instructorName,
         date: new Date().toLocaleDateString(),
         score: overallPercentage,
         answers: answers,
@@ -1646,6 +1676,7 @@
       // Store for report generation
       window.quizResults = {
         name: participantName,
+        instructor: instructorName,
         date: new Date().toLocaleDateString(),
         totalCorrect: totalCorrect,
         totalQuestions: questions.length,
@@ -1665,6 +1696,7 @@
 
       // Populate report header info
       document.getElementById('reportName').textContent = results.name;
+      document.getElementById('reportInstructor').textContent = results.instructor || '—';
       document.getElementById('reportDate').textContent = results.date;
       document.getElementById('reportScore').textContent = results.percentage + '%';
       document.getElementById('reportScoreDetail').textContent =

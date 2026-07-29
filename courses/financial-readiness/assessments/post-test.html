@@ -690,6 +690,12 @@
       box-shadow: 0 0 0 3px rgba(200,168,78,0.2);
     }
 
+    /* Second field in the group (instructor) needs breathing room above it */
+    .name-input-group input + label,
+    .name-input-group p + label {
+      margin-top: 1.25rem;
+    }
+
     .btn-print {
       background: #1b2e4a;
       color: white;
@@ -1090,6 +1096,10 @@
         <div class="name-input-group">
           <label for="participantName">Please enter your name:</label>
           <input type="text" id="participantName" placeholder="Your full name" required>
+          <p id="nameError" role="alert" style="color:var(--danger);margin-top:.5rem" hidden>Please enter your name to begin.</p>
+          <label for="instructorName">Please enter your instructor's name:</label>
+          <input type="text" id="instructorName" placeholder="Instructor's full name" required>
+          <p id="instructorError" role="alert" style="color:var(--danger);margin-top:.5rem" hidden>Please enter your instructor's name to begin.</p>
         </div>
 
         <button class="btn-start" id="btnStart">Begin Final Assessment &#x2192;</button>
@@ -1188,7 +1198,7 @@
         </div>
         <div class="report-info-item">
           <div class="report-info-label">Instructor</div>
-          <div class="report-info-value">[Instructor Name]</div>
+          <div class="report-info-value" id="reportInstructor">&mdash;</div>
         </div>
       </div>
 
@@ -1388,6 +1398,7 @@
     var currentQuestion = 0;
     var answers = {};
     var participantName = "";
+    var instructorName = "";
     var preTestResults = null;
 
     var startSection = document.getElementById('startSection');
@@ -1403,6 +1414,7 @@
     var btnSubmit = document.getElementById('btnSubmit');
     var btnStart = document.getElementById('btnStart');
     var participantInput = document.getElementById('participantName');
+    var instructorInput = document.getElementById('instructorName');
 
     function init() {
       try {
@@ -1485,11 +1497,28 @@
       });
     }
 
+    // Both name fields are required. Flag an empty one with a message, not colour alone.
+    function validateNameField(input, errorEl) {
+      var filled = input.value.trim() !== '';
+      input.style.borderColor = filled ? '' : 'var(--danger)';
+      if (filled) {
+        input.removeAttribute('aria-invalid');
+        input.removeAttribute('aria-describedby');
+      } else {
+        input.setAttribute('aria-invalid', 'true');
+        if (errorEl) input.setAttribute('aria-describedby', errorEl.id);
+      }
+      if (errorEl) errorEl.hidden = filled;
+      return filled;
+    }
+
     function startQuiz() {
       participantName = participantInput.value.trim();
-      if (!participantName) {
-        participantInput.focus();
-        participantInput.style.borderColor = 'var(--danger)';
+      instructorName = instructorInput.value.trim();
+      var nameOk = validateNameField(participantInput, document.getElementById('nameError'));
+      var instructorOk = validateNameField(instructorInput, document.getElementById('instructorError'));
+      if (!nameOk || !instructorOk) {
+        (nameOk ? instructorInput : participantInput).focus();
         return;
       }
       startSection.classList.add('hidden');
@@ -1628,6 +1657,7 @@
 
       var results = {
         name: participantName,
+        instructor: instructorName,
         date: new Date().toLocaleDateString(),
         score: overallPercentage,
         answers: answers,
@@ -1645,6 +1675,7 @@
       window.quizResults = {
         testType: 'Post-Test',
         name: participantName,
+        instructor: instructorName,
         date: new Date().toLocaleDateString(),
         timestamp: new Date().toISOString(),
         totalCorrect: totalCorrect,
@@ -1678,7 +1709,7 @@
 
       var improvement = results.preTestScore !== null ? results.percentage - results.preTestScore : '';
       var rows = [
-        ['test_type', 'student_name', 'date', 'timestamp', 'score_percent', 'pre_test_score', 'improvement', 'correct', 'total_questions', 'category', 'category_correct', 'category_total', 'category_percent', 'question_id', 'student_answer', 'correct_answer', 'is_correct']
+        ['test_type', 'student_name', 'instructor_name', 'date', 'timestamp', 'score_percent', 'pre_test_score', 'improvement', 'correct', 'total_questions', 'category', 'category_correct', 'category_total', 'category_percent', 'question_id', 'student_answer', 'correct_answer', 'is_correct']
       ];
 
       questions.forEach(function(q) {
@@ -1688,6 +1719,7 @@
         rows.push([
           results.testType,
           results.name,
+          results.instructor,
           results.date,
           results.timestamp,
           results.percentage,
@@ -1729,6 +1761,7 @@
       }
 
       document.getElementById('reportName').textContent = results.name;
+      document.getElementById('reportInstructor').textContent = results.instructor || '—';
       document.getElementById('reportDate').textContent = results.date;
       document.getElementById('reportScore').textContent = results.percentage + '%';
       document.getElementById('reportScoreDetail').textContent =
