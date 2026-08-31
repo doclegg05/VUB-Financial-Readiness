@@ -1,0 +1,17 @@
+{
+  "$comment": "Shrink-only allowlist for scripts/a11y-check.mjs (axe-core WCAG A/AA). Keyed by page path then axe rule id -> allowed node count at baseline time. Entries may be removed or lowered as violations are fixed; never raised or added to admit a new violation. Regenerate with: node scripts/a11y-check.mjs --update",
+  "axeCoreTags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa"
+  ],
+  "pages": {
+    "/": {},
+    "/courses/computer-skills/weeks/week-01/presentation.html": {},
+    "/courses/financial-readiness/financial-readiness.html": {
+      "color-contrast": 1
+    },
+    "/courses/digital-literacy-1/weeks/week-01/presentation.html": {}
+  }
+}
