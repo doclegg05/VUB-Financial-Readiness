@@ -13,6 +13,9 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const SITE_ROOT = path.join(ROOT, process.argv[2] || path.join("dist", "site"));
 
+// Fail the build on courses.json <-> courses/ drift before copying anything.
+require("child_process").execFileSync(process.execPath, [path.join(__dirname, "check-courses.mjs")], { stdio: "inherit" });
+
 // Public, deployable top-level items — everything a learner or teacher needs.
 const PUBLISH = ["index.html", "404.html", "courses.json", "courses", "instructors", "shared", "assets"];
 
