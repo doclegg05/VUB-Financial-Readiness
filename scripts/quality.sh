@@ -44,4 +44,13 @@ npx playwright test
 echo "==> 5/5 a11y check (axe-core, ratchet vs committed baseline)"
 node scripts/a11y-check.mjs
 
+# REPORT-ONLY: prints per-deck Flesch-Kincaid grades (grade-8 ceiling) and
+# always exits 0. Turning this into a blocking check is a later, deliberate
+# calibration decision — do not drop --baseline without one.
+echo "==> readability baseline (report-only)"
+node scripts/readability-gate.mjs --baseline --format html \
+  --allowlist config/readability-allowlist.json \
+  courses/*/weeks/*/presentation.html \
+  || echo "readability baseline step failed (non-blocking)"
+
 echo "quality gate: PASS"
